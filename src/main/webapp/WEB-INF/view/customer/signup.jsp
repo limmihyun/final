@@ -130,8 +130,11 @@
 							<input type="text" class="form-control w-50" placeholder="**kg" id="weight" name="customerWeight">
 						</div>
 					</div>
-					
+					<br>
+					<label>사진</label>
+					<br>
 					<div class="custom-file">
+						
 					    <input type="file" class="custom-file-input" id="chooseFile" name="customerImg" accept="image/*" onchange="loadFile(this)">
 					    <label class="custom-file-label" for="customFile" id="fileName">이미지 선택</label>
 					</div>
