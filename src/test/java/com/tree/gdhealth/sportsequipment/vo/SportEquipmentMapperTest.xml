@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.tree.gdhealth.sportsequipment.vo.SportEquipmentMapperTest">
+
+    <insert id="insertSportsEquipment" parameterType="com.tree.gdhealth.sportsequipment.vo.SportsEquipment" useGeneratedKeys="true" keyProperty="sportEquipmentNo">
+        INSERT INTO sports_equipment
+            (item_name, item_price, note)
+        VALUES
+            (#{itemName},#{itemPrice},#{note})
+    </insert>
+
+    <select id="findSportEquipmentByNo" parameterType="int" resultType="com.tree.gdhealth.sportsequipment.vo.SportsEquipment">
+        SELECT sports_equipment_no sportEquipmentNo,
+               item_name itemName,
+               item_price itemPrice,
+               note,
+               createdate,
+               updatedate
+        FROM sports_equipment
+    </select>
+</mapper>

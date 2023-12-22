@@ -1,4 +1,4 @@
-package com.tree.gdhealth.sportequipment.vo;
+package com.tree.gdhealth.sportsequipment.vo;
 /**
  * @author 정인호
  */
