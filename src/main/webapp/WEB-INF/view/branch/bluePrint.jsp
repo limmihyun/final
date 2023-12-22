@@ -32,7 +32,6 @@
         <!-- 본문 종료 -->
         <jsp:include page="include/footer.jsp"/>
     </div>
-
     <jsp:include page="include/footer-js.jsp"/>
 </body>
 
