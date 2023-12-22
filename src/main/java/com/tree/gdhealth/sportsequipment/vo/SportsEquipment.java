@@ -1,4 +1,4 @@
-package com.tree.gdhealth.sportequipment.vo;
+package com.tree.gdhealth.sportsequipment.vo;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -14,10 +14,10 @@ import java.time.LocalDateTime;
 @AllArgsConstructor
 @NoArgsConstructor
 @Data
-public class SportEquipment {
-    private Integer sportEquipmentNo;
+public class SportsEquipment {
+    private int sportEquipmentNo;
     private String itemName;
-    private Integer price;
+    private int itemPrice;
     private String note;
     private LocalDateTime createdate;
     private LocalDateTime updatedate;

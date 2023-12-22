@@ -1,4 +1,4 @@
-package com.tree.gdhealth.sportequipment.vo;
+package com.tree.gdhealth.sportsequipment.vo;
 /**
  * @author 정인호
  * @todo 정확한 이미지확장자를 수정할 필요가 있습니다.
