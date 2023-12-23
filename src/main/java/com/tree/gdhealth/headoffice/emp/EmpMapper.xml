@@ -11,30 +11,28 @@
 			ed.employee_email empEmail,
 			ed.employee_gender empGender,
 			ed.createdate createdate,
-			ed.updatedate updatedate
-			<!-- 
-			ei.employee_img_file_name  -->
+			ed.updatedate updatedate,
+			ei.employee_img_file_name filename
 		FROM employee e
 		INNER JOIN employee_detail ed
 			ON ed.employee_no = e.employee_no
-		<!-- 
 		INNER JOIN employee_img ei
-			ON ei.employee_no = e.employee_no	
-		 -->
+			ON ei.employee_no = e.employee_no
 	</select>
 	
 	<insert id="insertEmployee" parameterType="com.tree.gdhealth.headoffice.emp.vo.Employee">	
 		INSERT INTO employee(
 			branch_no,
 			employee_id,
-			employee_pw,
-			employee_active
+			employee_pw
 		) VALUES (
 			#{branchNo},
 			#{employeeId},
-			PASSWORD(#{employeePw}),
-			#{employeeActive}
+			PASSWORD(#{employeePw})
 		)
+		<selectKey resultType="int" keyProperty="employeeNo" order="AFTER">
+      		  SELECT LAST_INSERT_ID()
+   		</selectKey> 
 	</insert>	
 	<insert id="insertEmployeeDetail" parameterType="com.tree.gdhealth.headoffice.emp.vo.EmployeeDetail">
 		INSERT INTO employee_detail(

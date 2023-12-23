@@ -7,11 +7,13 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.tree.gdhealth.headoffice.emp.vo.Employee;
 import com.tree.gdhealth.headoffice.emp.vo.EmployeeDetail;
 import com.tree.gdhealth.headoffice.emp.vo.EmployeeImg;
 
+import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 
@@ -23,46 +25,32 @@ public class EmpController {
 	private final EmpService empService;
 
 	@GetMapping("/emp")
-	public String emp(Model model) {
+	public String emp(HttpSession session, Model model) {
 		
-		List<Map<String,Object>> empList = empService.getEmployeeList();
-		
+		List<Map<String,Object>> empList = empService.getEmployeeList();		
 		model.addAttribute("empList", empList);
+		
+		String path = session.getServletContext().getRealPath("/WEB-INF/upload/emp");
+		model.addAttribute("path", path);
 		
 		return "headoffice/empList";
 		
 	}
 	
 	@GetMapping("/emp/addEmp") 
-	public String addEmp() {
+	public String addEmp(HttpSession session) {
 				
 		return "headoffice/addEmp";
 		
 	}
 	
 	@PostMapping("/emp/addEmp")
-	public String addEmp(Employee employee, EmployeeDetail employeeDetail,
-							EmployeeImg employeeImg) {
+	public String addEmp(HttpSession session, Employee employee, 
+							EmployeeDetail employeeDetail, MultipartFile employeeFile) {
 		
-		int result = empService.insertEmployee(employee);
+		String path = session.getServletContext().getRealPath("/WEB-INF/upload/emp");
 		
-		// 디버깅
-		log.debug("employee 추가(성공:1,실패:0) : " + result);
-		if(result == 1) {
-			
-			int detailResult = empService.insertEmployeeDetail(employeeDetail);
-			
-			// 디버깅
-			log.debug("employeeDetail 추가(성공:1,실패:0) : " + detailResult);
-			
-			if(detailResult == 1) {
-								
-				int imgResult = empService.insertEmployeeImg(employeeImg);
-				
-				// 디버깅
-				log.debug("employeeImg 추가(성공:1,실패:0) : " + imgResult);
-			}
-		}
+		empService.insertEmployee(employee, employeeDetail, employeeFile, path);
 		
 		return "redirect:/emp";
 	}
