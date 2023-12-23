@@ -11,13 +11,16 @@
 			ed.employee_email empEmail,
 			ed.employee_gender empGender,
 			ed.createdate createdate,
-			ed.updatedate updatedate,
-			ei.employee_img_file_name
+			ed.updatedate updatedate
+			<!-- 
+			ei.employee_img_file_name  -->
 		FROM employee e
 		INNER JOIN employee_detail ed
 			ON ed.employee_no = e.employee_no
+		<!-- 
 		INNER JOIN employee_img ei
 			ON ei.employee_no = e.employee_no	
+		 -->
 	</select>
 	
 </mapper>

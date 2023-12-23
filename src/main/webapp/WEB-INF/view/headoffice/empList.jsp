@@ -2,12 +2,12 @@
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!doctype html>
-<html class="no-js" lang="en">
+<html class="no-js" lang="zxx">
 
 <head>
     <meta charset="utf-8">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
-    <title>직원 추가</title>
+    <title>직원 관리</title>
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <!-- favicon
@@ -56,12 +56,6 @@
 		============================================ -->
     <link rel="stylesheet" href="/admin/css/calendar/fullcalendar.min.css">
     <link rel="stylesheet" href="/admin/css/calendar/fullcalendar.print.min.css">
-    <!-- forms CSS
-		============================================ -->
-    <link rel="stylesheet" href="/admin/css/form/all-type-forms.css">
-    <!-- dropzone CSS
-		============================================ -->
-    <link rel="stylesheet" href="/admin/css/dropzone/dropzone.css">
     <!-- style CSS
 		============================================ -->
     <link rel="stylesheet" href="/admin/style.css">
@@ -74,22 +68,20 @@
 </head>
 
 <body>
-    <!--[if lt IE 8]>
-		<p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
-	<![endif]-->
+	
     <!-- Start Left menu area -->
     <div class="left-sidebar-pro">
         <nav id="sidebar" class="">
             <div class="sidebar-header">
                 <a href="index.html"><img class="main-logo" src="/admin/img/logo/logo.png" alt="" /></a>
-                <strong><a href="index.html"><img src="/admin/img/logo/logosn.png" alt="" /></a></strong>
+                <strong><a href="index.html"><img src="/admin/img/logo/logosn.png" alt="" /></a></strong>  
             </div>
             <div class="left-custom-menu-adp-wrap comment-scrollbar">
                 <nav class="sidebar-nav left-sidebar-menu-pro">
                     <ul class="metismenu" id="menu1">
                         <li>
                             <a class="has-arrow" href="index.html">
-								   <span class="educate-icon educate-home icon-wrap"></span>
+								   <span class="educate-icon icon-wrap educate-home"></span>
 								   <span class="mini-click-non">Education</span>
 								</a>
                             <ul class="submenu-angle" aria-expanded="true">
@@ -112,7 +104,7 @@
                                 <li><a title="Professor Profile" href="professor-profile.html"><span class="mini-sub-pro">Professor Profile</span></a></li>
                             </ul>
                         </li>
-                        <li class="active">
+                        <li>
                             <a class="has-arrow" href="all-students.html" aria-expanded="false"><span class="educate-icon educate-student icon-wrap"></span> <span class="mini-click-non">Students</span></a>
                             <ul class="submenu-angle" aria-expanded="false">
                                 <li><a title="All Students" href="all-students.html"><span class="mini-sub-pro">All Students</span></a></li>
@@ -121,7 +113,7 @@
                                 <li><a title="Students Profile" href="student-profile.html"><span class="mini-sub-pro">Student Profile</span></a></li>
                             </ul>
                         </li>
-                        <li>
+                        <li class="active">
                             <a class="has-arrow" href="all-courses.html" aria-expanded="false"><span class="educate-icon educate-course icon-wrap"></span> <span class="mini-click-non">Courses</span></a>
                             <ul class="submenu-angle" aria-expanded="false">
                                 <li><a title="All Courses" href="all-courses.html"><span class="mini-sub-pro">All Courses</span></a></li>
@@ -226,6 +218,7 @@
         </nav>
     </div>
     <!-- End Left menu area -->
+    
     <!-- Start Welcome area -->
     <div class="all-content-wrapper">
         <div class="container-fluid">
@@ -863,6 +856,7 @@
                     </div>
                 </div>
             </div>
+            
             <!-- Mobile Menu start -->
             <div class="mobile-menu-area">
                 <div class="container">
@@ -1041,6 +1035,7 @@
                                                 <li><a href="500.html">500 Page</a></li>
                                             </ul>
                                         </li>
+                                        
                                     </ul>
                                 </nav>
                             </div>
@@ -1050,7 +1045,6 @@
             </div>
             <!-- Mobile Menu end -->
             
-            <!-- 
             <div class="breadcome-area">
                 <div class="container-fluid">
                     <div class="row">
@@ -1067,9 +1061,9 @@
                                     </div>
                                     <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
                                         <ul class="breadcome-menu">
-                                            <li><a href="#">Home</a> <span class="bread-slash">/</span>
+                                            <li><a href="#">홈으로</a> <span class="bread-slash">/</span>
                                             </li>
-                                            <li><span class="bread-blod">Add Student</span>
+                                            <li><span class="bread-blod">공지사항</span>
                                             </li>
                                         </ul>
                                     </div>
@@ -1079,101 +1073,145 @@
                     </div>
                 </div>
             </div>
-             -->
-            
-            
-            
         </div>
         
-        <!-- 직원 추가 화면 start-->
-        <div class="single-pro-review-area mt-t-30 mg-b-15">
-            <div class="container-fluid">
-                <div class="row">
-                    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-						
-                        <div class="product-payment-inner-st"> 
-                            <div>기본 정보</div>
-                            <div id="myTabContent" class="tab-content custom-product-edit">
-                                <div class="product-tab-list tab-pane fade active in" id="description">
-                                    <div class="row">
-                                        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-                                            <div class="review-content-section">
-                                                <div id="dropzone1" class="pro-ad">
-                                                    <form action="/upload" class="dropzone dropzone-custom needsclick add-professors" id="demo1-upload">
-                                                        <div class="row">
-                                                            <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
-                                                            	<div class="form-group">
-                                                                    <input name="employeeId" type="text" class="form-control" placeholder="ID">
-                                                                </div>
-                                                                <div class="form-group">
-                                                                    <input name="employeeName" type="text" class="form-control" placeholder="이름">
-                                                                </div>                                                              
-                                                                <div class="form-group">
-                                                                    <input name="employeePw" type="text" class="form-control" placeholder="비밀번호">
-                                                                </div>
-                                                                <div class="form-group">
-                                                                    <input type="text" class="form-control" id="pwCheck" placeholder="비밀번호 확인">
-                                                                </div>
-                                                                <div class="form-group">
-                                                                    <input name="employeePhone" type="text" class="form-control" placeholder="휴대폰 번호">
-                                                                </div>
-                                                                <div class="form-group">
-                                                                    <input name="employeeEmail" id="finish" type="text" class="form-control" placeholder="이메일">
-                                                                </div>
-                                                                
-                                                                <div class="form-group">
-                                                                    <select name="gender" class="form-control">
-																		<option value="none" selected="" disabled="">성별</option>
-																		<option value="male">남</option>
-																		<option value="female">여</option>
-																	</select>
-                                                                </div>
-                                                                <div class="form-group">
-                                                                    <select name="country" class="form-control">
-																			<option value="none" selected="" disabled="">소속</option>
-																			<option value="headoffice">본사</option>
-																			<option value="guro">구로</option>
-																			<option value="gangnam">강남</option>
-																			<option value="sillim">신림</option>
-																		</select>
-                                                                </div>
+        
+        <div class="contacts-area mg-b-15">
+            <div class="container-fluid">   
+            
+               	<!-- 회원 list start -->
+           		<div class="row">
+           			<c:forEach var="m" items="${empList}">
+           			
+                   	   <div class="col-lg-3 col-md-6 col-sm-6 col-xs-12">
+                        	<div class="student-inner-std res-mg-b-30">
+	                            <div class="student-img">
+	                                <img src="/admin/img/student/1.jpg" alt="" />
+	                            </div>
+	                            <div class="student-dtl">
+	                                <h2>${m.empName}</h2>
+	                                <p class="dp">${m.empGender}</p>
+	                                <p class="dp-ag"><b>입사 날짜 :</b> ${m.createdate}</p>
+                          		</div>
+                      	    </div>
+                   	   </div>
 
-                                                                <div class="form-group alert-up-pd">
-                                                                    <div class="dz-message needsclick download-custom">
-                                                                        <i class="fa fa-download edudropnone" aria-hidden="true"></i>
-                                                                        <h2 class="edudropnone">직원 이미지</h2>
-                                                                        <p class="edudropnone"><span class="note needsclick">이미지를 드래그하거나 클릭하여 업로드하세요.</span>
-                                                                        </p>
-                                                                        <input name="imageico" class="hd-pro-img" type="text" />
-                                                                    </div>
-                                                                </div>
-                                                                
-                                                                
-                                                                
-                                                            </div>
-                                                            <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12"></div>
-                                                        </div>
-                                                        <div class="row">
-                                                            <div class="col-lg-12">
-                                                                <div class="payment-adress">
-                                                                    <button type="submit" class="btn btn-primary waves-effect waves-light">Submit</button>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </form>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>        
+            		</c:forEach>
+           
+                    <div class="col-lg-3 col-md-6 col-sm-6 col-xs-12">
+                        <div class="student-inner-std res-mg-b-30">
+                            <div class="student-img">
+                                <img src="/admin/img/student/1.jpg" alt="" />
+                            </div>
+                            <div class="student-dtl">
+                                <h2>관호</h2>
+                                <p class="dp">Computer Science</p>
+                                <p class="dp-ag"><b>Age:</b> 20 Years</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="col-lg-3 col-md-6 col-sm-6 col-xs-12">
+                        <div class="student-inner-std res-mg-b-30">
+                            <div class="student-img">
+                                <img src="/admin/img/student/2.jpg" alt="" />
+                            </div>
+                            <div class="student-dtl">
+                                <h2>Alexam Angles</h2>
+                                <p class="dp">Computer Science</p>
+                                <p class="dp-ag"><b>Age:</b> 20 Years</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="col-lg-3 col-md-6 col-sm-6 col-xs-12">
+                        <div class="student-inner-std res-tablet-mg-t-30 dk-res-t-pro-30">
+                            <div class="student-img">
+                                <img src="/admin/img/student/4.jpg" alt="" />
+                            </div>
+                            <div class="student-dtl">
+                                <h2>Alexam Angles</h2>
+                                <p class="dp">Computer Science</p>
+                                <p class="dp-ag"><b>Age:</b> 20 Years</p>
                             </div>
                         </div>
                     </div>
                 </div>
-            </div>
+                
+                
+                <div class="row">
+                    <div class="col-lg-3 col-md-6 col-sm-6 col-xs-12">
+                        <div class="student-inner-std mg-t-30">
+                            <div class="student-img">
+                                <img src="/admin/img/student/1.jpg" alt="" />
+                            </div>
+                            <div class="student-dtl">
+                                <h2>Alexam Angles</h2>
+                                <p class="dp">Computer Science</p>
+                                <p class="dp-ag"><b>Age:</b> 20 Years</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-3 col-md-6 col-sm-6 col-xs-12">
+                        <div class="student-inner-std mg-t-30">
+                            <div class="student-img">
+                                <img src="/admin/img/student/2.jpg" alt="" />
+                            </div>
+                            <div class="student-dtl">
+                                <h2>Alexam Angles</h2>
+                                <p class="dp">Computer Science</p>
+                                <p class="dp-ag"><b>Age : </b> 20 Years</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-3 col-md-6 col-sm-6 col-xs-12">
+                        <div class="student-inner-std mg-t-30">
+                            <div class="student-img">
+                                <img src="/admin/img/student/3.jpg" alt="" />
+                            </div>
+                            <div class="student-dtl">
+                                <h2>Alexam Angles</h2>
+                                <p class="dp">Computer Science</p>
+                                <p class="dp-ag"><b>Age:</b> 20 Years</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-3 col-md-6 col-sm-6 col-xs-12">
+                        <div class="student-inner-std mg-t-30">
+                            <div class="student-img">
+                                <img src="/admin/img/student/4.jpg" alt="" />
+                            </div>
+                            <div class="student-dtl">
+                                <h2>Alexam Angles</h2>
+                                <p class="dp">Computer Science</p>
+                                <p class="dp-ag"><b>Age:</b> 20 Years</p>
+                            </div>
+                        </div>
+                    </div>                   
+                </div>
+                <!-- 회원 list end -->
+                
+                <!-- 페이징 start -->
+                 <ul class="pagination">
+				  <li class="page-item"><a class="page-link" href="#">Previous</a></li>
+				  <li class="page-item"><a class="page-link" href="#">1</a></li>
+				  <li class="page-item"><a class="page-link" href="#">2</a></li>
+				  <li class="page-item"><a class="page-link" href="#">3</a></li>
+				  <li class="page-item"><a class="page-link" href="#">4</a></li>
+				  <li class="page-item"><a class="page-link" href="#">5</a></li>
+				  <li class="page-item"><a class="page-link" href="#">6</a></li>
+				  <li class="page-item"><a class="page-link" href="#">7</a></li>
+				  <li class="page-item"><a class="page-link" href="#">8</a></li>
+				  <li class="page-item"><a class="page-link" href="#">9</a></li>
+				  <li class="page-item"><a class="page-link" href="#">10</a></li>
+				  <li class="page-item"><a class="page-link" href="#">Next</a></li>
+				</ul> 
+				<!-- 페이징 end -->
+            </div>    
         </div>
-        <!-- 직원 추가 화면 start-->
+          
         
+          
     </div>
 
     <!-- jquery
@@ -1230,9 +1268,6 @@
     <script src="/admin/js/form-validation/jquery.form.min.js"></script>
     <script src="/admin/js/form-validation/jquery.validate.min.js"></script>
     <script src="/admin/js/form-validation/form-active.js"></script>
-    <!-- dropzone JS
-		============================================ -->
-    <script src="/admin/js/dropzone/dropzone.js"></script>
     <!-- tab JS
 		============================================ -->
     <script src="/admin/js/tab.js"></script>

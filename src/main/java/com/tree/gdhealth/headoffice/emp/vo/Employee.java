@@ -1,4 +1,4 @@
-package com.tree.gdhealth.headoffice.emp;
+package com.tree.gdhealth.headoffice.emp.vo;
 
 import lombok.Data;
 

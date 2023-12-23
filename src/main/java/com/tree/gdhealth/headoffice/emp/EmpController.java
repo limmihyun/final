@@ -22,7 +22,7 @@ public class EmpController {
 		
 		model.addAttribute("empList", empList);
 		
-		return "headoffice/emp";
+		return "headoffice/empList";
 		
 	}
 	

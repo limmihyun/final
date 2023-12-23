@@ -15,12 +15,14 @@ import lombok.extern.slf4j.Slf4j;
 @Service
 public class EmpService {
 	
+	// DI
 	private final EmpMapper empMapper;
 	
 	public List<Map<String, Object>> getEmployeeList() {
 		
 		List<Map<String, Object>> employeeList = empMapper.employeeList();
 		
+		// 디버깅 
 		log.debug("직원 목록 : " + employeeList);
 		
 		return employeeList;
