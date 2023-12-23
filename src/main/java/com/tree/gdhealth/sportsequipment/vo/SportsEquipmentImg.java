@@ -20,7 +20,7 @@ public class SportsEquipmentImg {
     private String sportsEquipmentImgOriginName;
     private String sportsEquipmentImgFileName;
     private int sportsEquipmentImgSize;
-    private ImgType sportsEquipmentImgType;
+    private ImageType sportsEquipmentImageType;
     private LocalDateTime createdate;
     private LocalDateTime updatedate;
 }
