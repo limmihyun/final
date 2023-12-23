@@ -23,4 +23,48 @@
 		 -->
 	</select>
 	
+	<insert id="insertEmployee" parameterType="com.tree.gdhealth.headoffice.emp.vo.Employee">	
+		INSERT INTO employee(
+			branch_no,
+			employee_id,
+			employee_pw,
+			employee_active
+		) VALUES (
+			#{branchNo},
+			#{employeeId},
+			PASSWORD(#{employeePw}),
+			#{employeeActive}
+		)
+	</insert>	
+	<insert id="insertEmployeeDetail" parameterType="com.tree.gdhealth.headoffice.emp.vo.EmployeeDetail">
+		INSERT INTO employee_detail(
+			employee_no,
+			employee_name,
+			employee_phone,
+			employee_email,
+			employee_gender		
+		) VALUES (
+			#{employeeNo},
+			#{employeeName},
+			#{employeePhone},
+			#{employeeEmail},
+			#{employeeGender}
+		)
+	</insert>
+	<insert id="insertEmployeeImg" parameterType="com.tree.gdhealth.headoffice.emp.vo.EmployeeImg">
+		INSERT INTO employee_img(
+			employee_no,
+			employee_img_origin_name,
+			employee_img_file_name,
+			employee_img_size,
+			employee_img_type		
+		) VALUES (
+			#{employeeNo},
+			#{employeeImgOriginName},
+			#{employeeImgFilename},
+			#{employeeImgSize},
+			#{employeeImgType}
+		)
+	</insert>
+	
 </mapper>
