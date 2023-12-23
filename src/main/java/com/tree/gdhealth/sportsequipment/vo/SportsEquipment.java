@@ -15,7 +15,7 @@ import java.time.LocalDateTime;
 @NoArgsConstructor
 @Data
 public class SportsEquipment {
-    private int sportEquipmentNo;
+    private int sportsEquipmentNo;
     private String itemName;
     private int itemPrice;
     private String note;
