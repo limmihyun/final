@@ -1086,11 +1086,16 @@
                    	   <div class="col-lg-3 col-md-6 col-sm-6 col-xs-12">
                         	<div class="student-inner-std res-mg-b-30">
 	                            <div class="student-img">
-	                                <img src="/admin/img/student/1.jpg" alt="" />
+	                               <img src="${pageContext.request.contextPath}/WEB-INF/upload/emp/${m.filename}" alt="" /> 
 	                            </div>
 	                            <div class="student-dtl">
 	                                <h2>${m.empName}</h2>
-	                                <p class="dp">${m.empGender}</p>
+	                                <c:if test="${m.empGender == 'm'}">
+	                                	<p class="dp">남</p>
+	                                </c:if>
+	                                <c:if test="${m.empGender == 'f'}">
+	                                	<p class="dp">여</p>
+	                                </c:if>  
 	                                <p class="dp-ag"><b>입사 날짜 :</b> ${m.createdate}</p>
                           		</div>
                       	    </div>
@@ -1104,19 +1109,6 @@
                                 <img src="/admin/img/student/1.jpg" alt="" />
                             </div>
                             <div class="student-dtl">
-                                <h2>관호</h2>
-                                <p class="dp">Computer Science</p>
-                                <p class="dp-ag"><b>Age:</b> 20 Years</p>
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <div class="col-lg-3 col-md-6 col-sm-6 col-xs-12">
-                        <div class="student-inner-std res-mg-b-30">
-                            <div class="student-img">
-                                <img src="/admin/img/student/2.jpg" alt="" />
-                            </div>
-                            <div class="student-dtl">
                                 <h2>Alexam Angles</h2>
                                 <p class="dp">Computer Science</p>
                                 <p class="dp-ag"><b>Age:</b> 20 Years</p>
@@ -1124,6 +1116,7 @@
                         </div>
                     </div>
                     
+                     
                     <div class="col-lg-3 col-md-6 col-sm-6 col-xs-12">
                         <div class="student-inner-std res-tablet-mg-t-30 dk-res-t-pro-30">
                             <div class="student-img">
