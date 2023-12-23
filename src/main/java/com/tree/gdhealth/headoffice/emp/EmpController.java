@@ -11,7 +11,6 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.tree.gdhealth.headoffice.emp.vo.Employee;
 import com.tree.gdhealth.headoffice.emp.vo.EmployeeDetail;
-import com.tree.gdhealth.headoffice.emp.vo.EmployeeImg;
 
 import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
@@ -30,7 +29,7 @@ public class EmpController {
 		List<Map<String,Object>> empList = empService.getEmployeeList();		
 		model.addAttribute("empList", empList);
 		
-		String path = session.getServletContext().getRealPath("/WEB-INF/upload/emp");
+		String path = session.getServletContext().getRealPath("/upload/emp");
 		model.addAttribute("path", path);
 		
 		return "headoffice/empList";
@@ -48,10 +47,17 @@ public class EmpController {
 	public String addEmp(HttpSession session, Employee employee, 
 							EmployeeDetail employeeDetail, MultipartFile employeeFile) {
 		
-		String path = session.getServletContext().getRealPath("/WEB-INF/upload/emp");
-		
+		String path = session.getServletContext().getRealPath("/upload/emp");
+		// 디버깅
+		log.debug("저장 경로 : " + path);
 		empService.insertEmployee(employee, employeeDetail, employeeFile, path);
 		
 		return "redirect:/emp";
+	}
+	
+	@GetMapping("/emp/empOne")
+	public String empOne() {
+		
+		return "headoffice/empOne";
 	}
 }
