@@ -1062,7 +1062,11 @@
 			                        <img src="${pageContext.request.contextPath}/upload/emp/${m.filename}" alt="" style="height:300px; width:300px;"/> 
 			                     </div>
 			                     <div class="student-dtl">
-			                         <h2>${m.empName}</h2>
+			                         <h2>
+			                         <a href="${pageContext.request.contextPath}/emp/empOne?employeeId=${m.empId}">
+			                         	${m.empName}
+			                         </a>		                         
+			                         </h2>
 			                         <c:if test="${m.empGender == 'm'}">
 			                         	<p class="dp">남</p>
 			                         </c:if>
@@ -1073,7 +1077,7 @@
 			                  		</div>
 			              	    </div>
 			           	    </div>	           	    
-	           	    <c:if test="${(cnt%4 == 0) || (cnt == employeeCnt)}">
+	           	    <c:if test="${(cnt%4 == 0) || (cnt == employeeCnt)}"> <!-- cnt가 4의 배수이거나 마지막 순서일 때 -->
 	   			  	 	</div>
 	   			    </c:if>
            		</c:forEach>

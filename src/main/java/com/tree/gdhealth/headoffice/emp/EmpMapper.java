@@ -15,6 +15,8 @@ public interface EmpMapper {
 	List<Map<String, Object>> employeeList();
 	int employeeCnt();
 	
+	Map<String, Object> employeeOne(String employeeId);
+	
 	int insertEmployee(Employee employee);
 	int insertEmployeeDetail(EmployeeDetail employeeDetail);
 	int insertEmployeeImg(EmployeeImg employeeImg);

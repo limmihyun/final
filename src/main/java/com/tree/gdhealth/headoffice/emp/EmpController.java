@@ -61,7 +61,10 @@ public class EmpController {
 	}
 	
 	@GetMapping("/emp/empOne")
-	public String empOne() {
+	public String empOne(Model model, String employeeId) {
+		
+		Map<String, Object> employeeOne = empService.getEmployeeOne(employeeId);
+		model.addAttribute("empOne",employeeOne);
 		
 		return "headoffice/empOne";
 	}

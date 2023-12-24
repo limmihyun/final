@@ -44,6 +44,15 @@ public class EmpService {
 		return employeeCnt;
 	}
 	
+	public Map<String, Object> getEmployeeOne(String employeeId) {
+		
+		Map<String, Object> employeeOne = empMapper.employeeOne(employeeId);
+		// 디버깅 
+		log.debug("직원 상서 정보 : " + employeeOne);
+		
+		return employeeOne;
+	}
+	
 	public void insertEmployee(Employee employee, EmployeeDetail employeeDetail, 
 								MultipartFile employeeFile, String path) {
 		
