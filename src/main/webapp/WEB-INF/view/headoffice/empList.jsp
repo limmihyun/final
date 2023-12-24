@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <!doctype html>
 <html class="no-js" lang="zxx">
 
@@ -1044,160 +1045,42 @@
                 </div>
             </div>
             <!-- Mobile Menu end -->
-            
-            <div class="breadcome-area">
-                <div class="container-fluid">
-                    <div class="row">
-                        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-                            <div class="breadcome-list single-page-breadcome">
-                                <div class="row">
-                                    <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
-                                        <div class="breadcome-heading">
-                                            <form role="search" class="sr-input-func">
-                                                <input type="text" placeholder="Search..." class="search-int form-control">
-                                                <a href="#"><i class="fa fa-search"></i></a>
-                                            </form>
-                                        </div>
-                                    </div>
-                                    <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
-                                        <ul class="breadcome-menu">
-                                            <li><a href="#">홈으로</a> <span class="bread-slash">/</span>
-                                            </li>
-                                            <li><span class="bread-blod">공지사항</span>
-                                            </li>
-                                        </ul>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        
-        
+           
         <div class="contacts-area mg-b-15">
             <div class="container-fluid">   
             
                	<!-- 회원 list start -->
-           		<div class="row">
-           			<c:forEach var="m" items="${empList}">
-           			
-                   	   <div class="col-lg-3 col-md-6 col-sm-6 col-xs-12">
-                        	<div class="student-inner-std res-mg-b-30">
-	                            <div class="student-img">
-	                               <img src="${pageContext.request.contextPath}/upload/emp/${m.filename}" alt="" /> 
-	                            </div>
-	                            <div class="student-dtl">
-	                                <h2>${m.empName}</h2>
-	                                <c:if test="${m.empGender == 'm'}">
-	                                	<p class="dp">남</p>
-	                                </c:if>
-	                                <c:if test="${m.empGender == 'f'}">
-	                                	<p class="dp">여</p>
-	                                </c:if>  
-	                                <p class="dp-ag"><b>입사 날짜 :</b> ${m.createdate}</p>
-                          		</div>
-                      	    </div>
-                   	   </div>
-
-            		</c:forEach>
-            		
-            		<div class="col-lg-3 col-md-6 col-sm-6 col-xs-12">
-                        <div class="student-inner-std res-mg-b-30">
-                            <div class="student-img">
-                                <img src="/admin/img/student/1.jpg" alt="" />
-                            </div>
-                            <div class="student-dtl">
-                                <h2>Alexam Angles</h2>
-                                <p class="dp">Computer Science</p>
-                                <p class="dp-ag"><b>Age:</b> 20 Years</p>
-                            </div>
-                        </div>
-                    </div>
-           
-                    <div class="col-lg-3 col-md-6 col-sm-6 col-xs-12">
-                        <div class="student-inner-std res-mg-b-30">
-                            <div class="student-img">
-                                <img src="/admin/img/student/1.jpg" alt="" />
-                            </div>
-                            <div class="student-dtl">
-                                <h2>Alexam Angles</h2>
-                                <p class="dp">Computer Science</p>
-                                <p class="dp-ag"><b>Age:</b> 20 Years</p>
-                            </div>
-                        </div>
-                    </div>
-                    
-                     
-                    <div class="col-lg-3 col-md-6 col-sm-6 col-xs-12">
-                        <div class="student-inner-std res-tablet-mg-t-30 dk-res-t-pro-30">
-                            <div class="student-img">
-                                <img src="/admin/img/student/4.jpg" alt="" />
-                            </div>
-                            <div class="student-dtl">
-                                <h2>Alexam Angles</h2>
-                                <p class="dp">Computer Science</p>
-                                <p class="dp-ag"><b>Age:</b> 20 Years</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                
-                
-                <div class="row">
-                    <div class="col-lg-3 col-md-6 col-sm-6 col-xs-12">
-                        <div class="student-inner-std mg-t-30">
-                            <div class="student-img">
-                                <img src="/admin/img/student/1.jpg" alt="" />
-                            </div>
-                            <div class="student-dtl">
-                                <h2>Alexam Angles</h2>
-                                <p class="dp">Computer Science</p>
-                                <p class="dp-ag"><b>Age:</b> 20 Years</p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-3 col-md-6 col-sm-6 col-xs-12">
-                        <div class="student-inner-std mg-t-30">
-                            <div class="student-img">
-                                <img src="/admin/img/student/2.jpg" alt="" />
-                            </div>
-                            <div class="student-dtl">
-                                <h2>Alexam Angles</h2>
-                                <p class="dp">Computer Science</p>
-                                <p class="dp-ag"><b>Age : </b> 20 Years</p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-3 col-md-6 col-sm-6 col-xs-12">
-                        <div class="student-inner-std mg-t-30">
-                            <div class="student-img">
-                                <img src="/admin/img/student/3.jpg" alt="" />
-                            </div>
-                            <div class="student-dtl">
-                                <h2>Alexam Angles</h2>
-                                <p class="dp">Computer Science</p>
-                                <p class="dp-ag"><b>Age:</b> 20 Years</p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-3 col-md-6 col-sm-6 col-xs-12">
-                        <div class="student-inner-std mg-t-30">
-                            <div class="student-img">
-                                <img src="/admin/img/student/4.jpg" alt="" />
-                            </div>
-                            <div class="student-dtl">
-                                <h2>Alexam Angles</h2>
-                                <p class="dp">Computer Science</p>
-                                <p class="dp-ag"><b>Age:</b> 20 Years</p>
-                            </div>
-                        </div>
-                    </div>                   
-                </div>
-                <!-- 회원 list end -->
-                
-                <!-- 페이징 start -->
+               	<c:set var="cnt" value="0"></c:set>          		  			
+  				<c:forEach var="m" items="${empList}">
+	   			    <c:set var="cnt" value="${cnt + 1}"></c:set>
+	   			    <c:if test="${(cnt%4) == 1}">
+	   			  	 	<div class="row" style="margin-top:15px;"> 
+	   			    </c:if>		   			    
+			           	    <div class="col-lg-3 col-md-6 col-sm-6 col-xs-12">
+			                	<div class="student-inner-std res-mg-b-30">
+			                     <div class="student-img">
+			                        <img src="${pageContext.request.contextPath}/upload/emp/${m.filename}" alt="" style="height:300px; width:300px;"/> 
+			                     </div>
+			                     <div class="student-dtl">
+			                         <h2>${m.empName}</h2>
+			                         <c:if test="${m.empGender == 'm'}">
+			                         	<p class="dp">남</p>
+			                         </c:if>
+			                         <c:if test="${m.empGender == 'f'}">
+			                         	<p class="dp">여</p>
+			                         </c:if>  
+			                         <p class="dp-ag"><b>입사 날짜 :</b> ${m.createdate}</p>
+			                  		</div>
+			              	    </div>
+			           	    </div>	           	    
+	           	    <c:if test="${(cnt%4 == 0) || (cnt == employeeCnt)}">
+	   			  	 	</div>
+	   			    </c:if>
+           		</c:forEach>
+           		
+                <!-- 회원 list end -->              
+            </div>
+           		 <!-- 페이징 start -->
                  <ul class="pagination">
 				  <li class="page-item"><a class="page-link" href="#">Previous</a></li>
 				  <li class="page-item"><a class="page-link" href="#">1</a></li>
@@ -1212,12 +1095,8 @@
 				  <li class="page-item"><a class="page-link" href="#">10</a></li>
 				  <li class="page-item"><a class="page-link" href="#">Next</a></li>
 				</ul> 
-				<!-- 페이징 end -->
-            </div>    
+				<!-- 페이징 end -->    
         </div>
-          
-        
-          
     </div>
 
     <!-- jquery

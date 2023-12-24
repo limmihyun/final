@@ -13,6 +13,7 @@ import com.tree.gdhealth.headoffice.emp.vo.EmployeeImg;
 public interface EmpMapper {
 	
 	List<Map<String, Object>> employeeList();
+	int employeeCnt();
 	
 	int insertEmployee(Employee employee);
 	int insertEmployeeDetail(EmployeeDetail employeeDetail);

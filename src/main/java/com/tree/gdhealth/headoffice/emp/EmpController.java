@@ -32,6 +32,11 @@ public class EmpController {
 		String path = session.getServletContext().getRealPath("/upload/emp");
 		model.addAttribute("path", path);
 		
+		int employeeCnt = empService.getEmployeeCnt();
+		// 디버깅 
+		log.debug("직원 수 : " + employeeCnt);
+		model.addAttribute("employeeCnt",employeeCnt);
+		
 		return "headoffice/empList";
 		
 	}
@@ -59,5 +64,11 @@ public class EmpController {
 	public String empOne() {
 		
 		return "headoffice/empOne";
+	}
+	
+	@GetMapping("/emp/updateEmpOne")
+	public String updateEmpOne() {
+		
+		return "headoffice/updateEmp";
 	}
 }

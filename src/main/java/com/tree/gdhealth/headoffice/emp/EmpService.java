@@ -35,6 +35,15 @@ public class EmpService {
 		return employeeList;
 	}
 	
+	public int getEmployeeCnt() {
+		
+		int employeeCnt = empMapper.employeeCnt();
+		// 디버깅 
+		log.debug("직원 수 : " + employeeCnt);
+		
+		return employeeCnt;
+	}
+	
 	public void insertEmployee(Employee employee, EmployeeDetail employeeDetail, 
 								MultipartFile employeeFile, String path) {
 		

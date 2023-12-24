@@ -20,6 +20,12 @@
 			ON ei.employee_no = e.employee_no
 	</select>
 	
+	<select id="employeeCnt" resultType="int">
+		SELECT
+			COUNT(*)
+		FROM employee
+	</select>
+	
 	<insert id="insertEmployee" parameterType="com.tree.gdhealth.headoffice.emp.vo.Employee">	
 		INSERT INTO employee(
 			branch_no,
