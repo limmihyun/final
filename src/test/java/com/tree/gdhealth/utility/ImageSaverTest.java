@@ -8,6 +8,7 @@ import org.springframework.mock.web.MockMultipartFile;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.io.File;
+import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -21,7 +22,7 @@ import static org.junit.jupiter.api.Assertions.*;
 class ImageSaverTest {
     @Transactional
     @Test
-    void 이미지파일이_저장에_성공한다(){
+    void 이미지파일이_저장에_성공한다() throws IOException {
         //given
         MockMultipartFile imageFile = new MockMultipartFile("mockName", "mockOriginName.png", "image/png", "test".getBytes(StandardCharsets.UTF_8));
 
@@ -32,7 +33,7 @@ class ImageSaverTest {
         //then
         log.debug(saver.toString());
         assertEquals(true,file.exists());
-        file.delete();
+        saver.deleteImage();
     }
 
     @Transactional
@@ -48,6 +49,7 @@ class ImageSaverTest {
             File file = new File(saver.getSavedImagePath());
             file.exists();
         }catch (Exception e){
+            log.error("error", e);
             assertTrue(true);
             return;
         }

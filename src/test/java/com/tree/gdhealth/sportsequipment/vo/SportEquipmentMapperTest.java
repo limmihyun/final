@@ -9,9 +9,13 @@ import org.apache.ibatis.annotations.Mapper;
 @Mapper
 public interface SportEquipmentMapperTest {
     int insertSportsEquipment(SportsEquipment sportsEquipment);
-    SportsEquipment findSportsEquipmentByNo(int sportEquipmentNo);
+    SportsEquipment findSportsEquipmentByNo(int sportsEquipmentNo);
 
     int insertSportsEquipmentOrder(SportsEquipmentOrder sportsEquipmentOrder);
-    SportsEquipmentOrder findSportsEquipmentOrderByNo(int sportEquipmentOrderNo);
+    SportsEquipmentOrder findSportsEquipmentOrderByNo(int sportsEquipmentOrderNo);
+
+    int insertSportsEquipmentImg(SportsEquipmentImg sportsEquipmentImg);
+
+    SportsEquipmentImg findSportsEquipmentImgByNo(int sportEquipmentImgNO);
 
 }

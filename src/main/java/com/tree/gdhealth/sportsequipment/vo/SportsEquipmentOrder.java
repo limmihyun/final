@@ -25,14 +25,4 @@ public class SportsEquipmentOrder {
     private OrderStatus orderStatus;
     private LocalDateTime createdate;
     private LocalDateTime updatedate;
-
-    /*
-    public void setOrderStatus(String statusStr) {
-        this.orderStatus = OrderStatus.fromCode(statusStr);
-    }
-
-    public String getOrderStatusText(){
-        return this.orderStatus.getCode();
-    }
-     */
 }

@@ -15,15 +15,22 @@
         VALUES
             (#{employeeOrderer},#{branchNo},#{sportsEquipmentNo},#{quantity},#{totalPrice},#{employeeApprover},#{orderStatus})
     </insert>
+    <insert id="insertSportsEquipmentImg" parameterType="com.tree.gdhealth.sportsequipment.vo.SportsEquipmentImg" useGeneratedKeys="true" keyColumn="sports_equipment_img_no" keyProperty="sportsEquipmentImgNo">
+        INSERT INTO sports_equipment_img
+            (sports_equipment_no, sports_equipment_img_origin_name, sports_equipment_img_file_name, sports_equipment_img_size, sports_equipment_img_type)
+        VALUES
+            (#{sportsEquipmentNo},#{sportsEquipmentImgOriginName},#{sportsEquipmentImgFileName},#{sportsEquipmentImgSize},#{sportsEquipmentImgType})
+    </insert>
 
     <select id="findSportsEquipmentByNo" parameterType="int" resultType="com.tree.gdhealth.sportsequipment.vo.SportsEquipment">
-        SELECT sports_equipment_no sportEquipmentNo,
+        SELECT sports_equipment_no sportsEquipmentNo,
                item_name itemName,
                item_price itemPrice,
                note,
                createdate,
                updatedate
         FROM sports_equipment
+        WHERE sports_equipment_no = #{sportsEquipmentNo}
     </select>
     <select id="findSportsEquipmentOrderByNo" parameterType="int" resultType="com.tree.gdhealth.sportsequipment.vo.SportsEquipmentOrder">
         SELECT order_no orderNo,
@@ -37,5 +44,19 @@
                employee_approver employeeApprover,
                order_status orderStatus
         FROM sports_equipment_order
+        WHERE order_no = #{orderNo}
+    </select>
+    <select id="findSportsEquipmentImgByNo" parameterType="int"
+            resultType="com.tree.gdhealth.sportsequipment.vo.SportsEquipmentImg">
+        SELECT sports_equipment_img_no sportsEquipmentImgNo,
+               sports_equipment_no sportsEquipmentNo,
+               sports_equipment_img_origin_name sportsEquipmentImgOriginName,
+               sports_equipment_img_file_name sportsEquipmentImgFileName,
+               sports_equipment_img_size sportsEquipmentImgSize,
+               sports_equipment_img_type sportsEquipmentImgType,
+               createdate,
+               updatedate
+        FROM sports_equipment_img
+        WHERE sports_equipment_img_no = #{sportsEquipmentImgNo}
     </select>
 </mapper>

@@ -15,23 +15,23 @@ import static org.junit.jupiter.api.Assertions.*;
 @SpringBootTest
 class SportsEquipmentTest {
     @Autowired
-    SportEquipmentMapperTest mapper;
+    SportEquipmentMapperTest sportEquipmentMapperTest;
 
     @Transactional
     @Test
     void SportsEquipmentVo가_DB에_입력되고_조회된다(){
         //given
-        SportsEquipment inVo = SportsEquipment.builder()
+        SportsEquipment insertVo = SportsEquipment.builder()
                 .itemPrice(500).itemName("testName").note("testNote").build();
-        SportsEquipment outVo;
+        SportsEquipment selectVo;
 
         //when
-        mapper.insertSportsEquipment(inVo);
-        outVo = mapper.findSportsEquipmentByNo(inVo.getSportsEquipmentNo());
+        sportEquipmentMapperTest.insertSportsEquipment(insertVo);
+        selectVo = sportEquipmentMapperTest.findSportsEquipmentByNo(insertVo.getSportsEquipmentNo());
 
         //then
-        log.debug(outVo.toString());
-        assertEquals(outVo.getSportsEquipmentNo(), inVo.getSportsEquipmentNo());
+        log.debug(selectVo.toString());
+        assertEquals(selectVo.getSportsEquipmentNo(), insertVo.getSportsEquipmentNo());
 
     }
 
@@ -54,8 +54,8 @@ class SportsEquipmentTest {
         SportsEquipmentOrder selectVo;
 
         //when
-        int affectedRows = mapper.insertSportsEquipmentOrder(insertVo);
-        selectVo = mapper.findSportsEquipmentOrderByNo(insertVo.getOrderNo());
+        int affectedRows = sportEquipmentMapperTest.insertSportsEquipmentOrder(insertVo);
+        selectVo = sportEquipmentMapperTest.findSportsEquipmentOrderByNo(insertVo.getOrderNo());
         insertVo.setCreatedate(selectVo.getCreatedate());
         insertVo.setUpdatedate(selectVo.getUpdatedate());
 
@@ -64,6 +64,30 @@ class SportsEquipmentTest {
         assertEquals(1, affectedRows);
         assertEquals(insertVo.getOrderNo(), selectVo.getOrderNo());
         assertEquals(selectVo, insertVo);
+    }
+    @Transactional
+    @Test
+    void sportsEquipmentImgVo가_DB입력되고_조회된다(){
+        //given
+        SportsEquipmentImg insertVo = SportsEquipmentImg.builder()
+                .sportsEquipmentNo(1)
+                .sportsEquipmentImgSize(4)
+                .sportsEquipmentImgType(ImageType.JPG)
+                .sportsEquipmentImgFileName("testFilename")
+                .sportsEquipmentImgOriginName("testFileOriginName")
+                .build();
+        SportsEquipmentImg selectVo = null;
+
+        //when
+        int affectedRows = sportEquipmentMapperTest.insertSportsEquipmentImg(insertVo);
+        selectVo = sportEquipmentMapperTest.findSportsEquipmentImgByNo(insertVo.getSportsEquipmentImgNo());
+        insertVo.setCreatedate(selectVo.getCreatedate());
+        insertVo.setUpdatedate(selectVo.getUpdatedate());
+
+        //then
+        log.debug(insertVo.toString());
+        log.debug(selectVo.toString());
+        assertEquals(insertVo, selectVo);
     }
 
 }
