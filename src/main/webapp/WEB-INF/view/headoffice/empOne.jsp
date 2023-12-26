@@ -1045,8 +1045,7 @@
                     </div>
                 </div>
             </div>
-            <!-- Mobile Menu end -->
-            
+            <!-- Mobile Menu end -->    
         </div>
         
         <!-- 직원 상세 정보 start-->
@@ -1081,7 +1080,15 @@
                                 <div class="row">
                                     <div class="col-lg-6 col-md-12 col-sm-12 col-xs-6">
                                         <div class="address-hr tb-sm-res-d-n dps-tb-ntn">
-                                            <p><b>성별</b><br />${empOne.empGender}</p>
+                                            <p>
+                                            	<b>성별</b><br />
+                                            	<c:if test="${empOne.empGender == 'm'}">
+                                            		남자
+                                            	</c:if>
+                                            	<c:if test="${empOne.empGender == 'f'}">
+                                            		여자
+                                            	</c:if>
+                                            </p>
                                         </div>
                                     </div>
                                     <div class="col-lg-6 col-md-12 col-sm-12 col-xs-6">
@@ -1114,11 +1121,11 @@
                                         <div class="address-hr tb-sm-res-d-n dps-tb-ntn">
                                             <p><b>active</b><br />${empOne.empActive}</p>
                                         </div>
-                                    </div>          
-                                </div>
-                               	<div style="text-align:center;">
-                                    <button class="btn">수정</button>
-                                </div>                                                                            
+                                    </div>
+                                    <div style="text-align:center;">
+                                    	<button class="btn">뒤로 가기</button>
+                                    </div>         
+                                </div>                                                                         
                             </div>
                         </div>
                     </div>

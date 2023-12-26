@@ -69,9 +69,4 @@ public class EmpController {
 		return "headoffice/empOne";
 	}
 	
-	@GetMapping("/emp/updateEmpOne")
-	public String updateEmpOne() {
-		
-		return "headoffice/updateEmp";
-	}
 }

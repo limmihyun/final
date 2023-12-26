@@ -1045,6 +1045,38 @@
                 </div>
             </div>
             <!-- Mobile Menu end -->
+            
+            <!-- 검색창 start -->
+             <div class="breadcome-area">
+                <div class="container-fluid">
+                    <div class="row">
+                        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                            <div class="breadcome-list single-page-breadcome">
+                                <div class="row">
+                                    <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                                        <div class="breadcome-heading">
+                                            <form role="search" class="sr-input-func">
+                                                <input type="text" placeholder="Search..." class="search-int form-control">
+                                                <a href="#"><i class="fa fa-search"></i></a>
+                                            </form>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                                        <ul class="breadcome-menu">
+                                            <li><a href="#">Home</a> <span class="bread-slash">/</span>
+                                            </li>
+                                            <li><span class="bread-blod">Professor Profile</span>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- 검색창 end -->
            
         <div class="contacts-area mg-b-15">
             <div class="container-fluid">   
@@ -1054,7 +1086,7 @@
   				<c:forEach var="m" items="${empList}">
 	   			    <c:set var="cnt" value="${cnt + 1}"></c:set>
 	   			    <c:if test="${(cnt%4) == 1}">
-	   			  	 	<div class="row" style="margin-top:15px;"> 
+	   			  	 	<div class="row" style="margin-bottom:15px;"> 
 	   			    </c:if>		   			    
 			           	    <div class="col-lg-3 col-md-6 col-sm-6 col-xs-12">
 			                	<div class="student-inner-std res-mg-b-30">
@@ -1068,10 +1100,10 @@
 			                         </a>		                         
 			                         </h2>
 			                         <c:if test="${m.empGender == 'm'}">
-			                         	<p class="dp">남</p>
+			                         	<p class="dp">남자</p>
 			                         </c:if>
 			                         <c:if test="${m.empGender == 'f'}">
-			                         	<p class="dp">여</p>
+			                         	<p class="dp">여자</p>
 			                         </c:if>  
 			                         <p class="dp-ag"><b>입사 날짜 :</b> ${m.createdate}</p>
 			                  		</div>
