@@ -4,6 +4,8 @@
 	<select id="selectProgramByMonth" resultType="java.util.Map">
 		SELECT
 			COUNT(*) cnt,
+			YEAR(pd.program_date) year,
+			MONTH(pd.program_date) month,
 			DAY(pd.program_date) day,
 			p.program_max_customer programMaxCustomer,
 			p.program_name programName

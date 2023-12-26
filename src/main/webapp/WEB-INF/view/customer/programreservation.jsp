@@ -109,68 +109,102 @@
     </section>
     <!-- Hero Slider End -->
 	
-	<section>
-		<div>
-				<div align="center">
-		<h1>${calendarMap.targetMonth + 1} 월</h1>
-	</div>
-	<div style="text-align: left; position: relative;">
-	    <p style="margin-top:50px;">${calendarMap.targetYear} 년</p>
-	    <div style="position: absolute;  bottom:10%; left: 50%; transform: translateX(-50%);" class="d-flex justify-content-center" align="center">
-	        <a class="btn btn-primary" href="${pageContext.request.contextPath}/customer/programrs?targetYear=${calendarMap.targetYear}&targetMonth=${calendarMap.targetMonth - 1}">&#60;&nbsp;이전달</a>&nbsp;
-	        <a class="btn btn-primary" href="${pageContext.request.contextPath}/customer/programrs?targetYear=${calendarMap.targetYear}&targetMonth=${calendarMap.targetMonth + 1}">다음달&nbsp;&#62;</a>
-	    </div>
-	</div>
-
-	<br>
-	<br>
-	<table class="table table-bordered">
-		<tr>
-			<th style="text-align:center;">SUN</th> 
-			<th style="text-align:center;">MON</th>
-			<th style="text-align:center;">TUE</th>
-			<th style="text-align:center;">WED</th>
-			<th style="text-align:center;">THU</th>
-			<th style="text-align:center;">FRI</th>
-			<th style="text-align:center;">SAT</th>
-		</tr>
-		<tr>
-			<c:forEach var="i" begin="1" end="${calendarMap.totalTd}">
-				<c:set var="d" value="${i - calendarMap.beginBlank}"></c:set>
-				<td>
-					<c:if test="${d < 1 || d > calendarMap.lastDate}">
-						&nbsp;
-					</c:if>
-					<c:if test="${!(d < 1 || d > calendarMap.lastDate)}">
-						<c:if test="${(i%7-1)==0}">
-						  <a class="text-danger">${d}</a>
-						 	 <c:forEach var="l" items="${resultList}">
-							 	<c:if test="${d == l.day}">
-							 		<p>${l.programName}</p>
-							 		<p>${l.cnt} / ${l.programMaxCustomer}</p>
-							 	</c:if>
-							 </c:forEach> 
-						</c:if>
-						<c:if test="${!((i%7-1)==0)}">
-							${d}
-							 <c:forEach var="l" items="${resultList}">
-							 	<c:if test="${d == l.day}">
-							 		<p>${l.programName}</p>
-							 		<p>${l.cnt} / ${l.programMaxCustomer}</p>
-							 	</c:if>
-							 </c:forEach> 
-						</c:if>
-					</c:if>
-					
-					<!-- 한행에 7열씩.. -->
-					<c:if test="${i < calendarMap.totalTd && i%7 == 0}">
-						</tr><tr>
-					</c:if>
-				</td>
-	         </c:forEach>
-		</tr>
-	</table>
+	<section style="position: relative; height:100%;">
+ 	<div style="width:70%; position: absolute;">
+		<div align="center">
+			<h1>${calendarMap.targetMonth + 1} 월</h1>
 		</div>
+		<div style="text-align: left; position: relative;">
+		    <p style="margin-top:50px;">${calendarMap.targetYear} 년</p>
+		    <div style="position: absolute;  bottom:10%; left: 50%; transform: translateX(-50%);" class="d-flex justify-content-center" align="center">
+		        <a class="btn btn-primary" href="${pageContext.request.contextPath}/customer/programrs?targetYear=${calendarMap.targetYear}&targetMonth=${calendarMap.targetMonth - 1}">&#60;&nbsp;이전달</a>&nbsp;
+		        <a class="btn btn-primary" href="${pageContext.request.contextPath}/customer/programrs?targetYear=${calendarMap.targetYear}&targetMonth=${calendarMap.targetMonth + 1}">다음달&nbsp;&#62;</a>
+		    </div>
+		</div>
+	
+		<br>
+		<br>
+		<table class="table table-bordered">
+			<tr>
+				<th style="text-align:center;">SUN</th> 
+				<th style="text-align:center;">MON</th>
+				<th style="text-align:center;">TUE</th>
+				<th style="text-align:center;">WED</th>
+				<th style="text-align:center;">THU</th>
+				<th style="text-align:center;">FRI</th>
+				<th style="text-align:center;">SAT</th>
+			</tr>
+			<tr>
+				<c:forEach var="i" begin="1" end="${calendarMap.totalTd}">
+					<c:set var="d" value="${i - calendarMap.beginBlank}"></c:set>
+					<td style="width:129.5px; height:82.164px;">
+						<c:if test="${d < 1 || d > calendarMap.lastDate}">
+							&nbsp;
+						</c:if>
+						<c:if test="${!(d < 1 || d > calendarMap.lastDate)}">
+							<c:if test="${(i%7-1)==0}">
+							  <a class="text-danger">${d}</a>
+							 	 <c:forEach var="l" items="${resultList}">
+								 	<c:if test="${d == l.day}">
+								 		<p>${l.programName}</p>
+								 		<p>${l.cnt} / ${l.programMaxCustomer}</p>
+								 	</c:if>
+								 </c:forEach> 
+							</c:if>
+							<c:if test="${!((i%7-1)==0)}">
+								${d}
+								 <c:forEach var="l" items="${resultList}">
+								 	<c:if test="${d == l.day}">
+								 		<p>${l.programName}</p>
+								 		<p>${l.cnt} / ${l.programMaxCustomer}</p>
+								 	</c:if>
+								 </c:forEach> 
+							</c:if>
+						</c:if>
+						
+						<!-- 한행에 7열씩.. -->
+						<c:if test="${i < calendarMap.totalTd && i%7 == 0}">
+							</tr><tr>
+						</c:if>
+					</td>
+		         </c:forEach>
+			</tr>
+		</table>
+	</div>
+	
+	<div style="margin-left:80%; position: absolute; margin-top:13%; text-align:center;">
+		<div>
+				<c:forEach var="i" begin="0" end="2">
+					<c:set var="loop_flag" value="false" />
+					<c:set value="${calendarMap.targetYear}" var="listYear"></c:set>
+					<c:set value="${calendarMap.targetMonth + 1 + i}" var="listMonth"></c:set>
+					<c:if test="${listMonth > 12}">
+						<c:set value="${(calendarMap.targetMonth + 1 + i) - 12}" var="listMonth"></c:set>
+						<c:set value="${calendarMap.targetYear + 1}" var="listYear"></c:set>
+					</c:if>
+					<h3>${listYear} 년 ${listMonth} 월 </h3>
+					<c:forEach var="l" items="${resultList}" varStatus="status">
+						<c:if test="${listYear == l.year && listMonth == l.month}">
+							<p>${l.month} / ${l.day} &nbsp; ${l.programName}</p>
+							<p  style="margin-bottom:30px;">(${l.cnt} / ${l.programMaxCustomer})</p>
+							<c:set var="loop_flag" value="true"/>
+						</c:if>	
+						<c:if test="${not loop_flag}">
+							<br>
+							<h4>프로그램이 준비중입니다. </h4>	
+							<br>
+							<c:set var="loop_flag" value="true"/>
+						</c:if>		
+					</c:forEach>
+					<c:if test="${empty resultList}">
+							<br>
+							<h4>프로그램이 준비중입니다. </h4>	
+							<br>
+					</c:if>
+				</c:forEach>
+		</div>
+	</div>
+	
 	</section>
 	
     <!-- Footer Section Begin -->
