@@ -31,6 +31,10 @@ public class ProgramReservationController {
 		model.addAttribute("resultList", resultList);
 		System.out.println(resultList + "<---resultList 출력");
 		
+		List<Map<String, Object>> allList = calendarService.allCalendarList();
+		model.addAttribute("allList", allList);
+
+		
 		return "customer/programreservation";
 	}
 

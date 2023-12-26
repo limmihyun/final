@@ -72,5 +72,12 @@ public class CalendarService {
 		
 		return resultList;
 	}
+	
+	public List<Map<String, Object>> allCalendarList(){
+		
+		List<Map<String, Object>> allList = programReservationMapper.allCalendarList();
+		
+		return allList;
+	}
 
 }
