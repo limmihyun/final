@@ -20,6 +20,34 @@
 			ON ei.employee_no = e.employee_no
 	</select>
 	
+	<select id="employeeCnt" resultType="int">
+		SELECT
+			COUNT(*)
+		FROM employee
+	</select>
+	
+	<select id="employeeOne" resultType="map">
+		SELECT
+			e.employee_id empId,
+			e.employee_active empActive,
+			ed.employee_name empName,
+			ed.employee_phone empPhone,
+			ed.employee_email empEmail,
+			ed.employee_gender empGender,
+			ed.createdate createdate,
+			ed.updatedate updatedate,
+			ei.employee_img_file_name filename,
+			b.branch_name branchName
+		FROM employee e
+		INNER JOIN employee_detail ed
+			ON ed.employee_no = e.employee_no
+		INNER JOIN employee_img ei
+			ON ei.employee_no = e.employee_no
+		INNER JOIN branch b
+			ON b.branch_no = e.branch_no
+		WHERE e.employee_id = #{employeeId}
+	</select>
+	
 	<insert id="insertEmployee" parameterType="com.tree.gdhealth.headoffice.emp.vo.Employee">	
 		INSERT INTO employee(
 			branch_no,

@@ -1,14 +1,13 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <!doctype html>
-<html class="no-js" lang="zxx">
+<html class="no-js" lang="en">
 
 <head>
     <meta charset="utf-8">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
-    <title>직원 관리</title>
+    <title>직원 상세 정보</title>
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <!-- favicon
@@ -57,6 +56,9 @@
 		============================================ -->
     <link rel="stylesheet" href="/admin/css/calendar/fullcalendar.min.css">
     <link rel="stylesheet" href="/admin/css/calendar/fullcalendar.print.min.css">
+    <!-- forms CSS
+		============================================ -->
+    <link rel="stylesheet" href="/admin/css/form/all-type-forms.css">
     <!-- style CSS
 		============================================ -->
     <link rel="stylesheet" href="/admin/style.css">
@@ -69,20 +71,22 @@
 </head>
 
 <body>
-	
+    <!--[if lt IE 8]>
+		<p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
+	<![endif]-->
     <!-- Start Left menu area -->
     <div class="left-sidebar-pro">
         <nav id="sidebar" class="">
             <div class="sidebar-header">
                 <a href="index.html"><img class="main-logo" src="/admin/img/logo/logo.png" alt="" /></a>
-                <strong><a href="index.html"><img src="/admin/img/logo/logosn.png" alt="" /></a></strong>  
+                <strong><a href="index.html"><img src="/admin/img/logo/logosn.png" alt="" /></a></strong>
             </div>
             <div class="left-custom-menu-adp-wrap comment-scrollbar">
                 <nav class="sidebar-nav left-sidebar-menu-pro">
                     <ul class="metismenu" id="menu1">
                         <li>
                             <a class="has-arrow" href="index.html">
-								   <span class="educate-icon icon-wrap educate-home"></span>
+								   <span class="educate-icon educate-home icon-wrap"></span>
 								   <span class="mini-click-non">Education</span>
 								</a>
                             <ul class="submenu-angle" aria-expanded="true">
@@ -105,7 +109,7 @@
                                 <li><a title="Professor Profile" href="professor-profile.html"><span class="mini-sub-pro">Professor Profile</span></a></li>
                             </ul>
                         </li>
-                        <li>
+                        <li class="active">
                             <a class="has-arrow" href="all-students.html" aria-expanded="false"><span class="educate-icon educate-student icon-wrap"></span> <span class="mini-click-non">Students</span></a>
                             <ul class="submenu-angle" aria-expanded="false">
                                 <li><a title="All Students" href="all-students.html"><span class="mini-sub-pro">All Students</span></a></li>
@@ -114,14 +118,14 @@
                                 <li><a title="Students Profile" href="student-profile.html"><span class="mini-sub-pro">Student Profile</span></a></li>
                             </ul>
                         </li>
-                        <li class="active">
+                        <li>
                             <a class="has-arrow" href="all-courses.html" aria-expanded="false"><span class="educate-icon educate-course icon-wrap"></span> <span class="mini-click-non">Courses</span></a>
                             <ul class="submenu-angle" aria-expanded="false">
                                 <li><a title="All Courses" href="all-courses.html"><span class="mini-sub-pro">All Courses</span></a></li>
                                 <li><a title="Add Courses" href="add-course.html"><span class="mini-sub-pro">Add Course</span></a></li>
                                 <li><a title="Edit Courses" href="edit-course.html"><span class="mini-sub-pro">Edit Course</span></a></li>
                                 <li><a title="Courses Profile" href="course-info.html"><span class="mini-sub-pro">Courses Info</span></a></li>
-                                <li><a title="course Payment" href="course-payment.html"><span class="mini-sub-pro">Courses Payment</span></a></li>
+                                <li><a title="Course Payment" href="course-payment.html"><span class="mini-sub-pro">Courses Payment</span></a></li>
                             </ul>
                         </li>
                         <li>
@@ -219,7 +223,6 @@
         </nav>
     </div>
     <!-- End Left menu area -->
-    
     <!-- Start Welcome area -->
     <div class="all-content-wrapper">
         <div class="container-fluid">
@@ -857,7 +860,6 @@
                     </div>
                 </div>
             </div>
-            
             <!-- Mobile Menu start -->
             <div class="mobile-menu-area">
                 <div class="container">
@@ -934,8 +936,8 @@
                                                 </li>
                                             </ul>
                                         </li>
-                                        <li><a data-toggle="collapse" data-target="#demomi" href="#">Mailbox <span class="admin-project-icon edu-icon edu-down-arrow"></span></a>
-                                            <ul id="demomi" class="collapse dropdown-header-top">
+                                        <li><a data-toggle="collapse" data-target="#demo" href="#">Mailbox <span class="admin-project-icon edu-icon edu-down-arrow"></span></a>
+                                            <ul id="demo" class="collapse dropdown-header-top">
                                                 <li><a href="mailbox.html">Inbox</a>
                                                 </li>
                                                 <li><a href="mailbox-view.html">View Mail</a>
@@ -1036,7 +1038,6 @@
                                                 <li><a href="500.html">500 Page</a></li>
                                             </ul>
                                         </li>
-                                        
                                     </ul>
                                 </nav>
                             </div>
@@ -1044,95 +1045,95 @@
                     </div>
                 </div>
             </div>
-            <!-- Mobile Menu end -->
-            
-            <!-- 검색창 start -->
-             <div class="breadcome-area">
-                <div class="container-fluid">
-                    <div class="row">
-                        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-                            <div class="breadcome-list single-page-breadcome">
-                                <div class="row">
-                                    <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
-                                        <div class="breadcome-heading">
-                                            <form role="search" class="sr-input-func">
-                                                <input type="text" placeholder="Search..." class="search-int form-control">
-                                                <a href="#"><i class="fa fa-search"></i></a>
-                                            </form>
+            <!-- Mobile Menu end -->    
+        </div>
+        
+        <!-- 직원 상세 정보 start-->
+        <div class="single-pro-review-area mt-t-30 mg-b-15">
+            <div class="container-fluid">
+                <div class="row" style="margin-top:20px; margin-bottom:20px;">
+                	<div class="col-lg-3 col-md-3 col-sm-3"></div>
+                    <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                        <div class="profile-info-inner">
+    						   		
+ 					 <div class="profile-img col-lg-12 col-md-12 col-sm-12 col-xs-12" style="text-align:center;">
+                        <img src="${pageContext.request.contextPath}/upload/emp/${empOne.filename}" 
+                       	 	style="width:350px; height:350px;" alt="" />
+                     </div> 
+    			                  	   
+
+                            <div class="profile-details-hr">
+                            
+                            	<div class="row">
+                            		<div class="col-lg-6 col-md-12 col-sm-12 col-xs-6">
+                                        <div class="address-hr">
+                                            <p><b>ID</b><br />${empOne.empId}</p>
                                         </div>
                                     </div>
-                                    <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
-                                        <ul class="breadcome-menu">
-                                            <li><a href="#">Home</a> <span class="bread-slash">/</span>
-                                            </li>
-                                            <li><span class="bread-blod">Professor Profile</span>
-                                            </li>
-                                        </ul>
+                                    <div class="col-lg-6 col-md-12 col-sm-12 col-xs-6">
+                                        <div class="address-hr tb-sm-res-d-n dps-tb-ntn">
+                                            <p><b>이름</b><br />${empOne.empName}</p>
+                                        </div>
                                     </div>
+                            	</div>
+                            
+                                <div class="row">
+                                    <div class="col-lg-6 col-md-12 col-sm-12 col-xs-6">
+                                        <div class="address-hr tb-sm-res-d-n dps-tb-ntn">
+                                            <p>
+                                            	<b>성별</b><br />
+                                            	<c:if test="${empOne.empGender == 'm'}">
+                                            		남자
+                                            	</c:if>
+                                            	<c:if test="${empOne.empGender == 'f'}">
+                                            		여자
+                                            	</c:if>
+                                            </p>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-6 col-md-12 col-sm-12 col-xs-6">
+                                        <div class="address-hr">
+                                            <p><b>소속</b><br />${empOne.branchName}</p>
+                                        </div>
+                                    </div>   
                                 </div>
+                                
+                                <div class="row">
+                                    <div class="col-lg-6 col-md-12 col-sm-12 col-xs-6">
+                                        <div class="address-hr tb-sm-res-d-n dps-tb-ntn">
+                                            <p><b>휴대폰</b><br />${empOne.empPhone}</p>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-6 col-md-12 col-sm-12 col-xs-6">
+                                        <div class="address-hr tb-sm-res-d-n dps-tb-ntn">
+                                            <p><b>이메일</b><br />${empOne.empEmail}</p>
+                                        </div>
+                                    </div>
+                                </div>   
+                                
+                                <div class="row">                            
+                              	    <div class="col-lg-6 col-md-12 col-sm-12 col-xs-6">
+                                        <div class="address-hr tb-sm-res-d-n dps-tb-ntn">
+                                            <p><b>입사일</b><br />${empOne.createdate}</p>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-6 col-md-12 col-sm-12 col-xs-6">
+                                        <div class="address-hr tb-sm-res-d-n dps-tb-ntn">
+                                            <p><b>active</b><br />${empOne.empActive}</p>
+                                        </div>
+                                    </div>
+                                    <div style="text-align:center;">
+                                    	<button class="btn">뒤로 가기</button>
+                                    </div>         
+                                </div>                                                                         
                             </div>
                         </div>
                     </div>
-                </div>
+                    <div class="col-lg-3 col-md-3 col-sm-3"></div>         
+               	</div>       
             </div>
         </div>
-        <!-- 검색창 end -->
-           
-        <div class="contacts-area mg-b-15">
-            <div class="container-fluid">   
-            
-               	<!-- 회원 list start -->
-               	<c:set var="cnt" value="0"></c:set>          		  			
-  				<c:forEach var="m" items="${empList}">
-	   			    <c:set var="cnt" value="${cnt + 1}"></c:set>
-	   			    <c:if test="${(cnt%4) == 1}">
-	   			  	 	<div class="row" style="margin-bottom:15px;"> 
-	   			    </c:if>		   			    
-			           	    <div class="col-lg-3 col-md-6 col-sm-6 col-xs-12">
-			                	<div class="student-inner-std res-mg-b-30">
-			                     <div class="student-img">
-			                        <img src="${pageContext.request.contextPath}/upload/emp/${m.filename}" alt="" style="height:300px; width:300px;"/> 
-			                     </div>
-			                     <div class="student-dtl">
-			                         <h2>
-			                         <a href="${pageContext.request.contextPath}/emp/empOne?employeeId=${m.empId}">
-			                         	${m.empName}
-			                         </a>		                         
-			                         </h2>
-			                         <c:if test="${m.empGender == 'm'}">
-			                         	<p class="dp">남자</p>
-			                         </c:if>
-			                         <c:if test="${m.empGender == 'f'}">
-			                         	<p class="dp">여자</p>
-			                         </c:if>  
-			                         <p class="dp-ag"><b>입사 날짜 :</b> ${m.createdate}</p>
-			                  		</div>
-			              	    </div>
-			           	    </div>	           	    
-	           	    <c:if test="${(cnt%4 == 0) || (cnt == employeeCnt)}"> <!-- cnt가 4의 배수이거나 마지막 순서일 때 -->
-	   			  	 	</div>
-	   			    </c:if>
-           		</c:forEach>
-           		
-                <!-- 회원 list end -->              
-            </div>
-           		 <!-- 페이징 start -->
-                 <ul class="pagination">
-				  <li class="page-item"><a class="page-link" href="#">Previous</a></li>
-				  <li class="page-item"><a class="page-link" href="#">1</a></li>
-				  <li class="page-item"><a class="page-link" href="#">2</a></li>
-				  <li class="page-item"><a class="page-link" href="#">3</a></li>
-				  <li class="page-item"><a class="page-link" href="#">4</a></li>
-				  <li class="page-item"><a class="page-link" href="#">5</a></li>
-				  <li class="page-item"><a class="page-link" href="#">6</a></li>
-				  <li class="page-item"><a class="page-link" href="#">7</a></li>
-				  <li class="page-item"><a class="page-link" href="#">8</a></li>
-				  <li class="page-item"><a class="page-link" href="#">9</a></li>
-				  <li class="page-item"><a class="page-link" href="#">10</a></li>
-				  <li class="page-item"><a class="page-link" href="#">Next</a></li>
-				</ul> 
-				<!-- 페이징 end -->    
-        </div>
+        <!-- 직원 상세 정보 end-->
     </div>
 
     <!-- jquery
@@ -1176,19 +1177,6 @@
     <script src="/admin/js/calendar/moment.min.js"></script>
     <script src="/admin/js/calendar/fullcalendar.min.js"></script>
     <script src="/admin/js/calendar/fullcalendar-active.js"></script>
-    <!-- maskedinput JS
-		============================================ -->
-    <script src="/admin/js/jquery.maskedinput.min.js"></script>
-    <script src="/admin/js/masking-active.js"></script>
-    <!-- datepicker JS
-		============================================ -->
-    <script src="/admin/js/datepicker/jquery-ui.min.js"></script>
-    <script src="/admin/js/datepicker/datepicker-active.js"></script>
-    <!-- form validate JS
-		============================================ -->
-    <script src="/admin/js/form-validation/jquery.form.min.js"></script>
-    <script src="/admin/js/form-validation/jquery.validate.min.js"></script>
-    <script src="/admin/js/form-validation/form-active.js"></script>
     <!-- tab JS
 		============================================ -->
     <script src="/admin/js/tab.js"></script>
