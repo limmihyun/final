@@ -2,16 +2,23 @@ package com.tree.gdhealth.customer.programreservation.service;
 
 import java.util.Calendar;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
+import com.tree.gdhealth.customer.programreservation.mapper.ProgramReservationMapper;
 
 
 
 @Service
 @Transactional
 public class CalendarService {
+	@Autowired
+	private ProgramReservationMapper programReservationMapper;
+	
 	public Map<String, Object> getCalendar(Integer targetYear, Integer targetMonth, Integer targetDay){
 		
 		// 타겟 월의 1일
@@ -53,6 +60,17 @@ public class CalendarService {
 		
 		return resultMap;
 		
+	}
+	
+	public List<Map<String, Object>> selectProgramByMonth (int year, int month){
+		
+		Map<String, Object> paramMap = new HashMap<>();
+		paramMap.put("year", year);
+		paramMap.put("month", month+1);
+				
+		List<Map<String, Object>> resultList = programReservationMapper.selectProgramByMonth(paramMap);
+		
+		return resultList;
 	}
 
 }
