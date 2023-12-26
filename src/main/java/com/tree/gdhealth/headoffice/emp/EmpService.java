@@ -48,7 +48,7 @@ public class EmpService {
 		
 		Map<String, Object> employeeOne = empMapper.employeeOne(employeeId);
 		// 디버깅 
-		log.debug("직원 상서 정보 : " + employeeOne);
+		log.debug("직원 상세 정보 : " + employeeOne);
 		
 		return employeeOne;
 	}
