@@ -117,8 +117,8 @@
 	<div style="text-align: left; position: relative;">
 	    <p style="margin-top:50px;">${calendarMap.targetYear} 년</p>
 	    <div style="position: absolute;  bottom:10%; left: 50%; transform: translateX(-50%);" class="d-flex justify-content-center" align="center">
-	        <a class="btn btn-primary" href="${pageContext.request.contextPath}/home?targetYear=${calendarMap.targetYear}&targetMonth=${calendarMap.targetMonth - 1}">&#60;&nbsp;이전달</a>&nbsp;
-	        <a class="btn btn-primary" href="${pageContext.request.contextPath}/home?targetYear=${calendarMap.targetYear}&targetMonth=${calendarMap.targetMonth + 1}">다음달&nbsp;&#62;</a>
+	        <a class="btn btn-primary" href="${pageContext.request.contextPath}/customer/programrs?targetYear=${calendarMap.targetYear}&targetMonth=${calendarMap.targetMonth - 1}">&#60;&nbsp;이전달</a>&nbsp;
+	        <a class="btn btn-primary" href="${pageContext.request.contextPath}/customer/programrs?targetYear=${calendarMap.targetYear}&targetMonth=${calendarMap.targetMonth + 1}">다음달&nbsp;&#62;</a>
 	    </div>
 	</div>
 
@@ -143,10 +143,22 @@
 					</c:if>
 					<c:if test="${!(d < 1 || d > calendarMap.lastDate)}">
 						<c:if test="${(i%7-1)==0}">
-							<a class="text-danger">${d}</a>
+						  <a class="text-danger">${d}</a>
+						 	 <c:forEach var="l" items="${resultList}">
+							 	<c:if test="${d == l.day}">
+							 		<p>${l.programName}</p>
+							 		<p>${l.cnt} / ${l.programMaxCustomer}</p>
+							 	</c:if>
+							 </c:forEach> 
 						</c:if>
 						<c:if test="${!((i%7-1)==0)}">
 							${d}
+							 <c:forEach var="l" items="${resultList}">
+							 	<c:if test="${d == l.day}">
+							 		<p>${l.programName}</p>
+							 		<p>${l.cnt} / ${l.programMaxCustomer}</p>
+							 	</c:if>
+							 </c:forEach> 
 						</c:if>
 					</c:if>
 					
@@ -155,7 +167,7 @@
 						</tr><tr>
 					</c:if>
 				</td>
-			</c:forEach>
+	         </c:forEach>
 		</tr>
 	</table>
 		</div>

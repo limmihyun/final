@@ -1,5 +1,6 @@
 package com.tree.gdhealth.customer.programreservation.controller;
 
+import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,6 +26,10 @@ public class ProgramReservationController {
 		
 		Map<String, Object> calendarMap = calendarService.getCalendar(targetYear, targetMonth, targetDay);
 		model.addAttribute("calendarMap", calendarMap);
+		
+		List<Map<String, Object>> resultList = calendarService.selectProgramByMonth((int)(calendarMap.get("targetYear")), (int)(calendarMap.get("targetMonth")));
+		model.addAttribute("resultList", resultList);
+		System.out.println(resultList + "<---resultList 출력");
 		
 		return "customer/programreservation";
 	}
