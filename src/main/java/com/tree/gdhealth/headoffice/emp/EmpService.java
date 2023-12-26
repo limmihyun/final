@@ -73,7 +73,8 @@ public class EmpService {
 			// insert를 실패하였을 때 강제로 예외를 발생시켜 애노테이션 Transactiona이 작동하도록 한다.
 			throw new RuntimeException(); 
 		}
-			
+		
+		int imgResult = 0;
 		// file 추가
 		if(employeeFile != null) { // 파일이 하나이상 있다면
 
@@ -94,7 +95,7 @@ public class EmpService {
 			// xx.xxx.pdf -> .pdf
 			img.setEmployeeImgFilename(uName + extName);
 			
-			int imgResult = empMapper.insertEmployeeImg(img);
+			imgResult = empMapper.insertEmployeeImg(img);
 			if(imgResult != 1) {
 				// insert를 실패하였을 때 강제로 예외를 발생시켜 애노테이션 Transactiona이 작동하도록 한다.
 				throw new RuntimeException();
@@ -113,5 +114,5 @@ public class EmpService {
 		}
 	
 	}
-	
+			
 }
