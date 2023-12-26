@@ -27,21 +27,21 @@
 	<div class="container">
 		<div class="row">
 			<div class="col-md-12">
-				<form name="form" method="post" action="http://localhost:8080/board" enctype="multipart/form-data">
+				<form name="form" method="post" action="${path}/customer/signup" enctype="multipart/form-data">
 					<div class="form-group">
-						<label for="exampleInputEmail1">이름</label> <input type="text"
-							class="form-control" id="customerName" placeholder="2~4자리 한글"
+						<label>이름</label> <input type="text"
+							class="form-control" id="customerName" name="customerName" placeholder="2~4자리 한글"
 							required>
 					</div>
 
 
 					<div class="form-group">
-						<label for="exampleInputEmail1">아이디</label>
+						<label>아이디</label>
 						<div class="row">
 							<div class="col">
-								<input type="email" class="form-control" id="customerId" name="customerId"
-									placeholder="영문+숫자" aria-describedby="emailHelp"
-									style="position: relative;">
+								<input class="form-control" id="customerId" name="customerId"
+									placeholder="영문+숫자"
+									style="position: relative;" required>
 							</div>
 							<div class="col-auto">
 								<button class="btn btn-primary">중복확인</button>
@@ -51,13 +51,13 @@
 					</div>
 					
 					<div class="form-group">
-						<label for="exampleInputEmail1">비밀번호</label> <input type="text"
+						<label>비밀번호</label> <input
 							class="form-control" id="customerPw" name="customerPw" placeholder="영문+숫자+특수문자"
 							required>
 						<small id="pwHelp" class="form-text text-muted">정보</small>
 					</div>
 					<div class="form-group">
-						<label for="exampleInputEmail1">비밀번호확인</label> <input type="text"
+						<label>비밀번호확인</label> <input type="text"
 							class="form-control" id="customerPwCk" name="customerPwCk" placeholder=""
 							required>
 						<small id="pwCkHelp" class="form-text text-muted">정보</small>
@@ -70,7 +70,7 @@
 							<div class="col">
 								<input type="email" class="form-control" id="customerEmail" name="customerEmail"
 									placeholder="***@email.com" aria-describedby="emailHelp"
-									style="position: relative;">
+									style="position: relative;" required>
 							</div>
 							<div class="col-auto">
 								<button class="btn btn-primary">중복확인</button>
@@ -113,38 +113,39 @@
 						</div>
 						<div class="col-md-2 mb-3">
 							<label for="zip">나이</label> 
-							<input type="text" class="form-control w-50" placeholder="만" id="age" name="customerAge">
+							<input type="text" class="form-control w-50" placeholder="만" id="age" name="customerAge" required>
 							<div class="invalid-feedback">Please provide a valid state.
 							</div>
 							
 						</div>
 						<div class="col-md-2 mb-3">
 							<label for="zip">키</label> 
-							<input type="text" class="form-control w-50" placeholder="cm" id="height" name="customerHeight">
+							<input type="text" class="form-control w-50" placeholder="cm" id="height" name="customerHeight" required>
 							<div class="invalid-feedback">Please provide a valid state.
 							</div>
 						</div>
 						
 						<div class="col-md-3 mb-3">
 							<label for="zip">체중</label> 
-							<input type="text" class="form-control w-50" placeholder="**kg" id="weight" name="customerWeight">
+							<input type="text" class="form-control w-50" placeholder="**kg" id="weight" name="customerWeight" required>
 						</div>
 					</div>
 					<br>
 					<label>사진</label>
 					<br>
 					<div class="custom-file">
-						
-					    <input type="file" class="custom-file-input" id="chooseFile" name="customerImg" accept="image/*" onchange="loadFile(this)">
+					    <input type="file" class="custom-file-input" id="chooseFile" name="customerImg" accept="image/*" onchange="loadFile(this)" required>
 					    <label class="custom-file-label" for="customFile" id="fileName">이미지 선택</label>
 					</div>
+					<hr class="mb-4">
+					<button type="submit" class="btn btn-primary btn-lg btn-block">회원가입</button>
 					</form>
 					<br>
 					<br>
 					<br>
 
-					<hr class="mb-4">
-					<button class="btn btn-primary btn-lg btn-block">회원가입</button>
+					
+					
 			</div>
 		</div>
 		<footer class="my-5 pt-5 text-muted text-center text-small">
