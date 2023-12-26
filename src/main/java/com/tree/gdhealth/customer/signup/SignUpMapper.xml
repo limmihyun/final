@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.tree.gdhealth.customer.signup.SignUpMapper">
+<insert id="customerIn" parameterType="com.tree.gdhealth.customer.signup.vo.CustomerSignUp">
+	INSERT INTO customer(
+		customer_id,
+		customer_pw
+	) VALUES(
+		#{customerId},
+		#{customerPw}
+	)
+</insert>
+<insert id="customerDetailIn" parameterType="com.tree.gdhealth.customer.signup.vo.CustomerSignUp">
+	INSERT INTO customer_detail(
+		customer_no,
+		customer_name,
+		customer_gender,
+		customer_height,
+		customer_weight,
+		customer_age,
+		customer_phone,
+		customer_address,
+		customer_email
+	) VALUES(
+		#{customerNo},
+		#{customerName},
+		#{customerGender},
+		#{customerHeight},
+		#{customerWeight},
+		#{customerAge},
+		#{customerPhone},
+		#{customerAddress},
+		#{customerEmail}
+	)
+</insert>
+<insert id="customerImgIn" parameterType="com.tree.gdhealth.customer.signup.vo.CustomerSignUp">
+	INSERT INTO customer_img(
+		customer_no,
+		customer_img_origin_name,
+		customer_img_file_name,
+		customer_img_size,
+		customer_img_type
+	) VALUES(
+		#{customerNo},
+		#{customerImgOriginName},
+		#{customerImgFileName},
+		#{customerImgSize},
+		#{customerImgType}
+	)
+</insert>
+<select id="customerNoCk" parameterType="String" resultType="int">
+	SELECT
+		customer_no
+	FROM customer
+	WHERE customer_id = #{customerId}
+</select>
+
+
+
+</mapper>
