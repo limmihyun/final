@@ -3,18 +3,33 @@
 <mapper namespace="com.tree.gdhealth.customer.programreservation.mapper.ProgramReservationMapper">
 	<select id="selectProgramByMonth" resultType="java.util.Map">
 		SELECT
-			COUNT(*) cnt,
-			YEAR(pd.program_date) year,
-			MONTH(pd.program_date) month,
-			DAY(pd.program_date) day,
-			p.program_max_customer programMaxCustomer,
-			p.program_name programName
-		FROM program_reservation pr INNER JOIN program_date pd
+		      YEAR(pd.program_date) year,
+			  MONTH(pd.program_date) month,
+			  DAY(pd.program_date) day,
+			  COUNT(pr.program_date_no) cnt,
+			  p.program_max_customer programMaxCustomer,
+		      p.program_name programName
+		FROM program_reservation pr RIGHT OUTER JOIN program_date pd
 		  on pr.program_date_no = pd.program_date_no INNER JOIN program p
 		  on p.program_no = pd.program_no
 		WHERE YEAR(pd.program_date) = #{year}
 		AND MONTH(pd.program_date) = #{month}
 		GROUP BY pd.program_date
-		ORDER BY pd.program_date ASC;
+		ORDER BY pd.program_date ASC
+	</select>
+	
+	<select id="allCalendarList" resultType="java.util.Map">
+		SELECT
+		    YEAR(pd.program_date) year,
+			  MONTH(pd.program_date) month,
+			  DAY(pd.program_date) day,
+			  COUNT(pr.program_date_no) cnt,
+			p.program_max_customer programMaxCustomer,
+			p.program_name programName
+		FROM program_reservation pr RIGHT OUTER JOIN program_date pd
+		  on pr.program_date_no = pd.program_date_no INNER JOIN program p
+		  on p.program_no = pd.program_no
+		GROUP BY pd.program_date
+		ORDER BY pd.program_date ASC
 	</select>
 </mapper>

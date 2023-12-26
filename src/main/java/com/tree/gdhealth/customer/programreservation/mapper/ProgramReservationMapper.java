@@ -9,4 +9,5 @@ import org.apache.ibatis.annotations.Mapper;
 public interface ProgramReservationMapper {
 	
 	List<Map<String, Object>> selectProgramByMonth(Map<String, Object> paramMap);
+	List<Map<String, Object>> allCalendarList();
 }

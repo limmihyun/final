@@ -174,16 +174,25 @@
 	
 	<div style="margin-left:80%; position: absolute; margin-top:13%; text-align:center;">
 		<div>
+		<!-- 
+			이번달 프로그램 과 2달뒤 프로그램 까지 출력 
+		 -->
 				<c:forEach var="i" begin="0" end="2">
 					<c:set var="loop_flag" value="false" />
 					<c:set value="${calendarMap.targetYear}" var="listYear"></c:set>
 					<c:set value="${calendarMap.targetMonth + 1 + i}" var="listMonth"></c:set>
+					<!-- 앞으로 2달을 출력하는데 12 초과시 12를 빼서 날자 맞추기 -->
 					<c:if test="${listMonth > 12}">
 						<c:set value="${(calendarMap.targetMonth + 1 + i) - 12}" var="listMonth"></c:set>
 						<c:set value="${calendarMap.targetYear + 1}" var="listYear"></c:set>
 					</c:if>
 					<h3>${listYear} 년 ${listMonth} 월 </h3>
-					<c:forEach var="l" items="${resultList}" varStatus="status">
+					<!-- 
+						loop_flag 변수를 false로 선언 및 초기화 
+						해당 월에 값이 없다면 if문을 활용하여 문구 출력 
+						해당 월에 값이 있다면 해당 프로그램을 출력뒤 loop_flag를 true로 바꿈
+					 -->
+					<c:forEach var="l" items="${allList}">
 						<c:if test="${listYear == l.year && listMonth == l.month}">
 							<p>${l.month} / ${l.day} &nbsp; ${l.programName}</p>
 							<p  style="margin-bottom:30px;">(${l.cnt} / ${l.programMaxCustomer})</p>
@@ -196,15 +205,9 @@
 							<c:set var="loop_flag" value="true"/>
 						</c:if>		
 					</c:forEach>
-					<c:if test="${empty resultList}">
-							<br>
-							<h4>프로그램이 준비중입니다. </h4>	
-							<br>
-					</c:if>
 				</c:forEach>
 		</div>
 	</div>
-	
 	</section>
 	
     <!-- Footer Section Begin -->
