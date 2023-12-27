@@ -1,4 +1,4 @@
-package com.tree.gdhealth.customer.programreservation.controller;
+package com.tree.gdhealth.customer.programreservation;
 
 import java.util.List;
 import java.util.Map;
@@ -9,7 +9,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import com.tree.gdhealth.customer.programreservation.service.CalendarService;
+import com.tree.gdhealth.customer.programreservation.vo.ProgramReservation;
 
 import jakarta.servlet.http.HttpSession;
 
@@ -17,6 +17,9 @@ import jakarta.servlet.http.HttpSession;
 public class ProgramReservationController {
 	@Autowired
 	private CalendarService calendarService;
+	
+	@Autowired
+	private ProRsOneService proRsOneService;
 	
 	@GetMapping("/customer/programrs")
 	public String programrs(HttpSession session,Model model
@@ -36,6 +39,16 @@ public class ProgramReservationController {
 
 		
 		return "customer/programreservation";
+	}
+	
+	@GetMapping("/customer/prorsone")
+	public String prorsone(int year, int month, int day, String programName, Model model) {
+		
+		List<ProgramReservation> resultList = proRsOneService.prorsone(year, month, day, programName);
+		model.addAttribute("resultList", resultList);
+		
+		return "customer/proRsOne";
+		
 	}
 
 }

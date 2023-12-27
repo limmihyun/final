@@ -1,4 +1,4 @@
-package com.tree.gdhealth.customer.programreservation.mapper;
+package com.tree.gdhealth.customer.programreservation;
 
 import java.util.List;
 import java.util.Map;
