@@ -4,7 +4,7 @@
 <mapper namespace="com.tree.gdhealth.sportsequipment.api.SportsEquipmentApiMapper">
 
     <!--
-    <select id="findSportsEquipmentByNo" parameterType="int" resultType="com.tree.gdhealth.sportsequipment.vo.SportsEquipment">
+    <select id="findSportsEquipmentByNo" parameterType="int" resultType="com.tree.gdhealth.vo.SportsEquipment">
         SELECT sports_equipment_no sportsEquipmentNo,
                item_name itemName,
                item_price itemPrice,
@@ -14,7 +14,7 @@
         FROM sports_equipment
         WHERE sports_equipment_no = #{sportsEquipmentNo}
     </select>
-    <select id="findSportsEquipmentOrderByNo" parameterType="int" resultType="com.tree.gdhealth.sportsequipment.vo.SportsEquipmentOrder">
+    <select id="findSportsEquipmentOrderByNo" parameterType="int" resultType="com.tree.gdhealth.vo.SportsEquipmentOrder">
         SELECT order_no orderNo,
                employee_orderer employeeOrderer,
                branch_no branchNo,
@@ -29,7 +29,7 @@
         WHERE order_no = #{orderNo}
     </select>
     <select id="findSportsEquipmentImgByNo" parameterType="int"
-            resultType="com.tree.gdhealth.sportsequipment.vo.SportsEquipmentImg">
+            resultType="com.tree.gdhealth.vo.SportsEquipmentImg">
         SELECT sports_equipment_img_no sportsEquipmentImgNo,
                sports_equipment_no sportsEquipmentNo,
                sports_equipment_img_origin_name sportsEquipmentImgOriginName,
@@ -42,7 +42,7 @@
         WHERE sports_equipment_img_no = #{sportsEquipmentImgNo}
     </select>
     -->
-    <select id="getSportsEquipmentList" resultType="com.tree.gdhealth.sportsequipment.vo.SportsEquipment">
+    <select id="getSportsEquipmentList" resultType="com.tree.gdhealth.vo.SportsEquipment">
         SELECT sports_equipment_no sportsEquipmentNo,
                item_name itemName,
                item_price itemPrice,
@@ -51,7 +51,7 @@
                updatedate
         FROM sports_equipment
     </select>
-    <select id="getSportsEquipmentOne" resultType="com.tree.gdhealth.sportsequipment.vo.SportsEquipment">
+    <select id="getSportsEquipmentOne" resultType="com.tree.gdhealth.vo.SportsEquipment">
         SELECT sports_equipment_no sportsEquipmentNo,
                item_name itemName,
                item_price itemPrice,

@@ -10,8 +10,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
-import com.tree.gdhealth.headoffice.emp.vo.Employee;
-import com.tree.gdhealth.headoffice.emp.vo.EmployeeDetail;
+import com.tree.gdhealth.vo.Employee;
+import com.tree.gdhealth.vo.EmployeeDetail;
 
 import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;

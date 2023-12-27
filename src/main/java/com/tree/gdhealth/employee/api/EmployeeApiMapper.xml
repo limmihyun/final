@@ -2,7 +2,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.tree.gdhealth.employee.api.EmployeeApiMapper">
 
-	<select id="getEmployeeDetailByNo" resultType="com.tree.gdhealth.employee.api.EmployeeDetail">
+	<select id="getEmployeeDetailByNo" resultType="com.tree.gdhealth.vo.EmployeeDetail">
 		SELECT
 			employee_no employeeNo,
 			employee_name employeeName,
@@ -14,7 +14,7 @@
 		FROM employee_detail
 		WHERE employee_no = #{employeeNo}
 	</select>
-	<select id="getEmployeeListIsHeadOffice" resultType="com.tree.gdhealth.headoffice.emp.vo.Employee">
+	<select id="getEmployeeListIsHeadOffice" resultType="com.tree.gdhealth.vo.Employee">
 		SELECT
 		    employee_no employeeNo,
 		    branch_no branchNo,

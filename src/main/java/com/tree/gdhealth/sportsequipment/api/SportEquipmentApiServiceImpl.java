@@ -1,6 +1,6 @@
 package com.tree.gdhealth.sportsequipment.api;
 
-import com.tree.gdhealth.sportsequipment.vo.SportsEquipment;
+import com.tree.gdhealth.vo.SportsEquipment;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;

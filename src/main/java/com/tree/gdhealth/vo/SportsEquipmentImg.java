@@ -1,5 +1,6 @@
-package com.tree.gdhealth.sportsequipment.vo;
+package com.tree.gdhealth.vo;
 
+import com.tree.gdhealth.sportsequipment.vo.ImageType;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;

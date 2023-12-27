@@ -1,4 +1,4 @@
-package com.tree.gdhealth.employee.api;
+package com.tree.gdhealth.vo;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -7,16 +7,18 @@ import lombok.NoArgsConstructor;
 
 import java.time.LocalDateTime;
 
+/**
+ * @author 정인호
+ */
+@Builder
 @AllArgsConstructor
 @NoArgsConstructor
-@Builder
 @Data
-public class EmployeeDetail {
-    private int employeeNo;
-    private String employeeName;
-    private String employeePhone;
-    private String employeeEmail;
-    private String employeeGender;
+public class SportsEquipment {
+    private int sportsEquipmentNo;
+    private String itemName;
+    private int itemPrice;
+    private String note;
     private LocalDateTime createdate;
     private LocalDateTime updatedate;
 }
