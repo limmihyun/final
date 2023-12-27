@@ -1,18 +1,19 @@
-package com.tree.gdhealth.branch.sportsequipment;
+package com.tree.gdhealth.branch.api;
 
+import com.tree.gdhealth.branch.vo.Branch;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-/**
- * @author 정인호
- */
 @Slf4j
 @Transactional(readOnly = true)
 @RequiredArgsConstructor
 @Service
-public class BranchSportsEquipmentServiceImpl implements IBranchSportsEquipmentService{
-    final BranchSportsEquipmentMapper branchSportsEquipmentMapper;
+public class BranchApiService {
+    private final BranchApiMapper mapper;
 
+    public Branch getBranchOne(int branchNo) {
+        return mapper.getBranchOne(branchNo);
+    }
 }

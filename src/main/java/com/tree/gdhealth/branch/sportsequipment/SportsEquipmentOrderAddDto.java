@@ -23,9 +23,9 @@ public class SportsEquipmentOrderAddDto {
     @Positive
     private final int branchNo;
     @Positive
-    private final int sportsEquipmentNo;
+    private final Integer sportsEquipmentNo;
     @Positive
-    private final int quantity;
+    private final Integer quantity;
     @Positive
-    private final int employeeApprover;
+    private final Integer employeeApprover;
 }
