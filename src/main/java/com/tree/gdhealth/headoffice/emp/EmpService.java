@@ -10,9 +10,9 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
 
-import com.tree.gdhealth.headoffice.emp.vo.Employee;
-import com.tree.gdhealth.headoffice.emp.vo.EmployeeDetail;
-import com.tree.gdhealth.headoffice.emp.vo.EmployeeImg;
+import com.tree.gdhealth.vo.Employee;
+import com.tree.gdhealth.vo.EmployeeDetail;
+import com.tree.gdhealth.vo.EmployeeImg;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;

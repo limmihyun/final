@@ -1,6 +1,7 @@
 package com.tree.gdhealth.employee.api;
 
-import com.tree.gdhealth.headoffice.emp.vo.Employee;
+import com.tree.gdhealth.vo.Employee;
+import com.tree.gdhealth.vo.EmployeeDetail;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;

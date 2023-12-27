@@ -1,16 +1,14 @@
 package com.tree.gdhealth.branch.sportsequipment;
 
-import com.tree.gdhealth.headoffice.emp.vo.Employee;
+import com.tree.gdhealth.vo.Employee;
 import jakarta.servlet.http.HttpSession;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.validation.BindingResult;
 import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.servlet.ModelAndView;
 
 /**
  * @author 정인호

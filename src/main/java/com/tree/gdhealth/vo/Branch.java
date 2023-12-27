@@ -1,4 +1,4 @@
-package com.tree.gdhealth.branch.vo;
+package com.tree.gdhealth.vo;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;

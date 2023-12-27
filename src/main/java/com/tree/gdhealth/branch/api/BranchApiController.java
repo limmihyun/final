@@ -1,6 +1,6 @@
 package com.tree.gdhealth.branch.api;
 
-import com.tree.gdhealth.branch.vo.Branch;
+import com.tree.gdhealth.vo.Branch;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.GetMapping;

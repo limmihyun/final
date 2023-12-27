@@ -1,5 +1,8 @@
 package com.tree.gdhealth.sportsequipment.vo;
 
+import com.tree.gdhealth.vo.SportsEquipment;
+import com.tree.gdhealth.vo.SportsEquipmentImg;
+import com.tree.gdhealth.vo.SportsEquipmentOrder;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;

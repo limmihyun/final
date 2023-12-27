@@ -5,9 +5,9 @@ import java.util.Map;
 
 import org.apache.ibatis.annotations.Mapper;
 
-import com.tree.gdhealth.headoffice.emp.vo.Employee;
-import com.tree.gdhealth.headoffice.emp.vo.EmployeeDetail;
-import com.tree.gdhealth.headoffice.emp.vo.EmployeeImg;
+import com.tree.gdhealth.vo.Employee;
+import com.tree.gdhealth.vo.EmployeeDetail;
+import com.tree.gdhealth.vo.EmployeeImg;
 
 @Mapper
 public interface EmpMapper {

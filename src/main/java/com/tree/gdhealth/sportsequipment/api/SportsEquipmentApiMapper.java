@@ -1,6 +1,6 @@
 package com.tree.gdhealth.sportsequipment.api;
 
-import com.tree.gdhealth.sportsequipment.vo.SportsEquipment;
+import com.tree.gdhealth.vo.SportsEquipment;
 import org.apache.ibatis.annotations.Mapper;
 
 import java.util.List;
