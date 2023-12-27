@@ -1,4 +1,4 @@
- <%@ page language="java" contentType="text/html; charset=UTF-8"
+<%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!doctype html>
@@ -10,6 +10,8 @@
     <title>직원 추가</title>
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    
+    
     <!-- favicon
 		============================================ -->
     <link rel="shortcut icon" type="image/x-icon" href="/admin/img/favicon.ico">
@@ -224,6 +226,7 @@
         </nav>
     </div>
     <!-- End Left menu area -->
+    
     <!-- Start Welcome area -->
     <div class="all-content-wrapper">
         <div class="container-fluid">
@@ -861,6 +864,7 @@
                     </div>
                 </div>
             </div>
+            
             <!-- Mobile Menu start -->
             <div class="mobile-menu-area">
                 <div class="container">
@@ -1054,10 +1058,11 @@
         <div class="single-pro-review-area mt-t-30 mg-b-15">
             <div class="container-fluid">
                 <div class="row" style="margin-top:20px;">
-                    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 mt-3">
+                	<div class="col-lg-3 col-md-12 col-sm-12 col-xs-12 mt-3"></div>
+                    <div class="col-lg-6 col-md-12 col-sm-12 col-xs-12 mt-3">
 						
                         <div class="product-payment-inner-st"> 
-                            <div>기본 정보</div>
+                            <div style="font-size:20px;">기본 정보</div>
                             <div id="myTabContent" class="tab-content custom-product-edit">
                                 <div class="product-tab-list tab-pane fade active in" id="description">
                                     <div class="row">
@@ -1065,70 +1070,63 @@
                                             <div class="review-content-section">
                                                 <div id="dropzone1" class="pro-ad">
                                                     <form action="${pageContext.request.contextPath}/emp/addEmp" 
-                                                    	class="dropzone dropzone-custom needsclick add-professors" id="demo1-upload" 
+                                                    	class="dropzone dropzone-custom needsclick add-professors" id="insertForm" 
                                                     	method="post" enctype="multipart/form-data">
                                                         <div class="row">
-                                                            <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
-                                                            	<div class="form-group">
-                                                                    <input name="employeeId" type="text" class="form-control" placeholder="ID">
+                                                        	<div class="col-lg-8 col-md-8 col-sm-8 col-xs-8">
+                                                        		<div class="form-group">
+                                                                    <input name="employeeId" type="text" class="form-control" id="employeeId" placeholder="ID">
                                                                 </div>
-                                                                <div class="form-group">
-                                                                    <input name="employeeName" type="text" class="form-control" placeholder="이름">
-                                                                </div>                                                              
-                                                                <div class="form-group">
-                                                                    <input name="employeePw" type="password" class="form-control" placeholder="비밀번호">
+                                                        	</div>
+                                                        	<div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
+                                                        		<div class="form-group">
+                                                        			<button type="button" class="btn form-control" id="idCheck">중복체크</button>
+                                                        		</div>                            		
+                                                        	</div>
+                                                            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                                                            	<div class="form-group">
+                                                                    <input name="employeePw" id="employeePw" type="password" class="form-control" placeholder="비밀번호">
                                                                 </div>
                                                                 <div class="form-group">
                                                                     <input type="password" class="form-control" id="pwCheck" placeholder="비밀번호 확인">
+                                                                </div>                                                              
+                                                                <div class="form-group">
+                                                                    <input name="employeeName" id="employeeName" type="text" class="form-control" placeholder="이름">
+                                                                </div>                                                                                                                       
+                                                                <div class="form-group">
+                                                                    <input name="employeePhone" id="employeePhone" type="text" class="form-control" placeholder="휴대폰 번호">
                                                                 </div>
                                                                 <div class="form-group">
-                                                                    <input name="employeePhone" type="text" class="form-control" placeholder="휴대폰 번호">
-                                                                </div>
-                                                                <div class="form-group">
-                                                                    <input name="employeeEmail" type="text" class="form-control" placeholder="이메일">
+                                                                    <input name="employeeEmail" id="employeeEmail" type="text" class="form-control" placeholder="이메일">
                                                                 </div>                                                               
                                                                 
                                                                 <div class="form-group">
-                                                                    <select name="employeeGender" class="form-control">
-																		<option value="none" selected="" disabled="">성별</option>
+                                                                    <select name="employeeGender" id="employeeGender" class="form-control">
+																		<option value="0" selected>성별</option>
 																		<option value="m">남</option>
 																		<option value="f">여</option>
 																	</select>
                                                                 </div>
                                                                 <div class="form-group">
-                                                                    <select name="branchNo" class="form-control">
-																			<option value="none" selected="" disabled="">소속</option>
+                                                                    <select name="branchNo" id="branchNo" class="form-control">
+																			<option value="0" selected>지점</option>
 																			<option value="1">본사</option>
-																			<option value="2">구로</option>
-																			<option value="3">강남</option>
-																			<option value="4">신림</option>
+																			<option value="2">가산 1호점</option>
+																			<option value="3">가산 2호점</option>
 																		</select>
                                                                 </div>
                                                                 
                                                                 <div class="form-group">
-                                                                    <input name="employeeFile" type="file" class="form-control">
+                                                                    <input name="employeeFile" id="employeeFile" type="file" class="form-control">
                                                                 </div>
-																
-																<!-- 
-																	<div class="form-group alert-up-pd">
-                                                                    <div class="dz-message needsclick download-custom">
-                                                                        <i class="fa fa-download edudropnone" aria-hidden="true"></i>
-                                                                        <h2 class="edudropnone">직원 이미지</h2>
-                                                                        <p class="edudropnone"><span class="note needsclick">이미지를 드래그하거나 클릭하여 업로드하세요.</span>
-                                                                        </p>
-                                                                        <input name="imageico" class="hd-pro-img" type="text" />
-                                                                    </div>
-                                                                </div> 
-																 -->
-                                                                       
-                                                                
+                                                                                                                                
                                                             </div>
-                                                            <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12"></div>
+                     
                                                         </div>
                                                         <div class="row">
                                                             <div class="col-lg-12">
                                                                 <div class="payment-adress">
-                                                                    <button type="submit" class="btn btn-primary waves-effect waves-light">Submit</button>
+                                                                    <button type="button" class="btn btn-primary waves-effect waves-light" id="insertBtn">추가</button>
                                                                 </div>
                                                             </div>
                                                         </div>
@@ -1141,6 +1139,7 @@
                             </div>
                         </div>
                     </div>
+                    <div class="col-lg-3 col-md-12 col-sm-12 col-xs-12 mt-3"></div>
                 </div>
             </div>
         </div>
@@ -1215,5 +1214,125 @@
 		============================================ -->
     <script src="/admin/js/tawk-chat.js"></script>
 </body>
+<script>
+	$('#employeeId').focus();
+	
+	// 정규식을 이용한 ID 입력 체크(영문 소문자, 숫자만 입력 가능)
+	$('#employeeId').keyup(function(){
+		$(this).val($(this).val().replace(/[^a-z0-9]/g, ''));
+	});
+	
+	let isIdCheck = false; 
+	// 중복체크를 하고 난 뒤 아이디 입력란에 사용 가능한 아이디를 지우고 새로운 아이디를 입력했을 경우에 대처
+	$('#employeeId').keydown(function(){
+		isIdCheck = false;
+	});
+	
+	// 중복체크 버튼
+	$('#idCheck').click(function(){
+		
+		let employeeId = $('#employeeId').val();
+		if(employeeId != '') {
+			$.ajax({
+				url : '${pageContext.request.contextPath}/addEmpIdCheck',
+				method : 'get',
+				data : {employeeId : employeeId},
+				success : function(result) {
+					if(result == 1) {
+						alert('이미 사용중인 아이디입니다.');
+						$('#employeeId').focus();
+					} else if(employeeId.length < 5) {
+						alert('아이디를 5자 이상 입력하세요.');
+						$('#employeeId').focus();
+					} else {
+						isIdCheck = true;
+						alert('사용 가능한 아이디입니다.');
+						$('#employeePw').focus();
+					}
+				},
+				error : function(err) {
+					console.log(err);
+				}
+			}); 
+		 } else {
+			alert('아이디를 입력하세요.');
+			$('#employeeId').focus();
+		}
+	});
+	
+	// 회원가입 버튼
+	$('#insertBtn').click(function(){
+		
+		if(isIdCheck == false) {
+			alert('ID 중복체크를 하세요.');
+			$('#employeeId').focus();
+			return;
+		}
+		
+		let checkNumber = $('#employeePw').val().search(/[0-9]/g);
+	    let checkEnglish = $('#employeePw').val().search(/[a-z]/ig);
+	    
+	    if($('#employeePw').val().length == 0) { 
+			// 비밀번호 창에 아무것도 입력하지 않았을 때
+			alert('비밀번호를 입력하세요.');
+			$('#memberPw').focus();
+			return;
+		} else if($('#employeePw').val() != $('#pwCheck').val()) { 
+			// 비밀번호 일치 확인
+			alert('비밀번호가 일치하지 않습니다.');
+			$('#employeePw').focus();
+			return;
+		} else if($('#employeePw').val().length < 6 || $('#pwCheck').val().length < 6) { 
+			// 비밀번호 창의 입력값의 length가 6 미만일 때
+			alert('비밀번호를 6자 이상 입력하세요.');
+			$('#employeePw').focus();
+			return;
+		} else if(checkNumber <0 || checkEnglish <0){
+			// 숫자와 영어를 혼용하지 않았을 때
+	        alert("비밀번호는 숫자와 영문자를 혼용하여야 합니다.");
+	        $('#employeePw').focus();
+	        return;
+	    }
+	    
+	    if($('#employeeName').val().length == 0) {
+	    	alert('이름을 입력하세요.');
+			$('#employeeName').focus();
+			return;
+	    }
+	    
+	    if($('#employeePhone').val().length == 0) {
+	    	alert('휴대폰 번호를 입력하세요.');
+			$('#employeePhone').focus();
+			return;
+	    }
+	    
+	    if($('#employeeEmail').val().length == 0) {
+	    	alert('이메일을 입력하세요.');
+			$('#employeeEmail').focus();
+			return;
+	    }
+	    
+	    if($('#employeeGender').val() == 0) {
+			alert('성별을 선택하세요.');
+			$('#employeeGender').focus();
+			return;
+		}
+	    
+	    if($('#branchNo').val() == 0) {
+			alert('지점을 선택하세요.');
+			$('#branchNo').focus();
+			return;
+		}
+	    
+	    if($('#employeeFile').val() == 0) {
+			alert('직원 사진을 첨부하세요.');
+			$('#employeeFile').focus();
+			return;
+		}
+	    		
+	    alert('가입이 완료되었습니다.');
+		$('#insertForm').submit();
+	});
+</script>
 
 </html>

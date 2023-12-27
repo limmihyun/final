@@ -26,6 +26,12 @@
 		FROM employee
 	</select>
 	
+	<select id="idCheck" parameterType="String" resultType="int">
+		SELECT COUNT(*)
+		FROM employee
+		WHERE employee_id = #{employeeId}
+	</select>
+	
 	<select id="employeeOne" resultType="map">
 		SELECT
 			e.employee_id empId,
@@ -61,7 +67,7 @@
 		<selectKey resultType="int" keyProperty="employeeNo" order="AFTER">
       		  SELECT LAST_INSERT_ID()
    		</selectKey> 
-	</insert>	
+	</insert>
 	<insert id="insertEmployeeDetail" parameterType="com.tree.gdhealth.headoffice.emp.vo.EmployeeDetail">
 		INSERT INTO employee_detail(
 			employee_no,

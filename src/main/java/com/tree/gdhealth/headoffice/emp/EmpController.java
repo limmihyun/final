@@ -7,6 +7,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.tree.gdhealth.headoffice.emp.vo.Employee;
@@ -36,6 +37,17 @@ public class EmpController {
 		
 		return "headoffice/empList";
 		
+	}
+	
+	@ResponseBody
+	@GetMapping("/addEmpIdCheck")
+	public int addEmpIdCheck(String employeeId) {
+		
+		int result = empService.idCheck(employeeId);
+		
+		log.debug("아이디 중복 체크(중복o:1,중복x:0) : " + result);
+		
+		return result;
 	}
 	
 	@GetMapping("/emp/addEmp") 
