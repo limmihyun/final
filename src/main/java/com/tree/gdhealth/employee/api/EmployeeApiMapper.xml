@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.tree.gdhealth.employee.api.EmployeeApiMapper">
+
+	<select id="getEmployeeDetailByNo" resultType="com.tree.gdhealth.employee.api.EmployeeDetail">
+		SELECT
+			employee_no employeeNo,
+			employee_name employeeName,
+			employee_phone employeePhone,
+			employee_email employeeEmail,
+			employee_gender employeeGender,
+			createdate,
+			updatedate
+		FROM employee_detail
+		WHERE employee_no = #{employeeNo}
+	</select>
+	<select id="getEmployeeListIsHeadOffice" resultType="com.tree.gdhealth.headoffice.emp.vo.Employee">
+		SELECT
+		    employee_no employeeNo,
+		    branch_no branchNo,
+		    employee_id employeeId,
+		    employee_active employeeActive,
+		    createdate,
+		    updatedate
+		FROM employee e
+		WHERE e.branch_no = (
+		    SELECT branch.branch_no
+		        FROM branch
+		        WHERE branch_level = 1
+			)
+	</select>
+
+</mapper>

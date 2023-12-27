@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.tree.gdhealth.branch.api.BranchApiMapper">
+
+	<select id="getBranchOne" resultType="com.tree.gdhealth.branch.vo.Branch">
+		SELECT
+		    branch_no branchNo,
+		    branch_name branchName,
+		    branch_tel branchTel,
+		    branch_address branchAddress,
+		    createdate,
+		    updatedate,
+		    branch_level branchLevel,
+		    branch_active branchActive
+		FROM branch
+		WHERE branch_no = #{branchNo}
+	</select>
+
+</mapper>
