@@ -1087,7 +1087,7 @@
 	   			    <c:set var="cnt" value="${cnt + 1}"></c:set>
 	   			    <c:if test="${(cnt%4) == 1}">
 	   			  	 	<div class="row" style="margin-bottom:15px;"> 
-	   			    </c:if>		   			    
+	   			    </c:if>	 			    
 			           	    <div class="col-lg-3 col-md-6 col-sm-6 col-xs-12">
 			                	<div class="student-inner-std res-mg-b-30">
 			                     <div class="student-img">
@@ -1114,24 +1114,30 @@
 	   			    </c:if>
            		</c:forEach>
            		
-                <!-- 회원 list end -->              
-            </div>
-           		 <!-- 페이징 start -->
-                 <ul class="pagination">
-				  <li class="page-item"><a class="page-link" href="#">Previous</a></li>
-				  <li class="page-item"><a class="page-link" href="#">1</a></li>
-				  <li class="page-item"><a class="page-link" href="#">2</a></li>
-				  <li class="page-item"><a class="page-link" href="#">3</a></li>
-				  <li class="page-item"><a class="page-link" href="#">4</a></li>
-				  <li class="page-item"><a class="page-link" href="#">5</a></li>
-				  <li class="page-item"><a class="page-link" href="#">6</a></li>
-				  <li class="page-item"><a class="page-link" href="#">7</a></li>
-				  <li class="page-item"><a class="page-link" href="#">8</a></li>
-				  <li class="page-item"><a class="page-link" href="#">9</a></li>
-				  <li class="page-item"><a class="page-link" href="#">10</a></li>
-				  <li class="page-item"><a class="page-link" href="#">Next</a></li>
-				</ul> 
-				<!-- 페이징 end -->    
+                <!-- 회원 list end -->  
+                
+                <!-- 페이징 start -->     
+                <div style="text-align:center;">
+                	
+	                <ul class="pagination">
+					  <li class="page-item"><a class="page-link" href="#">Previous</a></li>
+					  <li class="page-item"><a class="page-link" href="#">1</a></li>
+					  <li class="page-item"><a class="page-link" href="#">2</a></li>
+					  <li class="page-item"><a class="page-link" href="#">3</a></li>
+					  <li class="page-item"><a class="page-link" href="#">4</a></li>
+					  <li class="page-item"><a class="page-link" href="#">5</a></li>
+					  <li class="page-item"><a class="page-link" href="#">6</a></li>
+					  <li class="page-item"><a class="page-link" href="#">7</a></li>
+					  <li class="page-item"><a class="page-link" href="#">8</a></li>
+					  <li class="page-item"><a class="page-link" href="#">9</a></li>
+					  <li class="page-item"><a class="page-link" href="#">10</a></li>
+					  <li class="page-item"><a class="page-link" href="#">Next</a></li>
+					</ul>
+				  
+                </div>
+                <!-- 페이징 end --> 
+                  
+            </div>          		    
         </div>
     </div>
 

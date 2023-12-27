@@ -53,6 +53,13 @@ public class EmpService {
 		return employeeOne;
 	}
 	
+	public int idCheck(String employeeId) {
+		
+		int result = empMapper.idCheck(employeeId);
+		
+		return result;
+	}
+	
 	public void insertEmployee(Employee employee, EmployeeDetail employeeDetail, 
 								MultipartFile employeeFile, String path) {
 		
