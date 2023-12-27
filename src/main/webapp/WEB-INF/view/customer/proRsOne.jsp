@@ -109,105 +109,25 @@
     </section>
     <!-- Hero Slider End -->
 	
-	<section style="position: relative; height:100%;">
- 	<div style="width:70%; position: absolute;">
-		<div align="center">
-			<h1>${calendarMap.targetMonth + 1} 월</h1>
-		</div>
-		<div style="text-align: left; position: relative;">
-		    <p style="margin-top:50px;">${calendarMap.targetYear} 년</p>
-		    <div style="position: absolute;  bottom:10%; left: 50%; transform: translateX(-50%);" class="d-flex justify-content-center" align="center">
-		        <a class="btn btn-primary" href="${pageContext.request.contextPath}/customer/programrs?targetYear=${calendarMap.targetYear}&targetMonth=${calendarMap.targetMonth - 1}">&#60;&nbsp;이전달</a>&nbsp;
-		        <a class="btn btn-primary" href="${pageContext.request.contextPath}/customer/programrs?targetYear=${calendarMap.targetYear}&targetMonth=${calendarMap.targetMonth + 1}">다음달&nbsp;&#62;</a>
-		    </div>
-		</div>
-	
-		<br>
-		<br>
-		<table class="table table-bordered">
-			<tr>
-				<th style="text-align:center;">SUN</th> 
-				<th style="text-align:center;">MON</th>
-				<th style="text-align:center;">TUE</th>
-				<th style="text-align:center;">WED</th>
-				<th style="text-align:center;">THU</th>
-				<th style="text-align:center;">FRI</th>
-				<th style="text-align:center;">SAT</th>
-			</tr>
-			<tr>
-				<c:forEach var="i" begin="1" end="${calendarMap.totalTd}">
-					<c:set var="d" value="${i - calendarMap.beginBlank}"></c:set>
-					<td style="width:129.5px; height:82.164px;">
-						<c:if test="${d < 1 || d > calendarMap.lastDate}">
-							&nbsp;
-						</c:if>
-						<c:if test="${!(d < 1 || d > calendarMap.lastDate)}">
-							<c:if test="${(i%7-1)==0}">
-							  <a class="text-danger">${d}</a>
-							 	 <c:forEach var="l" items="${resultList}">
-								 	<c:if test="${d == l.day}">
-								 		<a href="${pageContext.request.contextPath}/customer/prorsone?year=${l.year}&month=${l.month}&day=${l.day}&programName=${l.programName}">${l.programName}</a>
-								 		<p>${l.cnt} / ${l.programMaxCustomer}</p>
-								 	</c:if>
-								 </c:forEach> 
-							</c:if>
-							<c:if test="${!((i%7-1)==0)}">
-								${d}
-								 <c:forEach var="l" items="${resultList}">
-								 	<c:if test="${d == l.day}">
-								 		<a href="${pageContext.request.contextPath}/customer/prorsone?year=${l.year}&month=${l.month}&day=${l.day}&programName=${l.programName}">${l.programName}</a>
-								 		<p>${l.cnt} / ${l.programMaxCustomer}</p>
-								 	</c:if>
-								 </c:forEach> 
-							</c:if>
-						</c:if>
-						
-						<!-- 한행에 7열씩.. -->
-						<c:if test="${i < calendarMap.totalTd && i%7 == 0}">
-							</tr><tr>
-						</c:if>
-					</td>
-		         </c:forEach>
-			</tr>
-		</table>
-	</div>
-	
-	<div style="margin-left:80%; position: absolute; margin-top:13%; text-align:center;">
+	<section>
 		<div>
-		<!-- 
-			이번달 프로그램 과 2달뒤 프로그램 까지 출력 
-		 -->
-				<c:forEach var="i" begin="0" end="2">
-					<c:set var="loop_flag" value="false" />
-					<c:set value="${calendarMap.targetYear}" var="listYear"></c:set>
-					<c:set value="${calendarMap.targetMonth + 1 + i}" var="listMonth"></c:set>
-					<!-- 앞으로 2달을 출력하는데 12 초과시 12를 빼서 날자 맞추기 -->
-					<c:if test="${listMonth > 12}">
-						<c:set value="${(calendarMap.targetMonth + 1 + i) - 12}" var="listMonth"></c:set>
-						<c:set value="${calendarMap.targetYear + 1}" var="listYear"></c:set>
-					</c:if>
-					<h3>${listYear} 년 ${listMonth} 월 </h3>
-					<!-- 
-						loop_flag 변수를 false로 선언 및 초기화 
-						해당 월에 값이 없다면 if문을 활용하여 문구 출력 
-						해당 월에 값이 있다면 해당 프로그램을 출력뒤 loop_flag를 true로 바꿈
-					 -->
-					<c:forEach var="l" items="${allList}">
-						<c:if test="${listYear == l.year && listMonth == l.month}">
-							<p>${l.month} / ${l.day} &nbsp; ${l.programName}</p>
-							<p  style="margin-bottom:30px;">(${l.cnt} / ${l.programMaxCustomer})</p>
-							<c:set var="loop_flag" value="true"/>
-						</c:if>	
-						<c:if test="${not loop_flag}">
-							<br>
-							<h4>프로그램이 준비중입니다. </h4>	
-							<br>
-							<c:set var="loop_flag" value="true"/>
-						</c:if>		
-					</c:forEach>
-				</c:forEach>
+			<div>
+				<form>
+					<table>
+						<th>프로그램 이름</th>
+						<th>선택 날짜</th>
+						<th>고객 ID</th>
+						<th>어느 지점</th>
+						<c:forEach var="l" items="${resultList}">
+							<td>${l.programName}</td>
+							<td>${l.programDate}</td>
+							<td>${l.customerId}</td>
+							<td>${l.branchName}</td>
+						</c:forEach>
+					</table>
+				</form>
+			</div>
 		</div>
-	</div>
 	</section>
 	
     <!-- Footer Section Begin -->

@@ -1,4 +1,4 @@
-package com.tree.gdhealth.customer.programreservation.service;
+package com.tree.gdhealth.customer.programreservation;
 
 import java.util.Calendar;
 import java.util.HashMap;
@@ -8,8 +8,6 @@ import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-
-import com.tree.gdhealth.customer.programreservation.mapper.ProgramReservationMapper;
 
 
 
