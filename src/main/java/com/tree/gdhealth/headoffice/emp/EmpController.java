@@ -28,10 +28,7 @@ public class EmpController {
 		
 		List<Map<String,Object>> empList = empService.getEmployeeList();		
 		model.addAttribute("empList", empList);
-		
-		String path = session.getServletContext().getRealPath("/upload/emp");
-		model.addAttribute("path", path);
-		
+				
 		int employeeCnt = empService.getEmployeeCnt();
 		// 디버깅 
 		log.debug("직원 수 : " + employeeCnt);

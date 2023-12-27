@@ -48,7 +48,7 @@ public class EmpService {
 		
 		Map<String, Object> employeeOne = empMapper.employeeOne(employeeId);
 		// 디버깅 
-		log.debug("직원 상서 정보 : " + employeeOne);
+		log.debug("직원 상세 정보 : " + employeeOne);
 		
 		return employeeOne;
 	}
@@ -73,45 +73,49 @@ public class EmpService {
 			// insert를 실패하였을 때 강제로 예외를 발생시켜 애노테이션 Transactiona이 작동하도록 한다.
 			throw new RuntimeException(); 
 		}
-			
-		// file 추가
-		if(employeeFile != null) { // 파일이 하나이상 있다면
-
-			EmployeeImg img = new EmployeeImg();
-			img.setEmployeeNo(employee.getEmployeeNo());
-			img.setEmployeeImgOriginName(employeeFile.getOriginalFilename());
-			img.setEmployeeImgSize(employeeFile.getSize());
-			img.setEmployeeImgType(employeeFile.getContentType());
-
-			// fileName : 임의의 문자 생성(유일한 식별자)
-			String uName = UUID.randomUUID().toString(); // 파일이름
-			
-			String oName = employeeFile.getOriginalFilename();
-			// lastIndexOf : parameter로 전달받은 문자열을 원본 문자열의 뒤에서부터 탐색하여, 
-			// 처음으로 파라미터의 문자열이 나오는 index를 리턴한다.
-			// 확장자 구하기
-			String extName = oName.substring(oName.lastIndexOf(".")); 
-			// xx.xxx.pdf -> .pdf
-			img.setEmployeeImgFilename(uName + extName);
-			
-			int imgResult = empMapper.insertEmployeeImg(img);
-			if(imgResult != 1) {
-				// insert를 실패하였을 때 강제로 예외를 발생시켜 애노테이션 Transactiona이 작동하도록 한다.
-				throw new RuntimeException();
-			}
-			// noticefile 테이블 입력
-			
-			// 물리적file을 원하는 경로(path)에 저장
-			File file = new File(path+"/"+uName+extName); // 빈파일
-			try {
-				employeeFile.transferTo(file); // 물리적으로 파일 업로드가 됨.
-			} catch (IllegalStateException | IOException e) {
-				e.printStackTrace();
-				throw new RuntimeException();
-			}
 		
+		// file 추가
+		if(employeeFile != null) { // 업로드한 파일이 하나이상 있다면
+			// 파일 저장
+			empImgSave(employeeFile, path, employee.getEmployeeNo());
 		}
 	
 	}
 	
+	public void empImgSave(MultipartFile employeeFile, String path, int employeeNo) {
+		
+		EmployeeImg img = new EmployeeImg();
+		img.setEmployeeNo(employeeNo);
+		img.setEmployeeImgOriginName(employeeFile.getOriginalFilename());
+		img.setEmployeeImgSize(employeeFile.getSize());
+		img.setEmployeeImgType(employeeFile.getContentType());
+
+		// fileName : 임의의 문자 생성(유일한 식별자)
+		String uName = UUID.randomUUID().toString(); // 파일이름
+		
+		String oName = employeeFile.getOriginalFilename();
+		// lastIndexOf : parameter로 전달받은 문자열을 원본 문자열의 뒤에서부터 탐색하여, 
+		// 처음으로 파라미터의 문자열이 나오는 index를 리턴한다.
+		// 확장자 구하기
+		String extName = oName.substring(oName.lastIndexOf(".")); 
+		// xx.xxx.pdf -> .pdf
+		img.setEmployeeImgFilename(uName + extName);
+		
+		int imgResult = empMapper.insertEmployeeImg(img);
+		if(imgResult != 1) {
+			// insert를 실패하였을 때 강제로 예외를 발생시켜 애노테이션 Transactiona이 작동하도록 한다.
+			throw new RuntimeException();
+		}
+		// noticefile 테이블 입력
+		
+		// 물리적file을 원하는 경로(path)에 저장
+		File file = new File(path+"/"+uName+extName); // 빈파일
+		try {
+			employeeFile.transferTo(file); // 물리적으로 파일 업로드가 됨.
+		} catch (IllegalStateException | IOException e) {
+			e.printStackTrace();
+			throw new RuntimeException();
+		}
+	}
+			
 }
