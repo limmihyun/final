@@ -9,17 +9,12 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import com.tree.gdhealth.customer.programreservation.vo.ProgramReservation;
-
 import jakarta.servlet.http.HttpSession;
 
 @Controller
 public class ProgramReservationController {
 	@Autowired
-	private CalendarService calendarService;
-	
-	@Autowired
-	private ProRsOneService proRsOneService;
+	private ProgramReservationService programReservationService;
 	
 	@GetMapping("/customer/programrs")
 	public String programrs(HttpSession session,Model model
@@ -27,14 +22,14 @@ public class ProgramReservationController {
 			, @RequestParam(required = false) Integer targetMonth
 			, @RequestParam(required = false) Integer targetDay) {
 		
-		Map<String, Object> calendarMap = calendarService.getCalendar(targetYear, targetMonth, targetDay);
+		Map<String, Object> calendarMap = programReservationService.getCalendar(targetYear, targetMonth, targetDay);
 		model.addAttribute("calendarMap", calendarMap);
 		
-		List<Map<String, Object>> resultList = calendarService.selectProgramByMonth((int)(calendarMap.get("targetYear")), (int)(calendarMap.get("targetMonth")));
+		List<Map<String, Object>> resultList = programReservationService.selectProgramByMonth((int)(calendarMap.get("targetYear")), (int)(calendarMap.get("targetMonth")));
 		model.addAttribute("resultList", resultList);
 		System.out.println(resultList + "<---resultList 출력");
 		
-		List<Map<String, Object>> allList = calendarService.allCalendarList();
+		List<Map<String, Object>> allList = programReservationService.allCalendarList();
 		model.addAttribute("allList", allList);
 
 		
@@ -44,8 +39,9 @@ public class ProgramReservationController {
 	@GetMapping("/customer/prorsone")
 	public String prorsone(int year, int month, int day, String programName, Model model) {
 		
-		List<ProgramReservation> resultList = proRsOneService.prorsone(year, month, day, programName);
+		Map<String,Object> resultList = programReservationService.prorsone(year, month, day, programName);
 		model.addAttribute("resultList", resultList);
+		System.out.println(resultList + "resultList");
 		
 		return "customer/proRsOne";
 		

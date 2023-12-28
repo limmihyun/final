@@ -113,17 +113,19 @@
 		<div>
 			<div>
 				<form>
-					<table>
-						<th>프로그램 이름</th>
-						<th>선택 날짜</th>
-						<th>고객 ID</th>
-						<th>어느 지점</th>
-						<c:forEach var="l" items="${resultList}">
-							<td>${l.programName}</td>
-							<td>${l.programDate}</td>
-							<td>${l.customerId}</td>
-							<td>${l.branchName}</td>
-						</c:forEach>
+					<table border="1">
+						<tr>
+							<th>프로그램 이름</th>
+							<th>선택 날짜</th>
+							<th>고객 ID</th>
+							<th>어느 지점</th>
+						</tr>
+						<tr>
+							<td>${resultList.programName}</td>
+							<td>${resultList.programDate}</td>
+							<td>${resultList.customerId}</td>
+							<td>${resultList.branchName}</td>						
+						</tr>
 					</table>
 				</form>
 			</div>

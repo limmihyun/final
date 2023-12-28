@@ -9,11 +9,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-
-
 @Service
 @Transactional
-public class CalendarService {
+public class ProgramReservationService {
+
 	@Autowired
 	private ProgramReservationMapper programReservationMapper;
 	
@@ -77,5 +76,21 @@ public class CalendarService {
 		
 		return allList;
 	}
-
+	
+	public Map<String, Object> prorsone(int year, int month, int day, String programName){
+		
+		
+		Map<String, Object> paramMap = new HashMap<>();
+		paramMap.put("year", year);
+		paramMap.put("month", String.format("%02d",month));
+		paramMap.put("day", String.format("%02d",day));
+		paramMap.put("programName", programName);
+		
+		System.out.println(paramMap + "<--paramap출력 ");;
+		
+		Map<String, Object> resultList = programReservationMapper.proRsOne(paramMap);
+		System.out.println(resultList + "<--resultList 출력 결과");
+		
+		return resultList;
+	}
 }
