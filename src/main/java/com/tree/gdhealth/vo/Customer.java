@@ -1,4 +1,4 @@
-package com.tree.gdhealth.customer.signup.vo;
+package com.tree.gdhealth.vo;
 
 import lombok.Data;
 

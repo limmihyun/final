@@ -42,7 +42,7 @@
 									style="position: relative;" required>
 							</div>
 							<div class="col-auto">
-								<button class="btn btn-primary">중복확인</button>
+								<button id="idCk" class="btn btn-primary">중복확인</button>
 							</div>
 						</div>
 						<small id="idHelp" class="form-text text-muted">정보</small>
@@ -71,7 +71,7 @@
 									style="position: relative;" required>
 							</div>
 							<div class="col-auto">
-								<button class="btn btn-primary">중복확인</button>
+								<button id="emailCk" class="btn btn-primary">중복확인</button>
 							</div>
 						</div>
 						<small id="emailHelp" class="form-text text-muted">정보</small>
@@ -156,7 +156,36 @@
 		</footer>
 	</div>
 
-
+	<script>
+	
+	$('#idCk').click(function(){
+	    $.ajax({
+	        async: true,
+	        url: '/customer/idCk',
+	        type: 'get',
+	        data: {'customerId': $('#idCk').val() }, // 대분류 선택 문자열
+	        success: function(jsonData){
+	            if (jsonData.available) {
+	                alert('사용 가능한 ID입니다. 계속할 수 있습니다.');
+	            } else {
+	                alert('중복된 ID입니다. 다른 ID를 선택하십시오.');
+	            }
+	        },
+	        error: function(){
+	            alert('ID 확인 중 오류가 발생했습니다. 다시 시도하십시오.');
+	        }
+	    });
+	});
+	
+	
+	
+	</script>
+	
+	
+	
+	
+	
+	
 	<div id="layer"
 		style="display: none; position: fixed; overflow: hidden; z-index: 1; -webkit-overflow-scrolling: touch;">
 		<img src="//t1.daumcdn.net/postcode/resource/images/close.png"

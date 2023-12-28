@@ -9,7 +9,8 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
 
-import com.tree.gdhealth.customer.signup.vo.CustomerSignUp;
+import com.tree.gdhealth.vo.Customer;
+import com.tree.gdhealth.vo.CustomerSignUp;
 
 @Service
 @Transactional
@@ -65,5 +66,13 @@ public class SignUpService {
 			// 기타 예외가 발생한 경우 롤백 처리 또는 다른 예외 처리 로직 작성
 			throw e;
 		}
+	}
+	
+	
+	public int idCk(Customer customer) {
+		String customerId = customer.getCustomerId();
+		int customerNo = signUpMapper.customerNoCk(customerId);
+		
+		return customerNo;
 	}
 }

@@ -5,9 +5,11 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
-import com.tree.gdhealth.customer.signup.vo.CustomerSignUp;
+import com.tree.gdhealth.vo.Customer;
+import com.tree.gdhealth.vo.CustomerSignUp;
 
 import jakarta.servlet.http.HttpSession;
 
@@ -35,4 +37,15 @@ public class SignUpController {
 		
 		return "/customer/login";
 	}
+	
+	@ResponseBody
+	@GetMapping("/customer/idCk")
+	public int idCk(Customer customer) {
+		int customerNo = signUpService.idCk(customer);
+		
+		return customerNo;
+	}
+	
+
+	
 }

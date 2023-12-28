@@ -5,7 +5,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 
-import com.tree.gdhealth.customer.signup.vo.Customer;
+import com.tree.gdhealth.vo.Customer;
 
 import jakarta.servlet.http.HttpSession;
 
