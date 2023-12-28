@@ -10,11 +10,12 @@ public class CustomerSignUp {
 	private String customerActive;
 	private String customerName;
 	private String customerGender;
-	private int customerHeight;
-	private int customerWeight;
+	private double customerHeight;
+	private double customerWeight;
 	private int customerAge;
 	private String customerPhone;
 	private String customerAddress;
+	private String customerAddressDetail;
 	private String customerEmail;
 	private int customerImgNo;
 	private String customerImgOriginName;

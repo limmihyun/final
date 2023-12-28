@@ -35,7 +35,7 @@ public class SignUpController {
 		// customer INSERT
 		signUpService.SignUp(custoemrSignUp,imgFile,path);
 		
-		return "/customer/login";
+		return "redirect:/customer/login";
 	}
 	
 	@ResponseBody
@@ -44,6 +44,13 @@ public class SignUpController {
 		signUpService.idCk(customer);
 		
 		return customer;
+	}
+	
+	@ResponseBody
+	@GetMapping("/customer/emailCk")
+	public int emailCk(String customerEmail){
+		int customerNo = signUpService.emailCk(customerEmail);
+		return customerNo;
 	}
 	
 

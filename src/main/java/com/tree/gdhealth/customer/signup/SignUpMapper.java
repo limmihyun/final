@@ -12,5 +12,6 @@ public interface SignUpMapper {
 	int customerDetailIn(CustomerSignUp customerSignUp);
 	int customerImgIn(CustomerSignUp customerSignUp);
 	Integer customerNoCk(String customerId);
+	Integer customerEmailCk(String customerEmail);
 	
 }

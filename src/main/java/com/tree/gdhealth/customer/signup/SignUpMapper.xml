@@ -7,7 +7,7 @@
 		customer_pw
 	) VALUES(
 		#{customerId},
-		#{customerPw}
+		PASSWORD(#{customerPw})
 	)
 </insert>
 <insert id="customerDetailIn" parameterType="com.tree.gdhealth.vo.CustomerSignUp">
@@ -54,7 +54,12 @@
 	FROM customer
 	WHERE customer_id = #{customerId}
 </select>
-
+<select id="customerEmailCk" parameterType="String" resultType="Integer">
+	SELECT
+		customer_no
+	FROM customer_detail
+	WHERE customer_email = #{customerEmail}
+</select>
 
 
 
