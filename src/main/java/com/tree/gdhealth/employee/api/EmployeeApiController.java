@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
+import java.util.Map;
 
 /**
  * @author 정인호
@@ -26,7 +27,7 @@ public class EmployeeApiController {
 
     /*본사직원만 리스트로 가져옵니다.*/
     @GetMapping("/api/v1/employee")
-    public List<Employee> getEmployeeListIsHeadOffice(
+    public List<Map<String, Object>> getEmployeeListIsHeadOffice(
             @RequestParam(name = "isHeadOffice") boolean isHeadOffice){
         if(isHeadOffice) {
             return service.getEmployeeListIsHeadOffice();

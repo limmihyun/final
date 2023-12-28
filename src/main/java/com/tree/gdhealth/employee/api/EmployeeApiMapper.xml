@@ -14,15 +14,18 @@
 		FROM employee_detail
 		WHERE employee_no = #{employeeNo}
 	</select>
-	<select id="getEmployeeListIsHeadOffice" resultType="com.tree.gdhealth.vo.Employee">
+	<select id="getEmployeeListIsHeadOffice" resultType="java.util.Map">
 		SELECT
-		    employee_no employeeNo,
-		    branch_no branchNo,
-		    employee_id employeeId,
-		    employee_active employeeActive,
-		    createdate,
-		    updatedate
+		    e.employee_no employeeNo,
+		    ed.employee_name employeeName,
+		    e.branch_no branchNo,
+		    e.employee_id employeeId,
+		    e.employee_active employeeActive,
+		    e.createdate,
+		    e.updatedate
 		FROM employee e
+			INNER JOIN employee_detail ed
+			ON e.employee_no = ed.employee_no
 		WHERE e.branch_no = (
 		    SELECT branch.branch_no
 		        FROM branch

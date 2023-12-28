@@ -8,7 +8,7 @@ import lombok.NoArgsConstructor;
 
 import java.time.LocalDateTime;
 
-/**
+/**<p>{@link ImageType} using {@link com.tree.gdhealth.mybatis.typehandler.ImgTypeTypeHandler} </p>
  * @author 정인호
  */
 @Builder

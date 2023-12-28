@@ -30,8 +30,8 @@
                         <a class="has-arrow" href="all-courses.html" aria-expanded="false"><span class="educate-icon educate-course icon-wrap"></span> <span class="mini-click-non">
                                     물품관리</span></a>
                         <ul class="submenu-angle" aria-expanded="false">
-                            <li><a title="All Courses" href="all-courses.html"><span class="mini-sub-pro">지점물품조회</span></a></li>
-                            <li><a title="Add Courses" href="add-course.html"><span class="mini-sub-pro">지점물품발주</span></a></li>
+                            <li><a title="All Courses" href="/branch/sports-equipment/list"><span class="mini-sub-pro">지점물품조회</span></a></li>
+                            <li><a title="Add Courses" href="/branch/sports-equipment/order"><span class="mini-sub-pro">지점물품발주</span></a></li>
                         </ul>
                     </li>
                     <li>
