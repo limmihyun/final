@@ -105,35 +105,18 @@
                                                     </div>
                                                     <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
                                                         <div class="form-group">
-                                                            <label>승인권자</label> <%-- 클라이언트 선택, 서버 선택지제공--%>
-                                                            <select name="employeeApprover" class="form-control">
-                                                                <option value="1">1</option>
-                                                                <option value="1">2</option>
-                                                                <option value="1">3</option>
+                                                            <label>승인권자(번호)</label> <%-- 클라이언트 선택, 서버 선택지제공--%>
+                                                            <select id="employeeApproverSelectForm" name="employeeApprover" class="form-control">
                                                             </select>
                                                         </div>
                                                         <div class="form-group">
                                                             <label>물품사진</label> <%-- 물품 선택시 갱신--%>
-                                                            <input type="text" class="form-control"
-                                                                   placeholder="Course Price" value="$400">
+                                                            <br><img src="/img/about-us.jpg" height="200" width="200">
                                                         </div>
 
-
-                                                        <div class="form-group res-mg-t-15">
-                                                            <input type="text" class="form-control"
-                                                                   placeholder="Department" value="CSE">
-                                                        </div>
                                                         <div class="form-group edit-ta-resize">
                                                             <label>물품 정보</label> <%-- 물품 선택시 갱신--%>
                                                             <textarea id="note" readonly="readonly"></textarea>
-                                                        </div>
-                                                        <div class="form-group">
-                                                            <input type="text" class="form-control"
-                                                                   placeholder="Course Professor" value="Selima sha">
-                                                        </div>
-                                                        <div class="form-group">
-                                                            <input type="text" class="form-control" placeholder="Year"
-                                                                   value="1 Year">
                                                         </div>
                                                     </div>
                                                 </div>
@@ -142,7 +125,7 @@
                                                         <div class="payment-adress">
                                                             <button type="submit"
                                                                     class="btn btn-primary waves-effect waves-light">
-                                                                Submit
+                                                                발주요청
                                                             </button>
                                                         </div>
                                                     </div>
@@ -184,6 +167,19 @@
         }
     });
 
+    /*발주 승인권지 선택지*/
+    $.ajax({
+        url: '/api/v1/employee?isHeadOffice=true',
+        type: 'GET',
+        success: function (response) {
+            console.log(response);
+            $(response).each(function (index, employee) {
+                $('#employeeApproverSelectForm')
+                    .append('<option value="' + employee.employeeNo + '">' +'('+employee.employeeNo+')' + employee.employeeName + '</option>');
+            });
+        }
+    });
+
     /*물품 선택지*/
     $.ajax({
         url: '/api/v1/sportsEquipment',
@@ -210,8 +206,6 @@
                 let quantity = $('#quantity').val();
                 $('#totalPrice').val(itemPrice * quantity);
                 $('#note').val(response.note);
-
-                //TODO 물품사진이나 디테일부 갱신하기
             },
             error: function (){
                 $('#itemPrice').val(0);

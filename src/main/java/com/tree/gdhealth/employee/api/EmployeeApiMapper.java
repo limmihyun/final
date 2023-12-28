@@ -5,10 +5,11 @@ import com.tree.gdhealth.vo.EmployeeDetail;
 import org.apache.ibatis.annotations.Mapper;
 
 import java.util.List;
+import java.util.Map;
 
 @Mapper
 public interface EmployeeApiMapper {
     EmployeeDetail getEmployeeDetailByNo(int employeeNo);
 
-    List<Employee> getEmployeeListIsHeadOffice();
+    List<Map<String, Object>> getEmployeeListIsHeadOffice();
 }
