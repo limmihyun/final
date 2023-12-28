@@ -1,7 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
-<c:set var="path" value="${pageContext.request.contextPath}" /><!-- request.getContextPath 간소화 -->
 <header class="header-section">
     <div class="container">
         <div class="row">
@@ -15,8 +14,8 @@
                     <nav class="mobile-menu">
                         <ul>
                             <li><a href="/customer/home">home</a></li>
+                            <li><a href="/customer/programrs">programrs</a></li>
                             <li><a href="">BLANK</a></li>
-                            <li><a href="/customer/programrs">수업</a></li>
                             <li><a href="">BLANK</a></li>
                             <li><a href="">notice</a></li>
                             <c:if test="${customerNo eq null}">
