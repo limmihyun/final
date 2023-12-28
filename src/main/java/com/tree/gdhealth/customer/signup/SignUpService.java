@@ -20,6 +20,11 @@ public class SignUpService {
 	
 
 	public int SignUp(CustomerSignUp customerSignUp, MultipartFile imgFile,String path) {
+		// 주소 + 상세주소 조합
+		String a1 = customerSignUp.getCustomerAddress();
+		String a2 = customerSignUp.getCustomerAddressDetail();
+		customerSignUp.setCustomerAddress(a1+a2);
+		
 		try {
 			int n1 = signUpMapper.customerIn(customerSignUp); // customer INSERT 쿼리
 			int customerNo = signUpMapper.customerNoCk(customerSignUp.getCustomerId()); // customerNo 추출
@@ -74,11 +79,23 @@ public class SignUpService {
 		System.out.println(customer.getCustomerId());
 		String customerId = customer.getCustomerId();	
 		Integer customerNoCkResult = signUpMapper.customerNoCk(customerId);
-		if (customerNoCkResult == null || customerNoCkResult == 0) {
+		if (customerNoCkResult == null || customerNoCkResult == 0) {	// customerNo가 널값이면 0으로 대체
 		    customer.setCustomerNo(0);
 		    return customer;
 		}
 		customer.setCustomerNo(signUpMapper.customerNoCk(customerId));
 		return customer;
+	}
+	
+	public int emailCk(String customerEmail) {
+		int customerNo;
+		Integer customerNoCkResult = signUpMapper.customerEmailCk(customerEmail);
+		if (customerNoCkResult == null || customerNoCkResult == 0) {	// customerNo가 널값이면 0으로 대체
+			customerNo = 0;
+		    return customerNo;
+		}
+		customerNo = signUpMapper.customerEmailCk(customerEmail);
+		
+		return customerNo;
 	}
 }

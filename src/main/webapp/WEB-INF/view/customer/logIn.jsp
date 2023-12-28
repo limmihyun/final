@@ -1,4 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
 <c:set var="path" value="${pageContext.request.contextPath}" /><!-- request.getContextPath 간소화 -->
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
@@ -11,6 +12,16 @@
     <!-- 추가적인 스타일링을 위한 CSS 파일 -->
     <link rel="stylesheet" th:href="@{/css/customerLogin.css}">
 </head>
+
+<script>
+    $(document).ready(function() {
+        var msg = "${msg}";
+        if (msg.trim() !== "") {
+            alert(msg);
+        }
+    });
+</script>
+
 <body class="bg-light">
 
 <div class="container">
