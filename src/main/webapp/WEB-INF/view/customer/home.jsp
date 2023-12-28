@@ -61,17 +61,14 @@
     <section class="hero-slider">
         <div class="slide-items owl-carousel">
             <div class="single-slide set-bg active" data-setbg="/img/bg.jpg">
-                <a href="https://www.youtube.com/watch?v=SEVuD_djKrU" class="play-btn pop-up"><i class="fa fa-play"></i></a>
                 <h1>Be Fit.Top Gym</h1>
                 <a href="#" class="primary-btn">Read More</a>
             </div>
             <div class="single-slide set-bg" data-setbg="/img/bg-2.jpg">
-                <a href="https://www.youtube.com/watch?v=SEVuD_djKrU" class="play-btn pop-up"><i class="fa fa-play"></i></a>
                 <h1>Be Fit.Top Trainer</h1>
                 <a href="#" class="primary-btn">Read More</a>
             </div>
             <div class="single-slide set-bg" data-setbg="/img/bg-3.jpg">
-                <a href="https://www.youtube.com/watch?v=SEVuD_djKrU" class="play-btn pop-up"><i class="fa fa-play"></i></a>
                 <h1>Be Fit.Top Body</h1>
                 <a href="#" class="primary-btn">Read More</a>
             </div>
@@ -88,9 +85,7 @@
                             <img src="/img/features/feature-1.jpg" alt="">
                         </div>
                         <div class="feature-text">
-                            <div class="feature-icon">
-                                <img src="/img/features/icon-1.png" alt="">
-                            </div>
+                        <br>
                             <h5>Amazing Setting</h5>
                             <p>Pellentesque dictum nisl in nibh dictum volutpat nec a quam. Vivamus suscipit nisl quis
                                 nulla pretium, vitae ornare leo.</p>
@@ -103,9 +98,7 @@
                             <img src="/img/features/feature-2.jpg" alt="">
                         </div>
                         <div class="feature-text">
-                            <div class="feature-icon">
-                                <img src="/img/features/icon-2.png" alt="">
-                            </div>
+                        <br>
                             <h5>Best Trainers</h5>
                             <p>Pellentesque dictum nisl in nibh dictum volutpat nec a quam. Vivamus suscipit nisl quis
                                 nulla pretium, vitae ornare leo.</p>
@@ -118,9 +111,7 @@
                             <img src="/img/features/feature-3.jpg" alt="">
                         </div>
                         <div class="feature-text">
-                            <div class="feature-icon">
-                                <img src="/img/features/icon-3.png" alt="">
-                            </div>
+                        <br>
                             <h5>Diet Plans</h5>
                             <p>Pellentesque dictum nisl in nibh dictum volutpat nec a quam. Vivamus suscipit nisl quis
                                 nulla pretium, vitae ornare leo.</p>
