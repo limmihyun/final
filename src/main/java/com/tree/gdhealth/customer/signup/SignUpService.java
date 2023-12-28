@@ -69,10 +69,16 @@ public class SignUpService {
 	}
 	
 	
-	public int idCk(Customer customer) {
-		String customerId = customer.getCustomerId();
-		int customerNo = signUpMapper.customerNoCk(customerId);
+	public Customer idCk(Customer customer) {
 		
-		return customerNo;
+		System.out.println(customer.getCustomerId());
+		String customerId = customer.getCustomerId();	
+		Integer customerNoCkResult = signUpMapper.customerNoCk(customerId);
+		if (customerNoCkResult == null || customerNoCkResult == 0) {
+		    customer.setCustomerNo(0);
+		    return customer;
+		}
+		customer.setCustomerNo(signUpMapper.customerNoCk(customerId));
+		return customer;
 	}
 }

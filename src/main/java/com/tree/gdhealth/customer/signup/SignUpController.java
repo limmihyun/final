@@ -40,10 +40,10 @@ public class SignUpController {
 	
 	@ResponseBody
 	@GetMapping("/customer/idCk")
-	public int idCk(Customer customer) {
-		int customerNo = signUpService.idCk(customer);
+	public Customer idCk(Customer customer) {
+		signUpService.idCk(customer);
 		
-		return customerNo;
+		return customer;
 	}
 	
 

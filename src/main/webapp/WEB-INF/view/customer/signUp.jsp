@@ -163,10 +163,31 @@
 	        async: true,
 	        url: '/customer/idCk',
 	        type: 'get',
-	        data: {'customerId': $('#idCk').val() }, // 대분류 선택 문자열
+	        data: {'customerId': $('#customerId').val() }, // 대분류 선택 문자열
 	        success: function(jsonData){
-	            if (jsonData.available) {
-	                alert('사용 가능한 ID입니다. 계속할 수 있습니다.');
+	        	var customerNo = jsonData.customerNo;
+	            if (customerNo == 0) {
+	                alert('사용 가능한 ID입니다.');
+	            } else {
+	                alert('중복된 ID입니다. 다른 ID를 선택하십시오.');
+	            }
+	        },
+	        error: function(){
+	            alert('ID 확인 중 오류가 발생했습니다. 다시 시도하십시오.');
+	        }
+	    });
+	});
+	
+	$('#emailCk').click(function(){
+	    $.ajax({
+	        async: true,
+	        url: '/customer/emailCk',
+	        type: 'get',
+	        data: {'customerEmail': $('#customerEmail').val() }, // 대분류 선택 문자열
+	        success: function(jsonData){
+	        	var customerNo = jsonData.customerNo;
+	            if (customerNo == 0) {
+	                alert('사용 가능한 ID입니다.');
 	            } else {
 	                alert('중복된 ID입니다. 다른 ID를 선택하십시오.');
 	            }

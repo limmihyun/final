@@ -48,12 +48,14 @@
 		#{customerImgType}
 	)
 </insert>
-<select id="customerNoCk" parameterType="String" resultType="int">
+<select id="customerNoCk" parameterType="String" resultType="Integer">
 	SELECT
 		customer_no
 	FROM customer
 	WHERE customer_id = #{customerId}
 </select>
+
+
 
 
 
