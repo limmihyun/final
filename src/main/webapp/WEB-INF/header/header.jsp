@@ -15,16 +15,19 @@
                     <nav class="mobile-menu">
                         <ul>
                             <li><a href="/customer/home">home</a></li>
-                            <li><a href="">회사 소개</a></li>
+                            <li><a href="">BLANK</a></li>
                             <li><a href="/customer/programrs">수업</a></li>
-                            <li><a href="">강사</a></li>
+                            <li><a href="">BLANK</a></li>
                             <li><a href="">notice</a></li>
                             <c:if test="${customerNo eq null}">
                             <li><a href="/customer/login">login</a></li>
                             </c:if>
                             <c:if test="${customerNo ne null}">
                             <li><a href="/customer/logout">logout</a></li>
+                            
                             </c:if>
+                            <li><i>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</i></li>
                         </ul>
                     </nav>
                     <div id="mobile-menu-wrap"></div>
@@ -34,14 +37,11 @@
     </div>
 </header>
 
-<div class="top-social">
-    <div class="top-social-links">
-        <ul>
-            <li><a href="#"><i class="fa fa-pinterest"></i></a></li>
-            <li><a href="#"><i class="fa fa-facebook"></i></a></li>
-            <li><a href="#"><i class="fa fa-twitter"></i></a></li>
-            <li><a href="#"><i class="fa fa-dribbble"></i></a></li>
-            <li><a href="#"><i class="fa fa-behance"></i></a></li>
-        </ul>
-    </div>
-</div>
+ <div class="top-social">
+        <div class="top-social-links">
+            <ul>
+                <li><a href="#"><i class=""></i></a></li>
+                <li><a href="#"><i class=""></i></a></li>
+            </ul>
+        </div>
+   </div>
