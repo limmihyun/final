@@ -112,7 +112,9 @@
 	<section>
 		<div>
 			<div>
-				<form>
+				<form method="POST" action="${pageContext.request.contextPath}/customer/prorsone">
+					<input type="hidden" value="${resultList.branchNo}" name="branchNo">
+					<input type="hidden" value="${resultList.programDateNo}" name="programDateNo">
 					<table border="1">
 						<tr>
 							<th>프로그램 이름</th>
@@ -127,6 +129,7 @@
 							<td>${resultList.branchName}</td>						
 						</tr>
 					</table>
+					<button>전송버튼</button>
 				</form>
 			</div>
 		</div>

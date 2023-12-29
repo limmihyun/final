@@ -17,4 +17,6 @@ public interface ProgramReservationMapper {
 	String customerId(int customerNo);
 	
 	Map<String, Object> customerPayment (int customerNo);
+	
+	int programReservationAdd (Map<String, Object> paramap);
 }
