@@ -13,4 +13,6 @@ public interface BranchSportsEquipmentMapper {
     List<Map<String, Object>> getOrderList(Map<String, Object> paramMap);
 
     int getOrderListLastPage(Map<String, Object> paramMap);
+
+    int addOrder(SportsEquipmentOrderAddDto dto);
 }
