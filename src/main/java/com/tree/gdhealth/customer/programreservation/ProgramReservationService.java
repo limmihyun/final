@@ -93,4 +93,18 @@ public class ProgramReservationService {
 		
 		return resultList;
 	}
+	
+	public String customerId(int customerNo) {
+		
+		String customerId = programReservationMapper.customerId(customerNo);
+		
+		return customerId;
+	}
+	
+	public Map<String, Object> customerPayment(int customerNo) {
+		
+		Map<String, Object> paramap = programReservationMapper.customerPayment(customerNo);
+		 
+		return paramap;
+	}
 }

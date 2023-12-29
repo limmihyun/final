@@ -123,7 +123,7 @@
 						<tr>
 							<td>${resultList.programName}</td>
 							<td>${resultList.programDate}</td>
-							<td>${resultList.customerId}</td>
+							<td>${customerId}</td>
 							<td>${resultList.branchName}</td>						
 						</tr>
 					</table>

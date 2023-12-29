@@ -51,4 +51,22 @@
 		  AND p.program_name = #{programName}
 		ORDER BY pd.program_date ASC;
 	</select>
+	
+	<select id="customerId">
+		SELECT
+			customer_id customerId
+		FROM customer
+		WHERE customer_no = #{customerNo}
+	</select>
+	
+	<select id="customerPayment">
+		SELECT
+			YEAR(p.payment_date) year,
+			MONTH(p.payment_date) month,
+			DAY(p.payment_date) day,
+			m.membership_month membershipMonth
+		FROM payment p INNER JOIN membership m
+		  ON p.membership_no = m.membership_no
+		WHERE p.customer_no = #{customerNo}
+	</select>
 </mapper>
