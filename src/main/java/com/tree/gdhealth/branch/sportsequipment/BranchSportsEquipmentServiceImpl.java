@@ -43,4 +43,11 @@ public class BranchSportsEquipmentServiceImpl implements IBranchSportsEquipmentS
                 .lastPage(mapper.getOrderListLastPage(paramMap))
                 .build();
     }
+    @Transactional
+    @Override
+    public boolean addOrder(SportsEquipmentOrderAddDto dto) {
+        int affectedRows = mapper.addOrder(dto);
+        return (affectedRows == 1)?true:false;
+
+    }
 }

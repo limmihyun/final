@@ -1,8 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.tree.gdhealth.branch.sportsequipment.BranchSportsEquipmentMapper">
+    <insert id="addOrder" parameterType="com.tree.gdhealth.branch.sportsequipment.SportsEquipmentOrderAddDto">
+		INSERT INTO sports_equipment_order
+			(employee_orderer, branch_no, sports_equipment_no, quantity, total_price, employee_approver)
+		VALUES
+		    (#{employeeOrderer},#{branchNo},#{sportsEquipmentNo},#{quantity},
+		     (SELECT item_price * #{quantity} FROM sports_equipment WHERE sports_equipment.sports_equipment_no = #{sportsEquipmentNo}),
+		     #{employeeApprover})
+	</insert>
 
-	<select id="getBranchOne" resultType="com.tree.gdhealth.vo.Branch">
+    <select id="getBranchOne" resultType="com.tree.gdhealth.vo.Branch">
 		SELECT
 		    branch_no branchNo,
 		    branch_name branchName,

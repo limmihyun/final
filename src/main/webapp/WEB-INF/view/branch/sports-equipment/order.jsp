@@ -1,3 +1,4 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%--
   Created by IntelliJ IDEA.
   User: 정인호
@@ -50,7 +51,7 @@
                                 <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                                     <div class="review-content-section">
                                         <div id="dropzone1" class="pro-ad addcoursepro">
-                                            <form action="#"
+                                            <form method="post"
                                                   class="dropzone dropzone-custom needsclick add-professors dz-clickable"
                                                   id="demo1-upload">
                                                 <div class="row">
@@ -81,7 +82,7 @@
                                                             <label>발주물품(번호)</label> <%-- 클라이언트 선택, 서버선택지 제공 --%>
                                                             <select id="sportsEquipmentSelectForm"
                                                                     name="sportsEquipmentNo" class="form-control">
-                                                                <option>선택</option>
+                                                                <option value="0">선택</option>
                                                             </select>
                                                         </div>
                                                         <div class="form-group">
@@ -122,6 +123,17 @@
                                                 </div>
                                                 <div class="row">
                                                     <div class="col-lg-12">
+                                                        <div>
+                                                            <c:forEach var="fieldErrorMessage" items="${fieldErrorMessageList}">
+                                                                <c:out value="${fieldErrorMessage}"/><br>
+                                                            </c:forEach>
+                                                            <c:if test="${param.get('serverMessage') eq 'success'}">
+                                                                <c:out value="발주가 완료되었습니다."/>
+                                                            </c:if>
+                                                            <c:if test="${param.get('serverMessage') eq 'fail'}">
+                                                                <c:out value="발주가 실패했습니다. 시스템 관리자에게 문의바랍니다"/>
+                                                            </c:if>
+                                                        </div>
                                                         <div class="payment-adress">
                                                             <button type="submit"
                                                                     class="btn btn-primary waves-effect waves-light">

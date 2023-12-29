@@ -11,4 +11,6 @@ public interface IBranchSportsEquipmentService {
             int branchNo,
             int requestPage,
             boolean isOnlyWaitingList);
+
+    boolean addOrder(SportsEquipmentOrderAddDto dto);
 }

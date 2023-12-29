@@ -19,13 +19,13 @@ import java.time.LocalDateTime;
 @Data
 public class SportsEquipmentOrderAddDto {
     @Positive
-    private final int employeeOrderer;
+    private int employeeOrderer;
     @Positive
-    private final int branchNo;
+    private int branchNo;
+    @Positive(message = "발주물품을 선택해야합니다")
+    private Integer sportsEquipmentNo;
+    @Positive(message = "발주할 수량은 양수여야 합니다.")
+    private Integer quantity;
     @Positive
-    private final Integer sportsEquipmentNo;
-    @Positive
-    private final Integer quantity;
-    @Positive
-    private final Integer employeeApprover;
+    private Integer employeeApprover;
 }
