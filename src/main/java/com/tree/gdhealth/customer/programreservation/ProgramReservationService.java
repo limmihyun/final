@@ -107,4 +107,18 @@ public class ProgramReservationService {
 		 
 		return paramap;
 	}
+	
+	public int programReservationAdd(int programDateNo, int branchNo, Integer paymentNo) {
+		
+		Map<String, Object> paramap = new HashMap<>();
+		paramap.put("programDateNo", programDateNo);
+		paramap.put("branchNo", branchNo);
+		paramap.put("paymentNo", paymentNo);
+		
+		programReservationMapper.programReservationAdd(paramap);
+		
+		return 0;
+
+		
+	}
 }

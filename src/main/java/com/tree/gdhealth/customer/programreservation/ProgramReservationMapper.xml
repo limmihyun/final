@@ -64,9 +64,14 @@
 			YEAR(p.payment_date) year,
 			MONTH(p.payment_date) month,
 			DAY(p.payment_date) day,
-			m.membership_month membershipMonth
+			m.membership_month membershipMonth,
+			p.payment_no paymentNo
 		FROM payment p INNER JOIN membership m
 		  ON p.membership_no = m.membership_no
 		WHERE p.customer_no = #{customerNo}
 	</select>
+	
+	<insert id="programReservationAdd" parameterType="java.util.Map">
+		INSERT INTO program_reservation(payment_no, program_date_no, branch_no, program_reservation_date) VALUES(#{paymentNo}, #{programDateNo}, #{branchNo}, NOW());
+	</insert>
 </mapper>
