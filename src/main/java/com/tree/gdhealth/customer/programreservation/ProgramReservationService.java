@@ -121,4 +121,12 @@ public class ProgramReservationService {
 
 		
 	}
+	
+	public List<Map<String, Object>> myreservation(int cutomerNo){
+		
+		List<Map<String, Object>> resultList = programReservationMapper.myreservation(cutomerNo);
+		
+		return resultList;
+		
+	}
 }

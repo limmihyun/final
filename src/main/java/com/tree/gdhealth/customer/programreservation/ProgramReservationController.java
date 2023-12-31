@@ -138,5 +138,21 @@ public class ProgramReservationController {
 		
 		return "redirect:/customer/programrs";
 	}
+	
+	@GetMapping("/customer/myreservation")
+	public String myreservation(HttpSession session, Model model) {
+		
+		if(session.getAttribute("customerNo") == null) {
+			return "redirect:/customer/login";
+		}
+		
+		int customerNo = (int)(session.getAttribute("customerNo"));
+		List<Map<String, Object>> resultList = programReservationService.myreservation(customerNo);
+		model.addAttribute("resultList", resultList);
+		System.out.println(resultList + "<---resultList");
+		
+		return "customer/myreservation";
+		
+	}
 
 }
