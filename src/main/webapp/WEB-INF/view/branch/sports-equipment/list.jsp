@@ -27,7 +27,7 @@
                 <div class="sparkline13-list">
                     <div class="sparkline13-hd">
                         <div class="main-sparkline13-hd">
-                            <h1>지점물품조회 <span class="table-project-n"></span></h1>
+                            <h1>지점물품발주조회 <span class="table-project-n"></span></h1>
                         </div>
                     </div>
                     <div class="sparkline13-graph">
