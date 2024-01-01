@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- @author 정인호 -->
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.tree.gdhealth.branch.programcalendar.BranchProgramCalendarMapper">
+
+    <select id="getProgramDateBetween" resultType="com.tree.gdhealth.branch.programcalendar.vo.BranchProgramDate">
+        <!-- @note 받은 날짜로부터 +7일의 날짜행을 만들고 정보를 레프트조인합니다.
+        (프로그램정보, 담당직원, 총예약인원 수 등)-->
+        SELECT
+            dateList.generated_date date,
+            prd.program_date_no programDateNo,
+            prd.program_no programNo,
+            pr.program_name programName,
+            pr.program_detail programDetail,
+            pr.employee_no employeeNo,
+            eed.employee_name employeeName,
+            prm.employee_no managerNo,
+            med.employee_name managerName,
+            pr.program_max_customer maxCustomer,
+            IF(prd.program_no IS NULL, NULL, ifnull(prr.reservedCount, 0))
+                AS reservedCount
+        FROM
+            (SELECT DATE(#{startDate}) + INTERVAL seq DAY AS generated_date FROM seq_0_to_7) dateList
+                LEFT JOIN program_date prd ON dateList.generated_date = prd.program_date
+                LEFT JOIN program pr
+                          ON prd.program_no = pr.program_no
+                LEFT JOIN (SELECT * FROM program_manager prm WHERE prm.employee_no IN (SELECT em.employee_no FROM employee em WHERE em.branch_no = #{branchNo})) prm
+                          ON prd.program_no = prm.program_no
+                LEFT JOIN (SELECT program_date_no, COUNT(program_reservation_no) AS reservedCount FROM program_reservation WHERE branch_no = #{branchNo} GROUP BY program_date_no) prr
+                          ON prd.program_date_no = prr.program_date_no
+                LEFT JOIN employee_detail eed ON pr.employee_no = eed.employee_no
+                LEFT JOIN employee_detail med ON prm.employee_no = med.employee_no
+        ORDER BY dateList.generated_date
+    </select>
+</mapper>

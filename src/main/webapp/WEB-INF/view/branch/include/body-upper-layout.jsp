@@ -16,8 +16,8 @@
             <nav class="sidebar-nav left-sidebar-menu-pro">
                 <ul class="metismenu" id="menu1">
                     <li>
-                        <a title="Landing Page" href="events.html" aria-expanded="false"><span class="educate-icon educate-event icon-wrap sub-icon-mg" aria-hidden="true"></span> <span class="mini-click-non">
-                                    프로그램캘린더</span></a>
+                        <a title="Landing Page" href="/branch/program-calendar/home" aria-expanded="false"><span class="educate-icon educate-event icon-wrap sub-icon-mg" aria-hidden="true"></span> <span class="mini-click-non">
+                                    주간 프로그램</span></a>
                     </li>
                     <li>
                         <a class="has-arrow" href="all-professors.html" aria-expanded="false"><span class="educate-icon educate-professor icon-wrap"></span> <span class="mini-click-non">
@@ -30,7 +30,7 @@
                         <a class="has-arrow" href="all-courses.html" aria-expanded="false"><span class="educate-icon educate-course icon-wrap"></span> <span class="mini-click-non">
                                     물품관리</span></a>
                         <ul class="submenu-angle" aria-expanded="false">
-                            <li><a title="All Courses" href="/branch/sports-equipment/list"><span class="mini-sub-pro">지점물품조회</span></a></li>
+                            <li><a title="All Courses" href="/branch/sports-equipment/list"><span class="mini-sub-pro">지점물품발주조회</span></a></li>
                             <li><a title="Add Courses" href="/branch/sports-equipment/order"><span class="mini-sub-pro">지점물품발주</span></a></li>
                         </ul>
                     </li>

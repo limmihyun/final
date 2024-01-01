@@ -9,9 +9,9 @@ import org.springframework.web.bind.annotation.GetMapping;
  */
 @Controller
 public class branchHomeController {
-    @GetMapping("/branch/2")
+    @GetMapping("/branch/home")
     public String getHome(){
-        log.debug("/branch/2");
+        log.debug("/branch/home");
         return "/branch/home";
     }
 }

@@ -26,7 +26,7 @@ import java.util.Map;
 @RequiredArgsConstructor
 @Controller
 public class BranchSportsEquipmentController {
-    final IBranchSportsEquipmentService service;
+    final BranchSportsEquipmentService service;
 
     @ModelAttribute
     private void mockLoginEmployee(HttpSession session) {

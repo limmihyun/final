@@ -5,8 +5,6 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 /**
@@ -16,11 +14,10 @@ import java.util.Map;
 @Transactional(readOnly = true)
 @RequiredArgsConstructor
 @Service
-public class BranchSportsEquipmentServiceImpl implements IBranchSportsEquipmentService {
+public class BranchSportsEquipmentService {
     final BranchSportsEquipmentMapper mapper;
 
 
-    @Override
     public getOrderListResponseDto getOrderListResponseDto(
             int branchNo,
             int requestPage,
@@ -44,7 +41,6 @@ public class BranchSportsEquipmentServiceImpl implements IBranchSportsEquipmentS
                 .build();
     }
     @Transactional
-    @Override
     public boolean addOrder(SportsEquipmentOrderAddDto dto) {
         int affectedRows = mapper.addOrder(dto);
         return (affectedRows == 1)?true:false;

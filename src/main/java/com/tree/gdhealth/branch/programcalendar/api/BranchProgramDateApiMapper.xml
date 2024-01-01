@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.tree.gdhealth.branch.programcalendar.api.BranchProgramDateApiMapper">
+
+    <select id="getBranchProgramDate" resultType="java.util.Map">
+        SELECT
+            dateList.generated_date 'date',
+            prd.program_date_no programDateNo,
+            prd.program_no programNo,
+            pr.program_name programName,
+            pr.program_detail programDetail,
+            pr.employee_no employeeNo,
+            eed.employee_name employeeName,
+            prm.employee_no managerNo,
+            med.employee_name managerName,
+            med.employee_phone managerPhone,
+            pr.program_max_customer maxCustomer,
+            IF(prd.program_no IS NULL, NULL, ifnull(prr.reservedCount, 0)) AS reservedCount,
+            (SELECT br.branch_address FROM branch br WHERE br.branch_no = #{branchNo}) AS 'address',
+            (SELECT MIN(prd2.program_date) FROM program_date prd2 WHERE prd2.program_no = prd.program_no) AS startDate,
+            (SELECT MAX(prd2.program_date) FROM program_date prd2 WHERE prd2.program_no = prd.program_no) AS endDate
+        FROM
+                (SELECT #{date} AS 'generated_date' FROM DUAL) dateList
+                    LEFT JOIN program_date prd ON dateList.generated_date = prd.program_date
+                    LEFT JOIN program pr
+                              ON prd.program_no = pr.program_no
+                    LEFT JOIN (SELECT * FROM program_manager prm WHERE prm.employee_no IN (SELECT em.employee_no FROM employee em WHERE em.branch_no = #{branchNo})) prm
+                              ON prd.program_no = prm.program_no
+                    LEFT JOIN (SELECT program_date_no, COUNT(program_reservation_no) AS reservedCount FROM program_reservation WHERE branch_no = #{branchNo} GROUP BY program_date_no) prr
+                              ON prd.program_date_no = prr.program_date_no
+                    LEFT JOIN employee_detail eed ON pr.employee_no = eed.employee_no
+                    LEFT JOIN employee_detail med ON prm.employee_no = med.employee_no
+    </select>
+</mapper>
