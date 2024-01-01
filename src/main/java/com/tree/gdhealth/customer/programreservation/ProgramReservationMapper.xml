@@ -80,7 +80,8 @@
 		   MONTH(pd.program_date) month,
 		    DAY(pd.program_date) day,
 		    pg.program_name programName,
-		    b.branch_name branchName
+		    b.branch_name branchName,
+		    pr.program_reservation_no programReservationNo
 	FROM program_reservation pr INNER JOIN payment p
 	  ON pr.payment_no = p.payment_no INNER JOIN program_date pd
 	  ON pr.program_date_no = pd.program_date_no INNER JOIN program pg
@@ -88,4 +89,8 @@
 	  ON pr.branch_no = b.branch_no
 	WHERE p.customer_no = #{customerNo};
 	</select>
+	
+	<delete id="reservationdelete" parameterType="java.util.Map">
+		DELETE FROM program_reservation WHERE program_reservation_no = #{programReservationNo}
+	</delete>
 </mapper>
