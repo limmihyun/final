@@ -215,9 +215,11 @@
 						</c:if>		
 					</c:forEach>
 				</c:forEach>
-		</div>
+		</div>		
 	</div>
 	</section>
+	<a href="${pageContext.request.contextPath}/customer/myreservation">내 예약 보기</a>
+	
 	
     <!-- Footer Section Begin -->
     <footer class="footer-section set-bg" data-setbg="/img/footer-bg.jpg">

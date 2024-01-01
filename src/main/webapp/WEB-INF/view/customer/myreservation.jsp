@@ -123,9 +123,11 @@
 							<td>${l.programName}</td>
 							<td>${l.branchName}</td>
 							<td>${l.year}.${l.month}.${l.day}</td>
+							<a href="${pageContext.request.contextPath}/customer/reservationdelete?programReservationNo=${l.programReservationNo}">취소하기</a>
 						</c:forEach>
 					</tr>
 				</table>
+				<a href="${pageContext.request.contextPath}/customer/programrs">이전으로</a>
 			</div>
 		</div>
 	</section>

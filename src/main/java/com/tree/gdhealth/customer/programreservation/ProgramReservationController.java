@@ -154,5 +154,19 @@ public class ProgramReservationController {
 		return "customer/myreservation";
 		
 	}
+	
+	@GetMapping("/customer/reservationdelete")
+	public String reservationdelete(HttpSession session, int programReservationNo) {
+		
+		if(session.getAttribute("customerNo") == null) {
+			return "redirect:/customer/login";
+		}
+		
+		int customerNo = (int)(session.getAttribute("customerNo"));
+		
+		int result = programReservationService.reservationdelete(programReservationNo, customerNo);
+		
+		return "redirect:/customer/programrs";
+	}
 
 }

@@ -21,4 +21,6 @@ public interface ProgramReservationMapper {
 	int programReservationAdd (Map<String, Object> paramap);
 	
 	List<Map<String, Object>> myreservation (int customerNo);
+	
+	int reservationdelete (Map<String, Object> paramap);
 }

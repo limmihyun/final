@@ -129,4 +129,16 @@ public class ProgramReservationService {
 		return resultList;
 		
 	}
+	
+	public int reservationdelete(int programReservationNo, int customerNo) {
+		
+		Map<String, Object> paramap = new HashMap<>();
+		paramap.put("customerNo", customerNo);
+		paramap.put("programReservationNo", programReservationNo);
+		
+		int result = programReservationMapper.reservationdelete(paramap);
+		
+		return result;
+		
+	}
 }
