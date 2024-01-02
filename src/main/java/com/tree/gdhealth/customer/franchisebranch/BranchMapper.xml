@@ -2,4 +2,22 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper
 	namespace="com.tree.gdhealth.customer.franchisebranch.BranchMapper">
+	<select id="branchInfo" parameterType="com.tree.gdhealth.vo.Branch" resultType="com.tree.gdhealth.vo.Branch">
+	SELECT
+		branch_no branchNo,
+		branch_name branchName,
+		branch_tel branchTel,
+		branch_address branchAddress
+	FROM branch
+	WHERE branch_level != 1 AND branch_active = 'Y'
+	</select>
+	
+	<select id="attendanceInfo" parameterType="com.tree.gdhealth.vo.Branch" resultType="com.tree.gdhealth.vo.CustomerAttendance">
+	SELECT
+		count(*) count
+	FROM customer_attendance a JOIN branch b
+	ON a.branch_no = b.branch_no
+	WHERE a.branch_no = #{branchNo} AND a.customer_attendance_exit_time IS null
+	</select>
+	
 </mapper>

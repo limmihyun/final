@@ -251,13 +251,6 @@
 	
 	$(document).ready(function(){
 		
-		
-		
-		
-		
-		
-		
-		
 		$('#customerPw').blur(function(){
 			if (!getPw.test($('#customerPw').val())){
 				$('#pwHelp').html("비밀번호는 영문,숫자,특수문자를 각각 하나씩 포함한 8~16자리로 설정해주세요.");
@@ -500,16 +493,6 @@
 			document.form.submit();
 		});
 		});
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
 	
 	</script>
 	

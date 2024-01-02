@@ -84,10 +84,12 @@
                                     <div class="card-body">
                                     	&nbsp;&nbsp;
                                     	<div class="btn-group">
-                                        <a href="#" class="btn btn-primary">구로점</a>
-                                        <a href="#" class="btn btn-primary">가산점</a>
-                                        <a href="#" class="btn btn-primary">독산점</a>
-                                        <a href="#" class="btn btn-primary">종로점</a>
+                                    	
+                                    	<!-- 지점 리스트  -->
+                                    	<c:forEach items="${branch}" var="b">
+                                    		<a id="${b.branchNo}" href="#" class="btn btn-primary" onclick="loadBranchDetails(${b.branchNo})">${b.branchName}</a>
+                                    	</c:forEach>
+                                    	
                                         </div>
                                         <br><br>
                                     </div>
@@ -140,7 +142,7 @@
             <div class="row m-80">
                 <div class="col-lg-12">
                     <div class="milestone-title">
-                        <h2>혼잡도</h2>
+                        <h2>지점현황</h2>
                     </div>
                 </div>
                 <div class="col-lg-3 col-md-6">
@@ -148,7 +150,7 @@
                         <div class="counter-icon">
                             
                         </div>
-                        <span class="m-counter">561</span>
+                        <span id="memberCount" class="m-counter">561</span>
                         <p>Members</p>
                     </div>
                 </div>
@@ -166,8 +168,8 @@
                         <div class="counter-icon">
                             
                         </div>
-                        <span class="m-counter">255</span>
-                        <p>Awards</p>
+                        <span id="congestion">full</span>
+                        <p>혼잡도 레벨</p>
                     </div>
                 </div>
                 <div class="col-lg-3 col-md-6">
@@ -190,7 +192,7 @@
                 <div class="col-lg-3 col-md-6">
                     <div class="single-loader">
                         <div class="loader-circle-wrap">
-                            <div class="circle-progress" data-cpid="id-1" data-cpvalue="64" data-cpcolor="#233ede"></div>
+                            <div class="circle-progress" data-cpid="id-1" data-cpvalue="150" data-cpcolor="#233ede"></div>
                         </div>
                         <span>Morbi auctor lacus</span>
                     </div>
@@ -305,5 +307,39 @@ Copyright &copy;<script>document.write(new Date().getFullYear());</script> All r
     <script src="/js/jquery.barfiller.js"></script>
     <script src="/js/main.js"></script>
 </body>
+
+<script>
+	 function loadBranchDetails(branchNo) {
+	        // Ajax 호출
+	        $.ajax({
+	            type: 'post',
+	            url: '/customer/branchCk', 
+	            data: { branchNo: branchNo },
+	            success: function(response) {
+	            	$('#memberCount').html(response.count)
+	            	
+	            	if(response.count < 15){
+	            		$('#congestion').html(1)
+	            	}else if(response.count < 30){
+	            		$('#congestion').html(2)
+	            	}else if(response.count < 50){
+	            		$('#congestion').html(3)
+	            	}else if(response.count < 70){
+	            		$('#congestion').html(4)
+	            	}else if(response.count > 100 && response.count < 150){
+	            		$('#congestion').html(5)
+	            	}else{
+	            		$('#congestion').html(full)
+	            	}
+	                console.log(response);
+	            },
+	            error: function(xhr, status, error) {
+	                // Ajax 통신이 실패하면 이 부분에서 에러 처리를 수행합니다.
+	                console.error(xhr.responseText);
+	            }
+	        });
+	  }
+
+</script>
 
 </html>
