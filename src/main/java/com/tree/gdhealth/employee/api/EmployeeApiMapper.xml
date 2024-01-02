@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.tree.gdhealth.employee.api.EmployeeApiMapper">
-
 	<select id="getEmployeeDetailByNo" resultType="com.tree.gdhealth.vo.EmployeeDetail">
 		SELECT
 			employee_no employeeNo,
@@ -31,6 +30,20 @@
 		        FROM branch
 		        WHERE branch_level = 1
 			)
+	</select>
+    <select id="getBranchEmployeeList" resultType="java.util.Map">
+		SELECT
+			e.employee_no employeeNo,
+			ed.employee_name employeeName,
+			e.branch_no branchNo,
+			e.employee_id employeeId,
+			e.employee_active employeeActive,
+			e.createdate,
+			e.updatedate
+		FROM employee e
+				 INNER JOIN employee_detail ed
+							ON e.employee_no = ed.employee_no
+		WHERE e.branch_no = #{branchNo}
 	</select>
 
 </mapper>

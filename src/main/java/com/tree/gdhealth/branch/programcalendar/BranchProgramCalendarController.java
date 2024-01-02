@@ -7,10 +7,7 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.SessionAttribute;
+import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDate;
 
@@ -35,10 +32,18 @@ public class BranchProgramCalendarController {
     }
 
     @GetMapping("/home")
-    public String getHome(@SessionAttribute Employee loginEmployee,
-                          Model model){
-        BranchProgramCalendar calendar = service.getBranchProgramCalendar(LocalDate.now(),loginEmployee.getBranchNo());
+    public String getHome(){
+        return "redirect:/branch/program-calendar/"+LocalDate.now();
+    }
+
+    @GetMapping("/{requestDate}")
+    public String getHomeSpecifiedDate(
+            @SessionAttribute Employee loginEmployee,
+            Model model, @PathVariable("requestDate") LocalDate requestDate){
+        BranchProgramCalendar calendar = service.getBranchProgramCalendar(requestDate,loginEmployee.getBranchNo());
         model.addAttribute("calendar", calendar);
         return "/branch/program-calendar/home";
     }
+
+
 }

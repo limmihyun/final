@@ -26,12 +26,18 @@ public class EmployeeApiController {
     }
 
     /*본사직원만 리스트로 가져옵니다.*/
-    @GetMapping("/api/v1/employee")
+    @GetMapping(value = "/api/v1/employee",params = "isHeadOffice")
     public List<Map<String, Object>> getEmployeeListIsHeadOffice(
             @RequestParam(name = "isHeadOffice") boolean isHeadOffice){
         if(isHeadOffice) {
             return service.getEmployeeListIsHeadOffice();
         }
         return null;
+    }
+
+    @GetMapping(value = "/api/v1/employee", params = "branchNo")
+    public List<Map<String, Object>> getBranchEmployeeList(
+            @RequestParam(name = "branchNo") int branchNo){
+        return service.getBranchEmployeeList(branchNo);
     }
 }

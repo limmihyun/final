@@ -13,4 +13,10 @@ import java.util.Map;
 public interface BranchProgramDateApiMapper {
 
     Map<String, Object> getBranchProgramDate(@Param("date") LocalDate date, @Param("branchNo") int branchNo);
+
+    int selectManager(@Param("programDateNo") int programDateNo,@Param("managerNo") int managerNo);
+
+    int changeManager(@Param("programDateNo") int programDateNo,@Param("managerNo") int managerNo);
+
+    int insertManager(@Param("programDateNo") int programDateNo,@Param("managerNo") int managerNo);
 }

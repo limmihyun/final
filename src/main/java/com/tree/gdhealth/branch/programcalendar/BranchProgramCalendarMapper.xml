@@ -25,7 +25,7 @@
                 LEFT JOIN program pr
                           ON prd.program_no = pr.program_no
                 LEFT JOIN (SELECT * FROM program_manager prm WHERE prm.employee_no IN (SELECT em.employee_no FROM employee em WHERE em.branch_no = #{branchNo})) prm
-                          ON prd.program_no = prm.program_no
+                          ON prd.program_date_no = prm.program_date_no
                 LEFT JOIN (SELECT program_date_no, COUNT(program_reservation_no) AS reservedCount FROM program_reservation WHERE branch_no = #{branchNo} GROUP BY program_date_no) prr
                           ON prd.program_date_no = prr.program_date_no
                 LEFT JOIN employee_detail eed ON pr.employee_no = eed.employee_no

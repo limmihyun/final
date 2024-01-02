@@ -26,4 +26,8 @@ public class EmployeeApiService {
     public List<Map<String, Object>> getEmployeeListIsHeadOffice() {
         return mapper.getEmployeeListIsHeadOffice();
     }
+
+    public List<Map<String, Object>> getBranchEmployeeList(int branchNo) {
+        return mapper.getBranchEmployeeList(branchNo);
+    }
 }
