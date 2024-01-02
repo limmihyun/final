@@ -15,6 +15,7 @@ public class BranchProgramDate {
     private LocalDate date;
     private String dateName;
     private Boolean isHoliday;
+    private Boolean isToday;
     private int programDateNo;
     private int programNo;
     private String programName;

@@ -28,39 +28,50 @@ public class BranchProgramCalendarService {
     private final HolidayApi holidayApi;
 
     /** date 리스트에 휴일 API로 가져온 공휴일정보를 매핑하여 반환
-     * @param now
+     * @param requestDate 기준일
      * @param branchNo
-     * @return
      */
-    public BranchProgramCalendar getBranchProgramCalendar(LocalDate now, int branchNo) {
-        LocalDate startDate = now.minusDays(1);
-
+    public BranchProgramCalendar getBranchProgramCalendar(LocalDate requestDate, int branchNo) {
         BranchProgramCalendar calendar = new BranchProgramCalendar();
-        List<BranchProgramDate> dateList = mapper.getProgramDateBetween(branchNo, startDate);
+        List<BranchProgramDate> dateList = mapper.getProgramDateBetween(branchNo, requestDate.minusDays(1));
+        List<HolidayApiVo> holidayList = new ArrayList<>();
 
-        List<YearMonth> yearMonths = dateList.stream().map(date -> YearMonth.from(date.getDate())).distinct().toList();
-        List<HolidayApiVo> holidayApiVoList = new ArrayList<>();
+        /* 오늘날짜 지정*/
+        dateList.stream()
+                .filter(date -> LocalDate.now().equals(date.getDate()))
+                .findFirst()
+                .ifPresent(date -> date.setIsToday(true));
 
-        yearMonths.forEach(yearMonth -> {
-            try {
-                holidayApiVoList.addAll(holidayApi.getHolidayList(yearMonth));
-            } catch (IOException e) {
-                throw new RuntimeException(e);
-            }
-        });
+        /*휴일 찾기*/
+        dateList.stream()
+                .map(date -> YearMonth.from(date.getDate()))
+                .distinct()
+                .forEach(yearMonth -> {
+                    try {
+                        holidayList.addAll(holidayApi.getHolidayList(yearMonth));
+                    } catch (Exception e) {
+                        log.warn("휴일정보를 가져오는 중 문제가 발생하였습니다. 제외하고 계속합니다.", e);
+                    }
+                });
 
-        holidayApiVoList.forEach(holidayApiVo -> {
-            dateList.stream().filter(date -> date.getDate().equals(holidayApiVo.getLocdate())).findFirst().ifPresent(date -> {
-                        date.setDateName(holidayApiVo.getDateName());
-                        date.setIsHoliday(holidayApiVo.isHoliday());
+        /*휴일정보를 매핑*/
+        holidayList.forEach(holiday -> {
+            dateList.stream()
+                    .filter(date -> date.getDate().equals(holiday.getLocdate()))
+                    .findFirst()
+                    .ifPresent(date -> {
+                        date.setDateName(holiday.getDateName());
+                        date.setIsHoliday(holiday.isHoliday());
                     });
         });
 
+        /* 지난주, 다음주 날짜를 지정*/
+        calendar.setRequestDate(requestDate);
+        calendar.setPreviousWeekDate(requestDate.minusWeeks(1));
+        calendar.setNextWeekDate(requestDate.plusWeeks(1));
         calendar.setBranchNo(branchNo);
         calendar.setBranchDateList(dateList);
 
         return calendar;
-
-
     }
 }
