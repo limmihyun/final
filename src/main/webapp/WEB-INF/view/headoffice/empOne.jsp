@@ -1123,7 +1123,7 @@
                                         </div>
                                     </div>
                                     <div style="text-align:center;">
-                                    	<button class="btn">뒤로 가기</button>
+                                    	<a href="${pageContext.request.contextPath}/emp" class="btn btn-primary">뒤로 가기</a>
                                     </div>         
                                 </div>                                                                         
                             </div>

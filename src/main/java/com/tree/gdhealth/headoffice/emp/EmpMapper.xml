@@ -13,19 +13,19 @@
 			ed.createdate createdate,
 			ed.updatedate updatedate,
 			ei.employee_img_file_name filename
-		FROM employee e
-		INNER JOIN employee_detail ed
+	   FROM employee e
+	   INNER JOIN employee_detail ed
 			ON ed.employee_no = e.employee_no
-		INNER JOIN employee_img ei
+	   INNER JOIN employee_img ei
 			ON ei.employee_no = e.employee_no
-	</select>
+	   LIMIT #{displayPost}, #{postNum}
+	</select>	
 	
 	<select id="employeeCnt" resultType="int">
-		SELECT
-			COUNT(*)
+		SELECT COUNT(*)
 		FROM employee
 	</select>
-	
+
 	<select id="idCheck" parameterType="String" resultType="int">
 		SELECT COUNT(*)
 		FROM employee
