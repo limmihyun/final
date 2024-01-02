@@ -1095,7 +1095,7 @@
 			                     </div>
 			                     <div class="student-dtl">
 			                         <h2>
-			                         <a href="${pageContext.request.contextPath}/emp/empOne?employeeId=${m.empId}">
+			                         <a href="${pageContext.request.contextPath}/emp/empOne/${m.empId}">
 			                         	${m.empName}
 			                         </a>		                         
 			                         </h2>
@@ -1120,28 +1120,28 @@
 	             <ul class="pagination">
 	             
 	             	  <li class="page-item">
-	             	  	<a class="page-link" href="${pageContext.request.contextPath}/emp?num=1">처음</a>
+	             	  	<a class="page-link" href="${pageContext.request.contextPath}/emp?page=1">처음</a>
 	             	  </li>	
 					  
 					  <c:if test="${prev}">
-					  	<li class="page-item"><a class="page-link" href="${pageContext.request.contextPath}/emp?num=${startPageNum - 1}">이전</a></li>
+					  	<li class="page-item"><a class="page-link" href="${pageContext.request.contextPath}/emp?page=${startPageNum - 1}">이전</a></li>
 					  </c:if>
 					  <c:forEach begin="${startPageNum}" end="${endPageNum}" var="pageNum">
-					  	<c:if test="${pageNum == currentNum}"> <!-- 페이징 버튼 활성화 --> 
+					  	<c:if test="${pageNum == currentPage}"> <!-- 페이징 버튼 색 변경o --> 
 					  		<li class="page-item active">
-						  		<a class="page-link" href="${pageContext.request.contextPath}/emp?num=${pageNum}">${pageNum}</a>
+						  		<a class="page-link" href="${pageContext.request.contextPath}/emp?page=${pageNum}">${pageNum}</a>
 						  	</li>
 					  	</c:if>
-					  	<c:if test="${pageNum != currentNum}"> <!-- 페이징 버튼 비활성화 --> 
+					  	<c:if test="${pageNum != currentPage}"> <!-- 페이징 버튼 색 변경x --> 
 					  		<li class="page-item">
-						  		<a class="page-link" href="${pageContext.request.contextPath}/emp?num=${pageNum}">${pageNum}</a>
+						  		<a class="page-link" href="${pageContext.request.contextPath}/emp?page=${pageNum}">${pageNum}</a>
 						  	</li>
 					  	</c:if>
 					  </c:forEach>
 					  <c:if test="${next}">
-					  	<li class="page-item"><a class="page-link" href="${pageContext.request.contextPath}/emp?num=${endPageNum + 1}">다음</a></li>
+					  	<li class="page-item"><a class="page-link" href="${pageContext.request.contextPath}/emp?page=${endPageNum + 1}">다음</a></li>
 					  </c:if>	  
-					  <li class="page-item"><a class="page-link" href="${pageContext.request.contextPath}/emp?num=${lastPage}">끝</a></li>
+					  <li class="page-item"><a class="page-link" href="${pageContext.request.contextPath}/emp?page=${lastPage}">끝</a></li>
 				</ul>	  
             </div>
                <!------------- 페이징 end ---------------->        		    

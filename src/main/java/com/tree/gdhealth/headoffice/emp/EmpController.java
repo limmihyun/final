@@ -6,6 +6,7 @@ import java.util.Map;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -27,20 +28,20 @@ public class EmpController {
 	private final EmpService empService;
 
 	@GetMapping("/emp")
-	public String emp(Model model, @RequestParam(value = "num" , defaultValue = "1") int num) {
+	public String emp(Model model, @RequestParam(defaultValue = "1") int page) {
 			
 		// 직원수
-		int cnt = empService.getEmployeeCnt(); 
+		int employeeCnt = empService.getEmployeeCnt(); 
 		
 		Paging paging = new Paging();
-		paging.setNum(num);
-		paging.setCnt(cnt);
+		paging.setNum(page);
+		paging.setCnt(employeeCnt);
 		
 		List<Map<String, Object>> empList = empService.getEmployeeList(paging.getDisplayPost(), paging.getPostNum());
 		
 		model.addAttribute("empList", empList);   
 		model.addAttribute("lastPage", paging.getLastPage());
-		model.addAttribute("currentNum", num);
+		model.addAttribute("currentPage", page);
 	
 		model.addAttribute("startPageNum", paging.getStartPageNum());
 		model.addAttribute("endPageNum", paging.getEndPageNum());
@@ -82,13 +83,13 @@ public class EmpController {
 		return "redirect:/emp";
 	}
 	
-	@GetMapping("/emp/empOne")
-	public String empOne(Model model, String employeeId) {
+	@GetMapping("/emp/empOne/{employeeId}")
+	public String empOne(Model model, @PathVariable String employeeId) {
 		
 		Map<String, Object> employeeOne = empService.getEmployeeOne(employeeId);
 		model.addAttribute("empOne",employeeOne);
 		
 		return "headoffice/empOne";
 	}
-	
+		
 }

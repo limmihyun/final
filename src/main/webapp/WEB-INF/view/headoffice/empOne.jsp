@@ -1123,7 +1123,7 @@
                                         </div>
                                     </div>
                                     <div style="text-align:center;">
-                                    	<button type="button" onclick="goBack();" class="btn">직원 목록</button>                                   	
+                                    	<button type="button" onclick="goBack();" class="btn">뒤로 가기</button>                                   	
                                     </div>         
                                 </div>                                                                         
                             </div>
