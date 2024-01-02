@@ -12,12 +12,12 @@ import com.tree.gdhealth.vo.EmployeeImg;
 @Mapper
 public interface EmpMapper {
 	
-	List<Map<String, Object>> employeeList();
+	List<Map<String, Object>> employeeList(Map<String, Integer> map);
 	int employeeCnt();
-	int idCheck(String employeeId);
 	
 	Map<String, Object> employeeOne(String employeeId);
 	
+	int idCheck(String employeeId);
 	int insertEmployee(Employee employee);
 	int insertEmployeeDetail(EmployeeDetail employeeDetail);
 	int insertEmployeeImg(EmployeeImg employeeImg);

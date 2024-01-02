@@ -2,6 +2,7 @@ package com.tree.gdhealth.emp;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -34,10 +35,13 @@ public class IntegrationTest { // DB 테스트
 	@DisplayName("직원들의 목록") // 현재 연결된 실제 DB로 테스트
 	void empListTest() {
 
+		Map<String, Integer> map = new HashMap<>();
 		// given(준비)
+		map.put("displayPost", 0);
+		map.put("postNum", 8);
 
 		// when(실행)
-		List<Map<String, Object>> list = empMapper.employeeList();
+		List<Map<String, Object>> list = empMapper.employeeList(map);
 
 		// then(검증)
 		assertThat(list.get(0).get("empName")).isEqualTo("확인용1");

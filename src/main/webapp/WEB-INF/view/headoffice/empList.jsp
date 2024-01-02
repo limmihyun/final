@@ -1112,32 +1112,39 @@
 	           	    <c:if test="${(cnt%4 == 0) || (cnt == employeeCnt)}"> <!-- cnt가 4의 배수이거나 마지막 순서일 때 -->
 	   			  	 	</div>
 	   			    </c:if>
-           		</c:forEach>
-           		
-                <!-- 회원 list end -->  
-                
-                <!-- 페이징 start -->     
-                <div style="text-align:center;">
-                	
-	                <ul class="pagination">
-					  <li class="page-item"><a class="page-link" href="#">Previous</a></li>
-					  <li class="page-item"><a class="page-link" href="#">1</a></li>
-					  <li class="page-item"><a class="page-link" href="#">2</a></li>
-					  <li class="page-item"><a class="page-link" href="#">3</a></li>
-					  <li class="page-item"><a class="page-link" href="#">4</a></li>
-					  <li class="page-item"><a class="page-link" href="#">5</a></li>
-					  <li class="page-item"><a class="page-link" href="#">6</a></li>
-					  <li class="page-item"><a class="page-link" href="#">7</a></li>
-					  <li class="page-item"><a class="page-link" href="#">8</a></li>
-					  <li class="page-item"><a class="page-link" href="#">9</a></li>
-					  <li class="page-item"><a class="page-link" href="#">10</a></li>
-					  <li class="page-item"><a class="page-link" href="#">Next</a></li>
-					</ul>
-				  
-                </div>
-                <!-- 페이징 end --> 
-                  
-            </div>          		    
+           		</c:forEach>           		
+                <!-- 회원 list end -->      
+            </div>         
+           		<!------------- 페이징 start ---------------->     
+            <div style="text-align:center;">       	
+	             <ul class="pagination">
+	             
+	             	  <li class="page-item">
+	             	  	<a class="page-link" href="${pageContext.request.contextPath}/emp?num=1">처음</a>
+	             	  </li>	
+					  
+					  <c:if test="${prev}">
+					  	<li class="page-item"><a class="page-link" href="${pageContext.request.contextPath}/emp?num=${startPageNum - 1}">이전</a></li>
+					  </c:if>
+					  <c:forEach begin="${startPageNum}" end="${endPageNum}" var="pageNum">
+					  	<c:if test="${pageNum == currentNum}"> <!-- 페이징 버튼 활성화 --> 
+					  		<li class="page-item active">
+						  		<a class="page-link" href="${pageContext.request.contextPath}/emp?num=${pageNum}">${pageNum}</a>
+						  	</li>
+					  	</c:if>
+					  	<c:if test="${pageNum != currentNum}"> <!-- 페이징 버튼 비활성화 --> 
+					  		<li class="page-item">
+						  		<a class="page-link" href="${pageContext.request.contextPath}/emp?num=${pageNum}">${pageNum}</a>
+						  	</li>
+					  	</c:if>
+					  </c:forEach>
+					  <c:if test="${next}">
+					  	<li class="page-item"><a class="page-link" href="${pageContext.request.contextPath}/emp?num=${endPageNum + 1}">다음</a></li>
+					  </c:if>	  
+					  <li class="page-item"><a class="page-link" href="${pageContext.request.contextPath}/emp?num=${lastPage}">끝</a></li>
+				</ul>	  
+            </div>
+               <!------------- 페이징 end ---------------->        		    
         </div>
     </div>
 

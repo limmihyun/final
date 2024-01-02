@@ -7,9 +7,11 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.tree.gdhealth.headoffice.Paging;
 import com.tree.gdhealth.vo.Employee;
 import com.tree.gdhealth.vo.EmployeeDetail;
 
@@ -25,17 +27,28 @@ public class EmpController {
 	private final EmpService empService;
 
 	@GetMapping("/emp")
-	public String emp(HttpSession session, Model model) {
+	public String emp(Model model, @RequestParam(value = "num" , defaultValue = "1") int num) {
+			
+		// 직원수
+		int cnt = empService.getEmployeeCnt(); 
 		
-		List<Map<String,Object>> empList = empService.getEmployeeList();		
-		model.addAttribute("empList", empList);
-				
-		int employeeCnt = empService.getEmployeeCnt();
-		// 디버깅 
-		log.debug("직원 수 : " + employeeCnt);
-		model.addAttribute("employeeCnt",employeeCnt);
+		Paging paging = new Paging();
+		paging.setNum(num);
+		paging.setCnt(cnt);
 		
-		return "headoffice/empList";
+		List<Map<String, Object>> empList = empService.getEmployeeList(paging.getDisplayPost(), paging.getPostNum());
+		
+		model.addAttribute("empList", empList);   
+		model.addAttribute("lastPage", paging.getLastPage());
+		model.addAttribute("currentNum", num);
+	
+		model.addAttribute("startPageNum", paging.getStartPageNum());
+		model.addAttribute("endPageNum", paging.getEndPageNum());
+		 
+		model.addAttribute("prev", paging.getPrev());
+		model.addAttribute("next", paging.getNext());  
+	
+	    return "headoffice/empList";
 		
 	}
 	

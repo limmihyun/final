@@ -2,6 +2,7 @@ package com.tree.gdhealth.headoffice.emp;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.UUID;
@@ -26,15 +27,17 @@ public class EmpService {
 	// DI
 	private final EmpMapper empMapper;
 	
-	public List<Map<String, Object>> getEmployeeList() {
+	public List<Map<String, Object>> getEmployeeList(int displayPost, int postNum) {
 		
-		List<Map<String, Object>> employeeList = empMapper.employeeList();		
-		// 디버깅 
-		log.debug("직원 목록 : " + employeeList);
+		Map<String, Integer> map = new HashMap<>();
+		map.put("displayPost", displayPost);
+		map.put("postNum", postNum);
+		
+		List<Map<String, Object>> employeeList = empMapper.employeeList(map);
 		
 		return employeeList;
 	}
-	
+			
 	public int getEmployeeCnt() {
 		
 		int employeeCnt = empMapper.employeeCnt();
@@ -124,5 +127,7 @@ public class EmpService {
 			throw new RuntimeException();
 		}
 	}
+	
+	
 			
 }
