@@ -111,23 +111,17 @@
 	
 	<section>
 		<div>
-			<div>
-				<table border="1">
-					<tr>
-						<th>프로그램 명</th>
-						<th>지점 명</th>
-						<th>날짜</th>
-					</tr>
-					<tr>
-						<c:forEach var="l" items="${resultList}">
-							<td>${l.programName}</td>
-							<td>${l.branchName}</td>
-							<td>${l.year}.${l.month}.${l.day}</td>
-							<a href="${pageContext.request.contextPath}/customer/reservationdelete?programReservationNo=${l.programReservationNo}">취소하기</a>
-						</c:forEach>
-					</tr>
-				</table>
-				<a href="${pageContext.request.contextPath}/customer/programrs">이전으로</a>
+			<div style="margin:2%;">
+					<c:forEach var="l" items="${resultList}">
+						<div  class="button-elem" style="border-radius:10px; border-style:solid; border-color:black;background-color:#F6F6F6; margin:1%;">
+							<div style="margin:1%;">
+								<p>${l.branchName}</p>
+								<p>${l.programName} · ${l.year}년 ${l.month}월 ${l.day}일 </p>
+								<a href="${pageContext.request.contextPath}/customer/reservationdelete?programReservationNo=${l.programReservationNo}" class="primary-btn b-btn" style="padding: 10px 24px;">취소하기</a>
+							</div>
+						</div>
+					</c:forEach>
+				<a href="${pageContext.request.contextPath}/customer/programrs"> < 이전으로</a>
 			</div>
 		</div>
 	</section>

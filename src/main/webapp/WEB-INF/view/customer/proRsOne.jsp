@@ -22,6 +22,12 @@
     <link rel="stylesheet" href="/css/barfiller.css" type="text/css">
     <link rel="stylesheet" href="/css/slicknav.min.css" type="text/css">
     <link rel="stylesheet" href="/css/style.css" type="text/css">
+	    
+	    <!-- Latest compiled and minified CSS -->
+	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+	
+	<!-- Latest compiled JavaScript -->
+	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
 </head>
 
 <body>
@@ -111,16 +117,16 @@
 	
 	<section>
 		<div>
-			<div>
+			<div class="container" style="margin-top:2%; margin-bottom:2%;">
 				<form method="POST" action="${pageContext.request.contextPath}/customer/prorsone">
 					<input type="hidden" value="${resultList.branchNo}" name="branchNo">
 					<input type="hidden" value="${resultList.programDateNo}" name="programDateNo">
-					<table border="1">
+					<table class="table" style="font-size:13px;">
 						<tr>
 							<th>프로그램 이름</th>
 							<th>선택 날짜</th>
 							<th>고객 ID</th>
-							<th>어느 지점</th>
+							<th>지점명</th>
 						</tr>
 						<tr>
 							<td>${resultList.programName}</td>
@@ -129,8 +135,10 @@
 							<td>${resultList.branchName}</td>						
 						</tr>
 					</table>
-					<button>전송버튼</button>
+					<button class="btn btn-dark btn-lg">예약하기</button>
 				</form>
+				<br>
+				<a href="${pageContext.request.contextPath}/customer/programrs" style="font-size:12px;"> < 이전으로</a>
 			</div>
 		</div>
 	</section>
