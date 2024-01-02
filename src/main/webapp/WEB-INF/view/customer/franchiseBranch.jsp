@@ -309,36 +309,56 @@ Copyright &copy;<script>document.write(new Date().getFullYear());</script> All r
 </body>
 
 <script>
-	 function loadBranchDetails(branchNo) {
-	        // Ajax 호출
-	        $.ajax({
-	            type: 'post',
-	            url: '/customer/branchCk', 
-	            data: { branchNo: branchNo },
-	            success: function(response) {
-	            	$('#memberCount').html(response.count)
-	            	
-	            	if(response.count < 15){
-	            		$('#congestion').html(1)
-	            	}else if(response.count < 30){
-	            		$('#congestion').html(2)
-	            	}else if(response.count < 50){
-	            		$('#congestion').html(3)
-	            	}else if(response.count < 70){
-	            		$('#congestion').html(4)
-	            	}else if(response.count > 100 && response.count < 150){
-	            		$('#congestion').html(5)
-	            	}else{
-	            		$('#congestion').html('full')
-	            	}
-	                console.log(response);
-	            },
-	            error: function(xhr, status, error) {
-	                // Ajax 통신이 실패하면 이 부분에서 에러 처리를 수행합니다.
-	                console.error(xhr.responseText);
-	            }
-	        });
-	  }
+function loadBranchDetails(branchNo) {
+    // Ajax 호출
+    $.ajax({
+        type: 'post',
+        url: '/customer/branchCk',
+        data: { branchNo: branchNo },
+        success: function(response) {
+            // 받아온 값으로 memberCount 업데이트
+            $('#memberCount').html(response.count);
+
+            // m-counter 클래스에 애니메이션 효과 추가
+            $('#memberCount').addClass('m-counter');
+
+            // Congestion 표시 업데이트
+            updateCongestion(response.count);
+
+        },
+        error: function(xhr, status, error) {
+            // Ajax 통신이 실패하면 이 부분에서 에러 처리를 수행합니다.
+            console.error(xhr.responseText);
+        }
+    });
+}
+
+// Congestion 업데이트 함수
+function updateCongestion(count) {
+    var congestionLevel;
+
+    if (count < 15) {
+        congestionLevel = 1;
+    } else if (count < 30) {
+        congestionLevel = 2;
+    } else if (count < 50) {
+        congestionLevel = 3;
+    } else if (count < 70) {
+        congestionLevel = 4;
+    } else if (count >= 100 && count < 150) {
+        congestionLevel = 5;
+    } else {
+        congestionLevel = 'full';
+    }
+
+    // Congestion 업데이트
+    $('#congestion').html(congestionLevel);
+}
+//memberCount 값이 변경될 때 m-counter-animation 클래스 제거
+$('#memberCount').on('DOMSubtreeModified', function() {
+    $(this).removeClass('m-counter');
+});
+
 
 </script>
 
