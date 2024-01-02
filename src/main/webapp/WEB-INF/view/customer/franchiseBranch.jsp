@@ -329,7 +329,7 @@ Copyright &copy;<script>document.write(new Date().getFullYear());</script> All r
 	            	}else if(response.count > 100 && response.count < 150){
 	            		$('#congestion').html(5)
 	            	}else{
-	            		$('#congestion').html(full)
+	            		$('#congestion').html('full')
 	            	}
 	                console.log(response);
 	            },
