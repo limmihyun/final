@@ -112,13 +112,7 @@
 								<option>여</option>
 							</select>
 						</div>
-						<div class="col-md-2 mb-3">
-							<label for="zip">나이</label> 
-							<input type="number" min="0" max="100" class="form-control w-50" placeholder="만" id="customerAge" name="customerAge" required>
-							<div class="invalid-feedback">Please provide a valid state.
-							</div>
-							
-						</div>
+						
 						<div class="col-md-2 mb-3">
 							<label for="zip">키</label> 
 							<input type="number" class="form-control w-50" placeholder="cm" id="customerHeight" name="customerHeight" required>
@@ -126,10 +120,16 @@
 							</div>
 						</div>
 						
-						<div class="col-md-3 mb-3">
+						<div class="col-md-2 mb-3">
 							<label for="zip">체중</label> 
 							<input type="number" class="form-control w-50" placeholder="**kg" id="customerWeight" name="customerWeight" required>
 						</div>
+						<div class="col-md-4 mb-3">
+							<label for="zip">생년월일</label> 
+							<input type="date" class="form-control w-50" id="customerBirth" name="customerBirth" required>
+							
+						</div>
+						
 					</div>
 					<br>
 					<label>사진</label>
@@ -247,6 +247,7 @@
 	let getSpace = /\s/g;
 	let getEmail = /^[a-zA-Z0-9]+([\w\.\_\-])*([a-zA-Z0-9])+([\w\.\_\-])+@([a-zA-Z0-9]+\.)+[a-zA-Z0-9]{2,8}$/;
 	let getNumber = /^[0-9]+$/;
+	let getBirth = /^(19[0-9][0-9]|20\d{2})-(0[0-9]|1[0-2])-(0[1-9]|[1-2][0-9]|3[0-1])$/;
 	let fileInput = document.getElementById('chooseFile');
 	
 	$(document).ready(function(){
@@ -403,31 +404,6 @@
 				return false;
 			}
 			
-			
-			if($('#customerAge').val()==""){
-				alert("나이를 입력하세요"); 
-				$('#customerAge').focus();
-				return false;
-			}
-			if(getSpace.test($('#customerAge').val())){
-				alert("공백은 입력 불가능 합니다");
-				$('#customerAge').val("");
-				$('#customerAge').focus(); 
-				return false;
-			}
-			if(!getNumber.test($('#customerAge').val())){
-				alert("나이는 숫자(정수)만 입력가능합니다");
-				$('#customerAge').val("");
-				$('#customerAge').focus();
-				return false;
-        	}
-			if($('#customerAge').val()<5 || $('#customerAge').val()>95){
-				alert("정확한 나이를 입력해주세요");
-				$('#customerAge').val("");
-				$('#customerAge').focus();
-				return false;
-        	}
-			
 			if($('#customerHeight').val()==""){
 				alert("키(신장)를 입력하세요"); 
 				$('#customerHeight').focus();
@@ -457,12 +433,32 @@
 				$('#customerWeight').focus(); 
 				return false;
 			}
+			
 			if($('#customerWeight').val()<20 || $('#customerWeight').val()>200){
 				alert("정확한 체중을 입력해주세요");
 				$('#customerWeight').val("");
 				$('#customerWeight').focus();
 				return false;
         	}
+			
+			if($('#customerBirth').val()==""){
+				alert("생년월일을 입력하세요"); 
+				$('#customerBirth').focus();
+				return false;
+			}
+			if(getSpace.test($('#customerBirth').val())){
+				alert("공백은 입력 불가능 합니다");
+				$('#customerBirth').val("");
+				$('#customerBirth').focus(); 
+				return false;
+			}
+			if(!getBirth.test($('#customerBirth').val())){
+				alert("유효한 생년월일을 입력해 주세요");
+				$('#customerBirth').val("");
+				$('#customerBirth').focus(); 
+				return false;
+			}
+			
 			
 			if(fileInput.files.length === 0) {
 			    alert("프로필 사진을 업로드해 주세요");

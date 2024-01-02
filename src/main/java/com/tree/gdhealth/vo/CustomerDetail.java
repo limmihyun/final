@@ -10,6 +10,7 @@ public class CustomerDetail {
 	private int customerHeight;
 	private int customerWeight;
 	private int customerAge;
+	private String customerBirth;
 	private String customerPhone;
 	private String customerAddress;
 	private String customerEmail;

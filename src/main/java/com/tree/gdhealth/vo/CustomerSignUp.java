@@ -13,6 +13,7 @@ public class CustomerSignUp {
 	private double customerHeight;
 	private double customerWeight;
 	private int customerAge;
+	private String customerBirth;
 	private String customerPhone;
 	private String customerAddress;
 	private String customerAddressDetail;

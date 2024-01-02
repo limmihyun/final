@@ -17,7 +17,7 @@
 		customer_gender,
 		customer_height,
 		customer_weight,
-		customer_age,
+		customer_birth,
 		customer_phone,
 		customer_address,
 		customer_email
@@ -27,7 +27,7 @@
 		#{customerGender},
 		#{customerHeight},
 		#{customerWeight},
-		#{customerAge},
+		#{customerBirth},
 		#{customerPhone},
 		#{customerAddress},
 		#{customerEmail}

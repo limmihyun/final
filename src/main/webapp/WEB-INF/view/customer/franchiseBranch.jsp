@@ -345,7 +345,7 @@ function updateCongestion(count) {
         congestionLevel = 3;
     } else if (count < 70) {
         congestionLevel = 4;
-    } else if (count >= 100 && count < 150) {
+    } else if (count < 150) {
         congestionLevel = 5;
     } else {
         congestionLevel = 'full';
