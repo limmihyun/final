@@ -27,7 +27,7 @@ public class EmpController {
 	private final EmpService empService;
 
 	@GetMapping("/emp")
-	public String emp(Model model, @RequestParam("num") int num) {
+	public String emp(Model model, @RequestParam(value = "num" , defaultValue = "1") int num) {
 			
 		// 직원수
 		int cnt = empService.getEmployeeCnt(); 

@@ -1123,7 +1123,7 @@
                                         </div>
                                     </div>
                                     <div style="text-align:center;">
-                                    	<a href="${pageContext.request.contextPath}/emp" class="btn btn-primary">뒤로 가기</a>
+                                    	<button type="button" onclick="goBack();" class="btn">직원 목록</button>                                   	
                                     </div>         
                                 </div>                                                                         
                             </div>
@@ -1190,5 +1190,11 @@
 		============================================ -->
     <script src="/admin/js/tawk-chat.js"></script>
 </body>
+
+<script>
+	function goBack() {
+		window.history.back();
+	}
+</script>
 
 </html>
