@@ -32,7 +32,7 @@
 			<div class="offset-md-2 col-lg-5 col-md-7 offset-lg-4 offset-md-3">
 				<div class="panel border bg-white">
 					<div class="panel-heading">
-						<h3 class="pt-3 font-weight-bold">Login</h3>
+						<h3 class="pt-3 font-weight-bold">비밀번호 재설정</h3>
 					</div>
 					<div class="panel-body p-3">
 						<form name="form" action="/customer/resetPw" method="post">
@@ -49,7 +49,7 @@
 							<div class="form-group py-1 pb-2">
 								<div class="input-field">
 									<span class="fas fa-lock px-2"></span> <input type="password"
-										placeholder="Password" id="customerPwCk" name="customerPwCk"
+										placeholder="PasswordCheck" id="customerPwCk" name="customerPwCk"
 										required>
 									<button type="button" class="btn bg-white text-muted toggle-password2">
 										<span class="far fa-eye-slash"></span>
