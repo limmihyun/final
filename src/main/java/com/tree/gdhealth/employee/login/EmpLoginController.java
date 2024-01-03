@@ -39,4 +39,13 @@ public class EmpLoginController {
 		session.setAttribute("userLevel", 1);
 		return "redirect:/customer/home";
 	}
+	
+	@GetMapping("/employee/logout")
+	public String logout(HttpSession session,RedirectAttributes red) {
+		System.out.println("로그아웃");
+		String msg = "로그아웃 되셨습니다.";
+		red.addFlashAttribute("msg",msg);
+		session.invalidate();
+		return "redirect:/customer/home";
+	}
 }
