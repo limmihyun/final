@@ -92,7 +92,7 @@ public class EmpController {
 		Map<String, Object> employeeOne = empService.getEmployeeOne(employeeId);
 		// 디버깅
 		log.debug("회원 상세 정보 : " + employeeOne);
-		model.addAttribute("empOne",employeeOne);
+		model.addAttribute("empOne", employeeOne);
 		
 		return "headoffice/empOne";
 	}

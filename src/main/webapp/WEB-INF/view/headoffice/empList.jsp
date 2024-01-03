@@ -1091,7 +1091,7 @@
 			           	    <div class="col-lg-3 col-md-6 col-sm-6 col-xs-12">
 			                	<div class="student-inner-std res-mg-b-30">
 			                     <div class="student-img">
-			                        <img src="${pageContext.request.contextPath}/upload/emp/${m.filename}" alt="" style="height:300px; width:300px;"/> 
+			                        <img src="${pageContext.request.contextPath}/upload/emp/${m.filename}" alt="${pageContext.request.contextPath}/noImg" style="height:300px; width:300px;"/> 
 			                     </div>
 			                     <div class="student-dtl">
 			                         <h2>

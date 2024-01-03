@@ -1082,7 +1082,9 @@
                 		<div class="col-lg-3 col-md-6 col-sm-6 col-xs-12">
 	                        <div class="courses-inner res-mg-b-30">
 	                            <div class="courses-title">
-	                                <a href="#"><img src="${pageContext.request.contextPath}/upload/program/${m.filename}" alt=""></a>
+	                                <a href="#">
+	                                	<img src="${pageContext.request.contextPath}/upload/program/${m.filename}" alt="${pageContext.request.contextPath}/noImg" style="height:270px; width:300px;">
+	                                </a>
 	                                <h2>${m.programName}</h2>
 	                            </div>
 	                          
@@ -1092,7 +1094,7 @@
 	                                <p><span><i class="fa fa-clock"></i></span> <b>수용 인원 :</b> ${m.maxCustomer}</p>
 	                            </div>
 	                            <div class="product-buttons">
-	                                <button type="button" class="button-default cart-btn">자세히 보기</button>
+	                                <button type="button" class="button-default cart-btn" onclick="location.href='${pageContext.request.contextPath}/program/programOne/${m.programNo}'">자세히 보기</button>
 	                            </div>
 	                        </div>
                    	    </div>

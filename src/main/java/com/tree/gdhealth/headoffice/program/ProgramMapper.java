@@ -17,6 +17,8 @@ public interface ProgramMapper {
 	List<Map<String,Object>> programList(Map<String, Object> map);
 	int programCnt();
 	
+	Map<String, Object> programOne(int programNo);
+	
 	int insertProgram(Program program);
 	int insertProgramDate(ProgramDate programDate);
 	int insertProgramManager(ProgramManager programManager);

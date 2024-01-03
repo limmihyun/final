@@ -1166,6 +1166,58 @@
 	
 	$('#insertBtn').click(function(){
 		
+		if($('#programName').val().trim() == '') {
+			alert('프로그램 제목을 입력하세요.');
+			$('#programName').val('');
+			$('#programName').focus();
+			return;
+		}
+		
+		if($('#programDetail').val().trim() == '') {
+			alert('내용을 입력하세요.');
+			$('#programDetail').val('');	
+			$('#programDetail').focus();			
+			return;
+		}
+		
+		if($('#programMaxCustomer').val().trim() == '') {
+			alert('수용 인원을 입력하세요.');
+			$('#programMaxCustomer').val('');	
+			$('#programMaxCustomer').focus();			
+			return;
+		}
+		
+		let checkNumber = $('#programMaxCustomer').val().search(/[0-9]/g);
+		
+		if(checkNumber < 0) { 
+			alert('수용 인원은 숫자만 입력 가능합니다.')
+			$('#programMaxCustomer').val('');	
+			$('#programMaxCustomer').focus();			
+			return;
+		}	
+		
+		if($('#programDate').val().trim() == '') {
+			alert('개설 날짜를 입력하세요.');
+			$('#programDate').val('');	
+			$('#programDate').focus();			
+			return;
+		}
+		
+		// 날짜 형식의 유효성 검증
+		var format = /^(19[7-9][0-9]|20\d{2})-(0[0-9]|1[0-2])-(0[1-9]|[1-2][0-9]|3[0-1])$/;
+		
+		if (!format.test($('#programDate').val())) {
+			alert("개설 날짜의 형식을 올바르게 입력해주세요.");
+			$('#programDate').val('');	
+			$('#programDate').focus();
+			return;
+		}
+		
+		if($('#programFile').val().length == 0) {
+			alert('프로그램 사진을 첨부하세요.');
+			$('#programFile').focus();
+			return;
+		}
 		
 		alert('추가 완료되었습니다.');
 		$('#insertForm').submit();

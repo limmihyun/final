@@ -1054,14 +1054,12 @@
                 <div class="row" style="margin-top:20px; margin-bottom:20px;">
                 	<div class="col-lg-3 col-md-3 col-sm-3"></div>
                     <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
-                        <div class="profile-info-inner">
-    						   		
- 					 <div class="profile-img col-lg-12 col-md-12 col-sm-12 col-xs-12" style="text-align:center;">
-                        <img src="${pageContext.request.contextPath}/upload/emp/${empOne.filename}" 
-                       	 	style="width:350px; height:350px;" alt="" />
-                     </div> 
+                        <div class="profile-info-inner">    						   		
+						 	<div class="profile-img col-lg-12 col-md-12 col-sm-12 col-xs-12" style="text-align:center;">
+		                       <img src="${pageContext.request.contextPath}/upload/emp/${empOne.filename}" 
+		                      	 	style="width:350px; height:350px;" alt="${pageContext.request.contextPath}/noImg" />
+		                    </div> 
     			                  	   
-
                             <div class="profile-details-hr">
                             
                             	<div class="row">

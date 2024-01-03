@@ -1287,44 +1287,49 @@
 			alert('비밀번호를 6자 이상 입력하세요.');
 			$('#employeePw').focus();
 			return;
-		} else if(checkNumber <0 || checkEnglish <0){
+		} else if(checkNumber < 0 || checkEnglish < 0){
 			// 숫자와 영어를 혼용하지 않았을 때
 	        alert("비밀번호는 숫자와 영문자를 혼용하여야 합니다.");
 	        $('#employeePw').focus();
 	        return;
 	    }
 	    
-	    if($('#employeeName').val().length == 0) {
+	    if($('#employeeName').val().trim() == '') {
 	    	alert('이름을 입력하세요.');
+	    	$('#employeeName').val('');
 			$('#employeeName').focus();
 			return;
 	    }
 	    
-	    if($('#employeePhone').val().length == 0) {
+	    if($('#employeePhone').val().trim() == '') {
 	    	alert('휴대폰 번호를 입력하세요.');
+	    	$('#employeePhone').val('');
 			$('#employeePhone').focus();
 			return;
 	    }
 	    
-	    if($('#employeeEmail').val().length == 0) {
+	    if($('#employeeEmail').val().trim() == '') {
 	    	alert('이메일을 입력하세요.');
+	    	$('#employeeEmail').val('');
 			$('#employeeEmail').focus();
 			return;
 	    }
 	    
-	    if($('#employeeGender').val() == 0) {
+	    if($('#employeeGender').val().trim() == '') {
 			alert('성별을 선택하세요.');
+			$('#employeeGender').val('');
 			$('#employeeGender').focus();
 			return;
 		}
 	    
-	    if($('#branchNo').val() == 0) {
+	    if($('#branchNo').val().trim() == '') {
 			alert('지점을 선택하세요.');
+			$('#branchNo').val('');
 			$('#branchNo').focus();
 			return;
 		}
 	    
-	    if($('#employeeFile').val() == 0) {
+	    if($('#employeeFile').val().length == 0) {
 			alert('직원 사진을 첨부하세요.');
 			$('#employeeFile').focus();
 			return;

@@ -49,6 +49,13 @@ public class ProgramService {
 		return programCnt;
 	}
 	
+	public Map<String, Object> getProgramOne(int programNo) {
+		
+		Map<String, Object> programOne = programMapper.programOne(programNo);
+		
+		return programOne;
+	}
+	
 	public void insertProgram(Program program, ProgramDate programDate,
 							ProgramManager programManager, MultipartFile programFile,
 									String path) {
@@ -79,9 +86,9 @@ public class ProgramService {
 		programManager.setProgramDateNo(programDate.getProgramDateNo());
 		programManager.setProgramNo(program.getProgramNo());
 		
-		/////////////////// 로그인 기능 구현 전 임시 코드 start//////////////////////////
+		/////////////////// 로그인 기능 구현 전 임시 코드 start //////////////////////////
 		programManager.setEmployeeNo(1);
-		/////////////////// 로그인 기능 구현 전 임시 코드 end////////////////////////////
+		/////////////////// 로그인 기능 구현 전 임시 코드 end ////////////////////////////
 		
 		int managerResult = programMapper.insertProgramManager(programManager);
 		// 디버깅

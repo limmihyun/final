@@ -6,6 +6,7 @@ import java.util.Map;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
@@ -73,6 +74,17 @@ public class ProgramController {
 		programService.insertProgram(program, programDate, programManager, programFile, path);
 		
 		return "redirect:/program";
+	}
+	
+	@GetMapping("/program/programOne/{programNo}")
+	public String programOne(Model model, @PathVariable int programNo) {
+		
+		Map<String, Object> programOne = programService.getProgramOne(programNo);
+		// 디버깅
+		log.debug("프로그램 상세 정보 : " + programOne);
+		model.addAttribute("programOne",programOne);
+		
+		return "headoffice/programOne";
 	}
 
 }
