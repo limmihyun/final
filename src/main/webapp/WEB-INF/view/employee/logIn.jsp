@@ -55,7 +55,7 @@
 							</div>
 							<button type="submit" class="btn btn-primary btn-block mt-3">Login</button>
 							<div class="text-center pt-4 text-muted">
-								<a href="/customer/signup">계정등록</a>
+								<a href="/emp/addEmp">계정등록</a>
 							</div>
 						</form>
 					</div>
