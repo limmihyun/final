@@ -9,7 +9,11 @@ import com.tree.gdhealth.vo.CustomerAttendance;
 
 @Mapper
 public interface BranchMapper {
+	
 	List<Branch> branchInfo();
+	
+	Branch branchMemberCnt();
+	
 	CustomerAttendance attendanceInfo(Branch branch);
 	
 }

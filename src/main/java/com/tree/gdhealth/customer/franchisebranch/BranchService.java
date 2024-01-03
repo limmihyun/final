@@ -19,6 +19,10 @@ public class BranchService {
 		List<Branch> branch = branchMapper.branchInfo();
 		return branch;
 	}
+	public Branch branchMemberCnt() {
+		Branch branch = branchMapper.branchMemberCnt();
+		return branch;
+	}
 	
 	// 지점 정보, 혼잡도
 	public CustomerAttendance attendanceInfo(Branch branch) {

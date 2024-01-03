@@ -21,6 +21,7 @@ public class Branch {
     private String branchAddress;
     private Boolean isHeadOffice; // -> branch.branch_level
     private Boolean isActive; // -> branch.branch_active
+    private Integer count;
     private LocalDateTime createdate;
     private LocalDateTime updatedate;
 

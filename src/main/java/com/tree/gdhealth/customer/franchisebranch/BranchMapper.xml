@@ -11,6 +11,12 @@
 	FROM branch
 	WHERE branch_level != 1 AND branch_active = 'Y'
 	</select>
+	<select id="branchMemberCnt" parameterType="com.tree.gdhealth.vo.Branch" resultType="com.tree.gdhealth.vo.Branch">
+	SELECT
+		count(*) count
+	FROM customer_attendance
+	WHERE customer_attendance_exit_time IS null
+	</select>
 	
 	<select id="attendanceInfo" parameterType="com.tree.gdhealth.vo.Branch" resultType="com.tree.gdhealth.vo.CustomerAttendance">
 	SELECT

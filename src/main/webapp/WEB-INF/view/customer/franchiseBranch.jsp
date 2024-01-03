@@ -150,7 +150,7 @@
                         <div class="counter-icon">
                             
                         </div>
-                        <span id="memberCount" class="m-counter">561</span>
+                        <span id="memberCount" class="m-counter">${cnt.count}</span>
                         <p>Members</p>
                     </div>
                 </div>
@@ -166,9 +166,8 @@
                 <div class="col-lg-3 col-md-6">
                     <div class="milestone-counter">
                         <div class="counter-icon">
-                            
                         </div>
-                        <span id="congestion">full</span>
+                        <span id="congestion">5</span>
                         <p>혼잡도 레벨</p>
                     </div>
                 </div>
@@ -192,9 +191,9 @@
                 <div class="col-lg-3 col-md-6">
                     <div class="single-loader">
                         <div class="loader-circle-wrap">
-                            <div class="circle-progress" data-cpid="id-1" data-cpvalue="150" data-cpcolor="#233ede"></div>
+                            <div id="congestionGraph" class="circle-progress" data-cpid="id-1" data-cpvalue="${cnt.count}" data-cpcolor="#233ede"></div>
                         </div>
-                        <span>Morbi auctor lacus</span>
+                        <span>혼잡도</span>
                     </div>
                 </div>
                 <div class="col-lg-3 col-md-6">
@@ -307,7 +306,31 @@ Copyright &copy;<script>document.write(new Date().getFullYear());</script> All r
     <script src="/js/jquery.barfiller.js"></script>
     <script src="/js/main.js"></script>
 </body>
+<script>
+    // 페이지 로드 후 실행되는 JavaScript 코드
+    document.addEventListener('DOMContentLoaded', function() {
+        // cnt.count의 값을 가져와서 숫자에 따라 span 내용을 변경
+        var cntCount = ${cnt.count};
 
+        // 변경된 숫자를 설정할 요소
+        var congestionSpan = document.getElementById('congestion');
+
+
+   		// cnt.count 값에 따라 내용 변경
+        if (cntCount < 200) {
+            congestionSpan.textContent = '1';
+        } else if (cntCount < 400) {
+            congestionSpan.textContent = '2';
+        } else if (cntCount < 700) {
+            congestionSpan.textContent = '3';
+        } else if (cntCount < 1000) {
+            congestionSpan.textContent = '4';
+        } else if (cntCount < 1300) {
+            congestionSpan.textContent = '5';
+        }
+
+    });
+</script>
 <script>
 function loadBranchDetails(branchNo) {
     // Ajax 호출

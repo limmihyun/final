@@ -20,8 +20,14 @@ public class BranchController {
 	
 	@GetMapping("/customer/franchiseBranch")
 	public String franchiseBranchPage(Model model, HttpSession session) {
+		// 지점리스트
 		List<Branch> branch = branchService.branchInfo();
 		model.addAttribute("branch", branch);
+		
+		// 전 지점 인원수
+		Branch cnt = branchService.branchMemberCnt();
+		model.addAttribute("cnt", cnt);
+		
 		System.out.println(branch.toString());
 		return "customer/franchiseBranch";
 	}
