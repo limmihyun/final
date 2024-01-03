@@ -2,7 +2,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.tree.gdhealth.headoffice.program.ProgramMapper">
 	
-	<insert id="insertProgram" parameterType="com.tree.gdhealth.vo.ProgramImg">
+	<insert id="insertProgram" parameterType="com.tree.gdhealth.vo.Program">
 		INSERT INTO program(
 			employee_no,
 			program_name,
@@ -13,6 +13,50 @@
 			#{programName},
 			#{programDetail},
 			#{programMaxCustomer}
+		)
+		<selectKey resultType="int" keyProperty="programNo" order="AFTER">
+      		  SELECT LAST_INSERT_ID()
+   		</selectKey> 
+	</insert>
+	
+	<insert id="insertProgramDate" parameterType="com.tree.gdhealth.vo.ProgramDate">
+		INSERT INTO program_date(
+			program_no,
+			program_date
+		) VALUES (
+			#{programNo},
+			#{programDate}
+		)
+		<selectKey resultType="int" keyProperty="programDateNo" order="AFTER">
+      		  SELECT LAST_INSERT_ID()
+   		</selectKey> 
+	</insert>
+	
+	<insert id="insertProgramManager" parameterType="com.tree.gdhealth.vo.ProgramManager">
+		INSERT INTO program_manager(
+			program_date_no,
+			program_no,
+			employee_no
+		) VALUES (
+			#{programDateNo},
+			#{programNo},
+			#{employeeNo}
+		)
+	</insert>
+	
+	<insert id="insertProgramImg" parameterType="com.tree.gdhealth.vo.ProgramImg">
+		INSERT INTO program_img(
+			program_no,
+			program_img_origin,
+			program_img_file,
+			program_img_size,
+			program_img_type
+		) VALUES (
+			#{programNo},
+			#{originName},
+			#{filename},
+			#{programImgSize},
+			#{programImgType}
 		)
 	</insert>
 	

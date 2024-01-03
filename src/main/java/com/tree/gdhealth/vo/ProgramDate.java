@@ -3,11 +3,12 @@ package com.tree.gdhealth.vo;
 import lombok.Data;
 
 @Data
-public class programDate {
+public class ProgramDate {
 	
 	private int programDateNo;
 	private int programNo;
 	private String programDate;
 	private String createdate;
 	private String updatedate;
+
 }

@@ -1126,7 +1126,7 @@
                                                         <div class="row">
                                                             <div class="col-lg-12">
                                                                 <div class="payment-adress">
-                                                                    <button type="button" class="btn btn-primary waves-effect waves-light" id="insertBtn">추가</button>
+                                                                    <button type="button" class="btn btn-primary waves-effect waves-light" id="insertBtn">추가하기</button>
                                                                 </div>
                                                             </div>
                                                         </div>

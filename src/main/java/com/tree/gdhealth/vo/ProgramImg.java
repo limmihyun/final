@@ -7,9 +7,9 @@ public class ProgramImg {
 
 	private int programImgNo;
 	private int programNo;
-	private String programImgOrigin;
-	private String programImgFile;
-	private String programImgSize;
+	private String originName;
+	private String filename;
+	private long programImgSize;
 	private String programImgType;
 	private String createdate;
 	private String updatedate;

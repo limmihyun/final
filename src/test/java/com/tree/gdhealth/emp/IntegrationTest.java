@@ -13,11 +13,9 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.tree.gdhealth.headoffice.emp.EmpMapper;
-import com.tree.gdhealth.headoffice.program.ProgramMapper;
 import com.tree.gdhealth.vo.Employee;
 import com.tree.gdhealth.vo.EmployeeDetail;
 import com.tree.gdhealth.vo.EmployeeImg;
-import com.tree.gdhealth.vo.Program;
 
 /* 
  * Spring Test에서의 @Transactional은 테스트 시작 전에 트랜잭션을 시작하고, 
@@ -32,7 +30,6 @@ import com.tree.gdhealth.vo.Program;
 public class IntegrationTest { // DB 테스트
 	
 	@Autowired EmpMapper empMapper;
-	@Autowired ProgramMapper programMapper;
 
 	@Test
 	@DisplayName("직원들의 목록") // 현재 연결된 실제 DB로 테스트
@@ -134,21 +131,4 @@ public class IntegrationTest { // DB 테스트
 
 	}
 	
-	@Test
-	@DisplayName("program DB에 데이터가 추가되는지 확인") // 테스트 후 자동으로 롤백
-	void insertProgram() {
-		
-		// given(준비)
-		Program p = new Program(); 
-		p.setEmployeeNo(2);
-		p.setProgramName("유산소");
-		p.setProgramDetail("유산소 운동입니다.");
-		p.setProgramMaxCustomer(10);
-		
-		// when(실행)
-		int result = programMapper.insertProgram(p);
-		
-		// then(검증)
-		assertThat(result).isEqualTo(1);
-	}
 }

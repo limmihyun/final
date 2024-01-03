@@ -1047,53 +1047,49 @@
             <!-- Mobile Menu end -->
         </div>
         
-        <!-- 직원 추가 화면 start--> 	
-            
-	            
-		<form id="insertForm" method="post" action="${pageContext.request.contextPath}/program/addProgram">
+        <!-- 프로그램 추가 화면 start--> 	          
+		<form id="insertForm" method="post" 
+					action="${pageContext.request.contextPath}/program/addProgram"
+					enctype="multipart/form-data">
 			
 			<div class="row" id="font" style="padding:15px;">
 			
-				<div class="col-lg-3 col-md-2 col-sm-1 col-xs-12 mt-3"></div>	
-				<div class="col-lg-6 col-md-8 col-sm-10 col-xs-12 mt-3">
-					<h3>프로그램 추가하기</h3>
-					<div class="mb-3 mt-3">
+				<div class="col-lg-3 col-md-2 col-sm-1 col-xs-12"></div>	
+				<div class="col-lg-6 col-md-8 col-sm-10 col-xs-12">	
+					<div style="margin-bottom:10px;">
 						<label for="programName" class="form-label">프로그램 제목</label>
 					    <input type="text" class="form-control" id="programName" name="programName" placeholder="입력하기">
 					</div>
-					<div class="mb-3 mt-3">
+					<div>
 						<label for="programDetail" class="form-label">프로그램 내용</label>
 						<textarea name="programDetail" id="programDetail" class="form-control" rows="15" maxlength="1000" style="resize:none; margin-bottom:10px;" placeholder="입력하기"></textarea>			
 					</div>
-		 		
-				
+		 			
+		 			<div class="row" style="margin-bottom:10px;">
+			 			<div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+							<label for="programMaxCustomer" class="form-label">수용 인원</label>
+							<input type="text" class="form-control" id="programMaxCustomer" name="programMaxCustomer" placeholder="입력하기">
+						</div>
+						<div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+							<label for="programDate" class="form-label">개설 날짜</label>
+							<input type="text" class="form-control" id="programDate" name="programDate" placeholder="예) 1996-12-02">
+						</div>
+		 			</div>
 					
-					<div class="mb-3 mt-3">
-						<label for="programMaxCustomer" class="form-label">수용 인원</label>
-						<input type="text" class="form-control" id="programMaxCustomer" name="programMaxCustomer" placeholder="입력하기">
-					</div>
-					<div class="mb-3 mt-3">
-						<label for="programDate" class="form-label">개설 날짜</label>
-						<input type="date" class="form-control" id="programDate" name="programDate">
-					</div>
-					
-					
-					
-					
-					
-					<div class="mb-3 mt-3">
-						<label for="programDate" class="form-label">프로그램 이미지</label>
-						<input type="file" class="form-control" id="programImg" name="programImg">
+					<div>
+						<label for="programFile" class="form-label">프로그램 이미지</label>
+						<input type="file" class="form-control" id="programFile" name="programFile">
 					</div>
 				
-					<div class="d-flex">
-						<button type="button" class="btn btn-dark" id="insertBtn" style="margin-top:15px; margin-left:auto;">추가하기</button>
+					<div style="text-align:center;">
+						<button type="button" class="btn btn-primary" id="insertBtn" style="margin-top:15px;">추가하기</button>
 					</div>	
 				</div>
-				<div class="col-lg-3 col-md-2 col-sm-1 col-xs-12 mt-3"></div>
+				
+				<div class="col-lg-3 col-md-2 col-sm-1 col-xs-12"></div>
 			 </div>			
 		</form>           
-        <!-- 직원 추가 화면 end-->
+        <!-- 프로그램 추가 화면 end-->
         
     </div>
 
@@ -1171,7 +1167,7 @@
 	$('#insertBtn').click(function(){
 		
 		
-		alert('가입이 완료되었습니다.');
+		alert('추가 완료되었습니다.');
 		$('#insertForm').submit();
 	});
 </script>
