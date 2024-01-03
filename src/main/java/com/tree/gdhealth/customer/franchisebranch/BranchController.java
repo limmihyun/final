@@ -26,6 +26,8 @@ public class BranchController {
 		
 		// 전 지점 인원수
 		Branch cnt = branchService.branchMemberCnt();
+		// 인원수 임의로 값 넣기 
+		// cnt.setCount(1000);
 		model.addAttribute("cnt", cnt);
 		
 		System.out.println(branch.toString());
@@ -34,8 +36,8 @@ public class BranchController {
 	
 	@ResponseBody
 	@PostMapping("/customer/branchCk")
-	public CustomerAttendance attendanceInfo(Branch branch) {
-		CustomerAttendance data = branchService.attendanceInfo(branch);
+	public Branch branchInfoOne(Branch branch) {
+		Branch data = branchService.branchInfoOne(branch);
 		return data;
 	}
 }

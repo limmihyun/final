@@ -46,7 +46,7 @@
                         <h2>지점</h2>
                         <div class="links">
                             <a href="/customer/home">Home</a>
-                            <a href="#" class="rt-breadcrumb"></a>
+                            
                         </div>
                     </div>
                 </div>
@@ -58,20 +58,9 @@
     <section class="element-section">
         <div class="container">
             <div class="row">
-                <div class="col-lg-12">
-                    <div class="button-elem">
-                        <h2>Buttons</h2>
-                        <a href="#" class="primary-btn">Send Message1</a>
-                        <a href="#" class="primary-btn b-btn">Send Message2</a>
-                        <a href="#" class="primary-btn border-btn">Send Message3</a>
-                        <a href="#" class="primary-btn sky-btn">Send Message4</a>
-                    </div>
-                </div>
-            </div>
-            <div class="row">
                 <div class="col-lg-6">
                     <div class="accordin-elem">
-                        <h2>Accordions & Tabs</h2>
+                        <h2>franchise branch</h2>
                         <div class="accordion" id="accordionExample">
                             <div class="card">
                                 <div class="card-heading">
@@ -225,7 +214,7 @@
             <div class="row">
                 <div class="col-lg-12">
                     <div class="icon-box-title">
-                        <h2>Icon Boxes</h2>
+                        <h2>INFOMATION</h2>
                     </div>
                 </div>
                 <div class="col-lg-4">
@@ -233,8 +222,8 @@
                         <div class="single-icon-box-img">
                             
                         </div>
-                        <h5>Amazing Setting</h5>
-                        <p>Pellentesque dictum nisl in nibh dictum volutpat nec a quam. Vivamus suscipit nisl quis nulla
+                        <h5>TEL</h5>
+                        <p id="branchTel">Pellentesque dictum nisl in nibh dictum volutpat nec a quam. Vivamus suscipit nisl quis nulla
                             pretium, vitae ornare leo.</p>
                     </div>
                 </div>
@@ -243,8 +232,8 @@
                         <div class="single-icon-box-img">
                         
                         </div>
-                        <h5>Best Trainers</h5>
-                        <p>Pellentesque dictum nisl in nibh dictum volutpat nec a quam. Vivamus suscipit nisl quis nulla
+                        <h5>ADDRESS</h5>
+                        <p id="branchAddress">Pellentesque dictum nisl in nibh dictum volutpat nec a quam. Vivamus suscipit nisl quis nulla
                             pretium, vitae ornare leo.</p>
                     </div>
                 </div>
@@ -327,7 +316,9 @@ Copyright &copy;<script>document.write(new Date().getFullYear());</script> All r
             congestionSpan.textContent = '4';
         } else if (cntCount < 1300) {
             congestionSpan.textContent = '5';
-        }
+        } else {
+            congestionSpan.textContent = 'full';
+        } 
 
     });
 </script>
@@ -341,16 +332,15 @@ function loadBranchDetails(branchNo) {
         success: function(response) {
             // 받아온 값으로 memberCount 업데이트
             $('#memberCount').html(response.count);
+            $('#branchTel').html(response.branchTel);
+            $('#branchAddress').html(response.branchAddress);
 
-            // m-counter 클래스에 애니메이션 효과 추가
-            $('#memberCount').addClass('m-counter');
 
-            // Congestion 표시 업데이트
+            // Congestion 업데이트
             updateCongestion(response.count);
 
         },
         error: function(xhr, status, error) {
-            // Ajax 통신이 실패하면 이 부분에서 에러 처리를 수행합니다.
             console.error(xhr.responseText);
         }
     });
@@ -377,10 +367,6 @@ function updateCongestion(count) {
     // Congestion 업데이트
     $('#congestion').html(congestionLevel);
 }
-//memberCount 값이 변경될 때 m-counter-animation 클래스 제거
-$('#memberCount').on('DOMSubtreeModified', function() {
-    $(this).removeClass('m-counter');
-});
 
 
 </script>

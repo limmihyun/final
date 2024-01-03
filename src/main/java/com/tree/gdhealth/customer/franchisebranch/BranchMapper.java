@@ -14,6 +14,6 @@ public interface BranchMapper {
 	
 	Branch branchMemberCnt();
 	
-	CustomerAttendance attendanceInfo(Branch branch);
+	Branch branchInfoOne(Branch branch);
 	
 }

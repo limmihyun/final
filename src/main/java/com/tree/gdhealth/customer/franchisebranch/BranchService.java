@@ -25,8 +25,8 @@ public class BranchService {
 	}
 	
 	// 지점 정보, 혼잡도
-	public CustomerAttendance attendanceInfo(Branch branch) {
-		CustomerAttendance data = branchMapper.attendanceInfo(branch);
+	public Branch branchInfoOne(Branch branch) {
+		Branch data = branchMapper.branchInfoOne(branch);
 		System.out.println(data.getCount());
 		return data;
 	}
