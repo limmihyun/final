@@ -1081,7 +1081,7 @@
         <div class="contacts-area mg-b-15">
             <div class="container-fluid">   
             
-               	<!-- 회원 list start -->
+               	<!--------------------- 회원 list start-------------------------->
                	<c:set var="cnt" value="0"></c:set>          		  			
   				<c:forEach var="m" items="${empList}">
 	   			    <c:set var="cnt" value="${cnt + 1}"></c:set>
@@ -1113,9 +1113,9 @@
 	   			  	 	</div>
 	   			    </c:if>
            		</c:forEach>           		
-                <!-- 회원 list end -->      
+                <!--------------------- 회원 list end-------------------------->      
             </div>         
-           		<!------------- 페이징 start ---------------->     
+           		<!--------------------- 페이징 start ----------------------------------->     
             <div style="text-align:center;">       	
 	             <ul class="pagination">
 	             
@@ -1144,7 +1144,7 @@
 					  <li class="page-item"><a class="page-link" href="${pageContext.request.contextPath}/emp?page=${lastPage}">끝</a></li>
 				</ul>	  
             </div>
-               <!------------- 페이징 end ---------------->        		    
+               <!----------------------- 페이징 end ---------------------------->       		    
         </div>
     </div>
 

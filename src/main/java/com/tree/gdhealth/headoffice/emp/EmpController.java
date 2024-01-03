@@ -30,14 +30,17 @@ public class EmpController {
 	@GetMapping("/emp")
 	public String emp(Model model, @RequestParam(defaultValue = "1") int page) {
 			
-		// 직원수
-		int employeeCnt = empService.getEmployeeCnt(); 
+		// 전체 직원 수
+		int employeeCnt = empService.getEmployeeCnt();
+		// 디버깅
+		log.debug("전체 직원 수 : " + employeeCnt);
 		
 		Paging paging = new Paging();
-		paging.setNum(page);
-		paging.setCnt(employeeCnt);
+		paging.setRowPerPage(8); // 한 페이지에 나타낼 직원 수
+		paging.setCurrentPage(page); // 현재 페이지
+		paging.setCnt(employeeCnt); // 전체 직원 수
 		
-		List<Map<String, Object>> empList = empService.getEmployeeList(paging.getDisplayPost(), paging.getPostNum());
+		List<Map<String, Object>> empList = empService.getEmployeeList(paging.getBeginRow(), paging.getRowPerPage());
 		
 		model.addAttribute("empList", empList);   
 		model.addAttribute("lastPage", paging.getLastPage());

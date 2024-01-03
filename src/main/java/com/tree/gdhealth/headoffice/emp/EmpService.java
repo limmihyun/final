@@ -27,11 +27,11 @@ public class EmpService {
 	// DI
 	private final EmpMapper empMapper;
 	
-	public List<Map<String, Object>> getEmployeeList(int displayPost, int postNum) {
+	public List<Map<String, Object>> getEmployeeList(int beginRow, int rowPerPage) {
 		
-		Map<String, Integer> map = new HashMap<>();
-		map.put("displayPost", displayPost);
-		map.put("postNum", postNum);
+		Map<String, Object> map = new HashMap<>();
+		map.put("beginRow", beginRow);
+		map.put("rowPerPage", rowPerPage);
 		
 		List<Map<String, Object>> employeeList = empMapper.employeeList(map);
 		

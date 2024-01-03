@@ -1072,183 +1072,70 @@
             </div>
         </div>
         
-        
+        <!--------------------- 프로그램 list start-------------------------->
         <div class="courses-area">
             <div class="container-fluid">
                 <div class="row">
-                    <div class="col-lg-3 col-md-6 col-sm-6 col-xs-12">
-                        <div class="courses-inner res-mg-b-30">
-                            <div class="courses-title">
-                                <a href="#"><img src="/admin/img/courses/1.jpg" alt=""></a>
-                                <h2>Apps Development</h2>
-                            </div>
-                            <div class="courses-alaltic">
-                                <span class="cr-ic-r"><span class="course-icon"><i class="fa fa-clock"></i></span> 1 Year</span>
-                                <span class="cr-ic-r"><span class="course-icon"><i class="fa fa-heart"></i></span> 50</span>
-                                <span class="cr-ic-r"><span class="course-icon"><i class="fa fa-dollar"></i></span> 500</span>
-                            </div>
-                            <div class="course-des">
-                                <p><span><i class="fa fa-clock"></i></span> <b>Duration:</b> 6 Months</p>
-                                <p><span><i class="fa fa-clock"></i></span> <b>Professor:</b> Jane Doe</p>
-                                <p><span><i class="fa fa-clock"></i></span> <b>Students:</b> 100+</p>
-                            </div>
-                            <div class="product-buttons">
-                                <button type="button" class="button-default cart-btn">Read More</button>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-3 col-md-6 col-sm-6 col-xs-12">
-                        <div class="courses-inner">
-                            <div class="courses-title">
-                                <a href="#"><img src="/admin/img/courses/2.jpg" alt=""></a>
-                                <h2>Illustrator CC 2018</h2>
-                            </div>
-                            <div class="courses-alaltic">
-                                <span class="cr-ic-r"><span class="course-icon"><i class="fa fa-clock"></i></span> 1 Year</span>
-                                <span class="cr-ic-r"><span class="course-icon"><i class="fa fa-heart"></i></span> 50</span>
-                                <span class="cr-ic-r"><span class="course-icon"><i class="fa fa-dollar"></i></span> 500</span>
-                            </div>
-                            <div class="course-des">
-                                <p><span><i class="fa fa-clock"></i></span> <b>Duration:</b> 6 Months</p>
-                                <p><span><i class="fa fa-clock"></i></span> <b>Professor:</b> Jane Doe</p>
-                                <p><span><i class="fa fa-clock"></i></span> <b>Students:</b> 100+</p>
-                            </div>
-                            <div class="product-buttons">
-                                <button type="button" class="button-default cart-btn">Read More</button>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-3 col-md-6 col-sm-6 col-xs-12">
-                        <div class="courses-inner res-mg-t-30 dk-res-t-pro-30">
-                            <div class="courses-title">
-                                <a href="#"><img src="/admin/img/courses/3.jpg" alt=""></a>
-                                <h2>Indesign cs6 2018</h2>
-                            </div>
-                            <div class="courses-alaltic">
-                                <span class="cr-ic-r"><span class="course-icon"><i class="fa fa-clock"></i></span> 1 Year</span>
-                                <span class="cr-ic-r"><span class="course-icon"><i class="fa fa-heart"></i></span> 50</span>
-                                <span class="cr-ic-r"><span class="course-icon"><i class="fa fa-dollar"></i></span> 500</span>
-                            </div>
-                            <div class="course-des">
-                                <p><span><i class="fa fa-clock"></i></span> <b>Duration:</b> 6 Months</p>
-                                <p><span><i class="fa fa-clock"></i></span> <b>Professor:</b> Jane Doe</p>
-                                <p><span><i class="fa fa-clock"></i></span> <b>Students:</b> 100+</p>
-                            </div>
-                            <div class="product-buttons">
-                                <button type="button" class="button-default cart-btn">Read More</button>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-3 col-md-6 col-sm-6 col-xs-12">
-                        <div class="courses-inner res-mg-t-30 dk-res-t-pro-30">
-                            <div class="courses-title">
-                                <a href="#"><img src="/admin/img/courses/1.jpg" alt=""></a>
-                                <h2>Web Development</h2>
-                            </div>
-                            <div class="courses-alaltic">
-                                <span class="cr-ic-r"><span class="course-icon"><i class="fa fa-clock"></i></span> 1 Year</span>
-                                <span class="cr-ic-r"><span class="course-icon"><i class="fa fa-heart"></i></span> 50</span>
-                                <span class="cr-ic-r"><span class="course-icon"><i class="fa fa-dollar"></i></span> 500</span>
-                            </div>
-                            <div class="course-des">
-                                <p><span><i class="fa fa-clock"></i></span> <b>Duration:</b> 6 Months</p>
-                                <p><span><i class="fa fa-clock"></i></span> <b>Professor:</b> Jane Doe</p>
-                                <p><span><i class="fa fa-clock"></i></span> <b>Students:</b> 100+</p>
-                            </div>
-                            <div class="product-buttons">
-                                <button type="button" class="button-default cart-btn">Read More</button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="row mg-b-15">
-                    <div class="col-lg-3 col-md-6 col-sm-6 col-xs-12">
-                        <div class="courses-inner mg-t-30">
-                            <div class="courses-title">
-                                <a href="#"><img src="/admin/img/courses/1.jpg" alt=""></a>
-                                <h2>Apps Development</h2>
-                            </div>
-                            <div class="courses-alaltic">
-                                <span class="cr-ic-r"><span class="course-icon"><i class="fa fa-clock"></i></span> 1 Year</span>
-                                <span class="cr-ic-r"><span class="course-icon"><i class="fa fa-heart"></i></span> 50</span>
-                                <span class="cr-ic-r"><span class="course-icon"><i class="fa fa-dollar"></i></span> 500</span>
-                            </div>
-                            <div class="course-des">
-                                <p><span><i class="fa fa-clock"></i></span> <b>Duration:</b> 6 Months</p>
-                                <p><span><i class="fa fa-clock"></i></span> <b>Professor:</b> Jane Doe</p>
-                                <p><span><i class="fa fa-clock"></i></span> <b>Students:</b> 100+</p>
-                            </div>
-                            <div class="product-buttons">
-                                <button type="button" class="button-default cart-btn">Read More</button>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-3 col-md-6 col-sm-6 col-xs-12">
-                        <div class="courses-inner mg-t-30">
-                            <div class="courses-title">
-                                <a href="#"><img src="/admin/img/courses/2.jpg" alt=""></a>
-                                <h2>Illustrator CC 2018</h2>
-                            </div>
-                            <div class="courses-alaltic">
-                                <span class="cr-ic-r"><span class="course-icon"><i class="fa fa-clock"></i></span> 1 Year</span>
-                                <span class="cr-ic-r"><span class="course-icon"><i class="fa fa-heart"></i></span> 50</span>
-                                <span class="cr-ic-r"><span class="course-icon"><i class="fa fa-dollar"></i></span> 500</span>
-                            </div>
-                            <div class="course-des">
-                                <p><span><i class="fa fa-clock"></i></span> <b>Duration:</b> 6 Months</p>
-                                <p><span><i class="fa fa-clock"></i></span> <b>Professor:</b> Jane Doe</p>
-                                <p><span><i class="fa fa-clock"></i></span> <b>Students:</b> 100+</p>
-                            </div>
-                            <div class="product-buttons">
-                                <button type="button" class="button-default cart-btn">Read More</button>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-3 col-md-6 col-sm-6 col-xs-12">
-                        <div class="courses-inner mg-t-30">
-                            <div class="courses-title">
-                                <a href="#"><img src="/admin/img/courses/3.jpg" alt=""></a>
-                                <h2>Indesign cs6 2018</h2>
-                            </div>
-                            <div class="courses-alaltic">
-                                <span class="cr-ic-r"><span class="course-icon"><i class="fa fa-clock"></i></span> 1 Year</span>
-                                <span class="cr-ic-r"><span class="course-icon"><i class="fa fa-heart"></i></span> 50</span>
-                                <span class="cr-ic-r"><span class="course-icon"><i class="fa fa-dollar"></i></span> 500</span>
-                            </div>
-                            <div class="course-des">
-                                <p><span><i class="fa fa-clock"></i></span> <b>Duration:</b> 6 Months</p>
-                                <p><span><i class="fa fa-clock"></i></span> <b>Professor:</b> Jane Doe</p>
-                                <p><span><i class="fa fa-clock"></i></span> <b>Students:</b> 100+</p>
-                            </div>
-                            <div class="product-buttons">
-                                <button type="button" class="button-default cart-btn">Read More</button>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-3 col-md-6 col-sm-6 col-xs-12">
-                        <div class="courses-inner mg-t-30">
-                            <div class="courses-title">
-                                <a href="#"><img src="/admin/img/courses/1.jpg" alt=""></a>
-                                <h2>Web Development</h2>
-                            </div>
-                            <div class="courses-alaltic">
-                                <span class="cr-ic-r"><span class="course-icon"><i class="fa fa-clock"></i></span> 1 Year</span>
-                                <span class="cr-ic-r"><span class="course-icon"><i class="fa fa-heart"></i></span> 50</span>
-                                <span class="cr-ic-r"><span class="course-icon"><i class="fa fa-dollar"></i></span> 500</span>
-                            </div>
-                            <div class="course-des">
-                                <p><span><i class="fa fa-clock"></i></span> <b>Duration:</b> 6 Months</p>
-                                <p><span><i class="fa fa-clock"></i></span> <b>Professor:</b> Jane Doe</p>
-                                <p><span><i class="fa fa-clock"></i></span> <b>Students:</b> 100+</p>
-                            </div>
-                            <div class="product-buttons">
-                                <button type="button" class="button-default cart-btn">Read More</button>
-                            </div>
-                        </div>
-                    </div>
+                
+                	<c:forEach var="m" items="${programList}">
+                	
+                		<div class="col-lg-3 col-md-6 col-sm-6 col-xs-12">
+	                        <div class="courses-inner res-mg-b-30">
+	                            <div class="courses-title">
+	                                <a href="#"><img src="${pageContext.request.contextPath}/upload/program/${m.filename}" alt=""></a>
+	                                <h2>${m.programName}</h2>
+	                            </div>
+	                          
+	                            <div class="course-des">
+	                                <p><span><i class="fa fa-clock"></i></span> <b>개설 날짜 :</b> ${m.programDate}</p>
+	                                <p><span><i class="fa fa-clock"></i></span> <b>트레이너 :</b> ${m.empName}</p>
+	                                <p><span><i class="fa fa-clock"></i></span> <b>수용 인원 :</b> ${m.maxCustomer}</p>
+	                            </div>
+	                            <div class="product-buttons">
+	                                <button type="button" class="button-default cart-btn">자세히 보기</button>
+	                            </div>
+	                        </div>
+                   	    </div>
+                	
+                	</c:forEach>
+   
                 </div>
             </div>
         </div>
+        <!--------------------- 프로그램 list start-------------------------->
+        
+        <!--------------------- 페이징 start -----------------------------------> 
+        <div style="text-align:center;">       	
+             <ul class="pagination">
+             
+             	  <li class="page-item">
+             	  	<a class="page-link" href="${pageContext.request.contextPath}/program?page=1">처음</a>
+             	  </li>	
+				  
+				  <c:if test="${prev}">
+				  	<li class="page-item"><a class="page-link" href="${pageContext.request.contextPath}/program?page=${startPageNum - 1}">이전</a></li>
+				  </c:if>
+				  <c:forEach begin="${startPageNum}" end="${endPageNum}" var="pageNum">
+				  	<c:if test="${pageNum == currentPage}"> <!-- 페이징 버튼 색 변경o --> 
+				  		<li class="page-item active">
+					  		<a class="page-link" href="${pageContext.request.contextPath}/program?page=${pageNum}">${pageNum}</a>
+					  	</li>
+				  	</c:if>
+				  	<c:if test="${pageNum != currentPage}"> <!-- 페이징 버튼 색 변경x --> 
+				  		<li class="page-item">
+					  		<a class="page-link" href="${pageContext.request.contextPath}/program?page=${pageNum}">${pageNum}</a>
+					  	</li>
+				  	</c:if>
+				  </c:forEach>
+				  <c:if test="${next}">
+				  	<li class="page-item"><a class="page-link" href="${pageContext.request.contextPath}/program?page=${endPageNum + 1}">다음</a></li>
+				  </c:if>	  
+				  <li class="page-item"><a class="page-link" href="${pageContext.request.contextPath}/program?page=${lastPage}">끝</a></li>
+			</ul>	  
+        </div>
+        <!----------------------- 페이징 end ---------------------------->
+            
+        
     </div>
 
     <!-- jquery

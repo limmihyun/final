@@ -18,7 +18,7 @@
 			ON ed.employee_no = e.employee_no
 		INNER JOIN employee_img ei
 			ON ei.employee_no = e.employee_no
-		LIMIT #{displayPost}, #{postNum}
+		LIMIT #{beginRow}, #{rowPerPage}
 	</select>	
 	
 	<select id="employeeCnt" resultType="int">

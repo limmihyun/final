@@ -2,6 +2,9 @@ package com.tree.gdhealth.headoffice.program;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 import java.util.UUID;
 
 import org.springframework.stereotype.Service;
@@ -25,12 +28,33 @@ public class ProgramService {
 	// DI
 	private final ProgramMapper programMapper;
 	
+	public List<Map<String, Object>> getProgramList(int beginRow, int rowPerPage) {
+		
+		Map<String, Object> map = new HashMap<>();
+		map.put("beginRow", beginRow);
+		map.put("rowPerPage", rowPerPage);
+		
+		List<Map<String, Object>> programList = programMapper.programList(map);
+		
+		return programList;
+		
+	}
+	
+	public int getProgramCnt() {
+		
+		int programCnt = programMapper.programCnt();
+		// 디버깅 
+		log.debug("전체 프로그램 수 : " + programCnt);
+		
+		return programCnt;
+	}
+	
 	public void insertProgram(Program program, ProgramDate programDate,
 							ProgramManager programManager, MultipartFile programFile,
 									String path) {
 		
 		/////////////////// 로그인 기능 구현 전 임시 코드 start//////////////////////////
-		program.setEmployeeNo(7);
+		program.setEmployeeNo(1);
 		/////////////////// 로그인 기능 구현 전 임시 코드 end////////////////////////////
 		
 		int result = programMapper.insertProgram(program);
@@ -54,9 +78,11 @@ public class ProgramService {
 		// programMapper.xml에서 selectKey로 얻어 온 program_date table의 auto increment 값
 		programManager.setProgramDateNo(programDate.getProgramDateNo());
 		programManager.setProgramNo(program.getProgramNo());
+		
 		/////////////////// 로그인 기능 구현 전 임시 코드 start//////////////////////////
-		programManager.setEmployeeNo(7);
+		programManager.setEmployeeNo(1);
 		/////////////////// 로그인 기능 구현 전 임시 코드 end////////////////////////////
+		
 		int managerResult = programMapper.insertProgramManager(programManager);
 		// 디버깅
 		log.debug("programManager 추가(성공:1,실패:0) : " + managerResult);
