@@ -35,7 +35,7 @@ public class IntegrationTest { // DB 테스트
 	@DisplayName("직원들의 목록") // 현재 연결된 실제 DB로 테스트
 	void empListTest() {
 
-		Map<String, Integer> map = new HashMap<>();
+		Map<String, Object> map = new HashMap<>();
 		// given(준비)
 		map.put("displayPost", 0);
 		map.put("postNum", 8);
@@ -130,4 +130,5 @@ public class IntegrationTest { // DB 테스트
 		assertThat(result).isEqualTo(1);
 
 	}
+	
 }
