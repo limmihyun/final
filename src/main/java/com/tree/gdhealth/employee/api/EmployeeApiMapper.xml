@@ -39,7 +39,10 @@
 			e.employee_id employeeId,
 			e.employee_active employeeActive,
 			e.createdate,
-			e.updatedate
+			e.updatedate,
+			ed.employee_email employeeEmail,
+			ed.employee_gender employeeGender,
+			ed.employee_phone employeePhone
 		FROM employee e
 				 INNER JOIN employee_detail ed
 							ON e.employee_no = ed.employee_no

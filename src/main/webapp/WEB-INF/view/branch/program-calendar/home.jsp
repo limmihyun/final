@@ -188,6 +188,7 @@
 <!-- 본문 종료 -->
 <jsp:include page="/WEB-INF/view/branch/include/body-lower-layout.jsp"/>
 <script>
+    /*지점정보출력*/
     $.ajax({
         url: '/api/v1/branch/${calendar.branchNo}',
         type: 'GET',
