@@ -56,7 +56,7 @@
 							<div class="form-inline">
 								<input type="checkbox" id="checkId" name="checkId"> <label
 									for="remember" class="text-muted">Remember me</label> <a
-									href="#" id="forgot" class="font-weight-bold">비밀번호 찾기</a>
+									href="/customer/findPw" id="forgot" class="font-weight-bold">비밀번호 찾기</a>
 							</div>
 							<button type="submit" class="btn btn-primary btn-block mt-3">Login</button>
 							<div class="text-center pt-4 text-muted">

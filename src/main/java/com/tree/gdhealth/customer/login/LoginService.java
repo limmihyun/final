@@ -23,5 +23,24 @@ public class LoginService {
 		
 		return n;
 	}
+	
+	public int findPw(Customer customer) {
+		int n;
+		Integer customerFindPwResult = loginMapper.customerFindPwCk(customer);
+		if (customerFindPwResult == null || customerFindPwResult == 0) {
+			n = 0;
+			return n;
+		}
+		n = loginMapper.customerFindPwCk(customer);
+		
+		return n;
+	}
 
+	public int resetPw(Customer customer) {
+		System.out.println(customer.getCustomerPw());
+		System.out.println(customer.getCustomerNo());
+		int n = loginMapper.customerResetPw(customer);
+		return n;
+	}
+	
 }

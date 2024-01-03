@@ -7,4 +7,18 @@
 	FROM customer
 	WHERE customer_id = #{customerId} AND customer_active = 'Y' AND customer_pw = PASSWORD(#{customerPw})
 </select>
+<select id="customerFindPwCk" parameterType="com.tree.gdhealth.vo.Customer" resultType="INTEGER">
+	SELECT
+	c.customer_no
+	FROM customer c JOIN customer_detail d
+	ON c.customer_no = d.customer_no
+	WHERE c.customer_id = #{customerId} AND c.customer_active = 'Y' AND d.customer_birth = #{customerBirth}
+</select>
+
+<update id="customerResetPw" parameterType="com.tree.gdhealth.vo.Customer">
+	UPDATE customer
+	SET customer_pw = PASSWORD(#{customerPw})
+	WHERE customer_no = #{customerNo}
+</update>
+
 </mapper>
