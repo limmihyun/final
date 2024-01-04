@@ -111,11 +111,21 @@ public class ProgramController {
 	}
 	
 	@GetMapping("/program/deactive/{programNo}")
-	public String delete(HttpSession session, @PathVariable int programNo) {
+	public String deactive(HttpSession session, @PathVariable int programNo) {
 		
 		int result = programService.deactiveProgram(programNo);
 		// 디버깅
 		log.debug("프로그램 비활성화(성공:1,실패:0) : " + result);
+		
+		return "redirect:/program";
+	}
+	
+	@GetMapping("/program/active/{programNo}")
+	public String active(HttpSession session, @PathVariable int programNo) {
+		
+		int result = programService.activeProgram(programNo);
+		// 디버깅
+		log.debug("프로그램 활성화(성공:1,실패:0) : " + result);
 		
 		return "redirect:/program";
 	}

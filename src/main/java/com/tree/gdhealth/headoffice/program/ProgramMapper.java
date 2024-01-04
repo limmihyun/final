@@ -26,5 +26,6 @@ public interface ProgramMapper {
 	int updateProgramImg(ProgramImg programImg);
 	
 	int deactiveProgram(int programNo);
+	int activeProgram(int programNo);
 	
 }

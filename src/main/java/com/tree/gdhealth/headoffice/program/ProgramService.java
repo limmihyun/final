@@ -114,6 +114,15 @@ public class ProgramService {
 		return result;
 	}
 	
+	public int activeProgram(int programNo) {
+		
+		int result = programMapper.activeProgram(programNo);
+		// 디버깅
+		log.debug("프로그램 활성화(성공:1,실패:0) : " + result);
+		
+		return result;
+	}
+	
 	public void programImgSave(MultipartFile programFile, String path, int programNo) {
 		
 		ProgramImg img= new ProgramImg();

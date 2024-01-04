@@ -1069,6 +1069,7 @@
                                             <div class="details-blog-dt blog-sig-details-dt courses-info mobile-sm-d-n">
                                                 <span><i class="fa fa-heart"></i> <b>수용 인원 :</b> ${programOne.maxCustomer}</span>
                                                 <span><i class="fa fa-user"></i> <b>담당 본사 직원 :</b> ${programOne.empName}</span>
+                                                <span><i class="fa fa-heart"></i> <b>활성화 상태 :</b> ${programOne.active}</span>
                                             </div>
                                             <div style="text-align:center;">
 	                                             <h1>${programOne.programName}</h1>
@@ -1078,15 +1079,18 @@
                                         
                                         <div style="text-align:center;">                    	
                                         	<a href="${pageContext.request.contextPath}/program/update/${programOne.programNo}" class="btn btn-primary">수정하기</a>
-                                        	<a href="${pageContext.request.contextPath}/program/deactive/${programOne.programNo}" class="btn btn-primary">비활성화하기</a>                                 
+                                        	<c:if test="${programOne.active == 'Y'}">
+                                        		<a href="${pageContext.request.contextPath}/program/deactive/${programOne.programNo}" class="btn btn-primary">비활성화하기</a>
+                                        	</c:if>
+                                        	<c:if test="${programOne.active == 'N'}">
+                                        		<a href="${pageContext.request.contextPath}/program/active/${programOne.programNo}" class="btn btn-primary">활성화하기</a>
+                                        	</c:if>                                	                                 
                                         </div>                          
                                     </div>
                                 </div>
                             </div>                                      
                         </div>
-                        
-                        
-                        
+                             
                     </div>
                     <div class="col-lg-3 col-md-12 col-sm-12 col-xs-12"></div>
                 </div>
