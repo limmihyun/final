@@ -81,6 +81,39 @@ public class ProgramService {
 		
 	}
 	
+	public void updateProgram(Program program, MultipartFile programFile,
+			String path, String oldPath) {
+
+		int result = programMapper.updateProgram(program);
+		log.debug("프로그램 수정(성공:1,실패:0) : " + result);
+		if(result != 1) {
+			// insert를 실패하였을 때 강제로 예외를 발생시켜 애노테이션 Transactiona이 작동하도록 한다.
+			throw new RuntimeException();
+		}
+			
+		if(!programFile.isEmpty()) {
+		
+			// 기존 파일 삭제
+			File file = new File(oldPath);
+			boolean isDelete = file.delete();
+			// 디버깅
+			log.debug("기존 파일 삭제 여부 : " + isDelete);
+			
+			// 수정한 파일 저장
+			programImgUpdate(programFile, path, program.getProgramNo());
+		}
+	
+	}
+	
+	public int deactiveProgram(int programNo) {
+		
+		int result = programMapper.deactiveProgram(programNo);
+		// 디버깅
+		log.debug("프로그램 비활성화(성공:1,실패:0) : " + result);
+		
+		return result;
+	}
+	
 	public void programImgSave(MultipartFile programFile, String path, int programNo) {
 		
 		ProgramImg img= new ProgramImg();
@@ -115,29 +148,6 @@ public class ProgramService {
 			e.printStackTrace();
 			throw new RuntimeException();
 		}
-	}
-	
-	public void updateProgram(Program program, MultipartFile programFile,
-								String path, String oldPath) {
-		
-		int result = programMapper.updateProgram(program);
-		log.debug("프로그램 수정(성공:1,실패:0) : " + result);
-		if(result != 1) {
-			throw new RuntimeException();
-		}
-						
-		if(!programFile.isEmpty()) {
-			
-			// 기존 파일 삭제
-			File file = new File(oldPath);
-			boolean isDelete = file.delete();
-			// 디버깅
-			log.debug("기존 파일 삭제 여부 : " + isDelete);
-			
-			// 수정한 파일 저장
-			programImgUpdate(programFile, path, program.getProgramNo());
-		}
-		
 	}
 	
 	public void programImgUpdate(MultipartFile programFile, String path, int programNo) {

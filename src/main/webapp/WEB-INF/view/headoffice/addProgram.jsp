@@ -1071,16 +1071,11 @@
 							<input type="text" class="form-control" id="programMaxCustomer" name="programMaxCustomer" placeholder="입력하기">
 						</div>
 						<div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
-							<label for="programDate" class="form-label">개설 날짜</label>
-							<input type="text" class="form-control" id="programDate" name="programDate" placeholder="예) 1996-12-02">
+							<label for="programFile" class="form-label">프로그램 이미지</label>
+							<input type="file" class="form-control" id="programFile" name="programFile">
 						</div>
 		 			</div>
-					
-					<div>
-						<label for="programFile" class="form-label">프로그램 이미지</label>
-						<input type="file" class="form-control" id="programFile" name="programFile">
-					</div>
-				
+									
 					<div style="text-align:center;">
 						<button type="button" class="btn btn-primary" id="insertBtn" style="margin-top:15px;">추가하기</button>
 					</div>	
@@ -1195,24 +1190,7 @@
 			$('#programMaxCustomer').focus();			
 			return;
 		}	
-		
-		if($('#programDate').val().trim() == '') {
-			alert('개설 날짜를 입력하세요.');
-			$('#programDate').val('');	
-			$('#programDate').focus();			
-			return;
-		}
-		
-		// 날짜 형식의 유효성 검증
-		var format = /^(19[7-9][0-9]|20\d{2})-(0[0-9]|1[0-2])-(0[1-9]|[1-2][0-9]|3[0-1])$/;
-		
-		if (!format.test($('#programDate').val())) {
-			alert("개설 날짜의 형식을 올바르게 입력해주세요.");
-			$('#programDate').val('');	
-			$('#programDate').focus();
-			return;
-		}
-		
+				
 		if($('#programFile').val().length == 0) {
 			alert('프로그램 사진을 첨부하세요.');
 			$('#programFile').focus();

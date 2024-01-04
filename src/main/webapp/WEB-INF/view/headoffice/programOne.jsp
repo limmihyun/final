@@ -1078,7 +1078,7 @@
                                         
                                         <div style="text-align:center;">                    	
                                         	<a href="${pageContext.request.contextPath}/program/update/${programOne.programNo}" class="btn btn-primary">수정하기</a>
-                                        	<a href="#" class="btn btn-primary">삭제하기</a>                                 
+                                        	<a href="${pageContext.request.contextPath}/program/deactive/${programOne.programNo}" class="btn btn-primary">비활성화하기</a>                                 
                                         </div>                          
                                     </div>
                                 </div>

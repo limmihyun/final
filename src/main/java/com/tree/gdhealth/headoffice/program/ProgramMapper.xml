@@ -16,11 +16,13 @@
 			ON ed.employee_no = p.writer_employee_no
 		INNER JOIN program_img pi
 			ON p.program_no = pi.program_no
+		WHERE p.program_active = 'Y'
 		LIMIT #{beginRow}, #{rowPerPage}
 	</select>
 	<select id="programCnt" resultType="int">
 		SELECT COUNT(*)
 		FROM program
+		WHERE program_active = 'Y'
 	</select>
 	
 	<select id="programOne" parameterType="int" resultType="Map">
@@ -39,6 +41,7 @@
 		INNER JOIN program_img pi
 			ON p.program_no = pi.program_no
 		WHERE p.program_no = #{programNo}
+		AND p.program_active = 'Y'
 	</select>
 	
 	<insert id="insertProgram" parameterType="com.tree.gdhealth.vo.Program">
@@ -57,7 +60,6 @@
       		  SELECT LAST_INSERT_ID()
    		</selectKey> 
 	</insert>
-	
 	<insert id="insertProgramImg" parameterType="com.tree.gdhealth.vo.ProgramImg">
 		INSERT INTO program_img(
 			program_no,
@@ -81,8 +83,7 @@
 			program_detail = #{programDetail},
 			program_max_customer = #{programMaxCustomer}
 		WHERE program_no = #{programNo}
-	</update>
-	
+	</update>	
 	<update id="updateProgramImg" parameterType="com.tree.gdhealth.vo.ProgramImg">
 		UPDATE program_img
 		SET
@@ -93,4 +94,11 @@
 		WHERE program_no = #{programNo}
 	</update>
 	
+	<update id="deactiveProgram">
+		UPDATE program
+		SET
+			program_active = 'N'
+		WHERE program_no = #{programNo}
+	</update>
+		
 </mapper>

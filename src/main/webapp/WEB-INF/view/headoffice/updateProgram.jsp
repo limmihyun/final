@@ -1065,26 +1065,22 @@
 	                                   <div class="latest-blog-single blog-single-full-view">
 	                                        <div class="blog-details blog-sig-details">
 	                                        	<div class="blog-details" style="text-align:center;">
-	                                        		<h4>프로그램 이미지 변경</h4> <input type="file" name="programFile" style="display:block; margin:0 auto;">     
+                                        			<input type="file" name="programFile" style="display:block; margin:0 auto;">    
 	                                        	</div>
 	                                            <div class="details-blog-dt blog-sig-details-dt courses-info mobile-sm-d-n">
 	                                                <span>
-	                                                	<i class="fa fa-heart"></i> <b>수용 인원 :</b> <input type="text" value="${programOne.maxCustomer}" name="programMaxCustomer" style="width:60px;">
+	                                                	<i class="fa fa-heart"></i> <b>수용 인원 :</b> <input type="text" value="${programOne.maxCustomer}" name="programMaxCustomer" id="programMaxCustomer" style="width:60px;">
 	                                                </span>
 	                                            </div>
 	                                            <div style="text-align:center;">    
 	                                           		<h1>
-		                                             	<input type="text" value="${programOne.programName}" name="programName">
+		                                             	<input type="text" value="${programOne.programName}" id="programName" name="programName">
 		                                            </h1>
-	                            	 
-	                                             	<textarea style="resize:none; width:70%;" rows="15" name="programDetail">
-	                                             		${programOne.programDetail}
-	                                             	</textarea>                                                                                                                                 	                                          
+	                                             	<textarea style="resize:none; width:70%;" rows="15" name="programDetail" id="programDetail">${programOne.programDetail}</textarea>                                                                                                                                 	                                          
 	                                            </div>                          
 	                                        </div>
 	                                        <div style="text-align:center;">
-	                                        	<button class="btn btn-primary">수정하기</button>                  	
-	                                                                      
+	                                        	<button type="button" class="btn btn-primary" id="updateBtn">수정하기</button>                  	                                                                    
 	                                        </div>                          
 	                                    </div>
 	                                </form>
@@ -1167,5 +1163,46 @@
 		============================================ -->
     <script src="/admin/js/tawk-chat.js"></script>
 </body>
+
+<script>	
+	$('#programMaxCustomer').focus();
+	
+	$('#updateBtn').click(function(){
+		
+		if($('#programMaxCustomer').val().trim() == '') {
+			alert('수용 인원을 입력하세요.');
+			$('#programMaxCustomer').val('');	
+			$('#programMaxCustomer').focus();			
+			return;
+		}
+		
+		let checkNumber = $('#programMaxCustomer').val().search(/[0-9]/g);
+		
+		if(checkNumber < 0) { 
+			alert('수용 인원은 숫자만 입력 가능합니다.')
+			$('#programMaxCustomer').val('');	
+			$('#programMaxCustomer').focus();			
+			return;
+		}
+		
+		if($('#programName').val().trim() == '') {
+			alert('프로그램 제목을 입력하세요.');
+			$('#programName').val('');
+			$('#programName').focus();
+			return;
+		}
+		
+		if($('#programDetail').val().trim() == '') {
+			alert('내용을 입력하세요.');
+			$('#programDetail').val('');	
+			$('#programDetail').focus();			
+			return;
+		}
+		
+		alert('수정 완료되었습니다.');
+		$('#updateForm').submit();
+		
+	});
+</script>
 
 </html>

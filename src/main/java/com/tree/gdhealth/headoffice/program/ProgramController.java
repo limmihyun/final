@@ -93,7 +93,7 @@ public class ProgramController {
 		Map<String, Object> programOne = programService.getProgramOne(programNo);
 		// 디버깅
 		log.debug("프로그램 상세 정보 : " + programOne);
-		model.addAttribute("programOne",programOne);
+		model.addAttribute("programOne", programOne);
 		
 		return "headoffice/updateProgram";
 	}
@@ -101,16 +101,23 @@ public class ProgramController {
 	@PostMapping("/program/update")
 	public String update(HttpSession session, MultipartFile programFile,
 							Program program, ProgramImg programImg) {
-		
-		// 디버깅
-		log.debug("programFile : " + programFile);
-		
+				
 		String oldPath = session.getServletContext().getRealPath("/upload/program/" + programImg.getFilename());
 		String path = session.getServletContext().getRealPath("/upload/program");
 		
 		programService.updateProgram(program, programFile, path, oldPath);
 		
 		return "redirect:/program/programOne/" + program.getProgramNo();
+	}
+	
+	@GetMapping("/program/deactive/{programNo}")
+	public String delete(HttpSession session, @PathVariable int programNo) {
+		
+		int result = programService.deactiveProgram(programNo);
+		// 디버깅
+		log.debug("프로그램 비활성화(성공:1,실패:0) : " + result);
+		
+		return "redirect:/program";
 	}
 
 }
