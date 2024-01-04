@@ -5,6 +5,8 @@ import java.util.Map;
 
 import org.apache.ibatis.annotations.Mapper;
 
+import com.tree.gdhealth.vo.Branch;
+
 @Mapper
 public interface ProgramReservationMapper {
 	
@@ -25,4 +27,8 @@ public interface ProgramReservationMapper {
 	List<Map<String, Object>> myreservation (int customerNo);
 	
 	int reservationdelete (Map<String, Object> paramap);
+	
+	List<Branch> branchList ();
+	
+	Integer  reservationDate (Map<String, Object> paramap);
 }

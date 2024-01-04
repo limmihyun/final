@@ -50,18 +50,29 @@
 		SELECT
 			  p.program_name programName,
 			  pd.program_date programDate,
-			  b.branch_name branchName,
-			  pd.program_date_no programDateNo,
-			  b.branch_no branchNo
+			  pd.program_date_no programDateNo
 		FROM  program_date pd INNER JOIN program p
-	   	    on p.program_no = pd.program_no INNER JOIN employee e
-		  	on e.employee_no = p.employee_no INNER JOIN branch b
-		  	on e.branch_no = b.branch_no
+	       on p.program_no = pd.program_no
  		WHERE YEAR(pd.program_date) = #{year}
 		  AND MONTH(pd.program_date) = #{month}
 		  AND DAY(pd.program_date) = #{day}
 		  AND p.program_name = #{programName}
 		ORDER BY pd.program_date ASC;
+	</select>
+	
+	
+	<select id="reservationDate" parameterType="java.util.Map" resultType="Integer">
+		SELECT pr.branch_no branchNo
+		FROM program_reservation pr INNER JOIN payment p
+		  ON pr.payment_no = p.payment_no
+		WHERE pr.program_date_no = #{programDateNo} AND p.customer_no = #{customerNo}
+	</select>
+	
+	<select id="branchList" resultType="com.tree.gdhealth.vo.Branch">
+		SELECT branch_name branchName,
+			   branch_no branchNo
+		FROM branch
+		WHERE branch_name != 'headoffice';
 	</select>
 	
 	<select id="customerId">
