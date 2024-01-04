@@ -47,7 +47,7 @@
                                             <button class="pd-setting" name="programName">${branchDate.programName}</button>
                                             </c:if>
                                         </td>
-                                        <td>${branchDate.managerNo ne 0? branchDate.managerName : null}</td>
+                                        <td>${branchDate.trainerEmployeeNo ne 0? branchDate.managerName : null}</td>
                                         <td>${branchDate.reservedCount}/${branchDate.maxCustomer} 명</td>
                                     </tr>
                                     </c:forEach>

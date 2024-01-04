@@ -1,6 +1,5 @@
 package com.tree.gdhealth.branch.programcalendar.vo;
 
-import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -20,9 +19,9 @@ public class BranchProgramDate {
     private int programNo;
     private String programName;
     private String programDetail;
-    private int employeeNo; // editor
+    private int writerEmployeeNo; // editor
     private String employeeName;
-    private int managerNo; // charged of branch
+    private int trainerEmployeeNo; // charged of branch
     private String managerName;
     private int maxCustomer;
     private int reservedCount;
