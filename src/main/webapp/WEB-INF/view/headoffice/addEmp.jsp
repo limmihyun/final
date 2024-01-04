@@ -1113,7 +1113,15 @@
 																			<option value="1">본사</option>
 																			<option value="2">가산 1호점</option>
 																			<option value="3">가산 2호점</option>
-																		</select>
+																	</select>
+                                                                </div>
+                                                                <div class="form-group">
+                                                                    <select name="employeePosition" id="employeePosition" class="form-control">
+																			<option value="0" selected>소속</option>
+																			<option value="trainer">트레이너</option>
+																			<option value="branch_manager">지점 관리자</option>
+																			<option value="head_office_manager">본사 관리자</option>
+																	</select>
                                                                 </div>
                                                                 
                                                                 <div class="form-group">
@@ -1315,20 +1323,24 @@
 			return;
 	    }
 	    
-	    if($('#employeeGender').val().trim() == '') {
+	    if($('#employeeGender').val() == 0) {
 			alert('성별을 선택하세요.');
-			$('#employeeGender').val('');
 			$('#employeeGender').focus();
 			return;
 		}
 	    
-	    if($('#branchNo').val().trim() == '') {
+	    if($('#branchNo').val() == 0) {
 			alert('지점을 선택하세요.');
-			$('#branchNo').val('');
 			$('#branchNo').focus();
 			return;
 		}
 	    
+	    if($('#employeePosition').val() == 0) {
+			alert('소속을 선택하세요.');
+			$('#employeePosition').focus();
+			return;
+		}
+	   
 	    if($('#employeeFile').val().length == 0) {
 			alert('직원 사진을 첨부하세요.');
 			$('#employeeFile').focus();

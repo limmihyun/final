@@ -14,6 +14,7 @@ import org.springframework.web.multipart.MultipartFile;
 import com.tree.gdhealth.headoffice.Paging;
 import com.tree.gdhealth.vo.Program;
 import com.tree.gdhealth.vo.ProgramDate;
+import com.tree.gdhealth.vo.ProgramImg;
 import com.tree.gdhealth.vo.ProgramManager;
 
 import jakarta.servlet.http.HttpSession;
@@ -65,13 +66,12 @@ public class ProgramController {
 	
 	@PostMapping("/program/addProgram")
 	public String addProgram(HttpSession session, Program program, 
-								ProgramDate programDate, MultipartFile programFile, 
-								ProgramManager programManager) {
+								ProgramDate programDate, MultipartFile programFile) {
 		
 		String path = session.getServletContext().getRealPath("/upload/program");
 		// 디버깅
 		log.debug("저장 경로 : " + path);
-		programService.insertProgram(program, programDate, programManager, programFile, path);
+		programService.insertProgram(program, programFile, path);
 		
 		return "redirect:/program";
 	}
@@ -85,6 +85,29 @@ public class ProgramController {
 		model.addAttribute("programOne",programOne);
 		
 		return "headoffice/programOne";
+	}
+	
+	@GetMapping("/program/update/{programNo}")
+	public String update(Model model, @PathVariable int programNo) {
+		
+		Map<String, Object> programOne = programService.getProgramOne(programNo);
+		// 디버깅
+		log.debug("프로그램 상세 정보 : " + programOne);
+		model.addAttribute("programOne",programOne);
+		
+		return "headoffice/updateProgram";
+	}
+	
+	@PostMapping("/program/update")
+	public String update(HttpSession session, MultipartFile programFile,
+							Program program, ProgramImg programImg) {
+		
+		String oldPath = session.getServletContext().getRealPath("/upload/program/" + programImg.getFilename());
+		String path = session.getServletContext().getRealPath("/upload/program");
+		
+		programService.updateProgram(program, programFile, path, oldPath);
+		
+		return "redirect:/program/programOne/" + program.getProgramNo();
 	}
 
 }
