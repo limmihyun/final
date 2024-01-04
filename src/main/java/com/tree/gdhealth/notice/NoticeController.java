@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
@@ -21,6 +22,16 @@ import lombok.extern.slf4j.Slf4j;
 @Controller
 public class NoticeController {
    @Autowired NoticeService noticeService;
+   
+   @ModelAttribute
+   private void mockLoginEmployee(HttpSession session) {
+       Employee employee = new Employee();
+       employee.setBranchNo(2);
+       employee.setEmployeeId("gasan1manager");
+       employee.setEmployeeActive("Y");
+       employee.setEmployeeNo(2);
+       session.setAttribute("loginEmployee", employee);
+   }
    
    @GetMapping("/notice/noticeList")
    public String noticeList(Model model, @RequestParam(defaultValue="1")int currentPage) {
@@ -53,8 +64,10 @@ public class NoticeController {
    
    @GetMapping("/notice/addNotice")
    public String addNotice(HttpSession session, Model model) {
-	   //int employeeNo = 1;
-	   //model.addAttribute("employeeNo", employeeNo);
+	   
+	   int employeeNo = ((Employee)session.getAttribute("loginEmployee")).getEmployeeNo();
+	   model.addAttribute("employeeNo", employeeNo);
+	   
 	   return "/notice/addNotice";
    }
    
@@ -64,44 +77,32 @@ public class NoticeController {
 	   
 	   System.out.println("employeeNo: " + employeeNo);
 	   
-	   notice.setEmployeeNo(employeeNo);
-	   
        int row = noticeService.addNotice(notice);
        
-       return "forward:/notice/noticeList"; 
+       return "redirect:/notice/noticeList"; 
    }
    
 
-   //@GetMapping("/updateNotice")
-   public String updateNotice(HttpSession session, int noticeNo, Model model) {
-      Employee employee = (Employee) session.getAttribute("loginEmployee");
-      
-      model.addAttribute("noticeNo", noticeNo);
-      return "updateNotice";
+   @GetMapping("/notice/updateNotice")
+   public String updateNotice(int noticeNo, Model model) {
+	   
+	  model.addAttribute("noticeNo", noticeNo);
+      return "/notice/updateNotice";
    }
    
-   //@PostMapping("/updateNotice")
-   public String updateNotice(HttpSession session, Notice notice) {
-      Employee employee = (Employee) session.getAttribute("loginEmployee");
+   @PostMapping("/notice/updateNotice")
+   public String updateNotice(int noticeNo, Notice notice) {
       
       int row = noticeService.updateNotice(notice);
-      return "redirect:/noticeList";
+      return "redirect:/notice/noticeList";
    }
    
-   //@GetMapping("/deleteNotice")
-   public String deleteNotice(HttpSession session, Model model, int noticeNo) {
-      Employee employee = (Employee) session.getAttribute("loginEmployee");
+   @GetMapping("/notice/deleteNotice")
+   public String deleteNotice(Notice notice) {
       
-      model.addAttribute("noticeNo", noticeNo);
-      return "deleteNotice";
+	   int row = noticeService.deleteNotice(notice);
+    
+      return "redirect:/notice/noticeList";
    }
-   
-   //@PostMapping("/deleteNotice")
-   public String deleteNotice(HttpSession session, Notice notice) {
-      Employee employee = (Employee) session.getAttribute("loginEmployee");
-
-      int row = noticeService.deleteNotice(notice);
-      return "redirect:/noticeList";
-      
-   }
+ 
 }

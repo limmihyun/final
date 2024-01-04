@@ -57,7 +57,7 @@
    
    UPDATE notice
    SET notice_title = #{noticeTitle}, notice_content = #{noticeContent}
-   WHERE notice_no = #{noticeNo} AND employee_no = #{employeeNo}
+   WHERE notice_no = #{noticeNo}
    </update>
 
 <!-- 공지 삭제 -->
@@ -66,7 +66,7 @@
    
    DELETE 
    FROM notice
-   WHERE notice_no = #{noticeNo} AND employee_no = #{employeeNo}
+   WHERE notice_no = #{noticeNo}
    
    </delete>
 </mapper>
