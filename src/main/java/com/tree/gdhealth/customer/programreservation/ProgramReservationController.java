@@ -24,6 +24,14 @@ public class ProgramReservationController {
 			, @RequestParam(required = false) Integer targetMonth
 			, @RequestParam(required = false) Integer targetDay) {
 		
+		if(session.getAttribute("customerNo") == null) {
+			return "redirect:/customer/login";
+		}
+		
+		
+		int customerNo = (int)(session.getAttribute("customerNo"));
+		
+		
 		Map<String, Object> calendarMap = programReservationService.getCalendar(targetYear, targetMonth, targetDay);
 		model.addAttribute("calendarMap", calendarMap);
 		
@@ -33,7 +41,9 @@ public class ProgramReservationController {
 		
 		List<Map<String, Object>> allList = programReservationService.allCalendarList();
 		model.addAttribute("allList", allList);
-
+		
+		List<Map<String, Object>> myCalendarList = programReservationService.myCalendarLust((int)(calendarMap.get("targetYear")), (int)(calendarMap.get("targetMonth")), customerNo);
+		model.addAttribute("myCalendarList", myCalendarList);
 		
 		return "customer/programreservation";
 	}

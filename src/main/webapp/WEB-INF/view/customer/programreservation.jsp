@@ -154,18 +154,52 @@
 							<c:if test="${(i%7-1)==0}">
 							  <a class="text-danger">${d}</a>
 							 	 <c:forEach var="l" items="${resultList}">
-								 	<c:if test="${d == l.day}">
-								 		<a href="${pageContext.request.contextPath}/customer/prorsone?year=${l.year}&month=${l.month}&day=${l.day}&programName=${l.programName}">${l.programName}</a>
-								 		<p>${l.cnt} / ${l.programMaxCustomer}</p>
+							 	 <c:set var="end" value="false"></c:set>
+							 	 <c:if test="${d == l.day}">
+							 			<c:if test="${l.cnt == l.programMaxCustomer}">
+								 			<a style="color:gray">${l.programName}</a>
+								 			<p style="color:gray">${l.cnt} / ${l.programMaxCustomer}</p>
+								 		</c:if>
+								 		<c:if test="${l.cnt != l.programMaxCustomer}">								 		
+										 	<c:forEach var="my" items="${myCalendarList}">  
+									 			<c:if test="${d == my.day and not end}">
+										 			<a style="color:gray">${l.programName}</a>
+										 			<p style="color:gray">${l.cnt} / ${l.programMaxCustomer}</p>
+										 			<c:set var="end" value="true"></c:set>
+									 			</c:if>
+									 			<c:if test="${d != my.day and not end}">
+											 		<a href="${pageContext.request.contextPath}/customer/prorsone?year=${l.year}&month=${l.month}&day=${l.day}&programName=${l.programName}">${l.programName}</a>
+											 		<p>${l.cnt} / ${l.programMaxCustomer}</p>
+										 			<c:set var="end" value="true"></c:set>
+									 			</c:if>
+									 		</c:forEach>
+								 		</c:if>
 								 	</c:if>
-								 </c:forEach> 
+								 </c:forEach>
 							</c:if>
 							<c:if test="${!((i%7-1)==0)}">
 								${d}
 								 <c:forEach var="l" items="${resultList}">
+								   <c:set var="end" value="false"></c:set>
 								 	<c:if test="${d == l.day}">
-								 		<a href="${pageContext.request.contextPath}/customer/prorsone?year=${l.year}&month=${l.month}&day=${l.day}&programName=${l.programName}">${l.programName}</a>
-								 		<p>${l.cnt} / ${l.programMaxCustomer}</p>
+							 			<c:if test="${l.cnt == l.programMaxCustomer}">
+								 			<a style="color:gray">${l.programName}</a>
+								 			<p style="color:gray">${l.cnt} / ${l.programMaxCustomer}</p>
+								 		</c:if>
+								 		<c:if test="${l.cnt != l.programMaxCustomer}">								 		
+										 	<c:forEach var="my" items="${myCalendarList}">  
+									 			<c:if test="${d == my.day and not end}">
+										 			<a style="color:gray">${l.programName}</a>
+										 			<p style="color:gray">${l.cnt} / ${l.programMaxCustomer}</p>
+										 			<c:set var="end" value="true"></c:set>
+									 			</c:if>
+									 			<c:if test="${d != my.day and not end}">
+											 		<a href="${pageContext.request.contextPath}/customer/prorsone?year=${l.year}&month=${l.month}&day=${l.day}&programName=${l.programName}">${l.programName}</a>
+											 		<p>${l.cnt} / ${l.programMaxCustomer}</p>
+										 			<c:set var="end" value="true"></c:set>
+									 			</c:if>
+									 		</c:forEach>
+								 		</c:if>
 								 	</c:if>
 								 </c:forEach> 
 							</c:if>

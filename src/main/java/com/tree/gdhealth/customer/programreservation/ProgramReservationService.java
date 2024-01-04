@@ -59,6 +59,19 @@ public class ProgramReservationService {
 		
 	}
 	
+	public List<Map<String, Object>> myCalendarLust (int year, int month, int customerNo){
+		
+		Map<String, Object> paramMap = new HashMap<>();
+		paramMap.put("year", year);
+		paramMap.put("month", month+1);
+		paramMap.put("customerNo", customerNo);
+		
+		List<Map<String, Object>> resultList = programReservationMapper.myCalendarList(paramMap);
+		
+		return resultList;
+
+	}
+	
 	public List<Map<String, Object>> selectProgramByMonth (int year, int month){
 		
 		Map<String, Object> paramMap = new HashMap<>();
