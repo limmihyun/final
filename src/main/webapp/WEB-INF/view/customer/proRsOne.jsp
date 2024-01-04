@@ -119,7 +119,6 @@
 		<div>
 			<div class="container" style="margin-top:2%; margin-bottom:2%;">
 				<form method="POST" action="${pageContext.request.contextPath}/customer/prorsone">
-					<input type="hidden" value="${resultList.branchNo}" name="branchNo">
 					<input type="hidden" value="${resultList.programDateNo}" name="programDateNo">
 					<table class="table" style="font-size:13px;">
 						<tr>
@@ -132,7 +131,11 @@
 							<td>${resultList.programName}</td>
 							<td>${resultList.programDate}</td>
 							<td>${customerId}</td>
-							<td>${resultList.branchName}</td>						
+							<td><select name="branchNo">
+								<c:forEach var="b" items="${branchList}">
+									<option value="${b.branchNo}">${b.branchName}</option>
+								</c:forEach>
+							</select></td>
 						</tr>
 					</table>
 					<button class="btn btn-dark btn-lg">예약하기</button>

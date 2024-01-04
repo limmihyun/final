@@ -9,6 +9,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.tree.gdhealth.vo.Branch;
+
 @Service
 @Transactional
 public class ProgramReservationService {
@@ -107,6 +109,17 @@ public class ProgramReservationService {
 		return resultList;
 	}
 	
+	public Integer  reservationDate(int customerNo, int programRservationNo) {
+		
+		Map<String, Object> reservationDate = new HashMap<>();
+		reservationDate.put("programRservationNo", programRservationNo);
+		reservationDate.put("customerNo", customerNo);
+		
+		Integer  resultOverlap = programReservationMapper.reservationDate(reservationDate);
+		
+		return resultOverlap;
+	}
+	
 	public String customerId(int customerNo) {
 		
 		String customerId = programReservationMapper.customerId(customerNo);
@@ -128,10 +141,20 @@ public class ProgramReservationService {
 		paramap.put("branchNo", branchNo);
 		paramap.put("paymentNo", paymentNo);
 		
+		System.out.println(paramap + "<--paramap");
+		
 		programReservationMapper.programReservationAdd(paramap);
 		
 		return 0;
 
+		
+	}
+	
+	public List<Branch> branchList(){
+		
+		List<Branch> branchList = programReservationMapper.branchList();
+		
+		return branchList;
 		
 	}
 	
