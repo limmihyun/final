@@ -1,5 +1,7 @@
 package com.tree.gdhealth.employee.login;
 
+import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -7,21 +9,24 @@ import org.springframework.transaction.annotation.Transactional;
 import com.tree.gdhealth.customer.login.LoginMapper;
 import com.tree.gdhealth.vo.Employee;
 
+import java.util.Map;
+
+/**
+ * @author 이은택
+ * @contributor: 정인호
+ */
+@Slf4j
+@RequiredArgsConstructor
+@Transactional(readOnly = true)
 @Service
-@Transactional
 public class EmpLoginService {
-	@Autowired EmpLoginMapper empLoginMapper;
+	private final EmpLoginMapper mapper;
 
-	public int login(Employee employee) {
-		int n;
-		Integer employeeNoCkResult = empLoginMapper.employeeLoginCk(employee);
-		if (employeeNoCkResult == null || employeeNoCkResult == 0) { // customerNo가 널값이면 0으로 대체
-			n = 0;
-			return n;
+	public LoginEmployee login(Employee employee) {
+		Integer LoginEmployeeNo = mapper.employeeLoginCk(employee);
+		if(LoginEmployeeNo == null){
+			return null;
 		}
-
-		n = empLoginMapper.employeeLoginCk(employee);
-
-		return n;
+        return mapper.getLoginEmployeeInfo(LoginEmployeeNo);
 	}
 }
