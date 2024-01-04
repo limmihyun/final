@@ -15,7 +15,6 @@ import com.tree.gdhealth.headoffice.Paging;
 import com.tree.gdhealth.vo.Program;
 import com.tree.gdhealth.vo.ProgramDate;
 import com.tree.gdhealth.vo.ProgramImg;
-import com.tree.gdhealth.vo.ProgramManager;
 
 import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
