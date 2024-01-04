@@ -24,7 +24,7 @@
 </head>
 
 <body>
-    <!-- Page Preloder -->
+	<!-- Page Preloder -->
     <div id="preloder">
         <div class="loader"></div>
     </div>
@@ -74,87 +74,23 @@
     </section>
     <!-- Search Bar End -->
     <!-- Contact Section Begin -->
-    //
-    <div class="untree_co-section before-footer-section">
-            <div class="container">
-             <div class="p-3 p-lg-5 border bg-white">
-             <h1 class="mb-4 section-title">Notice</h1>
-             <br>
-				<table class ="table">
- 		<tr>
-            <th>공지번호</th>
-            <td><p style="border: none;">${notiOne.noticeNo}</p></td>
-        </tr>
-    
-        <tr>
-            <th>제목</th>
-            <td><p style="border: none;">${notiOne.noticeTitle}</td>
-        </tr>
-        <tr>
-    		<th>공지사항</th>
-    		<td><textarea rows="6" cols="130" style="border: none;" readonly>${notiOne.noticeContent}</textarea></td>
-		</tr>
-        <tr>
-            <th>게시일</th>
-            <td><p style="border: none;">${notiOne.createdate}</td>
-        </tr>
-        <tr>
-            <th>수정일</th>
-            <td><p style="border: none;">${notiOne.updatedate}</td>
-        </tr>
-        
-    </table>
-     <a>
-        <a href="${pageContext.request.contextPath}/notice/updateNotice?noticeNo=${notiOne.noticeNo}" class="btn btn-primary">수정</a>
-        <a href="${pageContext.request.contextPath}/notice/deleteNotice?noticeNo=${notiOne.noticeNo}" class="btn btn-danger">삭제</a>
-    </a>
-</div>
-</div>
-</div>
-
-     
-    
-    <!-- Contact Section End -->
-    <!-- Footer Section Begin -->
-    <footer class="footer-section set-bg" data-setbg="/img/footer-bg.jpg">
+    <section class="contact-section">
         <div class="container">
             <div class="row">
-                <div class="col-lg-12">
-                    <div class="footer-content">
-                        <div class="footer-logo">
-                            <a href="#"><img src="/img/logo.png" alt=""></a>
-                        </div>
-                        <div class="footer-menu">
-                            <ul>
-                                <li><a href="./home.html">Home</a></li>
-                                <li><a href="#">About us</a></li>
-                                <li><a href="#">Classes</a></li>
-                                <li><a href="#">Instructors</a></li>
-                                <li><a href="#">News</a></li>
-                                <li><a href="#">Contact</a></li>
-                            </ul>
-                        </div>
-                        <div class="subscribe-form">
-                            <form action="#">
-                                <input type="text" placeholder="your Email">
-                                <button type="submit">Sign Up</button>
-                            </form>
-                        </div>
-                        <div class="footer-icon-img">
-                            <img src="/img/footer-icon.png" alt="">
-                        </div>
-                        <div class="copyright">
-                            <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
-Copyright &copy;<script>document.write(new Date().getFullYear());</script> All rights reserved | This template is made with <i class="fa fa-heart-o" aria-hidden="true"></i> by <a href="https://colorlib.com" target="_blank">Colorlib</a>
-<!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </footer>
-    <!-- Footer Section End -->
-
+                <div class="col-lg-6">
+                    <div class="contact-info">
+                        <div class="contact-form">
+                           <form method="post" action="${pageContext.request.contextPath}/notice/updateNotice">
+                           		<input type="hidden" value="${noticeNo}" name="noticeNo">
+                                <div class="row">
+                                
+                                <div class="container" style="margin-top: 100px;">
+                                	<div class="col-lg-12">
+                                        <input type="text" placeholder="noticeTitle" name="noticeTitle" > 
+                                        <textarea placeholder="Message" name = "noticeContent"></textarea>
+                                        <button type="submit" class="site-btn">수정하기</button>
+   										
+  						  </form>
     <!-- Js Plugins -->
     <script src="/js/jquery-3.3.1.min.js"></script>
     <script src="/js/bootstrap.min.js"></script>
@@ -165,5 +101,4 @@ Copyright &copy;<script>document.write(new Date().getFullYear());</script> All r
     <script src="/js/jquery.barfiller.js"></script>
     <script src="/js/main.js"></script>
 </body>
-
 </html>
