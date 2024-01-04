@@ -12,6 +12,8 @@ public interface ProgramReservationMapper {
 	
 	List<Map<String, Object>> allCalendarList();
 	
+	List<Map<String, Object>> myCalendarList(Map<String, Object> paramMap);
+	
 	Map<String, Object> proRsOne(Map<String, Object> paramMap);
 	
 	String customerId(int customerNo);
