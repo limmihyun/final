@@ -74,7 +74,7 @@ public class ProgramService {
 		}
 				
 		// 이미지 추가
-		if(programFile != null) { // 업로드한 이미지 파일이 하나이상 있다면
+		if(!programFile.isEmpty()) { // 업로드한 이미지 파일이 하나이상 있다면
 			// 파일 저장
 			programImgSave(programFile, path, program.getProgramNo());
 		}
@@ -126,13 +126,13 @@ public class ProgramService {
 			throw new RuntimeException();
 		}
 						
-		if(programFile != null) {
+		if(!programFile.isEmpty()) {
 			
 			// 기존 파일 삭제
 			File file = new File(oldPath);
 			boolean isDelete = file.delete();
 			// 디버깅
-			log.debug("파일 삭제 여부 : " + isDelete);
+			log.debug("기존 파일 삭제 여부 : " + isDelete);
 			
 			// 수정한 파일 저장
 			programImgUpdate(programFile, path, program.getProgramNo());

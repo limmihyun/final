@@ -102,6 +102,9 @@ public class ProgramController {
 	public String update(HttpSession session, MultipartFile programFile,
 							Program program, ProgramImg programImg) {
 		
+		// 디버깅
+		log.debug("programFile : " + programFile);
+		
 		String oldPath = session.getServletContext().getRealPath("/upload/program/" + programImg.getFilename());
 		String path = session.getServletContext().getRealPath("/upload/program");
 		
