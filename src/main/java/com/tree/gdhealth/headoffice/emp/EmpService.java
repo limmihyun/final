@@ -85,7 +85,7 @@ public class EmpService {
 		}
 		
 		// file 추가
-		if(employeeFile != null) { // 업로드한 파일이 하나이상 있다면
+		if(!employeeFile.isEmpty()) { // 업로드한 파일이 하나이상 있다면
 			// 파일 저장
 			empImgSave(employeeFile, path, employee.getEmployeeNo());
 		}

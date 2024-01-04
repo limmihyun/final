@@ -3,12 +3,12 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <!doctype html>
-<html class="no-js" lang="en">
+<html class="no-js" lang="zxx">
 
 <head>
     <meta charset="utf-8">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
-    <title>프로그램 관리</title>
+    <title>프로그램 상세</title>
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <!-- favicon
@@ -69,7 +69,9 @@
 </head>
 
 <body>
-
+    <!--[if lt IE 8]>
+		<p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
+	<![endif]-->
     <!-- Start Left menu area -->
     <div class="left-sidebar-pro">
         <nav id="sidebar" class="">
@@ -1042,99 +1044,55 @@
                 </div>
             </div>
             <!-- Mobile Menu end -->
-            <div class="breadcome-area">
-                <div class="container-fluid">
-                    <div class="row">
-                        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-                            <div class="breadcome-list">
-                                <div class="row">
-                                    <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
-                                        <div class="breadcome-heading">
-                                            <form role="search" class="sr-input-func">
-                                                <input type="text" placeholder="Search..." class="search-int form-control">
-                                                <a href="#"><i class="fa fa-search"></i></a>
-                                            </form>
-                                        </div>
-                                    </div>
-                                    <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
-                                        <ul class="breadcome-menu">
-                                            <li><a href="#">Home</a> <span class="bread-slash">/</span>
-                                            </li>
-                                            <li><span class="bread-blod">All Courses</span>
-                                            </li>
-                                        </ul>
-                                    </div>
+           
+            
+        </div>
+        
+        
+        <div class="blog-details-area mg-b-15">
+            <div class="container-fluid">
+                <div class="row" style="margin-top:20px;">
+                	<div class="col-lg-3 col-md-2 col-sm-1 col-xs-12"></div>
+                    <div class="col-lg-6 col-md-8 col-sm-10 col-xs-12">  
+                        <div class="blog-details-inner">
+                            <div class="row">
+                                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                                
+	                                <form action="${pageContext.request.contextPath}/program/update" id="updateForm" 
+                                                    	method="post" enctype="multipart/form-data">
+                                       <input type="hidden" value="${programOne.programNo}" name="programNo">
+                                       <input type="hidden" value="${programOne.filename}" name="filename">
+	                                   <div class="latest-blog-single blog-single-full-view">
+	                                        <div class="blog-details blog-sig-details">
+	                                        	<div class="blog-details" style="text-align:center;">
+                                        			<input type="file" name="programFile" style="display:block; margin:0 auto;">    
+	                                        	</div>
+	                                            <div class="details-blog-dt blog-sig-details-dt courses-info mobile-sm-d-n">
+	                                                <span>
+	                                                	<i class="fa fa-heart"></i> <b>수용 인원 :</b> <input type="text" value="${programOne.maxCustomer}" name="programMaxCustomer" id="programMaxCustomer" style="width:60px;">
+	                                                </span>
+	                                            </div>
+	                                            <div style="text-align:center;">    
+	                                           		<h1>
+		                                             	<input type="text" value="${programOne.programName}" id="programName" name="programName">
+		                                            </h1>
+	                                             	<textarea style="resize:none; width:70%;" rows="15" name="programDetail" id="programDetail">${programOne.programDetail}</textarea>                                                                                                                                 	                                          
+	                                            </div>                          
+	                                        </div>
+	                                        <div style="text-align:center;">
+	                                        	<button type="button" class="btn btn-primary" id="updateBtn">수정하기</button>                  	                                                                    
+	                                        </div>                          
+	                                    </div>
+	                                </form>
+                                                             
                                 </div>
-                            </div>
+                            </div>                                      
                         </div>
                     </div>
+                    <div class="col-lg-3 col-md-2 col-sm-1 col-xs-12"></div>
                 </div>
             </div>
         </div>
-        
-        <!--------------------- 프로그램 list start-------------------------->
-        <div class="courses-area">
-            <div class="container-fluid">
-                <div class="row">
-                
-                	<c:forEach var="m" items="${programList}">
-                	
-                		<div class="col-lg-3 col-md-6 col-sm-6 col-xs-12">
-	                        <div class="courses-inner res-mg-b-30">
-	                            <div class="courses-title">
-	                                <a href="#">
-	                                	<img src="${pageContext.request.contextPath}/upload/program/${m.filename}" alt="${pageContext.request.contextPath}/noImg" style="height:270px; width:300px;">
-	                                </a>
-	                                <h2>${m.programName}</h2>
-	                            </div>
-	                          
-	                            <div class="course-des">
-	                                <p><span><i class="fa fa-clock"></i></span> <b>수용 인원 :</b> ${m.maxCustomer}</p>
-	                            </div>
-	                            <div class="product-buttons">
-	                                <button type="button" class="button-default cart-btn" onclick="location.href='${pageContext.request.contextPath}/program/programOne/${m.programNo}'">자세히 보기</button>
-	                            </div>
-	                        </div>
-                   	    </div>
-                	
-                	</c:forEach>
-   
-                </div>
-            </div>
-        </div>
-        <!--------------------- 프로그램 list start-------------------------->
-        
-        <!--------------------- 페이징 start -----------------------------------> 
-        <div style="text-align:center;">       	
-             <ul class="pagination">
-             
-             	  <li class="page-item">
-             	  	<a class="page-link" href="${pageContext.request.contextPath}/program?page=1">처음</a>
-             	  </li>	
-				  
-				  <c:if test="${prev}">
-				  	<li class="page-item"><a class="page-link" href="${pageContext.request.contextPath}/program?page=${startPageNum - 1}">이전</a></li>
-				  </c:if>
-				  <c:forEach begin="${startPageNum}" end="${endPageNum}" var="pageNum">
-				  	<c:if test="${pageNum == currentPage}"> <!-- 페이징 버튼 색 변경o --> 
-				  		<li class="page-item active">
-					  		<a class="page-link" href="${pageContext.request.contextPath}/program?page=${pageNum}">${pageNum}</a>
-					  	</li>
-				  	</c:if>
-				  	<c:if test="${pageNum != currentPage}"> <!-- 페이징 버튼 색 변경x --> 
-				  		<li class="page-item">
-					  		<a class="page-link" href="${pageContext.request.contextPath}/program?page=${pageNum}">${pageNum}</a>
-					  	</li>
-				  	</c:if>
-				  </c:forEach>
-				  <c:if test="${next}">
-				  	<li class="page-item"><a class="page-link" href="${pageContext.request.contextPath}/program?page=${endPageNum + 1}">다음</a></li>
-				  </c:if>	  
-				  <li class="page-item"><a class="page-link" href="${pageContext.request.contextPath}/program?page=${lastPage}">끝</a></li>
-			</ul>	  
-        </div>
-        <!----------------------- 페이징 end ---------------------------->
-            
         
     </div>
 
@@ -1174,12 +1132,27 @@
 		============================================ -->
     <script src="/admin/js/sparkline/jquery.sparkline.min.js"></script>
     <script src="/admin/js/sparkline/jquery.charts-sparkline.js"></script>
-    <script src="/admin/js/sparkline/sparkline-active.js"></script>
     <!-- calendar JS
 		============================================ -->
     <script src="/admin/js/calendar/moment.min.js"></script>
     <script src="/admin/js/calendar/fullcalendar.min.js"></script>
     <script src="/admin/js/calendar/fullcalendar-active.js"></script>
+    <!-- maskedinput JS
+		============================================ -->
+    <script src="/admin/js/jquery.maskedinput.min.js"></script>
+    <script src="/admin/js/masking-active.js"></script>
+    <!-- datepicker JS
+		============================================ -->
+    <script src="/admin/js/datepicker/jquery-ui.min.js"></script>
+    <script src="/admin/js/datepicker/datepicker-active.js"></script>
+    <!-- form validate JS
+		============================================ -->
+    <script src="/admin/js/form-validation/jquery.form.min.js"></script>
+    <script src="/admin/js/form-validation/jquery.validate.min.js"></script>
+    <script src="/admin/js/form-validation/form-active.js"></script>
+    <!-- tab JS
+		============================================ -->
+    <script src="/admin/js/tab.js"></script>
     <!-- plugins JS
 		============================================ -->
     <script src="/admin/js/plugins.js"></script>
@@ -1190,5 +1163,46 @@
 		============================================ -->
     <script src="/admin/js/tawk-chat.js"></script>
 </body>
+
+<script>	
+	$('#programMaxCustomer').focus();
+	
+	$('#updateBtn').click(function(){
+		
+		if($('#programMaxCustomer').val().trim() == '') {
+			alert('수용 인원을 입력하세요.');
+			$('#programMaxCustomer').val('');	
+			$('#programMaxCustomer').focus();			
+			return;
+		}
+		
+		let checkNumber = $('#programMaxCustomer').val().search(/[0-9]/g);
+		
+		if(checkNumber < 0) { 
+			alert('수용 인원은 숫자만 입력 가능합니다.')
+			$('#programMaxCustomer').val('');	
+			$('#programMaxCustomer').focus();			
+			return;
+		}
+		
+		if($('#programName').val().trim() == '') {
+			alert('프로그램 제목을 입력하세요.');
+			$('#programName').val('');
+			$('#programName').focus();
+			return;
+		}
+		
+		if($('#programDetail').val().trim() == '') {
+			alert('내용을 입력하세요.');
+			$('#programDetail').val('');	
+			$('#programDetail').focus();			
+			return;
+		}
+		
+		alert('수정 완료되었습니다.');
+		$('#updateForm').submit();
+		
+	});
+</script>
 
 </html>

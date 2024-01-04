@@ -20,8 +20,12 @@ public interface ProgramMapper {
 	Map<String, Object> programOne(int programNo);
 	
 	int insertProgram(Program program);
-	int insertProgramDate(ProgramDate programDate);
-	int insertProgramManager(ProgramManager programManager);
 	int insertProgramImg(ProgramImg programImg);
-
+	
+	int updateProgram(Program program);
+	int updateProgramImg(ProgramImg programImg);
+	
+	int deactiveProgram(int programNo);
+	int activeProgram(int programNo);
+	
 }

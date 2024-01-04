@@ -18,6 +18,7 @@
 			ON ed.employee_no = e.employee_no
 		INNER JOIN employee_img ei
 			ON ei.employee_no = e.employee_no
+		WHERE e.employee_active = 'Y'
 		LIMIT #{beginRow}, #{rowPerPage}
 	</select>	
 	
@@ -52,17 +53,20 @@
 		INNER JOIN branch b
 			ON b.branch_no = e.branch_no
 		WHERE e.employee_id = #{employeeId}
+		AND e.employee_active = 'Y'
 	</select>
 	
 	<insert id="insertEmployee" parameterType="com.tree.gdhealth.vo.Employee">
 		INSERT INTO employee(
 			branch_no,
 			employee_id,
-			employee_pw
+			employee_pw,
+			employee_position
 		) VALUES (
 			#{branchNo},
 			#{employeeId},
-			PASSWORD(#{employeePw})
+			PASSWORD(#{employeePw}),
+			#{employeePosition}
 		)
 		<selectKey resultType="int" keyProperty="employeeNo" order="AFTER">
       		  SELECT LAST_INSERT_ID()

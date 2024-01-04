@@ -10,13 +10,10 @@
 			p.program_max_customer maxCustomer,
 			p.program_detail programDetail,
 			p.program_max_customer maxCustomer,
-			pd.program_date programDate,
 			pi.program_img_file filename
 		FROM program p
 		INNER JOIN employee_detail ed
-			ON ed.employee_no = p.employee_no
-		INNER JOIN program_date pd
-			ON pd.program_no = p.program_no
+			ON ed.employee_no = p.writer_employee_no
 		INNER JOIN program_img pi
 			ON p.program_no = pi.program_no
 		LIMIT #{beginRow}, #{rowPerPage}
@@ -34,13 +31,12 @@
 			p.program_max_customer maxCustomer,
 			p.program_detail programDetail,
 			p.program_max_customer maxCustomer,
-			pd.program_date programDate,
+			p.program_active active,
+			pi.program_img_no programImgNo,
 			pi.program_img_file filename
 		FROM program p
 		INNER JOIN employee_detail ed
-			ON ed.employee_no = p.employee_no
-		INNER JOIN program_date pd
-			ON pd.program_no = p.program_no
+			ON ed.employee_no = p.writer_employee_no
 		INNER JOIN program_img pi
 			ON p.program_no = pi.program_no
 		WHERE p.program_no = #{programNo}
@@ -48,7 +44,7 @@
 	
 	<insert id="insertProgram" parameterType="com.tree.gdhealth.vo.Program">
 		INSERT INTO program(
-			employee_no,
+			writer_employee_no,
 			program_name,
 			program_detail,
 			program_max_customer
@@ -62,32 +58,6 @@
       		  SELECT LAST_INSERT_ID()
    		</selectKey> 
 	</insert>
-	
-	<insert id="insertProgramDate" parameterType="com.tree.gdhealth.vo.ProgramDate">
-		INSERT INTO program_date(
-			program_no,
-			program_date
-		) VALUES (
-			#{programNo},
-			#{programDate}
-		)
-		<selectKey resultType="int" keyProperty="programDateNo" order="AFTER">
-      		  SELECT LAST_INSERT_ID()
-   		</selectKey> 
-	</insert>
-	
-	<insert id="insertProgramManager" parameterType="com.tree.gdhealth.vo.ProgramManager">
-		INSERT INTO program_manager(
-			program_date_no,
-			program_no,
-			employee_no
-		) VALUES (
-			#{programDateNo},
-			#{programNo},
-			#{employeeNo}
-		)
-	</insert>
-	
 	<insert id="insertProgramImg" parameterType="com.tree.gdhealth.vo.ProgramImg">
 		INSERT INTO program_img(
 			program_no,
@@ -104,4 +74,35 @@
 		)
 	</insert>
 	
+	<update id="updateProgram" parameterType="com.tree.gdhealth.vo.Program">
+		UPDATE program
+		SET 
+			program_name = #{programName},
+			program_detail = #{programDetail},
+			program_max_customer = #{programMaxCustomer}
+		WHERE program_no = #{programNo}
+	</update>	
+	<update id="updateProgramImg" parameterType="com.tree.gdhealth.vo.ProgramImg">
+		UPDATE program_img
+		SET
+			program_img_origin = #{originName},
+			program_img_file = #{filename},
+			program_img_size = #{programImgSize},
+			program_img_type = #{programImgType}
+		WHERE program_no = #{programNo}
+	</update>
+	
+	<update id="deactiveProgram">
+		UPDATE program
+		SET
+			program_active = 'N'
+		WHERE program_no = #{programNo}
+	</update>
+		
+	<update id="activeProgram">
+		UPDATE program
+		SET
+			program_active = 'Y'
+		WHERE program_no = #{programNo}
+	</update>
 </mapper>

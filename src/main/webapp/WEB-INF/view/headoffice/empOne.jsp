@@ -1052,8 +1052,8 @@
         <div class="single-pro-review-area mt-t-30 mg-b-15">
             <div class="container-fluid">
                 <div class="row" style="margin-top:20px; margin-bottom:20px;">
-                	<div class="col-lg-3 col-md-3 col-sm-3"></div>
-                    <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                	<div class="col-lg-3 col-md-2 col-sm-1"></div>
+                    <div class="col-lg-6 col-md-8 col-sm-10 col-xs-12">
                         <div class="profile-info-inner">    						   		
 						 	<div class="profile-img col-lg-12 col-md-12 col-sm-12 col-xs-12" style="text-align:center;">
 		                       <img src="${pageContext.request.contextPath}/upload/emp/${empOne.filename}" 
@@ -1063,21 +1063,21 @@
                             <div class="profile-details-hr">
                             
                             	<div class="row">
-                            		<div class="col-lg-6 col-md-12 col-sm-12 col-xs-6">
+                            		<div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
                                         <div class="address-hr">
                                             <p><b>ID</b><br />${empOne.empId}</p>
                                         </div>
                                     </div>
-                                    <div class="col-lg-6 col-md-12 col-sm-12 col-xs-6">
-                                        <div class="address-hr tb-sm-res-d-n dps-tb-ntn">
+                                    <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
+                                        <div class="address-hr">
                                             <p><b>이름</b><br />${empOne.empName}</p>
                                         </div>
                                     </div>
                             	</div>
                             
                                 <div class="row">
-                                    <div class="col-lg-6 col-md-12 col-sm-12 col-xs-6">
-                                        <div class="address-hr tb-sm-res-d-n dps-tb-ntn">
+                                    <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
+                                        <div class="address-hr">
                                             <p>
                                             	<b>성별</b><br />
                                             	<c:if test="${empOne.empGender == 'm'}">
@@ -1089,7 +1089,7 @@
                                             </p>
                                         </div>
                                     </div>
-                                    <div class="col-lg-6 col-md-12 col-sm-12 col-xs-6">
+                                    <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
                                         <div class="address-hr">
                                             <p><b>소속</b><br />${empOne.branchName}</p>
                                         </div>
@@ -1097,26 +1097,26 @@
                                 </div>
                                 
                                 <div class="row">
-                                    <div class="col-lg-6 col-md-12 col-sm-12 col-xs-6">
-                                        <div class="address-hr tb-sm-res-d-n dps-tb-ntn">
+                                    <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
+                                        <div class="address-hr">
                                             <p><b>휴대폰</b><br />${empOne.empPhone}</p>
                                         </div>
                                     </div>
-                                    <div class="col-lg-6 col-md-12 col-sm-12 col-xs-6">
-                                        <div class="address-hr tb-sm-res-d-n dps-tb-ntn">
+                                    <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
+                                        <div class="address-hr">
                                             <p><b>이메일</b><br />${empOne.empEmail}</p>
                                         </div>
                                     </div>
                                 </div>   
                                 
                                 <div class="row">                            
-                              	    <div class="col-lg-6 col-md-12 col-sm-12 col-xs-6">
-                                        <div class="address-hr tb-sm-res-d-n dps-tb-ntn">
+                              	    <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
+                                        <div class="address-hr">
                                             <p><b>입사일</b><br />${empOne.createdate}</p>
                                         </div>
                                     </div>
-                                    <div class="col-lg-6 col-md-12 col-sm-12 col-xs-6">
-                                        <div class="address-hr tb-sm-res-d-n dps-tb-ntn">
+                                    <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
+                                        <div class="address-hr">
                                             <p><b>active</b><br />${empOne.empActive}</p>
                                         </div>
                                     </div>
@@ -1127,7 +1127,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="col-lg-3 col-md-3 col-sm-3"></div>         
+                    <div class="col-lg-3 col-md-2 col-sm-1"></div>         
                	</div>       
             </div>
         </div>

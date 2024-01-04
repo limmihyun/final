@@ -10,6 +10,7 @@ public class Program {
 	private String programName;
 	private String programDetail;
 	private int programMaxCustomer;
+	private String programActive;
 	private String createdate;
 	private String updatedate;
 	
