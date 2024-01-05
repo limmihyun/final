@@ -41,10 +41,13 @@ private final EmpLoginService empLoginService;
 	        return "redirect:/employee/login";
 		}
 		red.addFlashAttribute("msg", "로그인 되셨습니다."+loginEmployee.getEmployeeName()+" 님");
-		//
 		log.debug("로그인된 직원정보 = "+loginEmployee.toString());
 		session.setAttribute("loginEmployee", loginEmployee);
-		return "redirect:/customer/home";
+		// branchNo 채크해서 본사페이지 이동
+		if(loginEmployee.getBranchNo() == 1) {
+			return "redirect:/headoffice/home";
+		}
+		return "redirect:/branch/home";
 	}
 	
 	@GetMapping("/employee/logout")

@@ -21,7 +21,7 @@
                             <li><a href="/customer/login">login</a></li>
                             </c:if>
                             <c:if test="${customerNo ne null}">
-                            <li><a href="/customer/mypage">mypage</a></li>
+                            <li><a href="/customer/myPage">mypage</a></li>
                             &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                             <li><a href="/customer/logout">logout</a></li>
                             </c:if>
