@@ -7,6 +7,14 @@ div{
   box-sizing: border-box;
 }
 
+a {
+  text-decoration-line: none;
+  color: #000000;
+
+}
+
+
+
 /* alert badge */
 .circle{
   display: inline-block;

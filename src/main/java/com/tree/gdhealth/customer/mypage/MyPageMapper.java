@@ -2,8 +2,14 @@ package com.tree.gdhealth.customer.mypage;
 
 import org.apache.ibatis.annotations.Mapper;
 
+import com.tree.gdhealth.vo.CustomerMyPage;
+
 @Mapper
 public interface MyPageMapper {
 	
+	CustomerMyPage info(int customerNo);
+	int attendanceCount(int customerNo);
+	int reviewCount(int customerNo);
+	int questionCount(int customerNo);
 
 }
