@@ -21,10 +21,11 @@
                             <li><a href="/customer/login">login</a></li>
                             </c:if>
                             <c:if test="${customerNo ne null}">
+                            <li><a href="/customer/mypage">mypage</a></li>
+                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                             <li><a href="/customer/logout">logout</a></li>
                             </c:if>
-                            <li><i>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
-                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</i></li>
+                            &nbsp;&nbsp;&nbsp;
                             <c:if test="${customerNo eq null && sessionScope.loginEmployee eq null}">
                             <li><a href="/employee/login">employee login</a></li>
                             </c:if>
