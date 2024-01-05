@@ -84,45 +84,7 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="card">
-                                <div class="card-heading">
-                                    <a data-toggle="collapse" data-target="#collapseTwo">
-                                        경기
-                                    </a>
-                                </div>
-                                <div id="collapseTwo" class="collapse" data-parent="#accordionExample">
-                                    <div class="card-body">
-                                        &nbsp;&nbsp;
-                                    	<div class="btn-group">
-                                        <a href="#" class="btn btn-primary">00점</a>
-                                        <a href="#" class="btn btn-primary">00점</a>
-                                        <a href="#" class="btn btn-primary">00점</a>
-                                        <a href="#" class="btn btn-primary">00점</a>
-                                        </div>
-                                        <br><br>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="card">
-                                <div class="card-heading active">
-                                    <a class="active" data-toggle="collapse"
-                                        data-target="#collapseThree">
-                                        전국
-                                    </a>
-                                </div>
-                                <div id="collapseThree" class="collapse show" data-parent="#accordionExample">
-                                    <div class="card-body">
-                                        &nbsp;&nbsp;
-                                    	<div class="btn-group">
-                                        <a href="#" class="btn btn-primary">00점</a>
-                                        <a href="#" class="btn btn-primary">00점</a>
-                                        <a href="#" class="btn btn-primary">00점</a>
-                                        <a href="#" class="btn btn-primary">00점</a>
-                                        </div>
-                                        <br><br>
-                                    </div>
-                                </div>
-                            </div>
+                            
                         </div>
                     </div>
                 </div>
@@ -171,46 +133,7 @@
                     </div>
                 </div>
             </div>
-            <div class="row m-80">
-                <div class="col-lg-12">
-                    <div class="loaders-title">
-                        <h2>그래프</h2>
-                    </div>
-                </div>
-                <div class="col-lg-3 col-md-6">
-                    <div class="single-loader">
-                        <div class="loader-circle-wrap">
-                            <div id="congestionGraph" class="circle-progress" data-cpid="id-1" data-cpvalue="${cnt.count}" data-cpcolor="#233ede"></div>
-                        </div>
-                        <span>혼잡도</span>
-                    </div>
-                </div>
-                <div class="col-lg-3 col-md-6">
-                    <div class="single-loader">
-                        <div class="loader-circle-wrap">
-                            <div class="circle-progress" data-cpid="id-2" data-cpvalue="25" data-cpcolor="#233ede"></div>
-                        </div>
-                        <span>Morbi auctor lacus</span>
-                    </div>
-                </div>
-                <div class="col-lg-3 col-md-6">
-                    <div class="single-loader">
-                        <div class="loader-circle-wrap">
-                            <div class="circle-progress" data-cpid="id-3" data-cpvalue="50" data-cpcolor="#233ede"></div>
-                        </div>
-                        <span>Morbi auctor lacus</span>
-                    </div>
-                </div>
-                <div class="col-lg-3 col-md-6">
-                    <div class="single-loader">
-                        <div class="loader-circle-wrap">
-                            <div class="circle-progress" data-cpid="id-4" data-cpvalue="75" data-cpcolor="#233ede"></div>
-                        </div>
-                        <span>Morbi auctor lacus</span>
-                    </div>
-                    
-                </div>
-            </div>
+            
             <div class="row">
                 <div class="col-lg-12">
                     <div class="icon-box-title">

@@ -118,32 +118,21 @@
 					class="right" href="#"><div>></div></a>
 			</div>
 			<div class="item">
-				<a href="#"><div class="icon">ii &nbsp; 설정</div></a> <a
+				<a href="#"><div class="icon">ii &nbsp; 맴버십 정보</div></a> <a
 					class="right" href="#"><div>></div></a>
 			</div>
 			<div class="item">
-				<a href="#"><div class="icon">ii &nbsp; 설정</div></a> <a
+				<a href="#"><div class="icon">ii &nbsp; 프로그램 정보</div></a> <a
 					class="right" href="#"><div>></div></a>
 			</div>
 		</div>
 		<div class="listContainer">
 			<div class="item">
-				<div class="icon">ii</div>
-				<div class="text">
-					<span>내지갑</span> <span class="smallLight"> <span>|</span> <span>보유
-							적립금</span>
-					</span>
-				</div>
-				<div class="right">
-					<span class="blct">175 BLCT</span> >
-				</div>
-			</div>
-			<div class="item">
-				<a href="#"><div class="icon">ii &nbsp; 설정</div></a> <a
+				<a href="#"><div class="icon">ii &nbsp; 고객센터</div></a> <a
 					class="right" href="#"><div>></div></a>
 			</div>
 			<div class="item">
-				<a href="#"><div class="icon">ii &nbsp; 설정</div></a> <a
+				<a href="#"><div class="icon">ii &nbsp; 회원탈퇴</div></a> <a
 					class="right" href="#"><div>></div></a>
 			</div>
 		</div>
