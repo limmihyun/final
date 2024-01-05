@@ -10,29 +10,40 @@
                 <nav class="sidebar-nav left-sidebar-menu-pro">
                     <ul class="metismenu" id="menu1">
                     	<li>
-                            <a href="${pageContext.request.contextPath}/emp">
+                            <a href="${pageContext.request.contextPath}/headoffice/home">
+							   <span class="educate-icon educate-home icon-wrap"></span>
+							   <span class="mini-click-non">홈</span>
+							</a>                            
+                        </li>
+                    	<li>
+                            <a class="has-arrow" href="#" aria-expanded="false">
                             	<span class="educate-icon educate-professor icon-wrap"></span> 
                             	<span class="mini-click-non">직원</span>
                             </a>
+                            <ul class="submenu-angle form-mini-nb-dp" aria-expanded="false">
+                                <li><a href="${pageContext.request.contextPath}/headoffice/emp"><span class="mini-sub-pro">직원 목록</span></a></li>
+                                <li><a href="${pageContext.request.contextPath}/headoffice/emp/addEmp"><span class="mini-sub-pro">직원 추가</span></a></li>                               
+                            </ul>
                         </li>
-                        <li>
-                            <a class="has-arrow" href="all-professors.html" aria-expanded="false">
+                         <li>
+                            <a class="has-arrow" href="#" aria-expanded="false">
                             	<span class="educate-icon educate-professor icon-wrap"></span> 
                             	<span class="mini-click-non">회원</span>
                             </a>
-                            <ul class="submenu-angle" aria-expanded="false">
-                                <li><a title="All Professors" href="all-professors.html"><span class="mini-sub-pro">All Professors</span></a></li>
-                                <li><a title="Add Professor" href="add-professor.html"><span class="mini-sub-pro">Add Professor</span></a></li>
-                                <li><a title="Edit Professor" href="edit-professor.html"><span class="mini-sub-pro">Edit Professor</span></a></li>
-                                <li><a title="Professor Profile" href="professor-profile.html"><span class="mini-sub-pro">Professor Profile</span></a></li>
+                            <ul class="submenu-angle form-mini-nb-dp" aria-expanded="false">
+                                <li><a href="${pageContext.request.contextPath}/headoffice/customer"><span class="mini-sub-pro">회원 목록</span></a></li>                                
                             </ul>
-                        </li>
+                        </li>    
                         <li>
-                            <a href="${pageContext.request.contextPath}/program">
+                            <a class="has-arrow" href="#" aria-expanded="false">
                             	<span class="educate-icon educate-course icon-wrap"></span> 
                             	<span class="mini-click-non">프로그램</span>
-                            </a>                         
-                        </li>
+                            </a>
+                            <ul class="submenu-angle form-mini-nb-dp" aria-expanded="false">
+                                <li><a href="${pageContext.request.contextPath}/headoffice/program"><span class="mini-sub-pro">프로그램 목록</span></a></li>
+                                <li><a href="${pageContext.request.contextPath}/headoffice/program/addProgram"><span class="mini-sub-pro">프로그램 추가</span></a></li>                               
+                            </ul>                         
+                        </li>                                       
                         <li>
                             <a class="has-arrow" href="mailbox.html" aria-expanded="false">
                             	<span class="educate-icon educate-data-table icon-wrap"></span> 

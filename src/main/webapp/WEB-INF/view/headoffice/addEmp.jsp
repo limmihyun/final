@@ -11,9 +11,10 @@
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     
-    <!-- favicon
-		============================================ -->
-    <link rel="shortcut icon" type="image/x-icon" href="/admin/img/favicon.ico">
+    <!------------------- favicon start ------------------>
+	<link type="image/png" sizes="32x32" rel="icon" href="/admin/workoutFavicon.png">
+	<!------------------- favicon end -------------------->
+	
     <!-- Google Fonts
 		============================================ -->
     <link href="https://fonts.googleapis.com/css?family=Roboto:100,300,400,700,900" rel="stylesheet">
@@ -85,9 +86,7 @@
         <div class="container-fluid">
             <div class="row">
                 <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-                    <div class="logo-pro">
-                        <a href="index.html"><img class="main-logo" src="/admin/img/logo/logo.png" alt="" /></a>
-                    </div>
+                    <h1 style="color:#2E64FE; margin-top:20px;">본사 페이지</h1> 
                 </div>
             </div>
         </div>
@@ -105,7 +104,7 @@
                     <div class="col-lg-6 col-md-12 col-sm-12 col-xs-12 mt-3">
 						
                         <div class="product-payment-inner-st"> 
-                            <div style="font-size:20px;">직원 추가하기</div>
+                            <h3 style="font-size:20px;">직원 추가하기</h3>
                             <div id="myTabContent" class="tab-content custom-product-edit">
                                 <div class="product-tab-list tab-pane fade active in" id="description">
                                     <div class="row">
@@ -261,9 +260,7 @@
     <!-- main JS
 		============================================ -->
     <script src="/admin/js/main.js"></script>
-    <!-- tawk chat JS
-		============================================ -->
-    <script src="/admin/js/tawk-chat.js"></script>
+ 
 </body>
 <script>
 	$('#employeeId').focus();

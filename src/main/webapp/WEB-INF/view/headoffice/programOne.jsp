@@ -11,9 +11,10 @@
     <title>프로그램 상세</title>
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <!-- favicon
-		============================================ -->
-    <link rel="shortcut icon" type="image/x-icon" href="img/favicon.ico">
+    <!------------------- favicon start ------------------>
+	<link type="image/png" sizes="32x32" rel="icon" href="/admin/workoutFavicon.png">
+	<!------------------- favicon end -------------------->
+	
     <!-- Google Fonts
 		============================================ -->
     <link href="https://fonts.googleapis.com/css?family=Roboto:100,300,400,700,900" rel="stylesheet">
@@ -79,9 +80,7 @@
         <div class="container-fluid">
             <div class="row">
                 <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-                    <div class="logo-pro">
-                        <a href="index.html"><img class="main-logo" src="/admin/img/logo/logo.png" alt="" /></a>
-                    </div>
+                    <h1 style="color:#2E64FE; margin-top:20px;">본사 페이지</h1> 
                 </div>
             </div>
         </div>
@@ -95,24 +94,29 @@
         <div class="blog-details-area mg-b-15">
             <div class="container-fluid">
                 <div class="row" style="margin-top:20px;">
-                	<div class="col-lg-3 col-md-12 col-sm-12 col-xs-12"></div>
-                    <div class="col-lg-6 col-md-12 col-sm-12 col-xs-12">
-                    
-                    
+                	<div class="col-lg-3 col-md-2 col-sm-1 col-xs-12"></div>
+                    <div class="col-lg-6 col-md-8 col-sm-10 col-xs-12">
                     
                         <div class="blog-details-inner">
                             <div class="row">
                                 <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                                     <div class="latest-blog-single blog-single-full-view">
-                                        <div class="blog-image">
-                                           	<img src="${pageContext.request.contextPath}/upload/program/${programOne.filename}" alt="${pageContext.request.contextPath}/noImg" style="width:600px; height:600px;"/>                     
+                                        <div class="blog-image col-lg-12 col-md-12 col-sm-12 col-xs-12" style="text-align:center;">
+                                           	<img src="${pageContext.request.contextPath}/upload/program/${programOne.filename}" alt="${pageContext.request.contextPath}/noImg" style="width:450px; height:450px;"/>                     
                                         </div>
                                         
                                         <div class="blog-details blog-sig-details">
-                                            <div class="details-blog-dt blog-sig-details-dt courses-info mobile-sm-d-n">
-                                                <span><i class="fa fa-heart"></i> <b>수용 인원 :</b> ${programOne.maxCustomer}</span>
-                                                <span><i class="fa fa-user"></i> <b>담당 본사 직원 :</b> ${programOne.empName}</span>
-                                                <span><i class="fa fa-heart"></i> <b>활성화 상태 :</b> ${programOne.active}</span>
+                                            <div class="details-blog-dt blog-sig-details-dt courses-info  row" style="text-align:left;">
+                                            	<div class="col-lg-12">
+                                            		<span><i class="fa fa-heart"></i> <b>수용 인원 :</b> ${programOne.maxCustomer}</span>
+                                            	</div>
+                                            	<div class="col-lg-12">
+                                            		<span><i class="fa fa-user"></i> <b>담당 본사 직원 :</b> ${programOne.empName}</span>
+                                            	</div>
+                                            	<div class="col-lg-12">
+                                            		<span><i class="fa fa-heart"></i> <b>활성화 상태 :</b> ${programOne.active}</span>
+                                            	</div>
+                                                  
                                             </div>
                                             <div style="text-align:center;">
 	                                             <h1>${programOne.programName}</h1>
@@ -121,12 +125,12 @@
                                         </div>
                                         
                                         <div style="text-align:center;">                    	
-                                        	<a href="${pageContext.request.contextPath}/program/update/${programOne.programNo}" class="btn btn-primary">수정하기</a>
+                                        	<a href="${pageContext.request.contextPath}/headoffice/program/update/${programOne.programNo}" class="btn btn-primary">수정하기</a>
                                         	<c:if test="${programOne.active == 'Y'}">
-                                        		<a href="${pageContext.request.contextPath}/program/deactive/${programOne.programNo}" class="btn btn-primary">비활성화하기</a>
+                                        		<button type="button" id="deactiveBtn" class="btn btn-primary">비활성화하기</button>
                                         	</c:if>
                                         	<c:if test="${programOne.active == 'N'}">
-                                        		<a href="${pageContext.request.contextPath}/program/active/${programOne.programNo}" class="btn btn-primary">활성화하기</a>
+                                        		<button type="button" id="activeBtn" class="btn btn-primary">활성화하기</button>                                      		
                                         	</c:if>                                	                                 
                                         </div>                          
                                     </div>
@@ -135,7 +139,7 @@
                         </div>
                              
                     </div>
-                    <div class="col-lg-3 col-md-12 col-sm-12 col-xs-12"></div>
+                    <div class="col-lg-3 col-md-2 col-sm-1 col-xs-12"></div>
                 </div>
             </div>
         </div>
@@ -205,9 +209,27 @@
     <!-- main JS
 		============================================ -->
     <script src="/admin/js/main.js"></script>
-    <!-- tawk chat JS
-		============================================ -->
-    <script src="/admin/js/tawk-chat.js"></script>
+
 </body>
+
+<script>
+	
+	$('#deactiveBtn').click(function(){	
+		let result = confirm('비활성화 하시겠습니까?');
+		
+		if(result) {
+			location.href = '${pageContext.request.contextPath}/headoffice/program/deactive/${programOne.programNo}';
+		}
+	});
+	
+	$('#activeBtn').click(function(){
+		let result = confirm('활성화 하시겠습니까?');
+		
+		if(result) {
+			location.href = '${pageContext.request.contextPath}/headoffice/program/active/${programOne.programNo}';
+		}
+	})
+
+</script>
 
 </html>

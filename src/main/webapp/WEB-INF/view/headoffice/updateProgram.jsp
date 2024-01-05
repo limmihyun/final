@@ -8,12 +8,13 @@
 <head>
     <meta charset="utf-8">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
-    <title>프로그램 상세</title>
+    <title>프로그램 수정</title>
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <!-- favicon
-		============================================ -->
-    <link rel="shortcut icon" type="image/x-icon" href="img/favicon.ico">
+    <!------------------- favicon start ------------------>
+	<link type="image/png" sizes="32x32" rel="icon" href="/admin/workoutFavicon.png">
+	<!------------------- favicon end -------------------->
+	
     <!-- Google Fonts
 		============================================ -->
     <link href="https://fonts.googleapis.com/css?family=Roboto:100,300,400,700,900" rel="stylesheet">
@@ -80,9 +81,7 @@
         <div class="container-fluid">
             <div class="row">
                 <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-                    <div class="logo-pro">
-                        <a href="index.html"><img class="main-logo" src="/admin/img/logo/logo.png" alt="" /></a>
-                    </div>
+                   	<h1 style="color:#2E64FE; margin-top:20px;">본사 페이지</h1>                  
                 </div>
             </div>
         </div>
@@ -103,16 +102,18 @@
                         <div class="blog-details-inner">
                             <div class="row">
                                 <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-                                
-	                                <form action="${pageContext.request.contextPath}/program/update" id="updateForm" 
+                                	
+	                                <form action="${pageContext.request.contextPath}/headoffice/program/update" id="updateForm" 
                                                     	method="post" enctype="multipart/form-data">
                                        <input type="hidden" value="${programOne.programNo}" name="programNo">
                                        <input type="hidden" value="${programOne.filename}" name="filename">
 	                                   <div class="latest-blog-single blog-single-full-view">
 	                                        <div class="blog-details blog-sig-details">
 	                                        	<div class="blog-details" style="text-align:center;">
+	                                        		<h3 style="margin-bottom:50px;">프로그램 수정하기</h3>
                                         			<input type="file" name="programFile" style="display:block; margin:0 auto;">    
 	                                        	</div>
+	                                        	
 	                                            <div class="details-blog-dt blog-sig-details-dt courses-info mobile-sm-d-n">
 	                                                <span>
 	                                                	<i class="fa fa-heart"></i> <b>수용 인원 :</b> <input type="text" value="${programOne.maxCustomer}" name="programMaxCustomer" id="programMaxCustomer" style="width:60px;">
@@ -205,9 +206,7 @@
     <!-- main JS
 		============================================ -->
     <script src="/admin/js/main.js"></script>
-    <!-- tawk chat JS
-		============================================ -->
-    <script src="/admin/js/tawk-chat.js"></script>
+
 </body>
 
 <script>	

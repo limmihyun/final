@@ -8,6 +8,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -21,6 +22,7 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
+@RequestMapping("/headoffice/program")
 @RequiredArgsConstructor
 @Controller
 public class ProgramController {
@@ -28,7 +30,7 @@ public class ProgramController {
 	// DI 
 	private final ProgramService programService;
 	
-	@GetMapping("/program")
+	@GetMapping
 	public String program(Model model, @RequestParam(defaultValue = "1") int page) {
 		
 		// 전체 프로그램 수
@@ -57,13 +59,13 @@ public class ProgramController {
 		return "headoffice/programList";
 	}
 	
-	@GetMapping("/program/addProgram")
+	@GetMapping("/addProgram")
 	public String addProgram() {
 		
 		return "headoffice/addProgram";
 	}
 	
-	@PostMapping("/program/addProgram")
+	@PostMapping("/addProgram")
 	public String addProgram(HttpSession session, Program program, 
 								ProgramDate programDate, MultipartFile programFile) {
 		
@@ -75,7 +77,7 @@ public class ProgramController {
 		return "redirect:/program";
 	}
 	
-	@GetMapping("/program/programOne/{programNo}")
+	@GetMapping("/programOne/{programNo}")
 	public String programOne(Model model, @PathVariable int programNo) {
 		
 		Map<String, Object> programOne = programService.getProgramOne(programNo);
@@ -86,7 +88,7 @@ public class ProgramController {
 		return "headoffice/programOne";
 	}
 	
-	@GetMapping("/program/update/{programNo}")
+	@GetMapping("/update/{programNo}")
 	public String update(Model model, @PathVariable int programNo) {
 		
 		Map<String, Object> programOne = programService.getProgramOne(programNo);
@@ -97,7 +99,7 @@ public class ProgramController {
 		return "headoffice/updateProgram";
 	}
 	
-	@PostMapping("/program/update")
+	@PostMapping("/update")
 	public String update(HttpSession session, MultipartFile programFile,
 							Program program, ProgramImg programImg) {
 				
@@ -109,24 +111,24 @@ public class ProgramController {
 		return "redirect:/program/programOne/" + program.getProgramNo();
 	}
 	
-	@GetMapping("/program/deactive/{programNo}")
+	@GetMapping("/deactive/{programNo}")
 	public String deactive(HttpSession session, @PathVariable int programNo) {
 		
 		int result = programService.deactiveProgram(programNo);
 		// 디버깅
 		log.debug("프로그램 비활성화(성공:1,실패:0) : " + result);
 		
-		return "redirect:/program";
+		return "redirect:/headoffice/program/programOne/" + programNo;
 	}
 	
-	@GetMapping("/program/active/{programNo}")
+	@GetMapping("/active/{programNo}")
 	public String active(HttpSession session, @PathVariable int programNo) {
 		
 		int result = programService.activeProgram(programNo);
 		// 디버깅
 		log.debug("프로그램 활성화(성공:1,실패:0) : " + result);
 		
-		return "redirect:/program";
+		return "redirect:/headoffice/program/programOne/" + programNo;
 	}
 
 }

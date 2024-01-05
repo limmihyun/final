@@ -11,9 +11,10 @@
     <title>프로그램 관리</title>
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <!-- favicon
-		============================================ -->
-    <link rel="shortcut icon" type="image/x-icon" href="img/favicon.ico">
+    <!------------------- favicon start ------------------>
+	<link type="image/png" sizes="32x32" rel="icon" href="/admin/workoutFavicon.png">
+	<!------------------- favicon end -------------------->
+	
     <!-- Google Fonts
 		============================================ -->
     <link href="https://fonts.googleapis.com/css?family=Roboto:100,300,400,700,900" rel="stylesheet">
@@ -80,9 +81,7 @@
         <div class="container-fluid">
             <div class="row">
                 <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-                    <div class="logo-pro">
-                        <a href="index.html"><img class="main-logo" src="/admin/img/logo/logo.png" alt="" /></a>
-                    </div>
+                    <h1 style="color:#2E64FE; margin-top:20px;">본사 페이지</h1> 
                 </div>
             </div>
         </div>
@@ -134,20 +133,19 @@
                 
                 	<c:forEach var="m" items="${programList}">
                 	
-                		<div class="col-lg-3 col-md-6 col-sm-6 col-xs-12">
+                		<div class="col-lg-3 col-md-6 col-sm-6 col-xs-12" style="margin-bottom:15px;">
 	                        <div class="courses-inner res-mg-b-30">
-	                            <div class="courses-title">
-	                                <a href="#">
-	                                	<img src="${pageContext.request.contextPath}/upload/program/${m.filename}" alt="${pageContext.request.contextPath}/noImg" style="height:270px; width:300px;">
-	                                </a>
-	                                <h2>${m.programName}</h2>
+	                            <div style="text-align:center;">	           
+                                	<img src="${pageContext.request.contextPath}/upload/program/${m.filename}" alt="${pageContext.request.contextPath}/noImg" style="height:270px; width:300px;">
+	                                
 	                            </div>
 	                          
 	                            <div class="course-des">
+	                            	<h3>${m.programName}</h3>
 	                                <p><span><i class="fa fa-clock"></i></span> <b>수용 인원 :</b> ${m.maxCustomer}</p>
 	                            </div>
 	                            <div class="product-buttons">
-	                                <button type="button" class="button-default cart-btn" onclick="location.href='${pageContext.request.contextPath}/program/programOne/${m.programNo}'">자세히 보기</button>
+	                                <button type="button" class="button-default cart-btn" onclick="location.href='${pageContext.request.contextPath}/headoffice/program/programOne/${m.programNo}'">자세히 보기</button>
 	                            </div>
 	                        </div>
                    	    </div>
@@ -164,28 +162,28 @@
              <ul class="pagination">
              
              	  <li class="page-item">
-             	  	<a class="page-link" href="${pageContext.request.contextPath}/program?page=1">처음</a>
+             	  	<a class="page-link" href="${pageContext.request.contextPath}/headoffice/program?page=1">처음</a>
              	  </li>	
 				  
 				  <c:if test="${prev}">
-				  	<li class="page-item"><a class="page-link" href="${pageContext.request.contextPath}/program?page=${startPageNum - 1}">이전</a></li>
+				  	<li class="page-item"><a class="page-link" href="${pageContext.request.contextPath}/headoffice/program?page=${startPageNum - 1}">이전</a></li>
 				  </c:if>
 				  <c:forEach begin="${startPageNum}" end="${endPageNum}" var="pageNum">
 				  	<c:if test="${pageNum == currentPage}"> <!-- 페이징 버튼 색 변경o --> 
 				  		<li class="page-item active">
-					  		<a class="page-link" href="${pageContext.request.contextPath}/program?page=${pageNum}">${pageNum}</a>
+					  		<a class="page-link" href="${pageContext.request.contextPath}/headoffice/program?page=${pageNum}">${pageNum}</a>
 					  	</li>
 				  	</c:if>
 				  	<c:if test="${pageNum != currentPage}"> <!-- 페이징 버튼 색 변경x --> 
 				  		<li class="page-item">
-					  		<a class="page-link" href="${pageContext.request.contextPath}/program?page=${pageNum}">${pageNum}</a>
+					  		<a class="page-link" href="${pageContext.request.contextPath}/headoffice/program?page=${pageNum}">${pageNum}</a>
 					  	</li>
 				  	</c:if>
 				  </c:forEach>
 				  <c:if test="${next}">
-				  	<li class="page-item"><a class="page-link" href="${pageContext.request.contextPath}/program?page=${endPageNum + 1}">다음</a></li>
+				  	<li class="page-item"><a class="page-link" href="${pageContext.request.contextPath}/headoffice/program?page=${endPageNum + 1}">다음</a></li>
 				  </c:if>	  
-				  <li class="page-item"><a class="page-link" href="${pageContext.request.contextPath}/program?page=${lastPage}">끝</a></li>
+				  <li class="page-item"><a class="page-link" href="${pageContext.request.contextPath}/headoffice/program?page=${lastPage}">끝</a></li>
 			</ul>	  
         </div>
         <!----------------------- 페이징 end ---------------------------->
@@ -241,9 +239,7 @@
     <!-- main JS
 		============================================ -->
     <script src="/admin/js/main.js"></script>
-    <!-- tawk chat JS
-		============================================ -->
-    <script src="/admin/js/tawk-chat.js"></script>
+ 
 </body>
 
 </html>

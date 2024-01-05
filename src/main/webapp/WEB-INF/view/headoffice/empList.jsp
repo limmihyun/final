@@ -11,9 +11,11 @@
     <title>직원 관리</title>
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <!-- favicon
-		============================================ -->
-    <link rel="shortcut icon" type="image/x-icon" href="/admin/img/favicon.ico">
+    
+	<!------------------- favicon start ------------------>
+	<link type="image/png" sizes="32x32" rel="icon" href="/admin/workoutFavicon.png">
+	<!------------------- favicon end -------------------->
+	
     <!-- Google Fonts
 		============================================ -->
     <link href="https://fonts.googleapis.com/css?family=Roboto:100,300,400,700,900" rel="stylesheet">
@@ -79,9 +81,7 @@
         <div class="container-fluid">
             <div class="row">
                 <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-                    <div class="logo-pro">
-                        <a href="index.html"><img class="main-logo" src="/admin/img/logo/logo.png" alt="" /></a>
-                    </div>
+                    <h1 style="color:#2E64FE; margin-top:20px;">본사 페이지</h1> 
                 </div>
             </div>
         </div>
@@ -131,16 +131,16 @@
   				<c:forEach var="m" items="${empList}">
 	   			    <c:set var="cnt" value="${cnt + 1}"></c:set>
 	   			    <c:if test="${(cnt%4) == 1}">
-	   			  	 	<div class="row" style="margin-bottom:15px;"> 
+	   			  	 	<div class="row"> 
 	   			    </c:if>	 			    
-			           	    <div class="col-lg-3 col-md-6 col-sm-6 col-xs-12">
+			           	    <div class="col-lg-3 col-md-6 col-sm-6 col-xs-12" style="margin-bottom:15px;">
 			                	<div class="student-inner-std res-mg-b-30">
 			                     <div class="student-img">
 			                        <img src="${pageContext.request.contextPath}/upload/emp/${m.filename}" alt="${pageContext.request.contextPath}/noImg" style="height:300px; width:300px;"/> 
 			                     </div>
 			                     <div class="student-dtl">
 			                         <h2>
-			                         <a href="${pageContext.request.contextPath}/emp/empOne/${m.empId}">
+			                         <a href="${pageContext.request.contextPath}/headoffice/emp/empOne/${m.empId}">
 			                         	${m.empName}
 			                         </a>		                         
 			                         </h2>
@@ -165,28 +165,28 @@
 	             <ul class="pagination">
 	             
 	             	  <li class="page-item">
-	             	  	<a class="page-link" href="${pageContext.request.contextPath}/emp?page=1">처음</a>
+	             	  	<a class="page-link" href="${pageContext.request.contextPath}/headoffice/emp?page=1">처음</a>
 	             	  </li>	
 					  
 					  <c:if test="${prev}">
-					  	<li class="page-item"><a class="page-link" href="${pageContext.request.contextPath}/emp?page=${startPageNum - 1}">이전</a></li>
+					  	<li class="page-item"><a class="page-link" href="${pageContext.request.contextPath}/headoffice/emp?page=${startPageNum - 1}">이전</a></li>
 					  </c:if>
 					  <c:forEach begin="${startPageNum}" end="${endPageNum}" var="pageNum">
 					  	<c:if test="${pageNum == currentPage}"> <!-- 페이징 버튼 색 변경o --> 
 					  		<li class="page-item active">
-						  		<a class="page-link" href="${pageContext.request.contextPath}/emp?page=${pageNum}">${pageNum}</a>
+						  		<a class="page-link" href="${pageContext.request.contextPath}/headoffice/emp?page=${pageNum}">${pageNum}</a>
 						  	</li>
 					  	</c:if>
 					  	<c:if test="${pageNum != currentPage}"> <!-- 페이징 버튼 색 변경x --> 
 					  		<li class="page-item">
-						  		<a class="page-link" href="${pageContext.request.contextPath}/emp?page=${pageNum}">${pageNum}</a>
+						  		<a class="page-link" href="${pageContext.request.contextPath}/headoffice/emp?page=${pageNum}">${pageNum}</a>
 						  	</li>
 					  	</c:if>
 					  </c:forEach>
 					  <c:if test="${next}">
-					  	<li class="page-item"><a class="page-link" href="${pageContext.request.contextPath}/emp?page=${endPageNum + 1}">다음</a></li>
+					  	<li class="page-item"><a class="page-link" href="${pageContext.request.contextPath}/headoffice/emp?page=${endPageNum + 1}">다음</a></li>
 					  </c:if>	  
-					  <li class="page-item"><a class="page-link" href="${pageContext.request.contextPath}/emp?page=${lastPage}">끝</a></li>
+					  <li class="page-item"><a class="page-link" href="${pageContext.request.contextPath}/headoffice/emp?page=${lastPage}">끝</a></li>
 				</ul>	  
             </div>
                <!----------------------- 페이징 end ---------------------------->       		    
@@ -256,9 +256,7 @@
     <!-- main JS
 		============================================ -->
     <script src="/admin/js/main.js"></script>
-    <!-- tawk chat JS
-		============================================ -->
-    <script src="/admin/js/tawk-chat.js"></script>
+    
 </body>
 
 </html>

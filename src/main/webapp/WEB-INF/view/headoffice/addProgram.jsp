@@ -10,9 +10,11 @@
     <title>프로그램 추가</title>
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <!-- favicon
-		============================================ -->
-    <link rel="shortcut icon" type="image/x-icon" href="/admin/img/favicon.ico">
+    
+	<!------------------- favicon start ------------------>
+	<link type="image/png" sizes="32x32" rel="icon" href="/admin/workoutFavicon.png">
+	<!------------------- favicon end -------------------->
+	
     <!-- Google Fonts
 		============================================ -->
     <link href="https://fonts.googleapis.com/css?family=Roboto:100,300,400,700,900" rel="stylesheet">
@@ -78,9 +80,7 @@
         <div class="container-fluid">
             <div class="row">
                 <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-                    <div class="logo-pro">
-                        <a href="index.html"><img class="main-logo" src="/admin/img/logo/logo.png" alt="" /></a>
-                    </div>
+                    <h1 style="color:#2E64FE; margin-top:20px;">본사 페이지</h1> 
                 </div>
             </div>
         </div>
@@ -92,13 +92,14 @@
         
         <!-- 프로그램 추가 화면 start--> 	          
 		<form id="insertForm" method="post" 
-					action="${pageContext.request.contextPath}/program/addProgram"
+					action="${pageContext.request.contextPath}/headoffice/program/addProgram"
 					enctype="multipart/form-data">
 			
 			<div class="row" id="font" style="padding:15px;">
 			
 				<div class="col-lg-3 col-md-2 col-sm-1 col-xs-12"></div>	
-				<div class="col-lg-6 col-md-8 col-sm-10 col-xs-12">	
+				<div class="col-lg-6 col-md-8 col-sm-10 col-xs-12">
+					<h3 style="margin-bottom:20px;">프로그램 추가하기</h3>
 					<div style="margin-bottom:10px;">
 						<label for="programName" class="form-label">프로그램 제목</label>
 					    <input type="text" class="form-control" id="programName" name="programName" placeholder="입력하기">
@@ -194,9 +195,7 @@
     <!-- main JS
 		============================================ -->
     <script src="/admin/js/main.js"></script>
-    <!-- tawk chat JS
-		============================================ -->
-    <script src="/admin/js/tawk-chat.js"></script>
+
 </body>
 
 <script>
