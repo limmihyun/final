@@ -7,4 +7,6 @@ import com.tree.gdhealth.vo.Employee;
 @Mapper
 public interface EmpLoginMapper {
 	Integer employeeLoginCk(Employee employee);
+
+	LoginEmployee getLoginEmployeeInfo(Integer loginEmployeeNo);
 }

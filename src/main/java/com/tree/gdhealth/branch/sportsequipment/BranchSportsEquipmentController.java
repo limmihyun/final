@@ -1,5 +1,6 @@
 package com.tree.gdhealth.branch.sportsequipment;
 
+import com.tree.gdhealth.employee.login.LoginEmployee;
 import com.tree.gdhealth.vo.Employee;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
@@ -28,16 +29,6 @@ import java.util.Map;
 public class BranchSportsEquipmentController {
     final BranchSportsEquipmentService service;
 
-    @ModelAttribute
-    private void mockLoginEmployee(HttpSession session) {
-        Employee employee = new Employee();
-        employee.setBranchNo(2);
-        employee.setEmployeeId("gasan1manager");
-        employee.setEmployeeActive("Y");
-        employee.setEmployeeNo(2);
-        session.setAttribute("loginEmployee", employee);
-    }
-
     /**
      * @param requestPage 쿼리스트링의 요청페이지번호
      * @param isOnlyWaitingList 발주상태가 대기인 것만 추출할 것인지 여부
@@ -47,7 +38,7 @@ public class BranchSportsEquipmentController {
     public String getOrderList(
             @RequestParam(name = "requestPage", defaultValue = "1") int requestPage,
             @RequestParam(name = "isOnlyWaitingList", defaultValue = "false") boolean isOnlyWaitingList,
-            @SessionAttribute Employee loginEmployee,
+            @SessionAttribute("loginEmployee") LoginEmployee loginEmployee,
             HttpServletRequest request, Model model) {
 
         getOrderListResponseDto orderListResponseDto = service.getOrderListResponseDto(
@@ -74,7 +65,7 @@ public class BranchSportsEquipmentController {
     }
 
     @GetMapping("/order")
-    public String getOrderForm(@SessionAttribute Employee loginEmployee, Model model) {
+    public String getOrderForm(@SessionAttribute("loginEmployee") LoginEmployee loginEmployee, Model model) {
         SportsEquipmentOrderAddDto dto = new SportsEquipmentOrderAddDto(
                 loginEmployee.getEmployeeNo(),
                 loginEmployee.getBranchNo(),

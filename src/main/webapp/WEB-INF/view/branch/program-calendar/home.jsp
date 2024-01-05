@@ -47,7 +47,7 @@
                                             <button class="pd-setting" name="programName">${branchDate.programName}</button>
                                             </c:if>
                                         </td>
-                                        <td>${branchDate.managerNo ne 0? branchDate.managerName : null}</td>
+                                        <td>${branchDate.trainerEmployeeNo ne 0? branchDate.managerName : null}</td>
                                         <td>${branchDate.reservedCount}/${branchDate.maxCustomer} 명</td>
                                     </tr>
                                     </c:forEach>
@@ -169,7 +169,18 @@
                                                                 <button class="form-control" id="changeManagerButton" type="button">변경</button>
                                                             </form>
                                                         </div>
-                                                            <div class="col-lg-8"></div>
+                                                            <div class="col-lg-4">
+                                                            </div>
+                                                            <div class="col-lg-4">
+                                                            </div>
+                                                        </div>
+                                                        <div class="row mg-t-30">
+                                                            <div class="col-lg-6">
+                                                                <h4><a href="">입실 QR</a></h4>
+                                                            </div>
+                                                            <div class="col-lg-6">
+                                                                <h4>퇴실 QR</h4>
+                                                            </div>
                                                         </div>
                                                     </div>
                                                 </div>

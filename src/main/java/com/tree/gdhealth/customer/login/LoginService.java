@@ -37,10 +37,10 @@ public class LoginService {
 	}
 
 	public int resetPw(Customer customer) {
-		System.out.println(customer.getCustomerPw());
-		System.out.println(customer.getCustomerNo());
 		int n = loginMapper.customerResetPw(customer);
 		return n;
 	}
+	
+	
 	
 }

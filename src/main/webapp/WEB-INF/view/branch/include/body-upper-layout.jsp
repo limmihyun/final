@@ -10,7 +10,8 @@
 <div class="left-sidebar-pro">
     <nav id="sidebar" class="">
         <div class="sidebar-header">
-            <h3 style="color: #0a6aa1">GD HEALTH</h3>
+            <h3 style="color: #0a6aa1"><a href="/branch/home">GD HEALTH</a></h3>
+            <h5 style="color: #0a6aa1">${sessionScope.loginEmployee.employeeName} 님 (${sessionScope.loginEmployee.branchName})</h5>
         </div>
         <div class="left-custom-menu-adp-wrap comment-scrollbar mt-3">
             <nav class="sidebar-nav left-sidebar-menu-pro">
@@ -72,6 +73,7 @@
                                             <li class="nav-item"><a href="/customer/home" class="nav-link">고객 홈</a></li>
                                             <li class="nav-item"><a href="/branch/home" class="nav-link">지점 홈</a></li>
                                             <li class="nav-item"><a href="/notice/noticeList" class="nav-link">공지 게시판</a></li>
+                                            <li class="nav-item"><a href="/testLoginEmployee" class="nav-link">직원 테스트로그인</a></li>
                                         </ul>
                                     </div>
                                 </div>

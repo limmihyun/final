@@ -16,4 +16,7 @@ public interface BranchMapper {
 	
 	Branch branchInfoOne(Branch branch);
 	
+	int branchTrainerCount(Branch branch);
+	
+	int branchTrainerCountOne(Branch branch);
 }

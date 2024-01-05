@@ -153,21 +153,125 @@
 						<c:if test="${!(d < 1 || d > calendarMap.lastDate)}">
 							<c:if test="${(i%7-1)==0}">
 							  <a class="text-danger">${d}</a>
-							 	 <c:forEach var="l" items="${resultList}">
-								 	<c:if test="${d == l.day}">
-								 		<a href="${pageContext.request.contextPath}/customer/prorsone?year=${l.year}&month=${l.month}&day=${l.day}&programName=${l.programName}">${l.programName}</a>
-								 		<p>${l.cnt} / ${l.programMaxCustomer}</p>
-								 	</c:if>
-								 </c:forEach> 
+							  	 <c:if test="${calendarMap.targetYear < calendarMap.thisYear}">
+								 	&nbsp;
+								  </c:if>
+								 <c:if test="${!(calendarMap.targetYear < calendarMap.thisYear)}">
+								  	<c:if test="${calendarMap.targetMonth + 1 < calendarMap.thisMonth}">
+								  		&nbsp;
+								  	</c:if>							  
+								  	<c:if test="${!(calendarMap.targetMonth + 1 < calendarMap.thisMonth)}">	
+								  		<c:if test="${d < calendarMap.thisDay}">
+								  			&nbsp;
+								  		</c:if>					  	
+								  		<c:if test="${!(d < calendarMap.thisDay)}">
+										 <c:forEach var="l" items="${resultList}">
+										   <c:set var="end" value="false"></c:set>
+										 	<c:if test="${d == l.day}">
+									 			<c:if test="${l.cnt == l.programMaxCustomer}">
+										 			<a style="color:gray">${l.programName}</a>
+										 			<p style="color:gray">${l.cnt} / ${l.programMaxCustomer}</p>
+										 		</c:if>
+										 		<c:if test="${l.cnt != l.programMaxCustomer}">								 		
+												 	<c:forEach var="my" items="${myCalendarList}">  
+											 			<c:if test="${d == my.day and not end}">
+												 			<a style="color:gray">${l.programName}</a>
+												 			<p style="color:gray">${l.cnt} / ${l.programMaxCustomer}</p>
+												 			<c:set var="end" value="true"></c:set>
+											 			</c:if>
+											 			<c:if test="${d != my.day and not end}">
+													 		<a href="${pageContext.request.contextPath}/customer/prorsone?year=${l.year}&month=${l.month}&day=${l.day}&programName=${l.programName}">${l.programName}</a>
+													 		<p>${l.cnt} / ${l.programMaxCustomer}</p>
+												 			<c:set var="end" value="true"></c:set>
+											 			</c:if>
+											 			<c:set var="myempty" value="true"></c:set> 								 			
+											 		</c:forEach>
+											 	<c:if test="${l.cnt != l.programMaxCustomer and not myempty}">
+											 		<a href="${pageContext.request.contextPath}/customer/prorsone?year=${l.year}&month=${l.month}&day=${l.day}&programName=${l.programName}">${l.programName}</a>
+											 		<p>${l.cnt} / ${l.programMaxCustomer}</p>
+									 			</c:if>
+										 		</c:if>
+										 	</c:if>
+										  </c:forEach> 
+										 </c:if>
+									 </c:if>
+								</c:if>
 							</c:if>
 							<c:if test="${!((i%7-1)==0)}">
 								${d}
-								 <c:forEach var="l" items="${resultList}">
-								 	<c:if test="${d == l.day}">
-								 		<a href="${pageContext.request.contextPath}/customer/prorsone?year=${l.year}&month=${l.month}&day=${l.day}&programName=${l.programName}">${l.programName}</a>
-								 		<p>${l.cnt} / ${l.programMaxCustomer}</p>
-								 	</c:if>
-								 </c:forEach> 
+								  <c:if test="${calendarMap.targetYear < calendarMap.thisYear}">
+								 		&nbsp;
+								  </c:if>
+								  <c:if test="${!(calendarMap.targetYear < calendarMap.thisYear)}">
+								  	<c:if test="${calendarMap.targetMonth + 1 < calendarMap.thisMonth}">
+								  		&nbsp;
+								  	</c:if>							  
+								  	<c:if test="${calendarMap.targetMonth + 1 == calendarMap.thisMonth}">	
+								  		<c:if test="${d < calendarMap.thisDay}">
+								  			&nbsp;
+								  		</c:if>					  	
+								  		<c:if test="${!(d < calendarMap.thisDay)}">
+										 <c:forEach var="l" items="${resultList}">
+										   <c:set var="end" value="false"></c:set>
+										 	<c:if test="${d == l.day}">
+									 			<c:if test="${l.cnt == l.programMaxCustomer}">
+										 			<a style="color:gray">${l.programName}</a>
+										 			<p style="color:gray">${l.cnt} / ${l.programMaxCustomer}</p>
+										 		</c:if>
+										 		<c:if test="${l.cnt != l.programMaxCustomer}">								 		
+												 	<c:forEach var="my" items="${myCalendarList}">  
+											 			<c:if test="${d == my.day and not end}">
+												 			<a style="color:gray">${l.programName}</a>
+												 			<p style="color:gray">${l.cnt} / ${l.programMaxCustomer}</p>
+												 			<c:set var="end" value="true"></c:set>
+											 			</c:if>
+											 			<c:if test="${d != my.day and not end}">
+													 		<a href="${pageContext.request.contextPath}/customer/prorsone?year=${l.year}&month=${l.month}&day=${l.day}&programName=${l.programName}">${l.programName}</a>
+													 		<p>${l.cnt} / ${l.programMaxCustomer}</p>
+												 			<c:set var="end" value="true"></c:set>
+											 			</c:if>
+											 			<c:set var="myempty" value="true"></c:set> 								 			
+											 		</c:forEach>
+											 	<c:if test="${l.cnt != l.programMaxCustomer and not myempty}">
+											 		<a href="${pageContext.request.contextPath}/customer/prorsone?year=${l.year}&month=${l.month}&day=${l.day}&programName=${l.programName}">${l.programName}</a>
+											 		<p>${l.cnt} / ${l.programMaxCustomer}</p>
+									 			</c:if>
+										 		</c:if>
+										 	</c:if>
+										  </c:forEach> 
+										 </c:if>
+									 </c:if>
+									 <c:if test="${calendarMap.targetMonth + 1 > calendarMap.thisMonth}">
+										 <c:forEach var="l" items="${resultList}">
+											   <c:set var="end" value="false"></c:set>
+											 	<c:if test="${d == l.day}">
+										 			<c:if test="${l.cnt == l.programMaxCustomer}">
+											 			<a style="color:gray">${l.programName}</a>
+											 			<p style="color:gray">${l.cnt} / ${l.programMaxCustomer}</p>
+											 		</c:if>
+											 		<c:if test="${l.cnt != l.programMaxCustomer}">								 		
+													 	<c:forEach var="my" items="${myCalendarList}">  
+												 			<c:if test="${d == my.day and not end}">
+													 			<a style="color:gray">${l.programName}</a>
+													 			<p style="color:gray">${l.cnt} / ${l.programMaxCustomer}</p>
+													 			<c:set var="end" value="true"></c:set>
+												 			</c:if>
+												 			<c:if test="${d != my.day and not end}">
+														 		<a href="${pageContext.request.contextPath}/customer/prorsone?year=${l.year}&month=${l.month}&day=${l.day}&programName=${l.programName}">${l.programName}</a>
+														 		<p>${l.cnt} / ${l.programMaxCustomer}</p>
+													 			<c:set var="end" value="true"></c:set>
+												 			</c:if>
+												 			<c:set var="myempty" value="true"></c:set> 								 			
+												 		</c:forEach>
+												 	<c:if test="${l.cnt != l.programMaxCustomer and not myempty}">
+												 		<a href="${pageContext.request.contextPath}/customer/prorsone?year=${l.year}&month=${l.month}&day=${l.day}&programName=${l.programName}">${l.programName}</a>
+												 		<p>${l.cnt} / ${l.programMaxCustomer}</p>
+										 			</c:if>
+											 		</c:if>
+											 	</c:if>
+											  </c:forEach> 
+									 </c:if>
+								</c:if>
 							</c:if>
 						</c:if>
 						
@@ -203,17 +307,25 @@
 					 -->
 					<c:forEach var="l" items="${allList}">
 						<c:if test="${listYear == l.year && listMonth == l.month}">
-							<p>${l.month} / ${l.day} &nbsp; ${l.programName}</p>
-							<p  style="margin-bottom:30px;">(${l.cnt} / ${l.programMaxCustomer})</p>
-							<c:set var="loop_flag" value="true"/>
+						  <c:if test="${calendarMap.thisMonth == l.month}">
+							  	<c:if test="${l.day >= calendarMap.thisDay}">
+									<p>${l.month} / ${l.day} &nbsp; ${l.programName}</p>
+									<p  style="margin-bottom:30px;">(${l.cnt} / ${l.programMaxCustomer})</p>
+									<c:set var="loop_flag" value="true"/>
+							  </c:if>
+						  </c:if>
+						  <c:if test="${calendarMap.thisMonth < l.month}">
+					  			<p>${l.month} / ${l.day} &nbsp; ${l.programName}</p>
+								<p  style="margin-bottom:30px;">(${l.cnt} / ${l.programMaxCustomer})</p>
+								<c:set var="loop_flag" value="true"/>
+						  </c:if>
 						</c:if>	
-						<c:if test="${not loop_flag}">
-							<br>
-							<h4>프로그램이 준비중입니다. </h4>	
-							<br>
-							<c:set var="loop_flag" value="true"/>
-						</c:if>		
 					</c:forEach>
+					<c:if test="${not loop_flag}">
+					    <br>
+					    <h4>프로그램이 준비중입니다. </h4>
+					    <br>
+					</c:if>
 				</c:forEach>
 		</div>		
 	</div>
@@ -278,5 +390,4 @@ Copyright &copy;<script>document.write(new Date().getFullYear());</script> All r
     <script src="/js/jquery.barfiller.js"></script>
     <script src="/js/main.js"></script>
 </body>
-
 </html>

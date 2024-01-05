@@ -22,6 +22,7 @@ public class Branch {
     private Boolean isHeadOffice; // -> branch.branch_level
     private Boolean isActive; // -> branch.branch_active
     private Integer count;
+    private int trainerCount;
     private LocalDateTime createdate;
     private LocalDateTime updatedate;
 

@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.tree.gdhealth.vo.Customer;
 import com.tree.gdhealth.vo.CustomerSignUp;
@@ -25,7 +26,7 @@ public class SignUpController {
 	}
 	
 	@PostMapping("/customer/signup")
-	public String signUp(HttpSession session,CustomerSignUp custoemrSignUp,@RequestParam("customerImg") MultipartFile imgFile) {
+	public String signUp(HttpSession session,CustomerSignUp custoemrSignUp,@RequestParam("customerImg") MultipartFile imgFile, RedirectAttributes red) {
 		
 		String path = session.getServletContext().getRealPath("/upload/customer");
 		
@@ -34,6 +35,9 @@ public class SignUpController {
 		
 		// customer INSERT
 		signUpService.SignUp(custoemrSignUp,imgFile,path);
+		
+		String msg = "회원가입이 완료되었습니다.";
+		red.addFlashAttribute("msg",msg);
 		
 		return "redirect:/customer/login";
 	}

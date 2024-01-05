@@ -11,6 +11,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.tree.gdhealth.vo.Branch;
+
 import jakarta.servlet.http.HttpSession;
 
 @Controller
@@ -24,6 +26,14 @@ public class ProgramReservationController {
 			, @RequestParam(required = false) Integer targetMonth
 			, @RequestParam(required = false) Integer targetDay) {
 		
+		if(session.getAttribute("customerNo") == null) {
+			return "redirect:/customer/login";
+		}
+		
+		
+		int customerNo = (int)(session.getAttribute("customerNo"));
+		
+		
 		Map<String, Object> calendarMap = programReservationService.getCalendar(targetYear, targetMonth, targetDay);
 		model.addAttribute("calendarMap", calendarMap);
 		
@@ -33,7 +43,10 @@ public class ProgramReservationController {
 		
 		List<Map<String, Object>> allList = programReservationService.allCalendarList();
 		model.addAttribute("allList", allList);
-
+		
+		List<Map<String, Object>> myCalendarList = programReservationService.myCalendarLust((int)(calendarMap.get("targetYear")), (int)(calendarMap.get("targetMonth")), customerNo);
+		model.addAttribute("myCalendarList", myCalendarList);
+		System.out.println(myCalendarList + "<---myCalendarList 출력");
 		
 		return "customer/programreservation";
 	}
@@ -108,6 +121,13 @@ public class ProgramReservationController {
 
 		// --------------------------------------------------
 		
+		//             -----branchList---------
+		
+		List<Branch> branchList = programReservationService.branchList();
+		System.out.println(branchList + "/////branchLust");
+		model.addAttribute("branchList", branchList);
+	
+		// --------------------------------------------------
 		
 		String customerId = programReservationService.customerId(customerNo);
 		model.addAttribute("customerId", customerId);
@@ -122,19 +142,36 @@ public class ProgramReservationController {
 	
 	@PostMapping("/customer/prorsone")
 	public String prorsone(HttpSession session, 
-			int programDateNo, int branchNo) {
+			int programDateNo, Integer branchNo, RedirectAttributes red) {
 		
 		if(session.getAttribute("customerNo") == null) {
 			return "redirect:/customer/login";
 		}
 		
+		System.out.println(branchNo + "<------branchNo");
+		
 		int customerNo = (int)(session.getAttribute("customerNo"));
+		
+		// -------------중복 신청 유효성 검사------------------
+		String msg = "";
+		
+		Integer resultOverlap = programReservationService.reservationDate(customerNo, programDateNo);
+		System.out.println(resultOverlap + "<--resultOverlap");
+		if (resultOverlap != null) {
+		    msg = "중복 신청은 불가능 합니다.";            
+		    System.out.println("중복 신청");
+		    red.addFlashAttribute("msg", msg);
+		    return "redirect:/customer/programrs";
+		}
+
+		
+		// ------------------------------------------------
+
 		Map<String, Object> paramap = programReservationService.customerPayment(customerNo);
 		
 		Integer paymentNo = Integer.parseInt(String.valueOf(paramap.get("paymentNo")));
 		
 		programReservationService.programReservationAdd(programDateNo, branchNo, paymentNo);
-		
 		
 		return "redirect:/customer/programrs";
 	}

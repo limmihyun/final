@@ -3,15 +3,15 @@
 <mapper namespace="com.tree.gdhealth.branch.programcalendar.api.BranchProgramDateApiMapper">
     <insert id="insertManager">
         INSERT INTO program_manager
-            (program_date_no, program_no, employee_no)
+            (program_date_no, program_no, trainer_employee_no)
         VALUES
             (#{programDateNo},(SELECT program_date.program_no FROM program_date WHERE program_date.program_date_no = #{programDateNo} LIMIT 0,1),#{managerNo})
     </insert>
     <update id="changeManager">
         UPDATE program_manager
-        SET employee_no = #{managerNo}
+        SET trainer_employee_no = #{managerNo}
         WHERE program_date_no = #{programDateNo}
-            AND program_manager.employee_no IN
+            AND program_manager.trainer_employee_no IN
                 (SELECT e1.employee_no FROM employee e1 WHERE branch_no = (SELECT e2.branch_no FROM employee e2 WHERE e2.employee_no = #{managerNo}))
     </update>
 
@@ -22,9 +22,9 @@
             prd.program_no programNo,
             pr.program_name programName,
             pr.program_detail programDetail,
-            pr.employee_no employeeNo,
+            pr.writer_employee_no employeeNo,
             eed.employee_name employeeName,
-            prm.employee_no managerNo,
+            prm.trainer_employee_no managerNo,
             med.employee_name managerName,
             med.employee_phone managerPhone,
             pr.program_max_customer maxCustomer,
@@ -37,18 +37,18 @@
                     LEFT JOIN program_date prd ON dateList.generated_date = prd.program_date
                     LEFT JOIN program pr
                               ON prd.program_no = pr.program_no
-                    LEFT JOIN (SELECT * FROM program_manager prm WHERE prm.employee_no IN (SELECT em.employee_no FROM employee em WHERE em.branch_no = #{branchNo})) prm
+                    LEFT JOIN (SELECT * FROM program_manager prm WHERE prm.trainer_employee_no IN (SELECT em.employee_no FROM employee em WHERE em.branch_no = #{branchNo})) prm
                               ON prd.program_date_no = prm.program_date_no
                     LEFT JOIN (SELECT program_date_no, COUNT(program_reservation_no) AS reservedCount FROM program_reservation WHERE branch_no = #{branchNo} GROUP BY program_date_no) prr
                               ON prd.program_date_no = prr.program_date_no
-                    LEFT JOIN employee_detail eed ON pr.employee_no = eed.employee_no
-                    LEFT JOIN employee_detail med ON prm.employee_no = med.employee_no
+                    LEFT JOIN employee_detail eed ON pr.writer_employee_no = eed.employee_no
+                    LEFT JOIN employee_detail med ON prm.trainer_employee_no = med.employee_no
     </select>
     <select id="selectManager" resultType="java.lang.Integer">
         SELECT count(*)
         FROM program_manager
         WHERE
-            program_manager.employee_no IN
+            program_manager.trainer_employee_no IN
             (SELECT e1.employee_no FROM employee e1 WHERE branch_no = (SELECT e2.branch_no FROM employee e2 WHERE e2.employee_no = #{managerNo}))
           AND program_date_no = #{programDateNo}
     </select>

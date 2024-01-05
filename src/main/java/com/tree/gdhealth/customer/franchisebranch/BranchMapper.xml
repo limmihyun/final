@@ -26,4 +26,18 @@
 	WHERE a.branch_no = #{branchNo} AND a.customer_attendance_exit_time IS null
 	</select>
 	
+	<select id="branchTrainerCount" parameterType="com.tree.gdhealth.vo.Branch" resultType="int">
+	SELECT
+		count(*) trainerCount
+	FROM employee
+	WHERE branch_no != 1 AND employee_active = 'Y' AND employee_position = 'trainer'
+	</select>
+	
+	<select id="branchTrainerCountOne" parameterType="com.tree.gdhealth.vo.Branch" resultType="int">
+	SELECT
+		count(*) trainerCount
+	FROM employee
+	WHERE branch_no = #{branchNo} AND employee_position = 'trainer'
+	</select>
+	
 </mapper>

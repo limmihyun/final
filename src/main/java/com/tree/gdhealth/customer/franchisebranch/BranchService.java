@@ -21,13 +21,16 @@ public class BranchService {
 	}
 	public Branch branchMemberCnt() {
 		Branch branch = branchMapper.branchMemberCnt();
+		int branchTrainerCount = branchMapper.branchTrainerCount(branch);
+		branch.setTrainerCount(branchTrainerCount);
 		return branch;
 	}
 	
 	// 지점 정보, 혼잡도
 	public Branch branchInfoOne(Branch branch) {
 		Branch data = branchMapper.branchInfoOne(branch);
-		System.out.println(data.getCount());
+		int branchTrainerCount = branchMapper.branchTrainerCountOne(branch);
+		data.setTrainerCount(branchTrainerCount);
 		return data;
 	}
 }

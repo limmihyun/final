@@ -6,9 +6,9 @@ import com.tree.gdhealth.vo.Customer;
 
 @Mapper
 public interface LoginMapper {
+	
 	Integer customerLoginCk(Customer customer);
-	
 	Integer customerFindPwCk(Customer customer);
-	
 	int customerResetPw(Customer customer);
+	
 }

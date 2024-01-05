@@ -21,4 +21,7 @@
 	WHERE customer_no = #{customerNo}
 </update>
 
+
+
+
 </mapper>

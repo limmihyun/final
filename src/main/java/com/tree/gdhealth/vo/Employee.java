@@ -10,6 +10,7 @@ public class Employee {
 	private String employeeId;
 	private String employeePw;
 	private String employeeActive;
+	private String employeePosition;
 	private String createdate;
 	private String updatedate;
 	

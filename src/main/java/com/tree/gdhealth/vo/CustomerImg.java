@@ -3,7 +3,7 @@ package com.tree.gdhealth.vo;
 import lombok.Data;
 
 @Data
-public class CustoemrImg {
+public class CustomerImg {
 	private int customerNo;
 	private int customerImgNo;
 	private String customerImgOriginName;
