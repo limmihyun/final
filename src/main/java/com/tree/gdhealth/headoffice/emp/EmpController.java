@@ -8,6 +8,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
@@ -21,13 +22,14 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
+@RequestMapping("/headoffice/emp")
 @RequiredArgsConstructor
 @Controller
 public class EmpController {
 	
 	private final EmpService empService;
 
-	@GetMapping("/emp")
+	@GetMapping
 	public String emp(Model model, @RequestParam(defaultValue = "1") int page) {
 			
 		// 전체 직원 수
@@ -67,14 +69,14 @@ public class EmpController {
 		return result;
 	}
 	
-	@GetMapping("/emp/addEmp") 
+	@GetMapping("/addEmp") 
 	public String addEmp(HttpSession session) {
 				
 		return "headoffice/addEmp";
 		
 	}
 	
-	@PostMapping("/emp/addEmp")
+	@PostMapping("/addEmp")
 	public String addEmp(HttpSession session, Employee employee, 
 							EmployeeDetail employeeDetail, MultipartFile employeeFile) {
 		
@@ -86,7 +88,7 @@ public class EmpController {
 		return "redirect:/emp";
 	}
 	
-	@GetMapping("/emp/empOne/{employeeId}")
+	@GetMapping("/empOne/{employeeId}")
 	public String empOne(Model model, @PathVariable String employeeId) {
 		
 		Map<String, Object> employeeOne = empService.getEmployeeOne(employeeId);

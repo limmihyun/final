@@ -24,6 +24,18 @@ public class ProgramReservationService {
 		Calendar firstDay = Calendar.getInstance();
 		firstDay.set(Calendar.DATE, 1);
 		
+		Calendar today = Calendar.getInstance();
+		int	thisYear = today.get(Calendar.YEAR);
+		int thisMonth = (today.get(Calendar.MONTH)+1);
+		int thisDay = Calendar.DATE;
+		System.out.println(thisYear + "!!year");
+		System.out.println(thisMonth + "!!month");
+		System.out.println(thisDay + "!!day");
+		System.out.println(today + "!!totay");
+
+
+
+		
 		// 넘어온 year,month가 null이 아니면 새로 들어온 값을 년 월로 바꿈
 		if(targetYear != null && targetMonth != null) {
 			firstDay.set(Calendar.YEAR, targetYear);
@@ -54,6 +66,9 @@ public class ProgramReservationService {
 		resultMap.put("beginBlank", beginBlank);
 		resultMap.put("endBlank", endBlank);
 		resultMap.put("totalTd", totalTd);
+		resultMap.put("thisYear", thisYear);
+		resultMap.put("thisMonth", thisMonth);
+		resultMap.put("thisDay", thisDay);
 		
 		System.out.println(resultMap);
 		
@@ -67,6 +82,8 @@ public class ProgramReservationService {
 		paramMap.put("year", year);
 		paramMap.put("month", month+1);
 		paramMap.put("customerNo", customerNo);
+		
+		System.out.println(paramMap + "paramMap");
 		
 		List<Map<String, Object>> resultList = programReservationMapper.myCalendarList(paramMap);
 		
