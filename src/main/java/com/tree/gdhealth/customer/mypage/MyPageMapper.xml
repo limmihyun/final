@@ -33,4 +33,47 @@
 	WHERE customer_no = #{customerNo}
 </select>
 
+<select id="customerDeleteCk" parameterType="com.tree.gdhealth.vo.Customer" resultType="INTEGER">
+	SELECT
+	customer_no
+	FROM customer
+	WHERE customer_id = #{customerId} AND customer_active = 'Y' AND customer_pw = PASSWORD(#{customerPw})
+</select>
+<select id="customerImgCk" parameterType="com.tree.gdhealth.vo.CustomerImg" resultType="com.tree.gdhealth.vo.CustomerImg">
+	SELECT
+	customer_img_file_name customerImgFileName
+	FROM customer_img
+	WHERE customer_no = #{customerNo}
+</select>
+<update id="customerDetailDelete" parameterType="com.tree.gdhealth.vo.Customer">
+	UPDATE customer_detail
+	SET 
+		customer_name = '0',
+		customer_gender = '비활성',
+		customer_height = 0,
+		customer_weight = 0,
+		customer_birth = NOW(),
+		customer_phone = '0',
+		customer_address = '0',
+		customer_email = '0',
+		updatedate = NOW()
+	WHERE customer_no = #{customerNo}
+</update>
+<update id="customerImgDelete" parameterType="com.tree.gdhealth.vo.Customer">
+	UPDATE customer_img
+	SET 
+		customer_img_origin_name = '0',
+		customer_img_file_name = '0',
+		customer_img_size = 0,
+		customer_img_type = '0'
+	WHERE customer_no = #{customerNo}
+</update>
+<update id="customerDelete" parameterType="com.tree.gdhealth.vo.Customer">
+	UPDATE customer
+	SET 
+		customer_pw = PASSWORD(1234),
+		customer_active = 'N'
+	WHERE customer_no = #{customerNo}
+</update>
+
 </mapper>
