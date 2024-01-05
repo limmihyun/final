@@ -3,7 +3,7 @@ package com.tree.gdhealth.vo;
 import lombok.Data;
 
 @Data
-public class Review {_
+public class Review {
 	private int reviewNo;
 	private int programReservationNo;
 	private String customerId;
