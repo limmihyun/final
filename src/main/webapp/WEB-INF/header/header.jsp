@@ -17,7 +17,7 @@
                             <li><a href="/customer/franchiseBranch">branch</a></li>
                             <li><a href="">BLANK</a></li>
                             <li><a href="/notice/noticeList">notice</a></li>
-                            <c:if test="${customerNo eq null && sessionScope.loginEmployee eq null}">
+                            <c:if test="${customerNo eq null}">
                             <li><a href="/customer/login">login</a></li>
                             </c:if>
                             <c:if test="${customerNo ne null}">
@@ -25,14 +25,8 @@
                             &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                             <li><a href="/customer/logout">logout</a></li>
                             </c:if>
-                            &nbsp;&nbsp;&nbsp;
-                            <c:if test="${customerNo eq null && sessionScope.loginEmployee eq null}">
-                            <li><a href="/employee/login">employee login</a></li>
-                            </c:if>
-                            <c:if test="${sessionScope.loginEmployee ne null}">
-                            <li><a href="/employee/logout">employee logout</a></li>
-                            <li><a href="/branch/home">branch home</a></li>
-                            </c:if>
+                            <li><i>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</i></li>
                         </ul>
                     </nav>
                     <div id="mobile-menu-wrap"></div>
