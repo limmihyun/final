@@ -46,6 +46,7 @@ public class ProgramReservationController {
 		
 		List<Map<String, Object>> myCalendarList = programReservationService.myCalendarLust((int)(calendarMap.get("targetYear")), (int)(calendarMap.get("targetMonth")), customerNo);
 		model.addAttribute("myCalendarList", myCalendarList);
+		System.out.println(myCalendarList + "<---myCalendarList 출력");
 		
 		return "customer/programreservation";
 	}
