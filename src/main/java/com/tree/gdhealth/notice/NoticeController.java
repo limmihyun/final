@@ -22,16 +22,7 @@ import lombok.extern.slf4j.Slf4j;
 @Controller
 public class NoticeController {
    @Autowired NoticeService noticeService;
-   
-   @ModelAttribute
-   private void mockLoginEmployee(HttpSession session) {
-       Employee employee = new Employee();
-       employee.setBranchNo(2);
-       employee.setEmployeeId("gasan1manager");
-       employee.setEmployeeActive("Y");
-       employee.setEmployeeNo(2);
-       session.setAttribute("loginEmployee", employee);
-   }
+
    
    @GetMapping("/notice/noticeList")
    public String noticeList(Model model, @RequestParam(defaultValue="1")int currentPage) {
@@ -64,16 +55,21 @@ public class NoticeController {
    
    @GetMapping("/notice/addNotice")
    public String addNotice(HttpSession session, Model model) {
-	   
+	   if(session.getAttribute("employeeNo")== null) {
+		   return "redirect:/employee/login";
+	   }
 	   int employeeNo = ((Employee)session.getAttribute("loginEmployee")).getEmployeeNo();
 	   model.addAttribute("employeeNo", employeeNo);
 	   
 	   return "/notice/addNotice";
    }
    
+   
    @PostMapping("/notice/addNotice")
    public String addNotice(HttpSession session, int employeeNo, Notice notice) {
-      
+	   if(session.getAttribute("employeeNo")== null) {
+		   return "redirect:/employee/login";
+	   }
 	   
 	   System.out.println("employeeNo: " + employeeNo);
 	   
@@ -84,22 +80,28 @@ public class NoticeController {
    
 
    @GetMapping("/notice/updateNotice")
-   public String updateNotice(int noticeNo, Model model) {
-	   
+   public String updateNotice(HttpSession session, int noticeNo, Model model) {
+	   if(session.getAttribute("employeeNo")== null) {
+		   return "redirect:/employee/login";
+	   }
 	  model.addAttribute("noticeNo", noticeNo);
       return "/notice/updateNotice";
    }
    
    @PostMapping("/notice/updateNotice")
-   public String updateNotice(int noticeNo, Notice notice) {
-      
+   public String updateNotice(HttpSession session, int noticeNo, Notice notice) {
+	   if(session.getAttribute("employeeNo")== null) {
+		   return "redirect:/employee/login";
+	   }
       int row = noticeService.updateNotice(notice);
       return "redirect:/notice/noticeList";
    }
    
    @GetMapping("/notice/deleteNotice")
-   public String deleteNotice(Notice notice) {
-      
+   public String deleteNotice(HttpSession session, Notice notice) {
+	   if(session.getAttribute("employeeNo")== null) {
+		   return "redirect:/employee/login";
+	   }
 	   int row = noticeService.deleteNotice(notice);
     
       return "redirect:/notice/noticeList";

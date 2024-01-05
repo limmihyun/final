@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.tree.gdhealth.review.ReviewMapper">
+<!-- 삽입 -->
+	<insert id= "addReview"
+	parameterType="com.tree.gdhealth.vo.Review">
+	
+
+</insert>
+<!-- 수정 -->
+	<update id="updateReview"
+	parameterType="com.tree.gdhealth.vo.Review">
+	
+	</update>
+
+<!-- 삭제 -->
+	<delete id="deleteReview"
+	parameterType="com.tree.gdhealth.vo.Review">
+	
+	</delete>
+<!-- 리스트 -->
+	<select id="reviewList"
+	parameterType="com.tree.gdhealth.vo.Review">
+	
+	SELECT
+		r.review_no AS reviewNo,
+		r.review_title AS reviewTitle,
+		c.customer_id AS customerId,
+		r.createdate,
+		r.updatedate
+	FROM review r
+	JOIN
+		customer c ON r.customer_no = c.customer_no
+	ORDER BY
+		r.review_no DESC;
+		
+	
+	</select>
+<!-- 상세 -->
+	<select id="reviewOne"
+	parameterType="int"
+	resultType="com.tree.gdhealth.vo.Review">
+	
+	SELECT 
+		r.review_no AS reviewNo,
+		r.program_reservation_no AS programReservationNo,
+		c.customer_id AS customerId,
+		r.review_title AS reviewTitle,
+		COALESCE(ri.review_img_origin, 'NoImage') AS reviewImgOrigin,
+		r.review_content AS reviewContent,
+		r.createdate AS createdate,
+		r.updatedate AS updatedate
+		
+	FROM review r
+	JOIN customer c ON r.customer_no = c.customer_no
+	LEFT JOIN review_img ri ON ri.review_no = r.review_no
+	WHERE r.review_no = #{reviewNo};
+
+	</select>
+	
+	
+
+</mapper>
