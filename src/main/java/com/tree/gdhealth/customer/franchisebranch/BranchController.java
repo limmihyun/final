@@ -29,7 +29,7 @@ public class BranchController {
 		// 인원수 임의로 값 넣기 
 		// cnt.setCount(1000);
 		model.addAttribute("cnt", cnt);
-		
+		System.out.println(cnt.toString());
 		System.out.println(branch.toString());
 		return "customer/franchiseBranch";
 	}
@@ -38,6 +38,7 @@ public class BranchController {
 	@PostMapping("/customer/branchCk")
 	public Branch branchInfoOne(Branch branch) {
 		Branch data = branchService.branchInfoOne(branch);
+		System.out.println(data.toString());
 		return data;
 	}
 }

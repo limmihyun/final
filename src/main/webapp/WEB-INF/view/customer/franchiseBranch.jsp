@@ -110,7 +110,7 @@
                         <div class="counter-icon">
                             
                         </div>
-                        <span class="m-counter">12</span>
+                        <span id="trainerCount" class="m-counter">${cnt.trainerCount}</span>
                         <p>Trainers</p>
                     </div>
                 </div>
@@ -257,7 +257,7 @@ function loadBranchDetails(branchNo) {
             $('#memberCount').html(response.count);
             $('#branchTel').html(response.branchTel);
             $('#branchAddress').html(response.branchAddress);
-
+            $('#trainerCount').html(response.trainerCount);
 
             // Congestion 업데이트
             updateCongestion(response.count);
