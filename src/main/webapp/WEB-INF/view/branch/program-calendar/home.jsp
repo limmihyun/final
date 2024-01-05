@@ -131,8 +131,23 @@
                                                         <div class="row">
                                                             <div class="col-lg-12">
                                                                 <div class="content-profile">
-                                                                    <h5>프로그램 예약고객</h5>
-                                                                    <h5>고객 출석현황</h5>
+                                                                    <h5>프로그램 예약고객/ 출석</h5>
+                                                                    <div>
+                                                                        <table class="table">
+                                                                            <thead>
+                                                                                <tr>
+                                                                                    <th>번호</th>
+                                                                                    <th>고객번호</th>
+                                                                                    <th>고객이름</th>
+                                                                                    <th>예약번호</th>
+                                                                                    <th>입실</th>
+                                                                                    <th>퇴실</th>
+                                                                                </tr>
+                                                                            </thead>
+                                                                            <tbody id="customerAttendanceTableBody">
+                                                                            </tbody>
+                                                                        </table>
+                                                                    </div>
                                                                 </div>
                                                             </div>
                                                         </div>
@@ -154,7 +169,7 @@
                                                                 <div class="progress-skill">
                                                                     <h2>출석현황</h2>
                                                                     <div class="progress progress-mini">
-                                                                        <div style="width: 0%;" class="progress-bar progress-green"></div>
+                                                                        <div id="attendanceProgressBar" style="width: 0%;" class="progress-bar progress-green"></div>
                                                                     </div>
                                                                 </div>
                                                             </div>
@@ -172,14 +187,6 @@
                                                             <div class="col-lg-4">
                                                             </div>
                                                             <div class="col-lg-4">
-                                                            </div>
-                                                        </div>
-                                                        <div class="row mg-t-30">
-                                                            <div class="col-lg-6">
-                                                                <h4><a href="">입실 QR</a></h4>
-                                                            </div>
-                                                            <div class="col-lg-6">
-                                                                <h4>퇴실 QR</h4>
                                                             </div>
                                                         </div>
                                                     </div>
@@ -245,9 +252,86 @@
                         });
                     }
                 });
+                updateCustomerAttendanceList(response.programDateNo);
             }
         });
     });
+    /**/
+    function updateCustomerAttendanceList(programDateNo) {
+        $.ajax({
+            url: '/api/v1/customerAttendance/'+programDateNo,
+            type: 'get',
+            data: {branchNo : ${calendar.branchNo}},
+            success: function (response){
+                let numberOfReservation = response.length;
+                let numberOfAttendance = 0;
+                response.forEach(function (item){
+                    if(item.enterTime != "undefined" && item.enterTime != null && item.enterTime != ""){
+                        numberOfAttendance++;
+                    }
+                });
+                console.log(numberOfAttendance,numberOfReservation);
+                let attendanceRate = numberOfAttendance/numberOfReservation * 100;
+                $('#attendanceProgressBar').css('width','0%').css('width',attendanceRate+'%');
+
+                let list = $('#customerAttendanceTableBody');
+                list.html('');
+                $(response).each(function (index, item) {
+                   list.append(
+                       '<tr><td>'+(index+1)+'</td><td name="customerNo">'+item.customerNo+'</td><td>'+item.customerName+'</td><td name="programReservationNo">'+item.programReservationNo+'</td>'+undefinedEnterExitHandler(item.enterTime,item.exitTime)+'</tr>'
+                   );
+                });
+                $("button[name='recordEnterTimeButton']").on("click", function (){
+                    let programReservationNo = $(this).closest('tr').find('td[name="programReservationNo"]').text();
+                    console.log(programReservationNo);
+                    $.ajax({
+                        url: '/api/v1/customerAttendance/enter',
+                        type: 'GET',
+                        data: {programReservationNo : programReservationNo},
+                        success: function (response){
+                            updateCustomerAttendanceList(programDateNo);
+                        }
+                    });
+
+                });
+                $("button[name='recordExitTimeButton']").on("click", function (){
+                    let programReservationNo = $(this).closest('tr').find('td[name="programReservationNo"]').text();
+                    console.log(programReservationNo);
+                    $.ajax({
+                        url: '/api/v1/customerAttendance/exit',
+                        type: 'GET',
+                        data: {programReservationNo : programReservationNo},
+                        success: function (response){
+                            updateCustomerAttendanceList(programDateNo);
+                        }
+                    });
+
+                });
+            }
+        });
+    }
+
+    function undefinedEnterExitHandler(enter, exit){
+        let str;
+        if(typeof enter == "undefined" || enter == null || enter == "") {
+            str = '<td><button name="recordEnterTimeButton" type="button">입실처리</button></td><td>-</td>';
+        }else if(typeof exit == "undefined" || exit == null || exit == ""){
+            str = '<td>'+enter+'</td><td><button name="recordExitTimeButton" type="button">퇴실처리</button></td>';
+        }else {
+            str = '<td>'+enter+'</td><td>'+exit+'</td>';
+        }
+        return str ;
+    }
+
+
+    function undefinedEnterHandler(str){
+        if(typeof str == "undefined" || str == null || str == "")
+            str = '<button name="recordEnterTimeButton" type="button">입실처리</button>' ;
+
+        return str ;
+    }
+
+
 
     /*매니저변경*/
     $('#changeManagerButton').click(function () {
