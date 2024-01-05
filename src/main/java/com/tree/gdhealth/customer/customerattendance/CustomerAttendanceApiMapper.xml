@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.tree.gdhealth.customer.customerattendance.CustomerAttendanceApiMapper">
+	<insert id="recordEnterTime">
+		INSERT INTO customer_attendance
+		(program_reservation_no,
+		 customer_no,
+		 branch_no,
+		 customer_attendance_date,
+		 customer_attendance_enter_time)
+		VALUES
+			(
+				#{programReservationNo},
+				(SELECT customer_no FROM program_reservation INNER JOIN payment ON program_reservation.payment_no = payment.payment_no WHERE program_reservation_no = #{programReservationNo}),
+				(SELECT branch_no FROM program_reservation WHERE program_reservation_no = #{programReservationNo}),
+				now(),
+				now()
+			);
+	</insert>
+	<update id="recordExitTime">
+		UPDATE customer_attendance
+		SET customer_attendance_exit_time = now()
+		WHERE program_reservation_no = #{programReservationNo}
+	</update>
+	<select id="getCustomerAttendanceList" resultType="java.util.Map">
+		SELECT
+			pr.branch_no branchNo,
+			pr.program_date_no programDateNo,
+			pr.program_reservation_no programReservationNo,
+			pay.customer_no customerNo,
+			cd.customer_name customerName,
+			ca.customer_attendance_enter_time enterTime,
+			ca.customer_attendance_exit_time exitTime
+		FROM program_reservation pr
+				 LEFT JOIN payment pay ON pr.payment_no = pay.payment_no
+				 LEFT JOIN customer_detail cd ON pay.customer_no = cd.customer_no
+				 LEFT JOIN customer_attendance ca ON pr.program_reservation_no = ca.program_reservation_no
+		WHERE pr.program_date_no = #{programDateNo}
+		  AND pr.branch_no = #{branchNo}
+	</select>
+</mapper>
