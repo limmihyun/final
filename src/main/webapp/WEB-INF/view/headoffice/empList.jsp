@@ -91,7 +91,7 @@
 	        <c:import url="/WEB-INF/view/headoffice/include/topBar.jsp"></c:import>
 	        <!---------------------- 상단바 end ----------------------->
             
-            <!-- 검색창 start -->
+            <!----------------------- 검색창 start --------------------->
              <div class="breadcome-area">
                 <div class="container-fluid">
                     <div class="row">
@@ -101,12 +101,12 @@
                                 	
                                     <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
                                         <div class="breadcome-heading">
-                                       	 	<form class="sr-input-func">
+                                       	 	<form class="sr-input-func" id="searchForm" method="get" action="${pageContext.request.contextPath}/headoffice/emp/searchList">
 	                                        	<table style="margin-top:8px;">
 	                                        		<tr>
 	                                        			<td>
-	                                        				<select name="type" class="form-control" style="width:160px;">
-																<option value="select">선택</option>
+	                                        				<select name="type" class="form-control" style="width:160px;" id="type">
+																<option value="search">검색</option>
 																<option value="id">ID</option>
 																<option value="name">이름</option>
 																<option value="branch">지점</option>
@@ -114,10 +114,8 @@
 																<option value="phone">휴대폰 번호</option>
 															</select>   															
 	                                        			</td>
-	                                        			<td class="sr-input-func">
-			                                                <input type="text" name="keyword" placeholder="검색어 입력" class="search-int form-control" style="width:170px;">		                                            
-	                                        			</td>
-	                                        			<td><button style="margin-left:10px; width:50px;" class="btn">검색</button></td>
+	                                        			<td class="sr-input-func" id="plus1"></td>
+	                                        			<td id="plus2"></td>
 	                                        		</tr>	
 	                                        	</table>	 
                                         	</form>                  	
@@ -141,7 +139,7 @@
                 </div>
             </div>
         </div>
-        <!-- 검색창 end -->
+        <!----------------------- 검색창 end ----------------------->
       
            
         <div class="contacts-area mg-b-15">
@@ -202,7 +200,7 @@
 				    <c:forEach begin="${startPageNum}" end="${endPageNum}" var="pageNum">
 					  	<c:if test="${pageNum == currentPage}"> <!-- 페이징 버튼 색 변경o --> 
 					  		<li class="page-item active">
-						  		<a class="page-link" href="${pageContext.request.contextPath}/headoffice/emp?page=${pageNum}">${pageNum}</a>
+						  		<a class="page-link">${pageNum}</a>
 						  	</li>
 					  	</c:if>
 					  	<c:if test="${pageNum != currentPage}"> <!-- 페이징 버튼 색 변경x --> 
@@ -296,5 +294,88 @@
     <script src="/admin/js/main.js"></script>
     
 </body>
+
+<script>
+
+	//select 태그의 value를 change할 때
+	$('#type').change(function(){
+		
+		if($(this).val() == 'search') {
+			$('#plus1').html('');
+			$('#plus2').html('');
+		}
+		
+		if($(this).val() == 'id' || $(this).val() == 'name' || $(this).val() == 'phone') {
+			$('#plus1').html('<input type="text" name="keyword" id="keyword" placeholder="검색어 입력" class="search-int form-control" style="width:170px;">');
+			$('#plus2').html('<button style="margin-left:10px; width:50px;" type="button" class="btn" id="searchBtn">검색</button>');
+		}
+		
+		if($(this).val() == 'branch') {
+			
+			let selectHtml = `
+				<select name="keyword" class="form-control" style="width:160px;" id="keyword">
+					<option value="">선택</option>
+					<option value="id">ID</option>
+					<option value="name">이름</option>
+					<option value="branch">지점</option>
+					<option value="gender">성별</option>
+					<option value="phone">휴대폰 번호</option>
+				</select> 
+			`;
+			
+			$('#plus1').html(selectHtml);
+			$('#plus2').html('<button style="margin-left:10px; width:50px;" type="button" class="btn" id="searchBtn">검색</button>');
+		}
+		
+		if($(this).val() == 'gender') {
+			
+			let selectHtml = `
+				<select name="keyword" class="form-control" style="width:160px;" id="keyword">
+					<option value="">선택</option>
+					<option value="m">남성</option>
+					<option value="f">여성</option>
+				</select> 
+			`;
+			
+			$('#plus1').html(selectHtml);
+			$('#plus2').html('<button style="margin-left:10px; width:50px;" type="button" class="btn" id="searchBtn">검색</button>');
+			
+		}
+			
+	});
+	
+	// 동적으로 추가된 요소에 대해 이벤트 처리
+	$(document).on('click', '#searchBtn', function(){
+		
+		if($('#type').val() == 'gender') {
+			
+			if($('#keyword').val() == '') {
+				alert('성별을 선택하세요.');
+				$('#keyword').focus();
+				return;
+			}
+			
+		} else if($('#type').val() == 'branch') {
+			
+			if($('#keyword').val() == '') {
+				alert('지점을 선택하세요.');
+				$('#keyword').focus();
+				return;
+			}
+			
+		} else {
+		
+			if($('#keyword').val().trim() == '') {
+				alert('검색할 내용을 입력하세요.');
+				$('#keyword').focus();
+				return;
+			}
+			
+		}
+		
+		$('#searchForm').submit();
+	});
+	
+</script>
 
 </html>

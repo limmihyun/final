@@ -176,7 +176,7 @@
 				  <c:forEach begin="${startPageNum}" end="${endPageNum}" var="pageNum">
 				  	<c:if test="${pageNum == currentPage}"> <!-- 페이징 버튼 색 변경o --> 
 				  		<li class="page-item active">
-					  		<a class="page-link" href="${pageContext.request.contextPath}/headoffice/program?page=${pageNum}">${pageNum}</a>
+					  		<a class="page-link">${pageNum}</a>
 					  	</li>
 				    </c:if>
 				    <c:if test="${pageNum != currentPage}"> <!-- 페이징 버튼 색 변경x --> 

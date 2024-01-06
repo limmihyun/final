@@ -59,13 +59,35 @@ public class EmpController {
 	}
 	
 	@GetMapping("/searchList")
-	public String searchList(String type, String keyword,
+	public String searchList(Model model, String type, String keyword,
 								@RequestParam(defaultValue = "1") int page) {
 		
+		// 검색 결과 개수
+		int searchCnt = empService.getSearchCnt(type, keyword);
+		// 디버깅
+		log.debug("검색 결과 개수 : " + searchCnt);
 		
+		Paging paging = new Paging();
+		paging.setRowPerPage(8); // 한 페이지에 나타낼 검색 결과 수
+		paging.setCurrentPage(page); // 현재 페이지
+		paging.setCnt(searchCnt); // 전체 검색 결과 수
 		
+		List<Map<String, Object>> searchList = empService.getSearchList(paging.getBeginRow(), paging.getRowPerPage(), type, keyword);
 		
-		return "";
+		model.addAttribute("searchList", searchList);   
+		model.addAttribute("lastPage", paging.getLastPage());
+		model.addAttribute("currentPage", page);
+	
+		model.addAttribute("startPageNum", paging.getStartPageNum());
+		model.addAttribute("endPageNum", paging.getEndPageNum());
+		 
+		model.addAttribute("prev", paging.getPrev());
+		model.addAttribute("next", paging.getNext());
+		
+		model.addAttribute("type", type);
+		model.addAttribute("keyword", keyword);
+
+		return "headoffice/searchList";
 	}
 	
 	@ResponseBody
@@ -95,7 +117,7 @@ public class EmpController {
 		log.debug("저장 경로 : " + path);
 		empService.insertEmployee(employee, employeeDetail, employeeFile, path);
 		
-		return "redirect:/emp";
+		return "redirect:/headoffice/emp";
 	}
 	
 	@GetMapping("/empOne/{employeeId}")

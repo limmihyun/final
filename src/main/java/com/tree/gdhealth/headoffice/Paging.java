@@ -12,7 +12,7 @@ public class Paging {
 	// 현재 페이지 번호
 	private int currentPage;
 
-	// 직원 수
+	// row 개수
 	private int cnt;
 
 	// 마지막 페이징번호
@@ -83,6 +83,9 @@ public class Paging {
 	private void calculation() {
 		
 		 lastPage = (int) Math.ceil((double)cnt/rowPerPage);
+		 if(lastPage == 0) {
+			 lastPage = 1;
+		 }
 		
 		 // 마지막 번호
 		 endPageNum = (int)(Math.ceil((double) currentPage / (double)pageNumCnt) * pageNumCnt);

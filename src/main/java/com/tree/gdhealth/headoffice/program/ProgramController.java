@@ -74,7 +74,7 @@ public class ProgramController {
 		log.debug("저장 경로 : " + path);
 		programService.insertProgram(program, programFile, path);
 		
-		return "redirect:/program";
+		return "redirect:/headoffice/program";
 	}
 	
 	@GetMapping("/programOne/{programNo}")
