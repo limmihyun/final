@@ -85,6 +85,10 @@
 			</choose>
 		</where>
 	</select>
+	<select id="branchList" resultType="String">
+		SELECT branch_name
+		FROM branch
+	</select>
 
 	<select id="idCheck" parameterType="String" resultType="int">
 		SELECT COUNT(*)

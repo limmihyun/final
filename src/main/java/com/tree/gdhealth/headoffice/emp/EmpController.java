@@ -58,8 +58,8 @@ public class EmpController {
 		
 	}
 	
-	@GetMapping("/searchList")
-	public String searchList(Model model, String type, String keyword,
+	@GetMapping("/search")
+	public String search(Model model, String type, String keyword,
 								@RequestParam(defaultValue = "1") int page) {
 		
 		// 검색 결과 개수
@@ -87,7 +87,17 @@ public class EmpController {
 		model.addAttribute("type", type);
 		model.addAttribute("keyword", keyword);
 
-		return "headoffice/searchList";
+		return "headoffice/searchEmpList";
+	}
+	
+	@ResponseBody
+	@GetMapping("/branchList")
+	public List<String> branchList() {
+		
+		List<String> branchList = empService.getBranchList();
+		
+		return branchList;
+		
 	}
 	
 	@ResponseBody

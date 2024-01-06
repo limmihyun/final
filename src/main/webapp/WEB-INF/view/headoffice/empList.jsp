@@ -96,16 +96,15 @@
                 <div class="container-fluid">
                     <div class="row">
                         <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-                            <div class="breadcome-list single-page-breadcome">
-                                <div class="row">
-                                	
+                            <div class="breadcome-list">
+                                <div class="row"> 	
                                     <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
-                                        <div class="breadcome-heading">
-                                       	 	<form class="sr-input-func" id="searchForm" method="get" action="${pageContext.request.contextPath}/headoffice/emp/searchList">
+                                        <div class="breadcome-menu">
+                                       	 	<form id="searchForm" method="get" action="${pageContext.request.contextPath}/headoffice/emp/search">
 	                                        	<table style="margin-top:8px;">
 	                                        		<tr>
 	                                        			<td>
-	                                        				<select name="type" class="form-control" style="width:160px;" id="type">
+	                                        				<select name="type" class="form-control" style="width:120px; margin-right:5px;" id="type">
 																<option value="search">검색</option>
 																<option value="id">ID</option>
 																<option value="name">이름</option>
@@ -114,7 +113,7 @@
 																<option value="phone">휴대폰 번호</option>
 															</select>   															
 	                                        			</td>
-	                                        			<td class="sr-input-func" id="plus1"></td>
+	                                        			<td  id="plus1"></td>
 	                                        			<td id="plus2"></td>
 	                                        		</tr>	
 	                                        	</table>	 
@@ -126,8 +125,8 @@
                                             <li>
                                            		 <select name="searchField" class="form-control" style="width:130px;">
 													<option value="select">선택</option>
-													<option value="title">이름</option>
-													<option value="memo">상세 설명</option>
+													<option value="title">이름 순</option>
+													<option value="memo">입사 날짜 순</option>
 												  </select>    
                                             </li>
                                    	    </ul>
@@ -306,31 +305,33 @@
 		}
 		
 		if($(this).val() == 'id' || $(this).val() == 'name' || $(this).val() == 'phone') {
-			$('#plus1').html('<input type="text" name="keyword" id="keyword" placeholder="검색어 입력" class="search-int form-control" style="width:170px;">');
+			$('#plus1').html('<input type="text" name="keyword" id="keyword" placeholder="검색어 입력" class="form-control" style="width:170px;">');
 			$('#plus2').html('<button style="margin-left:10px; width:50px;" type="button" class="btn" id="searchBtn">검색</button>');
 		}
 		
 		if($(this).val() == 'branch') {
 			
-			let selectHtml = `
-				<select name="keyword" class="form-control" style="width:160px;" id="keyword">
-					<option value="">선택</option>
-					<option value="id">ID</option>
-					<option value="name">이름</option>
-					<option value="branch">지점</option>
-					<option value="gender">성별</option>
-					<option value="phone">휴대폰 번호</option>
-				</select> 
-			`;
-			
-			$('#plus1').html(selectHtml);
-			$('#plus2').html('<button style="margin-left:10px; width:50px;" type="button" class="btn" id="searchBtn">검색</button>');
+			$.ajax({
+				url : '${pageContext.request.contextPath}/headoffice/emp/branchList',
+				type : 'get',
+				success : function(result){
+					
+					$('#plus1').html('<select name="keyword" class="form-control" style="width:120px;" id="keyword"></select>');
+					$('#keyword').append('<option value="">선택</option>')
+					$(result).each(function(index,item){
+						$('#keyword').append('<option value="' + item + '">' + item + '</option>')
+					});
+					
+					$('#plus2').html('<button style="margin-left:10px; width:50px;" type="button" class="btn" id="searchBtn">검색</button>');
+				}
+			});
+					
 		}
 		
 		if($(this).val() == 'gender') {
 			
 			let selectHtml = `
-				<select name="keyword" class="form-control" style="width:160px;" id="keyword">
+				<select name="keyword" class="form-control" style="width:80px;" id="keyword">
 					<option value="">선택</option>
 					<option value="m">남성</option>
 					<option value="f">여성</option>

@@ -78,6 +78,15 @@ public class EmpService {
 		return searchCnt;
 	}
 	
+	public List<String> getBranchList() {
+		
+		List<String> branchList = empMapper.branchList();
+		// 디버깅
+		log.debug("지점 목록 : " + branchList);
+		
+		return branchList;
+	}
+	
 	public Map<String, Object> getEmployeeOne(String employeeId) {
 		
 		Map<String, Object> employeeOne = empMapper.employeeOne(employeeId);
