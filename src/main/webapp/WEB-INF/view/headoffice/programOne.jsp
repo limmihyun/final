@@ -114,7 +114,12 @@
                                             		<span><i class="fa fa-user"></i> <b>담당 본사 직원 :</b> ${programOne.empName}</span>
                                             	</div>
                                             	<div class="col-lg-12">
-                                            		<span><i class="fa fa-heart"></i> <b>활성화 상태 :</b> ${programOne.active}</span>
+                                            		<c:if test="${programOne.active == 'Y'}">
+                                            			<span><i class="fa fa-heart"></i> <b>상태 :</b> 활성화</span>
+                                            		</c:if>
+                                            		<c:if test="${programOne.active == 'N'}">
+                                            			<span><i class="fa fa-heart"></i> <b>상태 :</b> 비활성화</span>
+                                            		</c:if>
                                             	</div>
                                                   
                                             </div>

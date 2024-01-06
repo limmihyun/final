@@ -2,7 +2,22 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.tree.gdhealth.headoffice.customer.CustomerMapper">
 
-
-
+	<select id="customerList" parameterType="map" resultType="map">
+		SELECT
+			c.customer_id customerId,
+			c.customer_active active,
+			c.createdate createdate,
+			cd.customer_name customerName,
+			cd.customer_gender customerGender,
+			cd.customer_phone customerPhone
+		FROM customer c
+		INNER JOIN customer_detail cd
+			ON cd.customer_no = c.customer_no
+		LIMIT #{beginRow}, #{rowPerPage}
+	</select>
+	<select id="customerCnt">
+		SELECT COUNT(*)
+		FROM customer
+	</select>
 
 </mapper>
