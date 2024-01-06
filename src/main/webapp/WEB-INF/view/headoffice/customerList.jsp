@@ -8,7 +8,7 @@
 <head>
     <meta charset="utf-8">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
-    <title>직원 관리</title>
+    <title>회원 관리</title>
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     
@@ -98,42 +98,22 @@
                         <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                             <div class="breadcome-list single-page-breadcome">
                                 <div class="row">
-                                	
                                     <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
                                         <div class="breadcome-heading">
-                                       	 	<form class="sr-input-func">
-	                                        	<table style="margin-top:8px;">
-	                                        		<tr>
-	                                        			<td>
-	                                        				<select name="type" class="form-control" style="width:160px;">
-																<option value="select">선택</option>
-																<option value="id">ID</option>
-																<option value="name">이름</option>
-																<option value="branch">지점</option>
-																<option value="gender">성별</option>
-																<option value="phone">휴대폰 번호</option>
-															</select>   															
-	                                        			</td>
-	                                        			<td class="sr-input-func">
-			                                                <input type="text" name="keyword" placeholder="검색어 입력" class="search-int form-control" style="width:170px;">		                                            
-	                                        			</td>
-	                                        			<td><button style="margin-left:10px; width:50px;" class="btn">검색</button></td>
-	                                        		</tr>	
-	                                        	</table>	 
-                                        	</form>                  	
+                                            <form role="search" class="sr-input-func">
+                                                <input type="text" placeholder="Search..." class="search-int form-control">
+                                                <a href="#"><i class="fa fa-search"></i></a>
+                                            </form>
                                         </div>
                                     </div>
-                                    <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">	
-                                   		<ul class="breadcome-menu">
-                                            <li>
-                                           		 <select name="searchField" class="form-control" style="width:130px;">
-													<option value="select">선택</option>
-													<option value="title">이름</option>
-													<option value="memo">상세 설명</option>
-												  </select>    
+                                    <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                                        <ul class="breadcome-menu">
+                                            <li><a href="#">Home</a> <span class="bread-slash">/</span>
                                             </li>
-                                   	    </ul>
-                                    </div>                        
+                                            <li><span class="bread-blod">Professor Profile</span>
+                                            </li>
+                                        </ul>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -142,92 +122,84 @@
             </div>
         </div>
         <!-- 검색창 end -->
-      
            
         <div class="contacts-area mg-b-15">
             <div class="container-fluid">   
-            
-               	<!--------------------- 회원 list start-------------------------->
-               	<c:set var="cnt" value="0"></c:set>          		  			
-  				<c:forEach var="m" items="${empList}">
-	   			    <c:set var="cnt" value="${cnt + 1}"></c:set>
-	   			    <c:if test="${(cnt%4) == 1}">
-	   			  	 	<div class="row"> 
-	   			    </c:if>	 			    
-			           	    <div class="col-lg-3 col-md-6 col-sm-6 col-xs-12" style="margin-bottom:15px;">
-			                	<div class="student-inner-std res-mg-b-30">
-			                     <div class="student-img">
-			                        <img src="${pageContext.request.contextPath}/upload/emp/${m.filename}" alt="${pageContext.request.contextPath}/noImg" style="height:300px; width:300px;"/> 
-			                     </div>
-			                     <div class="student-dtl">
-			                         <h2>
-			                         <a href="${pageContext.request.contextPath}/headoffice/emp/empOne/${m.empId}">
-			                         	${m.empName}
-			                         </a>		                         
-			                         </h2>
-			                         <c:if test="${m.empGender == 'm'}">
-			                         	<p class="dp">남자</p>
-			                         </c:if>
-			                         <c:if test="${m.empGender == 'f'}">
-			                         	<p class="dp">여자</p>
-			                         </c:if>  
-			                         <p class="dp-ag"><b>입사 날짜 :</b> ${m.createdate}</p>
-			                  		</div>
-			              	    </div>
-			           	    </div>	           	    
-	           	    <c:if test="${(cnt%4 == 0) || (cnt == employeeCnt)}"> <!-- cnt가 4의 배수이거나 마지막 순서일 때 -->
-	   			  	 	</div>
-	   			    </c:if>
-           		</c:forEach>           		
+            	<h3>회원 목록</h3>
+               	<!--------------------- 회원 list start-------------------------->   		  	  				
+	   			    <table class="table table-bordered">
+	   			    	<thead>
+	   			    		<tr>
+	   			    			<th>아이디</th>
+	   			    			<th>이름</th>
+	   			    			<th>성별</th>
+	   			    			<th>휴대폰 번호</th>
+	   			    			<th>가입 날짜, 시간</th>
+	   			    			<th>가입 여부</th>
+	   			    		</tr>
+	   			    	</thead>
+	   			    	<tbody>
+	   			    		<c:forEach var="m" items="${customerList}">
+	   			    			<tr>
+	   			    				<td>${m.customerId}</td>
+	   			    				<td>${m.customerName}</td>
+	   			    				<td>${m.customerGender}</td>
+	   			    				<td>${m.customerPhone}</td>
+	   			    				<td>${m.createdate} ${str}</td>
+	   			    				<td>${m.active}</td>
+	   			    			</tr>
+	   			    		</c:forEach>   
+	   			    	</tbody>
+	   			    </table>
+           		        		
                 <!--------------------- 회원 list end-------------------------->      
-            </div>    
-            
-       		<!--------------------- 페이징 start ----------------------------------->     
+            </div>         
+           		<!--------------------- 페이징 start ----------------------------------->     
             <div style="text-align:center;">       	
-	             <ul class="pagination">   	
-             		<c:if test="${currentPage == 1}">
-             			<li class="page-item disabled">
-	             	  		<a class="page-link">처음</a>  	
-	             	 	</li>	
-             		</c:if>
-             		<c:if test="${currentPage != 1}">
-             			<li class="page-item">           	  	
-	             	  		<a class="page-link" href="${pageContext.request.contextPath}/headoffice/emp?page=1">처음</a>
-	             	 	</li>
-             		</c:if>
-
-		  			<c:if test="${prev}">
-					  	<li class="page-item"><a class="page-link" href="${pageContext.request.contextPath}/headoffice/emp?page=${startPageNum - 1}">이전</a></li>
-				 	</c:if>
-				    <c:forEach begin="${startPageNum}" end="${endPageNum}" var="pageNum">
+	             <ul class="pagination">
+	             
+             	  <c:if test="${currentPage == 1}">
+           			<li class="page-item disabled">
+            	  		<a class="page-link">처음</a>  	
+            	 	</li>	
+          		  </c:if>
+          		  <c:if test="${currentPage != 1}">
+           			<li class="page-item">           	  	
+            	  		<a class="page-link" href="${pageContext.request.contextPath}/headoffice/customer?page=1">처음</a>
+            	 	</li>
+           		  </c:if>  
+					  
+					  <c:if test="${prev}">
+					  	<li class="page-item"><a class="page-link" href="${pageContext.request.contextPath}/headoffice/customer?page=${startPageNum - 1}">이전</a></li>
+					  </c:if>
+					  <c:forEach begin="${startPageNum}" end="${endPageNum}" var="pageNum">
 					  	<c:if test="${pageNum == currentPage}"> <!-- 페이징 버튼 색 변경o --> 
 					  		<li class="page-item active">
-						  		<a class="page-link" href="${pageContext.request.contextPath}/headoffice/emp?page=${pageNum}">${pageNum}</a>
+						  		<a class="page-link" href="${pageContext.request.contextPath}/headoffice/customer?page=${pageNum}">${pageNum}</a>
 						  	</li>
 					  	</c:if>
 					  	<c:if test="${pageNum != currentPage}"> <!-- 페이징 버튼 색 변경x --> 
 					  		<li class="page-item">
-						  		<a class="page-link" href="${pageContext.request.contextPath}/headoffice/emp?page=${pageNum}">${pageNum}</a>
+						  		<a class="page-link" href="${pageContext.request.contextPath}/headoffice/customer?page=${pageNum}">${pageNum}</a>
 						  	</li>
 					  	</c:if>
-				    </c:forEach>
-			  		<c:if test="${next}">
-					  	<li class="page-item"><a class="page-link" href="${pageContext.request.contextPath}/headoffice/emp?page=${endPageNum + 1}">다음</a></li>
-				 	</c:if>
-				  	<c:if test="${currentPage == lastPage}">
+					  </c:forEach>
+					  <c:if test="${next}">
+					  	<li class="page-item"><a class="page-link" href="${pageContext.request.contextPath}/headoffice/customer?page=${endPageNum + 1}">다음</a></li>
+					  </c:if>	  
+					  <c:if test="${currentPage == lastPage}">
 					  	<li class="page-item disabled">
 					  		<a class="page-link">끝</a>
 					  	</li>
-				    </c:if>
-		  	    	<c:if test="${currentPage != lastPage}">
+					  </c:if>
+					  <c:if test="${currentPage != lastPage}">
 					  	<li class="page-item">
-					  		<a class="page-link" href="${pageContext.request.contextPath}/headoffice/emp?page=${lastPage}">끝</a>
+					  		<a class="page-link" href="${pageContext.request.contextPath}/headoffice/customer?page=${lastPage}">끝</a>
 					  	</li>
-					</c:if>			  
+					  </c:if>
 				</ul>	  
             </div>
-            <!----------------------- 페이징 end ---------------------------->    
-               		    
+               <!----------------------- 페이징 end ---------------------------->       		    
         </div>
     </div>
 

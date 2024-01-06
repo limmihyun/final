@@ -15,6 +15,8 @@ public interface EmpMapper {
 	List<Map<String, Object>> employeeList(Map<String, Object> map);
 	int employeeCnt();
 	
+	List<Map<String, Object>> searchList(Map<String, Object> map);
+	
 	Map<String, Object> employeeOne(String employeeId);
 	
 	int idCheck(String employeeId);

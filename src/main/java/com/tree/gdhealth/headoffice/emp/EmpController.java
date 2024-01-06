@@ -58,6 +58,16 @@ public class EmpController {
 		
 	}
 	
+	@GetMapping("/searchList")
+	public String searchList(String type, String keyword,
+								@RequestParam(defaultValue = "1") int page) {
+		
+		
+		
+		
+		return "";
+	}
+	
 	@ResponseBody
 	@GetMapping("/addEmpIdCheck")
 	public int addEmpIdCheck(String employeeId) {

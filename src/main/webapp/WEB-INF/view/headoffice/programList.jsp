@@ -160,11 +160,16 @@
         <!--------------------- 페이징 start -----------------------------------> 
         <div style="text-align:center;">       	
              <ul class="pagination">
-             
-             	  <li class="page-item">
-             	  	<a class="page-link" href="${pageContext.request.contextPath}/headoffice/program?page=1">처음</a>
-             	  </li>	
-				  
+             	  <c:if test="${currentPage == 1}">
+           			<li class="page-item disabled">
+            	  		<a class="page-link">처음</a>  	
+            	 	</li>	
+          		  </c:if>
+          		  <c:if test="${currentPage != 1}">
+           			<li class="page-item">           	  	
+            	  		<a class="page-link" href="${pageContext.request.contextPath}/headoffice/program?page=1">처음</a>
+            	 	</li>
+           		  </c:if>            	 				  
 				  <c:if test="${prev}">
 				  	<li class="page-item"><a class="page-link" href="${pageContext.request.contextPath}/headoffice/program?page=${startPageNum - 1}">이전</a></li>
 				  </c:if>
@@ -173,8 +178,8 @@
 				  		<li class="page-item active">
 					  		<a class="page-link" href="${pageContext.request.contextPath}/headoffice/program?page=${pageNum}">${pageNum}</a>
 					  	</li>
-				  	</c:if>
-				  	<c:if test="${pageNum != currentPage}"> <!-- 페이징 버튼 색 변경x --> 
+				    </c:if>
+				    <c:if test="${pageNum != currentPage}"> <!-- 페이징 버튼 색 변경x --> 
 				  		<li class="page-item">
 					  		<a class="page-link" href="${pageContext.request.contextPath}/headoffice/program?page=${pageNum}">${pageNum}</a>
 					  	</li>
@@ -182,8 +187,17 @@
 				  </c:forEach>
 				  <c:if test="${next}">
 				  	<li class="page-item"><a class="page-link" href="${pageContext.request.contextPath}/headoffice/program?page=${endPageNum + 1}">다음</a></li>
-				  </c:if>	  
-				  <li class="page-item"><a class="page-link" href="${pageContext.request.contextPath}/headoffice/program?page=${lastPage}">끝</a></li>
+				  </c:if>
+				  <c:if test="${currentPage == lastPage}">
+				  	<li class="page-item disabled">
+				  		<a class="page-link">끝</a>
+				  	</li>
+				  </c:if>
+				  <c:if test="${currentPage != lastPage}">
+				  	<li class="page-item">
+				  		<a class="page-link" href="${pageContext.request.contextPath}/headoffice/program?page=${lastPage}">끝</a>
+				  	</li>
+				  </c:if>				  
 			</ul>	  
         </div>
         <!----------------------- 페이징 end ---------------------------->
