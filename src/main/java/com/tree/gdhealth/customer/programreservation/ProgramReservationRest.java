@@ -2,6 +2,7 @@ package com.tree.gdhealth.customer.programreservation;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import jakarta.servlet.http.HttpSession;
@@ -22,4 +23,9 @@ public class ProgramReservationRest {
 		
 		return result;
 	}
+	
+//	@GetMapping("/customer/frontList")
+//	public frontList(@RequestParam(defaultValue = "1") int currentPage) {
+//		
+//	}
 }

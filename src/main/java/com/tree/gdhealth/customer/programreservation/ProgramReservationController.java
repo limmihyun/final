@@ -24,18 +24,38 @@ public class ProgramReservationController {
 	public String programrs(HttpSession session,Model model
 			, @RequestParam(required = false) Integer targetYear
 			, @RequestParam(required = false) Integer targetMonth
-			, @RequestParam(required = false) Integer targetDay) {
+			, @RequestParam(required = false) Integer targetDay
+			, @RequestParam(defaultValue = "1") int currentPageMonth1
+			, @RequestParam(defaultValue = "1") int currentPageMonth2
+			, @RequestParam(defaultValue = "1") int currentPageMonth3) {
 		
 		if(session.getAttribute("customerNo") == null) {
 			return "redirect:/customer/login";
 		}
 		
 		
-		int customerNo = (int)(session.getAttribute("customerNo"));
-		
+		int customerNo = (int)(session.getAttribute("customerNo"));	
 		
 		Map<String, Object> calendarMap = programReservationService.getCalendar(targetYear, targetMonth, targetDay);
 		model.addAttribute("calendarMap", calendarMap);
+		
+		
+		// ----------------List 페이징-----------------
+		
+		List<Map<String, Object>> listMonth1 = programReservationService.listPage(currentPageMonth1,(int)(calendarMap.get("targetYear")), (int)(calendarMap.get("targetMonth")));
+		model.addAttribute("listMonth1", listMonth1);
+		System.out.println(listMonth1 + "<---listMonth1");
+		
+		int lastPage = programReservationService.lastPage(currentPageMonth1, (int)(calendarMap.get("targetYear")), (int)(calendarMap.get("targetMonth")));
+		model.addAttribute("lastPage", lastPage);
+		System.out.println(lastPage + "<---lastPage");
+		
+		
+		model.addAttribute("currentPageMonth1", currentPageMonth1);
+		System.out.println(currentPageMonth1 + "<---currentPageMonth1");
+
+		// -------------------------------------------
+		
 		
 		List<Map<String, Object>> resultList = programReservationService.selectProgramByMonth((int)(calendarMap.get("targetYear")), (int)(calendarMap.get("targetMonth")));
 		model.addAttribute("resultList", resultList);
