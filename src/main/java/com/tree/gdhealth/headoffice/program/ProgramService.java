@@ -51,6 +51,35 @@ public class ProgramService {
 		return programCnt;
 	}
 	
+	public List<Map<String, Object>> getSearchList(int beginRow, int rowPerPage, 
+			String type, String keyword) {
+
+		Map<String, Object> map = new HashMap<>();
+		map.put("beginRow", beginRow);
+		map.put("rowPerPage", rowPerPage);
+		map.put("type", type);
+		map.put("keyword", keyword);
+		
+		List<Map<String, Object>> searchList = programMapper.programList(map);
+		
+		return searchList;
+		
+	}
+	
+	public int getSearchCnt(String type, String keyword) {
+		
+		Map<String, Object> map = new HashMap<>();
+		map.put("type", type);
+		map.put("keyword", keyword);
+		
+		int searchCnt = programMapper.searchCnt(map);
+		// 디버깅
+		log.debug("검색 결과 개수 : " + searchCnt);
+		
+		return searchCnt;
+		
+	}
+	
 	public Map<String, Object> getProgramOne(int programNo) {
 		
 		Map<String, Object> programOne = programMapper.programOne(programNo);

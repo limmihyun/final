@@ -113,7 +113,7 @@
 																<option value="phone">휴대폰 번호</option>
 															</select>   															
 	                                        			</td>
-	                                        			<td  id="plus1"></td>
+	                                        			<td id="plus1"></td>
 	                                        			<td id="plus2"></td>
 	                                        		</tr>	
 	                                        	</table>	 
@@ -121,7 +121,8 @@
                                         </div>
                                     </div>
                                     <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">	
-                                   		<ul class="breadcome-menu">
+                                    	<!-- 
+                                    	<ul class="breadcome-menu">
                                             <li>
                                            		 <select name="searchField" class="form-control" style="width:130px;">
 													<option value="select">선택</option>
@@ -130,6 +131,8 @@
 												  </select>    
                                             </li>
                                    	    </ul>
+                                    	 -->
+                                   		
                                     </div>                        
                                 </div>
                             </div>
@@ -417,6 +420,8 @@
 		
 	});
 	
+	// 동적으로 추가된 요소에 대해 이벤트 처리
+	// search 후 페이징
 	$(document).on('click', '.searchPageBtn', function(e){
 		e.preventDefault();
 		let page = $(this).data('page');

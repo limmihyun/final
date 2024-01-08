@@ -51,14 +51,16 @@
              		</c:if>
              		<c:if test="${currentPage != 1}">
              			<li class="page-item">           	  	
-	             	  		<a class="page-link searchPageBtn" href="#" data-page="1" data-type="${type}" data-keyword="${keyword}">처음</a>
+	             	  		<a class="page-link searchPageBtn" href="#" data-page="1" 
+             	  				data-type="${type}" data-keyword="${keyword}">처음</a>
 	             	 	</li>
              		</c:if>
              		<!------- '처음' 버튼 end ------->
 
 					<!------- '이전' 버튼 start ------->
 		  			<c:if test="${prev}">
-					  	<li class="page-item"><a class="page-link searchPageBtn" href="#" data-page="${startPageNum - 1}" data-type="${type}" data-keyword="${keyword}">이전</a></li>
+					  	<li class="page-item"><a class="page-link searchPageBtn" href="#" data-page="${startPageNum - 1}" data-type="${type}" 
+					  			data-keyword="${keyword}">이전</a></li>
 				 	</c:if>
 				 	<!------- '이전' 버튼 end ------->
 				 	
@@ -94,7 +96,7 @@
 		  	    	<c:if test="${currentPage != lastPage}">
 					  	<li class="page-item">
 					  		<a class="page-link searchPageBtn" href="#" data-page="${lastPage}" 
-					  						data-type="${type}" data-keyword="${keyword}">끝</a>
+			  						data-type="${type}" data-keyword="${keyword}">끝</a>
 					  	</li>
 					</c:if>	
 					<!------- '끝' 버튼 end ------->

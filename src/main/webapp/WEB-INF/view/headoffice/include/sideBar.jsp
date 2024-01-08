@@ -43,17 +43,7 @@
                                 <li><a href="${pageContext.request.contextPath}/headoffice/program"><span class="mini-sub-pro">프로그램 목록</span></a></li>
                                 <li><a href="${pageContext.request.contextPath}/headoffice/program/addProgram"><span class="mini-sub-pro">프로그램 추가</span></a></li>                               
                             </ul>                         
-                        </li>                                       
-                        <li>
-                            <a class="has-arrow" href="mailbox.html" aria-expanded="false">
-                            	<span class="educate-icon educate-data-table icon-wrap"></span> 
-                            	<span class="mini-click-non">발주</span>
-                            </a>
-                            <ul class="submenu-angle" aria-expanded="false">
-                                <li><a title="Peity Charts" href="static-table.html"><span class="mini-sub-pro">Static Table</span></a></li>
-                                <li><a title="Data Table" href="data-table.html"><span class="mini-sub-pro">Data Table</span></a></li>
-                            </ul>
-                        </li>
+                        </li>                                                               
 						<li>
                             <a class="has-arrow" href="mailbox.html" aria-expanded="false">
                             	<span class="educate-icon educate-form icon-wrap"></span> 
@@ -66,6 +56,16 @@
                                 <li><a title="Multi Upload" href="multi-upload.html"><span class="mini-sub-pro">Multi Upload</span></a></li>
                                 <li><a title="Text Editor" href="tinymc.html"><span class="mini-sub-pro">Text Editor</span></a></li>
                                 <li><a title="Dual List Box" href="dual-list-box.html"><span class="mini-sub-pro">Dual List Box</span></a></li>
+                            </ul>
+                        </li>
+                        <li>
+                            <a class="has-arrow" href="mailbox.html" aria-expanded="false">
+                            	<span class="educate-icon educate-data-table icon-wrap"></span> 
+                            	<span class="mini-click-non">발주</span>
+                            </a>
+                            <ul class="submenu-angle" aria-expanded="false">
+                                <li><a title="Peity Charts" href="static-table.html"><span class="mini-sub-pro">Static Table</span></a></li>
+                                <li><a title="Data Table" href="data-table.html"><span class="mini-sub-pro">Data Table</span></a></li>
                             </ul>
                         </li>
 						<li>

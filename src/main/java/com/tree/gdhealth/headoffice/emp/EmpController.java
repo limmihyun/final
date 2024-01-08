@@ -54,8 +54,8 @@ public class EmpController {
 		model.addAttribute("prev", paging.getPrev());
 		model.addAttribute("next", paging.getNext());  
 	
-	    return "headoffice/empList";
-		
+		return "headoffice/empList";
+	    
 	}
 	
 	@GetMapping("/paging")
@@ -83,8 +83,8 @@ public class EmpController {
 		model.addAttribute("prev", paging.getPrev());
 		model.addAttribute("next", paging.getNext());  
 	
-	    return "headoffice/fragment/emp";
-		
+		return "headoffice/fragment/emp";
+
 	}
 	
 	@GetMapping("/search")
@@ -113,6 +113,7 @@ public class EmpController {
 		model.addAttribute("prev", paging.getPrev());
 		model.addAttribute("next", paging.getNext());
 		
+		// search parameter 추가
 		model.addAttribute("type", type);
 		model.addAttribute("keyword", keyword);
 
@@ -123,10 +124,6 @@ public class EmpController {
 	public String searchPaging(Model model, String type, String keyword, 
 									@RequestParam(defaultValue = "1") int page) {
 		
-		log.debug("type : " + type);
-		log.debug("keyword : " + keyword);
-		log.debug("page : " + page);
-			
 		// 검색 결과 개수
 		int searchCnt = empService.getSearchCnt(type, keyword);
 		// 디버깅
@@ -149,6 +146,7 @@ public class EmpController {
 		model.addAttribute("prev", paging.getPrev());
 		model.addAttribute("next", paging.getNext());  
 		
+		// search parameter 추가
 		model.addAttribute("type", type);
 		model.addAttribute("keyword", keyword);
 	

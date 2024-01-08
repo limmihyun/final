@@ -42,24 +42,21 @@ public class EmpService {
 		
 		int employeeCnt = empMapper.employeeCnt();
 		// 디버깅 
-		log.debug("직원 수 : " + employeeCnt);
+		log.debug("전체 직원 수 : " + employeeCnt);
 		
 		return employeeCnt;
 	}
 	
 	public List<Map<String, Object>> getSearchList(int beginRow, int rowPerPage, 
 													String type, String keyword) {
-		
-		log.debug("type = " + type);
-		log.debug("keyword = " + keyword);
-		
+				
 		Map<String, Object> map = new HashMap<>();
 		map.put("beginRow", beginRow);
 		map.put("rowPerPage", rowPerPage);
 		map.put("type", type);
 		map.put("keyword", keyword);
 		
-		List<Map<String, Object>> searchList = empMapper.searchList(map);
+		List<Map<String, Object>> searchList = empMapper.employeeList(map);
 		
 		return searchList;
 		

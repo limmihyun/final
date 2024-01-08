@@ -14,25 +14,6 @@
 			ON ed.employee_no = e.employee_no
 		INNER JOIN employee_img ei
 			ON ei.employee_no = e.employee_no
-		LIMIT #{beginRow}, #{rowPerPage}
-	</select>	
-	<select id="employeeCnt" resultType="int">
-		SELECT COUNT(*)
-		FROM employee
-	</select>
-	
-	<select id="searchList" parameterType="map" resultType="map">
-		SELECT
-			e.employee_id empId,  
-			ed.employee_name empName,
-			ed.employee_gender empGender,
-			ed.createdate createdate,
-			ei.employee_img_file_name filename
-		FROM employee e
-		INNER JOIN employee_detail ed
-			ON ed.employee_no = e.employee_no
-		INNER JOIN employee_img ei
-			ON ei.employee_no = e.employee_no
 		INNER JOIN branch b
 			ON b.branch_no = e.branch_no
 		<where>
@@ -55,7 +36,13 @@
 			</choose>
 		</where>
 		LIMIT #{beginRow}, #{rowPerPage}
+	</select>	
+	
+	<select id="employeeCnt" resultType="int">
+		SELECT COUNT(*)
+		FROM employee e
 	</select>
+	
 	<select id="searchCnt" parameterType="map" resultType="int">
 		SELECT COUNT(*)
 		FROM employee e

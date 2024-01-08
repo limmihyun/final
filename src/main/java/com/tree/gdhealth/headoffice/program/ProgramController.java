@@ -59,6 +59,105 @@ public class ProgramController {
 		return "headoffice/programList";
 	}
 	
+	@GetMapping("/paging")
+	public String paging(Model model, @RequestParam(defaultValue = "1") int page) {
+		
+		// 전체 프로그램 수
+		int programCnt = programService.getProgramCnt();
+		// 디버깅
+		log.debug("전체 프로그램 수 : " + programCnt);
+		
+		Paging paging = new Paging();
+		paging.setRowPerPage(4); // 한 페이지에 나타낼 프로그램 수
+		paging.setCurrentPage(page); // 현재 페이지
+		paging.setCnt(programCnt); // 전체 직원 수
+		
+		List<Map<String, Object>> searchList = programService.getProgramList(paging.getBeginRow(), paging.getRowPerPage());
+		
+		model.addAttribute("programList", searchList);  
+		
+		model.addAttribute("lastPage", paging.getLastPage());
+		model.addAttribute("currentPage", page);
+	
+		model.addAttribute("startPageNum", paging.getStartPageNum());
+		model.addAttribute("endPageNum", paging.getEndPageNum());
+		 
+		model.addAttribute("prev", paging.getPrev());
+		model.addAttribute("next", paging.getNext());  
+		
+		return "headoffice/fragment/program";
+		
+	}
+	
+	@GetMapping("/search")
+	public String search(Model model, String type, 
+							String keyword, @RequestParam(defaultValue = "1") int page) {
+		
+		// 검색 결과 개수
+		int searchCnt = programService.getSearchCnt(type, keyword);
+		// 디버깅
+		log.debug("전체 프로그램 수 : " + searchCnt);
+		
+		Paging paging = new Paging();
+		paging.setRowPerPage(4); // 한 페이지에 나타낼 프로그램 수
+		paging.setCurrentPage(page); // 현재 페이지
+		paging.setCnt(searchCnt); // 전체 직원 수
+		
+		List<Map<String, Object>> searchList = programService.getSearchList(paging.getBeginRow(), paging.getRowPerPage(), type, keyword);
+		
+		model.addAttribute("programList", searchList);  
+		
+		model.addAttribute("lastPage", paging.getLastPage());
+		model.addAttribute("currentPage", page);
+	
+		model.addAttribute("startPageNum", paging.getStartPageNum());
+		model.addAttribute("endPageNum", paging.getEndPageNum());
+		 
+		model.addAttribute("prev", paging.getPrev());
+		model.addAttribute("next", paging.getNext());
+		
+		// search parameter 추가
+		model.addAttribute("type", type);
+		model.addAttribute("keyword", keyword);
+		
+		return "headoffice/fragment/searchProgram";
+	}
+	
+	@GetMapping("/searchPaging")
+	public String searchPaging(Model model, String type, String keyword, 
+									@RequestParam(defaultValue = "1") int page) {
+		
+		// 검색 결과 개수
+		int searchCnt = programService.getSearchCnt(type, keyword);
+		// 디버깅
+		log.debug("전체 프로그램 수 : " + searchCnt);
+		
+		Paging paging = new Paging();
+		paging.setRowPerPage(4); // 한 페이지에 나타낼 프로그램 수
+		paging.setCurrentPage(page); // 현재 페이지
+		paging.setCnt(searchCnt); // 전체 직원 수
+		
+		List<Map<String, Object>> searchList = programService.getSearchList(paging.getBeginRow(), paging.getRowPerPage(), type, keyword);
+		
+		model.addAttribute("programList", searchList);  
+		
+		model.addAttribute("lastPage", paging.getLastPage());
+		model.addAttribute("currentPage", page);
+	
+		model.addAttribute("startPageNum", paging.getStartPageNum());
+		model.addAttribute("endPageNum", paging.getEndPageNum());
+		 
+		model.addAttribute("prev", paging.getPrev());
+		model.addAttribute("next", paging.getNext()); 
+		
+		// search parameter 추가
+		model.addAttribute("type", type);
+		model.addAttribute("keyword", keyword);
+		
+		return "headoffice/fragment/searchProgram";
+		
+	}
+	
 	@GetMapping("/addProgram")
 	public String addProgram() {
 		
@@ -96,7 +195,7 @@ public class ProgramController {
 		log.debug("프로그램 상세 정보 : " + programOne);
 		model.addAttribute("programOne", programOne);
 		
-		return "headoffice/updateProgram";
+		return "headoffice/updateProgram"; 
 	}
 	
 	@PostMapping("/update")
@@ -108,7 +207,7 @@ public class ProgramController {
 		
 		programService.updateProgram(program, programFile, path, oldPath);
 		
-		return "redirect:/program/programOne/" + program.getProgramNo();
+		return "redirect:/headoffice/program/programOne/" + program.getProgramNo();
 	}
 	
 	@GetMapping("/deactive/{programNo}")

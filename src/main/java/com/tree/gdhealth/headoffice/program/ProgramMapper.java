@@ -16,6 +16,7 @@ public interface ProgramMapper {
 	
 	List<Map<String,Object>> programList(Map<String, Object> map);
 	int programCnt();
+	int searchCnt(Map<String, Object> map);
 	
 	Map<String, Object> programOne(int programNo);
 	
