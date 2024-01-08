@@ -45,7 +45,7 @@
 							</div>
 							<div class="form-group py-1 pb-2">
 								<div class="input-field">
-									<span class="fa-lock px-2"></span> <input type="text"
+									<span class="fa-user p-2"></span> <input type="text"
 										placeholder="YYYY-MM-DD" id="customerBirth" name="customerBirth" required>
 									
 								</div>
