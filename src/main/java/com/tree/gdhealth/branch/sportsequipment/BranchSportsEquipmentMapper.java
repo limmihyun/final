@@ -1,6 +1,7 @@
 package com.tree.gdhealth.branch.sportsequipment;
 
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
 import java.util.Map;
@@ -15,4 +16,8 @@ public interface BranchSportsEquipmentMapper {
     int getOrderListLastPage(Map<String, Object> paramMap);
 
     int addOrder(SportsEquipmentOrderAddDto dto);
+
+    Map<String, Object> getOrderOne(Integer orderNo);
+
+    int changeOrderStatus(@Param("orderNo") Integer orderNo, @Param("changeOrderStatus") String changeOrderStatus);
 }
