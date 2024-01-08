@@ -81,13 +81,12 @@
                 <div class="col-md-4">
                     <div class="single-features">
                         <div class="features-img">
-                            <img src="/img/features/feature-1.jpg" alt="">
+                            <img src="/img/features/feature-3.jpg" alt="">
                         </div>
                         <div class="feature-text">
                         <br>
                             <h5>Amazing Setting</h5>
-                            <p>Pellentesque dictum nisl in nibh dictum volutpat nec a quam. Vivamus suscipit nisl quis
-                                nulla pretium, vitae ornare leo.</p>
+                            <p>헬스장은 운동을 즐겁게 하고 건강한 라이프스타일을 추구하는 분들을 위한 공간입니다. 뛰어난 시설과 조용한 분위기는 여러분이 몸과 마음을 동시에 강화할 수 있도록 돕습니다.</p>
                         </div>
                     </div>
                 </div>
@@ -99,21 +98,19 @@
                         <div class="feature-text">
                         <br>
                             <h5>Best Trainers</h5>
-                            <p>Pellentesque dictum nisl in nibh dictum volutpat nec a quam. Vivamus suscipit nisl quis
-                                nulla pretium, vitae ornare leo.</p>
+                            <p>우리의 훌륭한 트레이너들은 여러분의 운동 목표를 달성하기 위해 항상 도와드립니다. 개별 맞춤 피트니스 계획과 지속적인 모니터링으로, 건강과 몸매 변화를 지속적으로 경험할 수 있습니다.</p>
                         </div>
                     </div>
                 </div>
                 <div class="col-md-4">
                     <div class="single-features">
                         <div class="features-img">
-                            <img src="/img/features/feature-3.jpg" alt="">
+                            <img src="/img/features/feature-1.jpg" alt="">
                         </div>
                         <div class="feature-text">
                         <br>
                             <h5>Diet Plans</h5>
-                            <p>Pellentesque dictum nisl in nibh dictum volutpat nec a quam. Vivamus suscipit nisl quis
-                                nulla pretium, vitae ornare leo.</p>
+                            <p>건강한 몸을 만들기 위해 맞춤식 다이어트 계획을 제공합니다. 영양 전문가와 협력하여 여러분의 식단을 최적화하고, 균형 잡힌 영양을 통해 더 건강한 삶을 살 수 있도록 돕겠습니다.</p>
                         </div>
                     </div>
                 </div>
@@ -133,32 +130,30 @@
                 </div>
             </div>
             <div class="row">
-                <div class="col-lg-3 col-sm-6">
+                <div class="col-lg-5 col-sm-6">
                     <div class="single-service">
                         <h5>Pilates</h5>
-                        <p>Pellentesque dictum nisl in nibh dictum volutpat nec a quam. Vivamus suscipit nisl quis nulla
-                            pretium.</p>
+                        <p>PILATES는 몸 전체의 균형을 강화하고 근육을 강조하는 종합적인 운동 방식입니다. 우리의 PILATES 클래스는 자세한 가이드와 함께, 효과적인 코어 강화와 유연성 향상을 경험할 수 있는 기회를 제공합니다.</p>
                     </div>
                 </div>
-                <div class="col-lg-3 col-sm-6">
+                
+                <div class="col-lg-5 col-sm-6">
                     <div class="single-service c-text">
                         <h5>Free Lifting</h5>
-                        <p>Pellentesque dictum nisl in nibh dictum volutpat nec a quam. Vivamus suscipit nisl quis nulla
-                            pretium.</p>
+                        <p>자유로운 움직임과 무게를 이용한 효과적인 근육 강화를 추구하는 FREE LIFTING 클래스에서는 단련된 인스트럭터의 지도 아래, 안전하게 몸을 강화하고 높은 퍼포먼스를 이끌어냅니다.</p>
                     </div>
                 </div>
-                <div class="col-lg-3 col-sm-6">
+                
+                <div class="col-lg-5 col-sm-6">
                     <div class="single-service">
                         <h5>Yoga</h5>
-                        <p>Pellentesque dictum nisl in nibh dictum volutpat nec a quam. Vivamus suscipit nisl quis nulla
-                            pretium.</p>
+                        <p>YOGA는 몸과 마음을 조화롭게 유지하는데 도움을 주는 운동입니다. 저희의 YOGA 수업은 다양한 레벨과 스타일을 제공하여, 신체의 강도와 유연성을 향상시키며 동시에 내적 평화를 찾을 수 있는 기회를 제공합니다.</p>
                     </div>
                 </div>
-                <div class="col-lg-3 col-sm-6">
+                <div class="col-lg-5 col-sm-6">
                     <div class="single-service">
                         <h5>Spinning</h5>
-                        <p>Pellentesque dictum nisl in nibh dictum volutpat nec a quam. Vivamus suscipit nisl quis nulla
-                            pretium.</p>
+                        <p>SPINNING은 강도높은 유산소 운동으로, 실내에서 자전거를 이용하여 몸을 강화하고 지방을 연소하는 활력 넘치는 운동입니다. 저희의 SPINNING 클래스는 역동적인 음악과 함께 몸과 마음을 활기차게 만들어줍니다.</p>
                     </div>
                 </div>
             </div>

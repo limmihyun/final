@@ -34,9 +34,12 @@ public class BranchController {
 		return "customer/franchiseBranch";
 	}
 	
+	
+	// 선택된 지점의 정보를 출력 (ajax)
 	@ResponseBody
 	@PostMapping("/customer/branchCk")
 	public Branch branchInfoOne(Branch branch) {
+		System.out.println(branch.getBranchNo());
 		Branch data = branchService.branchInfoOne(branch);
 		System.out.println(data.toString());
 		return data;

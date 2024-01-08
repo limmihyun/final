@@ -146,8 +146,7 @@
                             
                         </div>
                         <h5>TEL</h5>
-                        <p id="branchTel">Pellentesque dictum nisl in nibh dictum volutpat nec a quam. Vivamus suscipit nisl quis nulla
-                            pretium, vitae ornare leo.</p>
+                        <p id="branchTel"></p>
                     </div>
                 </div>
                 <div class="col-lg-4">
@@ -156,8 +155,7 @@
                         
                         </div>
                         <h5>ADDRESS</h5>
-                        <p id="branchAddress">Pellentesque dictum nisl in nibh dictum volutpat nec a quam. Vivamus suscipit nisl quis nulla
-                            pretium, vitae ornare leo.</p>
+                        <p id="branchAddress"></p>
                     </div>
                 </div>
                 <div class="col-lg-4">
@@ -166,8 +164,7 @@
                         
                         </div>
                         <h5>Diet Plans</h5>
-                        <p>Pellentesque dictum nisl in nibh dictum volutpat nec a quam. Vivamus suscipit nisl quis nulla
-                            pretium, vitae ornare leo.</p>
+                        <p></p>
                     </div>
                 </div>
             </div>
@@ -175,37 +172,7 @@
     </section>
     <!-- Elements Section End -->
     <!-- Footer Section Begin -->
-    <footer class="footer-section set-bg" data-setbg="/img/footer-bg.jpg">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-12">
-                    <div class="footer-content">
-                        <div class="footer-logo">
-                            <a href="#"><img src="/img/logo.png" alt=""></a>
-                        </div>
-                        <div class="footer-menu">
-                            <ul>
-                                <li><a href="./home.html">Home</a></li>
-                                <li><a href="#">About us</a></li>
-                                <li><a href="#">Classes</a></li>
-                                <li><a href="#">Instructors</a></li>
-                                <li><a href="#">News</a></li>
-                                <li><a href="#">Contact</a></li>
-                            </ul>
-                        </div>
-                        <div class="footer-icon-img">
-                            <img src="/img/footer-icon.png" alt="">
-                        </div>
-                        <div class="copyright">
-                            <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
-Copyright &copy;<script>document.write(new Date().getFullYear());</script> All rights reserved | This template is made with <i class="fa fa-heart-o" aria-hidden="true"></i> by <a href="https://colorlib.com" target="_blank">Colorlib</a>
-<!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </footer>
+    <jsp:include page="/WEB-INF/footer/footer.jsp" />
     <!-- Footer Section End -->
 
     <!-- Js Plugins -->
@@ -247,6 +214,7 @@ Copyright &copy;<script>document.write(new Date().getFullYear());</script> All r
 </script>
 <script>
 function loadBranchDetails(branchNo) {
+	console.log(branchNo)
     // Ajax 호출
     $.ajax({
         type: 'post',
@@ -255,7 +223,7 @@ function loadBranchDetails(branchNo) {
         success: function(response) {
             // 받아온 값으로 memberCount 업데이트
             $('#memberCount').html(response.count);
-            $('#branchTel').html(response.branchTel);
+            $('#branchTel').html(response.branchName +"  :  "+ response.branchTel);
             $('#branchAddress').html(response.branchAddress);
             $('#trainerCount').html(response.trainerCount);
 

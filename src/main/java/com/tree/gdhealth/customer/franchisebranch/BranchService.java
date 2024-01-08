@@ -29,7 +29,11 @@ public class BranchService {
 	// 지점 정보, 혼잡도
 	public Branch branchInfoOne(Branch branch) {
 		Branch data = branchMapper.branchInfoOne(branch);
+		
+		// 선택된 지점의 맴버, 트레이너 수 저장 
+		int branchMemberCount = branchMapper.branchMemberCounterOne(branch);
 		int branchTrainerCount = branchMapper.branchTrainerCountOne(branch);
+		data.setCount(branchMemberCount);
 		data.setTrainerCount(branchTrainerCount);
 		return data;
 	}
