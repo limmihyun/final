@@ -6,6 +6,8 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
+
 /**
  * @author 정인호
  */
@@ -18,5 +20,9 @@ public class BranchApiService {
 
     public Branch getBranchOne(int branchNo) {
         return mapper.getBranchOne(branchNo);
+    }
+
+    public List<Branch> getBranchList() {
+        return mapper.getBranchList();
     }
 }

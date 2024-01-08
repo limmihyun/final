@@ -5,6 +5,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.HashMap;
 import java.util.Map;
 
 /**
@@ -19,18 +20,25 @@ public class BranchSportsEquipmentService {
 
 
     public getOrderListResponseDto getOrderListResponseDto(
-            int branchNo,
+            Integer branchNo,
             int requestPage,
             boolean isOnlyWaitingList) {
 
         int rowPerPage = 10;
         int beginRow = (requestPage - 1) * rowPerPage;
 
+        Map<String, Object> paramMap = new HashMap<>();
+        paramMap.put("branchNo", branchNo);
+        paramMap.put("beginRow", beginRow);
+        paramMap.put("rowPerPage", rowPerPage);
+        paramMap.put("isOnlyWaitingList", isOnlyWaitingList);
+        /*
         Map<String, Object> paramMap = Map.of(
                 "branchNo", branchNo,
                 "beginRow", beginRow,
                 "rowPerPage", rowPerPage,
                 "isOnlyWaitingList", isOnlyWaitingList);
+        */
 
         return getOrderListResponseDto.builder()
                 .requestPage(requestPage)
@@ -43,7 +51,17 @@ public class BranchSportsEquipmentService {
     @Transactional
     public boolean addOrder(SportsEquipmentOrderAddDto dto) {
         int affectedRows = mapper.addOrder(dto);
-        return (affectedRows == 1)?true:false;
+        return affectedRows == 1;
 
+    }
+
+    public Map<String, Object> getOrderOne(Integer orderNo) {
+        return mapper.getOrderOne(orderNo);
+    }
+
+    public boolean changeOrderStatus(Integer orderNo, String changeOrderStatus) {
+        int affectedRows = mapper.changeOrderStatus(orderNo, changeOrderStatus);
+
+        return affectedRows == 1;
     }
 }

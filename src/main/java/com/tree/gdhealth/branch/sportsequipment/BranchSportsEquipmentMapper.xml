@@ -9,8 +9,13 @@
 		     (SELECT item_price * #{quantity} FROM sports_equipment WHERE sports_equipment.sports_equipment_no = #{sportsEquipmentNo}),
 		     #{employeeApprover})
 	</insert>
+	<update id="changeOrderStatus">
+		UPDATE sports_equipment_order
+		SET order_status = #{changeOrderStatus}
+		WHERE order_no = #{orderNo}
+	</update>
 
-    <select id="getBranchOne" resultType="com.tree.gdhealth.vo.Branch">
+	<select id="getBranchOne" resultType="com.tree.gdhealth.vo.Branch">
 		SELECT
 		    branch_no branchNo,
 		    branch_name branchName,
@@ -43,21 +48,45 @@
 				 LEFT JOIN branch bch ON seo.branch_no = bch.branch_no
 				 LEFT JOIN sports_equipment se ON seo.sports_equipment_no = se.sports_equipment_no
 				 LEFT JOIN employee_detail aed ON seo.employee_approver = aed.employee_no
-		WHERE seo.branch_no = #{branchNo}
-			<if test="isOnlyWaitingList">
-				AND seo.order_status = '대기'
-			</if>
+		<where>
+		<if test="branchNo != null">AND seo.branch_no = #{branchNo}</if>
+		<if test="isOnlyWaitingList">AND seo.order_status = '대기'</if>
+		</where>
 		ORDER BY seo.createdate DESC
 		LIMIT #{beginRow}, #{rowPerPage}
 	</select>
 	<select id="getOrderListLastPage" resultType="java.lang.Integer">
 		SELECT CEILING(COUNT(seo.order_no)/${rowPerPage}) AS lastPage
 		FROM sports_equipment_order seo
-		WHERE seo.branch_no = #{branchNo}
-		<if test="isOnlyWaitingList">
-			AND seo.order_status = '대기'
-		</if>
+		<where>
+			<if test="branchNo != null">AND seo.branch_no = #{branchNo}</if>
+			<if test="isOnlyWaitingList">AND seo.order_status = '대기'</if>
+		</where>
 		ORDER BY seo.createdate DESC
+	</select>
+    <select id="getOrderOne" resultType="java.util.Map">
+		SELECT seo.order_no orderNo,
+			   seo.employee_orderer employeeOrderer,
+			   oed.employee_name employeeOrdererName,
+			   seo.branch_no branchNo,
+			   bch.branch_name branchName,
+			   seo.sports_equipment_no sportsEquipmentNo,
+			   se.item_name itemName,
+			   se.note AS note,
+			   se.item_name itemName,
+			   seo.quantity AS quantity,
+			   se.item_price itemPrice,
+			   (seo.quantity * se.item_price) totalPrice,
+			   seo.employee_approver employeeApprover,
+			   aed.employee_name employeeApproverName,
+			   seo.order_status orderStatus,
+			   seo.createdate
+		FROM sports_equipment_order seo
+				 LEFT JOIN employee_detail oed ON seo.employee_orderer = oed.employee_no
+				 LEFT JOIN branch bch ON seo.branch_no = bch.branch_no
+				 LEFT JOIN sports_equipment se ON seo.sports_equipment_no = se.sports_equipment_no
+				 LEFT JOIN employee_detail aed ON seo.employee_approver = aed.employee_no
+		where seo.order_no = #{orderNo}
 	</select>
 
 </mapper>

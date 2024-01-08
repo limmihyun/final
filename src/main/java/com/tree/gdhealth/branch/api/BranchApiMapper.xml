@@ -15,5 +15,18 @@
 		FROM branch
 		WHERE branch_no = #{branchNo}
 	</select>
+    <select id="getBranchList" resultType="com.tree.gdhealth.vo.Branch">
+		SELECT
+			branch_no branchNo,
+			branch_name branchName,
+			branch_tel branchTel,
+			branch_address branchAddress,
+			createdate,
+			updatedate,
+			branch_level branchLevel,
+			branch_active branchActive
+		FROM branch
+		WHERE branch_level = '0'
+	</select>
 
 </mapper>
