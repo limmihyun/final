@@ -58,6 +58,35 @@ public class EmpController {
 		
 	}
 	
+	@GetMapping("/paging")
+	public String paging(Model model, @RequestParam(defaultValue = "1") int page) {
+			
+		// 전체 직원 수
+		int employeeCnt = empService.getEmployeeCnt();
+		// 디버깅
+		log.debug("전체 직원 수 : " + employeeCnt);
+		
+		Paging paging = new Paging();
+		paging.setRowPerPage(8); // 한 페이지에 나타낼 직원 수
+		paging.setCurrentPage(page); // 현재 페이지
+		paging.setCnt(employeeCnt); // 전체 직원 수
+		
+		List<Map<String, Object>> empList = empService.getEmployeeList(paging.getBeginRow(), paging.getRowPerPage());
+		
+		model.addAttribute("empList", empList);   
+		model.addAttribute("lastPage", paging.getLastPage());
+		model.addAttribute("currentPage", page);
+	
+		model.addAttribute("startPageNum", paging.getStartPageNum());
+		model.addAttribute("endPageNum", paging.getEndPageNum());
+		 
+		model.addAttribute("prev", paging.getPrev());
+		model.addAttribute("next", paging.getNext());  
+	
+	    return "headoffice/fragment";
+		
+	}
+	
 	@GetMapping("/search")
 	public String search(Model model, String type, String keyword,
 								@RequestParam(defaultValue = "1") int page) {

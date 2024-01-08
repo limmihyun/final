@@ -141,7 +141,7 @@
         <!----------------------- 검색창 end ----------------------->
       
            
-        <div class="contacts-area mg-b-15">
+        <div class="contacts-area mg-b-15" id="fragment">
             <div class="container-fluid">   
             
                	<!--------------------- 회원 list start-------------------------->
@@ -189,12 +189,12 @@
              		</c:if>
              		<c:if test="${currentPage != 1}">
              			<li class="page-item">           	  	
-	             	  		<a class="page-link" href="${pageContext.request.contextPath}/headoffice/emp?page=1">처음</a>
+	             	  		<a class="page-link pageBtn" data-page="1" href="${pageContext.request.contextPath}/headoffice/emp?page=1">처음</a>
 	             	 	</li>
              		</c:if>
 
 		  			<c:if test="${prev}">
-					  	<li class="page-item"><a class="page-link" href="${pageContext.request.contextPath}/headoffice/emp?page=${startPageNum - 1}">이전</a></li>
+					  	<li class="page-item"><a class="page-link pageBtn" data-page="${startPageNum - 1}" href="${pageContext.request.contextPath}/headoffice/emp?page=${startPageNum - 1}">이전</a></li>
 				 	</c:if>
 				    <c:forEach begin="${startPageNum}" end="${endPageNum}" var="pageNum">
 					  	<c:if test="${pageNum == currentPage}"> <!-- 페이징 버튼 색 변경o --> 
@@ -204,12 +204,14 @@
 					  	</c:if>
 					  	<c:if test="${pageNum != currentPage}"> <!-- 페이징 버튼 색 변경x --> 
 					  		<li class="page-item">
-						  		<a class="page-link" href="${pageContext.request.contextPath}/headoffice/emp?page=${pageNum}">${pageNum}</a>
+						  		<a class="page-link pageBtn" data-page="${pageNum}" href="${pageContext.request.contextPath}/headoffice/emp?page=${pageNum}">${pageNum}</a>
 						  	</li>
 					  	</c:if>
 				    </c:forEach>
 			  		<c:if test="${next}">
-					  	<li class="page-item"><a class="page-link" href="${pageContext.request.contextPath}/headoffice/emp?page=${endPageNum + 1}">다음</a></li>
+					  	<li class="page-item">
+					  		<a class="page-link pageBtn" data-page="${endPageNum + 1}" href="${pageContext.request.contextPath}/headoffice/emp?page=${endPageNum + 1}">다음</a>				
+					  	</li>
 				 	</c:if>
 				  	<c:if test="${currentPage == lastPage}">
 					  	<li class="page-item disabled">
@@ -218,7 +220,7 @@
 				    </c:if>
 		  	    	<c:if test="${currentPage != lastPage}">
 					  	<li class="page-item">
-					  		<a class="page-link" href="${pageContext.request.contextPath}/headoffice/emp?page=${lastPage}">끝</a>
+					  		<a class="page-link pageBtn" data-page="${lastPage}" href="${pageContext.request.contextPath}/headoffice/emp?page=${lastPage}">끝</a>
 					  	</li>
 					</c:if>			  
 				</ul>	  
@@ -375,6 +377,26 @@
 		}
 		
 		$('#searchForm').submit();
+	});
+	
+	// 동적으로 추가된 요소에 대해 이벤트 처리
+	$(document).on('click', '.pageBtn', function(e){
+		e.preventDefault();
+		let page = $(this).data('page');
+		console.log(page);
+		
+		$.ajax({
+			url : '${pageContext.request.contextPath}/headoffice/emp/paging',
+			method : 'get',
+			data : {
+				page : page	
+			},
+			success : function(result){
+				console.log('페이징 성공!')
+				$('#fragment').html(result);
+			}			
+		});
+		
 	});
 	
 </script>
