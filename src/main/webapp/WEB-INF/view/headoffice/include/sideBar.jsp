@@ -50,8 +50,7 @@
                             	<span class="mini-click-non">발주</span>
                             </a>
                             <ul class="submenu-angle" aria-expanded="false">
-                                <li><a title="Peity Charts" href="static-table.html"><span class="mini-sub-pro">Static Table</span></a></li>
-                                <li><a title="Data Table" href="data-table.html"><span class="mini-sub-pro">Data Table</span></a></li>
+                                <li><a title="Peity Charts" href="/headoffice/sportsEquipmentOrder/list"><span class="mini-sub-pro">발주관리</span></a></li>
                             </ul>
                         </li>
 						<li>
