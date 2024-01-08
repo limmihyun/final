@@ -130,27 +130,27 @@
                 </div>
             </div>
             <div class="row">
-                <div class="col-lg-5 col-sm-6">
+                <div class="col-lg-3 col-sm-6">
                     <div class="single-service">
                         <h5>Pilates</h5>
                         <p>PILATES는 몸 전체의 균형을 강화하고 근육을 강조하는 종합적인 운동 방식입니다. 우리의 PILATES 클래스는 자세한 가이드와 함께, 효과적인 코어 강화와 유연성 향상을 경험할 수 있는 기회를 제공합니다.</p>
                     </div>
                 </div>
                 
-                <div class="col-lg-5 col-sm-6">
+                <div class="col-lg-3 col-sm-6">
                     <div class="single-service c-text">
                         <h5>Free Lifting</h5>
                         <p>자유로운 움직임과 무게를 이용한 효과적인 근육 강화를 추구하는 FREE LIFTING 클래스에서는 단련된 인스트럭터의 지도 아래, 안전하게 몸을 강화하고 높은 퍼포먼스를 이끌어냅니다.</p>
                     </div>
                 </div>
                 
-                <div class="col-lg-5 col-sm-6">
+                <div class="col-lg-3 col-sm-6">
                     <div class="single-service">
                         <h5>Yoga</h5>
                         <p>YOGA는 몸과 마음을 조화롭게 유지하는데 도움을 주는 운동입니다. 저희의 YOGA 수업은 다양한 레벨과 스타일을 제공하여, 신체의 강도와 유연성을 향상시키며 동시에 내적 평화를 찾을 수 있는 기회를 제공합니다.</p>
                     </div>
                 </div>
-                <div class="col-lg-5 col-sm-6">
+                <div class="col-lg-3 col-sm-6">
                     <div class="single-service">
                         <h5>Spinning</h5>
                         <p>SPINNING은 강도높은 유산소 운동으로, 실내에서 자전거를 이용하여 몸을 강화하고 지방을 연소하는 활력 넘치는 운동입니다. 저희의 SPINNING 클래스는 역동적인 음악과 함께 몸과 마음을 활기차게 만들어줍니다.</p>
