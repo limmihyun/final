@@ -308,13 +308,17 @@
 					<c:forEach var="l" items="${allList}">
 						<c:if test="${listYear == l.year && listMonth == l.month}">
 						  <c:if test="${calendarMap.thisMonth == l.month}">
-							  	<c:if test="${l.day >= calendarMap.thisDay}">
-									<p>${l.month} / ${l.day} &nbsp; ${l.programName}</p>
-									<p  style="margin-bottom:30px;">(${l.cnt} / ${l.programMaxCustomer})</p>
-									<c:set var="loop_flag" value="true"/>
-							  </c:if>
+							  <c:if test="${l.day >= calendarMap.thisDay && not loop_flag}">
+							  		<c:forEach var="ml" items="${listMonth1}">
+								  		<p>${ml.month} / ${ml.day} &nbsp; ${ml.programName}</p>
+										<p  style="margin-bottom:30px;">(${ml.cnt} / ${ml.programMaxCustomer})</p>
+										<c:set var="loop_flag" value="true"/>									
+							  		</c:forEach>
+							  <c:if test="${currentPageMonth1 > 1}"><a href="${pageContext.request.contextPath}/customer/programrs?currentPageMonth1=${currentPageMonth1 - 1}"> < </a></c:if>
+							  <c:if test="${currentPageMonth1 < lastPage}"><a href="${pageContext.request.contextPath}/customer/programrs?currentPageMonth1=${currentPageMonth1 + 1}" > > </a></c:if>  
+							  </c:if>						 
 						  </c:if>
-						  <c:if test="${calendarMap.thisMonth < l.month}">
+						  <c:if test="${calendarMap.thisMonth < l.month && not loop_flag}">
 					  			<p>${l.month} / ${l.day} &nbsp; ${l.programName}</p>
 								<p  style="margin-bottom:30px;">(${l.cnt} / ${l.programMaxCustomer})</p>
 								<c:set var="loop_flag" value="true"/>
@@ -389,5 +393,24 @@ Copyright &copy;<script>document.write(new Date().getFullYear());</script> All r
     <script src="/js/circle-progress.min.js"></script>
     <script src="/js/jquery.barfiller.js"></script>
     <script src="/js/main.js"></script>
+    
+    <script>
+	$('#frontList').click(function(){
+		console.log("클릭");
+		
+		$.ajax({
+			async : true,
+			url : '/customer/frontList',
+			type : 'get',
+			data : {programReservationNo : $('#programReservationNo').val()},
+			success : function(jsonData){
+				console.log(jsonData, " <--jsonData");
+				
+				$('#reservationList').load(location.href + " #reservationList");
+			}
+		    }
+		});
+	});
+    </script>
 </body>
 </html>

@@ -33,6 +33,32 @@
 		ORDER BY pd.program_date ASC
 	</select>
 	
+ 	<select id="allCalendarListPage" resultType="java.util.Map">
+		SELECT
+		      YEAR(pd.program_date) year,
+			  MONTH(pd.program_date) month,
+			  DAY(pd.program_date) day,
+			  COUNT(pr.program_date_no) cnt,
+			p.program_max_customer programMaxCustomer,
+			p.program_name programName
+		FROM program_reservation pr RIGHT OUTER JOIN program_date pd
+		  on pr.program_date_no = pd.program_date_no INNER JOIN program p
+		  on p.program_no = pd.program_no
+		WHERE YEAR(pd.program_date) = #{year} AND MONTH(pd.program_date) = #{month}
+		GROUP BY pd.program_date
+		ORDER BY pd.program_date ASC
+		LIMIT #{beginRow},#{rowPerPage};
+	</select> 
+	
+	<select id="lastPage">
+		SELECT
+			COUNT(*)
+		FROM  program_date pd INNER JOIN program p 
+		   on pd.program_no = p.program_no
+		WHERE YEAR(pd.program_date) = #{year} AND MONTH(pd.program_date) = #{month}
+		 GROUP BY p.program_no
+	</select>
+	
 	<select id="myCalendarList" resultType="java.util.Map">
 		SELECT
 			  DAY(pd.program_date) day
