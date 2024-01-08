@@ -54,9 +54,9 @@
             </div>
         </div>
     </section>
-    	<jsp:include page="/WEB-INF/header/header.jsp" />
-    	
-    	
+    
+   	<jsp:include page="/WEB-INF/header/header.jsp" />
+    		
     <section class="hero-slider">
         <div class="slide-items owl-carousel">
             <div class="single-slide set-bg active" data-setbg="/img/bg.jpg">
@@ -135,7 +135,6 @@
             <div class="row">
                 <div class="col-lg-3 col-sm-6">
                     <div class="single-service">
-                        <img src="/img/icon-1.png" alt="">
                         <h5>Pilates</h5>
                         <p>Pellentesque dictum nisl in nibh dictum volutpat nec a quam. Vivamus suscipit nisl quis nulla
                             pretium.</p>
@@ -143,7 +142,6 @@
                 </div>
                 <div class="col-lg-3 col-sm-6">
                     <div class="single-service c-text">
-                        <img src="/img/icon-2.png" alt="">
                         <h5>Free Lifting</h5>
                         <p>Pellentesque dictum nisl in nibh dictum volutpat nec a quam. Vivamus suscipit nisl quis nulla
                             pretium.</p>
@@ -151,7 +149,6 @@
                 </div>
                 <div class="col-lg-3 col-sm-6">
                     <div class="single-service">
-                        <img src="/img/icon-3.png" alt="">
                         <h5>Yoga</h5>
                         <p>Pellentesque dictum nisl in nibh dictum volutpat nec a quam. Vivamus suscipit nisl quis nulla
                             pretium.</p>
@@ -159,7 +156,6 @@
                 </div>
                 <div class="col-lg-3 col-sm-6">
                     <div class="single-service">
-                        <img src="/img/icon-4.png" alt="">
                         <h5>Spinning</h5>
                         <p>Pellentesque dictum nisl in nibh dictum volutpat nec a quam. Vivamus suscipit nisl quis nulla
                             pretium.</p>
@@ -175,60 +171,7 @@
     </section>
     <!-- Services Section End -->
     <!-- Trainer Section Begin -->
-    <section class="trainer-section set-bg" data-setbg="/img/trainer-bg.jpg">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-12 text-center">
-                    <div class="section-title">
-                        <span>The Best</span>
-                        <h2>Trainers</h2>
-                        <a href="#" class="primary-btn trainer-btn">See All</a>
-                    </div>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-md-4">
-                    <div class="single-trainer">
-                        <div class="trainer-img">
-                            <img src="/img/trainer/trainer-1.jpg" alt="">
-                            <div class="/img-hover">
-                                <a href="#"><i class="fa fa-plus"></i></a>
-                            </div>
-                        </div>
-                        <div class="trainer-text">
-                            <h5>Rachel Smith <span>Aerobics Instructor</span></h5>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-4">
-                    <div class="single-trainer">
-                        <div class="trainer-img">
-                            <img src="/img/trainer/trainer-2.jpg" alt="">
-                            <div class="img-hover">
-                                <a href="#"><i class="fa fa-plus"></i></a>
-                            </div>
-                        </div>
-                        <div class="trainer-text">
-                            <h5>Micheal Williams <span>Aerobics Instructor</span></h5>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-4">
-                    <div class="single-trainer">
-                        <div class="trainer-img">
-                            <img src="/img/trainer/trainer-3.jpg" alt="">
-                            <div class="img-hover">
-                                <a href="#"><i class="fa fa-plus"></i></a>
-                            </div>
-                        </div>
-                        <div class="trainer-text">
-                            <h5>James Brown <span>Aerobics Instructor</span></h5>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
+   
     <!-- Traniner Section End -->
     <!-- Upcoming Event Begin -->
     <section class="upcoming-event-section spad-2">
@@ -282,53 +225,10 @@
     </section>
     <!-- Upcoming Event End -->
     <!-- Footer Section Begin -->
-   <!-- Footer Section Begin -->
-    <footer class="footer-section set-bg" data-setbg="/img/footer-bg.jpg">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-12">
-                    <div class="footer-content">
-                        <div class="footer-logo">
-                            <a href="#"><img src="/img/logo.png" alt=""></a>
-                        </div>
-                        <div class="footer-menu">
-                            <ul>
-                                <li><a href="./index.html">Home</a></li>
-                                <li><a href="#">About us</a></li>
-                                <li><a href="#">Classes</a></li>
-                                <li><a href="#">Instructors</a></li>
-                                <li><a href="#">News</a></li>
-                                <li><a href="#">Contact</a></li>
-                            </ul>
-                        </div>
-                        <div class="subscribe-form">
-                            <form action="#">
-                                <input type="text" placeholder="your Email">
-                                <button type="submit">Sign Up</button>
-                            </form>
-                        </div>
-                        <div class="social-links">
-                            <a href="#"><i class="fa fa-pinterest"></i></a>
-                            <a href="#"><i class="fa fa-facebook"></i></a>
-                            <a href="#"><i class="fa fa-twitter"></i></a>
-                            <a href="#"><i class="fa fa-dribbble"></i></a>
-                            <a href="#"><i class="fa fa-behance"></i></a>
-                        </div>
-                        <div class="footer-icon-img">
-                            <img src="/img/footer-icon.png" alt="">
-                        </div>
-                        <div class="copyright">
-                            <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
-Copyright &copy;<script>document.write(new Date().getFullYear());</script> All rights reserved | This template is made with <i class="fa fa-heart-o" aria-hidden="true"></i> by <a href="https://colorlib.com" target="_blank">Colorlib</a>
-<!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </footer>
+    <!-- Footer Section Begin -->
+    <jsp:include page="/WEB-INF/footer/footer.jsp" />
     <!-- Footer Section End -->
-
+	
     <!-- Js Plugins -->
     <script src="/js/jquery-3.3.1.min.js"></script>
     <script src="/js/bootstrap.min.js"></script>
