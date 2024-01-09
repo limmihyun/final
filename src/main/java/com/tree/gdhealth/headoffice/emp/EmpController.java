@@ -6,10 +6,8 @@ import java.util.Map;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.validation.Errors;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -34,30 +32,8 @@ public class EmpController {
 	private final EmpService empService;
 
 	@GetMapping
-	public String empList(Model model, @RequestParam(defaultValue = "1") int page) {
-			
-		// 전체 직원 수
-		int employeeCnt = empService.getEmployeeCnt();
-		// 디버깅
-		log.debug("전체 직원 수 : " + employeeCnt);
+	public String emp() {
 		
-		Paging paging = new Paging();
-		paging.setRowPerPage(8); // 한 페이지에 나타낼 직원 수
-		paging.setCurrentPage(page); // 현재 페이지
-		paging.setCnt(employeeCnt); // 전체 직원 수
-		
-		List<Map<String, Object>> empList = empService.getEmployeeList(paging.getBeginRow(), paging.getRowPerPage());
-		
-		model.addAttribute("empList", empList);   
-		model.addAttribute("lastPage", paging.getLastPage());
-		model.addAttribute("currentPage", page);
-	
-		model.addAttribute("startPageNum", paging.getStartPageNum());
-		model.addAttribute("endPageNum", paging.getEndPageNum());
-		 
-		model.addAttribute("prev", paging.getPrev());
-		model.addAttribute("next", paging.getNext());  
-	
 		return "headoffice/empList";
 	    
 	}
@@ -70,58 +46,23 @@ public class EmpController {
 		// 디버깅
 		log.debug("전체 직원 수 : " + employeeCnt);
 		
-		Paging paging = new Paging();
-		paging.setRowPerPage(8); // 한 페이지에 나타낼 직원 수
-		paging.setCurrentPage(page); // 현재 페이지
-		paging.setCnt(employeeCnt); // 전체 직원 수
-		
+		// 페이징
+		Paging paging = Paging.builder()
+				.pageNumCnt(10) // 한번에 표시할 페이징 번호의 갯수
+				.rowPerPage(8) // 한 페이지에 나타낼 row 수
+				.currentPage(page) // 현재 페이지
+				.cnt(employeeCnt) // 전체 row 수
+				.build();
+		paging.calculation();
+				
 		List<Map<String, Object>> empList = empService.getEmployeeList(paging.getBeginRow(), paging.getRowPerPage());
-		
 		model.addAttribute("empList", empList);   
-		model.addAttribute("lastPage", paging.getLastPage());
-		model.addAttribute("currentPage", page);
-	
-		model.addAttribute("startPageNum", paging.getStartPageNum());
-		model.addAttribute("endPageNum", paging.getEndPageNum());
-		 
-		model.addAttribute("prev", paging.getPrev());
-		model.addAttribute("next", paging.getNext());  
+		
+		// 페이징(model 추가)
+		paging.pagingAttributes(model, paging, page);
 	
 		return "headoffice/fragment/emp";
 
-	}
-	
-	@GetMapping("/search")
-	public String search(Model model, String type, String keyword,
-								@RequestParam(defaultValue = "1") int page) {
-		
-		// 검색 결과 개수
-		int searchCnt = empService.getSearchCnt(type, keyword);
-		// 디버깅
-		log.debug("검색 결과 개수 : " + searchCnt);
-		
-		Paging paging = new Paging();
-		paging.setRowPerPage(8); // 한 페이지에 나타낼 검색 결과 수
-		paging.setCurrentPage(page); // 현재 페이지
-		paging.setCnt(searchCnt); // 전체 검색 결과 수
-		
-		List<Map<String, Object>> searchList = empService.getSearchList(paging.getBeginRow(), paging.getRowPerPage(), type, keyword);
-		
-		model.addAttribute("empList", searchList);   
-		model.addAttribute("lastPage", paging.getLastPage());
-		model.addAttribute("currentPage", page);
-	
-		model.addAttribute("startPageNum", paging.getStartPageNum());
-		model.addAttribute("endPageNum", paging.getEndPageNum());
-		 
-		model.addAttribute("prev", paging.getPrev());
-		model.addAttribute("next", paging.getNext());
-		
-		// search parameter 추가
-		model.addAttribute("type", type);
-		model.addAttribute("keyword", keyword);
-
-		return "headoffice/fragment/searchEmp";
 	}
 	
 	@GetMapping("/searchPaging")
@@ -133,22 +74,19 @@ public class EmpController {
 		// 디버깅
 		log.debug("검색 결과 개수(searchPaging) : " + searchCnt);
 		
-		Paging paging = new Paging();
-		paging.setRowPerPage(8); // 한 페이지에 나타낼 직원 수
-		paging.setCurrentPage(page); // 현재 페이지
-		paging.setCnt(searchCnt); // 전체 직원 수
-		
+		Paging paging = Paging.builder()
+							.pageNumCnt(10) // 한번에 표시할 페이징 번호의 갯수
+							.rowPerPage(8) // 한 페이지에 나타낼 row 수
+							.currentPage(page) // 현재 페이지
+							.cnt(searchCnt) // 전체 row 수
+							.build();
+		paging.calculation();
+				
 		List<Map<String, Object>> searchList = empService.getSearchList(paging.getBeginRow(), paging.getRowPerPage(), type, keyword);
+		model.addAttribute("empList", searchList);  
 		
-		model.addAttribute("empList", searchList);   
-		model.addAttribute("lastPage", paging.getLastPage());
-		model.addAttribute("currentPage", page);
-	
-		model.addAttribute("startPageNum", paging.getStartPageNum());
-		model.addAttribute("endPageNum", paging.getEndPageNum());
-		 
-		model.addAttribute("prev", paging.getPrev());
-		model.addAttribute("next", paging.getNext());  
+		// 페이징(model 추가)
+		paging.pagingAttributes(model, paging, page);  
 		
 		// search parameter 추가
 		model.addAttribute("type", type);

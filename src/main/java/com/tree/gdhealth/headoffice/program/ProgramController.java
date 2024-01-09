@@ -32,30 +32,7 @@ public class ProgramController {
 	private final ProgramService programService;
 	
 	@GetMapping
-	public String program(Model model, @RequestParam(defaultValue = "1") int page) {
-		
-		// 전체 프로그램 수
-		int programCnt = programService.getProgramCnt();
-		// 디버깅
-		log.debug("전체 프로그램 수 : " + programCnt);
-		
-		Paging paging = new Paging();
-		paging.setRowPerPage(4); // 한 페이지에 나타낼 프로그램 수
-		paging.setCurrentPage(page); // 현재 페이지
-		paging.setCnt(programCnt); // 전체 직원 수
-		
-		List<Map<String, Object>> programList = programService.getProgramList(paging.getBeginRow(), paging.getRowPerPage());
-		
-		model.addAttribute("programList", programList);  
-		
-		model.addAttribute("lastPage", paging.getLastPage());
-		model.addAttribute("currentPage", page);
-	
-		model.addAttribute("startPageNum", paging.getStartPageNum());
-		model.addAttribute("endPageNum", paging.getEndPageNum());
-		 
-		model.addAttribute("prev", paging.getPrev());
-		model.addAttribute("next", paging.getNext());  
+	public String program() {
 		
 		return "headoffice/programList";
 	}
@@ -68,60 +45,23 @@ public class ProgramController {
 		// 디버깅
 		log.debug("전체 프로그램 수 : " + programCnt);
 		
-		Paging paging = new Paging();
-		paging.setRowPerPage(4); // 한 페이지에 나타낼 프로그램 수
-		paging.setCurrentPage(page); // 현재 페이지
-		paging.setCnt(programCnt); // 전체 직원 수
+		// 페이징
+		Paging paging = Paging.builder()
+				.pageNumCnt(10) // 한번에 표시할 페이징 번호의 갯수
+				.rowPerPage(4) // 한 페이지에 나타낼 row 수
+				.currentPage(page) // 현재 페이지
+				.cnt(programCnt) // 전체 row 수
+				.build();
+		paging.calculation();
 		
-		List<Map<String, Object>> searchList = programService.getProgramList(paging.getBeginRow(), paging.getRowPerPage());
-		
+		List<Map<String, Object>> searchList = programService.getProgramList(paging.getBeginRow(), paging.getRowPerPage());	
 		model.addAttribute("programList", searchList);  
 		
-		model.addAttribute("lastPage", paging.getLastPage());
-		model.addAttribute("currentPage", page);
-	
-		model.addAttribute("startPageNum", paging.getStartPageNum());
-		model.addAttribute("endPageNum", paging.getEndPageNum());
-		 
-		model.addAttribute("prev", paging.getPrev());
-		model.addAttribute("next", paging.getNext());  
-		
+		// 페이징(model 추가)
+		paging.pagingAttributes(model, paging, page);
+						
 		return "headoffice/fragment/program";
 		
-	}
-	
-	@GetMapping("/search")
-	public String search(Model model, String type, 
-							String keyword, @RequestParam(defaultValue = "1") int page) {
-		
-		// 검색 결과 개수
-		int searchCnt = programService.getSearchCnt(type, keyword);
-		// 디버깅
-		log.debug("전체 프로그램 수 : " + searchCnt);
-		
-		Paging paging = new Paging();
-		paging.setRowPerPage(4); // 한 페이지에 나타낼 프로그램 수
-		paging.setCurrentPage(page); // 현재 페이지
-		paging.setCnt(searchCnt); // 전체 직원 수
-		
-		List<Map<String, Object>> searchList = programService.getSearchList(paging.getBeginRow(), paging.getRowPerPage(), type, keyword);
-		
-		model.addAttribute("programList", searchList);  
-		
-		model.addAttribute("lastPage", paging.getLastPage());
-		model.addAttribute("currentPage", page);
-	
-		model.addAttribute("startPageNum", paging.getStartPageNum());
-		model.addAttribute("endPageNum", paging.getEndPageNum());
-		 
-		model.addAttribute("prev", paging.getPrev());
-		model.addAttribute("next", paging.getNext());
-		
-		// search parameter 추가
-		model.addAttribute("type", type);
-		model.addAttribute("keyword", keyword);
-		
-		return "headoffice/fragment/searchProgram";
 	}
 	
 	@GetMapping("/searchPaging")
@@ -133,23 +73,20 @@ public class ProgramController {
 		// 디버깅
 		log.debug("전체 프로그램 수 : " + searchCnt);
 		
-		Paging paging = new Paging();
-		paging.setRowPerPage(4); // 한 페이지에 나타낼 프로그램 수
-		paging.setCurrentPage(page); // 현재 페이지
-		paging.setCnt(searchCnt); // 전체 직원 수
+		// 페이징
+		Paging paging = Paging.builder()
+				.pageNumCnt(10) // 한번에 표시할 페이징 번호의 갯수
+				.rowPerPage(4) // 한 페이지에 나타낼 row 수
+				.currentPage(page) // 현재 페이지
+				.cnt(searchCnt) // 전체 row 수
+				.build();
+		paging.calculation();
 		
 		List<Map<String, Object>> searchList = programService.getSearchList(paging.getBeginRow(), paging.getRowPerPage(), type, keyword);
-		
 		model.addAttribute("programList", searchList);  
 		
-		model.addAttribute("lastPage", paging.getLastPage());
-		model.addAttribute("currentPage", page);
-	
-		model.addAttribute("startPageNum", paging.getStartPageNum());
-		model.addAttribute("endPageNum", paging.getEndPageNum());
-		 
-		model.addAttribute("prev", paging.getPrev());
-		model.addAttribute("next", paging.getNext()); 
+		// 페이징(model 추가)
+		paging.pagingAttributes(model, paging, page); 
 		
 		// search parameter 추가
 		model.addAttribute("type", type);

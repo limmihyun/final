@@ -129,8 +129,7 @@
 												  </select>    
                                             </li>
                                    	    </ul>
-                                    	 -->
-                                   		
+                                    	 -->		
                                     </div>                        
                                 </div>
                             </div>
@@ -140,95 +139,11 @@
             </div>
         </div>
         <!----------------------- 검색창 end ----------------------->
-      
-           
-        <div class="contacts-area mg-b-15" id="fragment">
-            <div class="container-fluid">   
-            
-               	<!--------------------- 회원 list start-------------------------->
-               	<c:set var="cnt" value="0"></c:set>          		  			
-  				<c:forEach var="m" items="${empList}">
-	   			    <c:set var="cnt" value="${cnt + 1}"></c:set>
-	   			    <c:if test="${(cnt%4) == 1}">
-	   			  	 	<div class="row"> 
-	   			    </c:if>	 			    
-			           	    <div class="col-lg-3 col-md-6 col-sm-6 col-xs-12" style="margin-bottom:15px;">
-			                	<div class="student-inner-std res-mg-b-30">
-			                     <div class="student-img">
-			                        <img src="${pageContext.request.contextPath}/upload/emp/${m.filename}" alt="${pageContext.request.contextPath}/noImg" style="height:300px; width:300px;"/> 
-			                     </div>
-			                     <div class="student-dtl">
-			                         <h2>
-			                         <a href="${pageContext.request.contextPath}/headoffice/emp/empOne/${m.empId}">
-			                         	${m.empName}
-			                         </a>		                         
-			                         </h2>
-			                         <c:if test="${m.empGender == 'm'}">
-			                         	<p class="dp">남자</p>
-			                         </c:if>
-			                         <c:if test="${m.empGender == 'f'}">
-			                         	<p class="dp">여자</p>
-			                         </c:if>  
-			                         <p class="dp-ag"><b>입사 날짜 :</b> ${m.createdate}</p>
-			                  		</div>
-			              	    </div>
-			           	    </div>	           	    
-	           	    <c:if test="${(cnt%4 == 0) || (cnt == employeeCnt)}"> <!-- cnt가 4의 배수이거나 마지막 순서일 때 -->
-	   			  	 	</div>
-	   			    </c:if>
-           		</c:forEach>           		
-                <!--------------------- 회원 list end-------------------------->      
-            </div>    
-            
-       		<!--------------------- 페이징 start ----------------------------------->     
-            <div style="text-align:center;">       	
-	             <ul class="pagination">   	
-             		<c:if test="${currentPage == 1}">
-             			<li class="page-item disabled">
-	             	  		<a class="page-link">처음</a>  	
-	             	 	</li>	
-             		</c:if>
-             		<c:if test="${currentPage != 1}">
-             			<li class="page-item">           	  	
-	             	  		<a class="page-link pageBtn" data-page="1" href="#">처음</a>
-	             	 	</li>
-             		</c:if>
-
-		  			<c:if test="${prev}">
-					  	<li class="page-item"><a class="page-link pageBtn" data-page="${startPageNum - 1}" href="#">이전</a></li>
-				 	</c:if>
-				    <c:forEach begin="${startPageNum}" end="${endPageNum}" var="pageNum">
-					  	<c:if test="${pageNum == currentPage}"> <!-- 페이징 버튼 색 변경o --> 
-					  		<li class="page-item active">
-						  		<a class="page-link">${pageNum}</a>
-						  	</li>
-					  	</c:if>
-					  	<c:if test="${pageNum != currentPage}"> <!-- 페이징 버튼 색 변경x --> 
-					  		<li class="page-item">
-						  		<a class="page-link pageBtn" data-page="${pageNum}" href="#">${pageNum}</a>
-						  	</li>
-					  	</c:if>
-				    </c:forEach>
-			  		<c:if test="${next}">
-					  	<li class="page-item">
-					  		<a class="page-link pageBtn" data-page="${endPageNum + 1}" href="#">다음</a>				
-					  	</li>
-				 	</c:if>
-				  	<c:if test="${currentPage == lastPage}">
-					  	<li class="page-item disabled">
-					  		<a class="page-link">끝</a>
-					  	</li>
-				    </c:if>
-		  	    	<c:if test="${currentPage != lastPage}">
-					  	<li class="page-item">
-					  		<a class="page-link pageBtn" data-page="${lastPage}" href="#">끝</a>
-					  	</li>
-					</c:if>			  
-				</ul>	  
-            </div>
-            <!----------------------- 페이징 end ---------------------------->    
-               		    
-        </div>
+        
+        <!--------------------- 직원 list, 페이징 start-------------------------->
+        <div class="contacts-area mg-b-15" id="fragment"></div>
+        <!--------------------- 직원 list, 페이징 end-------------------------->  
+              
     </div>
 
     <!-- jquery
@@ -298,7 +213,44 @@
 </body>
 
 <script>
+	
+	// 초기 화면
+	paging(1);
 
+	function paging(page) {
+		
+		$.ajax({
+			url : '${pageContext.request.contextPath}/headoffice/emp/paging',
+			method : 'get',
+			data : {
+				page : page
+			},
+			success : function(result){
+				console.log('페이징 성공!')
+				$('#fragment').html(result);
+			}			
+		});
+		
+	}
+	
+	function searchPaging(page, type, keyword) {
+		
+		$.ajax({
+			url : '${pageContext.request.contextPath}/headoffice/emp/searchPaging',
+			method : 'get',
+			data : {
+				page : page,
+				type : type,
+				keyword : keyword
+			},
+			success : function(result){
+				console.log('페이징 성공!')
+				$('#fragment').html(result);
+			}			
+		});
+		
+	}
+	
 	//select 태그의 value를 change할 때
 	$('#type').change(function(){
 		
@@ -382,18 +334,7 @@
 			
 		}
 		
-		$.ajax({
-			url : '${pageContext.request.contextPath}/headoffice/emp/search',
-			method : 'get',
-			data : {
-				type : type,
-				keyword : keyword
-			},
-			success : function(result){
-				console.log('검색 성공!')
-				$('#fragment').html(result);
-			}
-		});
+		searchPaging(1,type,keyword);
 		
 	});
 	
@@ -404,17 +345,7 @@
 		let page = $(this).data('page');
 		console.log(page);
 		
-		$.ajax({
-			url : '${pageContext.request.contextPath}/headoffice/emp/paging',
-			method : 'get',
-			data : {
-				page : page
-			},
-			success : function(result){
-				console.log('페이징 성공!')
-				$('#fragment').html(result);
-			}			
-		});
+		paging(page);
 		
 	});
 	
@@ -427,19 +358,7 @@
 		let keyword = $(this).data('keyword');
 		console.log(page);
 		
-		$.ajax({
-			url : '${pageContext.request.contextPath}/headoffice/emp/searchPaging',
-			method : 'get',
-			data : {
-				page : page,
-				type : type,
-				keyword : keyword
-			},
-			success : function(result){
-				console.log('페이징 성공!')
-				$('#fragment').html(result);
-			}			
-		});
+		searchPaging(page,type,keyword);
 		
 	});
 	

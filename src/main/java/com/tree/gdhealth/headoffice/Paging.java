@@ -1,10 +1,16 @@
 package com.tree.gdhealth.headoffice;
 
+import org.springframework.ui.Model;
 
+import lombok.Builder;
+import lombok.Getter;
+
+@Builder
+@Getter
 public class Paging {
 	
 	// 한번에 표시할 페이징 번호의 갯수
-	private int pageNumCnt = 10;
+	private int pageNumCnt;
 		
 	// 한 페이지에 출력할 게시물 갯수
 	private int rowPerPage;
@@ -31,60 +37,12 @@ public class Paging {
 	private boolean prev;
 	private boolean next;
 	
-	public void setRowPerPage(int rowPerPage) {
-		this.rowPerPage = rowPerPage;
-	}
-	
-	public void setCurrentPage(int currentPage) {
-		this.currentPage = currentPage;
-	}
 
-	public void setCnt(int cnt) {
-		this.cnt = cnt; 
-		calculation();
-	}
-
-	public int getCnt() {
-		return cnt;
-	}
-
-	public int getRowPerPage() {
-		return rowPerPage;
-	}
-
-	public int getLastPage() {
-		return lastPage;
-	}
-
-	public int getBeginRow() {
-		return beginRow;
-	}
-
-	public int getPageNumCnt() {
-		return pageNumCnt;
-	}
-
-	public int getEndPageNum() {
-		return endPageNum;
-	}
-
-	public int getStartPageNum() {
-		return startPageNum;
-	}
-
-	public boolean getPrev() {
-		return prev;
-	} 
-
-	public boolean getNext() {
-		return next;
-	}
-	
-	private void calculation() {
+	public void calculation() {
 		
 		 lastPage = (int) Math.ceil((double)cnt/rowPerPage);
-		 if(lastPage == 0) {
-			 lastPage = 1;
+		 if(lastPage == 0) { // row의 개수가 0일 때(데이터가 없을 때)
+			 lastPage = 1; 
 		 }
 		
 		 // 마지막 번호
@@ -106,5 +64,18 @@ public class Paging {
 		 beginRow = (currentPage - 1) * rowPerPage;
 		 
 	}
-
+	
+	public void pagingAttributes(Model model, Paging paging, int page) {
+		
+	    model.addAttribute("lastPage", paging.getLastPage());
+	    model.addAttribute("currentPage", page);
+	    
+	    model.addAttribute("startPageNum", paging.getStartPageNum());
+	    model.addAttribute("endPageNum", paging.getEndPageNum());
+	    
+	    model.addAttribute("prev", paging.isPrev());
+	    model.addAttribute("next", paging.isNext());
+	    
+	}
+	
 }
