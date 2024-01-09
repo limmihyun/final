@@ -35,6 +35,7 @@ public class NoticeController {
       return "/notice/noticeList";
 
    }
+  
    
    @GetMapping("/notice/noticeOne")
      public String noticeOne(Model model, int noticeNo) {
