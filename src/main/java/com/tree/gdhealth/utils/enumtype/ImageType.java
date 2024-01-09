@@ -1,4 +1,4 @@
-package com.tree.gdhealth.sportsequipment.vo;
+package com.tree.gdhealth.utils.enumtype;
 
 import lombok.Getter;
 

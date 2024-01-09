@@ -1,5 +1,6 @@
-package com.tree.gdhealth.mybatis.typehandler;
+package com.tree.gdhealth.utils.typehandler;
 
+import com.tree.gdhealth.utils.enumtype.CodeEnum;
 import org.apache.ibatis.type.JdbcType;
 import org.apache.ibatis.type.TypeHandler;
 

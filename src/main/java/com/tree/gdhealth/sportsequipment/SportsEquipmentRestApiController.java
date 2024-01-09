@@ -1,4 +1,4 @@
-package com.tree.gdhealth.sportsequipment.api;
+package com.tree.gdhealth.sportsequipment;
 
 import com.tree.gdhealth.vo.SportsEquipment;
 import lombok.RequiredArgsConstructor;
@@ -9,14 +9,14 @@ import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
 
-/**<p>sportEquipmet에 대한 apiController</p>
+/**<p>sportEquipmet에 대한 restApiController</p>
  * @author 정인호
  */
 @Slf4j
 @RequiredArgsConstructor
 @RestController
-public class SportsEquipmentApiController {
-    private final ISportsEquipmentApiService service;
+public class SportsEquipmentRestApiController {
+    private final SportEquipmentApiService service;
     @GetMapping("/api/v1/sportsEquipment")
     public List<SportsEquipment> getSportsEquipmentList(){
 

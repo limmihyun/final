@@ -1,8 +1,8 @@
 package com.tree.gdhealth.branch;
 
 import com.tree.gdhealth.branch.programcalendar.vo.BranchProgramCalendar;
-import com.tree.gdhealth.branch.sportsequipment.SportsEquipmentOrderAddDto;
-import com.tree.gdhealth.branch.sportsequipment.getOrderListResponseDto;
+import com.tree.gdhealth.sportsequipment.dto.SportsEquipmentOrderAddDto;
+import com.tree.gdhealth.sportsequipment.dto.getOrderListResponseDto;
 import com.tree.gdhealth.employee.login.LoginEmployee;
 import com.tree.gdhealth.vo.Employee;
 import jakarta.servlet.http.HttpSession;
@@ -32,7 +32,7 @@ import java.util.Map;
 public class BranchController {
     private final BranchService service;
     @GetMapping("/home")
-    public String getHome(){
+    public String getBranchHome(){
         log.debug("/branch/home");
         return "/branch/home";
     }
@@ -125,7 +125,7 @@ public class BranchController {
      * @param model {@link BranchProgramCalendar}
      */
     @GetMapping("/programCalendar/{requestDate}")
-    public String getHomeSpecifiedDate(
+    public String getBranchProgramCalendar(
             @PathVariable(name = "requestDate") LocalDate requestDate,
             @SessionAttribute("loginEmployee") LoginEmployee loginEmployee, Model model){
 

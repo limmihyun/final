@@ -2,9 +2,9 @@ package com.tree.gdhealth.branch;
 
 import com.tree.gdhealth.branch.programcalendar.BranchProgramCalendarService;
 import com.tree.gdhealth.branch.programcalendar.vo.BranchProgramCalendar;
-import com.tree.gdhealth.branch.sportsequipment.BranchSportsEquipmentService;
-import com.tree.gdhealth.branch.sportsequipment.SportsEquipmentOrderAddDto;
-import com.tree.gdhealth.branch.sportsequipment.getOrderListResponseDto;
+import com.tree.gdhealth.sportsequipment.SportEquipmentApiService;
+import com.tree.gdhealth.sportsequipment.dto.SportsEquipmentOrderAddDto;
+import com.tree.gdhealth.sportsequipment.dto.getOrderListResponseDto;
 import com.tree.gdhealth.employee.api.EmployeeApiService;
 import com.tree.gdhealth.employee.login.EmpLoginService;
 import com.tree.gdhealth.employee.login.LoginEmployee;
@@ -29,7 +29,7 @@ import java.util.Map;
 public class BranchService {
     private final EmpLoginService empLoginService;
     private final EmployeeApiService employeeApiService;
-    private final BranchSportsEquipmentService branchSportsEquipmentService;
+    private final SportEquipmentApiService sportEquipmentApiService;
     private final BranchProgramCalendarService branchProgramCalendarService;
 
     public LoginEmployee testEmployeeLogin(Employee employee) {
@@ -41,11 +41,11 @@ public class BranchService {
     }
 
     public getOrderListResponseDto getBranchSportsEquipmentOrderList(Integer branchNo, int requestPage, boolean isOnlyWaitingList) {
-        return branchSportsEquipmentService.getOrderListResponseDto(branchNo, requestPage, isOnlyWaitingList);
+        return sportEquipmentApiService.getSportsEquipmentOrderList(branchNo, requestPage, isOnlyWaitingList);
     }
 
     public boolean addBranchEquipmentOrder(SportsEquipmentOrderAddDto dto) {
-        return branchSportsEquipmentService.addOrder(dto);
+        return sportEquipmentApiService.addSportsEquipmentOrder(dto);
     }
 
     public BranchProgramCalendar getBranchProgramCalendar(LocalDate requestDate, Integer branchNo) {

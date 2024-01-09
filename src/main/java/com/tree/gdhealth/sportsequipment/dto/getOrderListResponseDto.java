@@ -1,4 +1,4 @@
-package com.tree.gdhealth.branch.sportsequipment;
+package com.tree.gdhealth.sportsequipment.dto;
 
 import lombok.Builder;
 import lombok.Data;

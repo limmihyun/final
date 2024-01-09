@@ -1,5 +1,7 @@
 package com.tree.gdhealth.sportsequipment.vo;
 
+import com.tree.gdhealth.utils.enumtype.ImageType;
+import com.tree.gdhealth.utils.enumtype.OrderStatus;
 import com.tree.gdhealth.vo.SportsEquipment;
 import com.tree.gdhealth.vo.SportsEquipmentImg;
 import com.tree.gdhealth.vo.SportsEquipmentOrder;

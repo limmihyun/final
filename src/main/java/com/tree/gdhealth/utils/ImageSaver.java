@@ -1,7 +1,7 @@
-package com.tree.gdhealth.utility;
+package com.tree.gdhealth.utils;
 
 import com.tree.gdhealth.exception.MisMatchedContentTypeException;
-import com.tree.gdhealth.sportsequipment.vo.ImageType;
+import com.tree.gdhealth.utils.enumtype.ImageType;
 import lombok.Getter;
 import lombok.ToString;
 import lombok.extern.slf4j.Slf4j;

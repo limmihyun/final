@@ -1,5 +1,7 @@
-package com.tree.gdhealth.utility.ApiRequest;
+package com.tree.gdhealth.utils.ApiRequest;
 
+import com.tree.gdhealth.holiday.HolidayApi;
+import com.tree.gdhealth.holiday.HolidayApiVo;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -9,7 +11,6 @@ import java.time.YearMonth;
 import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.junit.jupiter.api.Assertions.*;
 
 /**<p>api테스트용</p>
  * @author 정인호

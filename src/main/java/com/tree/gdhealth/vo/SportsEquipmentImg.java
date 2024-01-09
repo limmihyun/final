@@ -1,6 +1,7 @@
 package com.tree.gdhealth.vo;
 
-import com.tree.gdhealth.sportsequipment.vo.ImageType;
+import com.tree.gdhealth.utils.enumtype.ImageType;
+import com.tree.gdhealth.utils.typehandler.ImgTypeTypeHandler;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -8,7 +9,7 @@ import lombok.NoArgsConstructor;
 
 import java.time.LocalDateTime;
 
-/**<p>{@link ImageType} using {@link com.tree.gdhealth.mybatis.typehandler.ImgTypeTypeHandler} </p>
+/**<p>{@link ImageType} using {@link ImgTypeTypeHandler} </p>
  * @author 정인호
  */
 @Builder

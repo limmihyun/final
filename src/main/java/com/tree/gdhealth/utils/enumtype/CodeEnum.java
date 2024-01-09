@@ -1,4 +1,4 @@
-package com.tree.gdhealth.mybatis.typehandler;
+package com.tree.gdhealth.utils.enumtype;
 
 /**
  * <p>마이바티스의 타입핸들러에 제네릭타입을 사용하기 위한 커스텀 자바이넘의 구현대상인터페이스</p>

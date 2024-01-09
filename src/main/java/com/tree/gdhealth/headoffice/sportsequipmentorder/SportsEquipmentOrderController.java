@@ -1,13 +1,15 @@
 package com.tree.gdhealth.headoffice.sportsequipmentorder;
 
-import com.tree.gdhealth.branch.sportsequipment.BranchSportsEquipmentService;
-import com.tree.gdhealth.branch.sportsequipment.getOrderListResponseDto;
+import com.tree.gdhealth.sportsequipment.SportEquipmentApiService;
+import com.tree.gdhealth.sportsequipment.dto.getOrderListResponseDto;
 import jakarta.servlet.http.HttpServletRequest;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.util.UriComponentsBuilder;
 
 import java.util.ArrayList;
@@ -21,7 +23,7 @@ import java.util.Map;
 @RequiredArgsConstructor
 @Controller
 public class SportsEquipmentOrderController {
-    final BranchSportsEquipmentService branchSportsEquipmentService;
+    final SportEquipmentApiService sportEquipmentApiService;
 
     /**
      * @param requestPage 쿼리스트링의 요청페이지번호
@@ -35,7 +37,7 @@ public class SportsEquipmentOrderController {
             @RequestParam(name = "branchNo", required = false) Integer branchNo,
             HttpServletRequest request, Model model) {
 
-        getOrderListResponseDto orderListResponseDto = branchSportsEquipmentService.getOrderListResponseDto(
+        getOrderListResponseDto orderListResponseDto = sportEquipmentApiService.getSportsEquipmentOrderList(
                 branchNo,
                 requestPage,
                 isOnlyWaitingList);
@@ -62,14 +64,14 @@ public class SportsEquipmentOrderController {
     @GetMapping("/headoffice/sportsEquipmentOrderOne")
     public String getOrderOne(@RequestParam(name = "orderNo", required = false) Integer orderNo,
                               Model model){
-        model.addAttribute("orderOne", branchSportsEquipmentService.getOrderOne(orderNo));
+        model.addAttribute("orderOne", sportEquipmentApiService.getSportsEquipmentOrderOne(orderNo));
         return "/headoffice/sportsEquipmentOrderOne";
     }
 
     @PostMapping("/headoffice/sportsEquipmentOrderOne")
     public String changeOrderStatus(@RequestParam(name = "orderNo") Integer orderNo,
                                     @RequestParam(name = "changeOrderStatus") String changeOrderStatus){
-            boolean isSuccess = branchSportsEquipmentService.changeOrderStatus(orderNo,changeOrderStatus);
+            boolean isSuccess = sportEquipmentApiService.changeSportsEquipmentOrderStatus(orderNo,changeOrderStatus);
         return "redirect:/headoffice/sportsEquipmentOrderOne?orderNo="+orderNo;
 
     }

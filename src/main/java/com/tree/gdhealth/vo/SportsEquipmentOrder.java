@@ -1,6 +1,7 @@
 package com.tree.gdhealth.vo;
 
-import com.tree.gdhealth.sportsequipment.vo.OrderStatus;
+import com.tree.gdhealth.utils.enumtype.OrderStatus;
+import com.tree.gdhealth.utils.typehandler.OrderStatusTypeHandler;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -8,7 +9,7 @@ import lombok.NoArgsConstructor;
 
 import java.time.LocalDateTime;
 
-/**<p>{@link OrderStatus} using {@link com.tree.gdhealth.mybatis.typehandler.OrderStatusTypeHandler} </p>
+/**<p>{@link OrderStatus} using {@link OrderStatusTypeHandler} </p>
  * @author 정인호
  */
 @Builder
