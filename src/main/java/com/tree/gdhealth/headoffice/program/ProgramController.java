@@ -32,7 +32,7 @@ public class ProgramController {
 	private final ProgramService programService;
 	
 	@GetMapping
-	public String program(Model model, @RequestParam(defaultValue = "1") int page) {
+	public String program() {
 		
 		return "headoffice/programList";
 	}

@@ -23,7 +23,7 @@ public class CustomerController {
 	private final CustomerService customerService;
 	
 	@GetMapping
-	public String customer(Model model, @RequestParam(defaultValue = "1") int page) {
+	public String customer() {
 		
 		return "headoffice/customerList";
 	}

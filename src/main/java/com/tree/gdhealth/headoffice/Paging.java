@@ -41,8 +41,8 @@ public class Paging {
 	public void calculation() {
 		
 		 lastPage = (int) Math.ceil((double)cnt/rowPerPage);
-		 if(lastPage == 0) {
-			 lastPage = 1;
+		 if(lastPage == 0) { // row의 개수가 0일 때(데이터가 없을 때)
+			 lastPage = 1; 
 		 }
 		
 		 // 마지막 번호

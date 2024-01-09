@@ -32,7 +32,7 @@ public class EmpController {
 	private final EmpService empService;
 
 	@GetMapping
-	public String emp(Model model, @RequestParam(defaultValue = "1") int page) {
+	public String emp() {
 		
 		return "headoffice/empList";
 	    
