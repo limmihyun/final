@@ -102,18 +102,19 @@ public class ProgramReservationService {
 		return resultList;
 	}
 	
-	public List<Map<String, Object>> allCalendarList(){
-
-		
-		List<Map<String, Object>> allList = programReservationMapper.allCalendarList();
-		
-		return allList;
-	}
+//	public List<Map<String, Object>> allCalendarList(){
+//
+//		
+//		List<Map<String, Object>> allList = programReservationMapper.allCalendarList();
+//		
+//		return allList;
+//	}
 	
 	public List<Map<String, Object>> listPage(int currentPage, int year, int month){
 		
 		int rowPerPage = 4;
 		int beginRow = (currentPage-1) * rowPerPage;
+
 		
 		Map<String, Object> paramap = new HashMap<>();
 		paramap.put("rowPerPage",rowPerPage);
@@ -124,7 +125,7 @@ public class ProgramReservationService {
 		System.out.println("paramap-->>" + paramap);
 
 		
-		List<Map<String, Object>> listPage = programReservationMapper.allCalendarListPage(paramap);
+		List<Map<String, Object>> listPage = programReservationMapper.listPage(paramap);
 		
 		return listPage;
 	}
@@ -215,18 +216,23 @@ public class ProgramReservationService {
 		
 	}
 	
-	public int lastPage(int currentPage, int year, int month) {
+	public Integer lastPage(int currentPage, int year, int month) {
 		
 		int rowPerPage = 4;
 		
 		Map<String, Object> paramap = new HashMap<>();
 		paramap.put("year",year);
 		paramap.put("month", String.format("%02d",month)+1);		
-		int total = programReservationMapper.lastPage(paramap);
-		int lastPage = total/rowPerPage;
-		if(total % rowPerPage != 0) {
-			lastPage = lastPage + 1;
+		Integer total = programReservationMapper.lastPage(paramap);
+		
+		if(total != null) {
+			int lastPage = total/rowPerPage;
+			if(total % rowPerPage != 0) {
+				lastPage = lastPage + 1;
+			}
+			return lastPage;
 		}
-		return lastPage;
+		
+	    return 0;
 	}
 }

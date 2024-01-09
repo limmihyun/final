@@ -285,18 +285,17 @@
 		</table>
 	</div>
 	
-	<div style="margin-left:80%; position: absolute; margin-top:13%; text-align:center;">
+ 	<div style="margin-left:80%; position: absolute; margin-top:13%; text-align:center;">
 		<div>
 		<!-- 
 			이번달 프로그램 과 2달뒤 프로그램 까지 출력 
 		 -->
-				<c:forEach var="i" begin="0" end="2">
 					<c:set var="loop_flag" value="false" />
 					<c:set value="${calendarMap.targetYear}" var="listYear"></c:set>
-					<c:set value="${calendarMap.targetMonth + 1 + i}" var="listMonth"></c:set>
+					<c:set value="${calendarMap.targetMonth + 1}" var="listMonth"></c:set>
 					<!-- 앞으로 2달을 출력하는데 12 초과시 12를 빼서 날자 맞추기 -->
 					<c:if test="${listMonth > 12}">
-						<c:set value="${(calendarMap.targetMonth + 1 + i) - 12}" var="listMonth"></c:set>
+						<c:set value="${(calendarMap.targetMonth + 1) - 12}" var="listMonth"></c:set>
 						<c:set value="${calendarMap.targetYear + 1}" var="listYear"></c:set>
 					</c:if>
 					<h3>${listYear} 년 ${listMonth} 월 </h3>
@@ -305,34 +304,18 @@
 						해당 월에 값이 없다면 if문을 활용하여 문구 출력 
 						해당 월에 값이 있다면 해당 프로그램을 출력뒤 loop_flag를 true로 바꿈
 					 -->
-					<c:forEach var="l" items="${allList}">
-						<c:if test="${listYear == l.year && listMonth == l.month}">
-						  <c:if test="${calendarMap.thisMonth == l.month}">
-							  <c:if test="${l.day >= calendarMap.thisDay && not loop_flag}">
-							  		<c:forEach var="ml" items="${listMonth1}">
-								  		<p>${ml.month} / ${ml.day} &nbsp; ${ml.programName}</p>
-										<p  style="margin-bottom:30px;">(${ml.cnt} / ${ml.programMaxCustomer})</p>
-										<c:set var="loop_flag" value="true"/>									
-							  		</c:forEach>
-							  <c:if test="${currentPageMonth1 > 1}"><a href="${pageContext.request.contextPath}/customer/programrs?currentPageMonth1=${currentPageMonth1 - 1}"> < </a></c:if>
-							  <c:if test="${currentPageMonth1 < lastPage}"><a href="${pageContext.request.contextPath}/customer/programrs?currentPageMonth1=${currentPageMonth1 + 1}" > > </a></c:if>  
-							  </c:if>						 
-						  </c:if>
-						  <c:if test="${calendarMap.thisMonth < l.month && not loop_flag}">
-					  			<p>${l.month} / ${l.day} &nbsp; ${l.programName}</p>
-								<p  style="margin-bottom:30px;">(${l.cnt} / ${l.programMaxCustomer})</p>
-								<c:set var="loop_flag" value="true"/>
-						  </c:if>
-						</c:if>	
-					</c:forEach>
-					<c:if test="${not loop_flag}">
-					    <br>
-					    <h4>프로그램이 준비중입니다. </h4>
-					    <br>
-					</c:if>
-				</c:forEach>
+					 <!-- 이번 월  --> 
+			  		<c:forEach var="ml" items="${listMonth1}">
+				  		<p>${ml.month} / ${ml.day} &nbsp; ${ml.programName}</p>
+						<p  style="margin-bottom:30px;">(${ml.cnt} / ${ml.programMaxCustomer})</p>
+						<c:set var="loop_flag" value="true"/>									
+			  		</c:forEach>
+				    <c:if test="${currentPageMonth1 > 1}"><a href="${pageContext.request.contextPath}/customer/programrs?currentPageMonth1=${currentPageMonth1 - 1}"> < </a></c:if>
+				    <c:if test="${currentPageMonth1 < lastPage}"><a href="${pageContext.request.contextPath}/customer/programrs?currentPageMonth1=${currentPageMonth1 + 1}" > > </a></c:if> 
+				    <!-- 이번 월 끝 -->
+				     
 		</div>		
-	</div>
+	</div> 
 	</section>
 	<a href="${pageContext.request.contextPath}/customer/myreservation">내 예약 보기</a>
 	

@@ -46,7 +46,7 @@ public class ProgramReservationController {
 		model.addAttribute("listMonth1", listMonth1);
 		System.out.println(listMonth1 + "<---listMonth1");
 		
-		int lastPage = programReservationService.lastPage(currentPageMonth1, (int)(calendarMap.get("targetYear")), (int)(calendarMap.get("targetMonth")));
+		Integer lastPage = programReservationService.lastPage(currentPageMonth1, (int)(calendarMap.get("targetYear")), (int)(calendarMap.get("targetMonth")));
 		model.addAttribute("lastPage", lastPage);
 		System.out.println(lastPage + "<---lastPage");
 		
@@ -60,9 +60,9 @@ public class ProgramReservationController {
 		List<Map<String, Object>> resultList = programReservationService.selectProgramByMonth((int)(calendarMap.get("targetYear")), (int)(calendarMap.get("targetMonth")));
 		model.addAttribute("resultList", resultList);
 		System.out.println(resultList + "<---resultList 출력");
-		
-		List<Map<String, Object>> allList = programReservationService.allCalendarList();
-		model.addAttribute("allList", allList);
+	
+//		List<Map<String, Object>> allList = programReservationService.allCalendarList();
+//		model.addAttribute("allList", allList);
 		
 		List<Map<String, Object>> myCalendarList = programReservationService.myCalendarLust((int)(calendarMap.get("targetYear")), (int)(calendarMap.get("targetMonth")), customerNo);
 		model.addAttribute("myCalendarList", myCalendarList);

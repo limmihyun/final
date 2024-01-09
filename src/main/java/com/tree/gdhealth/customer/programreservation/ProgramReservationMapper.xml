@@ -33,7 +33,7 @@
 		ORDER BY pd.program_date ASC
 	</select>
 	
- 	<select id="allCalendarListPage" resultType="java.util.Map">
+ 	<select id="listPage" resultType="java.util.Map">
 		SELECT
 		      YEAR(pd.program_date) year,
 			  MONTH(pd.program_date) month,
@@ -49,14 +49,14 @@
 		ORDER BY pd.program_date ASC
 		LIMIT #{beginRow},#{rowPerPage};
 	</select> 
-	
-	<select id="lastPage">
+		
+	<select id="lastPage" resultType="Integer">
 		SELECT
 			COUNT(*)
 		FROM  program_date pd INNER JOIN program p 
 		   on pd.program_no = p.program_no
 		WHERE YEAR(pd.program_date) = #{year} AND MONTH(pd.program_date) = #{month}
-		 GROUP BY p.program_no
+		GROUP BY p.program_no
 	</select>
 	
 	<select id="myCalendarList" resultType="java.util.Map">
