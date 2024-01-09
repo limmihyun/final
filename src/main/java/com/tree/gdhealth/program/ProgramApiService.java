@@ -2,8 +2,8 @@ package com.tree.gdhealth.program;
 
 import com.tree.gdhealth.program.dto.BranchProgramCalendar;
 import com.tree.gdhealth.program.dto.BranchProgramDate;
-import com.tree.gdhealth.holiday.HolidayApi;
-import com.tree.gdhealth.holiday.HolidayApiVo;
+import com.tree.gdhealth.utils.holidayapi.HolidayApi;
+import com.tree.gdhealth.utils.holidayapi.HolidayApiVo;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;

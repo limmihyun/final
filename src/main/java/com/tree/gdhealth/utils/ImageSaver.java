@@ -1,6 +1,6 @@
 package com.tree.gdhealth.utils;
 
-import com.tree.gdhealth.exception.MisMatchedContentTypeException;
+import com.tree.gdhealth.utils.exception.MisMatchedContentTypeException;
 import com.tree.gdhealth.utils.enumtype.ImageType;
 import lombok.Getter;
 import lombok.ToString;

@@ -1,4 +1,4 @@
-package com.tree.gdhealth.filter;
+package com.tree.gdhealth.utils.filter;
 
 import jakarta.servlet.*;
 import jakarta.servlet.http.HttpServletRequest;

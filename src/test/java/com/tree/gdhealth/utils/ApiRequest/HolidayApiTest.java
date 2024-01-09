@@ -1,7 +1,7 @@
 package com.tree.gdhealth.utils.ApiRequest;
 
-import com.tree.gdhealth.holiday.HolidayApi;
-import com.tree.gdhealth.holiday.HolidayApiVo;
+import com.tree.gdhealth.utils.holidayapi.HolidayApi;
+import com.tree.gdhealth.utils.holidayapi.HolidayApiVo;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
