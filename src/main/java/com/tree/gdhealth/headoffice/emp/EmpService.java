@@ -42,9 +42,46 @@ public class EmpService {
 		
 		int employeeCnt = empMapper.employeeCnt();
 		// 디버깅 
-		log.debug("직원 수 : " + employeeCnt);
+		log.debug("전체 직원 수 : " + employeeCnt);
 		
 		return employeeCnt;
+	}
+	
+	public List<Map<String, Object>> getSearchList(int beginRow, int rowPerPage, 
+													String type, String keyword) {
+				
+		Map<String, Object> map = new HashMap<>();
+		map.put("beginRow", beginRow);
+		map.put("rowPerPage", rowPerPage);
+		map.put("type", type);
+		map.put("keyword", keyword);
+		
+		List<Map<String, Object>> searchList = empMapper.employeeList(map);
+		
+		return searchList;
+		
+	}
+	
+	public int getSearchCnt(String type, String keyword) {
+		
+		Map<String, Object> map = new HashMap<>();
+		map.put("keyword", keyword);
+		map.put("type", type);
+		
+		int searchCnt = empMapper.searchCnt(map);
+		// 디버깅
+		log.debug("검색 결과 개수 : " + searchCnt);
+		
+		return searchCnt;
+	}
+	
+	public List<String> getBranchList() {
+		
+		List<String> branchList = empMapper.branchList();
+		// 디버깅
+		log.debug("지점 목록 : " + branchList);
+		
+		return branchList;
 	}
 	
 	public Map<String, Object> getEmployeeOne(String employeeId) {

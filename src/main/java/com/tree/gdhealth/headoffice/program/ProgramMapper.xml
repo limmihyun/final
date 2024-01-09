@@ -7,20 +7,53 @@
 			ed.employee_name empName,
 			p.program_no programNo,
 			p.program_name programName,
+			p.program_detail programDetail,		
 			p.program_max_customer maxCustomer,
-			p.program_detail programDetail,
-			p.program_max_customer maxCustomer,
-			pi.program_img_file filename
+			p.program_active programActive,
+			pi.program_img_file filename,
+			pd.program_date programDate
 		FROM program p
 		INNER JOIN employee_detail ed
 			ON ed.employee_no = p.writer_employee_no
+		INNER JOIN program_date pd
+			ON pd.program_no = p.program_no
 		INNER JOIN program_img pi
 			ON p.program_no = pi.program_no
+		<where>
+			<choose>
+				<when test="type != null and type.equals('title')">
+					p.program_name LIKE CONCAT('%',#{keyword},'%')
+				</when>	
+				<when test="type != null and type.equals('detail')">
+					p.program_detail LIKE CONCAT('%',#{keyword},'%')
+				</when>
+				<when test="type != null and type.equals('active')">
+					p.program_active LIKE CONCAT('%',#{keyword},'%')
+				</when>			
+			</choose>
+		</where>
 		LIMIT #{beginRow}, #{rowPerPage}
 	</select>
 	<select id="programCnt" resultType="int">
 		SELECT COUNT(*)
 		FROM program
+	</select>
+	<select id="searchCnt" parameterType="map" resultType="int">
+		SELECT COUNT(*)
+		FROM program p
+		<where>
+			<choose>
+				<when test="type != null and type.equals('title')">
+					p.program_name LIKE CONCAT('%',#{keyword},'%')
+				</when>	
+				<when test="type != null and type.equals('detail')">
+					p.program_detail LIKE CONCAT('%',#{keyword},'%')
+				</when>
+				<when test="type != null and type.equals('active')">
+					p.program_active LIKE CONCAT('%',#{keyword},'%')
+				</when>			
+			</choose>
+		</where>
 	</select>
 	
 	<select id="programOne" parameterType="int" resultType="Map">
@@ -33,10 +66,13 @@
 			p.program_max_customer maxCustomer,
 			p.program_active active,
 			pi.program_img_no programImgNo,
-			pi.program_img_file filename
+			pi.program_img_file filename,
+			pd.program_date programDate
 		FROM program p
 		INNER JOIN employee_detail ed
 			ON ed.employee_no = p.writer_employee_no
+		INNER JOIN program_date pd
+			ON pd.program_no = p.program_no
 		INNER JOIN program_img pi
 			ON p.program_no = pi.program_no
 		WHERE p.program_no = #{programNo}
@@ -57,6 +93,15 @@
 		<selectKey resultType="int" keyProperty="programNo" order="AFTER">
       		  SELECT LAST_INSERT_ID()
    		</selectKey> 
+	</insert>
+	<insert id="insertProgramDate" parameterType="com.tree.gdhealth.vo.ProgramDate">
+		INSERT INTO program_date(
+			program_no,
+			program_date
+		) VALUES (
+			#{programNo},
+			#{programDate}
+		)
 	</insert>
 	<insert id="insertProgramImg" parameterType="com.tree.gdhealth.vo.ProgramImg">
 		INSERT INTO program_img(
@@ -80,6 +125,12 @@
 			program_name = #{programName},
 			program_detail = #{programDetail},
 			program_max_customer = #{programMaxCustomer}
+		WHERE program_no = #{programNo}
+	</update>
+	<update id="updateProgramDate" parameterType="com.tree.gdhealth.vo.ProgramDate">
+		UPDATE program_date
+		SET
+			program_date = #{programDate}
 		WHERE program_no = #{programNo}
 	</update>	
 	<update id="updateProgramImg" parameterType="com.tree.gdhealth.vo.ProgramImg">

@@ -111,7 +111,7 @@
                                         <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                                             <div class="review-content-section">
                                                 <div id="dropzone1" class="pro-ad">
-                                                    <form action="${pageContext.request.contextPath}/emp/addEmp" 
+                                                    <form action="${pageContext.request.contextPath}/headoffice/emp/addEmp" 
                                                     	class="dropzone dropzone-custom needsclick add-professors" id="insertForm" 
                                                     	method="post" enctype="multipart/form-data">
                                                         <div class="row">
@@ -282,7 +282,7 @@
 		let employeeId = $('#employeeId').val();
 		if(employeeId != '') {
 			$.ajax({
-				url : '${pageContext.request.contextPath}/addEmpIdCheck',
+				url : '${pageContext.request.contextPath}/headoffice/emp/addEmpIdCheck',
 				method : 'get',
 				data : {employeeId : employeeId},
 				success : function(result) {
@@ -362,7 +362,7 @@
 			$('#employeeEmail').focus();
 			return;
 	    }
-	    
+	    	    
 	    if($('#employeeGender').val() == 0) {
 			alert('성별을 선택하세요.');
 			$('#employeeGender').focus();
@@ -387,7 +387,6 @@
 			return;
 		}
 	    		
-	    alert('가입이 완료되었습니다.');
 		$('#insertForm').submit();
 	});
 </script>

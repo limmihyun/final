@@ -106,12 +106,15 @@
                                         </div>
                                         
                                         <div class="blog-details blog-sig-details">
-                                            <div class="details-blog-dt blog-sig-details-dt courses-info  row" style="text-align:left;">
+                                            <div class="details-blog-dt blog-sig-details-dt courses-info row" style="text-align:left;">
                                             	<div class="col-lg-12">
                                             		<span><i class="fa fa-heart"></i> <b>수용 인원 :</b> ${programOne.maxCustomer}</span>
                                             	</div>
                                             	<div class="col-lg-12">
                                             		<span><i class="fa fa-user"></i> <b>담당 본사 직원 :</b> ${programOne.empName}</span>
+                                            	</div>
+                                            	<div class="col-lg-12">
+                                            		<span><i class="fa fa-heart"></i> <b>개설 날짜 :</b> ${programOne.programDate}</span>
                                             	</div>
                                             	<div class="col-lg-12">
                                             		<c:if test="${programOne.active == 'Y'}">

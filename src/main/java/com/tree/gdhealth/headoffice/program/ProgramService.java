@@ -51,6 +51,35 @@ public class ProgramService {
 		return programCnt;
 	}
 	
+	public List<Map<String, Object>> getSearchList(int beginRow, int rowPerPage, 
+			String type, String keyword) {
+
+		Map<String, Object> map = new HashMap<>();
+		map.put("beginRow", beginRow);
+		map.put("rowPerPage", rowPerPage);
+		map.put("type", type);
+		map.put("keyword", keyword);
+		
+		List<Map<String, Object>> searchList = programMapper.programList(map);
+		
+		return searchList;
+		
+	}
+	
+	public int getSearchCnt(String type, String keyword) {
+		
+		Map<String, Object> map = new HashMap<>();
+		map.put("type", type);
+		map.put("keyword", keyword);
+		
+		int searchCnt = programMapper.searchCnt(map);
+		// 디버깅
+		log.debug("검색 결과 개수 : " + searchCnt);
+		
+		return searchCnt;
+		
+	}
+	
 	public Map<String, Object> getProgramOne(int programNo) {
 		
 		Map<String, Object> programOne = programMapper.programOne(programNo);
@@ -58,7 +87,7 @@ public class ProgramService {
 		return programOne;
 	}
 	
-	public void insertProgram(Program program, MultipartFile programFile,
+	public void insertProgram(Program program, ProgramDate programDate, MultipartFile programFile,
 									String path) {
 		
 		/////////////////// 로그인 기능 구현 전 임시 코드 start//////////////////////////
@@ -72,7 +101,16 @@ public class ProgramService {
 			// insert를 실패하였을 때 강제로 예외를 발생시켜 애노테이션 Transactiona이 작동하도록 한다.
 			throw new RuntimeException(); 
 		}
-				
+		
+		// programMapper.xml에서 selectKey로 얻어 온 program table의 auto increment 값
+		programDate.setProgramNo(program.getProgramNo());
+		int dateResult = programMapper.insertProgramDate(programDate);
+		log.debug("programDate 추가(성공:1,실패:0) : " + dateResult);	
+		if(dateResult != 1) {
+			// insert를 실패하였을 때 강제로 예외를 발생시켜 애노테이션 Transactiona이 작동하도록 한다.
+			throw new RuntimeException(); 
+		}
+			
 		// 이미지 추가
 		if(!programFile.isEmpty()) { // 업로드한 이미지 파일이 하나이상 있다면
 			// 파일 저장
@@ -81,12 +119,19 @@ public class ProgramService {
 		
 	}
 	
-	public void updateProgram(Program program, MultipartFile programFile,
+	public void updateProgram(Program program, ProgramDate programDate, MultipartFile programFile,
 			String path, String oldPath) {
 
 		int result = programMapper.updateProgram(program);
 		log.debug("프로그램 수정(성공:1,실패:0) : " + result);
 		if(result != 1) {
+			// insert를 실패하였을 때 강제로 예외를 발생시켜 애노테이션 Transactiona이 작동하도록 한다.
+			throw new RuntimeException();
+		}
+		
+		int dateResult = programMapper.updateProgramDate(programDate);
+		log.debug("프로그램 date 수정(성공:1,실패:0) : " + dateResult);
+		if(dateResult != 1) {
 			// insert를 실패하였을 때 강제로 예외를 발생시켜 애노테이션 Transactiona이 작동하도록 한다.
 			throw new RuntimeException();
 		}

@@ -67,6 +67,11 @@
     <!-- modernizr JS
 		============================================ -->
     <script src="/admin/js/vendor/modernizr-2.8.3.min.js"></script>
+    
+    <!-- 달력 API -->
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.13.2/themes/base/jquery-ui.css">
+    <script src="https://code.jquery.com/ui/1.13.2/jquery-ui.js"></script>
+	
 </head>
 
 <body>
@@ -117,6 +122,15 @@
 						<div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
 							<label for="programFile" class="form-label">프로그램 이미지</label>
 							<input type="file" class="form-control" id="programFile" name="programFile">
+						</div>
+		 			</div>
+		 			<div class="row" style="margin-bottom:10px;">
+			 			<div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+							<label for="programDate" class="form-label">개설 날짜</label>
+							<input type="text" class="form-control" name="programDate" id="programDate" placeholder="입력하기">
+						</div>
+						<div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+							
 						</div>
 		 			</div>
 									
@@ -201,6 +215,16 @@
 <script>
 	$('#programName').focus();
 	
+	// 달력 API
+	$(function() {
+	    $( "#programDate" ).datepicker({
+	    	dateFormat : 'yy-mm-dd',
+	    	dayNamesMin: [ "일", "월","화", "수", "목", "금", "토" ],
+	    	monthNames: [ "1월", "2월", "3월", "4월", "5월", "6월", "7월", "8월", "9월", "10월", "11월", "12월"],
+	    	showMonthAfterYear: true
+	    });
+	 });
+	
 	$('#insertBtn').click(function(){
 		
 		if($('#programName').val().trim() == '') {
@@ -239,9 +263,17 @@
 			return;
 		}
 		
+		if($('#programDate').val().length == 0) {
+			alert('개설 날짜를 입력하세요.');
+			$('#programDate').focus();			
+			return;
+		}
+		
 		alert('추가 완료되었습니다.');
 		$('#insertForm').submit();
 	});
+	
+	
 </script>
 
 </html>

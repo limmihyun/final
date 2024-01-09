@@ -2,7 +2,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.tree.gdhealth.headoffice.emp.EmpMapper">
 	
-	<select id="employeeList" resultType="map">
+	<select id="employeeList" parameterType="map" resultType="map">
 		SELECT
 			e.employee_id empId,  
 			ed.employee_name empName,
@@ -14,33 +14,67 @@
 			ON ed.employee_no = e.employee_no
 		INNER JOIN employee_img ei
 			ON ei.employee_no = e.employee_no
+		INNER JOIN branch b
+			ON b.branch_no = e.branch_no
+		<where>
+			<choose>
+				<when test="type != null and type.equals('id')">
+					e.employee_id LIKE CONCAT('%',#{keyword},'%')
+				</when>
+				<when test="type != null and type.equals('name')">
+					ed.employee_name LIKE CONCAT('%',#{keyword},'%')
+				</when>
+				<when test="type != null and type.equals('branch')">
+					b.branch_name LIKE CONCAT('%',#{keyword},'%')
+				</when>
+				<when test="type != null and type.equals('gender')">
+					ed.employee_gender LIKE CONCAT('%',#{keyword},'%')
+				</when>
+				<when test="type != null and type.equals('phone')">
+					ed.employee_phone LIKE CONCAT('%',#{keyword},'%')
+				</when>
+			</choose>
+		</where>
 		LIMIT #{beginRow}, #{rowPerPage}
 	</select>	
 	
 	<select id="employeeCnt" resultType="int">
 		SELECT COUNT(*)
-		FROM employee
+		FROM employee e
 	</select>
 	
-	<select id="searchList">
-		SELECT
-			e.employee_id empId,  
-			ed.employee_name empName,
-			ed.employee_gender empGender,
-			ed.createdate createdate,
-			ei.employee_img_file_name filename
+	<select id="searchCnt" parameterType="map" resultType="int">
+		SELECT COUNT(*)
 		FROM employee e
 		INNER JOIN employee_detail ed
 			ON ed.employee_no = e.employee_no
 		INNER JOIN employee_img ei
 			ON ei.employee_no = e.employee_no
+		INNER JOIN branch b
+			ON b.branch_no = e.branch_no
 		<where>
 			<choose>
-				<when test="type != null and type.equals('')"></when>
-			
+				<when test="type != null and type.equals('id')">
+					e.employee_id LIKE CONCAT('%',#{keyword},'%')
+				</when>
+				<when test="type != null and type.equals('name')">
+					ed.employee_name LIKE CONCAT('%',#{keyword},'%')
+				</when>
+				<when test="type != null and type.equals('branch')">
+					b.branch_name LIKE CONCAT('%',#{keyword},'%')
+				</when>
+				<when test="type != null and type.equals('gender')">
+					ed.employee_gender LIKE CONCAT('%',#{keyword},'%')
+				</when>
+				<when test="type != null and type.equals('phone')">
+					ed.employee_phone LIKE CONCAT('%',#{keyword},'%')
+				</when>
 			</choose>
 		</where>
-		LIMIT #{beginRow}, #{rowPerPage}
+	</select>
+	<select id="branchList" resultType="String">
+		SELECT branch_name
+		FROM branch
 	</select>
 
 	<select id="idCheck" parameterType="String" resultType="int">

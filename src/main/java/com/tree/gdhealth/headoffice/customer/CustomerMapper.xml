@@ -13,11 +13,74 @@
 		FROM customer c
 		INNER JOIN customer_detail cd
 			ON cd.customer_no = c.customer_no
+		<where>
+			c.customer_active = 'Y'
+			<choose>
+				<when test="type != null and type.equals('id')">
+					AND c.customer_id LIKE CONCAT('%',#{keyword},'%')
+				</when>
+				<when test="type != null and type.equals('name')">
+					AND cd.customer_name LIKE CONCAT('%',#{keyword},'%')
+				</when>
+				<when test="type != null and type.equals('gender')">
+					AND cd.customer_gender LIKE CONCAT('%',#{keyword},'%')
+				</when>
+				<when test="type != null and type.equals('phone')">
+					AND cd.customer_phone LIKE CONCAT('%',#{keyword},'%')
+				</when>
+				<when test="type != null and type.equals('address')">
+					AND cd.customer_address LIKE CONCAT('%',#{keyword},'%')
+				</when>
+				<when test="type != null and type.equals('email')">
+					AND cd.customer_email LIKE CONCAT('%',#{keyword},'%')
+				</when>
+				<when test="type != null and type.equals('active')">
+					AND c.customer_active LIKE CONCAT('%',#{keyword},'%')
+				</when>
+			</choose>
+		</where>
 		LIMIT #{beginRow}, #{rowPerPage}
 	</select>
+	
 	<select id="customerCnt">
 		SELECT COUNT(*)
-		FROM customer
+		FROM customer c
+		INNER JOIN customer_detail cd
+			ON cd.customer_no = c.customer_no
+		WHERE c.customer_active = 'Y'
+	</select>
+	
+	<select id="searchCnt" parameterType="map" resultType="int">
+		SELECT COUNT(*)
+		FROM customer c
+		INNER JOIN customer_detail cd
+			ON cd.customer_no = c.customer_no
+		<where>
+			c.customer_active = 'Y'
+			<choose>
+				<when test="type != null and type.equals('id')">
+					AND c.customer_id LIKE CONCAT('%',#{keyword},'%')
+				</when>
+				<when test="type != null and type.equals('name')">
+					AND cd.customer_name LIKE CONCAT('%',#{keyword},'%')
+				</when>
+				<when test="type != null and type.equals('gender')">
+					AND cd.customer_gender LIKE CONCAT('%',#{keyword},'%')
+				</when>
+				<when test="type != null and type.equals('phone')">
+					AND cd.customer_phone LIKE CONCAT('%',#{keyword},'%')
+				</when>
+				<when test="type != null and type.equals('address')">
+					AND cd.customer_address LIKE CONCAT('%',#{keyword},'%')
+				</when>
+				<when test="type != null and type.equals('email')">
+					AND cd.customer_email LIKE CONCAT('%',#{keyword},'%')
+				</when>
+				<when test="type != null and type.equals('active')">
+					AND c.customer_active LIKE CONCAT('%',#{keyword},'%')
+				</when>
+			</choose>
+		</where>
 	</select>
 
 </mapper>

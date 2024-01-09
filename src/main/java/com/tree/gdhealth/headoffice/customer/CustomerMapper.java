@@ -10,5 +10,6 @@ public interface CustomerMapper {
 	
 	List<Map<String, Object>> customerList(Map<String, Object> map);
 	int customerCnt();
+	int searchCnt(Map<String, Object> map);
 
 }

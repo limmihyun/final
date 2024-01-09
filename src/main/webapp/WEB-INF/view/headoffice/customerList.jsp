@@ -96,23 +96,39 @@
                 <div class="container-fluid">
                     <div class="row">
                         <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-                            <div class="breadcome-list single-page-breadcome">
+                            <div class="breadcome-list">
                                 <div class="row">
                                     <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
-                                        <div class="breadcome-heading">
-                                            <form role="search" class="sr-input-func">
-                                                <input type="text" placeholder="Search..." class="search-int form-control">
-                                                <a href="#"><i class="fa fa-search"></i></a>
-                                            </form>
+                                        <div class="breadcome-menu">                                           
+                                        	<table style="margin-top:8px;">
+                                        		<tr>
+                                        			<td>
+                                        				<select name="type" class="form-control" style="width:120px; margin-right:5px;" id="type">
+															<option value="search">검색</option>
+															<option value="title">ID</option>
+															<option value="name">이름</option>
+															<option value="gender">성별</option>
+															<option value="phone">휴대폰</option>
+															<option value="address">주소</option>
+															<option value="email">이메일</option>
+															<option value="active">active</option>					
+														</select>   															
+                                        			</td>
+                                        			<td id="plus1"></td>
+                                        			<td id="plus2"></td>
+                                        		</tr>	
+                                        	</table>	    
                                         </div>
                                     </div>
                                     <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
-                                        <ul class="breadcome-menu">
+                                    	<!-- 
+                                    	<ul class="breadcome-menu">
                                             <li><a href="#">Home</a> <span class="bread-slash">/</span>
                                             </li>
                                             <li><span class="bread-blod">Professor Profile</span>
                                             </li>
                                         </ul>
+                                    	 -->                                      
                                     </div>
                                 </div>
                             </div>
@@ -123,7 +139,7 @@
         </div>
         <!-- 검색창 end -->
            
-        <div class="contacts-area mg-b-15">
+        <div class="contacts-area mg-b-15" id="fragment">
             <div class="container-fluid">   
             	<h3>회원 목록</h3>
                	<!--------------------- 회원 list start-------------------------->   		  	  				
@@ -146,7 +162,9 @@
 	   			    				<td>${m.customerGender}</td>
 	   			    				<td>${m.customerPhone}</td>
 	   			    				<td>${m.createdate} ${str}</td>
-	   			    				<td>${m.active}</td>
+	   			    				<c:if test="${m.active == 'Y'}">
+	   			    					<td>가입</td>
+	   			    				</c:if>	   			    
 	   			    			</tr>
 	   			    		</c:forEach>   
 	   			    	</tbody>
@@ -157,7 +175,6 @@
            		<!--------------------- 페이징 start ----------------------------------->     
             <div style="text-align:center;">       	
 	             <ul class="pagination">
-	             
              	  <c:if test="${currentPage == 1}">
            			<li class="page-item disabled">
             	  		<a class="page-link">처음</a>  	
@@ -165,27 +182,27 @@
           		  </c:if>
           		  <c:if test="${currentPage != 1}">
            			<li class="page-item">           	  	
-            	  		<a class="page-link" href="${pageContext.request.contextPath}/headoffice/customer?page=1">처음</a>
+            	  		<a class="page-link pageBtn" data-page="1" href="#">처음</a>
             	 	</li>
            		  </c:if>  
 					  
 					  <c:if test="${prev}">
-					  	<li class="page-item"><a class="page-link" href="${pageContext.request.contextPath}/headoffice/customer?page=${startPageNum - 1}">이전</a></li>
+					  	<li class="page-item"><a class="page-link pageBtn" data-page="${startPageNum - 1}" href="#">이전</a></li>
 					  </c:if>
 					  <c:forEach begin="${startPageNum}" end="${endPageNum}" var="pageNum">
 					  	<c:if test="${pageNum == currentPage}"> <!-- 페이징 버튼 색 변경o --> 
 					  		<li class="page-item active">
-						  		<a class="page-link" href="${pageContext.request.contextPath}/headoffice/customer?page=${pageNum}">${pageNum}</a>
+						  		<a class="page-link">${pageNum}</a>
 						  	</li>
 					  	</c:if>
 					  	<c:if test="${pageNum != currentPage}"> <!-- 페이징 버튼 색 변경x --> 
 					  		<li class="page-item">
-						  		<a class="page-link" href="${pageContext.request.contextPath}/headoffice/customer?page=${pageNum}">${pageNum}</a>
+						  		<a class="page-link pageBtn" data-page="${pageNum}" href="#">${pageNum}</a>
 						  	</li>
 					  	</c:if>
 					  </c:forEach>
 					  <c:if test="${next}">
-					  	<li class="page-item"><a class="page-link" href="${pageContext.request.contextPath}/headoffice/customer?page=${endPageNum + 1}">다음</a></li>
+					  	<li class="page-item"><a class="page-link pageBtn" data-page="${endPageNum + 1}" href="#">다음</a></li>
 					  </c:if>	  
 					  <c:if test="${currentPage == lastPage}">
 					  	<li class="page-item disabled">
@@ -194,7 +211,7 @@
 					  </c:if>
 					  <c:if test="${currentPage != lastPage}">
 					  	<li class="page-item">
-					  		<a class="page-link" href="${pageContext.request.contextPath}/headoffice/customer?page=${lastPage}">끝</a>
+					  		<a class="page-link pageBtn" data-page="${lastPage}" href="#">끝</a>
 					  	</li>
 					  </c:if>
 				</ul>	  
@@ -268,5 +285,142 @@
     <script src="/admin/js/main.js"></script>
     
 </body>
+<script>
+	$('#type').change(function(){
 
+		if($(this).val() == 'gender') {
+			
+			let selectHtml = `
+				<select name="keyword" class="form-control" style="width:80px;" id="keyword">
+					<option value="">선택</option>
+					<option value="남">남성</option>
+					<option value="여">여성</option>
+				</select> 
+			`;
+			
+			$('#plus1').html(selectHtml);
+			$('#plus2').html('<button style="margin-left:10px; width:50px;" type="button" class="btn" id="searchBtn">검색</button>');
+			
+		} else if($(this).val() == 'active') {
+			
+			let selectHtml = `
+				<select name="keyword" class="form-control" style="width:130px;" id="keyword">
+					<option value="">선택</option>
+					<option value="Y">활성화</option>
+					<option value="N">비활성화</option>
+				</select> 
+			`;
+			
+			$('#plus1').html(selectHtml);
+			$('#plus2').html('<button style="margin-left:10px; width:50px;" type="button" class="btn" id="searchBtn">검색</button>');
+			
+		} else if($(this).val() == 'search') {
+			
+			$('#plus1').html('');
+			$('#plus2').html('');
+			
+		} else {
+			$('#plus1').html('<input type="text" name="keyword" id="keyword" placeholder="검색어 입력" class="form-control" style="width:170px;">');
+			$('#plus2').html('<button style="margin-left:10px; width:50px;" type="button" class="btn" id="searchBtn">검색</button>');
+		}
+		
+	});
+	
+	// 동적으로 추가된 요소에 대해 이벤트 처리
+	// 검색
+
+	$(document).on('click', '#searchBtn', function(e){
+		
+		e.preventDefault();
+		let type = $('#type').val();
+		let keyword = $('#keyword').val();
+		
+		if(type == 'active') {
+			
+			if(keyword == '') {
+				alert('active를 선택하세요.');
+				$('#keyword').focus();
+				return;
+			}
+			
+		} else if(type == 'gender') {
+			
+			if(keyword == '') {
+				alert('성별을 선택하세요.');
+				$('#keyword').focus();
+				return;
+			}
+			
+		} else {
+		
+			if(keyword.trim() == '') {
+				alert('검색할 내용을 입력하세요.');
+				$('#keyword').focus();
+				return;
+			}
+			
+		}
+		
+		$.ajax({
+			url : '${pageContext.request.contextPath}/headoffice/customer/search',
+			method : 'get',
+			data : {
+				type : type,
+				keyword : keyword
+			},
+			success : function(result){
+				console.log('검색 성공!')
+				$('#fragment').html(result);
+			}
+		});
+	});
+	
+	// 동적으로 추가된 요소에 대해 이벤트 처리
+	// 페이징
+	$(document).on('click', '.pageBtn', function(e){
+		e.preventDefault();
+		let page = $(this).data('page');
+		console.log(page);
+		
+		$.ajax({
+			url : '${pageContext.request.contextPath}/headoffice/customer/paging',
+			method : 'get',
+			data : {
+				page : page
+			},
+			success : function(result){
+				console.log('페이징 성공!')
+				$('#fragment').html(result);
+			}			
+		});
+		
+	});
+	
+	// 동적으로 추가된 요소에 대해 이벤트 처리
+	// search 후 페이징
+	$(document).on('click', '.searchPageBtn', function(e){
+		e.preventDefault();
+		let page = $(this).data('page');
+		let type = $(this).data('type');
+		let keyword = $(this).data('keyword');
+		console.log(page);
+		
+		$.ajax({
+			url : '${pageContext.request.contextPath}/headoffice/customer/searchPaging',
+			method : 'get',
+			data : {
+				page : page,
+				type : type,
+				keyword : keyword
+			},
+			success : function(result){
+				console.log('페이징 성공!')
+				$('#fragment').html(result);
+			}			
+		});
+		
+	});
+
+	
+</script>
 </html>

@@ -91,46 +91,46 @@
 	        <c:import url="/WEB-INF/view/headoffice/include/topBar.jsp"></c:import>
 	        <!---------------------- 상단바 end ----------------------->
             
-            <!----------------------- 검색창 start --------------------->
+            <!-- 검색창 start -->
              <div class="breadcome-area">
                 <div class="container-fluid">
                     <div class="row">
                         <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                             <div class="breadcome-list">
-                                <div class="row"> 	
+                                <div class="row">
+                                	
                                     <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
-                                        <div class="breadcome-menu">                                   	 	
-                                        	<table style="margin-top:8px;">
-                                        		<tr>
-                                        			<td>
-                                        				<select name="type" class="form-control" style="width:120px; margin-right:5px;" id="type">
-															<option value="search">검색</option>
-															<option value="id">ID</option>
-															<option value="name">이름</option>
-															<option value="branch">지점</option>
-															<option value="gender">성별</option>
-															<option value="phone">휴대폰 번호</option>		
-														</select>   															
-                                        			</td>
-                                        			<td id="plus1"></td>
-                                        			<td id="plus2"></td>
-                                        		</tr>	
-                                        	</table>	                  	
+                                        <div class="breadcome-menu">
+                                       	 	<form id="searchForm" method="get" action="${pageContext.request.contextPath}/headoffice/emp/search">
+	                                        	<table style="margin-top:8px;">
+	                                        		<tr>
+	                                        			<td>
+	                                        				<select name="type" class="form-control" id="type" style="width:120px; margin-right:5px;">
+																<option value="search">선택</option>
+																<option value="id">ID</option>
+																<option value="name">이름</option>
+																<option value="branch">지점</option>
+																<option value="gender">성별</option>
+																<option value="phone">휴대폰 번호</option>
+															</select>   															
+	                                        			</td>
+	                                        			<td id="plus1"></td>
+	                                        			<td id="plus2"></td>
+	                                        		</tr>	
+	                                        	</table>	 
+                                        	</form>                  	
                                         </div>
                                     </div>
                                     <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">	
-                                    	<!-- 
-                                    	<ul class="breadcome-menu">
+                                   		<ul class="breadcome-menu">
                                             <li>
                                            		 <select name="searchField" class="form-control" style="width:130px;">
 													<option value="select">선택</option>
-													<option value="title">이름 순</option>
-													<option value="memo">입사 날짜 순</option>
+													<option value="title">이름</option>
+													<option value="memo">상세 설명</option>
 												  </select>    
                                             </li>
                                    	    </ul>
-                                    	 -->
-                                   		
                                     </div>                        
                                 </div>
                             </div>
@@ -139,15 +139,15 @@
                 </div>
             </div>
         </div>
-        <!----------------------- 검색창 end ----------------------->
+        <!-- 검색창 end -->
       
            
-        <div class="contacts-area mg-b-15" id="fragment">
+        <div class="contacts-area mg-b-15">
             <div class="container-fluid">   
             
                	<!--------------------- 회원 list start-------------------------->
                	<c:set var="cnt" value="0"></c:set>          		  			
-  				<c:forEach var="m" items="${empList}">
+  				<c:forEach var="m" items="${searchList}">
 	   			    <c:set var="cnt" value="${cnt + 1}"></c:set>
 	   			    <c:if test="${(cnt%4) == 1}">
 	   			  	 	<div class="row"> 
@@ -190,12 +190,12 @@
              		</c:if>
              		<c:if test="${currentPage != 1}">
              			<li class="page-item">           	  	
-	             	  		<a class="page-link pageBtn" data-page="1" href="#">처음</a>
+	             	  		<a class="page-link" href="${pageContext.request.contextPath}/headoffice/emp/search?type=${type}&keyword=${keyword}&page=1">처음</a>
 	             	 	</li>
              		</c:if>
 
 		  			<c:if test="${prev}">
-					  	<li class="page-item"><a class="page-link pageBtn" data-page="${startPageNum - 1}" href="#">이전</a></li>
+					  	<li class="page-item"><a class="page-link" href="${pageContext.request.contextPath}/headoffice/emp/search?type=${type}&keyword=${keyword}&page=${startPageNum - 1}">이전</a></li>
 				 	</c:if>
 				    <c:forEach begin="${startPageNum}" end="${endPageNum}" var="pageNum">
 					  	<c:if test="${pageNum == currentPage}"> <!-- 페이징 버튼 색 변경o --> 
@@ -205,14 +205,12 @@
 					  	</c:if>
 					  	<c:if test="${pageNum != currentPage}"> <!-- 페이징 버튼 색 변경x --> 
 					  		<li class="page-item">
-						  		<a class="page-link pageBtn" data-page="${pageNum}" href="#">${pageNum}</a>
+						  		<a class="page-link" href="${pageContext.request.contextPath}/headoffice/emp/search?type=${type}&keyword=${keyword}&page=${pageNum}">${pageNum}</a>
 						  	</li>
 					  	</c:if>
 				    </c:forEach>
 			  		<c:if test="${next}">
-					  	<li class="page-item">
-					  		<a class="page-link pageBtn" data-page="${endPageNum + 1}" href="#">다음</a>				
-					  	</li>
+					  	<li class="page-item"><a class="page-link" href="${pageContext.request.contextPath}/headoffice/emp/search?type=${type}&keyword=${keyword}&page=${endPageNum + 1}">다음</a></li>
 				 	</c:if>
 				  	<c:if test="${currentPage == lastPage}">
 					  	<li class="page-item disabled">
@@ -221,7 +219,7 @@
 				    </c:if>
 		  	    	<c:if test="${currentPage != lastPage}">
 					  	<li class="page-item">
-					  		<a class="page-link pageBtn" data-page="${lastPage}" href="#">끝</a>
+					  		<a class="page-link" href="${pageContext.request.contextPath}/headoffice/emp/search?type=${type}&keyword=${keyword}&page=${lastPage}">끝</a>
 					  	</li>
 					</c:if>			  
 				</ul>	  
@@ -298,7 +296,7 @@
 </body>
 
 <script>
-
+	
 	//select 태그의 value를 change할 때
 	$('#type').change(function(){
 		
@@ -347,26 +345,21 @@
 		}
 			
 	});
-	
+
 	// 동적으로 추가된 요소에 대해 이벤트 처리
-	// 검색
-	$(document).on('click', '#searchBtn', function(e){
+	$(document).on('click', '#searchBtn', function(){
 		
-		e.preventDefault();
-		let type = $('#type').val();
-		let keyword = $('#keyword').val();
-		
-		if(type == 'gender') {
+		if($('#type').val() == 'gender') {
 			
-			if(keyword == '') {
+			if($('#keyword').val() == '') {
 				alert('성별을 선택하세요.');
 				$('#keyword').focus();
 				return;
 			}
 			
-		} else if(type == 'branch') {
+		} else if($('#type').val() == 'branch') {
 			
-			if(keyword == '') {
+			if($('#keyword').val() == '') {
 				alert('지점을 선택하세요.');
 				$('#keyword').focus();
 				return;
@@ -374,7 +367,7 @@
 			
 		} else {
 		
-			if(keyword.trim() == '') {
+			if($('#keyword').val().trim() == '') {
 				alert('검색할 내용을 입력하세요.');
 				$('#keyword').focus();
 				return;
@@ -382,65 +375,7 @@
 			
 		}
 		
-		$.ajax({
-			url : '${pageContext.request.contextPath}/headoffice/emp/search',
-			method : 'get',
-			data : {
-				type : type,
-				keyword : keyword
-			},
-			success : function(result){
-				console.log('검색 성공!')
-				$('#fragment').html(result);
-			}
-		});
-		
-	});
-	
-	// 동적으로 추가된 요소에 대해 이벤트 처리
-	// 페이징
-	$(document).on('click', '.pageBtn', function(e){
-		e.preventDefault();
-		let page = $(this).data('page');
-		console.log(page);
-		
-		$.ajax({
-			url : '${pageContext.request.contextPath}/headoffice/emp/paging',
-			method : 'get',
-			data : {
-				page : page
-			},
-			success : function(result){
-				console.log('페이징 성공!')
-				$('#fragment').html(result);
-			}			
-		});
-		
-	});
-	
-	// 동적으로 추가된 요소에 대해 이벤트 처리
-	// search 후 페이징
-	$(document).on('click', '.searchPageBtn', function(e){
-		e.preventDefault();
-		let page = $(this).data('page');
-		let type = $(this).data('type');
-		let keyword = $(this).data('keyword');
-		console.log(page);
-		
-		$.ajax({
-			url : '${pageContext.request.contextPath}/headoffice/emp/searchPaging',
-			method : 'get',
-			data : {
-				page : page,
-				type : type,
-				keyword : keyword
-			},
-			success : function(result){
-				console.log('페이징 성공!')
-				$('#fragment').html(result);
-			}			
-		});
-		
+		$('#searchForm').submit();
 	});
 	
 </script>
