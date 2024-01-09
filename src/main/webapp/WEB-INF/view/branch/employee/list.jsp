@@ -26,7 +26,7 @@
                     <div class="row mg-t-30">
                         <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                             <div class="product-status-wrap drp-lst">
-                                <h4>지점직원조회 (<span id="branchName"></span>)</h4>
+                                <h4>지점직원조회 (${sessionScope.loginEmployee.branchName})</h4>
                                 <div class="asset-inner">
                                     <table>
                                         <tbody><tr>
@@ -51,14 +51,6 @@
                                         </c:forEach>
                                         </tbody></table>
                                 </div>
-                                <div class="custom-pagination">
-                                    <nav aria-label="Page navigation example">
-                                        <ul class="pagination">
-                                            <li class="page-item"><a class="page-link" href="#">Previous</a></li>
-                                            <li class="page-item"><a class="page-link" href="#">Next</a></li>
-                                        </ul>
-                                    </nav>
-                                </div>
                             </div>
                         </div>
                     </div>
@@ -68,16 +60,6 @@
     </div>
         <!-- 본문 종료 -->
     <jsp:include page="/WEB-INF/view/branch/include/body-lower-layout.jsp"/>
-<script>
-    /*지점정보출력*/
-    $.ajax({
-        url: '/api/v1/branch/${sessionScope.loginEmployee.branchNo}',
-        type: 'GET',
-        success: function (response){
-            $('#branchName').text(response.branchName + '지점');
-        }
-    });
-</script>
 </body>
 
 </html>
