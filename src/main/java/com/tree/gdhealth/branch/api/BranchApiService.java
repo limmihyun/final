@@ -19,10 +19,10 @@ public class BranchApiService {
     private final BranchApiMapper mapper;
 
     public Branch getBranchOne(int branchNo) {
-        return mapper.getBranchOne(branchNo);
+        return mapper.selectBranchOneByBranchNo(branchNo);
     }
 
     public List<Branch> getBranchList() {
-        return mapper.getBranchList();
+        return mapper.selectBranchAll();
     }
 }

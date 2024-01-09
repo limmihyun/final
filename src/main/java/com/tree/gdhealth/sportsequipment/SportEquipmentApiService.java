@@ -20,18 +20,18 @@ import java.util.Map;
 @RequiredArgsConstructor
 @Service
 public class SportEquipmentApiService {
-    private final SportsEquipmentApiMapper mapper;
+    private final SportsEquipmentApiMapper sportsEquipmentApiMapper;
 
     public List<SportsEquipment> getSportsEquipmentList() {
-        return mapper.selectSportsEquipmentAll();
+        return sportsEquipmentApiMapper.selectSportsEquipmentAll();
     }
 
     public SportsEquipment getSportsEquipmentOne(int sportsEquipmentNo) {
-        return mapper.selectSportsEquipmentOne(sportsEquipmentNo);
+        return sportsEquipmentApiMapper.selectSportsEquipmentOne(sportsEquipmentNo);
     }
 
     public Map<String, Object> getSportsEquipmentOrderOne(Integer orderNo) {
-        return mapper.selectSportsEquipmentOrderOneByOrderNo(orderNo);
+        return sportsEquipmentApiMapper.selectSportsEquipmentOrderOneByOrderNo(orderNo);
     }
 
     public getOrderListResponseDto getSportsEquipmentOrderList(
@@ -52,19 +52,19 @@ public class SportEquipmentApiService {
                 .requestPage(requestPage)
                 .isOnlyWaitingList(isOnlyWaitingList)
                 .rowPerPage(rowPerPage)
-                .orderList(mapper.selectSportsEquipmentOrderAll(paramMap))
-                .lastPage(mapper.countSportsEquipmentOrderListLastPage(paramMap))
+                .orderList(sportsEquipmentApiMapper.selectSportsEquipmentOrderAll(paramMap))
+                .lastPage(sportsEquipmentApiMapper.countSportsEquipmentOrderListLastPage(paramMap))
                 .build();
     }
 
     @Transactional
     public boolean addSportsEquipmentOrder(SportsEquipmentOrderAddDto dto) {
-        int affectedRows = mapper.insertSportsEquipmentOrder(dto);
+        int affectedRows = sportsEquipmentApiMapper.insertSportsEquipmentOrder(dto);
         return affectedRows == 1;
     }
 
     public boolean changeSportsEquipmentOrderStatus(Integer orderNo, String changeOrderStatus) {
-        int affectedRows = mapper.updateSportsEquipmentOrderStatus(orderNo, changeOrderStatus);
+        int affectedRows = sportsEquipmentApiMapper.updateSportsEquipmentOrderStatus(orderNo, changeOrderStatus);
 
         return affectedRows == 1;
     }

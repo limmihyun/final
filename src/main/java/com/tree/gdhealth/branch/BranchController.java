@@ -1,6 +1,6 @@
 package com.tree.gdhealth.branch;
 
-import com.tree.gdhealth.branch.programcalendar.vo.BranchProgramCalendar;
+import com.tree.gdhealth.program.dto.BranchProgramCalendar;
 import com.tree.gdhealth.sportsequipment.dto.SportsEquipmentOrderAddDto;
 import com.tree.gdhealth.sportsequipment.dto.getOrderListResponseDto;
 import com.tree.gdhealth.employee.login.LoginEmployee;

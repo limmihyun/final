@@ -1,4 +1,4 @@
-package com.tree.gdhealth.branch.programcalendar.vo;
+package com.tree.gdhealth.program.dto;
 
 import lombok.Data;
 

@@ -2,7 +2,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.tree.gdhealth.branch.api.BranchApiMapper">
 
-	<select id="getBranchOne" resultType="com.tree.gdhealth.vo.Branch">
+	<select id="selectBranchOneByBranchNo" resultType="com.tree.gdhealth.vo.Branch">
 		SELECT
 		    branch_no branchNo,
 		    branch_name branchName,
@@ -15,7 +15,7 @@
 		FROM branch
 		WHERE branch_no = #{branchNo}
 	</select>
-    <select id="getBranchList" resultType="com.tree.gdhealth.vo.Branch">
+    <select id="selectBranchAll" resultType="com.tree.gdhealth.vo.Branch">
 		SELECT
 			branch_no branchNo,
 			branch_name branchName,

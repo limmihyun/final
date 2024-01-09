@@ -11,7 +11,7 @@ import java.util.List;
 @Mapper
 public interface BranchApiMapper {
 
-    Branch getBranchOne(int branchNo);
+    Branch selectBranchOneByBranchNo(int branchNo);
 
-    List<Branch> getBranchList();
+    List<Branch> selectBranchAll();
 }

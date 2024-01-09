@@ -9,13 +9,13 @@ import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
 
-/**
+/**<p>지점도메인의 RestApiController</p>
  * @author 정인호
  */
 @Slf4j
 @RequiredArgsConstructor
 @RestController
-public class BranchApiController {
+public class BranchRestApiController {
     private final BranchApiService service;
 
     @GetMapping("/api/v1/branch/{branchNo}")
