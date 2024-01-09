@@ -1,4 +1,4 @@
-<%--
+<%@ page import="java.time.LocalDate" %><%--
   Created by IntelliJ IDEA.
   User: 정인호
   Date: 2023-12-26
@@ -17,22 +17,22 @@
             <nav class="sidebar-nav left-sidebar-menu-pro">
                 <ul class="metismenu" id="menu1">
                     <li>
-                        <a title="Landing Page" href="/branch/program-calendar/home" aria-expanded="false"><span class="educate-icon educate-event icon-wrap sub-icon-mg" aria-hidden="true"></span> <span class="mini-click-non">
+                        <a title="Landing Page" href="/branch/programCalendar/<%=LocalDate.now().toString()%>" aria-expanded="false"><span class="educate-icon educate-event icon-wrap sub-icon-mg" aria-hidden="true"></span> <span class="mini-click-non">
                                     주간 프로그램</span></a>
                     </li>
                     <li>
                         <a class="has-arrow" href="all-professors.html" aria-expanded="false"><span class="educate-icon educate-professor icon-wrap"></span> <span class="mini-click-non">
                                     직원관리</span></a>
                         <ul class="submenu-angle" aria-expanded="false">
-                            <li><a title="All Professors" href="/branch/employee/home"><span class="mini-sub-pro">지점직원조회</span></a></li>
+                            <li><a title="All Professors" href="/branch/employee/list"><span class="mini-sub-pro">지점직원조회</span></a></li>
                         </ul>
                     </li>
                     <li>
                         <a class="has-arrow" href="all-courses.html" aria-expanded="false"><span class="educate-icon educate-course icon-wrap"></span> <span class="mini-click-non">
                                     물품관리</span></a>
                         <ul class="submenu-angle" aria-expanded="false">
-                            <li><a title="All Courses" href="/branch/sports-equipment/list"><span class="mini-sub-pro">지점물품발주조회</span></a></li>
-                            <li><a title="Add Courses" href="/branch/sports-equipment/order"><span class="mini-sub-pro">지점물품발주</span></a></li>
+                            <li><a title="All Courses" href="/branch/sportsEquipment/order/list"><span class="mini-sub-pro">지점물품발주조회</span></a></li>
+                            <li><a title="Add Courses" href="/branch/sportsEquipment/order/addForm"><span class="mini-sub-pro">지점물품발주</span></a></li>
                         </ul>
                     </li>
                     <li>
@@ -73,7 +73,7 @@
                                             <li class="nav-item"><a href="/customer/home" class="nav-link">고객 홈</a></li>
                                             <li class="nav-item"><a href="/branch/home" class="nav-link">지점 홈</a></li>
                                             <li class="nav-item"><a href="/notice/noticeList" class="nav-link">공지 게시판</a></li>
-                                            <li class="nav-item"><a href="/testLoginEmployee" class="nav-link">직원 테스트로그인</a></li>
+                                            <li class="nav-item"><a href="/branch/testLoginEmployee" class="nav-link">직원 테스트로그인</a></li>
                                         </ul>
                                     </div>
                                 </div>

@@ -51,7 +51,7 @@
                                 <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                                     <div class="review-content-section">
                                         <div id="dropzone1" class="pro-ad addcoursepro">
-                                            <form method="post"
+                                            <form action="/branch/sportsEquipment/order" method="post"
                                                   class="dropzone dropzone-custom needsclick add-professors dz-clickable"
                                                   id="demo1-upload">
                                                 <div class="row">

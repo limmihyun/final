@@ -10,22 +10,22 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.tree.gdhealth.vo.Branch;
-import com.tree.gdhealth.vo.CustomerAttendance;
 
 import jakarta.servlet.http.HttpSession;
 
 @Controller
-public class BranchController {
-	@Autowired BranchService branchService;
+public class FranchiseBranchController {
+	@Autowired
+	FranchiseBranchService franchiseBranchService;
 	
 	@GetMapping("/customer/franchiseBranch")
 	public String franchiseBranchPage(Model model, HttpSession session) {
 		// 지점리스트
-		List<Branch> branch = branchService.branchInfo();
+		List<Branch> branch = franchiseBranchService.branchInfo();
 		model.addAttribute("branch", branch);
 		
 		// 전 지점 인원수
-		Branch cnt = branchService.branchMemberCnt();
+		Branch cnt = franchiseBranchService.branchMemberCnt();
 		// 인원수 임의로 값 넣기 
 		// cnt.setCount(1000);
 		model.addAttribute("cnt", cnt);
@@ -40,7 +40,7 @@ public class BranchController {
 	@PostMapping("/customer/branchCk")
 	public Branch branchInfoOne(Branch branch) {
 		System.out.println(branch.getBranchNo());
-		Branch data = branchService.branchInfoOne(branch);
+		Branch data = franchiseBranchService.branchInfoOne(branch);
 		System.out.println(data.toString());
 		return data;
 	}

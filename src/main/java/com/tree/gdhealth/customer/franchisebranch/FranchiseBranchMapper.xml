@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper
-	namespace="com.tree.gdhealth.customer.franchisebranch.BranchMapper">
+	namespace="com.tree.gdhealth.customer.franchisebranch.FranchiseBranchMapper">
 	<select id="branchInfo" parameterType="com.tree.gdhealth.vo.Branch" resultType="com.tree.gdhealth.vo.Branch">
 	SELECT
 		branch_no branchNo,

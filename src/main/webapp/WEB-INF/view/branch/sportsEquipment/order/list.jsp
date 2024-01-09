@@ -224,7 +224,7 @@
 <script>
     $('#isOnlyWaitingListSelectFrom').change(function () {
         let isOnlyWaitingListSelect = $('#isOnlyWaitingListSelectFrom').val();
-            window.location.replace('/branch/sports-equipment/list?isOnlyWaitingList='+isOnlyWaitingListSelect);
+            window.location.replace('/branch/sportsEquipment/order/list?isOnlyWaitingList='+isOnlyWaitingListSelect);
     })
 </script>
 </body>

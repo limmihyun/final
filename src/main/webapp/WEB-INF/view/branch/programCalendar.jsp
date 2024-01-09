@@ -56,8 +56,8 @@
                             <div class="custom-pagination">
                                 <nav aria-label="Page navigation example">
                                     <ul class="pagination">
-                                        <li class="page-item"><a class="page-link" href="/branch/program-calendar/${calendar.previousWeekDate}">Previous</a></li>
-                                        <li class="page-item"><a class="page-link" href="/branch/program-calendar/${calendar.nextWeekDate}">Next</a></li>
+                                        <li class="page-item"><a class="page-link" href="/branch/programCalendar/${calendar.previousWeekDate}">Previous</a></li>
+                                        <li class="page-item"><a class="page-link" href="/branch/programCalendar/${calendar.nextWeekDate}">Next</a></li>
                                     </ul>
                                 </nav>
                             </div>

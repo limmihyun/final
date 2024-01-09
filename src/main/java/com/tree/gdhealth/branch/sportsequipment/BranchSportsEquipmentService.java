@@ -32,13 +32,6 @@ public class BranchSportsEquipmentService {
         paramMap.put("beginRow", beginRow);
         paramMap.put("rowPerPage", rowPerPage);
         paramMap.put("isOnlyWaitingList", isOnlyWaitingList);
-        /*
-        Map<String, Object> paramMap = Map.of(
-                "branchNo", branchNo,
-                "beginRow", beginRow,
-                "rowPerPage", rowPerPage,
-                "isOnlyWaitingList", isOnlyWaitingList);
-        */
 
         return getOrderListResponseDto.builder()
                 .requestPage(requestPage)

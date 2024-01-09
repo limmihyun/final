@@ -38,7 +38,7 @@
                                             <th>이메일</th>
                                             <th>활성여부</th>
                                         </tr>
-                                        <c:forEach var="employee" items="${employeeList}">
+                                        <c:forEach var="employee" items="${branchEmployeeList}">
                                             <tr>
                                                 <td>${employee['employeeNo']}</td>
                                                 <td>${employee['employeeName']}</td>

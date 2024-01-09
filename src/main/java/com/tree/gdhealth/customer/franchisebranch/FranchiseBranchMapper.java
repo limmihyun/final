@@ -5,10 +5,9 @@ import java.util.List;
 import org.apache.ibatis.annotations.Mapper;
 
 import com.tree.gdhealth.vo.Branch;
-import com.tree.gdhealth.vo.CustomerAttendance;
 
 @Mapper
-public interface BranchMapper {
+public interface FranchiseBranchMapper {
 	
 	List<Branch> branchInfo();
 	
