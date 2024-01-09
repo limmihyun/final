@@ -40,12 +40,13 @@
 			  DAY(pd.program_date) day,
 			  COUNT(pr.program_date_no) cnt,
 			p.program_max_customer programMaxCustomer,
-			p.program_name programName
+			p.program_name programName,
+			pd.program_date_no programDateNo
 		FROM program_reservation pr RIGHT OUTER JOIN program_date pd
 		  on pr.program_date_no = pd.program_date_no INNER JOIN program p
 		  on p.program_no = pd.program_no
-		WHERE YEAR(pd.program_date) = #{year} AND MONTH(pd.program_date) = #{month}
-		GROUP BY pd.program_date
+		WHERE YEAR(pd.program_date) = #{year} AND MONTH(pd.program_date) = #{month} AND DAY(pd.program_date) >= #{thisDay}
+		GROUP BY pd.program_date_no
 		ORDER BY pd.program_date ASC
 		LIMIT #{beginRow},#{rowPerPage};
 	</select> 
@@ -55,13 +56,14 @@
 			COUNT(*)
 		FROM  program_date pd INNER JOIN program p 
 		   on pd.program_no = p.program_no
-		WHERE YEAR(pd.program_date) = #{year} AND MONTH(pd.program_date) = #{month}
-		GROUP BY p.program_no
+		WHERE YEAR(pd.program_date) = #{year} AND MONTH(pd.program_date) = #{month} AND DAY(pd.program_date) >= #{thisDay}
+		GROUP BY MONTH(pd.program_date)
 	</select>
 	
 	<select id="myCalendarList" resultType="java.util.Map">
 		SELECT
-			  DAY(pd.program_date) day
+			  DAY(pd.program_date) day,
+			  pd.program_date_no programDateNo
 		FROM program_reservation pr RIGHT OUTER JOIN program_date pd
 		  on pr.program_date_no = pd.program_date_no INNER JOIN payment p
 		   on pr.payment_no = p.payment_no

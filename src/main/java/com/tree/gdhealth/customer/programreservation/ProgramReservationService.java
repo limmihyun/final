@@ -110,7 +110,7 @@ public class ProgramReservationService {
 //		return allList;
 //	}
 	
-	public List<Map<String, Object>> listPage(int currentPage, int year, int month){
+	public List<Map<String, Object>> listPage(int currentPage, int year, int month, int thisDay){
 		
 		int rowPerPage = 4;
 		int beginRow = (currentPage-1) * rowPerPage;
@@ -121,6 +121,7 @@ public class ProgramReservationService {
 		paramap.put("beginRow",beginRow);
 		paramap.put("year",year);
 		paramap.put("month",month+1);
+		paramap.put("thisDay",thisDay);
 		
 		System.out.println("paramap-->>" + paramap);
 
@@ -216,14 +217,18 @@ public class ProgramReservationService {
 		
 	}
 	
-	public Integer lastPage(int currentPage, int year, int month) {
+	public Integer lastPage(int currentPage, int year, int month, int thisDay) {
 		
 		int rowPerPage = 4;
 		
 		Map<String, Object> paramap = new HashMap<>();
 		paramap.put("year",year);
-		paramap.put("month", String.format("%02d",month)+1);		
+		paramap.put("month", String.format("%02d",month)+1);
+		paramap.put("thisDay",thisDay);
+
+		
 		Integer total = programReservationMapper.lastPage(paramap);
+		System.out.println(total + "<--total");
 		
 		if(total != null) {
 			int lastPage = total/rowPerPage;
