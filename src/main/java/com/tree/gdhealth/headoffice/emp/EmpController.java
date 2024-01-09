@@ -5,7 +5,11 @@ import java.util.Map;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.Errors;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -183,8 +187,16 @@ public class EmpController {
 	}
 	
 	@PostMapping("/addEmp")
-	public String addEmp(HttpSession session, Employee employee, 
-							EmployeeDetail employeeDetail, MultipartFile employeeFile) {
+	public String addEmp(HttpSession session, Model model, 
+							@Validated Employee employee,
+							@Validated EmployeeDetail employeeDetail, 
+							BindingResult bindingResult, MultipartFile employeeFile) {
+				
+		// validation 실패시 회원가입 창으로 이동
+		if(bindingResult.hasErrors()) {
+			
+			return "headoffice/addEmp";
+		}
 		
 		String path = session.getServletContext().getRealPath("/upload/emp");
 		// 디버깅

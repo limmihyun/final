@@ -39,6 +39,34 @@ public class CustomerService {
 		return customerCnt;
 	}
 	
+	public List<Map<String, Object>> getSearchList(int beginRow, int rowPerPage, 
+													String type, String keyword) {
+
+		Map<String, Object> map = new HashMap<>();
+		map.put("beginRow", beginRow);
+		map.put("rowPerPage", rowPerPage);
+		map.put("type", type);
+		map.put("keyword", keyword);
+		
+		List<Map<String, Object>> searchList = customerMapper.customerList(map);
+		
+		return searchList;
+	
+	}
+	
+	public int getSearchCnt(String type, String keyword) {
+		
+		Map<String, Object> map = new HashMap<>();
+		map.put("keyword", keyword);
+		map.put("type", type);
+		
+		int searchCnt = customerMapper.searchCnt(map);
+		// 디버깅
+		log.debug("검색 결과 개수 : " + searchCnt);
+		
+		return searchCnt;
+	}
+	
 	
 
 }

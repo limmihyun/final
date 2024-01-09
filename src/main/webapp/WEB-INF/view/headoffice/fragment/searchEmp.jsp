@@ -2,7 +2,7 @@
     pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 
-<div class="container-fluid">   
+			<div class="container-fluid">   
             
                	<!--------------------- 회원 list start-------------------------->
                	<c:set var="cnt" value="0"></c:set>          		  			

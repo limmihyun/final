@@ -362,7 +362,7 @@
 			$('#employeeEmail').focus();
 			return;
 	    }
-	    
+	    	    
 	    if($('#employeeGender').val() == 0) {
 			alert('성별을 선택하세요.');
 			$('#employeeGender').focus();
@@ -387,7 +387,6 @@
 			return;
 		}
 	    		
-	    alert('가입이 완료되었습니다.');
 		$('#insertForm').submit();
 	});
 </script>

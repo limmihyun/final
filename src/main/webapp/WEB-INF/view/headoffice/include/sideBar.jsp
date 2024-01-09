@@ -28,10 +28,10 @@
                          <li>
                             <a class="has-arrow" href="#" aria-expanded="false">
                             	<span class="educate-icon educate-professor icon-wrap"></span> 
-                            	<span class="mini-click-non">회원</span>
+                            	<span class="mini-click-non">고객</span>
                             </a>
                             <ul class="submenu-angle form-mini-nb-dp" aria-expanded="false">
-                                <li><a href="${pageContext.request.contextPath}/headoffice/customer"><span class="mini-sub-pro">회원 목록</span></a></li>                                
+                                <li><a href="${pageContext.request.contextPath}/headoffice/customer"><span class="mini-sub-pro">고객 목록</span></a></li>                                
                             </ul>
                         </li>    
                         <li>

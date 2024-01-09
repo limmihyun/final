@@ -67,6 +67,10 @@
     <!-- modernizr JS
 		============================================ -->
     <script src="/admin/js/vendor/modernizr-2.8.3.min.js"></script>
+    
+    <!-- 달력 API -->
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.13.2/themes/base/jquery-ui.css">
+    <script src="https://code.jquery.com/ui/1.13.2/jquery-ui.js"></script>
 </head>
 
 <body>
@@ -116,7 +120,8 @@
 	                                        	
 	                                            <div class="details-blog-dt blog-sig-details-dt courses-info mobile-sm-d-n">
 	                                                <span>
-	                                                	<i class="fa fa-heart"></i> <b>수용 인원 :</b> <input type="text" value="${programOne.maxCustomer}" name="programMaxCustomer" id="programMaxCustomer" style="width:60px;">
+	                                                	<b>수용 인원 :</b> <input type="text" value="${programOne.maxCustomer}" name="programMaxCustomer" id="programMaxCustomer" style="width:60px;">
+	                                                	<b style="margin-left:20px;">개설 날짜 :</b> <input type="text" value="${programOne.programDate}" name="programDate" id="programDate" style="width:100px;">
 	                                                </span>
 	                                            </div>
 	                                            <div style="text-align:center;">    
@@ -212,6 +217,16 @@
 <script>	
 	$('#programMaxCustomer').focus();
 	
+	// 달력 API
+	$(function() {
+	    $( "#programDate" ).datepicker({
+	    	dateFormat : 'yy-mm-dd',
+	    	dayNamesMin: [ "일", "월","화", "수", "목", "금", "토" ],
+	    	monthNames: [ "1월", "2월", "3월", "4월", "5월", "6월", "7월", "8월", "9월", "10월", "11월", "12월"],
+	    	showMonthAfterYear: true
+	    });
+	 });
+	
 	$('#updateBtn').click(function(){
 		
 		if($('#programMaxCustomer').val().trim() == '') {
@@ -241,6 +256,12 @@
 			alert('내용을 입력하세요.');
 			$('#programDetail').val('');	
 			$('#programDetail').focus();			
+			return;
+		}
+		
+		if($('#programDate').val().length == 0) {
+			alert('개설 날짜를 입력하세요.');
+			$('#programDate').focus();			
 			return;
 		}
 		

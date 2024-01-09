@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.tree.gdhealth.headoffice.Paging;
 import com.tree.gdhealth.vo.Program;
@@ -171,7 +172,7 @@ public class ProgramController {
 		String path = session.getServletContext().getRealPath("/upload/program");
 		// 디버깅
 		log.debug("저장 경로 : " + path);
-		programService.insertProgram(program, programFile, path);
+		programService.insertProgram(program, programDate, programFile, path);
 		
 		return "redirect:/headoffice/program";
 	}
@@ -199,15 +200,18 @@ public class ProgramController {
 	}
 	
 	@PostMapping("/update")
-	public String update(HttpSession session, MultipartFile programFile,
-							Program program, ProgramImg programImg) {
+	public String update(HttpSession session, MultipartFile programFile, RedirectAttributes redirectAttributes,
+							Program program, ProgramDate programDate, ProgramImg programImg) {
 				
 		String oldPath = session.getServletContext().getRealPath("/upload/program/" + programImg.getFilename());
 		String path = session.getServletContext().getRealPath("/upload/program");
 		
-		programService.updateProgram(program, programFile, path, oldPath);
+		programService.updateProgram(program, programDate, programFile, path, oldPath);
 		
-		return "redirect:/headoffice/program/programOne/" + program.getProgramNo();
+		int programNo = program.getProgramNo();
+		redirectAttributes.addAttribute("programNo", programNo);
+		
+		return "redirect:/headoffice/program/programOne/{programNo}";
 	}
 	
 	@GetMapping("/deactive/{programNo}")
@@ -217,7 +221,7 @@ public class ProgramController {
 		// 디버깅
 		log.debug("프로그램 비활성화(성공:1,실패:0) : " + result);
 		
-		return "redirect:/headoffice/program/programOne/" + programNo;
+		return "redirect:/headoffice/program/programOne/{programNo}";
 	}
 	
 	@GetMapping("/active/{programNo}")
@@ -227,7 +231,7 @@ public class ProgramController {
 		// 디버깅
 		log.debug("프로그램 활성화(성공:1,실패:0) : " + result);
 		
-		return "redirect:/headoffice/program/programOne/" + programNo;
+		return "redirect:/headoffice/program/programOne/{programNo}";
 	}
 
 }

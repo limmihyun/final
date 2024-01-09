@@ -101,23 +101,21 @@
 	                        <div class="breadcome-list">
 	                            <div class="row">
 	                                <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
-	                                    <div class="breadcome-menu">
-	                                    	<form id="searchForm" method="get" action="${pageContext.request.contextPath}/headoffice/emp/search">
-	                                        	<table style="margin-top:8px;">
-	                                        		<tr>
-	                                        			<td>
-	                                        				<select name="type" class="form-control" style="width:120px; margin-right:5px;" id="type">
-																<option value="search">검색</option>
-																<option value="title">제목</option>
-																<option value="detail">설명</option>
-																<option value="active">active</option>					
-															</select>   															
-	                                        			</td>
-	                                        			<td id="plus1"></td>
-	                                        			<td id="plus2"></td>
-	                                        		</tr>	
-	                                        	</table>	 
-	                                        </form> 
+	                                    <div class="breadcome-menu">  	
+                                        	<table style="margin-top:8px;">
+                                        		<tr>
+                                        			<td>
+                                        				<select name="type" class="form-control" style="width:120px; margin-right:5px;" id="type">
+															<option value="search">검색</option>
+															<option value="title">제목</option>
+															<option value="detail">설명</option>
+															<option value="active">active</option>					
+														</select>   															
+                                        			</td>
+                                        			<td id="plus1"></td>
+                                        			<td id="plus2"></td>
+                                        		</tr>	
+                                        	</table>	                                         
 	                                    </div>
 	                                </div>
 	                                <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
@@ -158,6 +156,7 @@
                             <div class="course-des">
                             	<h3>${m.programName}</h3>
                                 <p><span><i class="fa fa-clock"></i></span> <b>수용 인원 :</b> ${m.maxCustomer}</p>
+                                <p><span><i class="fa fa-clock"></i></span> <b>개설 날짜 :</b> ${m.programDate}</p>
                             </div>
                             <div class="product-buttons">
                                 <button type="button" class="button-default cart-btn" onclick="location.href='${pageContext.request.contextPath}/headoffice/program/programOne/${m.programNo}'">자세히 보기</button>
@@ -272,6 +271,7 @@
 </body>
 
 <script>
+
 	$('#type').change(function(){
 		
 		if($(this).val() == 'search') {
@@ -380,8 +380,8 @@
 				$('#fragment').html(result);
 			}			
 		});
-		
 	});
+	
 </script>
 
 </html>

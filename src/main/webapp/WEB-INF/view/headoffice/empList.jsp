@@ -99,25 +99,23 @@
                             <div class="breadcome-list">
                                 <div class="row"> 	
                                     <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
-                                        <div class="breadcome-menu">
-                                       	 	<form id="searchForm" method="get" action="${pageContext.request.contextPath}/headoffice/emp/search">
-	                                        	<table style="margin-top:8px;">
-	                                        		<tr>
-	                                        			<td>
-	                                        				<select name="type" class="form-control" style="width:120px; margin-right:5px;" id="type">
-																<option value="search">검색</option>
-																<option value="id">ID</option>
-																<option value="name">이름</option>
-																<option value="branch">지점</option>
-																<option value="gender">성별</option>
-																<option value="phone">휴대폰 번호</option>
-															</select>   															
-	                                        			</td>
-	                                        			<td id="plus1"></td>
-	                                        			<td id="plus2"></td>
-	                                        		</tr>	
-	                                        	</table>	 
-                                        	</form>                  	
+                                        <div class="breadcome-menu">                                   	 	
+                                        	<table style="margin-top:8px;">
+                                        		<tr>
+                                        			<td>
+                                        				<select name="type" class="form-control" style="width:120px; margin-right:5px;" id="type">
+															<option value="search">검색</option>
+															<option value="id">ID</option>
+															<option value="name">이름</option>
+															<option value="branch">지점</option>
+															<option value="gender">성별</option>
+															<option value="phone">휴대폰 번호</option>		
+														</select>   															
+                                        			</td>
+                                        			<td id="plus1"></td>
+                                        			<td id="plus2"></td>
+                                        		</tr>	
+                                        	</table>	                  	
                                         </div>
                                     </div>
                                     <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">	
