@@ -1,4 +1,4 @@
-package com.tree.gdhealth.holiday;
+package com.tree.gdhealth.utils.holidayapi;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.Data;

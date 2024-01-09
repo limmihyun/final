@@ -1,7 +1,7 @@
 package com.tree.gdhealth.branch;
 
-import com.tree.gdhealth.branch.programcalendar.BranchProgramCalendarService;
-import com.tree.gdhealth.branch.programcalendar.vo.BranchProgramCalendar;
+import com.tree.gdhealth.program.dto.BranchProgramCalendar;
+import com.tree.gdhealth.program.ProgramApiService;
 import com.tree.gdhealth.sportsequipment.SportEquipmentApiService;
 import com.tree.gdhealth.sportsequipment.dto.SportsEquipmentOrderAddDto;
 import com.tree.gdhealth.sportsequipment.dto.getOrderListResponseDto;
@@ -30,7 +30,7 @@ public class BranchService {
     private final EmpLoginService empLoginService;
     private final EmployeeApiService employeeApiService;
     private final SportEquipmentApiService sportEquipmentApiService;
-    private final BranchProgramCalendarService branchProgramCalendarService;
+    private final ProgramApiService branchProgramCalendarService;
 
     public LoginEmployee testEmployeeLogin(Employee employee) {
         return empLoginService.login(employee);

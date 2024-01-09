@@ -1,4 +1,4 @@
-package com.tree.gdhealth.configuration;
+package com.tree.gdhealth.utils.configuration;
 
 import org.springframework.boot.web.client.RestTemplateBuilder;
 import org.springframework.context.annotation.Bean;

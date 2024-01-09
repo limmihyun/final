@@ -222,7 +222,7 @@
         console.log(date);
 
         $.ajax({
-            url: '/api/v1/BranchProgramDate/'+date,
+            url: '/api/v1/programDate/'+date,
             type: 'GET',
             data: {branchNo : ${calendar.branchNo}},
             success: function (response) {
@@ -339,7 +339,7 @@
        let managerNo = $('#mangerChangeSelectForm').val();
 
        $.ajax({
-           url: '/api/v1/BranchProgramDate/changeManager',
+           url: '/api/v1/programDate/changeManager',
            type: 'POST',
            contentType : 'application/json',
            data: JSON.stringify({"programDateNo": programDateNo, "managerNo" : managerNo}),

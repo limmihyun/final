@@ -1,9 +1,9 @@
-package com.tree.gdhealth.branch.programcalendar;
+package com.tree.gdhealth.program;
 
-import com.tree.gdhealth.branch.programcalendar.vo.BranchProgramCalendar;
-import com.tree.gdhealth.branch.programcalendar.vo.BranchProgramDate;
-import com.tree.gdhealth.holiday.HolidayApi;
-import com.tree.gdhealth.holiday.HolidayApiVo;
+import com.tree.gdhealth.program.dto.BranchProgramCalendar;
+import com.tree.gdhealth.program.dto.BranchProgramDate;
+import com.tree.gdhealth.utils.holidayapi.HolidayApi;
+import com.tree.gdhealth.utils.holidayapi.HolidayApiVo;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
@@ -13,18 +13,37 @@ import java.time.LocalDate;
 import java.time.YearMonth;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 /**
- * <p> </p>
  * @author 정인호
  */
+
 @Slf4j
 @Transactional(readOnly = true)
 @RequiredArgsConstructor
 @Service
-public class BranchProgramCalendarService {
-    private final BranchProgramCalendarMapper mapper;
+public class ProgramApiService {
+    private final ProgramApiMapper programApiMapper;
     private final HolidayApi holidayApi;
+
+    public Map<String, Object> getBranchProgramDate(LocalDate date, int branchNo) {
+        return programApiMapper.getBranchProgramDate(date, branchNo);
+    }
+    @Transactional
+    public boolean changeManager(int programDateNo, int managerNo) {
+        //confirm if exist
+        int foundRow = programApiMapper.selectManager(programDateNo, managerNo);
+        int result = 0;
+        if(foundRow == 1){
+            // if is update
+            result = programApiMapper.changeManager(programDateNo, managerNo);
+        }else {
+            // or insert
+            result = programApiMapper.insertManager(programDateNo, managerNo);
+        }
+        return result == 1;
+    }
 
     /** date 리스트에 휴일 API로 가져온 공휴일정보를 매핑하여 반환
      * @param requestDate 기준일
@@ -32,7 +51,7 @@ public class BranchProgramCalendarService {
      */
     public BranchProgramCalendar getBranchProgramCalendar(LocalDate requestDate, int branchNo) {
         BranchProgramCalendar calendar = new BranchProgramCalendar();
-        List<BranchProgramDate> dateList = mapper.getProgramDateBetween(branchNo, requestDate.minusDays(1));
+        List<BranchProgramDate> dateList = programApiMapper.getProgramDateBetween(branchNo, requestDate.minusDays(1));
         List<HolidayApiVo> holidayList = new ArrayList<>();
 
         /* 오늘날짜 지정*/

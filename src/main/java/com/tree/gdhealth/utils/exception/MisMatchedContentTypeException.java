@@ -1,4 +1,4 @@
-package com.tree.gdhealth.exception;
+package com.tree.gdhealth.utils.exception;
 
 import lombok.NoArgsConstructor;
 

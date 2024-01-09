@@ -1,4 +1,4 @@
-package com.tree.gdhealth.holiday;
+package com.tree.gdhealth.utils.holidayapi;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JsonNode;
