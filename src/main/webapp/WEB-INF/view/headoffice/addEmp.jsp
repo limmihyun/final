@@ -152,9 +152,6 @@
                                                                 <div class="form-group">
                                                                     <select name="branchNo" id="branchNo" class="form-control">
 																			<option value="0" selected>지점</option>
-																			<option value="1">본사</option>
-																			<option value="2">가산 1호점</option>
-																			<option value="3">가산 2호점</option>
 																	</select>
                                                                 </div>
                                                                 <div class="form-group">
@@ -264,6 +261,19 @@
 </body>
 <script>
 	$('#employeeId').focus();
+	
+	// 지점 목록 DB 테이블 column 가져 오기
+	$.ajax({
+		url : '${pageContext.request.contextPath}/headoffice/emp/branchList',
+		type : 'get',
+		success : function(result){
+			
+			$(result).each(function(index,item){
+				$('#branchNo').append('<option value="' + Number(index+1) + '">' + item + '</option>')
+			});
+			
+		}
+	});
 	
 	// 정규식을 이용한 ID 입력 체크(영문 소문자, 숫자만 입력 가능)
 	$('#employeeId').keyup(function(){
