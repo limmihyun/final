@@ -174,7 +174,7 @@
 										 		</c:if>
 										 		<c:if test="${l.cnt != l.programMaxCustomer}">								 		
 												 	<c:forEach var="my" items="${myCalendarList}">
-											 			<c:if test="${d == my.day}">
+											 			<c:if test="${d == my.day }">
 										   					<c:set var="sum" value="1"></c:set>		 
 											 			</c:if>
 											 			<c:set var="myempty" value="true"></c:set> 								 			
@@ -224,7 +224,7 @@
 										 		</c:if>
 										 		<c:if test="${l.cnt != l.programMaxCustomer}">								 		
 												 	<c:forEach var="my" items="${myCalendarList}">
-											 			<c:if test="${d == my.day}">
+											 			<c:if test="${d == my.day && l.programDateNo == my.programDateNo}">
 										   					<c:set var="sum" value="1"></c:set>		 
 											 			</c:if>
 											 			<c:set var="myempty" value="true"></c:set> 								 			

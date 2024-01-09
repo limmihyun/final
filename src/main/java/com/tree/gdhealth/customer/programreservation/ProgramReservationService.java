@@ -27,7 +27,7 @@ public class ProgramReservationService {
 		Calendar today = Calendar.getInstance();
 		int	thisYear = today.get(Calendar.YEAR);
 		int thisMonth = (today.get(Calendar.MONTH)+1);
-		int thisDay = Calendar.DATE;
+		int thisDay = today.get(Calendar.DAY_OF_MONTH);
 		System.out.println(thisYear + "!!year");
 		System.out.println(thisMonth + "!!month");
 		System.out.println(thisDay + "!!day");
