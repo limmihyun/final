@@ -12,13 +12,13 @@ public interface ProgramReservationMapper {
 	
 	List<Map<String, Object>> selectProgramByMonth(Map<String, Object> paramMap);
 	
-	List<Map<String, Object>> allCalendarList();
+//	List<Map<String, Object>> allCalendarList();
 	
-	List<Map<String, Object>> allCalendarListPage(Map<String, Object> paramMap);
+	List<Map<String, Object>> listPage(Map<String, Object> paramMap);
 	
 	List<Map<String, Object>> myCalendarList(Map<String, Object> paramMap);
 	
-	int lastPage(Map<String, Object> paramMap);
+	Integer lastPage(Map<String, Object> paramMap);
 
 	Map<String, Object> proRsOne(Map<String, Object> paramMap);
 	
