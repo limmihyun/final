@@ -13,7 +13,7 @@
 		FROM employee_detail
 		WHERE employee_no = #{employeeNo}
 	</select>
-	<select id="getEmployeeListIsHeadOffice" resultType="java.util.Map">
+	<select id="selectEmployeeListByCriteria" parameterType="com.tree.gdhealth.employee.dto.EmployeeRetrieveCriteria" resultType="com.tree.gdhealth.employee.dto.EmployeeInformationDto">
 		SELECT
 		    e.employee_no employeeNo,
 		    ed.employee_name employeeName,
@@ -25,28 +25,18 @@
 		FROM employee e
 			INNER JOIN employee_detail ed
 			ON e.employee_no = ed.employee_no
-		WHERE e.branch_no = (
-		    SELECT branch.branch_no
-		        FROM branch
-		        WHERE branch_level = 1
-			)
-	</select>
-    <select id="getBranchEmployeeList" resultType="java.util.Map">
-		SELECT
-			e.employee_no employeeNo,
-			ed.employee_name employeeName,
-			e.branch_no branchNo,
-			e.employee_id employeeId,
-			e.employee_active employeeActive,
-			e.createdate,
-			e.updatedate,
-			ed.employee_email employeeEmail,
-			ed.employee_gender employeeGender,
-			ed.employee_phone employeePhone
-		FROM employee e
-				 INNER JOIN employee_detail ed
-							ON e.employee_no = ed.employee_no
-		WHERE e.branch_no = #{branchNo}
+		<where>
+			<if test="isHeadOffice == true">
+				AND e.branch_no = (
+				SELECT branch.branch_no
+					FROM branch
+					WHERE branch_level = 1
+				)
+			</if>
+			<if test="branchNo != null">
+				AND e.branch_no = #{branchNo}
+			</if>
+		</where>
 	</select>
 
 </mapper>

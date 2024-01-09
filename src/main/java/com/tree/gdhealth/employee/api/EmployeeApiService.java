@@ -1,6 +1,7 @@
 package com.tree.gdhealth.employee.api;
 
-import com.tree.gdhealth.vo.Employee;
+import com.tree.gdhealth.employee.dto.EmployeeInformationDto;
+import com.tree.gdhealth.employee.dto.EmployeeRetrieveCriteria;
 import com.tree.gdhealth.vo.EmployeeDetail;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -8,7 +9,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
-import java.util.Map;
 
 /** <p></p>
  * @author 정인호
@@ -23,11 +23,11 @@ public class EmployeeApiService {
         return mapper.getEmployeeDetailByNo(employeeNo);
     }
 
-    public List<Map<String, Object>> getEmployeeListIsHeadOffice() {
-        return mapper.getEmployeeListIsHeadOffice();
+    public List<EmployeeInformationDto> getEmployeeListIsHeadOffice() {
+        return mapper.selectEmployeeListByCriteria(EmployeeRetrieveCriteria.isHeadOffice());
     }
 
-    public List<Map<String, Object>> getBranchEmployeeList(int branchNo) {
-        return mapper.getBranchEmployeeList(branchNo);
+    public List<EmployeeInformationDto> getEmployeeListByBranchNo(int branchNo) {
+        return mapper.selectEmployeeListByCriteria(EmployeeRetrieveCriteria.branchNo(branchNo));
     }
 }

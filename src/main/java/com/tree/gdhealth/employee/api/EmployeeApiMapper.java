@@ -1,11 +1,12 @@
 package com.tree.gdhealth.employee.api;
 
-import com.tree.gdhealth.vo.Employee;
+import com.tree.gdhealth.employee.dto.EmployeeInformationDto;
+import com.tree.gdhealth.employee.dto.EmployeeRetrieveCriteria;
 import com.tree.gdhealth.vo.EmployeeDetail;
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
-import java.util.Map;
 
 /**
  * @author 정인호
@@ -14,7 +15,7 @@ import java.util.Map;
 public interface EmployeeApiMapper {
     EmployeeDetail getEmployeeDetailByNo(int employeeNo);
 
-    List<Map<String, Object>> getEmployeeListIsHeadOffice();
+    List<EmployeeInformationDto> selectEmployeeListByCriteria(EmployeeRetrieveCriteria criteria);
 
-    List<Map<String, Object>> getBranchEmployeeList(int branchNo);
+    List<EmployeeInformationDto> selectEmployeeListByBranchNo(int branchNo);
 }

@@ -1,5 +1,6 @@
 package com.tree.gdhealth.branch;
 
+import com.tree.gdhealth.employee.dto.EmployeeInformationDto;
 import com.tree.gdhealth.program.dto.BranchProgramCalendar;
 import com.tree.gdhealth.program.ProgramApiService;
 import com.tree.gdhealth.sportsequipment.SportEquipmentApiService;
@@ -16,7 +17,6 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDate;
 import java.util.List;
-import java.util.Map;
 
 /**
  * <p>지점(branch)의 메인 서비스</p>
@@ -36,8 +36,8 @@ public class BranchService {
         return empLoginService.login(employee);
     }
 
-    public List<Map<String, Object>> getBranchEmployeeList(Integer branchNo) {
-        return employeeApiService.getBranchEmployeeList(branchNo);
+    public List<EmployeeInformationDto> getBranchEmployeeList(Integer branchNo) {
+        return employeeApiService.getEmployeeListByBranchNo(branchNo);
     }
 
     public getOrderListResponseDto getBranchSportsEquipmentOrderList(Integer branchNo, int requestPage, boolean isOnlyWaitingList) {
