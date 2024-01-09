@@ -2,14 +2,13 @@ package com.tree.gdhealth.branch.programcalendar;
 
 import com.tree.gdhealth.branch.programcalendar.vo.BranchProgramCalendar;
 import com.tree.gdhealth.branch.programcalendar.vo.BranchProgramDate;
-import com.tree.gdhealth.utility.ApiRequest.HolidayApi;
-import com.tree.gdhealth.utility.ApiRequest.HolidayApiVo;
+import com.tree.gdhealth.holiday.HolidayApi;
+import com.tree.gdhealth.holiday.HolidayApiVo;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.io.IOException;
 import java.time.LocalDate;
 import java.time.YearMonth;
 import java.util.ArrayList;
