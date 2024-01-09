@@ -1,3 +1,68 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.tree.gdhealth.question.QuestionMapper"></mapper>
+<mapper namespace="com.tree.gdhealth.question.QuestionMapper">
+<select id="questionList"
+		parameterType="com.tree.gdhealth.vo.Question"
+		resultType="com.tree.gdhealth.vo.Question">
+	
+	SELECT
+	    q.question_no AS questionNo,
+	    b.branch_name AS branchName,
+	    q.question_title AS questionTitle,
+	    c.customer_id AS customerId,
+	    q.createdate AS createdate,
+	    q.updatedate AS updatedate
+	FROM 
+	    question q
+	JOIN customer c 
+	ON q.customer_no = c.customer_no
+	JOIN branch b 
+	ON q.branch_no = b.branch_no
+	ORDER BY q.question_no DESC;
+	
+</select>
+
+<select id = "questionOne"
+	parameterType="int"
+	resultType="com.tree.gdhealth.vo.Question">
+	
+	SELECT
+		q.question_no AS questionNo,
+		b.branch_name AS branchName,
+		c.customer_id AS customerId,
+		q.question_title AS questionTitle,
+		q.question_content AS questionContent,
+		q.createdate AS createdate,
+		q.updatedate AS updatedate
+	FROM
+		question q
+	JOIN customer c
+	ON q.customer_no = c.customer_no
+	JOIN branch b
+	ON q.branch_no = b.branch_no
+	WHERE q.question_no = #{questionNo};
+		
+</select>
+
+<insert id="addQuestion"
+		parameterType="com.tree.gdhealth.vo.Question">
+		
+		INSERT INTO question(
+			question_no,
+			customer_no,
+			branch_no,
+			question_title,
+			question_content
+		) VALUES (
+			#{questionNo},
+			#{customerNo},
+			#{branchNo},
+			#{questionTitle},
+			#{questionContent}
+		)
+		
+	
+		
+
+</insert>
+</mapper>

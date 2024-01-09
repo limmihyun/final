@@ -15,10 +15,7 @@ import com.tree.gdhealth.vo.Notice;
 public class NoticeService {
    @Autowired
    private NoticeMapper noticeMapper;
-   
-   public NoticeService (NoticeMapper noticeMapper) {
-      this.noticeMapper = noticeMapper;
-   }    
+     
    // 공지추가
    public int addNotice(Notice notice) {
       int row = noticeMapper.addNotice(notice);
