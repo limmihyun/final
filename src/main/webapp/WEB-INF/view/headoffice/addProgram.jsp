@@ -69,8 +69,9 @@
     <script src="/admin/js/vendor/modernizr-2.8.3.min.js"></script>
     
     <!-- 달력 API -->
-    <link rel="stylesheet" href="//code.jquery.com/ui/1.13.2/themes/base/jquery-ui.css">
-    <script src="https://code.jquery.com/ui/1.13.2/jquery-ui.js"></script>
+    <link rel="stylesheet" href="http://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 	
 </head>
 
@@ -126,12 +127,15 @@
 		 			</div>
 		 			<div class="row" style="margin-bottom:10px;">
 			 			<div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
-							<label for="programDate" class="form-label">개설 날짜</label>
-							<input type="text" class="form-control" name="programDate" id="programDate" placeholder="입력하기">
+			 				<div id="dateArea">
+			 					<label for="programDates" class="form-label">개설 날짜</label>
+								<div style="display:flex">
+									<input type="text" class="form-control" id="programDates" name="programDates" class="programDates" placeholder="yy-mm-dd" style="width:240px;">
+									<button type="button" style="margin-left:15px; height:40px; width:40px;" id="plusBtn">+</button>							
+								</div>	
+			 				</div>		
 						</div>
-						<div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
-							
-						</div>
+						<div class="col-lg-6 col-md-6 col-sm-6 col-xs-12"></div>
 		 			</div>
 									
 					<div style="text-align:center;">
@@ -148,7 +152,8 @@
 
     <!-- jquery
 		============================================ -->
-    <script src="/admin/js/vendor/jquery-1.12.4.min.js"></script>
+	<!--  <script src="/admin/js/vendor/jquery-1.12.4.min.js"></script>      -->
+    
     <!-- bootstrap JS
 		============================================ -->
     <script src="/admin/js/bootstrap.min.js"></script>
@@ -215,9 +220,43 @@
 <script>
 	$('#programName').focus();
 	
+	let counter = 1;
+	
+	// +버튼 클릭시 개설 날짜 input 태그 증가
+	$(document).on('click', '#plusBtn', function(){
+		
+		let newDatepickerId = 'datepicker' + counter;
+		
+        let newDatepickerInput = $('<input type="text" class="form-control" name="programDates" placeholder="yy-mm-dd" style="width:240px;">').attr('id', newDatepickerId);   
+        let minusBtn = $('<button type="button" style="margin-left:15px; height:40px; width:40px;" class="minusBtn">-</button>');
+
+    	 // 동적으로 생성된 input과 button을 dateHtml에 추가
+        let dateHtml = $('<div style="display:flex;"></div>');
+        dateHtml.append(newDatepickerInput);
+        dateHtml.append(minusBtn);
+        
+        $('#dateArea').append(dateHtml);
+
+        // Initialize the new datepicker
+        $('#' + newDatepickerId).datepicker({
+            dateFormat: 'yy-mm-dd',
+            dayNamesMin: ["일", "월", "화", "수", "목", "금", "토"],
+            monthNames: ["1월", "2월", "3월", "4월", "5월", "6월", "7월", "8월", "9월", "10월", "11월", "12월"],
+            showMonthAfterYear: true
+        });
+        
+    	 // -버튼 클릭시 해당 개설 날짜 input 태그 삭제
+     	$(document).on('click', '.minusBtn', function(){
+            $(this).prev('input').remove(); // 이전에 추가된 input 태그 삭제
+            $(this).remove(); // 클릭한 - 버튼 삭제
+        });
+
+        counter++;
+	});
+	
 	// 달력 API
 	$(function() {
-	    $( "#programDate" ).datepicker({
+	    $('#programDates').datepicker({
 	    	dateFormat : 'yy-mm-dd',
 	    	dayNamesMin: [ "일", "월","화", "수", "목", "금", "토" ],
 	    	monthNames: [ "1월", "2월", "3월", "4월", "5월", "6월", "7월", "8월", "9월", "10월", "11월", "12월"],
