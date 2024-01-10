@@ -19,7 +19,7 @@ import lombok.extern.slf4j.Slf4j;
 @Controller
 public class QuestionController {
 	@Autowired QuestionService questionService;
-	@Autowired BranchService branchService;
+	@Autowired FranchiseBranchService branchService;
 
 
 	@GetMapping("/question/questionList")
