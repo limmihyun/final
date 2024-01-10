@@ -1,10 +1,11 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
 <!DOCTYPE html>
 <html lang="zxx">
 
 <head>
+<script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+
     <meta charset="UTF-8">
     <meta name="description" content="TopGym Template">
     <meta name="keywords" content="TopGym, unica, creative, html">
@@ -125,11 +126,14 @@
 		</div>
 		<div style="text-align: left; position: relative;">
 		    <p style="margin-top:50px;">${calendarMap.targetYear} 년</p>
-		    <div style="position: absolute;  bottom:10%; left: 50%; transform: translateX(-50%);" class="d-flex justify-content-center" align="center">
+		    <div style="position: absolute; left: 50%; transform: translateX(-50%);" class="d-flex justify-content-center" align="center">
 		        <a class="btn btn-primary" href="${pageContext.request.contextPath}/customer/programrs?targetYear=${calendarMap.targetYear}&targetMonth=${calendarMap.targetMonth - 1}">&#60;&nbsp;이전달</a>&nbsp;
 		        <a class="btn btn-primary" href="${pageContext.request.contextPath}/customer/programrs?targetYear=${calendarMap.targetYear}&targetMonth=${calendarMap.targetMonth + 1}">다음달&nbsp;&#62;</a>
 		    </div>
 		</div>
+		
+
+		
 	
 		<br>
 		<br>
@@ -153,21 +157,28 @@
 						<c:if test="${!(d < 1 || d > calendarMap.lastDate)}">
 							<c:if test="${(i%7-1)==0}">
 							  <a class="text-danger">${d}</a>
+							  <!-- 이번년도가 캘린더의 년도보다 클 경우 -->
 							  	 <c:if test="${calendarMap.targetYear < calendarMap.thisYear}">
 								 	&nbsp;
 								  </c:if>
+								  <!-- 이번년도가 캘린더의 년도보다 클 경우의 반대 경우 --> 
 								 <c:if test="${!(calendarMap.targetYear < calendarMap.thisYear)}">
+								 	 <!-- 이번월이 캘린더의 월보다 클 경우 -->
 								  	<c:if test="${calendarMap.targetMonth + 1 < calendarMap.thisMonth}">
 								  		&nbsp;
 								  	</c:if>							  
+								  	<!-- 이번월이 캘린더의 월보다 클 경우의 반대 -->		  								  	
 								  	<c:if test="${!(calendarMap.targetMonth + 1 < calendarMap.thisMonth)}">	
+								  		<!-- 일이 오늘보다 작을 경우 -->
 								  		<c:if test="${d < calendarMap.thisDay}">
 								  			&nbsp;
-								  		</c:if>					  	
+								  		</c:if>			
+								  		<!-- 일이 오늘보다 작을 경우의 반대 -->	  	
 								  		<c:if test="${!(d < calendarMap.thisDay)}">
 										 <c:forEach var="l" items="${resultList}">
-										   <c:set var="end" value="false"></c:set>
+										 	<c:set var="sum" value="0"></c:set>		 
 										 	<c:if test="${d == l.day}">
+										 		<!-- 프로그램 최대 인원수와 예약자수가 같을 경우 -->
 									 			<c:if test="${l.cnt == l.programMaxCustomer}">
 										 			<a style="color:gray">${l.programName}</a>
 										 			<p style="color:gray">${l.cnt} / ${l.programMaxCustomer}</p>
@@ -185,7 +196,7 @@
 												 		<p style="color:gray">${l.cnt} / ${l.programMaxCustomer}</p>
 											 		</c:if>
 											 		
-											 		<c:if test="${sum == 0}">
+											 		<c:if test="${sum == 0 and myempty}">
 											 			<a href="${pageContext.request.contextPath}/customer/prorsone?year=${l.year}&month=${l.month}&day=${l.day}&programName=${l.programName}">${l.programName}</a>
 											 			<p>${l.cnt} / ${l.programMaxCustomer}</p>
 											 		</c:if>
@@ -216,7 +227,6 @@
 								  		<c:if test="${!(d < calendarMap.thisDay)}">
 										 <c:forEach var="l" items="${resultList}">
 										   <c:set var="sum" value="0"></c:set>		 
-										   <c:set var="end" value="false"></c:set>
 										 	<c:if test="${d == l.day}">
 									 			<c:if test="${l.cnt == l.programMaxCustomer}">
 										 			<a style="color:gray">${l.programName}</a>
@@ -235,11 +245,13 @@
 												 		<p style="color:gray">${l.cnt} / ${l.programMaxCustomer}</p>
 											 		</c:if>
 											 		
-											 		<c:if test="${sum == 0}">
+											 		<c:if test="${sum == 0 and myempty}">
 											 			<a href="${pageContext.request.contextPath}/customer/prorsone?year=${l.year}&month=${l.month}&day=${l.day}&programName=${l.programName}">${l.programName}</a>
 											 			<p>${l.cnt} / ${l.programMaxCustomer}</p>
 											 		</c:if>
 											 		
+											 		
+											 		<!-- 그달에 예약된게 하나도 없는 경우  -->
 											 		<c:if test="${l.cnt != l.programMaxCustomer and not myempty}">
 											 			<a href="${pageContext.request.contextPath}/customer/prorsone?year=${l.year}&month=${l.month}&day=${l.day}&programName=${l.programName}">${l.programName}</a>
 											 			<p>${l.cnt} / ${l.programMaxCustomer}</p>
@@ -251,7 +263,7 @@
 									 </c:if>
 									 <c:if test="${calendarMap.targetMonth + 1 > calendarMap.thisMonth}">
 										 <c:forEach var="l" items="${resultList}">
-											   <c:set var="end" value="false"></c:set>
+										 <c:set var="sum" value="0"></c:set>		 
 											 	<c:if test="${d == l.day}">
 										 			<c:if test="${l.cnt == l.programMaxCustomer}">
 											 			<a style="color:gray">${l.programName}</a>
@@ -270,7 +282,7 @@
 												 		<p style="color:gray">${l.cnt} / ${l.programMaxCustomer}</p>
 											 		</c:if>
 											 		
-											 		<c:if test="${sum == 0}">
+											 		<c:if test="${sum == 0 and myempty}">
 											 			<a href="${pageContext.request.contextPath}/customer/prorsone?year=${l.year}&month=${l.month}&day=${l.day}&programName=${l.programName}">${l.programName}</a>
 											 			<p>${l.cnt} / ${l.programMaxCustomer}</p>
 											 		</c:if>
@@ -297,55 +309,62 @@
 		</table>
 	</div>
 	
- 	<div style="margin-left:80%; position: absolute; margin-top:13%; text-align:center;">
-		<div>
-		<!-- 
-			이번달 프로그램 과 2달뒤 프로그램 까지 출력 
-		 -->
+ 	<div style="margin-left:80%; position: absolute; margin-top:13%; text-align:center;" id="reservationList">
+ 	
+		<input type="hidden" id="currentPageMonth1" value="${currentPageMonth1}">
+		<input type="hidden" id="targetYear" value="${calendarMap.targetYear}">
+		<input type="hidden" id="targetMonth" value="${calendarMap.targetMonth}">
+		
 					<c:set var="loop_flag" value="false" />
 					<c:set value="${calendarMap.targetYear}" var="listYear"></c:set>
 					<c:set value="${calendarMap.targetMonth + 1}" var="listMonth"></c:set>
-					<!-- 앞으로 2달을 출력하는데 12 초과시 12를 빼서 날자 맞추기 -->
-					<c:if test="${listMonth > 12}">
-						<c:set value="${(calendarMap.targetMonth + 1) - 12}" var="listMonth"></c:set>
-						<c:set value="${calendarMap.targetYear + 1}" var="listYear"></c:set>
-					</c:if>
+
 					<h3>${listYear} 년 ${listMonth} 월 </h3>
-					<!-- 
-						loop_flag 변수를 false로 선언 및 초기화 
-						해당 월에 값이 없다면 if문을 활용하여 문구 출력 
-						해당 월에 값이 있다면 해당 프로그램을 출력뒤 loop_flag를 true로 바꿈
-					 -->
 					 <!-- 이번 월  --> 
 				<c:forEach var="ml" items="${listMonth1}">
 					<c:set var="sum" value="0"></c:set>
+					<!-- 프로그램 인원수가 꽉차면 -->
 					<c:if test="${ml.programMaxCustomer == ml.cnt}">
-						<p>${ml.month} / ${ml.day} &nbsp; ${ml.programName}</p>
+						<p id="test">${ml.month} / ${ml.day} &nbsp; ${ml.programName}</p>
 						<p style="margin-bottom:30px;">(${ml.cnt} / ${ml.programMaxCustomer})</p>
 					</c:if>
 					<c:if test="${ml.programMaxCustomer != ml.cnt}">
+						<!-- 내가 예약한 날짜 no와 프로그램 날짜 no가 같을 경우  -->
 						<c:forEach var="my" items="${myCalendarList}">
 				   		  <c:if test="${my.day == ml.day && ml.programDateNo == my.programDateNo}">
+				   		  <!-- sum이 증가 -->
 				   		  	<c:set var="sum" value="1"></c:set>
-						  </c:if>		  								
+						  </c:if>		  				
+						  <c:set var="myempty" value="true"></c:set> 								 				
 				  		</c:forEach>
-				  		<c:if test="${sum == 0}">
+				  		
+				  		<!-- sum이 0이랑 같고, myempty가 true인 경우 / true인 조건을 넣은 경우는 이 조건이 다음달에 예약자가 없는 경우도 나오나  -->
+				  		<!-- 이 조건은 myempty가 true니 조건 추가  -->
+				  		<c:if test="${sum == 0 and myempty}">
 							<a href="${pageContext.request.contextPath}/customer/prorsone?year=${ml.year}&month=${ml.month}&day=${ml.day}&programName=${ml.programName}">${ml.month} / ${ml.day} &nbsp; ${ml.programName}</a>	  		
 							<p style="margin-bottom:30px;">(${ml.cnt} / ${ml.programMaxCustomer})</p>
 				  		</c:if>
+				  		
+				  		<!-- sum이 0보다 컸을 경우  -->
 				  		<c:if test="${sum > 0}">
 							<p>${ml.month} / ${ml.day} &nbsp; ${ml.programName}</p>
 							<p style="margin-bottom:30px;">(${ml.cnt} / ${ml.programMaxCustomer})</p>
 				  		</c:if>
 					</c:if>
+					<!-- 인원수가 다 차있지 않고, 해당월에 예약자가 한명도 없을경우  -->
+					<c:if test="${ml.cnt != ml.programMaxCustomer and not myempty}">
+						<a href="${pageContext.request.contextPath}/customer/prorsone?year=${ml.year}&month=${ml.month}&day=${ml.day}&programName=${ml.programName}">${ml.month} / ${ml.day} &nbsp; ${ml.programName}</a>	  		
+						<p style="margin-bottom:30px;">(${ml.cnt} / ${ml.programMaxCustomer})</p>
+		 			</c:if>
 				</c:forEach>
-				<c:if test="${currentPageMonth1 > 1}"><a class="btn btn-primary" href="${pageContext.request.contextPath}/customer/programrs?currentPageMonth1=${currentPageMonth1 - 1}"> < </a></c:if>
-				<c:if test="${currentPageMonth1 < lastPage}"><a class="btn btn-primary" href="${pageContext.request.contextPath}/customer/programrs?currentPageMonth1=${currentPageMonth1 + 1}" > > </a></c:if> 
-				    <!-- 이번 월 끝 -->     
-		</div>		
+
+				
+				<c:if test="${currentPageMonth1 > 1}"><a href="#" onclick="backPage()" class="btn btn-primary"> < </a></c:if>
+				<c:if test="${currentPageMonth1 < lastPage}"><a href="#" onclick="nextPage()" class="btn btn-primary"> > </a></c:if> 		
 	</div> 
 	</section>
-	<a class="btn btn-primary" href="${pageContext.request.contextPath}/customer/myreservation">내 예약 보기</a>
+	
+	<a style="margin-top:5%;" class="btn btn-primary" href="${pageContext.request.contextPath}/customer/myreservation">내 예약 보기</a>
 	
 	
     <!-- Footer Section Begin -->
@@ -405,23 +424,192 @@ Copyright &copy;<script>document.write(new Date().getFullYear());</script> All r
     <script src="/js/jquery.barfiller.js"></script>
     <script src="/js/main.js"></script>
     
-    <script>
-	$('#frontList').click(function(){
-		console.log("클릭");
-		
-		$.ajax({
-			async : true,
-			url : '/customer/frontList',
-			type : 'get',
-			data : {programReservationNo : $('#programReservationNo').val()},
-			success : function(jsonData){
-				console.log(jsonData, " <--jsonData");
-				
-				$('#reservationList').load(location.href + " #reservationList");
-			}
-		    }
-		});
-	});
-    </script>
+<!-- 스크립트 부분을 body 태그 끝 부분으로 이동시킵니다. -->
+<script>    
+       function nextPage(){
+           event.preventDefault();
+            var currentPage = $('#currentPageMonth1');
+            var nextPage = Number(currentPage.val()) + 1;
+            var formData = {
+                targetYear: $('#targetYear').val(),
+                targetMonth: $('#targetMonth').val(),
+                currentPageMonth1: nextPage
+            };
+            $.ajax({
+                url: '/customer/nextPage',
+                type: 'get',
+                data: formData,
+                success: function(data){
+                    var a = '';
+                    var lastPage = data.lastPage;
+                    var listYear = data.calendarMap.targetYear;
+                    var listMonth = data.calendarMap.targetMonth + 1;
+                	a += '<h3>' +listYear+ '년 '+listMonth+'월</h3>';
+ 					
+                	
+                	// 이번 월
+                	for (var i = 0; i < data.listMonth1.length; i++) {
+                	    var ml = data.listMonth1[i];
+                	    var sum = 0;
+                	    var myempty = true;
+                	    var contextPath = "${pageContext.request.contextPath}";
+
+                	    
+                	    a += '<input type="hidden" id="targetYear" value="'+listYear+'">';
+                	    a += '<input type="hidden" id="targetMonth" value="'+data.calendarMap.targetMonth+'">';
+                	    a += '<input type="hidden" id="currentPageMonth1" value="'+data.currentPageMonth1+'">';
+
+                	    
+                	    // 프로그램 인원수가 꽉 차면
+                	    if (ml.programMaxCustomer == ml.cnt) {
+                	        a += '<p>' + ml.month + ' / ' + ml.day + ' &nbsp; ' + ml.programName + '</p>';
+                	        a += '<p style="margin-bottom:30px;">(' + ml.cnt + ' / ' + ml.programMaxCustomer + ')</p>';
+                	    }
+
+                	    // 프로그램 인원수가 꽉 차지 않으면
+                	    if (ml.programMaxCustomer != ml.cnt) {
+                	        // 내가 예약한 날짜 no와 프로그램 날짜 no가 같을 경우
+                	        for (var j = 0; j < data.myCalendarList.length; j++) {
+                	            var my = data.myCalendarList[j];
+                	            if (my.day == ml.day && ml.programDateNo == my.programDateNo) {
+                	                // sum이 증가
+                	                sum = 1;
+                	            }
+                	        }
+
+                	        // sum이 0이랑 같고, myempty가 true인 경우
+                	        if (sum == 0 && myempty) {
+                	            a += '<a href="'+contextPath+'/customer/prorsone?year=' + ml.year + '&month=' + ml.month + '&day=' + ml.day + '&programName=' + ml.programName + '">' + ml.month + ' / ' + ml.day + ' &nbsp; ' + ml.programName + '</a>';
+                	            a += '<p style="margin-bottom:30px;">(' + ml.cnt + ' / ' + ml.programMaxCustomer + ')</p>';
+                	        }
+
+                	        // sum이 0보다 크면
+                	        if (sum > 0) {
+                	            a += '<p>' + ml.month + ' / ' + ml.day + ' &nbsp; ' + ml.programName + '</p>';
+                	            a += '<p style="margin-bottom:30px;">(' + ml.cnt + ' / ' + ml.programMaxCustomer + ')</p>';
+                	        }
+                	    }
+
+                	    // 인원수가 다 차있지 않고, 해당월에 예약자가 한 명도 없을 경우
+                	    if (ml.cnt != ml.programMaxCustomer && !myempty) {
+                	        a += '<a href="'+contextPath+'/customer/prorsone?year=' + ml.year + '&month=' + ml.month + '&day=' + ml.day + '&programName=' + ml.programName + '">' + ml.month + ' / ' + ml.day + ' &nbsp; ' + ml.programName + '</a>';
+                	        a += '<p style="margin-bottom:30px;">(' + ml.cnt + ' / ' + ml.programMaxCustomer + ')</p>';
+                	    }
+                	}
+                	
+                	if(data.currentPageMonth1 > 1){
+                		a += '<a href="#" onclick="backPage()" class="btn btn-primary"> < </a>'
+                	}
+                	
+                	if(data.currentPageMonth1 < data.lastPage){
+                		a += '<a href="#" onclick="nextPage()" class="btn btn-primary"> > </a>'
+                	}
+
+                	// 추가로 필요한 부분을 위에 계속해서 추가하세요.
+
+                	// 최종적으로 생성된 HTML 문자열 사용
+                	document.getElementById('reservationList').innerHTML = a;
+
+
+                },
+                error: function(xhr, status, error){
+                    console.error(error);
+                }
+            });
+        };
+        
+        function backPage(){
+            event.preventDefault();
+            var currentPage = $('#currentPageMonth1');
+            var nextPage = Number(currentPage.val()) - 1;
+            var formData = {
+                targetYear: $('#targetYear').val(),
+                targetMonth: $('#targetMonth').val(),
+                targetDay: $('#targetDay').val(),
+                currentPageMonth1: nextPage
+            };
+            $.ajax({
+                url: '/customer/nextPage',
+                type: 'get',
+                data: formData,
+                success: function(data){
+                    var a = '';
+                    var lastPage = data.lastPage;
+                    var listYear = data.calendarMap.targetYear;
+                    var listMonth = data.calendarMap.targetMonth + 1;
+                	a += '<h3>' +listYear+ '년 '+listMonth+'월</h3>';
+ 					
+                	
+                	// 이번 월
+                	for (var i = 0; i < data.listMonth1.length; i++) {
+                	    var ml = data.listMonth1[i];
+                	    var sum = 0;
+                	    var myempty = true;
+                	    var contextPath = "${pageContext.request.contextPath}";
+
+                	    
+                	    a += '<input type="hidden" id="targetYear" value="'+listYear+'">';
+                	    a += '<input type="hidden" id="targetMonth" value="'+data.calendarMap.targetMonth+'">';
+                	    a += '<input type="hidden" id="currentPageMonth1" value="'+data.currentPageMonth1+'">';
+
+                	    
+                	    // 프로그램 인원수가 꽉 차면
+                	    if (ml.programMaxCustomer == ml.cnt) {
+                	        a += '<p>' + ml.month + ' / ' + ml.day + ' &nbsp; ' + ml.programName + '</p>';
+                	        a += '<p style="margin-bottom:30px;">(' + ml.cnt + ' / ' + ml.programMaxCustomer + ')</p>';
+                	    }
+
+                	    // 프로그램 인원수가 꽉 차지 않으면
+                	    if (ml.programMaxCustomer != ml.cnt) {
+                	        // 내가 예약한 날짜 no와 프로그램 날짜 no가 같을 경우
+                	        for (var j = 0; j < data.myCalendarList.length; j++) {
+                	            var my = data.myCalendarList[j];
+                	            if (my.day == ml.day && ml.programDateNo == my.programDateNo) {
+                	                // sum이 증가
+                	                sum = 1;
+                	            }
+                	        }
+
+                	        // sum이 0이랑 같고, myempty가 true인 경우
+                	        if (sum == 0 && myempty) {
+                	            a += '<a href="'+contextPath+'/customer/prorsone?year=' + ml.year + '&month=' + ml.month + '&day=' + ml.day + '&programName=' + ml.programName + '">' + ml.month + ' / ' + ml.day + ' &nbsp; ' + ml.programName + '</a>';
+                	            a += '<p style="margin-bottom:30px;">(' + ml.cnt + ' / ' + ml.programMaxCustomer + ')</p>';
+                	        }
+
+                	        // sum이 0보다 크면
+                	        if (sum > 0) {
+                	            a += '<p>' + ml.month + ' / ' + ml.day + ' &nbsp; ' + ml.programName + '</p>';
+                	            a += '<p style="margin-bottom:30px;">(' + ml.cnt + ' / ' + ml.programMaxCustomer + ')</p>';
+                	        }
+                	    }
+
+                	    // 인원수가 다 차있지 않고, 해당월에 예약자가 한 명도 없을 경우
+                	    if (ml.cnt != ml.programMaxCustomer && !myempty) {
+                	        a += '<a href="'+contextPath+'/customer/prorsone?year=' + ml.year + '&month=' + ml.month + '&day=' + ml.day + '&programName=' + ml.programName + '">' + ml.month + ' / ' + ml.day + ' &nbsp; ' + ml.programName + '</a>';
+                	        a += '<p style="margin-bottom:30px;">(' + ml.cnt + ' / ' + ml.programMaxCustomer + ')</p>';
+                	    }
+                	}
+                	
+                	if(data.currentPageMonth1 > 1){
+                		a += '<a href="#" onclick="backPage()" class="btn btn-primary"> < </a>'
+                	}
+                	
+                	if(data.currentPageMonth1 < data.lastPage){
+                		a += '<a href="#" onclick="nextPage()" class="btn btn-primary"> > </a>'
+                	}
+
+                	// 추가로 필요한 부분을 위에 계속해서 추가하세요.
+
+                	// 최종적으로 생성된 HTML 문자열 사용
+                	document.getElementById('reservationList').innerHTML = a;
+
+
+                },
+                error: function(xhr, status, error){
+                    console.error(error);
+                }
+            });
+        };
+</script>
 </body>
 </html>

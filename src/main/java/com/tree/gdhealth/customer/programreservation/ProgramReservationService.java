@@ -110,17 +110,35 @@ public class ProgramReservationService {
 //		return allList;
 //	}
 	
-	public List<Map<String, Object>> listPage(int currentPage, int year, int month, int thisDay){
+	public List<Map<String, Object>> listPage(int currentPage, int year, int month, int thisDay, int thisYear, int thisMonth){
 		
 		int rowPerPage = 4;
 		int beginRow = (currentPage-1) * rowPerPage;
+		
+		System.out.println(thisYear + "//thisYear");
+		System.out.println(year + "//year");
+		System.out.println(thisMonth + "//thisMonth");
+		System.out.println(month + "//month");
 
+		month = month + 1;
+		
+		if(year == thisYear) {
+			if(month != thisMonth) {
+				thisDay = 0;
+			}
+		}
+		
+		if(year != thisYear) {
+			thisDay = 0;
+		}
+		
+		
 		
 		Map<String, Object> paramap = new HashMap<>();
 		paramap.put("rowPerPage",rowPerPage);
 		paramap.put("beginRow",beginRow);
 		paramap.put("year",year);
-		paramap.put("month",month+1);
+		paramap.put("month",month);
 		paramap.put("thisDay",thisDay);
 		
 		System.out.println("paramap-->>" + paramap);
