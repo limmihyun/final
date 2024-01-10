@@ -44,4 +44,14 @@ class EmployeeRestApiControllerTest {
                 new ParameterizedTypeReference<List<EmployeeInformationDto>>(){});
         log.debug(responseEntity.getBody().toString());
     }
+
+    @Test
+    void 직원하나를_가져온다() {
+        String UrlStr = "http://localhost:"+port+"/api/v1/employee";
+        URI uri = UriComponentsBuilder.fromUriString(UrlStr).queryParam("employeeNo", "2").build().toUri();
+        ResponseEntity<EmployeeInformationDto> responseEntity = restTemplate.exchange(
+                uri, HttpMethod.GET, null,
+                EmployeeInformationDto.class);
+        log.debug(responseEntity.getBody().toString());
+    }
 }
