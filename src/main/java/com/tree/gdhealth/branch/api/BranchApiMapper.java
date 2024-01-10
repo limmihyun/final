@@ -1,5 +1,6 @@
 package com.tree.gdhealth.branch.api;
 
+import com.tree.gdhealth.branch.dto.BranchRetrieveCriteria;
 import com.tree.gdhealth.vo.Branch;
 import org.apache.ibatis.annotations.Mapper;
 
@@ -10,8 +11,5 @@ import java.util.List;
  */
 @Mapper
 public interface BranchApiMapper {
-
-    Branch selectBranchOneByBranchNo(int branchNo);
-
-    List<Branch> selectBranchAll();
+    List<Branch> selectBranchListByCriteria(BranchRetrieveCriteria criteria);
 }

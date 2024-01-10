@@ -11,9 +11,11 @@ import lombok.ToString;
 public class EmployeeRetrieveCriteria {
     private Boolean isHeadOffice;
     private Integer branchNo;
-    private EmployeeRetrieveCriteria(){
+    private Integer employeeNo;
 
-    }
+    private EmployeeRetrieveCriteria(){}
+
+    /*정적 팩토리 메서드*/
     public static EmployeeRetrieveCriteria none(){
         return new EmployeeRetrieveCriteria();
     }
@@ -27,6 +29,11 @@ public class EmployeeRetrieveCriteria {
         criteria.setBranchNo(branchNo);
         return criteria;
     }
+    public static EmployeeRetrieveCriteria employeeNo(int employeeNo){
+        EmployeeRetrieveCriteria criteria = new EmployeeRetrieveCriteria();
+        criteria.setEmployeeNo(employeeNo);
+        return criteria;
+    }
 
     /*setter*/
     private void setHeadOffice(Boolean headOffice) {
@@ -37,4 +44,7 @@ public class EmployeeRetrieveCriteria {
         this.branchNo = branchNo;
     }
 
+    private void setEmployeeNo(Integer employeeNo) {
+        this.employeeNo = employeeNo;
+    }
 }
