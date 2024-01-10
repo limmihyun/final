@@ -114,10 +114,11 @@ public class ProgramController {
 		return "redirect:/headoffice/program";
 	}
 	
-	@GetMapping("/programOne/{programNo}")
-	public String programOne(Model model, @PathVariable int programNo) {
+	@GetMapping("/programOne/{programNo}/{programDate}")
+	public String programOne(Model model, @PathVariable int programNo, 
+											@PathVariable String programDate) {
 		
-		Map<String, Object> programOne = programService.getProgramOne(programNo);
+		Map<String, Object> programOne = programService.getProgramOne(programNo, programDate);
 		// 디버깅
 		log.debug("프로그램 상세 정보 : " + programOne);
 		model.addAttribute("programOne",programOne);
@@ -125,10 +126,11 @@ public class ProgramController {
 		return "headoffice/programOne";
 	}
 	
-	@GetMapping("/update/{programNo}")
-	public String update(Model model, @PathVariable int programNo) {
+	@GetMapping("/update/{programNo}/{programDate}")
+	public String update(Model model, @PathVariable int programNo, 
+									@PathVariable String programDate) {
 		
-		Map<String, Object> programOne = programService.getProgramOne(programNo);
+		Map<String, Object> programOne = programService.getProgramOne(programNo, programDate);
 		// 디버깅
 		log.debug("프로그램 상세 정보 : " + programOne);
 		model.addAttribute("programOne", programOne);
@@ -146,29 +148,33 @@ public class ProgramController {
 		programService.updateProgram(program, programDate, programFile, path, oldPath);
 		
 		int programNo = program.getProgramNo();
+		String date = programDate.getProgramDate();
 		redirectAttributes.addAttribute("programNo", programNo);
+		redirectAttributes.addAttribute("programDate", date);
 		
-		return "redirect:/headoffice/program/programOne/{programNo}";
+		return "redirect:/headoffice/program/programOne/{programNo}/{programDate}";
 	}
 	
-	@GetMapping("/deactive/{programNo}")
-	public String deactive(HttpSession session, @PathVariable int programNo) {
+	@GetMapping("/deactive/{programNo}/{programDate}")
+	public String deactive(HttpSession session, @PathVariable int programNo,
+									@PathVariable String programDate) {
 		
 		int result = programService.deactiveProgram(programNo);
 		// 디버깅
 		log.debug("프로그램 비활성화(성공:1,실패:0) : " + result);
 		
-		return "redirect:/headoffice/program/programOne/{programNo}";
+		return "redirect:/headoffice/program/programOne/{programNo}/{programDate}";
 	}
 	
-	@GetMapping("/active/{programNo}")
-	public String active(HttpSession session, @PathVariable int programNo) {
+	@GetMapping("/active/{programNo}/{programDate}")
+	public String active(HttpSession session, @PathVariable int programNo,
+									@PathVariable String programDate) {
 		
 		int result = programService.activeProgram(programNo);
 		// 디버깅
 		log.debug("프로그램 활성화(성공:1,실패:0) : " + result);
 		
-		return "redirect:/headoffice/program/programOne/{programNo}";
+		return "redirect:/headoffice/program/programOne/{programNo}/{programDate}";
 	}
 
 }

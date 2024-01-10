@@ -128,10 +128,10 @@
 		 			<div class="row" style="margin-bottom:10px;">
 			 			<div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
 			 				<div id="dateArea">
-			 					<label for="programDates" class="form-label">개설 날짜</label>
+			 					<label for="programDate1" class="form-label">개설 날짜</label>
 								<div style="display:flex">
-									<input type="text" class="form-control" id="programDates" name="programDates" class="programDates" placeholder="yy-mm-dd" style="width:240px;">
-									<button type="button" style="margin-left:15px; height:40px; width:40px;" id="plusBtn">+</button>							
+									<input type="text" class="form-control" id="programDate1" name="programDates" class="programDates" placeholder="yy-mm-dd" style="width:240px;">
+									<button type="button" style="margin-left:15px; margin-top:5px; height:30px; width:30px;" id="plusBtn">+</button>							
 								</div>	
 			 				</div>		
 						</div>
@@ -220,17 +220,17 @@
 <script>
 	$('#programName').focus();
 	
-	let counter = 1;
+	let counter = 2;
 	
 	// +버튼 클릭시 개설 날짜 input 태그 증가
 	$(document).on('click', '#plusBtn', function(){
 		
-		let newDatepickerId = 'datepicker' + counter;
+		let newDatepickerId = 'programDate' + counter;
 		
         let newDatepickerInput = $('<input type="text" class="form-control" name="programDates" placeholder="yy-mm-dd" style="width:240px;">').attr('id', newDatepickerId);   
-        let minusBtn = $('<button type="button" style="margin-left:15px; height:40px; width:40px;" class="minusBtn">-</button>');
+        let minusBtn = $('<button type="button" style="margin-left:15px; margin-top:5px; height:30px; width:30px;" class="minusBtn">-</button>');
 
-    	 // 동적으로 생성된 input과 button을 dateHtml에 추가
+    	// 동적으로 생성된 input과 button을 dateHtml에 추가
         let dateHtml = $('<div style="display:flex;"></div>');
         dateHtml.append(newDatepickerInput);
         dateHtml.append(minusBtn);
@@ -256,7 +256,7 @@
 	
 	// 달력 API
 	$(function() {
-	    $('#programDates').datepicker({
+	    $('#programDate1').datepicker({
 	    	dateFormat : 'yy-mm-dd',
 	    	dayNamesMin: [ "일", "월","화", "수", "목", "금", "토" ],
 	    	monthNames: [ "1월", "2월", "3월", "4월", "5월", "6월", "7월", "8월", "9월", "10월", "11월", "12월"],
@@ -302,11 +302,27 @@
 			return;
 		}
 		
-		if($('#programDate').val().length == 0) {
+		if($('#programDate1').val().length == 0) {
 			alert('개설 날짜를 입력하세요.');
-			$('#programDate').focus();			
+			$('#programDate1').focus();			
 			return;
 		}
+		
+		let values = [];
+	    $('#dateArea input[type="text"]').each(function () {
+	      		values.push($(this).val());
+	    });
+	    
+	    console.log(values);
+	    
+	    function hasDuplicates(array) {
+	        return (new Set(array)).size !== array.length;
+	    }
+	    	    
+	    if (hasDuplicates(values)) {
+	        alert('개설 날짜를 다르게 입력해 주세요.');
+	        return; 
+	    }
 		
 		alert('추가 완료되었습니다.');
 		$('#insertForm').submit();

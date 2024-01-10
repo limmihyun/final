@@ -24,7 +24,7 @@
                                 <p><span><i class="fa fa-clock"></i></span> <b>개설 날짜 :</b> ${m.programDate}</p>
                             </div>
                             <div class="product-buttons">
-                                <button type="button" class="button-default cart-btn" onclick="location.href='${pageContext.request.contextPath}/headoffice/program/programOne/${m.programNo}'">자세히 보기</button>
+                                <button type="button" class="button-default cart-btn" onclick="location.href='${pageContext.request.contextPath}/headoffice/program/programOne/${m.programNo}/${m.programDate}'">자세히 보기</button>
                             </div>
                         </div>
                   	    </div>
