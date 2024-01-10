@@ -21,7 +21,6 @@ public class QuestionController {
 	@Autowired QuestionService questionService;
 	@Autowired FranchiseBranchService franchiseBranchService;
 
-
 	@GetMapping("/question/questionList")
 	public String questionList(Model model, Question question, HttpSession session) {
 		
