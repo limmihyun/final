@@ -40,7 +40,7 @@ public class ProgramReservationController {
 		
 		// ----------------List 페이징-----------------
 		
-		List<Map<String, Object>> listMonth1 = programReservationService.listPage(currentPageMonth1,(int)(calendarMap.get("targetYear")), (int)(calendarMap.get("targetMonth")), (int)(calendarMap.get("thisDay")));
+		List<Map<String, Object>> listMonth1 = programReservationService.listPage(currentPageMonth1,(int)(calendarMap.get("targetYear")), (int)(calendarMap.get("targetMonth")), (int)(calendarMap.get("thisDay")), (int)(calendarMap.get("thisYear")), (int)(calendarMap.get("thisMonth")));
 		model.addAttribute("listMonth1", listMonth1);
 		System.out.println(listMonth1 + "<---listMonth1");
 		
