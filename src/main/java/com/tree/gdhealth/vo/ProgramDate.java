@@ -1,5 +1,7 @@
 package com.tree.gdhealth.vo;
 
+import java.util.List;
+
 import lombok.Data;
 
 @Data
@@ -10,5 +12,7 @@ public class ProgramDate {
 	private String programDate;
 	private String createdate;
 	private String updatedate;
+	
+	private List<String> programDates;
 
 }

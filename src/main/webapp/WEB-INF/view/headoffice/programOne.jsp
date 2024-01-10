@@ -133,7 +133,7 @@
                                         </div>
                                         
                                         <div style="text-align:center;">                    	
-                                        	<a href="${pageContext.request.contextPath}/headoffice/program/update/${programOne.programNo}" class="btn btn-primary">수정하기</a>
+                                        	<a href="${pageContext.request.contextPath}/headoffice/program/update/${programOne.programNo}/${programOne.programDate}" class="btn btn-primary">수정하기</a>
                                         	<c:if test="${programOne.active == 'Y'}">
                                         		<button type="button" id="deactiveBtn" class="btn btn-primary">비활성화하기</button>
                                         	</c:if>
@@ -226,7 +226,7 @@
 		let result = confirm('비활성화 하시겠습니까?');
 		
 		if(result) {
-			location.href = '${pageContext.request.contextPath}/headoffice/program/deactive/${programOne.programNo}';
+			location.href = '${pageContext.request.contextPath}/headoffice/program/deactive/${programOne.programNo}/${programOne.programDate}';
 		}
 	});
 	
@@ -234,7 +234,7 @@
 		let result = confirm('활성화 하시겠습니까?');
 		
 		if(result) {
-			location.href = '${pageContext.request.contextPath}/headoffice/program/active/${programOne.programNo}';
+			location.href = '${pageContext.request.contextPath}/headoffice/program/active/${programOne.programNo}/${programOne.programDate}';
 		}
 	})
 

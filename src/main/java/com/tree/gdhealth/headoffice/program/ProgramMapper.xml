@@ -34,10 +34,12 @@
 		</where>
 		LIMIT #{beginRow}, #{rowPerPage}
 	</select>
+	
 	<select id="programCnt" resultType="int">
 		SELECT COUNT(*)
 		FROM program
 	</select>
+	
 	<select id="searchCnt" parameterType="map" resultType="int">
 		SELECT COUNT(*)
 		FROM program p
@@ -56,7 +58,7 @@
 		</where>
 	</select>
 	
-	<select id="programOne" parameterType="int" resultType="Map">
+	<select id="programOne" parameterType="map" resultType="Map">
 		SELECT
 			ed.employee_name empName,
 			p.program_no programNo,
@@ -76,6 +78,7 @@
 		INNER JOIN program_img pi
 			ON p.program_no = pi.program_no
 		WHERE p.program_no = #{programNo}
+		AND pd.program_date = #{programDate}
 	</select>
 	
 	<insert id="insertProgram" parameterType="com.tree.gdhealth.vo.Program">
@@ -94,14 +97,14 @@
       		  SELECT LAST_INSERT_ID()
    		</selectKey> 
 	</insert>
-	<insert id="insertProgramDate" parameterType="com.tree.gdhealth.vo.ProgramDate">
+	<insert id="insertProgramDates" parameterType="list">
 		INSERT INTO program_date(
 			program_no,
 			program_date
-		) VALUES (
-			#{programNo},
-			#{programDate}
-		)
+		) VALUES
+		<foreach collection="list" item="item" separator=",">
+			(#{item.programNo},#{item.programDate})
+		</foreach> 		
 	</insert>
 	<insert id="insertProgramImg" parameterType="com.tree.gdhealth.vo.ProgramImg">
 		INSERT INTO program_img(

@@ -10,7 +10,7 @@
                		<div class="col-lg-3 col-md-6 col-sm-6 col-xs-12" style="margin-bottom:15px;">
                         <div class="courses-inner res-mg-b-30">
                             <div style="text-align:center;">	           
-                               	<img src="${pageContext.request.contextPath}/upload/program/${m.filename}" alt="${pageContext.request.contextPath}/noImg" style="height:270px; width:300px;">   
+                               	<img src="${pageContext.request.contextPath}/upload/program/${m.filename}" style="height:270px; width:300px;">   
                             </div>
                           
                             <div class="course-des">
@@ -19,7 +19,7 @@
                                 <p><span><i class="fa fa-clock"></i></span> <b>개설 날짜 :</b> ${m.programDate}</p>
                             </div>
                             <div class="product-buttons">
-                                <button type="button" class="button-default cart-btn" onclick="location.href='${pageContext.request.contextPath}/headoffice/program/programOne/${m.programNo}'">자세히 보기</button>
+                                <button type="button" class="button-default cart-btn" onclick="location.href='${pageContext.request.contextPath}/headoffice/program/programOne/${m.programNo}/${m.programDate}'">자세히 보기</button>
                             </div>
                         </div>
                   	    </div>

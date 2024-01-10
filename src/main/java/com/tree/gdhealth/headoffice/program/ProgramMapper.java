@@ -18,10 +18,10 @@ public interface ProgramMapper {
 	int programCnt();
 	int searchCnt(Map<String, Object> map);
 	
-	Map<String, Object> programOne(int programNo);
+	Map<String, Object> programOne(Map<String, Object> map);
 	
 	int insertProgram(Program program);
-	int insertProgramDate(ProgramDate programDate);
+	int insertProgramDates(List<ProgramDate> dateList);
 	int insertProgramImg(ProgramImg programImg);
 	
 	int updateProgram(Program program);

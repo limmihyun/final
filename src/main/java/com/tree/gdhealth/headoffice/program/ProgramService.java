@@ -2,6 +2,7 @@ package com.tree.gdhealth.headoffice.program;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -80,9 +81,13 @@ public class ProgramService {
 		
 	}
 	
-	public Map<String, Object> getProgramOne(int programNo) {
+	public Map<String, Object> getProgramOne(int programNo, String programDate) {
 		
-		Map<String, Object> programOne = programMapper.programOne(programNo);
+		Map<String, Object> map = new HashMap<>();
+		map.put("programNo", programNo);
+		map.put("programDate", programDate);
+		
+		Map<String, Object> programOne = programMapper.programOne(map);
 		
 		return programOne;
 	}
@@ -103,14 +108,25 @@ public class ProgramService {
 		}
 		
 		// programMapper.xml에서 selectKey로 얻어 온 program table의 auto increment 값
-		programDate.setProgramNo(program.getProgramNo());
-		int dateResult = programMapper.insertProgramDate(programDate);
-		log.debug("programDate 추가(성공:1,실패:0) : " + dateResult);	
-		if(dateResult != 1) {
+		List<String> dates = programDate.getProgramDates();
+		List<ProgramDate> dateList = new ArrayList<>();
+		for(String date : dates) {
+			ProgramDate p = new ProgramDate();
+			p.setProgramNo(program.getProgramNo());
+			p.setProgramDate(date);
+			dateList.add(p);
+		}	
+		
+		// programDate.setProgramNo(program.getProgramNo());
+				
+		int dateResult = programMapper.insertProgramDates(dateList);
+		log.debug("programDate 추가(추가 개수) : " + dateResult);	
+
+		if(dateResult == 0) {
 			// insert를 실패하였을 때 강제로 예외를 발생시켜 애노테이션 Transactiona이 작동하도록 한다.
 			throw new RuntimeException(); 
 		}
-			
+
 		// 이미지 추가
 		if(!programFile.isEmpty()) { // 업로드한 이미지 파일이 하나이상 있다면
 			// 파일 저장
