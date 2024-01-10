@@ -32,4 +32,15 @@ public class QuestionService {
 		int row = questionMapper.addQuestion(question);
 		return row;
 	}
+	//문의 수정
+	public int updateQuestion(Question question) {
+		System.out.println("Update: " + question);
+		int row = questionMapper.updateQuestion(question);
+		return row;
+	}
+	//문의 삭제
+	public int deleteQuestion(Question question) {
+		int row = questionMapper.deleteQuestion(question);
+		return row;
+	}
 }

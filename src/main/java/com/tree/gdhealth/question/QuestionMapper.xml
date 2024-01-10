@@ -8,6 +8,7 @@
 	SELECT
 	    q.question_no AS questionNo,
 	    b.branch_name AS branchName,
+	    q.isSecret AS isSecret,
 	    q.question_title AS questionTitle,
 	    c.customer_id AS customerId,
 	    q.createdate AS createdate,
@@ -52,17 +53,32 @@
 			customer_no,
 			branch_no,
 			question_title,
-			question_content
+			question_content,
+			isSecret
 		) VALUES (
 			#{questionNo},
 			#{customerNo},
 			#{branchNo},
 			#{questionTitle},
-			#{questionContent}
+			#{questionContent},
+			#{isSecret}
 		)
-		
-	
-		
-
 </insert>
+
+<update id="updateQuestion"
+		parameterType="com.tree.gdhealth.vo.Question">
+		
+		UPDATE question
+		SET branch_no = #{branchNo}, question_title = #{questionTitle}, question_content = #{questionContent}, isSecret = #{isSecret}
+		WHERE question_no = #{questionNo}
+</update>
+
+<delete id="deleteQuestion"
+		parameterType="com.tree.gdhealth.vo.Question">
+		
+		DELETE 
+		FROM question
+		WHERE question_no = #{questionNo}
+
+</delete>
 </mapper>
