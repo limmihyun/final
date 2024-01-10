@@ -8,9 +8,9 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 
+import com.tree.gdhealth.customer.franchisebranch.FranchiseBranchService;
 import com.tree.gdhealth.vo.Branch;
 import com.tree.gdhealth.vo.Question;
-import com.tree.gdhealth.customer.franchisebranch.*;
 
 import jakarta.servlet.http.HttpSession;
 import lombok.extern.slf4j.Slf4j;
@@ -19,16 +19,19 @@ import lombok.extern.slf4j.Slf4j;
 @Controller
 public class QuestionController {
 	@Autowired QuestionService questionService;
-	@Autowired BranchService branchService;
+	@Autowired FranchiseBranchService franchiseBranchService;
 
 
 	@GetMapping("/question/questionList")
-	public String questionList(Model model, Question question) {
+	public String questionList(Model model, Question question, HttpSession session) {
 		
 		
 	    List<Question> list = questionService.questionList();
+	    Integer userLevel = ((Integer)session.getAttribute("userLevel"));
+	 
 	    model.addAttribute("list", list);
-	    
+	    model.addAttribute("userLevel", userLevel);
+	    System.out.println(userLevel + "<--userLevel");
 	    return "/question/questionList";
 	}
 
@@ -53,31 +56,62 @@ public class QuestionController {
 			 return "redirect:/customer/login";
 		}
 		int customerNo = ((Integer)session.getAttribute("customerNo"));
+		List<Branch> branchList = franchiseBranchService.branchInfo();
 		
-		List<Branch> branchList = branchService.branchInfo();
 		
 		model.addAttribute("branchList", branchList);
-		
-		System.out.println("branchList : " + branchList);
 		model.addAttribute("customerNo", customerNo);
+		
+		
 		
 		
 		return "/question/addQuestion";
 	}
 	
 	@PostMapping("/question/addQuestion")
-	public String addQuestion(int branchNo, String questionTitle, Question question) {
-		
+	public String addQuestion(HttpSession session, int branchNo, String questionTitle, Question question) {
+		if(session.getAttribute("customerNo")== null) {
+			 return "redirect:/customer/login";
+		}
 		System.out.println(branchNo + "<--branchNo");
 		System.out.println(questionTitle + "<--questionTitle");
 
 		int row = questionService.addQuestion(question);
-		
-		
 		return "redirect:/question/questionList";
 	}
 	
+	@GetMapping("/question/updateQuestion")
+	public String updateQuestion(HttpSession session, int questionNo, Model model, Question question) {
+		if(session.getAttribute("customerNo")== null) {
+			 return "redirect:/customer/login";
+		}
+		int customerNo = ((Integer)session.getAttribute("customerNo"));
+		List<Branch> branchList = franchiseBranchService.branchInfo();
+		
+		model.addAttribute("customerNo", customerNo);
+		model.addAttribute("branchList", branchList);
+		model.addAttribute("questionNo", questionNo);
+		;
+		return "/question/updateQuestion";
+	}
 	
+	@PostMapping("/question/updateQuestion")
+	public String updateQuestion(HttpSession session, Model model, int questionNo, int branchNo, Question question) {
+		if(session.getAttribute("customerNo")== null) {
+			 return "redirect:/customer/login";
+		}
+		model.addAttribute("branchNo", branchNo);
+		int row = questionService.updateQuestion(question);
+		return "redirect:/question/questionList";
+	}
 	
-	
+	@GetMapping("/question/deleteQuestion")
+	public String deleteQuestion(HttpSession session, Question question) {
+		if(session.getAttribute("customerNo")== null) {
+			return "redirect:/customer/login";
+		}
+		int row = questionService.deleteQuestion(question);
+		
+		return "redirect:/question/questionList";
+	}
 }

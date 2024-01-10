@@ -27,35 +27,6 @@
     <div id="preloder">
         <div class="loader"></div>
     </div>
-    <!-- Header Section Begin -->
-    <header class="header-section" style="background-color: #fff; box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.1); position: fixed; width: 100%; z-index: 1000;">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-12">
-                    <div class="main-menu">
-                        <div class="logo">
-                            <a href="./index.html">
-                                <img src="/img/logo.png" alt="">
-                            </a>
-                        </div>
-                        <nav class="mobile-menu">
-                            <ul>
-                                <li><a href="./index.html">Home</a></li>
-                                <li><a href="./about-us.html">About us</a></li>
-                                <li><a href="./classes.html">Classes</a></li>
-                                <li><a href="./elements.html">Instructors</a></li>
-                                <li><a href="./blog.html">News</a></li>
-                                <li><a href="./contact.html">Contact</a></li>
-                                <li class="search-btn search-trigger"><i class="fa fa-search"></i></li>
-                            </ul>
-                        </nav>
-                        <div id="mobile-menu-wrap"></div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </header>
-    <!-- Header End -->
     <!-- Search Bar Begin -->
     <section class="search-bar-wrap">
         <span class="search-close"><i class="fa fa-close"></i></span>
@@ -72,6 +43,7 @@
         </div>
     </section>
     <!-- Search Bar End -->
+    <jsp:include page="/WEB-INF/header/header.jsp" />
   
   <div class="untree_co-section" style="padding-top: 80px;">
           <div class="container" style="margin-top: 100px;">
@@ -92,21 +64,25 @@
        <th>수정날짜</th>
    </thead>
    <tbody>
+	
+  
    <c:forEach var="n" items="${list}">
-   <tr>
-      <td style="align-text:center;">${n.questionNo}</td>
-      <td>${n.branchName}</td>
-      <td><a href="${pageContext.request.contextPath}/question/questionOne?questionNo=${n.questionNo}">${n.questionTitle}</a></td>
-      <td>${n.customerId}</td>
-      <td>${n.createdate}</td>
-      <td>${n.updatedate}</td>
-
-   </tr>
+   	<c:if test="${userLevel > 0}">
+	   <tr>
+	      <td style="align-text:center;">${n.questionNo}</td>
+	      <td>${n.branchName}</td>
+	      <td><a href="${pageContext.request.contextPath}/question/questionOne?questionNo=${n.questionNo}">${n.questionTitle}</a></td>
+	      <td>${n.customerId}</td>
+	      <td>${n.createdate}</td>
+	      <td>${n.updatedate}</td>
+	   </tr>
+	  </c:if>
    </c:forEach>
+   
    </tbody>
    </table>
    <a href="${pageContext.request.contextPath}/question/addQuestion"><button type="submit" class="site-btn">문의하기</button></a>
-   
+   			
        <!-- Js Plugins -->
     <script src="/js/jquery-3.3.1.min.js"></script>
     <script src="/js/bootstrap.min.js"></script>
@@ -118,3 +94,5 @@
     <script src="/js/main.js"></script>
 </body>
 </html>
+
+<html></html>
