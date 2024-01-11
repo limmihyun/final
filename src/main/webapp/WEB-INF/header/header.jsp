@@ -7,7 +7,8 @@
                 <div class="main-menu">
                     <div class="logo">
                         <a href="/customer/home">
-                            <img src="/img/logo.png" alt="">
+                            <br>
+                            <H3 style="color: #ebfcff">GDHEALTH</H3>
                         </a>
                     </div>
                     <nav class="mobile-menu">
