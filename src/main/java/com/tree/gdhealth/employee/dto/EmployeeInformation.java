@@ -7,7 +7,7 @@ import lombok.Data;
  */
 
 @Data
-public class EmployeeInformationDto {
+public class EmployeeInformation {
 	//employee
 	private Integer employeeNo;
 	private Integer branchNo;

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.tree.gdhealth.employee.api.EmployeeApiMapper">
-	<select id="selectEmployeeListByCriteria" parameterType="com.tree.gdhealth.employee.dto.EmployeeRetrieveCriteria" resultType="com.tree.gdhealth.employee.dto.EmployeeInformationDto">
+	<select id="selectEmployeeListByCriteria" parameterType="com.tree.gdhealth.employee.dto.EmployeeRetrieveCriteria" resultType="com.tree.gdhealth.employee.dto.EmployeeInformation">
 		SELECT
 		    e.employee_no employeeNo,
 		    ed.employee_name employeeName,

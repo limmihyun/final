@@ -42,8 +42,8 @@ public class SportsEquipmentOrderController {
                 .branchNo(branchNo)
                 .rowPerPage(10).build();
 
-        List<SportsEquipmentOrderInformation> orderInformationList = branchServiceFacade.getBranchSportsEquipmentOrderList(criteria);
-        List<PageUri> pageUriList = branchServiceFacade.getBranchSportsEquipmentOrderListPagination(
+        List<SportsEquipmentOrderInformation> orderInformationList = branchServiceFacade.getSportsEquipmentOrderList(criteria);
+        List<PageUri> pageUriList = branchServiceFacade.getSportsEquipmentOrderListPagination(
                 criteria, "/headoffice/sportsEquipmentOrder/list");
 
         model.addAttribute("orderInformationList", orderInformationList);

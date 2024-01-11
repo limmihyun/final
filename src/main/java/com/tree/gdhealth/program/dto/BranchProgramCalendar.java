@@ -11,7 +11,7 @@ import java.util.List;
 @Data
 public class BranchProgramCalendar {
     private int branchNo;
-    private List<BranchProgramDate> branchDateList;
+    private List<BranchProgramDate> programDateList;
     private LocalDate requestDate;
     private LocalDate previousWeekDate;
     private LocalDate nextWeekDate;

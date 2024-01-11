@@ -1,6 +1,5 @@
 package com.tree.gdhealth.employee.api;
 
-import com.tree.gdhealth.employee.dto.EmployeeInformationDto;
 import com.tree.gdhealth.utils.exception.TooManyResultsException;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -11,7 +10,6 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import java.util.List;
 import java.util.Map;
 
 /**@apiNote Employee 도메인을 담당하는 REST API Controller

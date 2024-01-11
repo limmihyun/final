@@ -15,7 +15,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
-/**
+/**<p>프로그램 도메인 API 서비스</p>
  * @author 정인호
  */
 
@@ -28,15 +28,17 @@ public class ProgramApiService {
     private final HolidayApi holidayApi;
 
     public Map<String, Object> getBranchProgramDate(LocalDate date, int branchNo) {
+
         return programApiMapper.getBranchProgramDate(date, branchNo);
     }
+
     @Transactional
     public boolean changeManager(int programDateNo, int managerNo) {
         //confirm if exist
         int foundRow = programApiMapper.selectManager(programDateNo, managerNo);
         int result = 0;
         if(foundRow == 1){
-            // if is update
+            // updated
             result = programApiMapper.changeManager(programDateNo, managerNo);
         }else {
             // or insert
@@ -45,51 +47,14 @@ public class ProgramApiService {
         return result == 1;
     }
 
-    /** date 리스트에 휴일 API로 가져온 공휴일정보를 매핑하여 반환
-     * @param requestDate 기준일
-     * @param branchNo
-     */
-    public BranchProgramCalendar getBranchProgramCalendar(LocalDate requestDate, int branchNo) {
-        BranchProgramCalendar calendar = new BranchProgramCalendar();
-        List<BranchProgramDate> dateList = programApiMapper.getProgramDateBetween(branchNo, requestDate.minusDays(1));
-        List<HolidayApiVo> holidayList = new ArrayList<>();
+    public List<BranchProgramDate> getBranchProgramDateList(int branchNo, LocalDate requestDate, int minusDays, int plusDays){
 
-        /* 오늘날짜 지정*/
-        dateList.stream()
-                .filter(date -> LocalDate.now().equals(date.getDate()))
-                .findFirst()
-                .ifPresent(date -> date.setIsToday(true));
+        int totalDays = plusDays +minusDays;
 
-        /*휴일 찾기*/
-        dateList.stream()
-                .map(date -> YearMonth.from(date.getDate()))
-                .distinct()
-                .forEach(yearMonth -> {
-                    try {
-                        holidayList.addAll(holidayApi.getHolidayList(yearMonth));
-                    } catch (Exception e) {
-                        log.warn("휴일정보를 가져오는 중 문제가 발생하였습니다. 제외하고 계속합니다.", e);
-                    }
-                });
-
-        /*휴일정보를 매핑*/
-        holidayList.forEach(holiday -> {
-            dateList.stream()
-                    .filter(date -> date.getDate().equals(holiday.getLocdate()))
-                    .findFirst()
-                    .ifPresent(date -> {
-                        date.setDateName(holiday.getDateName());
-                        date.setIsHoliday(holiday.isHoliday());
-                    });
-        });
-
-        /* 지난주, 다음주 날짜를 지정*/
-        calendar.setRequestDate(requestDate);
-        calendar.setPreviousWeekDate(requestDate.minusWeeks(1));
-        calendar.setNextWeekDate(requestDate.plusWeeks(1));
-        calendar.setBranchNo(branchNo);
-        calendar.setBranchDateList(dateList);
-
-        return calendar;
+        return programApiMapper.getProgramDateBetween(branchNo, requestDate.minusDays(minusDays), totalDays);
     }
+
+
+
+
 }
