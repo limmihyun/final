@@ -132,7 +132,7 @@
 		<div style="text-align: left; position: relative;">
 		    <p style="margin-top:50px;">${calendarMap.targetYear} 년</p>
 		    <div style="position: absolute; left: 50%; transform: translateX(-50%);" class="d-flex justify-content-center" align="center">
-		        <a class="btn btn-primary" href="${pageContext.request.contextPath}/customer/programrs?targetYear=${calendarMap.targetYear}&targetMonth=${calendarMap.targetMonth - 1}">&#60;&nbsp;이전달</a>&nbsp;
+		    	<a class="btn btn-primary" href="#" onclick="backMonth(${calendarMap.targetYear}, ${calendarMap.targetMonth}, ${calendarMap.targetDay})">&#60;&nbsp;이전달</a>&nbsp;
 		        <a class="btn btn-primary" href="#"  onclick="nextMonth(${calendarMap.targetYear}, ${calendarMap.targetMonth}, ${calendarMap.targetDay})">다음달&nbsp;&#62;</a>
 		    </div>
 		</div>
@@ -615,6 +615,7 @@ Copyright &copy;<script>document.write(new Date().getFullYear());</script> All r
         };
         
         function nextMonth(targetYear, targetMonth, targetDay){
+            event.preventDefault();
         	console.log(targetYear);
         	console.log(targetMonth);
         	console.log(targetDay);
@@ -631,9 +632,30 @@ Copyright &copy;<script>document.write(new Date().getFullYear());</script> All r
                 success: function(data){
 
                 	$('#calendar').html(data);	
-/*                 	let currentMonth = $('#currentMonth').text();
- *//*                 	var a = '';
-                	a += '<a class="btn btn-primary" href="#"  onclick="nextMonth(2024,'+currentMonth+',0)">다음달&nbsp;&#62;</a>' */
+                	
+                	
+                }
+        	});
+        };
+        
+        function backMonth(targetYear, targetMonth, targetDay){
+            event.preventDefault();
+        	console.log(targetYear);
+        	console.log(targetMonth);
+        	console.log(targetDay);
+
+            var formData = {
+                    targetYear: targetYear,
+                    targetMonth: targetMonth - 1,
+                    targetDay: targetDay
+                };
+        	$.ajax({
+                url: '/customer/reservationCalendar',
+                method: 'get',
+                data: formData,
+                success: function(data){
+
+                	$('#calendar').html(data);	
                 	
                 	
                 }

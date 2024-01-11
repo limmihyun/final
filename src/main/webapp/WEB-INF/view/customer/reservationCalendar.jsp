@@ -18,7 +18,7 @@
 		<div style="text-align: left; position: relative;">
 		    <p style="margin-top:50px;">${calendarMap.targetYear} 년</p>
 		    <div style="position: absolute; left: 50%; transform: translateX(-50%);" class="d-flex justify-content-center" align="center" id="calBtn">
-		    	<a class="btn btn-primary" href="${pageContext.request.contextPath}/customer/programrs?targetYear=${calendarMap.targetYear}&targetMonth=${calendarMap.targetMonth - 1}">&#60;&nbsp;이전달</a>&nbsp;
+		    	<a class="btn btn-primary" href="#" onclick="backMonth(${calendarMap.targetYear}, ${calendarMap.targetMonth}, ${calendarMap.targetDay})">&#60;&nbsp;이전달</a>&nbsp;
 		        <a class="btn btn-primary" href="#"  onclick="nextMonth(${calendarMap.targetYear}, ${calendarMap.targetMonth}, ${calendarMap.targetDay})">다음달&nbsp;&#62;</a>	
 		    </div>
 		</div>
