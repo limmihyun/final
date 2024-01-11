@@ -16,7 +16,7 @@ import java.util.List;
 @RequiredArgsConstructor
 @RestController
 public class SportsEquipmentRestApiController {
-    private final SportEquipmentApiService service;
+    private final SportsEquipmentApiService service;
     @GetMapping("/api/v1/sportsEquipment")
     public List<SportsEquipment> getSportsEquipmentList(){
 

@@ -1,14 +1,14 @@
 package com.tree.gdhealth.sportsequipment;
 
-import com.tree.gdhealth.sportsequipment.dto.SportsEquipmentOrderAddDto;
-import com.tree.gdhealth.sportsequipment.dto.getOrderListResponseDto;
+import com.tree.gdhealth.sportsequipment.dto.SportsEquipmentOrderAddRequestDto;
+import com.tree.gdhealth.sportsequipment.dto.SportsEquipmentOrderInformation;
+import com.tree.gdhealth.sportsequipment.dto.SportsEquipmentOrderRetrieveCriteria;
 import com.tree.gdhealth.vo.SportsEquipment;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -19,7 +19,7 @@ import java.util.Map;
 @Transactional(readOnly = true)
 @RequiredArgsConstructor
 @Service
-public class SportEquipmentApiService {
+public class SportsEquipmentApiService {
     private final SportsEquipmentApiMapper sportsEquipmentApiMapper;
 
     public List<SportsEquipment> getSportsEquipmentList() {
@@ -34,31 +34,16 @@ public class SportEquipmentApiService {
         return sportsEquipmentApiMapper.selectSportsEquipmentOrderOneByOrderNo(orderNo);
     }
 
-    public getOrderListResponseDto getSportsEquipmentOrderList(
-            Integer branchNo,
-            int requestPage,
-            boolean isOnlyWaitingList) {
+    public List<SportsEquipmentOrderInformation> getSportsEquipmentOrderList(SportsEquipmentOrderRetrieveCriteria criteria){
+        return sportsEquipmentApiMapper.selectSportsEquipmentOrderListByCriteria(criteria);
+    }
 
-        int rowPerPage = 10;
-        int beginRow = (requestPage - 1) * rowPerPage;
-
-        Map<String, Object> paramMap = new HashMap<>();
-        paramMap.put("branchNo", branchNo);
-        paramMap.put("beginRow", beginRow);
-        paramMap.put("rowPerPage", rowPerPage);
-        paramMap.put("isOnlyWaitingList", isOnlyWaitingList);
-
-        return getOrderListResponseDto.builder()
-                .requestPage(requestPage)
-                .isOnlyWaitingList(isOnlyWaitingList)
-                .rowPerPage(rowPerPage)
-                .orderList(sportsEquipmentApiMapper.selectSportsEquipmentOrderAll(paramMap))
-                .lastPage(sportsEquipmentApiMapper.countSportsEquipmentOrderListLastPage(paramMap))
-                .build();
+    public int getSportsEquipmentOrderListLastPage(SportsEquipmentOrderRetrieveCriteria criteria) {
+        return sportsEquipmentApiMapper.countSportsEquipmentOrderListLastPage(criteria);
     }
 
     @Transactional
-    public boolean addSportsEquipmentOrder(SportsEquipmentOrderAddDto dto) {
+    public boolean addSportsEquipmentOrder(SportsEquipmentOrderAddRequestDto dto) {
         int affectedRows = sportsEquipmentApiMapper.insertSportsEquipmentOrder(dto);
         return affectedRows == 1;
     }

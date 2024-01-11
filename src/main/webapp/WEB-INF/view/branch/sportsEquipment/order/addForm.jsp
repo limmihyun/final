@@ -59,23 +59,25 @@
                                                         <div class="form-group">
                                                             <label>발주자직원번호</label> <%-- 서버 고정값 --%>
                                                             <input name="employeeOrderer"
-                                                                   value="${formDto.employeeOrderer}" type="text"
+                                                                   value="${sessionScope.loginEmployee.employeeNo}"
+                                                                   type="text"
                                                                    readonly="readonly" class="form-control">
                                                         </div>
                                                         <div>
-                                                            <label>발주자 이름</label> <%-- 조회값 --%>
-                                                            <input id="employeeOrdererName"
-                                                                   value="" type="text"
+                                                            <label>발주자 이름</label>
+                                                            <input value="${sessionScope.loginEmployee.employeeName}"
+                                                                   type="text"
                                                                    readonly="readonly" class="form-control">
                                                         </div>
                                                         <div class="form-group">
-                                                            <label>발주지점(번호)</label> <%-- 서버 고정값 --%>
-                                                            <input name="branchNo" value="${formDto.branchNo}"
+                                                            <label>발주지점(번호)</label>
+                                                            <input name="branchNo"
+                                                                   value="${sessionScope.loginEmployee.branchNo}"
                                                                    type="text" readonly="readonly" class="form-control">
                                                         </div>
                                                         <div class="form-group">
-                                                            <label>발주지점</label> <%-- 서버 고정값 --%>
-                                                            <input id="orderBranchName" value=""
+                                                            <label>발주지점</label>
+                                                            <input value="${sessionScope.loginEmployee.branchName}"
                                                                    type="text" readonly="readonly" class="form-control">
                                                         </div>
                                                         <div class="form-group">
@@ -107,7 +109,8 @@
                                                     <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
                                                         <div class="form-group">
                                                             <label>승인권자(번호)</label> <%-- 클라이언트 선택, 서버 선택지제공--%>
-                                                            <select id="employeeApproverSelectForm" name="employeeApprover" class="form-control">
+                                                            <select id="employeeApproverSelectForm"
+                                                                    name="employeeApprover" class="form-control">
                                                             </select>
                                                         </div>
                                                         <div class="form-group">
@@ -124,7 +127,8 @@
                                                 <div class="row">
                                                     <div class="col-lg-12">
                                                         <div>
-                                                            <c:forEach var="fieldErrorMessage" items="${fieldErrorMessageList}">
+                                                            <c:forEach var="fieldErrorMessage"
+                                                                       items="${fieldErrorMessageList}">
                                                                 <c:out value="${fieldErrorMessage}"/><br>
                                                             </c:forEach>
                                                             <c:if test="${param.get('serverMessage') eq 'success'}">
@@ -158,28 +162,7 @@
 <!-- 본문 종료 -->
 <jsp:include page="/WEB-INF/view/branch/include/body-lower-layout.jsp"/>
 <script>
-
-    /*직원이름*/
-    $.ajax({
-        url: '/api/v1/employeeDetail/'+"${formDto.employeeOrderer}",
-        type: 'GET',
-        success: function (response) {
-            console.log(response);
-            $('#employeeOrdererName').val(response.employeeName);
-        }
-    });
-
-    /*직원 지점*/
-    $.ajax({
-        url: '/api/v1/branch/'+"${formDto.branchNo}",
-        type: 'GET',
-        success: function (response) {
-            console.log(response);
-            $('#orderBranchName').val(response.branchName);
-        }
-    });
-
-    /*발주 승인권지 선택지*/
+    /*발주 승인권자 선택지*/
     $.ajax({
         url: '/api/v1/employee?isHeadOffice=true',
         type: 'GET',
@@ -187,7 +170,7 @@
             console.log(response);
             $(response).each(function (index, employee) {
                 $('#employeeApproverSelectForm')
-                    .append('<option value="' + employee.employeeNo + '">' +'('+employee.employeeNo+')' + employee.employeeName + '</option>');
+                    .append('<option value="' + employee.employeeNo + '">' + '(' + employee.employeeNo + ')' + employee.employeeName + '</option>');
             });
         }
     });
@@ -200,7 +183,7 @@
             console.log(response);
             $(response).each(function (index, item) {
                 $('#sportsEquipmentSelectForm')
-                    .append('<option value="' + item.sportsEquipmentNo + '">' +'('+item.sportsEquipmentNo+')' + item.itemName + '</option>');
+                    .append('<option value="' + item.sportsEquipmentNo + '">' + '(' + item.sportsEquipmentNo + ')' + item.itemName + '</option>');
             });
         }
     });
@@ -219,7 +202,7 @@
                 $('#totalPrice').val(itemPrice * quantity);
                 $('#note').val(response.note);
             },
-            error: function (){
+            error: function () {
                 $('#itemPrice').val(0);
                 let itemPrice = $('#itemPrice').val();
                 let quantity = $('#quantity').val();
@@ -230,12 +213,11 @@
     });
 
     /*총발주금액 갱신*/
-    $('#quantity').change(function (){
+    $('#quantity').change(function () {
         let itemPrice = $('#itemPrice').val();
         let quantity = $('#quantity').val();
         $('#totalPrice').val(itemPrice * quantity);
     });
-
 </script>
 </body>
 
