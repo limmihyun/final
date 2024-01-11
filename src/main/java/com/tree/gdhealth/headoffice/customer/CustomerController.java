@@ -39,7 +39,7 @@ public class CustomerController {
 		// 페이징
 		Paging paging = Paging.builder()
 				.pageNumCnt(10) // 한번에 표시할 페이징 번호의 갯수
-				.rowPerPage(4) // 한 페이지에 나타낼 row 수
+				.rowPerPage(8) // 한 페이지에 나타낼 row 수
 				.currentPage(page) // 현재 페이지
 				.cnt(customerCnt) // 전체 row 수
 				.build();
@@ -65,7 +65,7 @@ public class CustomerController {
 		
 		Paging paging = Paging.builder()
 				.pageNumCnt(10) // 한번에 표시할 페이징 번호의 갯수
-				.rowPerPage(4) // 한 페이지에 나타낼 row 수
+				.rowPerPage(8) // 한 페이지에 나타낼 row 수
 				.currentPage(page) // 현재 페이지
 				.cnt(searchCnt) // 전체 row 수
 				.build();

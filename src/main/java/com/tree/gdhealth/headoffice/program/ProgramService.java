@@ -92,6 +92,24 @@ public class ProgramService {
 		return programOne;
 	}
 	
+	public boolean checkDatesExists(List<String> programDates) {
+		
+		boolean checkDatesExists = programMapper.checkDatesExists(programDates);
+		// 디버깅
+		log.debug("dates 존재 확인(존재:true,존재x:false) : " + checkDatesExists);
+		
+		return checkDatesExists;
+	}
+	
+	public boolean checkDateOneExists(String programDate) {
+		
+		boolean checkDateOneExists = programMapper.checkDateOneExists(programDate);
+		// 디버깅
+		log.debug("dateOne 존재 확인(존재:true,존재x:false) : " + checkDateOneExists);
+		
+		return checkDateOneExists;
+	}
+	
 	public void insertProgram(Program program, ProgramDate programDate, MultipartFile programFile,
 									String path) {
 		
@@ -109,16 +127,17 @@ public class ProgramService {
 		
 		// programMapper.xml에서 selectKey로 얻어 온 program table의 auto increment 값
 		List<String> dates = programDate.getProgramDates();
+		log.debug("dates[2] : " + dates.get(2));
 		List<ProgramDate> dateList = new ArrayList<>();
 		for(String date : dates) {
-			ProgramDate p = new ProgramDate();
-			p.setProgramNo(program.getProgramNo());
-			p.setProgramDate(date);
-			dateList.add(p);
+			if(!date.equals("")) { // list의 값이 비어있지 않을 경우
+				ProgramDate p = new ProgramDate();
+				p.setProgramNo(program.getProgramNo());
+				p.setProgramDate(date);
+				dateList.add(p);
+			}
 		}	
-		
-		// programDate.setProgramNo(program.getProgramNo());
-				
+						
 		int dateResult = programMapper.insertProgramDates(dateList);
 		log.debug("programDate 추가(추가 개수) : " + dateResult);	
 

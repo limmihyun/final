@@ -18,6 +18,9 @@ public interface ProgramMapper {
 	int programCnt();
 	int searchCnt(Map<String, Object> map);
 	
+	boolean checkDatesExists(List<String> dateList);
+	boolean checkDateOneExists(String date);
+	
 	Map<String, Object> programOne(Map<String, Object> map);
 	
 	int insertProgram(Program program);

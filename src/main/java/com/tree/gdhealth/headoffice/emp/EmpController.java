@@ -107,7 +107,7 @@ public class EmpController {
 	}
 	
 	@ResponseBody
-	@GetMapping("/addEmpIdCheck")
+	@PostMapping("/addEmpIdCheck")
 	public int addEmpIdCheck(String employeeId) {
 		
 		int result = empService.idCheck(employeeId);
