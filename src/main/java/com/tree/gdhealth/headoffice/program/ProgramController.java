@@ -8,8 +8,10 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
@@ -48,7 +50,7 @@ public class ProgramController {
 		// 페이징
 		Paging paging = Paging.builder()
 				.pageNumCnt(10) // 한번에 표시할 페이징 번호의 갯수
-				.rowPerPage(4) // 한 페이지에 나타낼 row 수
+				.rowPerPage(8) // 한 페이지에 나타낼 row 수
 				.currentPage(page) // 현재 페이지
 				.cnt(programCnt) // 전체 row 수
 				.build();
@@ -76,7 +78,7 @@ public class ProgramController {
 		// 페이징
 		Paging paging = Paging.builder()
 				.pageNumCnt(10) // 한번에 표시할 페이징 번호의 갯수
-				.rowPerPage(4) // 한 페이지에 나타낼 row 수
+				.rowPerPage(8) // 한 페이지에 나타낼 row 수
 				.currentPage(page) // 현재 페이지
 				.cnt(searchCnt) // 전체 row 수
 				.build();
@@ -100,6 +102,28 @@ public class ProgramController {
 	public String addProgram() {
 		
 		return "headoffice/addProgram";
+	}
+	
+	@ResponseBody
+	@PostMapping("/datesCheck")
+	public boolean dateCheck(@RequestBody List<String> programDates) {
+		
+		boolean checkDatesExists = programService.checkDatesExists(programDates);
+		// 디버깅
+		log.debug("dates 존재 확인(존재:true,존재x:false) : " + checkDatesExists);
+		
+		return checkDatesExists;
+	}
+	
+	@ResponseBody
+	@PostMapping("/dateOneCheck")
+	public boolean dateOneCheck(String programDate) {
+		
+		boolean checkDateOneExists = programService.checkDateOneExists(programDate);
+		// 디버깅
+		log.debug("dateOne 존재 확인(존재:true,존재x:false) : " + checkDateOneExists);
+		
+		return checkDateOneExists;
 	}
 	
 	@PostMapping("/addProgram")

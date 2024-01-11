@@ -70,9 +70,8 @@
     
     <!-- 달력 API -->
     <link rel="stylesheet" href="http://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
-<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
-<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
-	
+	<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+	<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 </head>
 
 <body>
@@ -237,15 +236,22 @@
         
         $('#dateArea').append(dateHtml);
 
-        // Initialize the new datepicker
+        // 달력 API 초기화
         $('#' + newDatepickerId).datepicker({
             dateFormat: 'yy-mm-dd',
             dayNamesMin: ["일", "월", "화", "수", "목", "금", "토"],
             monthNames: ["1월", "2월", "3월", "4월", "5월", "6월", "7월", "8월", "9월", "10월", "11월", "12월"],
-            showMonthAfterYear: true
+            showMonthAfterYear: true,
+            changeYear: true,
+	    	changeMonth: true,
+	    	monthNamesShort: ['1월','2월','3월','4월','5월','6월','7월','8월','9월','10월','11월','12월'],
+	    	yearRange: 'c-10:c+50',
+	    	showButtonPanel: true,
+	    	currentText: '오늘 날짜',
+	    	closeText: '닫기'
         });
-        
-    	 // -버튼 클릭시 해당 개설 날짜 input 태그 삭제
+               
+    	// -버튼 클릭시 해당 개설 날짜 input 태그 삭제
      	$(document).on('click', '.minusBtn', function(){
             $(this).prev('input').remove(); // 이전에 추가된 input 태그 삭제
             $(this).remove(); // 클릭한 - 버튼 삭제
@@ -260,7 +266,14 @@
 	    	dateFormat : 'yy-mm-dd',
 	    	dayNamesMin: [ "일", "월","화", "수", "목", "금", "토" ],
 	    	monthNames: [ "1월", "2월", "3월", "4월", "5월", "6월", "7월", "8월", "9월", "10월", "11월", "12월"],
-	    	showMonthAfterYear: true
+	    	showMonthAfterYear: true,
+	    	changeYear: true,
+	    	changeMonth: true,
+	    	monthNamesShort: ['1월','2월','3월','4월','5월','6월','7월','8월','9월','10월','11월','12월'],
+	    	yearRange: 'c-10:c+50',
+	    	showButtonPanel: true,
+	    	currentText: '오늘 날짜',
+	    	closeText: '닫기'
 	    });
 	 });
 	
@@ -308,6 +321,7 @@
 			return;
 		}
 		
+		// 추가하는 개설날짜 중에 중복된 개설날짜가 있는지 확인
 		let values = [];
 	    $('#dateArea input[type="text"]').each(function () {
 	      		values.push($(this).val());
@@ -323,9 +337,28 @@
 	        alert('개설 날짜를 다르게 입력해 주세요.');
 	        return; 
 	    }
+	    
+	    // 선택한 개설 날짜가 DB에 이미 존재하는지 확인
+	    $.ajax({
+			url : '${pageContext.request.contextPath}/headoffice/program/datesCheck',
+			method : 'post',
+			data : JSON.stringify(values),
+			dataType : 'json',
+			contentType: 'application/json',
+			success : function(result) {
+				if(result == true) {
+					alert('선택한 개설 날짜가 이미 존재합니다.')
+					return;
+				} else {
+					alert('추가 완료되었습니다.');
+					$('#insertForm').submit();
+				}
+			},
+			error : function(err) {
+				console.log(err);
+			}
+		});
 		
-		alert('추가 완료되었습니다.');
-		$('#insertForm').submit();
 	});
 	
 	

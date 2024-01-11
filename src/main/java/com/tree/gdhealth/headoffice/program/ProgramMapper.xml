@@ -81,6 +81,29 @@
 		AND pd.program_date = #{programDate}
 	</select>
 	
+	<select id="checkDatesExists" parameterType="list" resultType="boolean">
+		SELECT
+			CASE
+		        WHEN COUNT(*) > 0 THEN true
+		        ELSE false
+     		 END AS result
+		FROM program_date 
+		WHERE program_date IN
+			<foreach collection="dateList" item="value" open="(" separator="," close=")">
+      		 	 #{value}
+    		</foreach>	
+	</select>
+	
+	<select id="checkDateOneExists" parameterType="String" resultType="boolean">
+		SELECT
+			CASE
+		        WHEN COUNT(*) > 0 THEN true
+		        ELSE false
+     		 END AS result
+		FROM program_date 
+		WHERE program_date = #{programDate}
+	</select>
+	
 	<insert id="insertProgram" parameterType="com.tree.gdhealth.vo.Program">
 		INSERT INTO program(
 			writer_employee_no,
@@ -102,7 +125,7 @@
 			program_no,
 			program_date
 		) VALUES
-		<foreach collection="list" item="item" separator=",">
+		<foreach collection="dateList" item="item" separator=",">
 			(#{item.programNo},#{item.programDate})
 		</foreach> 		
 	</insert>

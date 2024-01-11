@@ -69,8 +69,9 @@
     <script src="/admin/js/vendor/modernizr-2.8.3.min.js"></script>
     
     <!-- 달력 API -->
-    <link rel="stylesheet" href="//code.jquery.com/ui/1.13.2/themes/base/jquery-ui.css">
-    <script src="https://code.jquery.com/ui/1.13.2/jquery-ui.js"></script>
+    <link rel="stylesheet" href="http://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+	<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+	<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 </head>
 
 <body>
@@ -223,7 +224,14 @@
 	    	dateFormat : 'yy-mm-dd',
 	    	dayNamesMin: [ "일", "월","화", "수", "목", "금", "토" ],
 	    	monthNames: [ "1월", "2월", "3월", "4월", "5월", "6월", "7월", "8월", "9월", "10월", "11월", "12월"],
-	    	showMonthAfterYear: true
+	    	showMonthAfterYear: true,
+	    	changeYear: true,
+	    	changeMonth: true,
+	    	monthNamesShort: ['1월','2월','3월','4월','5월','6월','7월','8월','9월','10월','11월','12월'],
+	    	yearRange: 'c-10:c+50',
+	    	showButtonPanel: true,
+	    	currentText: '오늘 날짜',
+	    	closeText: '닫기'
 	    });
 	 });
 	
@@ -265,9 +273,31 @@
 			return;
 		}
 		
-		alert('수정 완료되었습니다.');
-		$('#updateForm').submit();
+		let programDate = $('#programDate').val();
+		console.log(programDate);
 		
+		// 선택한 개설 날짜가 DB에 이미 존재하는지 확인
+	    $.ajax({
+			url : '${pageContext.request.contextPath}/headoffice/program/dateOneCheck',
+			method : 'post',
+			data : {
+				programDate : programDate
+			},
+			success : function(result) {
+				if(result == true) {
+					alert('선택한 개설 날짜가 이미 존재합니다. 날짜를 수정해주세요.')
+					$('#programDate').focus();
+					return false;
+				} else {
+					alert('수정 완료되었습니다.');
+					$('#updateForm').submit();
+				}
+			},
+			error : function(err) {
+				console.log(err);
+			}
+		});
+	
 	});
 </script>
 
