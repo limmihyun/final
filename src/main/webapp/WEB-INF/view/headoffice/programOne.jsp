@@ -128,7 +128,7 @@
                                             </div>
                                             <div style="text-align:center;">
 	                                             <h1>${programOne.programName}</h1>
-	                                             <p>${programOne.programDetail}</p>
+	                                             <p align="left">${programOne.programDetail}</p>
                                             </div>                          
                                         </div>
                                         

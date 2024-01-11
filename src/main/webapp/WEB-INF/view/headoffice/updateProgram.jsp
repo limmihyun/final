@@ -149,9 +149,6 @@
         
     </div>
 
-    <!-- jquery
-		============================================ -->
-    <script src="/admin/js/vendor/jquery-1.12.4.min.js"></script>
     <!-- bootstrap JS
 		============================================ -->
     <script src="/admin/js/bootstrap.min.js"></script>
@@ -231,7 +228,8 @@
 	    	yearRange: 'c-10:c+50',
 	    	showButtonPanel: true,
 	    	currentText: '오늘 날짜',
-	    	closeText: '닫기'
+	    	closeText: '닫기',
+	    	minDate: 0
 	    });
 	 });
 	
@@ -284,7 +282,8 @@
 				programDate : programDate
 			},
 			success : function(result) {
-				if(result == true) {
+				// 결과값이 true이고 입력한 날짜가 원래 저장된 날짜와 다를 때
+				if(result == true && programDate != '${programOne.programDate}') {
 					alert('선택한 개설 날짜가 이미 존재합니다. 날짜를 수정해주세요.')
 					$('#programDate').focus();
 					return false;

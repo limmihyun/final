@@ -127,7 +127,7 @@ public class ProgramService {
 		
 		// programMapper.xml에서 selectKey로 얻어 온 program table의 auto increment 값
 		List<String> dates = programDate.getProgramDates();
-		log.debug("dates[2] : " + dates.get(2));
+		log.debug("dates : " + dates);
 		List<ProgramDate> dateList = new ArrayList<>();
 		for(String date : dates) {
 			if(!date.equals("")) { // list의 값이 비어있지 않을 경우
