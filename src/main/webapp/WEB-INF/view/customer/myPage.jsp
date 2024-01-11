@@ -5,7 +5,7 @@
 <head>
 <meta charset="UTF-8">
 <link rel="stylesheet" href="/css/myPage.css" type="text/css">
-<title>Insert title here</title>
+<title>GD HEALTH</title>
 </head>
 <body>
 	<div class="wrap">

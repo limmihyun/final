@@ -12,7 +12,7 @@
 <meta name="author" content="Saurav">
 <link href="/css/bootstrap.min.css" rel="stylesheet">
 <link href="/css/number.css" rel="stylesheet">
-<title></title>
+<title>GD HEALTH</title>
 </head>
 
 <body class="bg-light">

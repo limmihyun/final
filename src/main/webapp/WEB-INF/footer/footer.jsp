@@ -6,7 +6,7 @@
 			<div class="col-lg-12">
 				<div class="footer-content">
 					<div class="footer-logo">
-						<a href="#"><img src="/img/logo.png" alt=""></a>
+						<H3 style="color: #ebfcff">GDHEALTH</H3>
 					</div>
 					<div class="footer-menu">
 						<ul>
