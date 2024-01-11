@@ -23,9 +23,15 @@ public class ProgramReservationRest {
 	public int reservationdelete(HttpSession session, int programReservationNo) {		
 		int customerNo = 0;
 		
+		System.out.println(programReservationNo + "<---programReservationNo");
+		
 		customerNo = (int)(session.getAttribute("customerNo"));
 		
+		int result2 = programReservationService.reviewdelete(programReservationNo, customerNo);
+		System.out.println(result2 + "<--result2");
+		
 		int result = programReservationService.reservationdelete(programReservationNo, customerNo);
+		System.out.println("reservation 삭제 1 -- " + result);
 		
 		return result;
 	}

@@ -32,6 +32,8 @@ public interface ProgramReservationMapper {
 	
 	int reservationdelete (Map<String, Object> paramap);
 	
+	int reviewdelete (Map<String, Object> paramap);
+	
 	List<Branch> branchList ();
 	
 	Integer  reservationDate (Map<String, Object> paramap);

@@ -145,4 +145,8 @@
 	<delete id="reservationdelete" parameterType="java.util.Map">
 		DELETE FROM program_reservation WHERE program_reservation_no = #{programReservationNo}
 	</delete>
+	
+	<delete id="reviewdelete" parameterType="java.util.Map">
+		DELETE FROM review WHERE program_reservation_no = #{programReservationNo};
+	</delete>
 </mapper>

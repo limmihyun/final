@@ -119,7 +119,7 @@
 								<p>${l.branchName}</p>
 								<p>${l.programName} · ${l.year}년 ${l.month}월 ${l.day}일 </p>
 								<input type="hidden" value="${l.programReservationNo}" id="programReservationNo">
-								<button id="deleteBtn" class="primary-btn b-btn" style="padding: 10px 24px;">취소하기</button>
+								<a href="#" onclick="deleteBtn()" class="btn btn-primary" style="padding: 10px 24px;">취소하기</a>
 							</div>
 						</div>
 					</c:forEach>
@@ -186,7 +186,9 @@ Copyright &copy;<script>document.write(new Date().getFullYear());</script> All r
     <script src="/js/main.js"></script>
     
     <script>
-    	$('#deleteBtn').click(function(){
+    	function deleteBtn(){
+            event.preventDefault();
+
 			console.log("클릭");
 			
     		$.ajax({
@@ -198,8 +200,8 @@ Copyright &copy;<script>document.write(new Date().getFullYear());</script> All r
 					console.log(jsonData, " <--jsonData");
 					
     				$('#reservationList').load(location.href + " #reservationList");
-    			},
-    		    error: function (jqXHR, textStatus, errorThrown) {
+    			}
+/*     		    error: function (jqXHR, textStatus, errorThrown) {
     		        if (jqXHR.status === 500) {
     		            alert("로그인을 확인해주세요.");
     		            window.location.href = "/customer/login";
@@ -208,9 +210,9 @@ Copyright &copy;<script>document.write(new Date().getFullYear());</script> All r
     		        } else {
     		            alert("알 수 없는 오류가 발생했습니다.");
     		        }
-    		    }
+    		    } */
     		});
-    	});
+    	};
     </script>
 </body>
 
