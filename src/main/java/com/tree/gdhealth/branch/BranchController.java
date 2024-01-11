@@ -35,31 +35,37 @@ public class BranchController {
 
     @GetMapping("/home")
     public String getBranchHome(){
-        log.debug("/branch/home");
+
         return "/branch/home";
     }
 
     @GetMapping("/testLoginEmployee")
     public String testLogin(HttpSession session){
+
         Employee employee = new Employee();
         employee.setEmployeeId("gasan1manager");
         employee.setEmployeePw("1234");
         LoginEmployee loginEmployee = serviceFacade.testEmployeeLogin(employee);
+
         session.setAttribute("loginEmployee", loginEmployee);
+
         return "redirect:/branch/home";
     }
 
-    /**
+    /**<p>지점 직원리스트 페이지 호출</p>
      * @param loginEmployee 로그인된 직원
      * @return 지점의 직원리스트 페이지
      */
     @GetMapping("/employee/list")
     public String getBranchEmployeeList(@SessionAttribute LoginEmployee loginEmployee, Model model){
+
         model.addAttribute("branchEmployeeList", serviceFacade.getBranchEmployeeList(loginEmployee.getBranchNo()));
+
         return "/branch/employee/list";
     }
 
-    /**@return 지점의 물품발주조회 페이지
+    /**<p>지점 발주리스트 페이지 호출</p>
+     * @return 지점의 물품발주조회 페이지
      * @param requestPage (쿼리스트링)요청 페이지번호
      * @param isOnlyWaitingList (쿼리스트링)대기건만 조회할 것인지 여부
      * @apiNote  출력정보와 페이지네이션 정보
@@ -77,9 +83,8 @@ public class BranchController {
                 .branchNo(loginEmployee.getBranchNo())
                 .rowPerPage(10).build();
 
-        List<SportsEquipmentOrderInformation> orderInformationList = serviceFacade.getBranchSportsEquipmentOrderList(criteria);
-        List<PageUri> pageUriList = serviceFacade.getBranchSportsEquipmentOrderListPagination(
-                criteria, "/branch/sportsEquipment/order/list");
+        List<SportsEquipmentOrderInformation> orderInformationList = serviceFacade.getSportsEquipmentOrderList(criteria);
+        List<PageUri> pageUriList = serviceFacade.getSportsEquipmentOrderListPagination(criteria, "/branch/sportsEquipment/order/list");
 
         model.addAttribute("orderInformationList", orderInformationList);
         model.addAttribute("pageUriList", pageUriList);
@@ -87,50 +92,55 @@ public class BranchController {
         return "/branch/sportsEquipment/order/list";
     }
 
-    /**
+    /**<p>지점 물품발주 폼 페이지 호출</p>
      * @return 지점물품발주 폼 페이지
      */
     @GetMapping("/sportsEquipment/order/addForm")
-    public String getBranchEquipmentOrderAddForm(@SessionAttribute("loginEmployee") LoginEmployee loginEmployee, Model model) {
+    public String getSportsEquipmentOrderAddForm(@SessionAttribute("loginEmployee") LoginEmployee loginEmployee, Model model) {
+
         SportsEquipmentOrderAddRequestDto dto = new SportsEquipmentOrderAddRequestDto(loginEmployee.getEmployeeNo(), loginEmployee.getBranchNo(), null, null, null);
         model.addAttribute("formDto", dto);
+
         return "branch/sportsEquipment/order/addForm";
     }
 
-    /**<p>지점물품발주 post</p>
+    /**<p>지점물품발주요청 post</p>
      * @param dto {@link SportsEquipmentOrderAddRequestDto} 필드 유효성검사
      * @return 지점 물품 주문 폼 페이지에 메세지를 쿼리스트링 추가하여 리다이렉트
      */
     @PostMapping("/sportsEquipment/order")
-    public String addBranchEquipmentOrder(@Validated SportsEquipmentOrderAddRequestDto dto, Errors errors, Model model) {
+    public String addSportsEquipmentOrder(@Validated SportsEquipmentOrderAddRequestDto dto, Errors errors, Model model) {
+
         if (errors.hasErrors()){
             List<String> fieldErrorMessageList = errors.getFieldErrors().stream().map(DefaultMessageSourceResolvable::getDefaultMessage).toList();
             model.addAttribute("fieldErrorMessageList", fieldErrorMessageList);
             model.addAttribute("formDto", dto);
             return "/branch/sportsEquipment/order/addForm";
         }
-        boolean isSuccess = serviceFacade.addBranchEquipmentOrder(dto);
-        if(isSuccess){
-            return "redirect:/branch/sportsEquipment/order/addForm?serverMessage=success";
-        }
-        return "redirect:/branch/sportsEquipment/order/addForm?serverMessage=fail";
+
+        boolean isSuccess = serviceFacade.addSportsEquipmentOrder(dto);
+        String serverMessage = (isSuccess)? "success": "fail";
+
+        return "redirect:/branch/sportsEquipment/order/addForm?serverMessage="+serverMessage;
     }
 
-    /** <p>지점 프로그램 달력 페이지 get</p>
+    /** <p>지점 프로그램 달력 페이지 호출</p>
      * @param requestDate 기준일자
      * @param model {@link BranchProgramCalendar}
      */
     @GetMapping("/programCalendar/{requestDate}")
     public String getBranchProgramCalendar(
             @PathVariable(name = "requestDate") LocalDate requestDate,
-            @SessionAttribute("loginEmployee") LoginEmployee loginEmployee, Model model){
+            @SessionAttribute("loginEmployee") LoginEmployee loginEmployee,
+            Model model){
 
         if(requestDate == null){
             return "redirect:/branch/programCalendar/"+ LocalDate.now();
         }
 
-        BranchProgramCalendar calendar = serviceFacade.getBranchProgramCalendar(requestDate,loginEmployee.getBranchNo());
+        BranchProgramCalendar calendar = serviceFacade.getBranchProgramCalendar(loginEmployee.getBranchNo(), requestDate);
         model.addAttribute("calendar", calendar);
+
         return "/branch/programCalendar";
     }
 }

@@ -90,7 +90,7 @@
         </where>
         ORDER BY seo.createdate DESC
     </select>
-    <select id="selectSportsEquipmentOrderOneByOrderNo" resultType="java.util.Map">
+    <select id="selectSportsEquipmentOrderOneByOrderNo" resultType="com.tree.gdhealth.sportsequipment.dto.SportsEquipmentOrderInformation">
         SELECT seo.order_no orderNo,
                seo.employee_orderer employeeOrderer,
                oed.employee_name employeeOrdererName,

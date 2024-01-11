@@ -28,7 +28,7 @@
                 <div class="row mg-t-30">
                     <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                         <div class="product-status-wrap drp-lst">
-                            <h4>주간 프로그램 캘린더 (<span id="branchName"></span>)</h4>
+                            <h4>주간 프로그램 캘린더 (${sessionScope.loginEmployee.branchName})</h4>
                             <div class="asset-inner">
                                 <table>
                                     <tbody><tr>
@@ -36,19 +36,19 @@
                                         <th>날짜명</th>
                                         <th>프로그램</th>
                                         <th>담당트레이너</th>
-                                        <th>예약</th>
+                                        <th>예약현황</th>
                                     </tr>
-                                    <c:forEach var="branchDate" items="${calendar.branchDateList}">
+                                    <c:forEach var="programDate" items="${calendar.programDateList}">
                                     <tr>
-                                        <td name="date" style="${branchDate.isToday?"background: linear-gradient(to top, #ccd0f0 100%, transparent 50%);" : null}">${branchDate.date}</td>
-                                        <td>${branchDate.dateName} ${branchDate.isHoliday eq true ? "(공휴일)" : null}</td>
+                                        <td name="date" style="width: 200px; ${programDate.isToday?"background: linear-gradient(to top, #93DAFF 100%, transparent 50%); font-weight: bold;" : null}">${programDate.date}</td>
+                                        <td>${programDate.dateName} ${programDate.isHoliday eq true ? "(공휴일)" : null}</td>
                                         <td>
-                                            <c:if test="${branchDate.programName ne null}">
-                                            <button class="pd-setting" name="programName">${branchDate.programName}</button>
+                                            <c:if test="${programDate.programName ne null}">
+                                            <button class="pd-setting" name="programName">${programDate.programName}</button>
                                             </c:if>
                                         </td>
-                                        <td>${branchDate.trainerEmployeeNo ne 0? branchDate.managerName : null}</td>
-                                        <td>${branchDate.reservedCount}/${branchDate.maxCustomer} 명</td>
+                                        <td>${programDate.trainerEmployeeNo ne 0? programDate.managerName : null}</td>
+                                        <td>${programDate.reservedCount}/${programDate.maxCustomer} 명</td>
                                     </tr>
                                     </c:forEach>
                                     </tbody></table>
@@ -66,7 +66,7 @@
                             <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
                                 <div class="profile-info-inner">
                                     <div class="profile-img">
-                                        <img src="/branch/img/profile/1.jpg" alt="">
+                                        <img id="programImage" src="/branch/branchHome.png" alt="" style="width: 500px; height: 500px;" >
                                     </div>
                                     <div class="profile-details-hr">
                                         <div class="row">
@@ -206,62 +206,52 @@
 <!-- 본문 종료 -->
 <jsp:include page="/WEB-INF/view/branch/include/body-lower-layout.jsp"/>
 <script>
-    /*지점정보출력*/
-    $.ajax({
-        url: '/api/v1/branch/${calendar.branchNo}',
-        type: 'GET',
-        success: function (response){
-            $('#branchName').html(response.branchName + '지점');
-        }
-    });
-
+    const BRANCH_NO = ${sessionScope.loginEmployee.branchNo};
     /*프로그램 상세보기*/
     $('button[name="programName"]').click(function () {
-        console.log($(this).html());
-        let date = $(this).closest('tr').find('td[name="date"]').html();
-        console.log(date);
-
+        let date = $(this).closest('tr').find('td[name="date"]').text();
         $.ajax({
             url: '/api/v1/programDate/'+date,
             type: 'GET',
-            data: {branchNo : ${calendar.branchNo}},
-            success: function (response) {
-                console.log(response);
-                $('#date').text("").text(response.date);
-                $('#employeeName').text("").text(response.employeeName);
-                $('#address').text("").text(response.address);
-                $('#endDate').text("").text(response.endDate);
-                $('#managerName').text("").text(response.managerName);
-                $('#programDetail').text("").text(response.programDetail);
-                $('#programName').text("").text(response.programName);
-                $('#managerPhone').text("").text(response.managerPhone);
-                $('#startDate').text("").text(response.startDate);
-                let reservedCount = response.reservedCount;
-                let maxCustomer = response.maxCustomer;
+            data: {branchNo : BRANCH_NO},
+            success: function (responsePrgram) {
+                console.log(responsePrgram);
+                $('#date').text("").text(responsePrgram.date);
+                $('#employeeName').text("").text(responsePrgram.employeeName);
+                $('#address').text("").text(responsePrgram.address);
+                $('#endDate').text("").text(responsePrgram.endDate);
+                $('#managerName').text("").text(responsePrgram.managerName);
+                $('#programImage').attr('src','').attr('src','/upload/program/'+responsePrgram.programImageFile)
+                $('#programDetail').text("").text(responsePrgram.programDetail);
+                $('#programName').text("").text(responsePrgram.programName);
+                $('#managerPhone').text("").text(responsePrgram.managerPhone);
+                $('#startDate').text("").text(responsePrgram.startDate);
+                let reservedCount = responsePrgram.reservedCount;
+                let maxCustomer = responsePrgram.maxCustomer;
                 let reservedProgress = reservedCount/maxCustomer *100;
                 $('#reservedProgressBar').css('width',reservedProgress+'%');
-                $('#mangerChangeProgramDateNo').val("").val(response.programDateNo);
+                $('#mangerChangeProgramDateNo').val("").val(responsePrgram.programDateNo);
                 $('#mangerChangeSelectForm').html("");
                 $.ajax({
                     url: '/api/v1/employee',
                     type: 'GET',
-                    data: {branchNo : ${calendar.branchNo}},
-                    success: function (response2) {
-                        $(response2).each(function (index, item) {
+                    data: {branchNo : BRANCH_NO},
+                    success: function (responseManager) {
+                        $(responseManager).each(function (index, item) {
                             $('#mangerChangeSelectForm').append('<option value="'+item.employeeNo+'">'+item.employeeName+'</option>');
                         });
                     }
                 });
-                updateCustomerAttendanceList(response.programDateNo);
+                updateCustomerAttendanceList(responsePrgram.programDateNo);
             }
         });
     });
-    /**/
+    /*출석리스트 업데이트*/
     function updateCustomerAttendanceList(programDateNo) {
         $.ajax({
             url: '/api/v1/customerAttendance/'+programDateNo,
             type: 'get',
-            data: {branchNo : ${calendar.branchNo}},
+            data: {branchNo : BRANCH_NO},
             success: function (response){
                 let numberOfReservation = response.length;
                 let numberOfAttendance = 0;

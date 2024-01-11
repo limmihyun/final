@@ -24,5 +24,6 @@ public interface ProgramApiMapper {
 
     List<BranchProgramDate> getProgramDateBetween(
             @Param("branchNo") int branchNo,
-            @Param("startDate") LocalDate startDate);
+            @Param("startDate") LocalDate startDate,
+            @Param("totalDays") int totalDays);
 }

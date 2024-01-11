@@ -28,6 +28,7 @@
             med.employee_name managerName,
             med.employee_phone managerPhone,
             pr.program_max_customer maxCustomer,
+            pri.program_img_file programImageFile,
             IF(prd.program_no IS NULL, NULL, ifnull(prr.reservedCount, 0)) AS reservedCount,
             (SELECT br.branch_address FROM branch br WHERE br.branch_no = #{branchNo}) AS 'address',
             (SELECT MIN(prd2.program_date) FROM program_date prd2 WHERE prd2.program_no = prd.program_no) AS startDate,
@@ -37,6 +38,7 @@
                     LEFT JOIN program_date prd ON dateList.generated_date = prd.program_date
                     LEFT JOIN program pr
                               ON prd.program_no = pr.program_no
+                    LEFT JOIN program_img pri ON prd.program_no = pri.program_no
                     LEFT JOIN (SELECT * FROM program_manager prm WHERE prm.trainer_employee_no IN (SELECT em.employee_no FROM employee em WHERE em.branch_no = #{branchNo})) prm
                               ON prd.program_date_no = prm.program_date_no
                     LEFT JOIN (SELECT program_date_no, COUNT(program_reservation_no) AS reservedCount FROM program_reservation WHERE branch_no = #{branchNo} GROUP BY program_date_no) prr
@@ -70,7 +72,7 @@
         IF(prd.program_no IS NULL, NULL, ifnull(prr.reservedCount, 0))
         AS reservedCount
         FROM
-        (SELECT DATE(#{startDate}) + INTERVAL seq DAY AS generated_date FROM seq_0_to_7) dateList
+        (SELECT DATE(#{startDate}) + INTERVAL seq DAY AS generated_date FROM seq_0_to_${totalDays}) dateList
         LEFT JOIN program_date prd ON dateList.generated_date = prd.program_date
         LEFT JOIN program pr
         ON prd.program_no = pr.program_no

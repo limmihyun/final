@@ -1,6 +1,6 @@
 package com.tree.gdhealth.employee.api;
 
-import com.tree.gdhealth.employee.dto.EmployeeInformationDto;
+import com.tree.gdhealth.employee.dto.EmployeeInformation;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,7 +15,6 @@ import org.springframework.web.util.UriComponentsBuilder;
 import java.net.URI;
 import java.util.List;
 
-import static org.junit.jupiter.api.Assertions.*;
 @Slf4j
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 class EmployeeRestApiControllerTest {
@@ -29,9 +28,9 @@ class EmployeeRestApiControllerTest {
     void 본사직원리스트를_가져온다() {
         String UrlStr = "http://localhost:"+port+"/api/v1/employee";
         URI uri = UriComponentsBuilder.fromUriString(UrlStr).queryParam("isHeadOffice", "true").build().toUri();
-        ResponseEntity<List<EmployeeInformationDto>> responseEntity = restTemplate.exchange(
+        ResponseEntity<List<EmployeeInformation>> responseEntity = restTemplate.exchange(
                 uri, HttpMethod.GET, null,
-                new ParameterizedTypeReference<List<EmployeeInformationDto>>(){});
+                new ParameterizedTypeReference<List<EmployeeInformation>>(){});
         log.debug(responseEntity.getBody().toString());
     }
 
@@ -39,9 +38,9 @@ class EmployeeRestApiControllerTest {
     void 지점직원리스트를_가져온다() {
         String UrlStr = "http://localhost:"+port+"/api/v1/employee";
         URI uri = UriComponentsBuilder.fromUriString(UrlStr).queryParam("branchNo", "2").build().toUri();
-        ResponseEntity<List<EmployeeInformationDto>> responseEntity = restTemplate.exchange(
+        ResponseEntity<List<EmployeeInformation>> responseEntity = restTemplate.exchange(
                 uri, HttpMethod.GET, null,
-                new ParameterizedTypeReference<List<EmployeeInformationDto>>(){});
+                new ParameterizedTypeReference<List<EmployeeInformation>>(){});
         log.debug(responseEntity.getBody().toString());
     }
 
@@ -49,9 +48,9 @@ class EmployeeRestApiControllerTest {
     void 직원하나를_가져온다() {
         String UrlStr = "http://localhost:"+port+"/api/v1/employee";
         URI uri = UriComponentsBuilder.fromUriString(UrlStr).queryParam("employeeNo", "2").build().toUri();
-        ResponseEntity<EmployeeInformationDto> responseEntity = restTemplate.exchange(
+        ResponseEntity<EmployeeInformation> responseEntity = restTemplate.exchange(
                 uri, HttpMethod.GET, null,
-                EmployeeInformationDto.class);
+                EmployeeInformation.class);
         log.debug(responseEntity.getBody().toString());
     }
 }

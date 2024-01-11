@@ -22,7 +22,7 @@ public interface SportsEquipmentApiMapper {
 
     int insertSportsEquipmentOrder(SportsEquipmentOrderAddRequestDto dto);
 
-    Map<String, Object> selectSportsEquipmentOrderOneByOrderNo(@Param("orderNo") Integer orderNo);
+    SportsEquipmentOrderInformation selectSportsEquipmentOrderOneByOrderNo(@Param("orderNo") Integer orderNo);
 
     int updateSportsEquipmentOrderStatus(@Param("orderNo") Integer orderNo, @Param("changeOrderStatus") String changeOrderStatus);
 }
