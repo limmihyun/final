@@ -32,7 +32,7 @@
     </insert>
     <update id="updateSportsEquipmentOrderStatus">
         UPDATE sports_equipment_order
-        SET order_status = #{changeSportsEquipmentOrderStatus}
+        SET order_status = #{changeOrderStatus}
         WHERE order_no = #{orderNo}
     </update>
 
