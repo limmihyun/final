@@ -11,7 +11,7 @@ import lombok.Data;
 @Builder
 @AllArgsConstructor
 @Data
-public class SportsEquipmentOrderAddDto {
+public class SportsEquipmentOrderAddRequestDto {
     @Positive
     private int employeeOrderer;
     @Positive

@@ -2,46 +2,6 @@
 <!-- author 정인호-->
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.tree.gdhealth.sportsequipment.SportsEquipmentApiMapper">
-
-    <!--
-    <select id="findSportsEquipmentByNo" parameterType="int" resultType="com.tree.gdhealth.vo.SportsEquipment">
-        SELECT sports_equipment_no sportsEquipmentNo,
-               item_name itemName,
-               item_price itemPrice,
-               note,
-               createdate,
-               updatedate
-        FROM sports_equipment
-        WHERE sports_equipment_no = #{sportsEquipmentNo}
-    </select>
-    <select id="findSportsEquipmentOrderByNo" parameterType="int" resultType="com.tree.gdhealth.vo.SportsEquipmentOrder">
-        SELECT order_no orderNo,
-               employee_orderer employeeOrderer,
-               branch_no branchNo,
-               sports_equipment_no sportsEquipmentNo,
-               quantity,
-               total_price totalPrice,
-               createdate,
-               updatedate,
-               employee_approver employeeApprover,
-               order_status orderStatus
-        FROM sports_equipment_order
-        WHERE order_no = #{orderNo}
-    </select>
-    <select id="findSportsEquipmentImgByNo" parameterType="int"
-            resultType="com.tree.gdhealth.vo.SportsEquipmentImg">
-        SELECT sports_equipment_img_no sportsEquipmentImgNo,
-               sports_equipment_no sportsEquipmentNo,
-               sports_equipment_img_origin_name sportsEquipmentImgOriginName,
-               sports_equipment_img_file_name sportsEquipmentImgFileName,
-               sports_equipment_img_size sportsEquipmentImgSize,
-               sports_equipment_img_type sportsEquipmentImgType,
-               createdate,
-               updatedate
-        FROM sports_equipment_img
-        WHERE sports_equipment_img_no = #{sportsEquipmentImgNo}
-    </select>
-    -->
     <select id="selectSportsEquipmentAll" resultType="com.tree.gdhealth.vo.SportsEquipment">
         SELECT sports_equipment_no sportsEquipmentNo,
                item_name itemName,
@@ -62,7 +22,7 @@
         WHERE sports_equipment_no = #{sportsEquipmentNo}
     </select>
 
-    <insert id="insertSportsEquipmentOrder" parameterType="com.tree.gdhealth.sportsequipment.dto.SportsEquipmentOrderAddDto">
+    <insert id="insertSportsEquipmentOrder" parameterType="com.tree.gdhealth.sportsequipment.dto.SportsEquipmentOrderAddRequestDto">
         INSERT INTO sports_equipment_order
         (employee_orderer, branch_no, sports_equipment_no, quantity, total_price, employee_approver)
         VALUES
@@ -72,7 +32,7 @@
     </insert>
     <update id="updateSportsEquipmentOrderStatus">
         UPDATE sports_equipment_order
-        SET order_status = #{changeSportsEquipmentOrderStatus
+        SET order_status = #{changeSportsEquipmentOrderStatus}
         WHERE order_no = #{orderNo}
     </update>
 
@@ -89,21 +49,22 @@
         FROM branch
         WHERE branch_no = #{branchNo}
     </select>
-    <select id="selectSportsEquipmentOrderAll" parameterType="java.util.Map" resultType="java.util.Map">
-        SELECT seo.order_no orderNo,
-        seo.employee_orderer employeeOrderer,
-        oed.employee_name employeeOrdererName,
-        seo.branch_no branchNo,
-        bch.branch_name branchName,
-        seo.sports_equipment_no sportsEquipmentNo,
-        se.item_name itemName,
-        seo.quantity,
-        se.item_price itemPrice,
-        (seo.quantity * se.item_price) totalPrice,
-        seo.employee_approver employeeApprover,
-        aed.employee_name employeeApproverName,
-        seo.order_status orderStatus,
-        seo.createdate
+    <select id="selectSportsEquipmentOrderListByCriteria" parameterType="com.tree.gdhealth.sportsequipment.dto.SportsEquipmentOrderRetrieveCriteria" resultType="com.tree.gdhealth.sportsequipment.dto.SportsEquipmentOrderInformation">
+        SELECT
+            seo.order_no orderNo,
+            seo.employee_orderer employeeOrderer,
+            oed.employee_name employeeOrdererName,
+            seo.branch_no branchNo,
+            bch.branch_name branchName,
+            seo.sports_equipment_no sportsEquipmentNo,
+            se.item_name itemName,
+            seo.quantity,
+            se.item_price itemPrice,
+            (seo.quantity * se.item_price) totalPrice,
+            seo.employee_approver employeeApprover,
+            aed.employee_name employeeApproverName,
+            seo.order_status orderStatus,
+            seo.createdate
         FROM sports_equipment_order seo
         LEFT JOIN employee_detail oed ON seo.employee_orderer = oed.employee_no
         LEFT JOIN branch bch ON seo.branch_no = bch.branch_no
@@ -119,6 +80,10 @@
     <select id="countSportsEquipmentOrderListLastPage" resultType="java.lang.Integer">
         SELECT CEILING(COUNT(seo.order_no)/${rowPerPage}) AS lastPage
         FROM sports_equipment_order seo
+        LEFT JOIN employee_detail oed ON seo.employee_orderer = oed.employee_no
+        LEFT JOIN branch bch ON seo.branch_no = bch.branch_no
+        LEFT JOIN sports_equipment se ON seo.sports_equipment_no = se.sports_equipment_no
+        LEFT JOIN employee_detail aed ON seo.employee_approver = aed.employee_no
         <where>
             <if test="branchNo != null">AND seo.branch_no = #{branchNo}</if>
             <if test="isOnlyWaitingList">AND seo.order_status = '대기'</if>

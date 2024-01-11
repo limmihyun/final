@@ -129,8 +129,6 @@
                                                 <label>지점선택</label>
                                                 <select id="branchSelectFrom" class="form-control dt-tb">
                                                     <option value="">전체지점</option>
-                                                    <option>2</option>
-                                                    <option>3</option>
                                                 </select>
                                             </div>
                                         </div>
@@ -196,20 +194,20 @@
                                                 </tr>
                                                 </thead>
                                                 <tbody>
-                                                <c:forEach var="order" items="${orderListResponseDto.orderList}">
+                                                <c:forEach var="orderInformation" items="${orderInformationList}">
                                                     <tr>
-                                                        <td>${order.createdate}</td>
-                                                        <td>${order.orderNo}</td>
-                                                        <td>(${order.employeeOrderer})${order.employeeOrdererName}</td>
-                                                        <td>(${order.branchNo})${order.branchName}</td>
-                                                        <td>(${order.sportsEquipmentNo})${order.itemName}</td>
-                                                        <td>${order.quantity}</td>
-                                                        <td>${order.itemPrice}</td>
-                                                        <td>${order.totalPrice}</td>
+                                                        <td>${orderInformation.createdate}</td>
+                                                        <td>${orderInformation.orderNo}</td>
+                                                        <td>(${orderInformation.employeeOrderer})${orderInformation.employeeOrdererName}</td>
+                                                        <td>(${orderInformation.branchNo})${orderInformation.branchName}</td>
+                                                        <td>(${orderInformation.sportsEquipmentNo})${orderInformation.itemName}</td>
+                                                        <td>${orderInformation.quantity}</td>
+                                                        <td>${orderInformation.itemPrice}</td>
+                                                        <td>${orderInformation.totalPrice}</td>
                                                         <td>
-                                                            (${order.employeeApprover})${order.employeeApproverName}</td>
-                                                        <td><a href="/headoffice/sportsEquipmentOrderOne?orderNo=${order.orderNo}"
-                                                               class="btn btn-info">${order.orderStatus}</a></td>
+                                                            (${orderInformation.employeeApprover})${orderInformation.employeeApproverName}</td>
+                                                        <td><a href="/headoffice/sportsEquipmentOrderOne?orderNo=${orderInformation.orderNo}"
+                                                               class="btn btn-info">${orderInformation.orderStatus.code}</a></td>
                                                     </tr>
                                                 </c:forEach>
                                                 </tbody>
@@ -229,11 +227,8 @@
                                             <div class="pull-right pagination">
                                                 <ul class="pagination">
                                                     <li class="page-pre"><a href="#">‹</a></li>
-                                                    <c:forEach var="paginationURIMap"
-                                                               items="${orderListResponseDto.paginationURIList}">
-                                                        <li class="page-number ${(paginationURIMap['page'] eq orderListResponseDto.requestPage)? "active" : null}">
-                                                            <a href="${paginationURIMap['URI']}">${paginationURIMap['page']}</a>
-                                                        </li>
+                                                    <c:forEach var="pageUri" items="${pageUriList}">
+                                                        <li class="page-number ${pageUri.page eq requestPage? "active" : null}"><a href="${pageUri.uri}">${pageUri.page}</a></li>
                                                     </c:forEach>
                                                     <li class="page-next"><a href="#">›</a></li>
                                                 </ul>
@@ -307,7 +302,7 @@
 <script>
     /*지점리스트를 가져옵니다*/
     $.ajax({
-        url: '/api/v1/branch/list',
+        url: '/api/v1/branch',
         type: 'get',
         success: function (response){
             let currentUri = window.location.href;

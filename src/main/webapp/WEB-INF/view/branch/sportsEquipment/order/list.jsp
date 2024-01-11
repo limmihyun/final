@@ -43,75 +43,6 @@
                                             </select>
                                         </div>
                                     </div>
-                                    <div class="columns columns-right btn-group pull-right">
-                                        <button class="btn btn-default" type="button" name="paginationSwitch"
-                                                aria-label="pagination Switch" title="Hide/Show pagination"><i
-                                                class="glyphicon glyphicon-collapse-down icon-chevron-down"></i>
-                                        </button>
-                                        <button class="btn btn-default" type="button" name="refresh"
-                                                aria-label="refresh" title="Refresh"><i
-                                                class="glyphicon glyphicon-refresh icon-refresh"></i></button>
-                                        <button class="btn btn-default" type="button" name="toggle" aria-label="toggle"
-                                                title="Toggle"><i
-                                                class="glyphicon glyphicon-list-alt icon-list-alt"></i></button>
-                                        <div class="keep-open btn-group" title="Columns">
-                                            <button type="button" aria-label="columns"
-                                                    class="btn btn-default dropdown-toggle" data-toggle="dropdown"><i
-                                                    class="glyphicon glyphicon-th icon-th"></i> <span
-                                                    class="caret"></span></button>
-                                            <ul class="dropdown-menu" role="menu">
-                                                <li role="menuitem"><label><input type="checkbox" data-field="id"
-                                                                                  value="1" checked="checked">
-                                                    ID</label></li>
-                                                <li role="menuitem"><label><input type="checkbox" data-field="name"
-                                                                                  value="2" checked="checked">
-                                                    Task</label></li>
-                                                <li role="menuitem"><label><input type="checkbox" data-field="email"
-                                                                                  value="3" checked="checked">
-                                                    Email</label></li>
-                                                <li role="menuitem"><label><input type="checkbox" data-field="phone"
-                                                                                  value="4" checked="checked">
-                                                    Phone</label></li>
-                                                <li role="menuitem"><label><input type="checkbox" data-field="complete"
-                                                                                  value="5" checked="checked"> Completed</label>
-                                                </li>
-                                                <li role="menuitem"><label><input type="checkbox" data-field="task"
-                                                                                  value="6" checked="checked">
-                                                    Task</label></li>
-                                                <li role="menuitem"><label><input type="checkbox" data-field="date"
-                                                                                  value="7" checked="checked">
-                                                    Date</label></li>
-                                                <li role="menuitem"><label><input type="checkbox" data-field="price"
-                                                                                  value="8" checked="checked">
-                                                    Price</label></li>
-                                                <li role="menuitem"><label><input type="checkbox" data-field="action"
-                                                                                  value="9" checked="checked">
-                                                    Action</label></li>
-                                            </ul>
-                                        </div>
-                                        <div class="export btn-group">
-                                            <button class="btn btn-default dropdown-toggle" aria-label="export type"
-                                                    title="Export data" data-toggle="dropdown" type="button"><i
-                                                    class="glyphicon glyphicon-export icon-share"></i> <span
-                                                    class="caret"></span></button>
-                                            <ul class="dropdown-menu" role="menu">
-                                                <li role="menuitem" data-type="json"><a
-                                                        href="javascript:void(0)">JSON</a></li>
-                                                <li role="menuitem" data-type="xml"><a href="javascript:void(0)">XML</a>
-                                                </li>
-                                                <li role="menuitem" data-type="csv"><a href="javascript:void(0)">CSV</a>
-                                                </li>
-                                                <li role="menuitem" data-type="txt"><a href="javascript:void(0)">TXT</a>
-                                                </li>
-                                                <li role="menuitem" data-type="sql"><a href="javascript:void(0)">SQL</a>
-                                                </li>
-                                                <li role="menuitem" data-type="excel"><a href="javascript:void(0)">MS-Excel</a>
-                                                </li>
-                                            </ul>
-                                        </div>
-                                    </div>
-                                    <div class="pull-right search"><input class="form-control" type="text"
-                                                                          placeholder="Search"></div>
                                 </div>
                                 <div class="fixed-table-container" style="padding-bottom: 0px;">
                                     <div class="fixed-table-header" style="display: none;">
@@ -171,18 +102,18 @@
                                             </tr>
                                             </thead>
                                             <tbody>
-                                            <c:forEach var="order" items="${orderListResponseDto.orderList}">
+                                            <c:forEach var="orderInformation" items="${orderInformationList}">
                                             <tr>
-                                                <td>${order.createdate}</td>
-                                                <td>${order.orderNo}</td>
-                                                <td>(${order.employeeOrderer})${order.employeeOrdererName}</td>
-                                                <td>(${order.branchNo})${order.branchName}</td>
-                                                <td>(${order.sportsEquipmentNo})${order.itemName}</td>
-                                                <td>${order.quantity}</td>
-                                                <td>${order.itemPrice}</td>
-                                                <td>${order.totalPrice}</td>
-                                                <td>(${order.employeeApprover})${order.employeeApproverName}</td>
-                                                <td>${order.orderStatus}</td>
+                                                <td>${orderInformation.createdate}</td>
+                                                <td>${orderInformation.orderNo}</td>
+                                                <td>(${orderInformation.employeeOrderer})${orderInformation.employeeOrdererName}</td>
+                                                <td>(${orderInformation.branchNo})${orderInformation.branchName}</td>
+                                                <td>(${orderInformation.sportsEquipmentNo})${orderInformation.itemName}</td>
+                                                <td>${orderInformation.quantity}</td>
+                                                <td>${orderInformation.itemPrice}</td>
+                                                <td>${orderInformation.totalPrice}</td>
+                                                <td>(${orderInformation.employeeApprover})${orderInformation.employeeApproverName}</td>
+                                                <td>${orderInformation.orderStatus.code}</td>
                                             </tr>
                                             </c:forEach>
                                             </tbody>
@@ -202,8 +133,8 @@
                                         <div class="pull-right pagination">
                                             <ul class="pagination">
                                                 <li class="page-pre"><a href="#">‹</a></li>
-                                                <c:forEach var="paginationURIMap" items="${orderListResponseDto.paginationURIList}">
-                                                    <li class="page-number ${(paginationURIMap['page'] eq orderListResponseDto.requestPage)? "active" : null}"><a href="${paginationURIMap['URI']}">${paginationURIMap['page']}</a></li>
+                                                <c:forEach var="pageUri" items="${pageUriList}">
+                                                    <li class="page-number ${pageUri.page eq requestPage? "active" : null}"><a href="${pageUri.uri}">${pageUri.page}</a></li>
                                                 </c:forEach>
                                                 <li class="page-next"><a href="#">›</a></li>
                                             </ul>

@@ -2,7 +2,7 @@ package com.tree.gdhealth.utils.enumtype;
 
 import lombok.Getter;
 
-/**
+/** 물품발주의 처리상태
  * @author 정인호
  */
 @Getter
