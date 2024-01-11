@@ -7,7 +7,7 @@ import org.springframework.transaction.annotation.Transactional;
 import java.util.List;
 import java.util.Map;
 
-/**
+/**<p>고객출결의 매퍼</p>
  * @author 정인호
  */
 @Mapper

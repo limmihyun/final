@@ -8,7 +8,7 @@ import org.springframework.transaction.annotation.Transactional;
 import java.util.List;
 import java.util.Map;
 
-/**
+/**<p>고객출결관리 서비스</p>
  * @author 정인호
  */
 @Slf4j
@@ -18,14 +18,17 @@ import java.util.Map;
 public class CustomerAttendanceApiService {
     private final CustomerAttendanceApiMapper mapper;
     public List<Map<String, Object>> getCustomerAttendanceList(int programDateNo, int branchNo) {
+
         return mapper.getCustomerAttendanceList(programDateNo, branchNo);
     }
 
     public void recordEnterTime(int programReservationNo) {
+
         mapper.recordEnterTime(programReservationNo);
     }
 
     public void recordExitTime(int programReservationNo) {
+
         mapper.recordExitTime(programReservationNo);
     }
 }

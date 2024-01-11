@@ -271,6 +271,7 @@
                        '<tr><td>'+(index+1)+'</td><td name="customerNo">'+item.customerNo+'</td><td>'+item.customerName+'</td><td name="programReservationNo">'+item.programReservationNo+'</td>'+undefinedEnterExitHandler(item.enterTime,item.exitTime)+'</tr>'
                    );
                 });
+                /*출석처리 이벤트리스너 추가*/
                 $("button[name='recordEnterTimeButton']").on("click", function (){
                     let programReservationNo = $(this).closest('tr').find('td[name="programReservationNo"]').text();
                     console.log(programReservationNo);
@@ -284,6 +285,7 @@
                     });
 
                 });
+                /*퇴실처리 이벤트리스너 추가*/
                 $("button[name='recordExitTimeButton']").on("click", function (){
                     let programReservationNo = $(this).closest('tr').find('td[name="programReservationNo"]').text();
                     console.log(programReservationNo);
@@ -301,6 +303,7 @@
         });
     }
 
+    /*출결 값이 없을 때 화면을 처리하는 함수*/
     function undefinedEnterExitHandler(enter, exit){
         let str;
         if(typeof enter == "undefined" || enter == null || enter == "") {
@@ -313,7 +316,7 @@
         return str ;
     }
 
-
+    /*빈 값처리 함수*/
     function undefinedEnterHandler(str){
         if(typeof str == "undefined" || str == null || str == "")
             str = '<button name="recordEnterTimeButton" type="button">입실처리</button>' ;
@@ -331,8 +334,8 @@
        $.ajax({
            url: '/api/v1/programDate/changeManager',
            type: 'POST',
-           contentType : 'application/json',
-           data: JSON.stringify({"programDateNo": programDateNo, "managerNo" : managerNo}),
+           contentType : 'application/x-www-form-urlencoded',
+           data: {"programDateNo": programDateNo, "managerNo" : managerNo},
            success: function (response) {
                window.location.reload();
            }
