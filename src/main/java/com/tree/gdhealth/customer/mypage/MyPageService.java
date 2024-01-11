@@ -19,10 +19,14 @@ public class MyPageService {
 	@Autowired MyPageMapper myPageMapper;
 	
 	public CustomerMyPage MyPage(int customerNo) {
-		CustomerMyPage info = myPageMapper.info(customerNo); 
-		int weight = info.getCustomerWeight();
-		int height = info.getCustomerHeight();
-		double bmi = (weight / (height * height / 10000));
+		CustomerMyPage info = myPageMapper.info(customerNo);
+		
+		// bmi 계산식
+		double weight = info.getCustomerWeight();
+		double height = info.getCustomerHeight();
+		height /= 100;
+		double bmi = Math.round((weight / (height * height))*10);
+		bmi /=10 ;
 		info.setCustomerBmi(bmi);
 		System.out.println(info.toString());
 		System.out.println(bmi);
