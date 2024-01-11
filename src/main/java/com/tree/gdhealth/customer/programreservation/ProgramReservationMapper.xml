@@ -101,7 +101,7 @@
 		SELECT branch_name branchName,
 			   branch_no branchNo
 		FROM branch
-		WHERE branch_name != 'headoffice';
+		WHERE branch_name != '본점';
 	</select>
 	
 	<select id="customerId">
