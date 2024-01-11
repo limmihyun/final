@@ -22,8 +22,7 @@ public interface ProgramApiMapper {
 
     int insertManager(@Param("programDateNo") int programDateNo,@Param("managerNo") int managerNo);
 
-    List<BranchProgramDate> getProgramDateBetween(
-            @Param("branchNo") int branchNo,
-            @Param("startDate") LocalDate startDate,
-            @Param("totalDays") int totalDays);
+    List<BranchProgramDate> getProgramDateBetween(@Param("branchNo") int branchNo,
+                                                  @Param("startDate") LocalDate startDate,
+                                                  @Param("totalDays") int totalDays);
 }

@@ -15,7 +15,9 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
-/**<p>프로그램 도메인 API 서비스</p>
+/**
+ * <p>프로그램 도메인 API 서비스</p>
+ *
  * @author 정인호
  */
 
@@ -25,7 +27,6 @@ import java.util.Map;
 @Service
 public class ProgramApiService {
     private final ProgramApiMapper programApiMapper;
-    private final HolidayApi holidayApi;
 
     public Map<String, Object> getBranchProgramDate(LocalDate date, int branchNo) {
 
@@ -34,27 +35,24 @@ public class ProgramApiService {
 
     @Transactional
     public boolean changeManager(int programDateNo, int managerNo) {
-        //confirm if exist
+        //confirm whether it exist
         int foundRow = programApiMapper.selectManager(programDateNo, managerNo);
         int result = 0;
-        if(foundRow == 1){
+        if (foundRow == 1) {
             // updated
             result = programApiMapper.changeManager(programDateNo, managerNo);
-        }else {
+        } else {
             // or insert
             result = programApiMapper.insertManager(programDateNo, managerNo);
         }
         return result == 1;
     }
 
-    public List<BranchProgramDate> getBranchProgramDateList(int branchNo, LocalDate requestDate, int minusDays, int plusDays){
+    public List<BranchProgramDate> getBranchProgramDateList(int branchNo, LocalDate requestDate, int minusDays, int plusDays) {
 
-        int totalDays = plusDays +minusDays;
+        int totalDays = plusDays + minusDays;
 
         return programApiMapper.getProgramDateBetween(branchNo, requestDate.minusDays(minusDays), totalDays);
     }
-
-
-
 
 }
