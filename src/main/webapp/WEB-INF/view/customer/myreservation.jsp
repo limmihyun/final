@@ -201,7 +201,7 @@ Copyright &copy;<script>document.write(new Date().getFullYear());</script> All r
 					
     				$('#reservationList').load(location.href + " #reservationList");
     			}
-/*     		    error: function (jqXHR, textStatus, errorThrown) {
+     		    error: function (jqXHR, textStatus, errorThrown) {
     		        if (jqXHR.status === 500) {
     		            alert("로그인을 확인해주세요.");
     		            window.location.href = "/customer/login";
@@ -210,7 +210,7 @@ Copyright &copy;<script>document.write(new Date().getFullYear());</script> All r
     		        } else {
     		            alert("알 수 없는 오류가 발생했습니다.");
     		        }
-    		    } */
+    		    } 
     		});
     	};
     </script>

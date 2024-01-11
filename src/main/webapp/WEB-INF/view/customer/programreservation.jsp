@@ -119,8 +119,13 @@
     </section>
     <!-- Hero Slider End -->
 	
+	<input type="hidden" id="targetYear" value="${calendarMap.targetYear}">
+	<input type="hidden" id="targetMonth" value="${calendarMap.targetMonth}">
+	<input type="hidden" id="targetDay" value="${calendarMap.targetDay}">
+	
+	
 	<section style="position: relative; height:100%;">
- 	<div style="width:70%; position: absolute;">
+ 	<div id="calendar" style="width:70%; position: absolute;">
 		<div align="center">
 			<h1>${calendarMap.targetMonth + 1} 월</h1>
 		</div>
@@ -128,7 +133,7 @@
 		    <p style="margin-top:50px;">${calendarMap.targetYear} 년</p>
 		    <div style="position: absolute; left: 50%; transform: translateX(-50%);" class="d-flex justify-content-center" align="center">
 		        <a class="btn btn-primary" href="${pageContext.request.contextPath}/customer/programrs?targetYear=${calendarMap.targetYear}&targetMonth=${calendarMap.targetMonth - 1}">&#60;&nbsp;이전달</a>&nbsp;
-		        <a class="btn btn-primary" href="${pageContext.request.contextPath}/customer/programrs?targetYear=${calendarMap.targetYear}&targetMonth=${calendarMap.targetMonth + 1}">다음달&nbsp;&#62;</a>
+		        <a class="btn btn-primary" href="#"  onclick="nextMonth(${calendarMap.targetYear}, ${calendarMap.targetMonth}, ${calendarMap.targetDay})">다음달&nbsp;&#62;</a>
 		    </div>
 		</div>
 		
@@ -312,8 +317,6 @@
  	<div style="margin-left:80%; position: absolute; margin-top:13%; text-align:center;" id="reservationList">
  	
 		<input type="hidden" id="currentPageMonth1" value="${currentPageMonth1}">
-		<input type="hidden" id="targetYear" value="${calendarMap.targetYear}">
-		<input type="hidden" id="targetMonth" value="${calendarMap.targetMonth}">
 		
 					<c:set var="loop_flag" value="false" />
 					<c:set value="${calendarMap.targetYear}" var="listYear"></c:set>
@@ -609,6 +612,32 @@ Copyright &copy;<script>document.write(new Date().getFullYear());</script> All r
                     console.error(error);
                 }
             });
+        };
+        
+        function nextMonth(targetYear, targetMonth, targetDay){
+        	console.log(targetYear);
+        	console.log(targetMonth);
+        	console.log(targetDay);
+
+            var formData = {
+                    targetYear: targetYear,
+                    targetMonth: targetMonth + 1,
+                    targetDay: targetDay
+                };
+        	$.ajax({
+                url: '/customer/reservationCalendar',
+                method: 'get',
+                data: formData,
+                success: function(data){
+
+                	$('#calendar').html(data);	
+/*                 	let currentMonth = $('#currentMonth').text();
+ *//*                 	var a = '';
+                	a += '<a class="btn btn-primary" href="#"  onclick="nextMonth(2024,'+currentMonth+',0)">다음달&nbsp;&#62;</a>' */
+                	
+                	
+                }
+        	});
         };
 </script>
 </body>

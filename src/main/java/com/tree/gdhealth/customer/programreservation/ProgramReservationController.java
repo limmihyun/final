@@ -209,5 +209,37 @@ public class ProgramReservationController {
 		return "customer/myreservation";
 		
 	}
+	
+    @GetMapping("/customer/reservationCalendar")
+    public String showReservationCalendar(HttpSession session,Model model
+			, @RequestParam(required = false) Integer targetYear
+			, @RequestParam(required = false) Integer targetMonth
+			, @RequestParam(required = false) Integer targetDay) {
+    	
+    	
+    	if(session.getAttribute("customerNo") == null) {
+			return "redirect:/customer/login";
+		}
+		
+    	
+    	System.out.println("ajax calendar -->" + targetYear);
+    	System.out.println("ajax calendar -->" + targetMonth);
+    	System.out.println("ajax calendar -->" + targetDay);
+		
+		int customerNo = (int)(session.getAttribute("customerNo"));	
+    	
+		Map<String, Object> calendarMap = programReservationService.getCalendar(targetYear, targetMonth, targetDay);
+		model.addAttribute("calendarMap", calendarMap);
+    	
+		List<Map<String, Object>> resultList = programReservationService.selectProgramByMonth((int)(calendarMap.get("targetYear")), (int)(calendarMap.get("targetMonth")));
+		model.addAttribute("resultList", resultList);
+		System.out.println(resultList + "<---resultList 출력");
+		
+		List<Map<String, Object>> myCalendarList = programReservationService.myCalendarLust((int)(calendarMap.get("targetYear")), (int)(calendarMap.get("targetMonth")), customerNo);
+		model.addAttribute("myCalendarList", myCalendarList);
+		System.out.println(myCalendarList + "<---myCalendarList 출력");
+    	
+        return "customer/reservationCalendar";
+    }
 
 }
