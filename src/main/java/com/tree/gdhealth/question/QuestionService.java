@@ -21,12 +21,19 @@ public class QuestionService {
 	}
 	
 	//문의 상세
-	public Question questionOne(int questionNo) {
+	public Question questionOne(int employeeNo) {
 		
-		Question resultQuestionOne = questionMapper.questionOne(questionNo);
+		Question resultQuestionOne = questionMapper.questionOne(employeeNo);
 		
 		return resultQuestionOne;
 	}
+	
+	//본사확인
+	public int getBranchLevel(int branchNo) {
+		int row = questionMapper.getBranchLevel(branchNo);
+		return row;
+	}
+	
 	//문의 추가
 	public int addQuestion(Question question) {
 		int row = questionMapper.addQuestion(question);

@@ -43,7 +43,7 @@
         </div>
     </section>
     <!-- Search Bar End -->
-    <jsp:include page="/WEB-INF/header/header.jsp" />
+    <jsp:include page="/WEB-INF/header/header.jsp"/>
   
   <div class="untree_co-section" style="padding-top: 80px;">
           <div class="container" style="margin-top: 100px;">
@@ -64,21 +64,48 @@
        <th>수정날짜</th>
    </thead>
    <tbody>
-	
-  
-   <c:forEach var="n" items="${list}">
-   	<c:if test="${userLevel > 0}">
-	   <tr>
-	      <td style="align-text:center;">${n.questionNo}</td>
-	      <td>${n.branchName}</td>
-	      <td><a href="${pageContext.request.contextPath}/question/questionOne?questionNo=${n.questionNo}">${n.questionTitle}</a></td>
-	      <td>${n.customerId}</td>
-	      <td>${n.createdate}</td>
-	      <td>${n.updatedate}</td>
-	   </tr>
-	  </c:if>
-   </c:forEach>
    
+	<c:forEach var="n" items="${list}">
+	   <tr>
+	     <td style="align-text:center;">${n.questionNo}</td>
+	     <td>${n.branchName}</td>
+	     <c:choose>
+	     	<c:when test="${n.isSecret == 'TRUE'}">
+	     		<c:choose>
+	     			
+	 				<c:when test="${n.branchNo == branchNo}">
+	 				
+	     				<td><a href="${pageContext.request.contextPath}/question/questionOne?questionNo=${n.questionNo}">${n.questionTitle}</a></td>
+	     			</c:when>
+	     			
+	     			
+	     			<c:when test="${branchLevel == 1}">
+	     			
+	     				<td><a href="${pageContext.request.contextPath}/question/questionOne?questionNo=${n.questionNo}">${n.questionTitle}</a></td>
+	     			</c:when>
+	     			
+	     			
+	     			<c:when test="${n.customerNo == customerNo}">
+	     			
+	     				<td><a href="${pageContext.request.contextPath}/question/questionOne?questionNo=${n.questionNo}">${n.questionTitle}</a></td>
+	     			</c:when>
+	     			
+	     			<c:otherwise>
+	     					<td>비밀글입니다</td>
+	     			</c:otherwise>
+	     		</c:choose>
+	     	</c:when>
+	     	<c:otherwise>
+	     		<td><a href="${pageContext.request.contextPath}/question/questionOne?questionNo=${n.questionNo}">${n.questionTitle}</a></td>
+	     	</c:otherwise>
+	     </c:choose>
+	     <td>${n.customerId}</td>
+	     <td>${n.createdate}</td>
+	     <td>${n.updatedate}</td>
+	   </tr>
+	 </c:forEach>
+	
+ 
    </tbody>
    </table>
    <a href="${pageContext.request.contextPath}/question/addQuestion"><button type="submit" class="site-btn">문의하기</button></a>
@@ -94,5 +121,3 @@
     <script src="/js/main.js"></script>
 </body>
 </html>
-
-<html></html>
