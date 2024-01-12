@@ -83,9 +83,8 @@ public class BranchServiceFacade {
         return paginationUriGenerator.getPageUriList(criteria.getRequestPage(),lastPage,urlPath,paramMap);
     }
 
-    public boolean addSportsEquipmentOrder(SportsEquipmentOrderAddRequestDto dto) {
-
-        return sportsEquipmentApiService.addSportsEquipmentOrder(dto);
+    public boolean addSportsEquipmentOrder(SportsEquipmentOrderAddRequest reqDto) {
+        return sportsEquipmentApiService.addSportsEquipmentOrder(reqDto);
     }
 
     public boolean changeSportsEquipmentOrderStatus(Integer orderNo, String changeOrderStatus) {
@@ -101,16 +100,14 @@ public class BranchServiceFacade {
      */
     public BranchProgramCalendar getBranchProgramCalendar(Integer branchNo, LocalDate requestDate) {
 
-        BranchProgramCalendar calendar = new BranchProgramCalendar();
-        List<BranchProgramDate> dateList = programApiService.getBranchProgramDateList(branchNo,requestDate, 1, 6);
-        List<HolidayApiVo> holidayList = new ArrayList<>();
-
+        List<BranchProgramDate> dateList = programApiService.getBranchProgramDateList(branchNo, requestDate, 1, 6);
         /* 오늘날짜 지정*/
         dateList.stream()
                 .filter(date -> LocalDate.now().equals(date.getDate()))
                 .findFirst()
                 .ifPresent(date -> date.setIsToday(true));
 
+        List<HolidayApiVo> holidayList = new ArrayList<>();
         /*휴일 찾기*/
         dateList.stream()
                 .map(date -> YearMonth.from(date.getDate()))
@@ -134,7 +131,8 @@ public class BranchServiceFacade {
                     });
         });
 
-        /* 지난주, 다음주 날짜를 지정*/
+        /* 캘린더 객체 정리*/
+        BranchProgramCalendar calendar = new BranchProgramCalendar();
         calendar.setRequestDate(requestDate);
         calendar.setPreviousWeekDate(requestDate.minusWeeks(1));
         calendar.setNextWeekDate(requestDate.plusWeeks(1));
