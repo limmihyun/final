@@ -15,19 +15,19 @@
                         <ul>
                             <li><a href="/customer/home">home</a></li>
                             <li><a href="/customer/programrs">programrs</a></li>
-                            <li><a href="/customer/franchiseBranch">branch</a></li>
+                            <li><a href="/customer/franchiseBranch">branch</a></li>           
                             <li><a href="/question/questionList">q&a</a></li>
                             <li><a href="/notice/noticeList">notice</a></li>
                             <c:if test="${customerNo eq null}">
-                            <li><a href="/customer/login">login</a></li>
-                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                            <li class="log"><a href="/customer/login">login</a></li>
+                            
                             </c:if>
                             <c:if test="${customerNo ne null}">
-                            <li><a href="/customer/myPage">mypage</a></li>
-                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                            <li><a href="/customer/logout">logout</a></li>
+                            <li class="log"><a href="/customer/myPage">mypage</a></li>
+                            
+                            <li class="log"><a href="/customer/logout">logout</a></li>
                             </c:if>
-                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                            
                              
                         </ul>
                     </nav>
