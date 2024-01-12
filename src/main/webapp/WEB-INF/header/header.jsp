@@ -23,9 +23,8 @@
                             
                             </c:if>
                             <c:if test="${customerNo ne null}">
-                            <li class="log"><a href="/customer/myPage">mypage</a></li>
-                            
                             <li class="log"><a href="/customer/logout">logout</a></li>
+                            <li class="log"><a href="/customer/myPage">mypage</a></li>
                             </c:if>
                             
                              
