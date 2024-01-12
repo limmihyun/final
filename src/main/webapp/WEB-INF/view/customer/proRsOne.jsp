@@ -35,85 +35,23 @@
     <div id="preloder">
         <div class="loader"></div>
     </div>
-    <!-- Header Section Begin -->
-    <header class="header-section">
+      <jsp:include page="/WEB-INF/header/header.jsp" />
+    <!-- Breadcrumb Section Begin -->
+    <section class="breadcrumb-area set-bg" data-setbg="/img/elements/element-bg.jpg">
         <div class="container">
             <div class="row">
-                <div class="col-lg-12">
-                    <div class="main-menu">
-                        <div class="logo">
-                            <a href="./index.html">
-                                <img src="/img/logo.png" alt="">
-                            </a>
+                <div class="col-lg-12 text-center">
+                    <div class="breadcrumb-content">
+                        <h2>프로그램 예약</h2>
+                        <div class="links">
+                            <a href="/customer/home">Home</a>
+                            
                         </div>
-                        <nav class="mobile-menu">
-                            <ul>
-                                <li><a href="./index.html">Home</a></li>
-                                <li><a href="./about-us.html">About us</a></li>
-                                <li><a href="./classes.html">Classes</a></li>
-                                <li><a href="./elements.html">Instructors</a></li>
-                                <li><a href="./blog.html">News</a></li>
-                                <li><a href="./contact.html">Contact</a></li>
-                                <li class="search-btn search-trigger"><i class="fa fa-search"></i></li>
-                            </ul>
-                        </nav>
-                        <div id="mobile-menu-wrap"></div>
                     </div>
                 </div>
             </div>
         </div>
-    </header>
-    <!-- Header End -->
-    <!-- Search Bar Begin -->
-    <section class="search-bar-wrap">
-        <span class="search-close"><i class="fa fa-close"></i></span>
-        <div class="search-bar-table">
-            <div class="search-bar-tablecell">
-                <div class="search-bar-inner">
-                    <h2>Search</h2>
-                    <form action="#">
-                        <input type="search" placeholder="Type Keywords">
-                        <button type="submit">Search</button>
-                    </form>
-                </div>
-            </div>
-        </div>
     </section>
-    <!-- Search Bar End -->
-    <!-- Top Social Begin -->
-    <div class="top-social">
-        <div class="top-social-links">
-            <ul>
-                <li><a href="#"><i class="fa fa-pinterest"></i></a></li>
-                <li><a href="#"><i class="fa fa-facebook"></i></a></li>
-                <li><a href="#"><i class="fa fa-twitter"></i></a></li>
-                <li><a href="#"><i class="fa fa-dribbble"></i></a></li>
-                <li><a href="#"><i class="fa fa-behance"></i></a></li>
-            </ul>
-        </div>
-    </div>
-    <!-- Top Social End -->
-    <!-- Hero Slider Section Begin -->
-    <section class="hero-slider">
-        <div class="slide-items owl-carousel">
-            <div class="single-slide set-bg active" data-setbg="/img/bg.jpg">
-                <a href="https://www.youtube.com/watch?v=SEVuD_djKrU" class="play-btn pop-up"><i class="fa fa-play"></i></a>
-                <h1>Be Fit.Top Gym</h1>
-                <a href="#" class="primary-btn">Read More</a>
-            </div>
-            <div class="single-slide set-bg" data-setbg="/img/bg-2.jpg">
-                <a href="https://www.youtube.com/watch?v=SEVuD_djKrU" class="play-btn pop-up"><i class="fa fa-play"></i></a>
-                <h1>Be Fit.Top Trainer</h1>
-                <a href="#" class="primary-btn">Read More</a>
-            </div>
-            <div class="single-slide set-bg" data-setbg="/img/bg-3.jpg">
-                <a href="https://www.youtube.com/watch?v=SEVuD_djKrU" class="play-btn pop-up"><i class="fa fa-play"></i></a>
-                <h1>Be Fit.Top Body</h1>
-                <a href="#" class="primary-btn">Read More</a>
-            </div>
-        </div>
-    </section>
-    <!-- Hero Slider End -->
 	
 	<section>
 		<div>
@@ -146,52 +84,8 @@
 		</div>
 	</section>
 	
-    <!-- Footer Section Begin -->
-    <footer class="footer-section set-bg" data-setbg="/img/footer-bg.jpg">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-12">
-                    <div class="footer-content">
-                        <div class="footer-logo">
-                            <a href="#"><img src="/img/logo.png" alt=""></a>
-                        </div>
-                        <div class="footer-menu">
-                            <ul>
-                                <li><a href="./index.html">Home</a></li>
-                                <li><a href="#">About us</a></li>
-                                <li><a href="#">Classes</a></li>
-                                <li><a href="#">Instructors</a></li>
-                                <li><a href="#">News</a></li>
-                                <li><a href="#">Contact</a></li>
-                            </ul>
-                        </div>
-                        <div class="subscribe-form">
-                            <form action="#">
-                                <input type="text" placeholder="your Email">
-                                <button type="submit">Sign Up</button>
-                            </form>
-                        </div>
-                        <div class="social-links">
-                            <a href="#"><i class="fa fa-pinterest"></i></a>
-                            <a href="#"><i class="fa fa-facebook"></i></a>
-                            <a href="#"><i class="fa fa-twitter"></i></a>
-                            <a href="#"><i class="fa fa-dribbble"></i></a>
-                            <a href="#"><i class="fa fa-behance"></i></a>
-                        </div>
-                        <div class="footer-icon-img">
-                            <img src="/img/footer-icon.png" alt="">
-                        </div>
-                        <div class="copyright">
-                            <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
-Copyright &copy;<script>document.write(new Date().getFullYear());</script> All rights reserved | This template is made with <i class="fa fa-heart-o" aria-hidden="true"></i> by <a href="https://colorlib.com" target="_blank">Colorlib</a>
-<!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </footer>
-    <!-- Footer Section End -->
+      <jsp:include page="/WEB-INF/footer/footer.jsp" />
+
 
     <!-- Js Plugins -->
     <script src="/js/jquery-3.3.1.min.js"></script>
