@@ -15,6 +15,9 @@ public interface QuestionMapper {
 	//질문 상세
 	Question questionOne(int questionNo) ;
 	
+	//본사 확인
+	int getBranchLevel(int employeeNo);
+	
 	//추가
 	int addQuestion(Question question);
 	

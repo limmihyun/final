@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 
 import com.tree.gdhealth.customer.franchisebranch.FranchiseBranchService;
+import com.tree.gdhealth.employee.login.LoginEmployee;
 import com.tree.gdhealth.vo.Branch;
 import com.tree.gdhealth.vo.Question;
 
@@ -26,11 +27,32 @@ public class QuestionController {
 		
 		
 	    List<Question> list = questionService.questionList();
-	    Integer userLevel = ((Integer)session.getAttribute("userLevel"));
-	 
 	    model.addAttribute("list", list);
-	    model.addAttribute("userLevel", userLevel);
-	    System.out.println(userLevel + "<--userLevel");
+	    System.out.println("///" + list);
+	    
+	    
+	    LoginEmployee loginEmployee = (LoginEmployee)session.getAttribute("loginEmployee");
+	    Integer customerNo = ((Integer)session.getAttribute("customerNo"));
+	    
+	    if(loginEmployee != null) {
+		    int employeeNo = loginEmployee.getEmployeeNo();
+		    int branchNo = loginEmployee.getBranchNo();
+		    int branchLevel = questionService.getBranchLevel(employeeNo);
+		    
+		    model.addAttribute("employeeNo", employeeNo);
+		    model.addAttribute("branchNo", branchNo);
+		    model.addAttribute("branchLevel", branchLevel);
+		    
+		    
+		    System.out.println("employeeNo: " + employeeNo);
+		    System.out.println("branchNo: " + branchNo);
+		    System.out.println("branchLevel: " + branchLevel);
+	    }
+	    
+	    if(customerNo != null) {
+		    model.addAttribute("customerNo", customerNo);
+		    System.out.println("customerNo: " + customerNo);
+	    }
 	    return "/question/questionList";
 	}
 

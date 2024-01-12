@@ -7,9 +7,11 @@
 	
 	SELECT
 	    q.question_no AS questionNo,
+	    b.branch_no AS branchNo,
 	    b.branch_name AS branchName,
 	    q.isSecret AS isSecret,
 	    q.question_title AS questionTitle,
+	    c.customer_no AS customerNo,
 	    c.customer_id AS customerId,
 	    q.createdate AS createdate,
 	    q.updatedate AS updatedate
@@ -43,6 +45,19 @@
 	ON q.branch_no = b.branch_no
 	WHERE q.question_no = #{questionNo};
 		
+</select>
+
+<select id="getBranchLevel"
+		parameterType="int"
+		resultType="int">
+		
+		SELECT
+		b.branch_level AS branchLevel
+		FROM branch b
+		JOIN employee e
+		ON b.branch_no = e.branch_no
+		WHERE e.employee_no = #{employeeNo};
+
 </select>
 
 <insert id="addQuestion"

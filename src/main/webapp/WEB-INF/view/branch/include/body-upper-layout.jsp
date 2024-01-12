@@ -36,8 +36,8 @@
                         </ul>
                     </li>
                     <li>
-                        <a title="Landing Page" href="#" aria-expanded="false"><span class="educate-icon educate-department icon-wrap" aria-hidden="true"></span> <span class="mini-click-non">
-                                    고객리뷰</span></a>
+                        <a title="Landing Page" href="/question/questionList" aria-expanded="false"><span class="educate-icon educate-department icon-wrap" aria-hidden="true"></span> <span class="mini-click-non">
+                                    고객질문답변</span></a>
                     </li>
                     <li>
                         <a title="Landing Page" href="#" aria-expanded="false"><span class="educate-icon educate-data-table icon-wrap" aria-hidden="true"></span> <span class="mini-click-non">
