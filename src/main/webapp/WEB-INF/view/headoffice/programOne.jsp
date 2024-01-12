@@ -126,9 +126,9 @@
                                             	</div>
                                                   
                                             </div>
-                                            <div style="text-align:center;">
+                                            <div style="text-align:left;">
 	                                             <h1>${programOne.programName}</h1>
-	                                             <p align="left">${programOne.programDetail}</p>
+	                                             <p>${programOne.programDetail}</p>
                                             </div>                          
                                         </div>
                                         

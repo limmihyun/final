@@ -230,7 +230,7 @@
 		
 		let newDatepickerId = 'programDate' + counter;
 		
-        let newDatepickerInput = $('<input type="text" class="form-control" name="programDates" placeholder="yyyy-mm-dd" style="width:240px;">').attr('id', newDatepickerId);   
+        let newDatepickerInput = $('<input type="text" class="form-control" name="programDates" class="programDates" placeholder="yyyy-mm-dd" style="width:240px;">').attr('id', newDatepickerId);   
         let minusBtn = $('<button type="button" style="margin-left:15px; margin-top:5px; height:30px; width:30px;" class="minusBtn">-</button>');
 
     	// 동적으로 생성된 input과 button을 dateHtml에 추가
@@ -261,7 +261,7 @@
             $(this).prev('input').remove(); // 이전에 추가된 input 태그 삭제
             $(this).remove(); // 클릭한 - 버튼 삭제
         });
-
+    	
         counter++;
 	});
 	
@@ -283,8 +283,51 @@
 	    });
 	 });
 	
-	$('#insertBtn').click(function(){
+	// 날짜 형식 유효성 검증 함수
+	function validateDateFormat(input) {
+		
+	    // yyyy-mm-dd 형식의 정규식
+	    let dateFormat = /^\d{4}-\d{2}-\d{2}$/;
+
+	    if (!dateFormat.test(input.val())) {
+	        return false;
+	    } else {
+			return true;
+		}
+	    
+	}
+	
+	// 현재 날짜 유효성 검증 함수
+	function validateTodayDate(input) {
+		
+		// 현재 날짜
+		let today = new Date();
+		
+		let year = today.getFullYear(); // 년도
+		let month = today.getMonth() + 1;  // 월
+		if(month < 10) {
+			month = '0' + month;
+		}
+		let date = today.getDate();  // 날짜
+		
+		today = year + '-' + month + '-' + date;
 			
+		// 입력한 개설 날짜와 현재 날짜 비교
+		if(new Date(today) > new Date(input.val())) {
+			return false;
+		} else {
+			return true;
+		}
+		
+	}
+	
+	// 선택한 개설 날짜 중에 중복된 날짜가 있는지 검증하는 함수
+	function hasDuplicates(array) {
+        return (new Set(array)).size !== array.length;
+    }
+	
+	$(document).on('click', '#insertBtn', function(){
+				
 		if($('#programName').val().trim() == '') {
 			alert('프로그램 제목을 입력하세요.');
 			$('#programName').val('');
@@ -337,38 +380,47 @@
 			return;
 		}
 		
-		// yyyy-mm-dd 형식의 정규식
-		let dateFormat = /^\d{4}-\d{2}-\d{2}$/;
+		let isFormatValid = true;
 		
-		if (!dateFormat.test($('#programDate1').val())) {
-            alert('날짜 형식이 올바르지 않습니다.');
-            $('#programDate1').focus();
+		// id가 dataArea인 div태그 내의 모든 input 태그에 대해 날짜 형식 검증
+	    $('#dateArea input[type="text"]').each(function() {
+	    	console.log('validateDateFormat : ' + validateDateFormat($(this)));
+	        if(!validateDateFormat($(this))) {
+	        	isFormatValid = false;
+	        	return;
+	        }
+	    });
+		
+	    if(!isFormatValid) {
+			alert('입력 창 중에서 하나 이상의 개설 날짜의 형식이 유효하지 않습니다.');
             return;
-        }
-		
-		// 현재 날짜
-		let today = new Date();
-		
-		// 입력한 개설 날짜와 현재 날짜 비교 
-		if(today > new Date($('#programDate1').val())) {
-			alert('개설 날짜는 오늘 이후의 날짜만 선택 가능합니다.');
-			return;
 		}
-	
-		// 추가하는 개설날짜 중에 중복된 개설날짜가 있는지 확인
-		let values = [];
-	    $('#dateArea input[type="text"]').each(function () {
-	      		values.push($(this).val());
+	    
+	    let isTodayValid = true;
+		
+		$('#dateArea input[type="text"]').each(function() {
+			console.log('validateTodayDate : ' + validateTodayDate($(this)));
+	        if(!validateTodayDate($(this))) {
+	        	isTodayValid = false;
+	        	return;
+	        }
 	    });
 	    
-	    console.log(values);
+	    if(!isTodayValid) {
+			alert('개설 날짜는 오늘 이후의 날짜만 선택 가능합니다.');
+            return;
+		}
 	    
-	    function hasDuplicates(array) {
-	        return (new Set(array)).size !== array.length;
-	    }
-	    	    
+		 // 추가하는 개설날짜 중에 중복된 개설날짜가 있는지 확인하는 함수
+		let values = [];
+	    $('#dateArea input[type="text"]').each(function () {
+	      	values.push($(this).val());
+	    });
+	    
+	    console.log('values : ' + values);
+		  	    
 	    if (hasDuplicates(values)) {
-	        alert('개설 날짜가 서로 동일하지 않게 입력하거나 "-" 버튼을 눌러서 입력하지 않을 칸을 비워 주세요.');
+	        alert('개설 날짜가 서로 동일하지 않게 입력하세요.');
 	        return; 
 	    }
 	    
