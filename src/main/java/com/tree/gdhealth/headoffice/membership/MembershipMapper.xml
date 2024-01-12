@@ -8,4 +8,7 @@
 			membership_price membershipPrice
 		FROM membership;
 	</select>
+	<insert id="addMembership">
+		INSERT INTO membership(membership_name, membership_month, membership_price, createdate, updatedate) VALUES(#{membershipName}, #{membershipMonth}, #{membershipPrice}, NOW(),NOW());
+	</insert>
 </mapper>

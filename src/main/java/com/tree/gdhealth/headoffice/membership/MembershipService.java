@@ -22,4 +22,12 @@ public class MembershipService {
 		
 		return membershipList;
 	}
+	
+	public int addMembership(Membership membership) {
+		
+		int result = membershipMapper.addMembership(membership);
+		
+		return result;
+		
+	}
 }

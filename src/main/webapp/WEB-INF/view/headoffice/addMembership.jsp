@@ -94,25 +94,42 @@
 	        <c:import url="/WEB-INF/view/headoffice/include/topBar.jsp"></c:import>
 	        <!---------------------- 상단바 end ----------------------->    
         </div>
-    </div>          
-    
         
         <!-- 프로그램 추가 화면 start--> 	          
-		<section>
-			<div>
-				<c:forEach var="m" items="${membershipList}">
-					<div style="border-radius:10px; border-style:solid; border-color:black; background-color:#F6F6F6; margin-left:17%; margin-top:1%; margin-bottom:1%; margin-right:1%;">
-						<div style="margin:1%;">
-							<p>회원권 제목 : ${m.membershipName}</p>
-							<p>회원권 개월수 : ${m.membershipMonth}개월</p>
-							<p>회원권 가격 : ${m.membershipPrice}원</p>
-						</div>
+		<form method="post" 
+					action="${pageContext.request.contextPath}/headoffice/addMembership"
+					enctype="multipart/form-data">
+			
+			<div class="row" id="font" style="padding:15px;">
+			
+				<div class="col-lg-3 col-md-2 col-sm-1 col-xs-12"></div>	
+				<div class="col-lg-6 col-md-8 col-sm-10 col-xs-12">
+					<h3 style="margin-bottom:20px;">회원권 추가하기</h3>
+					<div style="margin-bottom:10px;">
+						<label for="membershipName" class="form-label">회원권 이름</label>
+					    <input type="text" class="form-control" name="membershipName" placeholder="이름을 입력해주세요.">
 					</div>
-				</c:forEach>
-			</div>
-		</section>
+					<div style="margin-bottom:10px;">
+						<label for="membershipMonth" class="form-label">회원권 개월수</label>
+					    <input type="text" class="form-control" name="membershipMonth" placeholder="숫자를 입력해주세요. ex)1">
+					</div>
+					<div style="margin-bottom:10px;">
+						<label for="membershipPrice" class="form-label">회원권 가격</label>
+					    <input type="text" class="form-control" name="membershipPrice" placeholder="가격을 입력해주세요.">
+					</div>
+													
+					<div style="text-align:center;">
+						<button type="submit" class="btn btn-primary" id="insertBtn" style="margin-top:15px;">추가하기</button>
+					</div>	
+				</div>
+				
+				<div class="col-lg-3 col-md-2 col-sm-1 col-xs-12"></div>
+			 </div>			
+		</form>           
         <!-- 프로그램 추가 화면 end-->
         
+    </div>
+
     <!-- jquery
 		============================================ -->
 	<!--  <script src="/admin/js/vendor/jquery-1.12.4.min.js"></script>      -->

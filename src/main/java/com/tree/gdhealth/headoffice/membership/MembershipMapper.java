@@ -10,4 +10,6 @@ import com.tree.gdhealth.vo.Membership;
 public interface MembershipMapper {
 	
 	List<Membership> membershipList();
+	
+	int addMembership (Membership membership);
 }
