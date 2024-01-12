@@ -53,6 +53,18 @@
                                 <li><a title="Peity Charts" href="/headoffice/sportsEquipmentOrder/list"><span class="mini-sub-pro">발주관리</span></a></li>
                             </ul>
                         </li>
+                        <li>
+                            <a class="has-arrow" href="mailbox.html" aria-expanded="false">
+                            	<span class="educate-icon educate-data-table icon-wrap"></span> 
+                            	<span class="mini-click-non">회원권</span>
+                            </a>
+                            <ul class="submenu-angle" aria-expanded="false">
+                                <li><a title="Peity Charts" href="${pageContext.request.contextPath}/headoffice/membershipList"><span class="mini-sub-pro">회원권 목록</span></a></li>
+                            </ul>
+                            <ul class="submenu-angle" aria-expanded="false">
+                                <li><a title="Peity Charts" href="${pageContext.request.contextPath}/headoffice/addMembership"><span class="mini-sub-pro">회원권 추가</span></a></li>
+                            </ul>
+                        </li>
 						<li>
                             <a class="has-arrow" href="mailbox.html" aria-expanded="false">
                             	<span class="educate-icon educate-form icon-wrap"></span> 

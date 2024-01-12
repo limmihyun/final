@@ -233,7 +233,7 @@
 	    	changeYear: true,
 	    	changeMonth: true,
 	    	monthNamesShort: ['1월','2월','3월','4월','5월','6월','7월','8월','9월','10월','11월','12월'],
-	    	yearRange: 'c-10:c+50',
+	    	yearRange: 'c-10:c+10',
 	    	showButtonPanel: true,
 	    	currentText: '오늘 날짜',
 	    	closeText: '닫기',
