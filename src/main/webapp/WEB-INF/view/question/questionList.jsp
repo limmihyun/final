@@ -73,23 +73,10 @@
 	     	<c:when test="${n.isSecret == 'TRUE'}">
 	     		<c:choose>
 	     			
-	 				<c:when test="${n.branchNo == branchNo}">
-	 				
+	 				<c:when test="${n.branchNo == branchNo || branchLevel == 1 || n.customerNo == customerNo}">
 	     				<td><a href="${pageContext.request.contextPath}/question/questionOne?questionNo=${n.questionNo}">${n.questionTitle}</a></td>
 	     			</c:when>
-	     			
-	     			
-	     			<c:when test="${branchLevel == 1}">
-	     			
-	     				<td><a href="${pageContext.request.contextPath}/question/questionOne?questionNo=${n.questionNo}">${n.questionTitle}</a></td>
-	     			</c:when>
-	     			
-	     			
-	     			<c:when test="${n.customerNo == customerNo}">
-	     			
-	     				<td><a href="${pageContext.request.contextPath}/question/questionOne?questionNo=${n.questionNo}">${n.questionTitle}</a></td>
-	     			</c:when>
-	     			
+	  
 	     			<c:otherwise>
 	     					<td>비밀글입니다</td>
 	     			</c:otherwise>
