@@ -31,5 +31,5 @@ public class LoginEmployee {
 
 	//branch
 	private String branchName;
-	private String branchLevel;
+	private int branchLevel;
 }

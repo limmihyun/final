@@ -1,6 +1,6 @@
 package com.tree.gdhealth.sportsequipment;
 
-import com.tree.gdhealth.sportsequipment.dto.SportsEquipmentOrderAddRequestDto;
+import com.tree.gdhealth.sportsequipment.dto.SportsEquipmentOrderAddRequest;
 import com.tree.gdhealth.sportsequipment.dto.SportsEquipmentOrderInformation;
 import com.tree.gdhealth.sportsequipment.dto.SportsEquipmentOrderRetrieveCriteria;
 import com.tree.gdhealth.vo.SportsEquipment;
@@ -8,7 +8,6 @@ import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
-import java.util.Map;
 //@autor 정인호
 
 @Mapper
@@ -20,7 +19,7 @@ public interface SportsEquipmentApiMapper {
 
     int countSportsEquipmentOrderListLastPage(SportsEquipmentOrderRetrieveCriteria criteria);
 
-    int insertSportsEquipmentOrder(SportsEquipmentOrderAddRequestDto dto);
+    int insertSportsEquipmentOrder(SportsEquipmentOrderAddRequest reqDto);
 
     SportsEquipmentOrderInformation selectSportsEquipmentOrderOneByOrderNo(@Param("orderNo") Integer orderNo);
 

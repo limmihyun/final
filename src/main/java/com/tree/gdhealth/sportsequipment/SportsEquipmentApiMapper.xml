@@ -22,7 +22,7 @@
         WHERE sports_equipment_no = #{sportsEquipmentNo}
     </select>
 
-    <insert id="insertSportsEquipmentOrder" parameterType="com.tree.gdhealth.sportsequipment.dto.SportsEquipmentOrderAddRequestDto">
+    <insert id="insertSportsEquipmentOrder" parameterType="com.tree.gdhealth.sportsequipment.dto.SportsEquipmentOrderAddRequest">
         INSERT INTO sports_equipment_order
         (employee_orderer, branch_no, sports_equipment_no, quantity, total_price, employee_approver)
         VALUES

@@ -84,7 +84,7 @@
                                                             <label>발주물품(번호)</label> <%-- 클라이언트 선택, 서버선택지 제공 --%>
                                                             <select id="sportsEquipmentSelectForm"
                                                                     name="sportsEquipmentNo" class="form-control">
-                                                                <option value="0">선택</option>
+                                                                <option value="">선택</option>
                                                             </select>
                                                         </div>
                                                         <div class="form-group">

@@ -1,10 +1,12 @@
 package com.tree.gdhealth.branch;
 
 import com.tree.gdhealth.program.dto.BranchProgramCalendar;
-import com.tree.gdhealth.sportsequipment.dto.SportsEquipmentOrderAddRequestDto;
+import com.tree.gdhealth.sportsequipment.dto.SportsEquipmentOrderAddRequest;
 import com.tree.gdhealth.sportsequipment.dto.SportsEquipmentOrderInformation;
 import com.tree.gdhealth.employee.login.LoginEmployee;
 import com.tree.gdhealth.sportsequipment.dto.SportsEquipmentOrderRetrieveCriteria;
+import com.tree.gdhealth.utils.auth.Auth;
+import com.tree.gdhealth.utils.auth.Authority;
 import com.tree.gdhealth.utils.pagination.PageUri;
 import com.tree.gdhealth.utils.pagination.PaginationUriGenerator;
 import com.tree.gdhealth.vo.Employee;
@@ -56,6 +58,7 @@ public class BranchController {
      * @param loginEmployee 로그인된 직원
      * @return 지점의 직원리스트 페이지
      */
+    @Auth(AUTHORITY = Authority.BRANCH_EMP_ONLY)
     @GetMapping("/employee/list")
     public String getBranchEmployeeList(@SessionAttribute LoginEmployee loginEmployee, Model model){
 
@@ -70,6 +73,7 @@ public class BranchController {
      * @param isOnlyWaitingList (쿼리스트링)대기건만 조회할 것인지 여부
      * @apiNote  출력정보와 페이지네이션 정보
      */
+    @Auth(AUTHORITY = Authority.BRANCH_EMP_ONLY)
     @GetMapping("/sportsEquipment/order/list")
     public String getBranchSportsEquipmentOrderList(
             @ModelAttribute @RequestParam(name = "requestPage", defaultValue = "1") Integer requestPage,
@@ -95,30 +99,27 @@ public class BranchController {
     /**<p>지점 물품발주 폼 페이지 호출</p>
      * @return 지점물품발주 폼 페이지
      */
+    @Auth(AUTHORITY = Authority.BRANCH_EMP_ONLY)
     @GetMapping("/sportsEquipment/order/addForm")
-    public String getSportsEquipmentOrderAddForm(@SessionAttribute("loginEmployee") LoginEmployee loginEmployee, Model model) {
-
-        SportsEquipmentOrderAddRequestDto dto = new SportsEquipmentOrderAddRequestDto(loginEmployee.getEmployeeNo(), loginEmployee.getBranchNo(), null, null, null);
-        model.addAttribute("formDto", dto);
-
+    public String getSportsEquipmentOrderAddForm() {
         return "branch/sportsEquipment/order/addForm";
     }
 
     /**<p>지점물품발주요청 post</p>
-     * @param dto {@link SportsEquipmentOrderAddRequestDto} 필드 유효성검사
+     * @param reqDto {@link SportsEquipmentOrderAddRequest} 필드 유효성검사
      * @return 지점 물품 주문 폼 페이지에 메세지를 쿼리스트링 추가하여 리다이렉트
      */
+    @Auth(AUTHORITY = Authority.BRANCH_EMP_ONLY)
     @PostMapping("/sportsEquipment/order")
-    public String addSportsEquipmentOrder(@Validated SportsEquipmentOrderAddRequestDto dto, Errors errors, Model model) {
-
+    public String addSportsEquipmentOrder(@Validated SportsEquipmentOrderAddRequest reqDto, Errors errors, Model model) {
+        log.debug(reqDto.toString());
         if (errors.hasErrors()){
             List<String> fieldErrorMessageList = errors.getFieldErrors().stream().map(DefaultMessageSourceResolvable::getDefaultMessage).toList();
             model.addAttribute("fieldErrorMessageList", fieldErrorMessageList);
-            model.addAttribute("formDto", dto);
             return "/branch/sportsEquipment/order/addForm";
         }
 
-        boolean isSuccess = serviceFacade.addSportsEquipmentOrder(dto);
+        boolean isSuccess = serviceFacade.addSportsEquipmentOrder(reqDto);
         String serverMessage = (isSuccess)? "success": "fail";
 
         return "redirect:/branch/sportsEquipment/order/addForm?serverMessage="+serverMessage;
@@ -128,6 +129,7 @@ public class BranchController {
      * @param requestDate 기준일자
      * @param model {@link BranchProgramCalendar}
      */
+    @Auth(AUTHORITY = Authority.BRANCH_EMP_ONLY)
     @GetMapping("/programCalendar/{requestDate}")
     public String getBranchProgramCalendar(
             @PathVariable(name = "requestDate") LocalDate requestDate,
