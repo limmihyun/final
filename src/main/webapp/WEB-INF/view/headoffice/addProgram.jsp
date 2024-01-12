@@ -107,7 +107,7 @@
 					<h3 style="margin-bottom:20px;">프로그램 추가하기</h3>
 					<div style="margin-bottom:10px;">
 						<label for="programName" class="form-label">프로그램 제목</label>
-					    <input type="text" class="form-control" id="programName" name="programName" placeholder="입력하기">
+					    <input type="text" class="form-control" id="programName" name="programName" placeholder="입력하기" maxlength="40">
 					</div>
 					<div>
 						<label for="programDetail" class="form-label">프로그램 내용</label>
@@ -117,7 +117,7 @@
 		 			<div class="row" style="margin-bottom:10px;">
 			 			<div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
 							<label for="programMaxCustomer" class="form-label">수용 인원</label>
-							<input type="text" class="form-control" id="programMaxCustomer" name="programMaxCustomer" placeholder="입력하기">
+							<input type="number" min="1" max="100" maxlength="3" oninput="maxLengthCheck(this)" class="form-control" id="programMaxCustomer" name="programMaxCustomer" placeholder="입력하기">
 						</div>
 						<div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
 							<label for="programFile" class="form-label">프로그램 이미지</label>
@@ -129,7 +129,8 @@
 			 				<div id="dateArea">
 			 					<label for="programDate1" class="form-label">개설 날짜</label>
 								<div style="display:flex">
-									<input type="text" class="form-control" id="programDate1" name="programDates" class="programDates" placeholder="yy-mm-dd" style="width:240px;">
+									<input type="text" class="form-control" id="programDate1" name="programDates" 
+												class="programDates" placeholder="yyyy-mm-dd" style="width:240px; background-color:white;" readonly>
 									<button type="button" style="margin-left:15px; margin-top:5px; height:30px; width:30px;" id="plusBtn">+</button>							
 								</div>	
 			 				</div>		
@@ -148,10 +149,6 @@
         <!-- 프로그램 추가 화면 end-->
         
     </div>
-
-    <!-- jquery
-		============================================ -->
-	<!--  <script src="/admin/js/vendor/jquery-1.12.4.min.js"></script>      -->
     
     <!-- bootstrap JS
 		============================================ -->
@@ -217,7 +214,15 @@
 </body>
 
 <script>
+
 	$('#programName').focus();
+	
+	// 숫자 입력시 글자 수 제한
+	function maxLengthCheck(object){
+	    if (object.value.length > object.maxLength){
+	      object.value = object.value.slice(0, object.maxLength);
+	    }    
+	 }
 	
 	let counter = 2;
 	
@@ -226,7 +231,7 @@
 		
 		let newDatepickerId = 'programDate' + counter;
 		
-        let newDatepickerInput = $('<input type="text" class="form-control" name="programDates" placeholder="yy-mm-dd" style="width:240px;">').attr('id', newDatepickerId);   
+        let newDatepickerInput = $('<input type="text" class="form-control" name="programDates" class="programDates" placeholder="yyyy-mm-dd" style="width:240px; background-color:white;" readonly>').attr('id', newDatepickerId);   
         let minusBtn = $('<button type="button" style="margin-left:15px; margin-top:5px; height:30px; width:30px;" class="minusBtn">-</button>');
 
     	// 동적으로 생성된 input과 button을 dateHtml에 추가
@@ -245,10 +250,11 @@
             changeYear: true,
 	    	changeMonth: true,
 	    	monthNamesShort: ['1월','2월','3월','4월','5월','6월','7월','8월','9월','10월','11월','12월'],
-	    	yearRange: 'c-10:c+50',
+	    	yearRange: 'c-1:c+10',
 	    	showButtonPanel: true,
 	    	currentText: '오늘 날짜',
-	    	closeText: '닫기'
+	    	closeText: '닫기',
+	    	minDate: 0
         });
                
     	// -버튼 클릭시 해당 개설 날짜 input 태그 삭제
@@ -256,7 +262,7 @@
             $(this).prev('input').remove(); // 이전에 추가된 input 태그 삭제
             $(this).remove(); // 클릭한 - 버튼 삭제
         });
-
+    	
         counter++;
 	});
 	
@@ -270,18 +276,44 @@
 	    	changeYear: true,
 	    	changeMonth: true,
 	    	monthNamesShort: ['1월','2월','3월','4월','5월','6월','7월','8월','9월','10월','11월','12월'],
-	    	yearRange: 'c-10:c+50',
+	    	yearRange: 'c-10:c+10',
 	    	showButtonPanel: true,
 	    	currentText: '오늘 날짜',
-	    	closeText: '닫기'
+	    	closeText: '닫기',
+	    	minDate: 0
 	    });
 	 });
 	
-	$('#insertBtn').click(function(){
+	// 날짜 형식 유효성 검증 함수
+	function validateDateFormat(input) {
 		
+	    // yyyy-mm-dd 형식의 정규식
+	    let dateFormat = /^\d{4}-\d{2}-\d{2}$/;
+
+	    if (!dateFormat.test(input.val())) {
+	        return false;
+	    } else {
+			return true;
+		}
+	    
+	}
+	
+	// 선택한 개설 날짜 중에 중복된 날짜가 있는지 검증하는 함수
+	function hasDuplicates(array) {
+        return (new Set(array)).size !== array.length;
+    }
+	
+	$(document).on('click', '#insertBtn', function(){
+				
 		if($('#programName').val().trim() == '') {
 			alert('프로그램 제목을 입력하세요.');
 			$('#programName').val('');
+			$('#programName').focus();
+			return;
+		}
+		
+		if($('#programName').val().length < 3) {
+			alert('프로그램 제목은 최소 3자 이상 입력하여야 합니다.');
 			$('#programName').focus();
 			return;
 		}
@@ -293,22 +325,26 @@
 			return;
 		}
 		
+		if($('#programDetail').val().length < 5) {
+			alert('내용은 최소 5자 이상 입력하여야 합니다.');
+			$('#programDetail').focus();			
+			return;
+		}
+		
 		if($('#programMaxCustomer').val().trim() == '') {
 			alert('수용 인원을 입력하세요.');
 			$('#programMaxCustomer').val('');	
 			$('#programMaxCustomer').focus();			
 			return;
 		}
-		
-		let checkNumber = $('#programMaxCustomer').val().search(/[0-9]/g);
-		
-		if(checkNumber < 0) { 
-			alert('수용 인원은 숫자만 입력 가능합니다.')
-			$('#programMaxCustomer').val('');	
-			$('#programMaxCustomer').focus();			
-			return;
-		}	
 				
+		if(Number($('#programMaxCustomer').val()) > 100 || Number($('#programMaxCustomer').val()) < 1) {
+			alert('입력 가능한 수용 인원은 1~100명입니다.');
+			$('#programMaxCustomer').val('');	
+			$('#programMaxCustomer').focus();
+			return;
+		}
+						
 		if($('#programFile').val().length == 0) {
 			alert('프로그램 사진을 첨부하세요.');
 			$('#programFile').focus();
@@ -321,20 +357,32 @@
 			return;
 		}
 		
-		// 추가하는 개설날짜 중에 중복된 개설날짜가 있는지 확인
+		let isFormatValid = true;
+		
+		// id가 dataArea인 div태그 내의 모든 input 태그에 대해 날짜 형식 검증
+	    $('#dateArea input[type="text"]').each(function() {
+	    	console.log('validateDateFormat : ' + validateDateFormat($(this)));
+	        if(!validateDateFormat($(this))) {
+	        	isFormatValid = false;
+	        	return;
+	        }
+	    });
+		
+	    if(!isFormatValid) {
+			alert('비어 있는 개설 날짜 입력창이 있습니다. 날짜를 선택하거나 "-"를 눌러 입력창을 삭제하세요.');
+            return;
+		}
+	    	    
+		// 추가하는 개설날짜 중에 중복된 개설날짜가 있는지 확인하는 함수
 		let values = [];
 	    $('#dateArea input[type="text"]').each(function () {
-	      		values.push($(this).val());
+	      	values.push($(this).val());
 	    });
 	    
-	    console.log(values);
-	    
-	    function hasDuplicates(array) {
-	        return (new Set(array)).size !== array.length;
-	    }
-	    	    
+	    console.log('values : ' + values);
+		  	    
 	    if (hasDuplicates(values)) {
-	        alert('개설 날짜를 다르게 입력해 주세요.');
+	        alert('개설 날짜가 서로 동일하지 않게 입력하세요.');
 	        return; 
 	    }
 	    
@@ -347,7 +395,7 @@
 			contentType: 'application/json',
 			success : function(result) {
 				if(result == true) {
-					alert('선택한 개설 날짜가 이미 존재합니다.')
+					alert('선택한 개설 날짜에 이미 다른 프로그램이 등록되어 있습니다. 날짜를 변경해주세요.')
 					return;
 				} else {
 					alert('추가 완료되었습니다.');

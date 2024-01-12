@@ -158,6 +158,7 @@
 		SET
 			program_date = #{programDate}
 		WHERE program_no = #{programNo}
+		AND program_date = #{originDate}
 	</update>	
 	<update id="updateProgramImg" parameterType="com.tree.gdhealth.vo.ProgramImg">
 		UPDATE program_img

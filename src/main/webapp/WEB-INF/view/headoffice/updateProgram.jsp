@@ -110,8 +110,9 @@
                                 	
 	                                <form action="${pageContext.request.contextPath}/headoffice/program/update" id="updateForm" 
                                                     	method="post" enctype="multipart/form-data">
+                           			   <input type="hidden" value="${programOne.programDate}" name="originDate">	
                                        <input type="hidden" value="${programOne.programNo}" name="programNo">
-                                       <input type="hidden" value="${programOne.filename}" name="filename">
+                                       <!-- <input type="hidden" value="${programOne.filename}" name="filename">  -->
 	                                   <div class="latest-blog-single blog-single-full-view">
 	                                        <div class="blog-details blog-sig-details">
 	                                        	<div class="blog-details" style="text-align:center;">
@@ -121,15 +122,15 @@
 	                                        	
 	                                            <div class="details-blog-dt blog-sig-details-dt courses-info mobile-sm-d-n">
 	                                                <span>
-	                                                	<b>수용 인원 :</b> <input type="text" value="${programOne.maxCustomer}" name="programMaxCustomer" id="programMaxCustomer" style="width:60px;">
-	                                                	<b style="margin-left:20px;">개설 날짜 :</b> <input type="text" value="${programOne.programDate}" name="programDate" id="programDate" style="width:100px;">
+	                                                	<b>수용 인원 :</b> <input type="number" min="1" max="100" maxlength="3" oninput="maxLengthCheck(this)" value="${programOne.maxCustomer}" name="programMaxCustomer" id="programMaxCustomer" style="width:60px;">
+	                                                	<b style="margin-left:20px;">개설 날짜 :</b> <input type="text" value="${programOne.programDate}" name="programDate" id="programDate" style="width:100px; background-color:white;" readonly>
 	                                                </span>
 	                                            </div>
 	                                            <div style="text-align:center;">    
 	                                           		<h1>
-		                                             	<input type="text" value="${programOne.programName}" id="programName" name="programName">
+		                                             	<input type="text" value="${programOne.programName}" maxlength="40" id="programName" name="programName">
 		                                            </h1>
-	                                             	<textarea style="resize:none; width:70%;" rows="15" name="programDetail" id="programDetail">${programOne.programDetail}</textarea>                                                                                                                                 	                                          
+	                                             	<textarea style="resize:none; width:70%;" rows="15" maxlength="1000" name="programDetail" id="programDetail">${programOne.programDetail}</textarea>                                                                                                                                 	                                          
 	                                            </div>                          
 	                                        </div>
 	                                        <div style="text-align:center;">
@@ -149,9 +150,6 @@
         
     </div>
 
-    <!-- jquery
-		============================================ -->
-    <script src="/admin/js/vendor/jquery-1.12.4.min.js"></script>
     <!-- bootstrap JS
 		============================================ -->
     <script src="/admin/js/bootstrap.min.js"></script>
@@ -218,20 +216,28 @@
 <script>	
 	$('#programMaxCustomer').focus();
 	
+	// 숫자 입력시 글자 수 제한
+	function maxLengthCheck(object){
+	    if (object.value.length > object.maxLength){
+	      object.value = object.value.slice(0, object.maxLength);
+	    }    
+	 }
+	
 	// 달력 API
 	$(function() {
 	    $( "#programDate" ).datepicker({
 	    	dateFormat : 'yy-mm-dd',
 	    	dayNamesMin: [ "일", "월","화", "수", "목", "금", "토" ],
-	    	monthNames: [ "1월", "2월", "3월", "4월", "5월", "6월", "7월", "8월", "9월", "10월", "11월", "12월"],
+	    	monthNames: ["1월", "2월", "3월", "4월", "5월", "6월", "7월", "8월", "9월", "10월", "11월", "12월"],
 	    	showMonthAfterYear: true,
 	    	changeYear: true,
 	    	changeMonth: true,
 	    	monthNamesShort: ['1월','2월','3월','4월','5월','6월','7월','8월','9월','10월','11월','12월'],
-	    	yearRange: 'c-10:c+50',
+	    	yearRange: 'c-10:c+10',
 	    	showButtonPanel: true,
 	    	currentText: '오늘 날짜',
-	    	closeText: '닫기'
+	    	closeText: '닫기',
+	    	minDate: 0
 	    });
 	 });
 	
@@ -244,18 +250,37 @@
 			return;
 		}
 		
-		let checkNumber = $('#programMaxCustomer').val().search(/[0-9]/g);
-		
-		if(checkNumber < 0) { 
-			alert('수용 인원은 숫자만 입력 가능합니다.')
+		if(Number($('#programMaxCustomer').val()) > 100 || Number($('#programMaxCustomer').val()) < 1) {
+			alert('입력 가능한 수용 인원은 1~100명입니다.');
 			$('#programMaxCustomer').val('');	
-			$('#programMaxCustomer').focus();			
+			$('#programMaxCustomer').focus();
 			return;
 		}
 		
+		if($('#programDate').val().length == 0) {
+			alert('개설 날짜를 입력하세요.');
+			$('#programDate').focus();			
+			return;
+		}
+		
+		// yyyy-mm-dd 형식의 정규식
+		let dateFormat = /^\d{4}-\d{2}-\d{2}$/;
+		
+		if (!dateFormat.test($('#programDate').val())) {
+            alert('개설 날짜의 형식이 올바르지 않습니다.');
+            $('#programDate').focus();
+            return;
+        }
+						
 		if($('#programName').val().trim() == '') {
 			alert('프로그램 제목을 입력하세요.');
 			$('#programName').val('');
+			$('#programName').focus();
+			return;
+		}
+		
+		if($('#programName').val().length < 3) {
+			alert('프로그램 제목은 최소 3자 이상 입력하여야 합니다.');
 			$('#programName').focus();
 			return;
 		}
@@ -267,14 +292,13 @@
 			return;
 		}
 		
-		if($('#programDate').val().length == 0) {
-			alert('개설 날짜를 입력하세요.');
-			$('#programDate').focus();			
+		if($('#programDetail').val().length < 5) {
+			alert('내용은 최소 5자 이상 입력하여야 합니다.');
+			$('#programDetail').focus();			
 			return;
 		}
 		
 		let programDate = $('#programDate').val();
-		console.log(programDate);
 		
 		// 선택한 개설 날짜가 DB에 이미 존재하는지 확인
 	    $.ajax({
@@ -284,7 +308,8 @@
 				programDate : programDate
 			},
 			success : function(result) {
-				if(result == true) {
+				// 결과값이 true이고 입력한 날짜가 원래 저장된 날짜와 다를 때
+				if(result == true && programDate != '${programOne.programDate}') {
 					alert('선택한 개설 날짜가 이미 존재합니다. 날짜를 수정해주세요.')
 					$('#programDate').focus();
 					return false;

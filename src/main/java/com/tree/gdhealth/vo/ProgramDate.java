@@ -14,5 +14,6 @@ public class ProgramDate {
 	private String updatedate;
 	
 	private List<String> programDates;
+	private String originDate;
 
 }

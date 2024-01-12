@@ -117,7 +117,7 @@
                                                         <div class="row">
                                                         	<div class="col-lg-8 col-md-8 col-sm-8 col-xs-8">
                                                         		<div class="form-group">
-                                                                    <input name="employeeId" type="text" class="form-control" id="employeeId" placeholder="ID">
+                                                                    <input name="employeeId" type="text" class="form-control" id="employeeId" placeholder="ID" maxlength="15">
                                                                 </div>
                                                         	</div>
                                                         	<div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
@@ -127,13 +127,13 @@
                                                         	</div>
                                                             <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                                                             	<div class="form-group">
-                                                                    <input name="employeePw" id="employeePw" type="password" class="form-control" placeholder="비밀번호">
+                                                                    <input name="employeePw" id="employeePw" type="password" class="form-control" placeholder="비밀번호" maxlength="15">
                                                                 </div>
                                                                 <div class="form-group">
                                                                     <input type="password" class="form-control" id="pwCheck" placeholder="비밀번호 확인">
                                                                 </div>                                                              
                                                                 <div class="form-group">
-                                                                    <input name="employeeName" id="employeeName" type="text" class="form-control" placeholder="이름">
+                                                                    <input name="employeeName" id="employeeName" type="text" class="form-control" placeholder="이름" maxlength="20">
                                                                 </div>                                                                                                                       
                                                                 <div class="form-group">
                                                                     <input name="employeePhone" id="employeePhone" type="text" class="form-control" placeholder="휴대폰 번호">
@@ -274,12 +274,7 @@
 			
 		}
 	});
-	
-	// 정규식을 이용한 ID 입력 체크(영문 소문자, 숫자만 입력 가능)
-	$('#employeeId').keyup(function(){
-		$(this).val($(this).val().replace(/[^a-z0-9]/g, ''));
-	});
-	
+		
 	let isIdCheck = false; 
 	// 중복체크를 하고 난 뒤 아이디 입력란에 사용 가능한 아이디를 지우고 새로운 아이디를 입력했을 경우에 대처
 	$('#employeeId').keydown(function(){
@@ -289,6 +284,9 @@
 	// 중복체크 버튼
 	$('#idCheck').click(function(){
 		
+		// 아이디 정규식 패턴 : 영어 소문자로 시작하는 영어 소문자 + 숫자 조합 6~15자리
+	    let idReg = /^[a-z]+[a-z0-9]{5,14}$/g;
+		
 		let employeeId = $('#employeeId').val();
 		if(employeeId != '') {
 			$.ajax({
@@ -297,10 +295,10 @@
 				data : {employeeId : employeeId},
 				success : function(result) {
 					if(result == 1) {
-						alert('이미 사용중인 아이디입니다.');
+						alert('이미 사용중인 아이디입니다. 아이디를 다시 입력해주세요.');
 						$('#employeeId').focus();
-					} else if(employeeId.length < 5) {
-						alert('아이디를 5자 이상 입력하세요.');
+					} else if(!idReg.test($('#employeeId').val())) {
+						alert('아이디는 영어 소문자로 시작하고 영어 소문자+숫자 조합의 6~15자로 이루어져야 합니다.');
 						$('#employeeId').focus();
 					} else {
 						isIdCheck = true;
@@ -327,8 +325,8 @@
 			return;
 		}
 		
-		let checkNumber = $('#employeePw').val().search(/[0-9]/g);
-	    let checkEnglish = $('#employeePw').val().search(/[a-z]/ig);
+	    // 비밀번호 정규식 패턴 : 영문 숫자 특수기호 조합 6~15자리
+	    let passwordReg = /^(?=.*[a-zA-z])(?=.*[0-9])(?=.*[$`~!@$!%*#^?&\\(\\)\-_=+]).{6,15}$/;
 	    
 	    if($('#employeePw').val().length == 0) { 
 			// 비밀번호 창에 아무것도 입력하지 않았을 때
@@ -338,16 +336,11 @@
 		} else if($('#employeePw').val() != $('#pwCheck').val()) { 
 			// 비밀번호 일치 확인
 			alert('비밀번호가 일치하지 않습니다.');
-			$('#employeePw').focus();
+			$('#pwCheck').focus();
 			return;
-		} else if($('#employeePw').val().length < 6 || $('#pwCheck').val().length < 6) { 
-			// 비밀번호 창의 입력값의 length가 6 미만일 때
-			alert('비밀번호를 6자 이상 입력하세요.');
-			$('#employeePw').focus();
-			return;
-		} else if(checkNumber < 0 || checkEnglish < 0){
+		} else if(!passwordReg.test($('#employeePw').val())){
 			// 숫자와 영어를 혼용하지 않았을 때
-	        alert("비밀번호는 숫자와 영문자를 혼용하여야 합니다.");
+	        alert("비밀번호는 숫자와 영문자, 특수문자를 혼용하여 6자 이상 입력해야 합니다.");
 	        $('#employeePw').focus();
 	        return;
 	    }
@@ -358,6 +351,22 @@
 			$('#employeeName').focus();
 			return;
 	    }
+	    
+	   	if($('#employeeName').val().length < 2) {
+	   		alert('이름은 최소 2자 이상 입력하여야 합니다.');
+			$('#employeeName').focus();
+			return;
+	   	}
+	   	
+		// 이름 정규식 패턴 : 한글, 영문, 띄어쓰기만 허용 가능
+	    let nameReg = /^[a-zA-Zㄱ-힣\s]+$/;
+	   	
+	   	if(!nameReg.test($('#employeeName').val())) {
+	   		alert('이름은 한글과 영문만 입력 가능합니다.');
+	    	$('#employeeName').val('');
+			$('#employeeName').focus();
+			return;
+	   	}
 	    
 	    if($('#employeePhone').val().trim() == '') {
 	    	alert('휴대폰 번호를 입력하세요.');
