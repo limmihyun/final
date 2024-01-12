@@ -123,7 +123,7 @@
 	                                            <div class="details-blog-dt blog-sig-details-dt courses-info mobile-sm-d-n">
 	                                                <span>
 	                                                	<b>수용 인원 :</b> <input type="number" min="1" max="100" maxlength="3" oninput="maxLengthCheck(this)" value="${programOne.maxCustomer}" name="programMaxCustomer" id="programMaxCustomer" style="width:60px;">
-	                                                	<b style="margin-left:20px;">개설 날짜 :</b> <input type="text" value="${programOne.programDate}" name="programDate" id="programDate" style="width:100px;">
+	                                                	<b style="margin-left:20px;">개설 날짜 :</b> <input type="text" value="${programOne.programDate}" name="programDate" id="programDate" style="width:100px; background-color:white;" readonly>
 	                                                </span>
 	                                            </div>
 	                                            <div style="text-align:center;">    
@@ -271,26 +271,7 @@
             $('#programDate').focus();
             return;
         }
-		
-		// 현재 날짜
-		let today = new Date();
-		
-		let year = today.getFullYear(); // 년도
-		let month = today.getMonth() + 1;  // 월
-		if(month < 10) {
-			month = '0' + month;
-		}
-		let date = today.getDate();  // 날짜
-		
-		today = year + '-' + month + '-' + date;
-			
-		// 입력한 개설 날짜와 현재 날짜 비교 
-		if(new Date(today) > new Date($('#programDate').val())) {
-			alert('개설 날짜는 오늘 이후의 날짜만 선택 가능합니다.');
-			$('#programDate').focus();
-			return;
-		}
-				
+						
 		if($('#programName').val().trim() == '') {
 			alert('프로그램 제목을 입력하세요.');
 			$('#programName').val('');

@@ -129,7 +129,8 @@
 			 				<div id="dateArea">
 			 					<label for="programDate1" class="form-label">개설 날짜</label>
 								<div style="display:flex">
-									<input type="text" class="form-control" id="programDate1" name="programDates" class="programDates" placeholder="yyyy-mm-dd" style="width:240px;">
+									<input type="text" class="form-control" id="programDate1" name="programDates" 
+												class="programDates" placeholder="yyyy-mm-dd" style="width:240px; background-color:white;" readonly>
 									<button type="button" style="margin-left:15px; margin-top:5px; height:30px; width:30px;" id="plusBtn">+</button>							
 								</div>	
 			 				</div>		
@@ -230,7 +231,7 @@
 		
 		let newDatepickerId = 'programDate' + counter;
 		
-        let newDatepickerInput = $('<input type="text" class="form-control" name="programDates" class="programDates" placeholder="yyyy-mm-dd" style="width:240px;">').attr('id', newDatepickerId);   
+        let newDatepickerInput = $('<input type="text" class="form-control" name="programDates" class="programDates" placeholder="yyyy-mm-dd" style="width:240px; background-color:white;" readonly>').attr('id', newDatepickerId);   
         let minusBtn = $('<button type="button" style="margin-left:15px; margin-top:5px; height:30px; width:30px;" class="minusBtn">-</button>');
 
     	// 동적으로 생성된 input과 button을 dateHtml에 추가
@@ -295,30 +296,6 @@
 			return true;
 		}
 	    
-	}
-	
-	// 현재 날짜 유효성 검증 함수
-	function validateTodayDate(input) {
-		
-		// 현재 날짜
-		let today = new Date();
-		
-		let year = today.getFullYear(); // 년도
-		let month = today.getMonth() + 1;  // 월
-		if(month < 10) {
-			month = '0' + month;
-		}
-		let date = today.getDate();  // 날짜
-		
-		today = year + '-' + month + '-' + date;
-			
-		// 입력한 개설 날짜와 현재 날짜 비교
-		if(new Date(today) > new Date(input.val())) {
-			return false;
-		} else {
-			return true;
-		}
-		
 	}
 	
 	// 선택한 개설 날짜 중에 중복된 날짜가 있는지 검증하는 함수
@@ -392,26 +369,11 @@
 	    });
 		
 	    if(!isFormatValid) {
-			alert('입력 창 중에서 하나 이상의 개설 날짜의 형식이 유효하지 않습니다.');
+			alert('비어 있는 개설 날짜 입력창이 있습니다. 날짜를 선택하거나 "-"를 눌러 입력창을 삭제하세요.');
             return;
 		}
-	    
-	    let isTodayValid = true;
-		
-		$('#dateArea input[type="text"]').each(function() {
-			console.log('validateTodayDate : ' + validateTodayDate($(this)));
-	        if(!validateTodayDate($(this))) {
-	        	isTodayValid = false;
-	        	return;
-	        }
-	    });
-	    
-	    if(!isTodayValid) {
-			alert('개설 날짜는 오늘 이후의 날짜만 선택 가능합니다.');
-            return;
-		}
-	    
-		 // 추가하는 개설날짜 중에 중복된 개설날짜가 있는지 확인하는 함수
+	    	    
+		// 추가하는 개설날짜 중에 중복된 개설날짜가 있는지 확인하는 함수
 		let values = [];
 	    $('#dateArea input[type="text"]').each(function () {
 	      	values.push($(this).val());
