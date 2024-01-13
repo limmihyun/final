@@ -9,10 +9,13 @@ public class Employee {
 
 	private int employeeNo;
 	
-	// @NotNull : null을 전달 받을 경우 Exception이 발생하지만 ""나 "   "와 같은 빈값이 들어올 때는 
-	// null이 아닌 String으로 인식하기 때문에 유효성을 통과한다.
+	/*
+		@NotNull : null을 전달 받을 경우 Exception이 발생하지만 ""나 "   "와 같은 빈값이 들어올 때는 
+		null이 아닌 String으로 인식하기 때문에 유효성을 통과한다.
+		
+		@NotBlank : Null과 "", "   " 모두 허용하지 않는다. String 타입만 사용 가능하다.
+	*/
 	
-	// @NotBlank : Null과 "", "   " 모두 허용하지 않는다. String 타입만 사용 가능하다.
 	
 	@Positive(message = "지점 번호는 양수여야 합니다.") // 양수만 가능하다.
 	private Integer branchNo;

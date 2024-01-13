@@ -127,10 +127,8 @@ public class EmpController {
 	}
 	
 	@PostMapping("/addEmp")
-	public String addEmp(@Validated Employee employee,
-							BindingResult bindingResult1,
-							@Validated EmployeeDetail employeeDetail,
-							BindingResult bindingResult2,
+	public String addEmp(@Validated Employee employee,BindingResult bindingResult1,
+							@Validated EmployeeDetail employeeDetail, BindingResult bindingResult2,
 							 MultipartFile employeeFile,
 							 HttpSession session, Model model) {
 		

@@ -5,6 +5,9 @@ import java.util.Map;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.ObjectError;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -108,12 +111,13 @@ public class ProgramController {
 	@PostMapping("/datesCheck") 
 	public boolean dateCheck(@RequestBody List<String> programDates) { 
 		// @RequestBody : HTTP 메시지 바디 정보(클라이언트에서 전송한 JSON 형식의 데이터)를 자바 객체로 변환해 준다.
-		
+				
 		boolean checkDatesExists = programService.checkDatesExists(programDates);
 		// 디버깅
 		log.debug("dates 존재 확인(존재:true,존재x:false) : " + checkDatesExists);
 		
 		return checkDatesExists;
+				
 	}
 	
 	@ResponseBody
@@ -128,8 +132,32 @@ public class ProgramController {
 	}
 	
 	@PostMapping("/addProgram")
-	public String addProgram(HttpSession session, Program program, 
-								ProgramDate programDate, MultipartFile programFile) {
+	public String addProgram(@Validated Program program, BindingResult bindingResult1,
+								@Validated ProgramDate programDate, BindingResult bindingResult2, 
+								MultipartFile programFile,
+								HttpSession session) {
+		
+		// 첫 번째 객체(Employee)의 유효성 검사 실패 시 처리
+		if(bindingResult1.hasErrors()) {
+			
+			// 에러 메시지 출력
+	        for (ObjectError error : bindingResult1.getAllErrors()) {
+	        	log.debug("program 객체 validation 실패 : " + error.getDefaultMessage());
+	        }
+			
+			return "headoffice/addProgram";
+		}
+				
+		// 두 번째 객체(EmployeeDetail)의 유효성 검사 실패 시 처리
+		if(bindingResult2.hasErrors()) {
+			
+			// 에러 메시지 출력
+	        for (ObjectError error : bindingResult2.getAllErrors()) {
+	        	log.debug("programDate 객체 validation 실패 : " + error.getDefaultMessage());
+	        }
+	        
+			return "headoffice/addProgram";
+		}
 		
 		String path = session.getServletContext().getRealPath("/upload/program");
 		// 디버깅
