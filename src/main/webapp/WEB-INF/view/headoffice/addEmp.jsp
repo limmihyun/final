@@ -136,10 +136,10 @@
                                                                     <input name="employeeName" id="employeeName" type="text" class="form-control" placeholder="이름" maxlength="20">
                                                                 </div>                                                                                                                       
                                                                 <div class="form-group">
-                                                                    <input name="employeePhone" id="employeePhone" type="text" class="form-control" placeholder="휴대폰 번호">
+                                                                    <input name="employeePhone" id="employeePhone" type="text" class="form-control" placeholder="휴대폰 번호 / ex) 010-1234-5678">
                                                                 </div>
                                                                 <div class="form-group">
-                                                                    <input name="employeeEmail" id="employeeEmail" type="text" class="form-control" placeholder="이메일">
+                                                                    <input name="employeeEmail" id="employeeEmail" type="text" class="form-control" placeholder="이메일 / ex) goodee@naver.com">
                                                                 </div>                                                               
                                                                 
                                                                 <div class="form-group">
@@ -164,7 +164,8 @@
                                                                 </div>
                                                                 
                                                                 <div class="form-group">
-                                                                    <input name="employeeFile" id="employeeFile" type="file" class="form-control">
+                                                                    <input name="employeeFile" id="employeeFile" type="file" class="form-control" 
+                                                                    					accept="image/*">
                                                                 </div>
                                                                                                                                 
                                                             </div>
@@ -316,6 +317,13 @@
 		}
 	});
 	
+	// 이미지 파일의 형식을 검사하는 함수
+	function isImageFile(file) {
+        // 간단한 예시로 파일 확장자를 이용한 확인 방법
+        var validImageTypes = ['image/jpg', 'image/jpeg', 'image/png', 'image/gif', 'image/webp'];
+        return validImageTypes.includes(file.type);
+    }
+	
 	// 회원가입 버튼
 	$('#insertBtn').click(function(){
 		
@@ -375,13 +383,33 @@
 			return;
 	    }
 	    
-	    if($('#employeeEmail').val().trim() == '') {
+	    // 휴대폰 번호 형식 정규식 패턴
+	   	let phoneReg = /^01(?:0|1|[6-9])-(?:\d{3}|\d{4})-\d{4}$/;
+	   	
+	   	if(!phoneReg.test($('#employeePhone').val())) {
+	   		alert('올바른 휴대폰 번호의 형식을 입력하세요.');
+	    	$('#employeePhone').val('');
+			$('#employeePhone').focus();
+			return;
+	   	}
+	   	
+	   	if($('#employeeEmail').val().trim() == '') {
 	    	alert('이메일을 입력하세요.');
 	    	$('#employeeEmail').val('');
 			$('#employeeEmail').focus();
 			return;
 	    }
-	    	    
+	   	
+	   	// 이메일 형식 정규식 패턴
+	   	let emailReg = /^[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*\.[a-zA-Z]{2,3}$/i;
+	   	
+	   	if(!emailReg.test($('#employeeEmail').val())) {
+	   		alert('올바른 이메일의 형식을 입력하세요.');
+	    	$('#employeeEmail').val('');
+			$('#employeeEmail').focus();
+			return;
+	   	}
+	       	    
 	    if($('#employeeGender').val() == 0) {
 			alert('성별을 선택하세요.');
 			$('#employeeGender').focus();
@@ -405,6 +433,15 @@
 			$('#employeeFile').focus();
 			return;
 		}
+	    
+	    var fileInput = $('#employeeFile')[0];
+        var file = fileInput.files[0];
+        
+        if (!isImageFile(file)) {
+        	alert('사진은 이미지 파일만 첨부 가능합니다.');
+			$('#employeeFile').focus();
+			return;
+        }
 	    		
 		$('#insertForm').submit();
 	});

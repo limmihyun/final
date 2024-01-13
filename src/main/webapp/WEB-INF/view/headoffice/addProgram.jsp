@@ -121,7 +121,7 @@
 						</div>
 						<div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
 							<label for="programFile" class="form-label">프로그램 이미지</label>
-							<input type="file" class="form-control" id="programFile" name="programFile">
+							<input type="file" class="form-control" id="programFile" name="programFile" accept="image/*">
 						</div>
 		 			</div>
 		 			<div class="row" style="margin-bottom:10px;">
@@ -284,6 +284,13 @@
 	    });
 	 });
 	
+	// 이미지 파일의 형식을 검사하는 함수
+	function isImageFile(file) {
+        // 간단한 예시로 파일 확장자를 이용한 확인 방법
+        var validImageTypes = ['image/jpg', 'image/jpeg', 'image/png', 'image/gif', 'image/webp'];
+        return validImageTypes.includes(file.type);
+    }
+	
 	// 날짜 형식 유효성 검증 함수
 	function validateDateFormat(input) {
 		
@@ -350,6 +357,15 @@
 			$('#programFile').focus();
 			return;
 		}
+		
+		var fileInput = $('#programFile')[0];
+        var file = fileInput.files[0];
+        
+        if (!isImageFile(file)) {
+        	alert('사진은 이미지 파일만 첨부 가능합니다.');
+			$('#programFile').focus();
+			return;
+        }
 		
 		if($('#programDate1').val().length == 0) {
 			alert('개설 날짜를 입력하세요.');
