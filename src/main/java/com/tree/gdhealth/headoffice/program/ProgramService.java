@@ -217,17 +217,21 @@ public class ProgramService {
 		String oName = programFile.getOriginalFilename();
 		// lastIndexOf : parameter로 전달받은 문자열을 원본 문자열의 뒤에서부터 탐색하여, 
 		// 처음으로 파라미터의 문자열이 나오는 index를 리턴한다.
-		// 확장자 구하기
+		// 확장자 구하기 : xx.xxx.pdf -> .pdf
 		String extName = oName.substring(oName.lastIndexOf(".")); 
-		// xx.xxx.pdf -> .pdf
+		log.debug("확장자 : " + extName);
+		
+		// 이미지 파일이 아니면 rollback
+		if(!(extName.equals(".png") || extName.equals(".jpg") || 
+				extName.equals(".jpeg") || extName.equals(".gif") || extName.equals(".webp"))) {
+			// 강제로 예외를 발생시켜 애노테이션 @Transactional이 작동되게 한다.
+			throw new RuntimeException();
+		}
+		
 		img.setFilename(uName + extName);
 		
 		int imgResult = programMapper.insertProgramImg(img);
-		if(imgResult != 1) {
-			// insert를 실패하였을 때 강제로 예외를 발생시켜 애노테이션 Transactiona이 작동하도록 한다.
-			throw new RuntimeException();
-		}
-		// noticefile 테이블 입력
+		log.debug("programImg 추가(성공:1) : " + imgResult);
 		
 		// 물리적file을 원하는 경로(path)에 저장
 		File file = new File(path+"/"+uName+extName); // 빈파일
@@ -253,17 +257,21 @@ public class ProgramService {
 		String oName = programFile.getOriginalFilename();
 		// lastIndexOf : parameter로 전달받은 문자열을 원본 문자열의 뒤에서부터 탐색하여, 
 		// 처음으로 파라미터의 문자열이 나오는 index를 리턴한다.
-		// 확장자 구하기
+		// 확장자 구하기 : xx.xxx.pdf -> .pdf
 		String extName = oName.substring(oName.lastIndexOf(".")); 
-		// xx.xxx.pdf -> .pdf
+		log.debug("확장자 : " + extName);
+		
+		// 이미지 파일이 아니면 rollback
+		if(!(extName.equals(".png") || extName.equals(".jpg") || 
+				extName.equals(".jpeg") || extName.equals(".gif") || extName.equals(".webp"))) {
+			// 강제로 예외를 발생시켜 애노테이션 @Transactional이 작동되게 한다.
+			throw new RuntimeException();
+		}
+
 		img.setFilename(uName + extName);
 		
 		int imgResult = programMapper.updateProgramImg(img);
-		if(imgResult != 1) {
-			// insert를 실패하였을 때 강제로 예외를 발생시켜 애노테이션 Transactiona이 작동하도록 한다.
-			throw new RuntimeException();
-		}
-		// noticefile 테이블 입력
+		log.debug("programImgUpdate 추가(성공:1) : " + imgResult);
 		
 		// 물리적file을 원하는 경로(path)에 저장
 		File file = new File(path+"/"+uName+extName); // 빈파일

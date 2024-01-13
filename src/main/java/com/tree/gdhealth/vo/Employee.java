@@ -2,7 +2,6 @@ package com.tree.gdhealth.vo;
 
 import jakarta.validation.constraints.Pattern;
 import jakarta.validation.constraints.Positive;
-import jakarta.validation.constraints.Size;
 import lombok.Data;
 
 @Data
