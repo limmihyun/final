@@ -3,12 +3,22 @@
 <mapper namespace="com.tree.gdhealth.headoffice.membership.MembershipMapper">
 	<select id="membershipList" resultType="java.util.Map">
 		SELECT
+			membership_no membershipNo,
 			membership_name membershipName,
 			membership_month membershipMonth,
-			membership_price membershipPrice
+			membership_price membershipPrice,
+			active
 		FROM membership;
 	</select>
 	<insert id="addMembership">
 		INSERT INTO membership(membership_name, membership_month, membership_price, createdate, updatedate) VALUES(#{membershipName}, #{membershipMonth}, #{membershipPrice}, NOW(),NOW());
 	</insert>
+	
+	<update id="activeTrue">
+		UPDATE membership SET active = 'true' WHERE membership_no = #{membershpNo}
+	</update>
+	
+	<update id="activeFalse">
+		UPDATE membership SET active = 'false' WHERE membership_no = #{membershpNo}
+	</update>
 </mapper>

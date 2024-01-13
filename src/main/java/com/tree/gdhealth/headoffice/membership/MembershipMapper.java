@@ -12,4 +12,9 @@ public interface MembershipMapper {
 	List<Membership> membershipList();
 	
 	int addMembership (Membership membership);
+	
+	int activeTrue (Membership membership);
+	
+	int activeFalse (Membership membership);
+
 }

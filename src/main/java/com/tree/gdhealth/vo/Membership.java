@@ -10,4 +10,5 @@ public class Membership {
 	private String membershipPrice;
 	private String createdate;
 	private String updatedate;
+	private String active;
 }
