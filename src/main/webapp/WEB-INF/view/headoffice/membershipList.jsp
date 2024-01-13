@@ -106,8 +106,17 @@
 							<p>회원권 제목 : ${m.membershipName}</p>
 							<p>회원권 개월수 : ${m.membershipMonth}개월</p>
 							<p>회원권 가격 : ${m.membershipPrice}원</p>
+							<p>${m.active}</p>
 						</div>
 					</div>
+					
+					<c:if test="${m.active == true}">
+						<button>비활성화</button>
+					</c:if>
+					
+					<c:if test="${m.active eq false}">
+						<button>활성화</button>
+					</c:if>
 				</c:forEach>
 			</div>
 		</section>
