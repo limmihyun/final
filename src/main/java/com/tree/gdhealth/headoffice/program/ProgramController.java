@@ -105,8 +105,9 @@ public class ProgramController {
 	}
 	
 	@ResponseBody
-	@PostMapping("/datesCheck")
-	public boolean dateCheck(@RequestBody List<String> programDates) {
+	@PostMapping("/datesCheck") 
+	public boolean dateCheck(@RequestBody List<String> programDates) { 
+		// @RequestBody : HTTP 메시지 바디 정보(클라이언트에서 전송한 JSON 형식의 데이터)를 자바 객체로 변환해 준다.
 		
 		boolean checkDatesExists = programService.checkDatesExists(programDates);
 		// 디버깅

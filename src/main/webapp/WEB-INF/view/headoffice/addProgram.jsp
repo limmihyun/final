@@ -407,8 +407,8 @@
 			url : '${pageContext.request.contextPath}/headoffice/program/datesCheck',
 			method : 'post',
 			data : JSON.stringify(values),
-			dataType : 'json',
-			contentType: 'application/json',
+			dataType : 'json', // 서버에서 받을 데이터의 타입 
+			contentType: 'application/json', // 서버로 보내는 데이터의 타입
 			success : function(result) {
 				if(result == true) {
 					alert('선택한 개설 날짜에 이미 다른 프로그램이 등록되어 있습니다. 날짜를 변경해주세요.')

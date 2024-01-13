@@ -136,10 +136,10 @@
                                                                     <input name="employeeName" id="employeeName" type="text" class="form-control" placeholder="이름" maxlength="20">
                                                                 </div>                                                                                                                       
                                                                 <div class="form-group">
-                                                                    <input name="employeePhone" id="employeePhone" type="text" class="form-control" placeholder="휴대폰 번호 / ex) 010-1234-5678">
+                                                                    <input name="employeePhone" id="employeePhone" type="text" class="form-control" placeholder="휴대폰 번호      ex) 010-1234-5678">
                                                                 </div>
                                                                 <div class="form-group">
-                                                                    <input name="employeeEmail" id="employeeEmail" type="text" class="form-control" placeholder="이메일 / ex) goodee@naver.com">
+                                                                    <input name="employeeEmail" id="employeeEmail" type="text" class="form-control" placeholder="이메일      ex) goodee@naver.com">
                                                                 </div>                                                               
                                                                 
                                                                 <div class="form-group">
@@ -156,7 +156,7 @@
                                                                 </div>
                                                                 <div class="form-group">
                                                                     <select name="employeePosition" id="employeePosition" class="form-control">
-																			<option value="0" selected>소속</option>
+																			<option value="0" selected>직책</option>
 																			<option value="trainer">트레이너</option>
 																			<option value="branch_manager">지점 관리자</option>
 																			<option value="head_office_manager">본사 관리자</option>
@@ -333,7 +333,7 @@
 			return;
 		}
 		
-	    // 비밀번호 정규식 패턴 : 영문 숫자 특수기호 조합 6~15자리
+	    // 비밀번호 정규식 패턴 : 영문 숫자 특수기호 조합 6~15자리 
 	    let passwordReg = /^(?=.*[a-zA-z])(?=.*[0-9])(?=.*[$`~!@$!%*#^?&\\(\\)\-_=+]).{6,15}$/;
 	    
 	    if($('#employeePw').val().length == 0) { 
@@ -423,7 +423,7 @@
 		}
 	    
 	    if($('#employeePosition').val() == 0) {
-			alert('소속을 선택하세요.');
+			alert('직책을 선택하세요.');
 			$('#employeePosition').focus();
 			return;
 		}
@@ -441,8 +441,8 @@
         	alert('사진은 이미지 파일만 첨부 가능합니다.');
 			$('#employeeFile').focus();
 			return;
-        }
-	    		
+        }		
+        
 		$('#insertForm').submit();
 	});
 </script>
