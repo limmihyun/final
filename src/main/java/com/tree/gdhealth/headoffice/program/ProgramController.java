@@ -137,7 +137,7 @@ public class ProgramController {
 								MultipartFile programFile,
 								HttpSession session) {
 		
-		// 첫 번째 객체(Employee)의 유효성 검사 실패 시 처리
+		// 첫 번째 객체(Employee)의 유효성 검증 실패시 처리
 		if(bindingResult1.hasErrors()) {
 			
 			// 에러 메시지 출력
@@ -148,7 +148,7 @@ public class ProgramController {
 			return "headoffice/addProgram";
 		}
 				
-		// 두 번째 객체(EmployeeDetail)의 유효성 검사 실패 시 처리
+		// 두 번째 객체(EmployeeDetail)의 유효성 검증 실패시 error 발생 시 처리
 		if(bindingResult2.hasErrors()) {
 			
 			// 에러 메시지 출력

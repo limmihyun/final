@@ -231,7 +231,7 @@
 		
 		let newDatepickerId = 'programDate' + counter;
 		
-        let newDatepickerInput = $('<input type="text" class="form-control" name="programDates" class="programDates" placeholder="yyyy-mm-dd" style="width:240px; background-color:white;" readonly>').attr('id', newDatepickerId);   
+        let newDatepickerInput = $('<input type="text" class="form-control" name="programDates" class="programDates" placeholder="yyyy-mm-dd" style="width:240px; background-color:white;">').attr('id', newDatepickerId);   
         let minusBtn = $('<button type="button" style="margin-left:15px; margin-top:5px; height:30px; width:30px;" class="minusBtn">-</button>');
 
     	// 동적으로 생성된 input과 button을 dateHtml에 추가
@@ -383,7 +383,7 @@
 	        	return;
 	        }
 	    });
-		
+
 	    if(!isFormatValid) {
 			alert('형식이 올바르지 않은 개설 날짜 입력창이 있습니다. 날짜를 선택하거나 "-"를 눌러 입력창을 삭제하세요.');
             return;
@@ -426,7 +426,6 @@
 		});
 		
 	});
-	
 	
 </script>
 

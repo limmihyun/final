@@ -28,7 +28,8 @@ public class ListPatternValidator implements ConstraintValidator<ListPattern, Li
         }
 
         for (String value : values) {
-            if (value == null || !value.matches(regexp)) {
+            if (value == null || !value.matches(regexp)) { 
+            	// matches : 정규식으로 이루어진 특정 패턴의 문자열을 포함하는지 확인
             	// 리스트의 각 요소를 순회하면서 각 요소가 정규 표현식과 일치하는지 검사 
             	// 하나라도 일치하지 않는 요소가 있다면 유효하지 않다고 판단
                 return false; // 패턴에 맞지 않는 요소가 있다면 유효하지 않음

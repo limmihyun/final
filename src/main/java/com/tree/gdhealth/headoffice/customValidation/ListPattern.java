@@ -24,9 +24,9 @@ public @interface ListPattern {
 	*/
 	
 	// 유효성 검사가 실패했을 때 사용될 기본 에러 메시지를 지정
-	String message() default "Invalid pattern in the list";
+	String message() default "날짜 형식이 올바르지 않습니다.";
 	
-	//Jakarta Bean Validation에서 그룹 기반 유효성 검사를 할 때 사용된다.
+	// Jakarta Bean Validation에서 그룹 기반 유효성 검사를 할 때 사용된다.
     Class<?>[] groups() default {};
     
     // 페이로드를 나타내며, 특별한 정보를 전달할 때 사용된다.
