@@ -19,6 +19,8 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.tree.gdhealth.headoffice.Paging;
+import com.tree.gdhealth.headoffice.customValidation.FutureDateGroup;
+import com.tree.gdhealth.headoffice.customValidation.ListGroup;
 import com.tree.gdhealth.vo.Program;
 import com.tree.gdhealth.vo.ProgramDate;
 import com.tree.gdhealth.vo.ProgramImg;
@@ -133,7 +135,7 @@ public class ProgramController {
 	
 	@PostMapping("/addProgram")
 	public String addProgram(@Validated Program program, BindingResult bindingResult1,
-								@Validated ProgramDate programDate, BindingResult bindingResult2, 
+								@Validated({ListGroup.class, FutureDateGroup.class}) ProgramDate programDate, BindingResult bindingResult2, 
 								MultipartFile programFile,
 								HttpSession session) {
 		
@@ -192,8 +194,8 @@ public class ProgramController {
 	}
 	
 	@PostMapping("/update")
-	public String update(HttpSession session, MultipartFile programFile, RedirectAttributes redirectAttributes,
-							Program program, ProgramDate programDate, ProgramImg programImg) {
+	public String update(@Validated Program program, ProgramDate programDate, ProgramImg programImg,
+			HttpSession session, MultipartFile programFile, RedirectAttributes redirectAttributes) {
 				
 		String oldPath = session.getServletContext().getRealPath("/upload/program/" + programImg.getFilename());
 		String path = session.getServletContext().getRealPath("/upload/program");

@@ -4,8 +4,10 @@ import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 import java.util.UUID;
 
 import javax.management.RuntimeErrorException;
@@ -119,18 +121,22 @@ public class ProgramService {
 		
 		int result = programMapper.insertProgram(program);
 		// 디버깅
-		log.debug("program 추가(성공:1,실패:0) : " + result);	
-		if(result != 1) {
-			// insert를 실패하였을 때 강제로 예외를 발생시켜 애노테이션 Transactiona이 작동하도록 한다.
-			throw new RuntimeException(); 
-		}
+		log.debug("program 추가(성공:1) : " + result);	
 		
 		// programMapper.xml에서 selectKey로 얻어 온 program table의 auto increment 값
 		List<String> dates = programDate.getProgramDates();
 		log.debug("dates : " + dates);
+		
+		Set<String> set = new HashSet<>(dates);
+		// dates내에 서로 중복된 값이 있을 때
+		if(dates.size() != set.size()) {
+			// insert를 실패하였을 때 강제로 예외를 발생시켜 애노테이션 Transactiona이 작동하도록 한다.
+			throw new RuntimeException();
+		}
+		
 		List<ProgramDate> dateList = new ArrayList<>();
 		for(String date : dates) {
-			if(!date.equals("")) { // list의 값이 비어있지 않을 경우
+			if(!date.equals("")) { // list의 요소가 공백이 아닐 경우
 				ProgramDate p = new ProgramDate();
 				p.setProgramNo(program.getProgramNo());
 				p.setProgramDate(date);

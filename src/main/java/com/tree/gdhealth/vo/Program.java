@@ -2,7 +2,7 @@ package com.tree.gdhealth.vo;
 
 import jakarta.validation.constraints.Max;
 import jakarta.validation.constraints.Min;
-import jakarta.validation.constraints.Positive;
+import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 import lombok.Data;
 
@@ -27,7 +27,8 @@ public class Program {
 	
 	@Max(value = 100, message = "수용 인원은 최대 100명까지 가능합니다.")
 	@Min(value = 1, message = "수용 인원은 1명 이상이어야 합니다.")
-	private int programMaxCustomer;
+	@NotNull(message = "나이를 입력해주세요.")
+	private Integer programMaxCustomer;
 	
 	private String programActive;
 	private String createdate;
