@@ -10,8 +10,6 @@ import java.util.Map;
 import java.util.Set;
 import java.util.UUID;
 
-import javax.management.RuntimeErrorException;
-
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
@@ -19,7 +17,6 @@ import org.springframework.web.multipart.MultipartFile;
 import com.tree.gdhealth.vo.Program;
 import com.tree.gdhealth.vo.ProgramDate;
 import com.tree.gdhealth.vo.ProgramImg;
-import com.tree.gdhealth.vo.ProgramManager;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -164,18 +161,10 @@ public class ProgramService {
 			String path, String oldPath) {
 
 		int result = programMapper.updateProgram(program);
-		log.debug("프로그램 수정(성공:1,실패:0) : " + result);
-		if(result != 1) {
-			// insert를 실패하였을 때 강제로 예외를 발생시켜 애노테이션 Transactiona이 작동하도록 한다.
-			throw new RuntimeException();
-		}
-		
+		log.debug("프로그램 수정(성공:1) : " + result);
+
 		int dateResult = programMapper.updateProgramDate(programDate);
-		log.debug("프로그램 date 수정(성공:1,실패:0) : " + dateResult);
-		if(dateResult != 1) {
-			// insert를 실패하였을 때 강제로 예외를 발생시켜 애노테이션 Transactiona이 작동하도록 한다.
-			throw new RuntimeException();
-		}
+		log.debug("프로그램 date 수정(성공:1) : " + dateResult);
 			
 		if(!programFile.isEmpty()) {
 		

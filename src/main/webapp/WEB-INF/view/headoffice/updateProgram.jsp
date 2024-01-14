@@ -112,7 +112,6 @@
                                                     	method="post" enctype="multipart/form-data">
                            			   <input type="hidden" value="${programOne.programDate}" name="originDate">	
                                        <input type="hidden" value="${programOne.programNo}" name="programNo">
-                                       <!-- <input type="hidden" value="${programOne.filename}" name="filename">  -->
 	                                   <div class="latest-blog-single blog-single-full-view">
 	                                        <div class="blog-details blog-sig-details">
 	                                        	<div class="blog-details" style="text-align:center;">
@@ -242,7 +241,7 @@
 	 });
 	
 	$('#updateBtn').click(function(){
-		
+		/*
 		if($('#programMaxCustomer').val().trim() == '') {
 			alert('수용 인원을 입력하세요.');
 			$('#programMaxCustomer').val('');	
@@ -297,7 +296,7 @@
 			$('#programDetail').focus();			
 			return;
 		}
-		
+		*/
 		let programDate = $('#programDate').val();
 		
 		// 선택한 개설 날짜가 DB에 이미 존재하는지 확인

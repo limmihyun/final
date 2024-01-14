@@ -1,5 +1,5 @@
 package com.tree.gdhealth.headoffice.customValidation;
 
-public interface ListGroup {
+public interface DateGroup {
 
 }

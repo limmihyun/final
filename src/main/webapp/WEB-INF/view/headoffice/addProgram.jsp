@@ -383,12 +383,12 @@
 	        	return;
 	        }
 	    });
-		
+		/*
 	    if(!isFormatValid) {
 			alert('형식이 올바르지 않은 개설 날짜 입력창이 있습니다. 날짜를 선택하거나 "-"를 눌러 입력창을 삭제하세요.');
             return;
 		}
-	        
+	    */   
 		// 추가하는 개설날짜 중에 중복된 개설날짜가 있는지 확인하는 함수
 		let values = [];
 	    $('#dateArea input[type="text"]').each(function () {
