@@ -4,11 +4,11 @@ import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 import java.util.UUID;
-
-import javax.management.RuntimeErrorException;
 
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -17,7 +17,6 @@ import org.springframework.web.multipart.MultipartFile;
 import com.tree.gdhealth.vo.Program;
 import com.tree.gdhealth.vo.ProgramDate;
 import com.tree.gdhealth.vo.ProgramImg;
-import com.tree.gdhealth.vo.ProgramManager;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -119,18 +118,22 @@ public class ProgramService {
 		
 		int result = programMapper.insertProgram(program);
 		// 디버깅
-		log.debug("program 추가(성공:1,실패:0) : " + result);	
-		if(result != 1) {
-			// insert를 실패하였을 때 강제로 예외를 발생시켜 애노테이션 Transactiona이 작동하도록 한다.
-			throw new RuntimeException(); 
-		}
+		log.debug("program 추가(성공:1) : " + result);	
 		
 		// programMapper.xml에서 selectKey로 얻어 온 program table의 auto increment 값
 		List<String> dates = programDate.getProgramDates();
 		log.debug("dates : " + dates);
+		
+		Set<String> set = new HashSet<>(dates);
+		// dates내에 서로 중복된 값이 있을 때
+		if(dates.size() != set.size()) {
+			// insert를 실패하였을 때 강제로 예외를 발생시켜 애노테이션 Transactiona이 작동하도록 한다.
+			throw new RuntimeException();
+		}
+		
 		List<ProgramDate> dateList = new ArrayList<>();
 		for(String date : dates) {
-			if(!date.equals("")) { // list의 값이 비어있지 않을 경우
+			if(!date.equals("")) { // list의 요소가 공백이 아닐 경우
 				ProgramDate p = new ProgramDate();
 				p.setProgramNo(program.getProgramNo());
 				p.setProgramDate(date);
@@ -158,18 +161,10 @@ public class ProgramService {
 			String path, String oldPath) {
 
 		int result = programMapper.updateProgram(program);
-		log.debug("프로그램 수정(성공:1,실패:0) : " + result);
-		if(result != 1) {
-			// insert를 실패하였을 때 강제로 예외를 발생시켜 애노테이션 Transactiona이 작동하도록 한다.
-			throw new RuntimeException();
-		}
-		
+		log.debug("프로그램 수정(성공:1) : " + result);
+
 		int dateResult = programMapper.updateProgramDate(programDate);
-		log.debug("프로그램 date 수정(성공:1,실패:0) : " + dateResult);
-		if(dateResult != 1) {
-			// insert를 실패하였을 때 강제로 예외를 발생시켜 애노테이션 Transactiona이 작동하도록 한다.
-			throw new RuntimeException();
-		}
+		log.debug("프로그램 date 수정(성공:1) : " + dateResult);
 			
 		if(!programFile.isEmpty()) {
 		
@@ -217,17 +212,21 @@ public class ProgramService {
 		String oName = programFile.getOriginalFilename();
 		// lastIndexOf : parameter로 전달받은 문자열을 원본 문자열의 뒤에서부터 탐색하여, 
 		// 처음으로 파라미터의 문자열이 나오는 index를 리턴한다.
-		// 확장자 구하기
+		// 확장자 구하기 : xx.xxx.pdf -> .pdf
 		String extName = oName.substring(oName.lastIndexOf(".")); 
-		// xx.xxx.pdf -> .pdf
+		log.debug("확장자 : " + extName);
+		
+		// 이미지 파일이 아니면 rollback
+		if(!(extName.equals(".png") || extName.equals(".jpg") || 
+				extName.equals(".jpeg") || extName.equals(".gif") || extName.equals(".webp"))) {
+			// 강제로 예외를 발생시켜 애노테이션 @Transactional이 작동되게 한다.
+			throw new RuntimeException();
+		}
+		
 		img.setFilename(uName + extName);
 		
 		int imgResult = programMapper.insertProgramImg(img);
-		if(imgResult != 1) {
-			// insert를 실패하였을 때 강제로 예외를 발생시켜 애노테이션 Transactiona이 작동하도록 한다.
-			throw new RuntimeException();
-		}
-		// noticefile 테이블 입력
+		log.debug("programImg 추가(성공:1) : " + imgResult);
 		
 		// 물리적file을 원하는 경로(path)에 저장
 		File file = new File(path+"/"+uName+extName); // 빈파일
@@ -253,17 +252,21 @@ public class ProgramService {
 		String oName = programFile.getOriginalFilename();
 		// lastIndexOf : parameter로 전달받은 문자열을 원본 문자열의 뒤에서부터 탐색하여, 
 		// 처음으로 파라미터의 문자열이 나오는 index를 리턴한다.
-		// 확장자 구하기
+		// 확장자 구하기 : xx.xxx.pdf -> .pdf
 		String extName = oName.substring(oName.lastIndexOf(".")); 
-		// xx.xxx.pdf -> .pdf
+		log.debug("확장자 : " + extName);
+		
+		// 이미지 파일이 아니면 rollback
+		if(!(extName.equals(".png") || extName.equals(".jpg") || 
+				extName.equals(".jpeg") || extName.equals(".gif") || extName.equals(".webp"))) {
+			// 강제로 예외를 발생시켜 애노테이션 @Transactional이 작동되게 한다.
+			throw new RuntimeException();
+		}
+
 		img.setFilename(uName + extName);
 		
 		int imgResult = programMapper.updateProgramImg(img);
-		if(imgResult != 1) {
-			// insert를 실패하였을 때 강제로 예외를 발생시켜 애노테이션 Transactiona이 작동하도록 한다.
-			throw new RuntimeException();
-		}
-		// noticefile 테이블 입력
+		log.debug("programImgUpdate 추가(성공:1) : " + imgResult);
 		
 		// 물리적file을 원하는 경로(path)에 저장
 		File file = new File(path+"/"+uName+extName); // 빈파일

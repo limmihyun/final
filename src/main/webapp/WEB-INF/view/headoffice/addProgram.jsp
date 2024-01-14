@@ -311,7 +311,7 @@
     }
 	
 	$(document).on('click', '#insertBtn', function(){
-				
+		
 		if($('#programName').val().trim() == '') {
 			alert('프로그램 제목을 입력하세요.');
 			$('#programName').val('');
@@ -366,7 +366,7 @@
 			$('#programFile').focus();
 			return;
         }
-		
+        
 		if($('#programDate1').val().length == 0) {
 			alert('개설 날짜를 입력하세요.');
 			$('#programDate1').focus();			
@@ -383,12 +383,12 @@
 	        	return;
 	        }
 	    });
-		
+		/*
 	    if(!isFormatValid) {
-			alert('비어 있는 개설 날짜 입력창이 있습니다. 날짜를 선택하거나 "-"를 눌러 입력창을 삭제하세요.');
+			alert('형식이 올바르지 않은 개설 날짜 입력창이 있습니다. 날짜를 선택하거나 "-"를 눌러 입력창을 삭제하세요.');
             return;
 		}
-	    	    
+	    */   
 		// 추가하는 개설날짜 중에 중복된 개설날짜가 있는지 확인하는 함수
 		let values = [];
 	    $('#dateArea input[type="text"]').each(function () {
@@ -396,7 +396,7 @@
 	    });
 	    
 	    console.log('values : ' + values);
-		  	    
+		
 	    if (hasDuplicates(values)) {
 	        alert('개설 날짜가 서로 동일하지 않게 입력하세요.');
 	        return; 
@@ -407,9 +407,9 @@
 			url : '${pageContext.request.contextPath}/headoffice/program/datesCheck',
 			method : 'post',
 			data : JSON.stringify(values),
-			dataType : 'json',
-			contentType: 'application/json',
-			success : function(result) {
+			dataType : 'json', // 서버에서 받을 데이터의 타입 
+			contentType: 'application/json', // 서버로 보내는 데이터의 타입
+			success : function(result) {	
 				if(result == true) {
 					alert('선택한 개설 날짜에 이미 다른 프로그램이 등록되어 있습니다. 날짜를 변경해주세요.')
 					return;
@@ -417,14 +417,15 @@
 					alert('추가 완료되었습니다.');
 					$('#insertForm').submit();
 				}
+				
 			},
 			error : function(err) {
+				console.log('datesCheck 오류');
 				console.log(err);
 			}
 		});
 		
 	});
-	
 	
 </script>
 

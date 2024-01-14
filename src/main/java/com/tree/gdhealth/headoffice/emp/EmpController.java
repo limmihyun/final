@@ -6,8 +6,10 @@ import java.util.Map;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
+import org.springframework.validation.ObjectError;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -125,14 +127,30 @@ public class EmpController {
 	}
 	
 	@PostMapping("/addEmp")
-	public String addEmp(HttpSession session, Model model, 
-							@Validated Employee employee,
-							@Validated EmployeeDetail employeeDetail, 
-							BindingResult bindingResult, MultipartFile employeeFile) {
-				
-		// validation 실패시 회원가입 창으로 이동
-		if(bindingResult.hasErrors()) {
+	public String addEmp(@Validated Employee employee,BindingResult bindingResult1,
+							@Validated EmployeeDetail employeeDetail, BindingResult bindingResult2,
+							 MultipartFile employeeFile,
+							 HttpSession session, Model model) {
+		
+		// 첫 번째 객체(Employee)의 유효성 검사 실패 시 처리
+		if(bindingResult1.hasErrors()) {
 			
+			// 에러 메시지 출력
+	        for (ObjectError error : bindingResult1.getAllErrors()) {
+	        	log.debug("employee 객체 validation 실패 : " + error.getDefaultMessage());
+	        }
+			
+			return "headoffice/addEmp";
+		}
+				
+		// 두 번째 객체(EmployeeDetail)의 유효성 검사 실패 시 처리
+		if(bindingResult2.hasErrors()) {
+			
+			// 에러 메시지 출력
+	        for (ObjectError error : bindingResult2.getAllErrors()) {
+	        	log.debug("employeeDetail 객체 validation 실패 : " + error.getDefaultMessage());
+	        }
+	        
 			return "headoffice/addEmp";
 		}
 		
