@@ -30,4 +30,20 @@ public class MembershipService {
 		return result;
 		
 	}
+	
+	public int activeY(Membership membership) {
+		
+		
+		membershipMapper.activeY(membership);
+		
+		return 1;
+	}
+	
+	
+	public int activeN(Membership membership) {
+		
+		membershipMapper.activeN(membership);
+		
+		return 1;
+	}
 }

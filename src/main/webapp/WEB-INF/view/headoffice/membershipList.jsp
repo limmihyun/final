@@ -5,6 +5,8 @@
 <html class="no-js" lang="zxx">
 
 <head>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+
     <meta charset="utf-8">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
     <title>회원권 추가하기</title>
@@ -67,11 +69,7 @@
     <!-- modernizr JS
 		============================================ -->
     <script src="/admin/js/vendor/modernizr-2.8.3.min.js"></script>
-    
-    <!-- 달력 API -->
-    <link rel="stylesheet" href="http://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
-	<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
-	<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+ 
 </head>
 
 <body>
@@ -99,7 +97,7 @@
         
         <!-- 프로그램 추가 화면 start--> 	          
 		<section>
-			<div>
+			<div id="membershipList">
 				<c:forEach var="m" items="${membershipList}">
 					<div style="border-radius:10px; border-style:solid; border-color:black; background-color:#F6F6F6; margin-left:17%; margin-top:1%; margin-bottom:1%; margin-right:1%;">
 						<div style="margin:1%;">
@@ -108,15 +106,17 @@
 							<p>회원권 가격 : ${m.membershipPrice}원</p>
 							<p>${m.active}</p>
 						</div>
+						
+						<c:if test="${m.active eq 'N'}">
+							<a href="#" onclick="activeY(${m.membershipNo}, '${m.active}')" class="btn btn-primary">비활성화</a>
+						</c:if>
+						
+						<c:if test="${m.active eq 'Y'}">
+							<a href="#" onclick="activeN(${m.membershipNo}, '${m.active}')" class="btn btn-primary">활성화</a>
+						</c:if>
 					</div>
 					
-					<c:if test="${m.active == true}">
-						<button>비활성화</button>
-					</c:if>
-					
-					<c:if test="${m.active eq false}">
-						<button>활성화</button>
-					</c:if>
+
 				</c:forEach>
 			</div>
 		</section>
@@ -187,11 +187,44 @@
 		============================================ -->
     <script src="/admin/js/main.js"></script>
 
-</body>
 
 
-	
-	
+<script>
+    	function activeY(membershipNo,active){
+            event.preventDefault();
+
+			console.log("클릭");
+			
+    		$.ajax({
+    			async : true,
+    			url : '/headoffice/deleteMembership',
+    			type : 'POST',
+    			data : {membershipNo : membershipNo, active : active},
+    			success : function(jsonData){
+					console.log(jsonData, " <--jsonData");
+					
+    				$('#membershipList').load(location.href + " #membershipList");
+    			}
+    		});
+    	};
+    	
+    	function activeN(membershipNo,active){
+            event.preventDefault();
+
+			console.log("클릭");
+			
+    		$.ajax({
+    			async : true,
+    			url : '/headoffice/deleteMembership',
+    			type : 'POST',
+    			data : {membershipNo : membershipNo, active : active},
+    			success : function(jsonData){
+					console.log(jsonData, " <--jsonData");
+					
+    				$('#membershipList').load(location.href + " #membershipList");
+    			}
+    		});
+    	};
 </script>
-
+</body>
 </html>

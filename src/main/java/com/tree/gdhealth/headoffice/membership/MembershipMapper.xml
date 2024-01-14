@@ -14,11 +14,11 @@
 		INSERT INTO membership(membership_name, membership_month, membership_price, createdate, updatedate) VALUES(#{membershipName}, #{membershipMonth}, #{membershipPrice}, NOW(),NOW());
 	</insert>
 	
-	<update id="activeTrue">
-		UPDATE membership SET active = 'true' WHERE membership_no = #{membershpNo}
+	<update id="activeY">
+		UPDATE membership SET active = 'Y' WHERE membership_no = #{membershipNo}
 	</update>
 	
-	<update id="activeFalse">
-		UPDATE membership SET active = 'false' WHERE membership_no = #{membershpNo}
+	<update id="activeN">
+		UPDATE membership SET active = 'N' WHERE membership_no = #{membershipNo}
 	</update>
 </mapper>

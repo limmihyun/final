@@ -13,8 +13,8 @@ public interface MembershipMapper {
 	
 	int addMembership (Membership membership);
 	
-	int activeTrue (Membership membership);
+	int activeY (Membership membership);
 	
-	int activeFalse (Membership membership);
+	int activeN (Membership membership);
 
 }
