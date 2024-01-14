@@ -19,8 +19,8 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.tree.gdhealth.headoffice.Paging;
-import com.tree.gdhealth.headoffice.customValidation.DateGroup;
-import com.tree.gdhealth.headoffice.customValidation.DatesGroup;
+import com.tree.gdhealth.headoffice.customValidation.group.DateGroup;
+import com.tree.gdhealth.headoffice.customValidation.group.DatesGroup;
 import com.tree.gdhealth.vo.Program;
 import com.tree.gdhealth.vo.ProgramDate;
 import com.tree.gdhealth.vo.ProgramImg;

@@ -1,6 +1,8 @@
-package com.tree.gdhealth.headoffice.customValidation;
+package com.tree.gdhealth.headoffice.customValidation.validator;
 
 import java.util.List;
+
+import com.tree.gdhealth.headoffice.customValidation.ListPattern;
 
 import jakarta.validation.ConstraintValidator;
 import jakarta.validation.ConstraintValidatorContext;
