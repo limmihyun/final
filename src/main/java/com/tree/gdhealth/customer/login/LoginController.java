@@ -34,6 +34,7 @@ public class LoginController {
 	        return "redirect:/customer/login";
 		}
 		red.addFlashAttribute("msg", "로그인 되셨습니다.");
+		session.invalidate();
 		session.setAttribute("customerNo", customerNo);
 		session.setAttribute("userLevel", 0);
 		return "redirect:/customer/home";
