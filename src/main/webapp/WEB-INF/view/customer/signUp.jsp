@@ -47,20 +47,20 @@
 								<button type="button" id="idCk" class="btn btn-primary">중복확인</button>
 							</div>
 						</div>
-						<small id="idHelp" class="form-text text-muted">정보</small>
+						<small id="idHelp" class="form-text text-muted"></small>
 					</div>
 					
 					<div class="form-group">
 						<label>비밀번호</label> <input type="password"
 							class="form-control" id="customerPw" name="customerPw" placeholder="영문+숫자+특수문자"
 							required>
-						<small id="pwHelp" class="form-text text-muted">정보</small>
+						<small id="pwHelp" class="form-text text-muted"></small>
 					</div>
 					<div class="form-group">
 						<label>비밀번호확인</label> <input type="password"
 							class="form-control" id="customerPwCk" name="customerPwCk" placeholder=""
 							required>
-						<small id="pwCkHelp" class="form-text text-muted">정보</small>
+						<small id="pwCkHelp" class="form-text text-muted"></small>
 					</div>
 					
 
@@ -77,13 +77,13 @@
 								<button type="button" id="emailCk" class="btn btn-primary">중복확인</button>
 							</div>
 						</div>
-						<small id="emailHelp" class="form-text text-muted">정보</small>
+						<small id="emailHelp" class="form-text text-muted"></small>
 					</div>
 					<div class="form-group">
 						<label for="exampleInputEmail1">전화번호</label> <input type="text"
 							class="form-control" id="customerPhone" name="customerPhone" placeholder="010********"
 							required>
-						<small id="hpHelp" class="form-text text-muted">정보</small>
+						<small id="hpHelp" class="form-text text-muted"></small>
 					</div>
 					<div class="form-group">
 						<label for="exampleInputPassword1">주소</label>
@@ -101,7 +101,7 @@
 
 					<div class="form-group">
 						<input type="text" class="form-control" id="addressDetail" name="customerAddressDetail"
-							required> <small class="form-text text-muted">상세주소
+							required> <small class="form-text text-muted">
 						</small>
 					</div>
 					<div class="row">
