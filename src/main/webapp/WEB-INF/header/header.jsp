@@ -18,6 +18,7 @@
                             <li><a href="/customer/franchiseBranch">branch</a></li>           
                             <li><a href="/question/questionList">q&a</a></li>
                             <li><a href="/notice/noticeList">notice</a></li>
+                            <li><a href="/review/reviewList">review</a></li>
                             <c:if test="${customerNo eq null}">
                             <li class="log"><a href="/customer/login">login</a></li>
                             

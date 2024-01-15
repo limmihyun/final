@@ -82,6 +82,7 @@
                         <div class="contact-form">
                            <form method="post" action="${pageContext.request.contextPath}/notice/updateNotice">
                            		<input type="hidden" value="${noticeNo}" name="noticeNo">
+                           		<input type="hidden" value="${branchLevel}" name="branchLevel">
                                 <div class="row">
                                 
                                 <div class="container" style="margin-top: 100px;">

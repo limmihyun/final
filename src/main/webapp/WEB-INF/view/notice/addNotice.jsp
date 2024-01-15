@@ -85,6 +85,8 @@
                                 
                                 <div class="container" style="margin-top: 100px;">
                                 	<div class="col-lg-12">
+                     
+                                		<input type="hidden" name="branchLevel" value="${branchLevel}">
                                 		<input type="hidden" name="employeeNo" value="${employeeNo}">
                                         <input type="text" placeholder="noticeTitle" name="noticeTitle" > 
                                         <textarea placeholder="Message" name = "noticeContent"></textarea>

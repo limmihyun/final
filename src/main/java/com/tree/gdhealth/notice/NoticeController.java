@@ -8,10 +8,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.tree.gdhealth.employee.login.LoginEmployee;
 import com.tree.gdhealth.vo.Employee;
 import com.tree.gdhealth.vo.Notice;
 
@@ -25,24 +25,41 @@ public class NoticeController {
 
    
    @GetMapping("/notice/noticeList")
-   public String noticeList(Model model, @RequestParam(defaultValue="1")int currentPage) {
+   public String noticeList(HttpSession session,Model model, @RequestParam(defaultValue="1")int currentPage) {
       
       List<Notice> list = noticeService.noticeList(currentPage);
-      
       model.addAttribute("list", list);
       model.addAttribute("currentPage", currentPage);
       
+      LoginEmployee loginEmployee = (LoginEmployee)session.getAttribute("loginEmployee");
+      
+      if(loginEmployee != null) {
+    	  int branchLevel = loginEmployee.getBranchLevel();
+    	  model.addAttribute("branchLevel", branchLevel);
+    	  
+    	  System.out.println("branchLevel : "+  branchLevel);
+    	
+      }
       return "/notice/noticeList";
 
    }
   
    
    @GetMapping("/notice/noticeOne")
-     public String noticeOne(Model model, int noticeNo) {
-      System.out.println("noticeNo: "+ noticeNo); 
-      Notice notiOne = noticeService.noticeOne(noticeNo);
+     public String noticeOne(HttpSession session, Model model, int noticeNo) {
+	   
+	   LoginEmployee loginEmployee = (LoginEmployee)session.getAttribute("loginEmployee");
+	   int branchLevel = 0;
+	   if(loginEmployee != null) {
+		   branchLevel = loginEmployee.getBranchLevel();
+	   }
+	   
+	 
+       System.out.println("noticeNo: "+ noticeNo); 
+       Notice notiOne = noticeService.noticeOne(noticeNo);
          
         model.addAttribute("notiOne", notiOne);
+        model.addAttribute("branchLevel", branchLevel);
         
         return "/notice/noticeOne";
     }
@@ -55,24 +72,32 @@ public class NoticeController {
    }
    
    @GetMapping("/notice/addNotice")
-   public String addNotice(HttpSession session, Model model) {
-	   if(session.getAttribute("employeeNo")== null) {
+   public String addNotice(HttpSession session, Model model, Notice notice) {
+	   
+	   LoginEmployee loginEmployee = (LoginEmployee)session.getAttribute("loginEmployee");
+	   int branchLevel = loginEmployee.getBranchLevel();
+	   int employeeNo = loginEmployee.getEmployeeNo();
+	   
+	   model.addAttribute("branchLevel", branchLevel);
+	   model.addAttribute("employeeNo", employeeNo);
+	   System.out.println("branchLevel: " + branchLevel);
+	   System.out.println("employeeNo: "+  employeeNo);
+	 
+	   if(branchLevel != 1) {
 		   return "redirect:/employee/login";
 	   }
-	   int employeeNo = ((Employee)session.getAttribute("loginEmployee")).getEmployeeNo();
-	   model.addAttribute("employeeNo", employeeNo);
+	   
 	   
 	   return "/notice/addNotice";
    }
    
    
    @PostMapping("/notice/addNotice")
-   public String addNotice(HttpSession session, int employeeNo, Notice notice) {
-	   if(session.getAttribute("employeeNo")== null) {
+   public String addNotice(HttpSession session, Notice notice,int branchLevel) {
+	   if(branchLevel != 1) {
 		   return "redirect:/employee/login";
 	   }
-	   
-	   System.out.println("employeeNo: " + employeeNo);
+	
 	   
        int row = noticeService.addNotice(notice);
        
@@ -81,17 +106,23 @@ public class NoticeController {
    
 
    @GetMapping("/notice/updateNotice")
-   public String updateNotice(HttpSession session, int noticeNo, Model model) {
-	   if(session.getAttribute("employeeNo")== null) {
+   public String updateNotice(HttpSession session, int noticeNo, Model model, Notice notice) {
+	   LoginEmployee loginEmployee = (LoginEmployee)session.getAttribute("loginEmployee");
+	   int branchLevel = 0;
+	   if(loginEmployee != null) {
+		   branchLevel = loginEmployee.getBranchLevel();
+	   }
+	   if(branchLevel != 1) {
 		   return "redirect:/employee/login";
 	   }
+	  model.addAttribute("branchLevel", branchLevel);
 	  model.addAttribute("noticeNo", noticeNo);
       return "/notice/updateNotice";
    }
    
    @PostMapping("/notice/updateNotice")
-   public String updateNotice(HttpSession session, int noticeNo, Notice notice) {
-	   if(session.getAttribute("employeeNo")== null) {
+   public String updateNotice(HttpSession session, int branchLevel, int noticeNo, Notice notice) {
+	   if(branchLevel != 1) {
 		   return "redirect:/employee/login";
 	   }
       int row = noticeService.updateNotice(notice);
@@ -99,12 +130,15 @@ public class NoticeController {
    }
    
    @GetMapping("/notice/deleteNotice")
-   public String deleteNotice(HttpSession session, Notice notice) {
-	   if(session.getAttribute("employeeNo")== null) {
+   public String deleteNotice(HttpSession session, Notice notice, Model model, int noticeNo) {
+	   LoginEmployee loginEmployee = (LoginEmployee)session.getAttribute("loginEmployee");
+	   int branchLevel = loginEmployee.getBranchLevel();
+	   if(branchLevel != 1) {
 		   return "redirect:/employee/login";
 	   }
 	   int row = noticeService.deleteNotice(notice);
-    
+	   
+	   model.addAttribute("noticeNo", noticeNo);
       return "redirect:/notice/noticeList";
    }
  

@@ -45,31 +45,29 @@ public class ReviewController{
 	   }
 	
 	@GetMapping("/review/addReview")
-	public String addReview(HttpSession session, Model model) {
-		if(session.getAttribute("customerNo")== null) {
+	public String addReview(HttpSession session, Model model, Review review) {
+		int customerNo = ((Integer)session.getAttribute("customerNo"));
+		System.out.println("customerNo: "+ customerNo);
+		if(customerNo == 0) {
 			   return "redirect:/customer/login";
-		   }
+		}
 		
-	
-		
-		int customerNo = ((Customer)session.getAttribute("customerNo")).getCustomerNo();
-		   model.addAttribute("customerNo", customerNo);
-		   
+		model.addAttribute("customerNo", customerNo);
+		 
 		
 		return "/review/addReview";
 	}
 	
-	/*@GetMapping("/review/deleteReview")
-	   public String deleteReview(HttpSession session, Review review) {
-		   if(session.getAttribute("employeeNo")== null) {
-			   
-			   if(session.getAttribute("customerId") == )
+	@PostMapping("/review/addReview")
+	public String addReview(HttpSession session, Review review, int customerNo) {
+		if(customerNo == 0) {
 			   return "redirect:/customer/login";
-		   }
-		   int row = reviewService.deleteReview(review);
-	    
-	       return "redirect:/review/reviewList";
-	   }
-	   */
+		}
+		
+		int row = reviewService.addreview(review);
+		return "redirect:/review/reviewList";
+	}
+	
+	
 	}
 

@@ -28,7 +28,7 @@ public class QuestionController {
 		
 	    List<Question> list = questionService.questionList();
 	    model.addAttribute("list", list);
-	    System.out.println("///" + list);
+	
 	    
 	    
 	    LoginEmployee loginEmployee = (LoginEmployee)session.getAttribute("loginEmployee");
@@ -37,7 +37,7 @@ public class QuestionController {
 	    if(loginEmployee != null) {
 		    int employeeNo = loginEmployee.getEmployeeNo();
 		    int branchNo = loginEmployee.getBranchNo();
-		    int branchLevel = questionService.getBranchLevel(employeeNo);
+		    int branchLevel = loginEmployee.getBranchLevel();
 		    
 		    model.addAttribute("employeeNo", employeeNo);
 		    model.addAttribute("branchNo", branchNo);
