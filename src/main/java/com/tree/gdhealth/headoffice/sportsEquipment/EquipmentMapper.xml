@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.tree.gdhealth.headoffice.sportsEquipment.EquipmentMapper">
+
+	<select id="equipmentList" parameterType="map" resultType="map">
+		SELECT
+			s.writer_employee_no writerNo,
+			s.item_name itemName,
+			s.item_price itemPrice,
+			s.note note,
+			s.createdate createdate
+		FROM sports_equipment s
+		INNER JOIN sports_equipment_img si
+			ON si.sports_equipment_no = s.sports_equipment_no
+		<where>
+			<choose>
+				<when test="type != null and type.equals('name')">
+					s.item_name LIKE CONCAT('%',#{keyword},'%')
+				</when>	
+				<when test="type != null and type.equals('note')">
+					s.note LIKE CONCAT('%',#{keyword},'%')
+				</when>		
+			</choose>
+		</where>
+		LIMIT #{beginRow}, #{rowPerPage}
+	</select>
+	
+	<select id="equipmentCnt" resultType="int">
+		SELECT COUNT(*)
+		FROM sports_equipment
+	</select>
+	
+	<select id="searchCnt" parameterType="map" resultType="int">
+		SELECT COUNT(*)
+		FROM sports_equipment 
+		<where>
+			<choose>
+				<when test="type != null and type.equals('name')">
+					item_name LIKE CONCAT('%',#{keyword},'%')
+				</when>	
+				<when test="type != null and type.equals('note')">
+					note LIKE CONCAT('%',#{keyword},'%')
+				</when>		
+			</choose>
+		</where>
+	</select>
+	
+	<insert id="insertEquipment">
+		INSERT INTO sports_equipment(
+			writer_employee_no,
+			item_name,
+			item_price,
+			note
+		) VALUES (
+			#{employeeNo},
+			#{itemName},
+			#{itemPrice},
+			#{note}
+		)
+		<selectKey resultType="int" keyProperty="sportsEquipmentNo" order="AFTER">
+      		  SELECT LAST_INSERT_ID()
+   		</selectKey> 
+	</insert>
+	
+	<insert id="insertEquipmentImg">
+		INSERT INTO sports_equipment_img (
+			sports_equipment_no,
+			sports_equipment_img_origin_name,
+			sports_equipment_img_file_name,
+			sports_equipment_img_size,
+			sports_equipment_img_type
+		) VALUES (
+			#{equipmentNo},
+			#{originName},
+			#{filename},
+			#{size},
+			#{type}
+		)
+	</insert>
+
+</mapper>

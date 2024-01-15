@@ -42,17 +42,17 @@
 	
 	<select id="searchCnt" parameterType="map" resultType="int">
 		SELECT COUNT(*)
-		FROM program p
+		FROM program 
 		<where>
 			<choose>
 				<when test="type != null and type.equals('title')">
-					p.program_name LIKE CONCAT('%',#{keyword},'%')
+					program_name LIKE CONCAT('%',#{keyword},'%')
 				</when>	
 				<when test="type != null and type.equals('detail')">
-					p.program_detail LIKE CONCAT('%',#{keyword},'%')
+					program_detail LIKE CONCAT('%',#{keyword},'%')
 				</when>
 				<when test="type != null and type.equals('active')">
-					p.program_active LIKE CONCAT('%',#{keyword},'%')
+					program_active LIKE CONCAT('%',#{keyword},'%')
 				</when>			
 			</choose>
 		</where>

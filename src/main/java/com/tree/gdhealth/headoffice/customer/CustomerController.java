@@ -7,7 +7,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 
 import com.tree.gdhealth.headoffice.Paging;
 
@@ -29,7 +28,7 @@ public class CustomerController {
 	}
 	
 	@GetMapping("/paging")
-	public String paging(Model model, @RequestParam(defaultValue = "1") int page) {
+	public String paging(Model model, int page) {
 		
 		// 전체 고객 수
 		int customerCnt = customerService.getCustomerCnt();
@@ -56,12 +55,12 @@ public class CustomerController {
 	
 	@GetMapping("/searchPaging")
 	public String searchPaging(Model model, String type, String keyword, 
-									@RequestParam(defaultValue = "1") int page) {
+									int page) {
 		
 		// 검색 결과 개수
 		int searchCnt = customerService.getSearchCnt(type, keyword);
 		// 디버깅
-		log.debug("전체 프로그램 수 : " + searchCnt);
+		log.debug("검색 결과 개수(searchPaging) : " + searchCnt);
 		
 		Paging paging = Paging.builder()
 				.pageNumCnt(10) // 한번에 표시할 페이징 번호의 갯수

@@ -13,7 +13,6 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
@@ -45,7 +44,7 @@ public class ProgramController {
 	}
 	
 	@GetMapping("/paging")
-	public String paging(Model model, @RequestParam(defaultValue = "1") int page) {
+	public String paging(Model model, int page) {
 		
 		// 전체 프로그램 수
 		int programCnt = programService.getProgramCnt();
@@ -61,8 +60,8 @@ public class ProgramController {
 				.build();
 		paging.calculation();
 		
-		List<Map<String, Object>> searchList = programService.getProgramList(paging.getBeginRow(), paging.getRowPerPage());	
-		model.addAttribute("programList", searchList);  
+		List<Map<String, Object>> programList = programService.getProgramList(paging.getBeginRow(), paging.getRowPerPage());	
+		model.addAttribute("programList", programList);  
 		
 		// 페이징(model 추가)
 		paging.pagingAttributes(model, paging, page);
@@ -73,12 +72,12 @@ public class ProgramController {
 	
 	@GetMapping("/searchPaging")
 	public String searchPaging(Model model, String type, String keyword, 
-									@RequestParam(defaultValue = "1") int page) {
+									int page) {
 		
 		// 검색 결과 개수
 		int searchCnt = programService.getSearchCnt(type, keyword);
 		// 디버깅
-		log.debug("전체 프로그램 수 : " + searchCnt);
+		log.debug("검색 결과 개수(searchPaging) " + searchCnt);
 		
 		// 페이징
 		Paging paging = Paging.builder()
@@ -116,7 +115,7 @@ public class ProgramController {
 				
 		boolean checkDatesExists = programService.checkDatesExists(programDates);
 		// 디버깅
-		log.debug("dates 존재 확인(존재:true,존재x:false) : " + checkDatesExists);
+		log.debug("선택한 날짜들이 이미 존재하는지 확인(존재:true,존재x:false) : " + checkDatesExists);
 		
 		return checkDatesExists;
 				
@@ -128,7 +127,7 @@ public class ProgramController {
 		
 		boolean checkDateOneExists = programService.checkDateOneExists(programDate);
 		// 디버깅
-		log.debug("dateOne 존재 확인(존재:true,존재x:false) : " + checkDateOneExists);
+		log.debug("선택한 날짜가 이미 존재하는지 확인(존재:true,존재x:false) : " + checkDateOneExists);
 		
 		return checkDateOneExists;
 	}

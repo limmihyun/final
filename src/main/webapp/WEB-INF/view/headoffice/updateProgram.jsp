@@ -241,7 +241,7 @@
 	 });
 	
 	$('#updateBtn').click(function(){
-		/*
+		
 		if($('#programMaxCustomer').val().trim() == '') {
 			alert('수용 인원을 입력하세요.');
 			$('#programMaxCustomer').val('');	
@@ -296,7 +296,7 @@
 			$('#programDetail').focus();			
 			return;
 		}
-		*/
+		
 		let programDate = $('#programDate').val();
 		
 		// 선택한 개설 날짜가 DB에 이미 존재하는지 확인

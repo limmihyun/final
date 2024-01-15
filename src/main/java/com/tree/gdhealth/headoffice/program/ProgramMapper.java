@@ -8,7 +8,6 @@ import java.util.Map;
 import com.tree.gdhealth.vo.Program;
 import com.tree.gdhealth.vo.ProgramDate;
 import com.tree.gdhealth.vo.ProgramImg;
-import com.tree.gdhealth.vo.ProgramManager;
 
 
 @Mapper
