@@ -95,7 +95,7 @@
     </div>          
     
         
-        <!-- 프로그램 추가 화면 start--> 	          
+        <!-- 회원권 추가 화면 start--> 	          
 		<section>
 			<div id="membershipList">
 				<c:forEach var="m" items="${membershipList}">
@@ -104,7 +104,6 @@
 							<p>회원권 제목 : ${m.membershipName}</p>
 							<p>회원권 개월수 : ${m.membershipMonth}개월</p>
 							<p>회원권 가격 : ${m.membershipPrice}원</p>
-							<p>${m.active}</p>
 						</div>
 						
 						<c:if test="${m.active eq 'N'}">
@@ -120,7 +119,7 @@
 				</c:forEach>
 			</div>
 		</section>
-        <!-- 프로그램 추가 화면 end-->
+        <!-- 회원권 추가 화면 end-->
         
     <!-- jquery
 		============================================ -->
