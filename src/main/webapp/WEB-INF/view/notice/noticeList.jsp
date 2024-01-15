@@ -102,16 +102,12 @@
    </c:forEach>
    </tbody>
    </table>
+   <c:choose>
+   <c:when test="${branchLevel == 1}">
    <a href="${pageContext.request.contextPath}/notice/addNotice"><button type="submit" class="site-btn">공지추가</button></a>
+   </c:when>
    
-   <c:if test="${currentPage > 1}">
-   <a href="${pageContext.request.contextPath}/notice/noticeList?currentPage=${currentPage -1}">이전</a>
-   </c:if>
-   
-   <c:if test="${currentPage > 1}">
-   <a href="${pageContext.request.contextPath}/notice/noticeList?currentPage=${currentPage +1}">이후</a>
-   </c:if>
-   
+   </c:choose>
        <!-- Js Plugins -->
     <script src="/js/jquery-3.3.1.min.js"></script>
     <script src="/js/bootstrap.min.js"></script>
