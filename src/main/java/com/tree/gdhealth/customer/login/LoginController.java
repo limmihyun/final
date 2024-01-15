@@ -1,5 +1,7 @@
 package com.tree.gdhealth.customer.login;
 
+import java.util.Enumeration;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -34,7 +36,9 @@ public class LoginController {
 	        return "redirect:/customer/login";
 		}
 		red.addFlashAttribute("msg", "로그인 되셨습니다.");
-		session.invalidate();
+		
+		session.removeAttribute("loginEmployee");
+
 		session.setAttribute("customerNo", customerNo);
 		session.setAttribute("userLevel", 0);
 		return "redirect:/customer/home";
