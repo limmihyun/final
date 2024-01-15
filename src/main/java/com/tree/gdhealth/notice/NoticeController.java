@@ -46,11 +46,20 @@ public class NoticeController {
   
    
    @GetMapping("/notice/noticeOne")
-     public String noticeOne(Model model, int noticeNo) {
-      System.out.println("noticeNo: "+ noticeNo); 
-      Notice notiOne = noticeService.noticeOne(noticeNo);
+     public String noticeOne(HttpSession session, Model model, int noticeNo) {
+	   
+	   LoginEmployee loginEmployee = (LoginEmployee)session.getAttribute("loginEmployee");
+	   int branchLevel = 0;
+	   if(loginEmployee != null) {
+		   branchLevel = loginEmployee.getBranchLevel();
+	   }
+	   
+	 
+       System.out.println("noticeNo: "+ noticeNo); 
+       Notice notiOne = noticeService.noticeOne(noticeNo);
          
         model.addAttribute("notiOne", notiOne);
+        model.addAttribute("branchLevel", branchLevel);
         
         return "/notice/noticeOne";
     }
@@ -99,7 +108,10 @@ public class NoticeController {
    @GetMapping("/notice/updateNotice")
    public String updateNotice(HttpSession session, int noticeNo, Model model, Notice notice) {
 	   LoginEmployee loginEmployee = (LoginEmployee)session.getAttribute("loginEmployee");
-	   int branchLevel = loginEmployee.getBranchLevel();
+	   int branchLevel = 0;
+	   if(loginEmployee != null) {
+		   branchLevel = loginEmployee.getBranchLevel();
+	   }
 	   if(branchLevel != 1) {
 		   return "redirect:/employee/login";
 	   }

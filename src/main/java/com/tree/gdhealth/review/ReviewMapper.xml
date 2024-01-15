@@ -16,7 +16,9 @@
 <!-- 삭제 -->
 	<delete id="deleteReview"
 	parameterType="com.tree.gdhealth.vo.Review">
-	
+	DELETE 
+	FROM review
+	WHERE review_no = #{reviewNo}
 	</delete>
 <!-- 리스트 -->
 	<select id="reviewList"
@@ -43,7 +45,7 @@
 	
 	SELECT 
 		r.review_no AS reviewNo,
-		r.program_reservation_no AS programReservationNo,
+		r.program_reservation_no AS programRsNo,
 		c.customer_id AS customerId,
 		r.review_title AS reviewTitle,
 		COALESCE(ri.review_img_origin, 'NoImage') AS reviewImgOrigin,

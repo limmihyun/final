@@ -105,8 +105,12 @@
         
     </table>
      <a>
+     <c:choose>
+     <c:when test="${branchLevel == 1}">
         <a href="${pageContext.request.contextPath}/notice/updateNotice?noticeNo=${notiOne.noticeNo}" class="btn btn-primary">수정</a>
         <a href="${pageContext.request.contextPath}/notice/deleteNotice?noticeNo=${notiOne.noticeNo}" class="btn btn-danger">삭제</a>
+    </c:when>
+    </c:choose>
     </a>
 </div>
 </div>
