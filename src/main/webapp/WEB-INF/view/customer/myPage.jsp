@@ -109,12 +109,12 @@
 					class="right" href="#"><div>></div></a>
 			</div>
 			<div class="item">
-				<a href="#"><div class="icon">ii &nbsp; 스케줄</div></a> <a
-					class="right" href="#"><div>></div></a>
+				<a href="/customer/programrs"><div class="icon">ii &nbsp; 스케줄</div></a> <a
+					class="right" href="/customer/programrs"><div>></div></a>
 			</div>
 			<div class="item">
-				<a href="#"><div class="icon">ii &nbsp; 문의사항</div></a> <a
-					class="right" href="#"><div>></div></a>
+				<a href="/question/questionList"><div class="icon">ii &nbsp; 문의사항</div></a> <a
+					class="right" href="/question/questionList"><div>></div></a>
 			</div>
 			<div class="item">
 				<a href="#"><div class="icon">ii &nbsp; 맴버십 정보</div></a> <a

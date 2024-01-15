@@ -13,7 +13,7 @@
 							<li><a href="/customer/home">home</a></li>
 							<li><a href="/customer/programrs">programrs</a></li>
 							<li><a href="/customer/franchiseBranch">branch</a></li>
-							<li><a href="">BLANK</a></li>
+							<li><a href="/question/questionList">q&a</a></li>
 							<li><a href="/notice/noticeList">notice</a></li>
 							<c:if test="${customerNo eq null}">
 								<li><a href="/customer/login">login</a></li>
