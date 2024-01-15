@@ -13,11 +13,11 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.multipart.MultipartFile;
 
 import com.tree.gdhealth.headoffice.Paging;
 import com.tree.gdhealth.vo.Employee;
 import com.tree.gdhealth.vo.EmployeeDetail;
+import com.tree.gdhealth.vo.EmployeeImg;
 
 import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
@@ -127,7 +127,7 @@ public class EmpController {
 	@PostMapping("/addEmp")
 	public String addEmp(@Validated Employee employee,BindingResult bindingResult1,
 							@Validated EmployeeDetail employeeDetail, BindingResult bindingResult2,
-							 MultipartFile employeeFile,
+							@Validated EmployeeImg employeeImg, BindingResult bindingResult3,
 							 HttpSession session, Model model) {
 		
 		// 첫 번째 객체(Employee)의 유효성 검사 실패 시 처리
@@ -152,10 +152,21 @@ public class EmpController {
 			return "headoffice/addEmp";
 		}
 		
+		// 세 번째 객체(EmployeeImg)의 유효성 검사 실패 시 처리
+		if(bindingResult3.hasErrors()) {
+			
+			// 에러 메시지 출력
+	        for (ObjectError error : bindingResult3.getAllErrors()) {
+	        	log.debug("employeeImg 객체 validation 실패 : " + error.getDefaultMessage());
+	        }
+	        
+			return "headoffice/addEmp";
+		}
+		
 		String path = session.getServletContext().getRealPath("/upload/emp");
 		// 디버깅
 		log.debug("저장 경로 : " + path);
-		empService.insertEmployee(employee, employeeDetail, employeeFile, path);
+		empService.insertEmployee(employee, employeeDetail, employeeImg, path);
 		
 		return "redirect:/headoffice/emp";
 	}

@@ -8,7 +8,10 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.tree.gdhealth.headoffice.ImageSave;
+import com.tree.gdhealth.utils.enumtype.ImageType;
 import com.tree.gdhealth.vo.SportsEquipment;
+import com.tree.gdhealth.vo.SportsEquipmentImg;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -71,22 +74,49 @@ public class EquipmentService {
 		
 	}
 	
-	public void insertEquipment(SportsEquipment sportsEquipment, MultipartFile equipmentFile,
-									String path) {
+	public void insertEquipment(SportsEquipment sportsEquipment, SportsEquipmentImg sportsEquipmentImg, 
+										String path) {
 		
 		/////////////////// 로그인 기능 구현 전 임시 코드 start//////////////////////////
 		sportsEquipment.setEmployeeNo(1);
 		/////////////////// 로그인 기능 구현 전 임시 코드 end////////////////////////////
 		
+		if(sportsEquipment.getNote() == null) {
+			sportsEquipment.setNote("");
+		}
+		
 		int result = equipmentMapper.insertEquipment(sportsEquipment);
 		// 디버깅
 		log.debug("equipment 추가(성공:1) : " + result);
-				
-		// file 추가
-		if(!equipmentFile.isEmpty()) { // 업로드한 파일이 하나이상 있다면
-			// 파일 저장
-			// empImgSave(employeeFile, path, employee.getEmployeeNo());
-		}
+		
+		int equipmentNo = sportsEquipment.getSportsEquipmentNo();
+		MultipartFile equipmentFile = sportsEquipmentImg.getEquipmentFile();
+		// 파일 저장
+		insertEquipmentImg(equipmentFile, path, equipmentNo);
+		
+	}
+	
+	public void insertEquipmentImg(MultipartFile equipmentFile, String path, int equipmentNo) {
+		
+		ImageSave imgSave = new ImageSave();
+		
+		SportsEquipmentImg img = new SportsEquipmentImg();
+		img.setSportsEquipmentNo(equipmentNo);
+		img.setSportsEquipmentImgOriginName(equipmentFile.getOriginalFilename());
+		img.setSportsEquipmentImgSize(equipmentFile.getSize());	
+		
+		ImageType imgType = ImageType.fromText(equipmentFile.getContentType());
+		img.setSportsEquipmentImgType(imgType);
+		
+		String filename = imgSave.getFilename(equipmentFile);
+		img.setSportsEquipmentImgFileName(filename);
+		
+		int imgResult = equipmentMapper.insertEquipmentImg(img);
+		log.debug("sportsEquipmentImg 추가(성공:1) : " + imgResult);
+		
+		// 파일 저장
+		imgSave.saveFile(equipmentFile, path, filename);
+		
 	}
 
 }

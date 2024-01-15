@@ -14,7 +14,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.tree.gdhealth.headoffice.Paging;
@@ -71,8 +70,7 @@ public class ProgramController {
 	}
 	
 	@GetMapping("/searchPaging")
-	public String searchPaging(Model model, String type, String keyword, 
-									int page) {
+	public String searchPaging(Model model, String type, String keyword, int page) {
 		
 		// 검색 결과 개수
 		int searchCnt = programService.getSearchCnt(type, keyword);
@@ -135,8 +133,8 @@ public class ProgramController {
 	@PostMapping("/addProgram")
 	public String addProgram(@Validated Program program, BindingResult bindingResult1,
 								@Validated(DatesGroup.class) ProgramDate programDate, 
-								BindingResult bindingResult2, 
-								MultipartFile programFile,
+								BindingResult bindingResult2,
+								@Validated ProgramImg programImg, BindingResult bindingResult3,
 								HttpSession session) {
 		
 		// 첫 번째 객체(Program)의 유효성 검증 실패시 처리
@@ -161,10 +159,21 @@ public class ProgramController {
 			return "headoffice/addProgram";
 		}
 		
+		// 세 번째 객체(ProgramDate)의 유효성 검증 실패시 처리
+		if(bindingResult3.hasErrors()) {
+			
+			// 에러 메시지 출력
+	        for (ObjectError error : bindingResult3.getAllErrors()) {
+	        	log.debug("programImg 객체 validation 실패 : " + error.getDefaultMessage());
+	        }
+	        
+			return "headoffice/addProgram";
+		}
+		
 		String path = session.getServletContext().getRealPath("/upload/program");
 		// 디버깅
 		log.debug("저장 경로 : " + path);
-		programService.insertProgram(program, programDate, programFile, path);
+		programService.insertProgram(program, programDate, programImg, path);
 		
 		return "redirect:/headoffice/program";
 	}
@@ -197,8 +206,8 @@ public class ProgramController {
 	public String update(@Validated Program program, BindingResult bindingResult1, 
 							@Validated(DateGroup.class) ProgramDate programDate, 
 							BindingResult bindingResult2, 
-							ProgramImg programImg,
-			HttpSession session, MultipartFile programFile, RedirectAttributes redirectAttributes) {
+							@Validated ProgramImg programImg, BindingResult bindingResult3,
+			HttpSession session, RedirectAttributes redirectAttributes) {
 		
 		int programNo = program.getProgramNo();
 		redirectAttributes.addAttribute("programNo", programNo);
@@ -232,10 +241,24 @@ public class ProgramController {
 			return "redirect:/headoffice/program/update/{programNo}/{originDate}";
 		}
 		
+		// 세 번째 객체(ProgramImg)의 유효성 검증 실패시 error 발생 시 처리
+		if(bindingResult3.hasErrors()) {
+			
+			originDate = programDate.getOriginDate();
+			redirectAttributes.addAttribute("originDate", originDate);
+			
+			// 에러 메시지 출력
+	        for (ObjectError error : bindingResult3.getAllErrors()) {
+	        	log.debug("programImg 객체 validation 실패 : " + error.getDefaultMessage());
+	        }
+	        
+			return "redirect:/headoffice/program/update/{programNo}/{originDate}";
+		}
+		
 		String oldPath = session.getServletContext().getRealPath("/upload/program/" + programImg.getFilename());
 		String path = session.getServletContext().getRealPath("/upload/program");
 		
-		programService.updateProgram(program, programDate, programFile, path, oldPath);
+		programService.updateProgram(program, programDate, programImg, path, oldPath);
 		
 		String date = programDate.getProgramDate();
 		redirectAttributes.addAttribute("programDate", date);

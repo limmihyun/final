@@ -108,7 +108,7 @@ public class ProgramService {
 		return checkDateOneExists;
 	}
 	
-	public void insertProgram(Program program, ProgramDate programDate, MultipartFile programFile,
+	public void insertProgram(Program program, ProgramDate programDate, ProgramImg programImg,
 									String path) {
 		
 		/////////////////// 로그인 기능 구현 전 임시 코드 start//////////////////////////
@@ -147,17 +147,14 @@ public class ProgramService {
 			// insert를 실패하였을 때 강제로 예외를 발생시켜 애노테이션 Transactiona이 작동하도록 한다.
 			throw new RuntimeException(); 
 		}
-
-		// 이미지 추가
-		if(!programFile.isEmpty()) { // 업로드한 이미지 파일이 하나이상 있다면
-			
-			// 파일 저장
-			insertOrUpdateProgramImg(programFile, path, program.getProgramNo(), true);
-		}
+		
+		MultipartFile programFile = programImg.getProgramFile();
+		// 파일 저장
+		insertOrUpdateProgramImg(programFile, path, program.getProgramNo(), true);
 		
 	}
 	
-	public void updateProgram(Program program, ProgramDate programDate, MultipartFile programFile,
+	public void updateProgram(Program program, ProgramDate programDate, ProgramImg programImg,
 			String path, String oldPath) {
 
 		int result = programMapper.updateProgram(program);
@@ -166,17 +163,16 @@ public class ProgramService {
 		int dateResult = programMapper.updateProgramDate(programDate);
 		log.debug("프로그램 date 수정(성공:1) : " + dateResult);
 			
-		if(!programFile.isEmpty()) {
+		// 기존 파일 삭제
+		File file = new File(oldPath);
+		boolean isDelete = file.delete();
+		// 디버깅
+		log.debug("기존 파일 삭제 여부 : " + isDelete);
 		
-			// 기존 파일 삭제
-			File file = new File(oldPath);
-			boolean isDelete = file.delete();
-			// 디버깅
-			log.debug("기존 파일 삭제 여부 : " + isDelete);
-			
-			// 수정한 파일 저장
-			insertOrUpdateProgramImg(programFile, path, program.getProgramNo(), false);
-		}
+		MultipartFile programFile = programImg.getProgramFile();
+		// 수정한 파일 저장
+		insertOrUpdateProgramImg(programFile, path, program.getProgramNo(), false);
+		
 	
 	}
 	

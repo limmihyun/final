@@ -99,7 +99,7 @@ public class EmpService {
 	}
 	
 	public void insertEmployee(Employee employee, EmployeeDetail employeeDetail, 
-								MultipartFile employeeFile, String path) {
+								EmployeeImg employeeImg, String path) {
 		
 		int result = empMapper.insertEmployee(employee);
 		// 디버깅
@@ -111,11 +111,9 @@ public class EmpService {
 		// 디버깅
 		log.debug("employeeDetail 추가(성공:1) : " + detailResult);
 		
-		// file 추가
-		if(!employeeFile.isEmpty()) { // 업로드한 파일이 하나이상 있다면
-			// 파일 저장
-			insertEmpImg(employeeFile, path, employee.getEmployeeNo());
-		}
+		MultipartFile employeeFile = employeeImg.getEmployeeFile();
+		// 파일 저장
+		insertEmpImg(employeeFile, path, employee.getEmployeeNo());
 	
 	}
 	

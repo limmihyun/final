@@ -4,14 +4,18 @@
 
 	<select id="equipmentList" parameterType="map" resultType="map">
 		SELECT
-			s.writer_employee_no writerNo,
 			s.item_name itemName,
 			s.item_price itemPrice,
 			s.note note,
-			s.createdate createdate
+			s.active active,
+			s.createdate createdate,
+			si.sports_equipment_img_file_name filename,
+			ed.employee_name employeeName
 		FROM sports_equipment s
 		INNER JOIN sports_equipment_img si
 			ON si.sports_equipment_no = s.sports_equipment_no
+		INNER JOIN employee_detail ed
+			ON s.writer_employee_no = ed.employee_no 
 		<where>
 			<choose>
 				<when test="type != null and type.equals('name')">
@@ -45,7 +49,7 @@
 		</where>
 	</select>
 	
-	<insert id="insertEquipment">
+	<insert id="insertEquipment" parameterType="com.tree.gdhealth.vo.SportsEquipment">
 		INSERT INTO sports_equipment(
 			writer_employee_no,
 			item_name,
@@ -62,7 +66,7 @@
    		</selectKey> 
 	</insert>
 	
-	<insert id="insertEquipmentImg">
+	<insert id="insertEquipmentImg" parameterType="com.tree.gdhealth.vo.SportsEquipmentImg">
 		INSERT INTO sports_equipment_img (
 			sports_equipment_no,
 			sports_equipment_img_origin_name,
@@ -70,11 +74,11 @@
 			sports_equipment_img_size,
 			sports_equipment_img_type
 		) VALUES (
-			#{equipmentNo},
-			#{originName},
-			#{filename},
-			#{size},
-			#{type}
+			#{sportsEquipmentNo},
+			#{sportsEquipmentImgOriginName},
+			#{sportsEquipmentImgFileName},
+			#{sportsEquipmentImgSize},
+			#{sportsEquipmentImgType}
 		)
 	</insert>
 

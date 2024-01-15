@@ -3,30 +3,33 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 
 		<div class="container-fluid">   
-       		<h3>회원 목록</h3>
+       		<h3>물품 목록</h3>
            	<!--------------------- 회원 list start-------------------------->   		  	  				
 			    <table class="table table-bordered">
 			    	<thead>
 			    		<tr>
-			    			<th>아이디</th>
-			    			<th>이름</th>
-			    			<th>성별</th>
-			    			<th>휴대폰 번호</th>
-			    			<th>가입 날짜, 시간</th>
-			    			<th>가입 여부</th>
+			    			<th>작성자</th>
+			    			<th>물품 이름</th>
+			    			<th>물품 가격</th>
+			    			<th>비고</th>
+			    			<th>활성화 여부</th>
+			    			<th>날짜</th>
 			    		</tr>
 			    	</thead>
 			    	<tbody>
-			    		<c:forEach var="m" items="${customerList}">
+			    		<c:forEach var="m" items="${equipmentList}">
 			    			<tr>
-			    				<td>${m.customerId}</td>
-			    				<td>${m.customerName}</td>
-			    				<td>${m.customerGender}</td>
-			    				<td>${m.customerPhone}</td>
-			    				<td>${m.createdate} ${str}</td>
+			    				<td>${m.employeeName}</td>
+			    				<td>${m.itemName}</td>
+			    				<td>${m.itemPrice}</td>
+			    				<td>${m.note}</td>
 			    				<c:if test="${m.active == 'Y'}">
-			    					<td>가입</td>
-			    				</c:if>	   			    
+			    					<td>활성화</td>
+			    				</c:if>
+			    				<c:if test="${m.active == 'N'}">
+			    					<td>비활성화</td>
+			    				</c:if>
+		    					<td>${m.createdate}</td>
 			    			</tr>
 			    		</c:forEach>   
 			    	</tbody>

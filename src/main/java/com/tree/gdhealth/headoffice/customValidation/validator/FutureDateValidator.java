@@ -9,11 +9,6 @@ import jakarta.validation.ConstraintValidator;
 import jakarta.validation.ConstraintValidatorContext;
 
 public class FutureDateValidator implements ConstraintValidator<FutureDate, String>{
-
-	@Override
-	public void initialize(FutureDate constraintAnnotation) {
-		// 초기화 로직이 없을 경우 생략
-	}
 	
 	@Override
 	public boolean isValid(String value, ConstraintValidatorContext context) {

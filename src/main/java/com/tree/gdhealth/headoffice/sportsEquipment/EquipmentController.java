@@ -11,10 +11,10 @@ import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.multipart.MultipartFile;
 
 import com.tree.gdhealth.headoffice.Paging;
 import com.tree.gdhealth.vo.SportsEquipment;
+import com.tree.gdhealth.vo.SportsEquipmentImg;
 
 import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
@@ -100,25 +100,36 @@ public class EquipmentController {
 	}
 	
 	@PostMapping("/addEquipment")
-	public String addEquipment(@Validated SportsEquipment sportsEquipment, BindingResult bindingResult,
-								MultipartFile equipmentFile,
+	public String addEquipment(@Validated SportsEquipment sportsEquipment, BindingResult bindingResult1,
+								@Validated SportsEquipmentImg sportsEquipmentImg, BindingResult bindingResult2,
 								HttpSession session) {
 		
 		// SportsEquipment의 유효성 검증 실패시 처리
-		if(bindingResult.hasErrors()) {
+		if(bindingResult1.hasErrors()) {
 			
 			// 에러 메시지 출력
-	        for (ObjectError error : bindingResult.getAllErrors()) {
+	        for (ObjectError error : bindingResult1.getAllErrors()) {
 	        	log.debug("SportsEquipment 객체 validation 실패 : " + error.getDefaultMessage());
 	        }
 			
 			return "headoffice/addEquipment";
 		}
 		
-		String path = session.getServletContext().getRealPath("/upload/program");
+		// SportsEquipmentImg의 유효성 검증 실패시 처리
+		if(bindingResult2.hasErrors()) {
+			
+			// 에러 메시지 출력
+	        for (ObjectError error : bindingResult2.getAllErrors()) {
+	        	log.debug("SportsEquipmentImg 객체 validation 실패 : " + error.getDefaultMessage());
+	        }
+			
+			return "headoffice/addEquipment";
+		}
+
+		String path = session.getServletContext().getRealPath("/upload/equipment");
 		// 디버깅
 		log.debug("저장 경로 : " + path);
-		
+		equipmentService.insertEquipment(sportsEquipment, sportsEquipmentImg, path);
 		
 		return "redirect:/headoffice/equipment";
 	}

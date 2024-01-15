@@ -23,7 +23,7 @@
 			    				<td>${m.customerName}</td>
 			    				<td>${m.customerGender}</td>
 			    				<td>${m.customerPhone}</td>
-			    				<td>${m.createdate} ${str}</td>
+			    				<td>${m.createdate}</td>
 			    				<c:if test="${m.active == 'Y'}">
 			    					<td>가입</td>
 			    				</c:if>	   			    

@@ -286,7 +286,7 @@
 	
 	// 이미지 파일의 형식을 검사하는 함수
 	function isImageFile(file) {
-        // 간단한 예시로 파일 확장자를 이용한 확인 방법
+
         var validImageTypes = ['image/jpg', 'image/jpeg', 'image/png', 'image/gif', 'image/webp'];
         return validImageTypes.includes(file.type);
     }

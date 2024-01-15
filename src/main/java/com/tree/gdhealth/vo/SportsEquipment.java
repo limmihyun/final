@@ -37,4 +37,5 @@ public class SportsEquipment {
     
     private LocalDateTime createdate;
     private LocalDateTime updatedate;
+    
 }

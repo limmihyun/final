@@ -41,7 +41,7 @@ public class ImageSave {
 		try {
 			multipartFile.transferTo(file); // 물리적으로 파일 업로드가 됨.
 		} catch (IllegalStateException | IOException e) {
-			e.printStackTrace();
+			// 강제로 예외를 발생시켜 애노테이션 @Transactional이 작동되게 한다.
 			throw new RuntimeException();
 		}
 	}
