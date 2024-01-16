@@ -46,7 +46,8 @@
 	           		  </c:if>            	 				  
 					  <c:if test="${prev}">
 					  	<li class="page-item"><a class="page-link searchPageBtn" data-page="${startPageNum - 1}" 
-					  						data-type="${type}" data-keyword="${keyword}" href="#">이전</a></li>
+					  						data-type="${type}" data-keyword="${keyword}" href="#">이전</a>
+					  	</li>
 					  </c:if>
 					  <c:forEach begin="${startPageNum}" end="${endPageNum}" var="pageNum">
 					  	<c:if test="${pageNum == currentPage}"> <!-- 페이징 버튼 색 변경o --> 

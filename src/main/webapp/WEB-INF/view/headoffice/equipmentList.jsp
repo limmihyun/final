@@ -106,14 +106,16 @@
                                         				<select name="type" class="form-control" style="width:120px; margin-right:5px;" id="type">
 															<option value="search">검색</option>
 															<option value="name">이름</option>
-															<option value="note">비고</option>				
+															<option value="note">비고</option>
+															<option value="writer">작성자</option>				
+															<option value="isActive">활성화 여부</option>								
 														</select>   															
                                         			</td>
                                         			<td id="plus1">
-                                        				<input type="text" name="keyword" id="keyword" placeholder="검색어 입력" class="form-control" style="width:170px;">
+                                        				<!-- <input type="text" name="keyword" id="keyword" placeholder="검색어 입력" class="form-control" style="width:170px;">  -->          				
                                         			</td>
                                         			<td id="plus2">
-                                        				<button style="margin-left:10px; width:50px;" type="button" class="btn" id="searchBtn">검색</button>
+                                        				<!-- <button style="margin-left:10px; width:50px;" type="button" class="btn" id="searchBtn">검색</button> -->
                                         			</td>
                                         		</tr>	
                                         	</table>	    
@@ -214,7 +216,7 @@
 				page : page
 			},
 			success : function(result){
-				console.log('페이징 성공!')
+				console.log('페이징 성공! : page=' + page)
 				$('#fragment').html(result);
 			}			
 		});
@@ -232,12 +234,40 @@
 				keyword : keyword
 			},
 			success : function(result){
-				console.log('페이징 성공!')
+				console.log('페이징 성공! : page=' + page)
+				console.log('페이징 성공! : type=' + type)
+				console.log('페이징 성공! : keyword=' + keyword)
 				$('#fragment').html(result);
 			}			
 		});
 		
 	}
+	
+	//select 태그의 value를 change할 때
+	$('#type').change(function(){
+		
+		if($(this).val() == 'isActive') {
+			
+			let selectHtml = `
+				<select name="keyword" class="form-control" style="width:120px;" id="keyword">
+					<option value="">선택</option>
+					<option value="Y">활성화</option>
+					<option value="N">비활성화</option>
+				</select> 
+			`;
+			
+			$('#plus1').html(selectHtml);
+			$('#plus2').html('<button style="margin-left:10px; width:50px;" type="button" class="btn" id="searchBtn">검색</button>');
+			
+		} else if($(this).val() == 'search') {
+			$('#plus1').html('');
+			$('#plus2').html('');
+		} else {
+			$('#plus1').html('<input type="text" name="keyword" id="keyword" placeholder="검색어 입력" class="form-control" style="width:170px;">');
+			$('#plus2').html('<button style="margin-left:10px; width:50px;" type="button" class="btn" id="searchBtn">검색</button>');
+		}
+			
+	});
 	
 	// 검색
 	$(document).on('click', '#searchBtn', function(e){

@@ -6,30 +6,52 @@
        		<h3>물품 목록</h3>
            	<!--------------------- 회원 list start-------------------------->   		  	  				
 			    <table class="table table-bordered">
+			    	<colgroup>
+					    <col width="15%" />
+					    <col width="8%" />
+					    <col width="10%" />
+					    <col width="28%" />
+					    <col width="15%" />					    
+						<col width="10%" />
+						<col width="9%" />
+					    <col width="5%" />
+			    	</colgroup>
 			    	<thead>
 			    		<tr>
-			    			<th>작성자</th>
+			    			
 			    			<th>물품 이름</th>
-			    			<th>물품 가격</th>
+			    			<th>이미지</th>
+			    			<th>물품 가격(원)</th>
 			    			<th>비고</th>
+			    			<th>작성자</th>
+			    			
+			    			<th>작성 날짜</th>
 			    			<th>활성화 여부</th>
-			    			<th>날짜</th>
+			    			<th>수정</th>
 			    		</tr>
 			    	</thead>
 			    	<tbody>
 			    		<c:forEach var="m" items="${equipmentList}">
 			    			<tr>
-			    				<td>${m.employeeName}</td>
+			    				
 			    				<td>${m.itemName}</td>
-			    				<td>${m.itemPrice}</td>
+			    				<td>
+			    					<img src="${pageContext.request.contextPath}/upload/equipment/${m.filename}" style="width:70px; height:70px;">
+			    				</td>
+			    				<td>${m.itemPrice}</td>   				
 			    				<td>${m.note}</td>
+			    				<td>${m.employeeName}</td>
+			    				<td>${m.createdate}</td>
 			    				<c:if test="${m.active == 'Y'}">
-			    					<td>활성화</td>
+			    					<td><a class="btn btn-primary">활성화</a></td>
 			    				</c:if>
 			    				<c:if test="${m.active == 'N'}">
-			    					<td>비활성화</td>
+			    					<td><a class="btn btn-primary"></a>비활성화</td>
 			    				</c:if>
-		    					<td>${m.createdate}</td>
+		    					
+		    					<td>
+		    						<a href="#" class="btn btn-primary">수정</a>
+		    					</td>
 			    			</tr>
 			    		</c:forEach>   
 			    	</tbody>

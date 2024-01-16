@@ -23,7 +23,13 @@
 				</when>	
 				<when test="type != null and type.equals('note')">
 					s.note LIKE CONCAT('%',#{keyword},'%')
-				</when>		
+				</when>
+				<when test="type != null and type.equals('writer')">
+					ed.employee_name LIKE CONCAT('%',#{keyword},'%')
+				</when>	
+				<when test="type != null and type.equals('isActive')">
+					s.active LIKE CONCAT('%',#{keyword},'%')
+				</when>			
 			</choose>
 		</where>
 		LIMIT #{beginRow}, #{rowPerPage}
@@ -31,12 +37,16 @@
 	
 	<select id="equipmentCnt" resultType="int">
 		SELECT COUNT(*)
-		FROM sports_equipment
+		FROM sports_equipment s
+		INNER JOIN sports_equipment_img si
+			ON si.sports_equipment_no = s.sports_equipment_no
 	</select>
 	
 	<select id="searchCnt" parameterType="map" resultType="int">
 		SELECT COUNT(*)
-		FROM sports_equipment 
+		FROM sports_equipment s
+		INNER JOIN sports_equipment_img si
+			ON si.sports_equipment_no = s.sports_equipment_no
 		<where>
 			<choose>
 				<when test="type != null and type.equals('name')">

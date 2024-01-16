@@ -37,12 +37,20 @@
 	
 	<select id="programCnt" resultType="int">
 		SELECT COUNT(*)
-		FROM program
+		FROM program p
+		INNER JOIN program_date pd
+			ON pd.program_no = p.program_no
+		INNER JOIN program_img pi
+			ON p.program_no = pi.program_no
 	</select>
 	
 	<select id="searchCnt" parameterType="map" resultType="int">
 		SELECT COUNT(*)
-		FROM program 
+		FROM program p
+		INNER JOIN program_date pd
+			ON pd.program_no = p.program_no
+		INNER JOIN program_img pi
+			ON p.program_no = pi.program_no
 		<where>
 			<choose>
 				<when test="type != null and type.equals('title')">
