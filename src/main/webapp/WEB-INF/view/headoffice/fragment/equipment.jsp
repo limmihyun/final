@@ -46,10 +46,9 @@
 			    				<c:if test="${m.active == 'N'}">
 			    					<td><button type="button" class="btn btn-primary activeBtn" 
 			    									data-equipmentno="${m.equipmentNo}">비활성화</button></td>
-			    				</c:if>
-		    					
+			    				</c:if>	
 		    					<td>
-		    						<a href="#" class="btn btn-primary">수정</a>
+		    						<a href="${pageContext.request.contextPath}/headoffice/equipment/update/${m.equipmentNo}" class="btn btn-primary">수정</a>
 		    					</td>
 			    			</tr>
 			    		</c:forEach>   
@@ -61,7 +60,6 @@
            		<!--------------------- 페이징 start ----------------------------------->     
             <div style="text-align:center;">       	
 	             <ul class="pagination">
-	             
              	  <c:if test="${currentPage == 1}">
            			<li class="page-item disabled">
             	  		<a class="page-link">처음</a>  	

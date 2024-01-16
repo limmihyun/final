@@ -130,16 +130,18 @@
                                                                     <input name="employeePw" id="employeePw" type="password" class="form-control" placeholder="비밀번호" maxlength="15">
                                                                 </div>
                                                                 <div class="form-group">
-                                                                    <input type="password" class="form-control" id="pwCheck" placeholder="비밀번호 확인">
+                                                                    <input type="password" class="form-control" id="pwCheck" placeholder="비밀번호 확인" maxlength="15">
                                                                 </div>                                                              
                                                                 <div class="form-group">
                                                                     <input name="employeeName" id="employeeName" type="text" class="form-control" placeholder="이름" maxlength="20">
                                                                 </div>                                                                                                                       
                                                                 <div class="form-group">
-                                                                    <input name="employeePhone" id="employeePhone" type="text" class="form-control" placeholder="휴대폰 번호      ex) 010-1234-5678">
+                                                                    <input name="employeePhone" id="employeePhone" type="text" class="form-control" 
+                                                                    					placeholder="휴대폰 번호      ex) 010-1234-5678" maxlength="13">
                                                                 </div>
                                                                 <div class="form-group">
-                                                                    <input name="employeeEmail" id="employeeEmail" type="text" class="form-control" placeholder="이메일      ex) goodee@naver.com">
+                                                                    <input name="employeeEmail" id="employeeEmail" type="text" class="form-control" 
+                                                                    					placeholder="이메일      ex) goodee@naver.com" maxlength="30">
                                                                 </div>                                                               
                                                                 
                                                                 <div class="form-group">

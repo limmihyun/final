@@ -48,7 +48,7 @@
 			    									data-equipmentno="${m.equipmentNo}">비활성화</button></td>
 			    				</c:if>
 		    					<td>
-		    						<a href="#" class="btn btn-primary">수정</a>
+		    						<a href="${pageContext.request.contextPath}/headoffice/equipment/update/${m.equipmentNo}" class="btn btn-primary">수정</a>
 		    					</td>
 			    			</tr>
 			    		</c:forEach>   

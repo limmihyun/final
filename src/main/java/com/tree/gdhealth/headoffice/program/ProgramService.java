@@ -155,7 +155,7 @@ public class ProgramService {
 	}
 	
 	public void updateProgram(Program program, ProgramDate programDate, ProgramImg programImg,
-			String path, String oldPath) {
+									String newPath, String oldPath) {
 
 		int result = programMapper.updateProgram(program);
 		log.debug("프로그램 수정(성공:1) : " + result);
@@ -163,16 +163,22 @@ public class ProgramService {
 		int dateResult = programMapper.updateProgramDate(programDate);
 		log.debug("프로그램 date 수정(성공:1) : " + dateResult);
 			
-		// 기존 파일 삭제
-		File file = new File(oldPath);
-		boolean isDelete = file.delete();
-		// 디버깅
-		log.debug("기존 파일 삭제 여부 : " + isDelete);
-		
 		MultipartFile programFile = programImg.getProgramFile();
-		// 수정한 파일 저장
-		insertOrUpdateProgramImg(programFile, path, program.getProgramNo(), false);
 		
+		// 수정한 파일이 존재할 때
+		if(!programFile.isEmpty()) {
+			
+			// 기존 파일 삭제
+			File file = new File(oldPath);
+			boolean isDelete = file.delete();
+			// 디버깅
+			log.debug("기존 파일 삭제 여부 : " + isDelete);
+			
+			int programNo = program.getProgramNo();
+			
+			// 수정한 파일 저장
+			insertOrUpdateProgramImg(programFile, newPath, programNo, false);
+		}
 	
 	}
 	

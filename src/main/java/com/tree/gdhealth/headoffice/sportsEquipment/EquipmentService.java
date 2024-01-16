@@ -1,5 +1,6 @@
 package com.tree.gdhealth.headoffice.sportsEquipment;
 
+import java.io.File;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -74,6 +75,33 @@ public class EquipmentService {
 		
 	}
 	
+	public Map<String, Object> getEquipmentOne(int equipmentNo) {
+		
+		Map<String, Object> equipment = equipmentMapper.equipmentOne(equipmentNo);
+		// 디버깅
+		log.debug("equipment 상세 : " + equipment);
+		
+		return equipment;
+	}
+	
+	public int deactiveEquipment(int sportsEquipmentNo) {
+		
+		int result = equipmentMapper.deactiveEquipment(sportsEquipmentNo);
+		// 디버깅
+		log.debug("물품 비활성화(성공:1,실패:0) : " + result);
+		
+		return result;
+	}
+		
+	public int activeEquipment(int sportsEquipmentNo) {
+		
+		int result = equipmentMapper.activeEquipment(sportsEquipmentNo);
+		// 디버깅
+		log.debug("물품 활성화(성공:1,실패:0) : " + result);
+		
+		return result;
+	}
+	
 	public void insertEquipment(SportsEquipment sportsEquipment, SportsEquipmentImg sportsEquipmentImg, 
 										String path) {
 		
@@ -92,11 +120,36 @@ public class EquipmentService {
 		int equipmentNo = sportsEquipment.getSportsEquipmentNo();
 		MultipartFile equipmentFile = sportsEquipmentImg.getEquipmentFile();
 		// 파일 저장
-		insertEquipmentImg(equipmentFile, path, equipmentNo);
+		insertOrUpdateEquipmentImg(equipmentFile, path, equipmentNo, true);
 		
 	}
 	
-	public void insertEquipmentImg(MultipartFile equipmentFile, String path, int equipmentNo) {
+	public void updateEquipment(SportsEquipment sportsEquipment, SportsEquipmentImg sportsEquipmentImg,
+									String newPath, String oldPath) {
+		
+		int result = equipmentMapper.updateEquipment(sportsEquipment);
+		log.debug("물품 수정(성공:1) : " + result);
+		
+		MultipartFile equipmentFile = sportsEquipmentImg.getEquipmentFile();
+		
+		// 수정한 파일이 존재할 때
+		if(!equipmentFile.isEmpty()) {
+			
+			// 기존 파일 삭제
+			File file = new File(oldPath);
+			boolean isDelete = file.delete();
+			// 디버깅
+			log.debug("기존 파일 삭제 여부 : " + isDelete);
+			
+			int equipmentNo = sportsEquipment.getSportsEquipmentNo();
+			
+			// 수정한 파일 저장
+			insertOrUpdateEquipmentImg(equipmentFile, newPath, equipmentNo, false);
+		}
+		
+	}
+	
+	public void insertOrUpdateEquipmentImg(MultipartFile equipmentFile, String path, int equipmentNo, boolean isInsert) {
 		
 		ImageSave imgSave = new ImageSave();
 		
@@ -111,30 +164,16 @@ public class EquipmentService {
 		String filename = imgSave.getFilename(equipmentFile);
 		img.setSportsEquipmentImgFileName(filename);
 		
-		int imgResult = equipmentMapper.insertEquipmentImg(img);
-		log.debug("sportsEquipmentImg 추가(성공:1) : " + imgResult);
+		if(isInsert) {
+			int imgResult = equipmentMapper.insertEquipmentImg(img);
+			log.debug("sportsEquipmentImg 추가(성공:1) : " + imgResult);
+		} else {
+			int imgResult = equipmentMapper.updateEquipmentImg(img);
+			log.debug("sportsEquipmentImgUpdate 추가(성공:1) : " + imgResult);
+		}
 		
 		// 파일 저장
 		imgSave.saveFile(equipmentFile, path, filename);
-		
-	}
-	
-	public int deactiveEquipment(int sportsEquipmentNo) {
-			
-		int result = equipmentMapper.deactiveEquipment(sportsEquipmentNo);
-		// 디버깅
-		log.debug("물품 비활성화(성공:1,실패:0) : " + result);
-		
-		return result;
-	}
-		
-	public int activeEquipment(int sportsEquipmentNo) {
-		
-		int result = equipmentMapper.activeEquipment(sportsEquipmentNo);
-		// 디버깅
-		log.debug("물품 활성화(성공:1,실패:0) : " + result);
-		
-		return result;
 	}
 
 }

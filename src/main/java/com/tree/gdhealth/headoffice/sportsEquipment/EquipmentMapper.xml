@@ -33,6 +33,7 @@
 				</when>			
 			</choose>
 		</where>
+		ORDER BY s.createdate DESC
 		LIMIT #{beginRow}, #{rowPerPage}
 	</select>
 	
@@ -58,6 +59,19 @@
 				</when>		
 			</choose>
 		</where>
+	</select>
+	
+	<select id="equipmentOne" parameterType="int" resultType="map">
+		SELECT
+			s.sports_equipment_no equipmentNo,
+			s.item_name itemName,
+			s.item_price itemPrice,
+			s.note note,
+			si.sports_equipment_img_file_name filename
+		FROM sports_equipment s
+		INNER JOIN sports_equipment_img si
+			ON si.sports_equipment_no = s.sports_equipment_no
+		WHERE s.sports_equipment_no = #{equipmentNo}
 	</select>
 	
 	<insert id="insertEquipment" parameterType="com.tree.gdhealth.vo.SportsEquipment">
@@ -92,6 +106,25 @@
 			#{sportsEquipmentImgType}
 		)
 	</insert>
+	
+	<update id="updateEquipment" parameterType="com.tree.gdhealth.vo.SportsEquipment">
+		UPDATE sports_equipment
+		SET
+			item_name = #{itemName},
+			item_price = #{itemPrice},
+			note = #{note}
+		WHERE sports_equipment_no = #{sportsEquipmentNo}
+	</update>
+	
+	<update id="updateEquipmentImg" parameterType="com.tree.gdhealth.vo.SportsEquipmentImg">
+		UPDATE sports_equipment_img
+		SET
+			sports_equipment_img_origin_name = #{sportsEquipmentImgOriginName},
+			sports_equipment_img_file_name = #{sportsEquipmentImgFileName},
+			sports_equipment_img_size = #{sportsEquipmentImgSize},
+			sports_equipment_img_type = #{sportsEquipmentImgType}
+		WHERE sports_equipment_no = #{sportsEquipmentNo}
+	</update>
 	
 	<update id="deactiveEquipment">
 		UPDATE sports_equipment

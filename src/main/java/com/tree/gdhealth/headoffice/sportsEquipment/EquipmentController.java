@@ -9,9 +9,11 @@ import org.springframework.validation.BindingResult;
 import org.springframework.validation.ObjectError;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.tree.gdhealth.headoffice.Paging;
 import com.tree.gdhealth.vo.SportsEquipment;
@@ -131,6 +133,43 @@ public class EquipmentController {
 		log.debug("저장 경로 : " + path);
 		equipmentService.insertEquipment(sportsEquipment, sportsEquipmentImg, path);
 		
+		return "redirect:/headoffice/equipment";
+	}
+	
+	@GetMapping("/update/{equipmentNo}")
+	public String update(@PathVariable int equipmentNo, Model model) {
+		
+		Map<String, Object> equipmentOne = equipmentService.getEquipmentOne(equipmentNo);
+		model.addAttribute("equipmentOne", equipmentOne);
+		
+		return "headoffice/updateEquipment";
+	}
+	
+	@PostMapping("/update")
+	public String update(@Validated SportsEquipment equipment, BindingResult bindingResult1,
+							SportsEquipmentImg sportsEquipmentImg,
+								HttpSession session, RedirectAttributes redirectAttributes) {
+		
+		int equipmentNo = equipment.getSportsEquipmentNo();
+		
+		if(bindingResult1.hasErrors()) {
+			
+			redirectAttributes.addAttribute("equipmentNo", equipmentNo);
+			
+			// 에러 메시지 출력
+	        for (ObjectError error : bindingResult1.getAllErrors()) {
+	        	log.debug(error.getDefaultMessage());
+	        }
+	        
+	        return "redirect:/headoffice/equipment/update/{equipmentNo}";
+		}
+		
+		String oldPath = session.getServletContext().getRealPath("/upload/equipment/" + sportsEquipmentImg.getSportsEquipmentImgFileName());
+		log.debug("oldPath : " + oldPath);
+		String newPath = session.getServletContext().getRealPath("/upload/equipment");
+		
+		equipmentService.updateEquipment(equipment, sportsEquipmentImg, newPath, oldPath);
+	
 		return "redirect:/headoffice/equipment";
 	}
 	

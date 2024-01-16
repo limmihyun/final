@@ -241,7 +241,7 @@
 		}
 				
 		if(Number($('#itemPrice').val()) > 100000000 || Number($('#itemPrice').val()) < 0) {
-			alert('물품 가격의 범위는 0~100000000원입니다.');
+			alert('물품 가격의 범위는 0~1억원입니다.');
 			$('#itemPrice').val('');	
 			$('#itemPrice').focus();
 			return;
@@ -252,8 +252,9 @@
 			$('#equipmentFile').focus();
 			return;
 		}
-		
+				
 		var fileInput = $('#equipmentFile')[0];
+		console.log(fileInput);
         var file = fileInput.files[0];
         
         if (!isImageFile(file)) {

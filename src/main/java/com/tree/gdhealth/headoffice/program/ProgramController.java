@@ -206,17 +206,16 @@ public class ProgramController {
 	public String update(@Validated Program program, BindingResult bindingResult1, 
 							@Validated(DateGroup.class) ProgramDate programDate, 
 							BindingResult bindingResult2, 
-							@Validated ProgramImg programImg, BindingResult bindingResult3,
+							ProgramImg programImg, 
 			HttpSession session, RedirectAttributes redirectAttributes) {
 		
 		int programNo = program.getProgramNo();
 		redirectAttributes.addAttribute("programNo", programNo);
 		
-		String originDate;
+		String originDate = programDate.getOriginDate();
 		// 첫 번째 객체(Program)의 유효성 검증 실패시 처리
 		if(bindingResult1.hasErrors()) {
 			
-			originDate = programDate.getOriginDate();
 			redirectAttributes.addAttribute("originDate", originDate);
 			
 			// 에러 메시지 출력
@@ -230,7 +229,6 @@ public class ProgramController {
 		// 두 번째 객체(ProgramDate)의 유효성 검증 실패시 error 발생 시 처리
 		if(bindingResult2.hasErrors()) {
 			
-			originDate = programDate.getOriginDate();
 			redirectAttributes.addAttribute("originDate", originDate);
 			
 			// 에러 메시지 출력
@@ -241,24 +239,10 @@ public class ProgramController {
 			return "redirect:/headoffice/program/update/{programNo}/{originDate}";
 		}
 		
-		// 세 번째 객체(ProgramImg)의 유효성 검증 실패시 error 발생 시 처리
-		if(bindingResult3.hasErrors()) {
-			
-			originDate = programDate.getOriginDate();
-			redirectAttributes.addAttribute("originDate", originDate);
-			
-			// 에러 메시지 출력
-	        for (ObjectError error : bindingResult3.getAllErrors()) {
-	        	log.debug(error.getDefaultMessage());
-	        }
-	        
-			return "redirect:/headoffice/program/update/{programNo}/{originDate}";
-		}
-		
 		String oldPath = session.getServletContext().getRealPath("/upload/program/" + programImg.getFilename());
-		String path = session.getServletContext().getRealPath("/upload/program");
+		String newPath = session.getServletContext().getRealPath("/upload/program");
 		
-		programService.updateProgram(program, programDate, programImg, path, oldPath);
+		programService.updateProgram(program, programDate, programImg, newPath, oldPath);
 		
 		String date = programDate.getProgramDate();
 		redirectAttributes.addAttribute("programDate", date);

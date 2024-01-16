@@ -15,8 +15,13 @@ public interface EquipmentMapper {
 	int equipmentCnt();
 	int searchCnt(Map<String, Object> map);
 	
+	Map<String, Object> equipmentOne(int equipmentNo);
+	
 	int insertEquipment(SportsEquipment sportsEquipment);
 	int insertEquipmentImg(SportsEquipmentImg sportsEquipmentImg);
+	
+	int updateEquipment(SportsEquipment sportsEquipment);
+	int updateEquipmentImg(SportsEquipmentImg sportsEquipmentImg);
 	
 	int deactiveEquipment(int sportsEquipmentNo);
 	int activeEquipment(int sportsEquipmentNo);

@@ -8,7 +8,7 @@
 <head>
     <meta charset="utf-8">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
-    <title>프로그램 수정</title>
+    <title>물품 수정</title>
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <!------------------- favicon start ------------------>
@@ -99,46 +99,59 @@
         </div>
         
         
-        <div class="blog-details-area mg-b-15">
+        <div class=" mg-b-15">
             <div class="container-fluid">
                 <div class="row" style="margin-top:20px;">
                 	<div class="col-lg-3 col-md-2 col-sm-1 col-xs-12"></div>
                     <div class="col-lg-6 col-md-8 col-sm-10 col-xs-12">  
                         <div class="blog-details-inner">
                             <div class="row">
-                                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-                                	
-	                                <form action="${pageContext.request.contextPath}/headoffice/program/update" id="updateForm" 
-                                                    	method="post" enctype="multipart/form-data">
-                           			   <input type="hidden" value="${programOne.programDate}" name="originDate">	
-                                       <input type="hidden" value="${programOne.programNo}" name="programNo">
-                                       <input type="hidden" value="${programOne.filename}" name="filename">
-	                                   <div class="latest-blog-single blog-single-full-view">
-	                                        <div class="blog-details blog-sig-details">
-	                                        	<div class="blog-details" style="text-align:center;">
-	                                        		<h3 style="margin-bottom:50px;">프로그램 수정하기</h3>
-                                        			<input type="file" name="programFile" style="display:block; margin:0 auto;">    
-	                                        	</div>
-	                                        	
-	                                            <div class="details-blog-dt blog-sig-details-dt courses-info mobile-sm-d-n">
-	                                                <span>
-	                                                	<b>수용 인원 :</b> <input type="number" min="1" max="100" maxlength="3" oninput="maxLengthCheck(this)" value="${programOne.maxCustomer}" name="programMaxCustomer" id="programMaxCustomer" style="width:60px;">
-	                                                	<b style="margin-left:20px;">개설 날짜 :</b> <input type="text" value="${programOne.programDate}" name="programDate" id="programDate" style="width:100px; background-color:white;" readonly>
-	                                                </span>
-	                                            </div>
-	                                            <div style="text-align:center;">    
-	                                           		<h1>
-		                                             	<input type="text" value="${programOne.programName}" maxlength="40" id="programName" name="programName">
-		                                            </h1>
-	                                             	<textarea style="resize:none; width:70%;" rows="15" maxlength="1000" name="programDetail" id="programDetail">${programOne.programDetail}</textarea>                                                                                                                                 	                                          
-	                                            </div>                          
-	                                        </div>
-	                                        <div style="text-align:center;">
-	                                        	<button type="button" class="btn btn-primary" id="updateBtn">수정하기</button>                  	                                                                    
-	                                        </div>                          
-	                                    </div>
-	                                </form>
-                                                             
+                                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12" style="text-align:center;">
+                                	<h3 style="margin-bottom:50px;">물품 수정하기</h3>
+	                                <form action="${pageContext.request.contextPath}/headoffice/equipment/update" id="updateForm" 
+                                                    	method="post" enctype="multipart/form-data">   
+                                        <input type="hidden" value="${equipmentOne.equipmentNo}" name="sportsEquipmentNo">
+                                        <input type="hidden" value="${equipmentOne.filename}" name="sportsEquipmentImgFileName">            
+	                                    <div class="row">
+	                                		<div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
+		                                        <div class="address-hr">                 
+		                                            <p><b>물품 이름</b><br />
+		                                            	<input value="${equipmentOne.itemName}" name="itemName" 
+		                                            			id="itemName" style="border-color:gray;">
+		                                            </p>
+		                                        </div>          
+		                                    </div>
+		                                    <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
+		                                        <div class="address-hr">
+		                                            <p><b>물품 가격(원)</b><br />
+		                                            	<input type="number" maxlength="9" oninput="maxLengthCheck(this)" 
+		                                            			value="${equipmentOne.itemPrice}" name="itemPrice" style="border-color:gray;">
+		                                            </p>
+		                                        </div>
+		                                    </div>
+		                                    <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
+		                                        <div class="form-group">	                                
+		                                        	 <p><b>이미지</b><br />
+		                                            	<input type="file" name="equipmentFile" id="equipmentFile" style="margin-left:50px; 
+		                                            									border-color:gray;"  accept="image/*">
+		                                            </p>                                 
+		                                        </div>
+		                                    </div>
+		                                    <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
+		                               
+		                                    </div> 
+		                                    
+		                                    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+		                                        <div class="address-hr">
+		                                            <p><b>비고</b><br />
+		                                            	<input value="${equipmentOne.note}" name="note" 
+		                                            			style="width:90%; border-color:gray;" maxlength="40">
+		                                            </p>
+		                                        </div>
+		                                    </div> 
+	                                	</div>
+                                        <button type="button" class="btn btn-primary" id="updateBtn">수정하기</button> 
+	                                </form>          
                                 </div>
                             </div>                                      
                         </div>
@@ -214,115 +227,63 @@
 </body>
 
 <script>	
-	$('#programMaxCustomer').focus();
+
+	$('#itemName').focus();
 	
 	// 숫자 입력시 글자 수 제한
 	function maxLengthCheck(object){
 	    if (object.value.length > object.maxLength){
 	      object.value = object.value.slice(0, object.maxLength);
 	    }    
-	 }
+	}
 	
-	// 달력 API
-	$(function() {
-	    $( "#programDate" ).datepicker({
-	    	dateFormat : 'yy-mm-dd',
-	    	dayNamesMin: [ "일", "월","화", "수", "목", "금", "토" ],
-	    	monthNames: ["1월", "2월", "3월", "4월", "5월", "6월", "7월", "8월", "9월", "10월", "11월", "12월"],
-	    	showMonthAfterYear: true,
-	    	changeYear: true,
-	    	changeMonth: true,
-	    	monthNamesShort: ['1월','2월','3월','4월','5월','6월','7월','8월','9월','10월','11월','12월'],
-	    	yearRange: 'c-10:c+10',
-	    	showButtonPanel: true,
-	    	currentText: '오늘 날짜',
-	    	closeText: '닫기',
-	    	minDate: 0
-	    });
-	 });
+	// 이미지 파일의 형식을 검사하는 함수
+	function isImageFile(file) {
+
+        var validImageTypes = ['image/jpg', 'image/jpeg', 'image/png', 'image/gif', 'image/webp'];
+        return validImageTypes.includes(file.type);
+    }
 	
 	$('#updateBtn').click(function(){
 		
-		if($('#programMaxCustomer').val().trim() == '') {
-			alert('수용 인원을 입력하세요.');
-			$('#programMaxCustomer').val('');	
-			$('#programMaxCustomer').focus();			
+		if($('#itemName').val().trim() == '') {
+			alert('물품 이름을 입력하세요.');
+			$('#itemName').val('');	
+			$('#itemName').focus();			
 			return;
 		}
 		
-		if(Number($('#programMaxCustomer').val()) > 100 || Number($('#programMaxCustomer').val()) < 1) {
-			alert('입력 가능한 수용 인원은 1~100명입니다.');
-			$('#programMaxCustomer').val('');	
-			$('#programMaxCustomer').focus();
+		if($('#itemName').val().length < 2) {
+			alert('물품 이름은 최소 2자 이상 입력하여야 합니다.');
+			$('#itemName').focus();
 			return;
 		}
 		
-		if($('#programDate').val().length == 0) {
-			alert('개설 날짜를 입력하세요.');
-			$('#programDate').focus();			
+		if($('#itemPrice').val() == '') {
+			alert('물품의 가격을 입력하세요.');
+			$('#itemPrice').val('');	
+			$('#itemPrice').focus();			
 			return;
 		}
 		
-		// yyyy-mm-dd 형식의 정규식
-		let dateFormat = /^\d{4}-\d{2}-\d{2}$/;
+		let fileInput = $('#equipmentFile')[0];
+		console.log(fileInput);
 		
-		if (!dateFormat.test($('#programDate').val())) {
-            alert('개설 날짜의 형식이 올바르지 않습니다.');
-            $('#programDate').focus();
-            return;
-        }
-						
-		if($('#programName').val().trim() == '') {
-			alert('프로그램 제목을 입력하세요.');
-			$('#programName').val('');
-			$('#programName').focus();
-			return;
-		}
+		if (fileInput !== undefined) {
+			
+	        let file = fileInput.files[0];
+
+            if (!isImageFile(file)) {
+                alert('사진은 이미지 파일만 첨부 가능합니다.');
+                $('#equipmentFile').focus();
+                return;
+            }
+	              
+	    } 
+
+		alert('수정이 완료되었습니다.')
+		$('#updateForm').submit();
 		
-		if($('#programName').val().length < 3) {
-			alert('프로그램 제목은 최소 3자 이상 입력하여야 합니다.');
-			$('#programName').focus();
-			return;
-		}
-		
-		if($('#programDetail').val().trim() == '') {
-			alert('내용을 입력하세요.');
-			$('#programDetail').val('');	
-			$('#programDetail').focus();			
-			return;
-		}
-		
-		if($('#programDetail').val().length < 5) {
-			alert('내용은 최소 5자 이상 입력하여야 합니다.');
-			$('#programDetail').focus();			
-			return;
-		}
-		
-		let programDate = $('#programDate').val();
-		
-		// 선택한 개설 날짜가 DB에 이미 존재하는지 확인
-	    $.ajax({
-			url : '${pageContext.request.contextPath}/headoffice/program/dateOneCheck',
-			method : 'post',
-			data : {
-				programDate : programDate
-			},
-			success : function(result) {
-				// 결과값이 true이고 입력한 날짜가 원래 저장된 날짜와 다를 때
-				if(result == true && programDate != '${programOne.programDate}') {
-					alert('선택한 개설 날짜가 이미 존재합니다. 날짜를 수정해주세요.')
-					$('#programDate').focus();
-					return false;
-				} else {
-					alert('수정 완료되었습니다.');
-					$('#updateForm').submit();
-				}
-			},
-			error : function(err) {
-				console.log(err);
-			}
-		});
-	
 	});
 </script>
 
