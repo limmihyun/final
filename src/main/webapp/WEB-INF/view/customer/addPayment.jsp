@@ -8,27 +8,83 @@
   <title>결제 위젯</title>
   <script src="https://js.tosspayments.com/v1/payment-widget"></script>
   
+    <meta charset="UTF-8">
+    <meta name="description" content="TopGym Template">
+    <meta name="keywords" content="TopGym, unica, creative, html">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>GD HEALTH</title>
+
+    <!-- Google Font -->
+    <link href="https://fonts.googleapis.com/css?family=Roboto:100,300,300i,400,500,700,900" rel="stylesheet">
+
+    <!-- Css Styles -->
+    <link rel="stylesheet" href="/css/bootstrap.min.css" type="text/css">
+    <link rel="stylesheet" href="/css/font-awesome.min.css" type="text/css">
+    <link rel="stylesheet" href="/css/owl.carousel.min.css" type="text/css">
+    <link rel="stylesheet" href="/css/magnific-popup.css" type="text/css">
+    <link rel="stylesheet" href="/css/barfiller.css" type="text/css">
+    <link rel="stylesheet" href="/css/slicknav.min.css" type="text/css">
+    <link rel="stylesheet" href="/css/style.css" type="text/css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+  
 </head>
 <body>
+
+    <div id="preloder">
+        <div class="loader"></div>
+    </div>
+
+
+     <jsp:include page="/WEB-INF/header/header.jsp" />
+    <!-- Breadcrumb Section Begin -->
+    <section class="breadcrumb-area set-bg" data-setbg="/img/elements/element-bg.jpg">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12 text-center">
+                    <div class="breadcrumb-content">
+                        <h2>회원권 구매</h2>
+                        <div class="links">
+                            <a href="/customer/home">Home</a>
+                            
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
   <!-- 상품 정보 영역-->
-  <div class="title">상품 정보</div>
-  <p>토스 티셔츠</p>
-  <p>결제 금액: 15,000원</p>
-  <form id="discount-coupon">
-    <input type="checkbox" id="coupon"/>5,000원 할인받기 
-  </form>
+  <div style="margin:2%;">
+  <div class="title" style="font-weight: bold; font-size:20px;">상품 정보</div>
+	  <p>${membershipName}회원권<p>
+	  <p>결제 금액: ${membershipPrice}원</p>
+  </div>
   <hr>	
 
   <!-- 결제 방법 영역-->
-  <div class="title">결제 방법</div>
   <div id="payment-method"></div>
-  <div id="agreement"></div> 
-  <button id="payment-button">결제하기</button>
-  <a href="#" onclick="testBtn()" class="btn btn-primary" style="padding: 10px 24px;">결제</a>
-  <script>
+  <div id="agreement"></div>
+  <div style="text-align:center; margin-bottom:1%;">
+  	<button id="payment-button" class="btn btn-primary">결제하기</button>
+  </div>
+  
+    <jsp:include page="/WEB-INF/footer/footer.jsp" />
+
+
+    <!-- Js Plugins -->
+    <script src="/js/jquery-3.3.1.min.js"></script>
+    <script src="/js/bootstrap.min.js"></script>
+    <script src="/js/jquery.slicknav.js"></script>
+    <script src="/js/owl.carousel.min.js"></script>
+    <script src="/js/jquery.magnific-popup.min.js"></script>
+    <script src="/js/circle-progress.min.js"></script>
+    <script src="/js/jquery.barfiller.js"></script>
+    <script src="/js/main.js"></script>
+    
+      <script>
     	var membershipNo = ${membershipNo};
     	var membershipPrice = ${membershipPrice};
-  </script>
+ 	 </script>
 </body>
 
 <script>
