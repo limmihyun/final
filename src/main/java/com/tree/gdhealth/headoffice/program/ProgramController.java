@@ -142,7 +142,7 @@ public class ProgramController {
 			
 			// 에러 메시지 출력
 	        for (ObjectError error : bindingResult1.getAllErrors()) {
-	        	log.debug("program 객체 validation 실패 : " + error.getDefaultMessage());
+	        	log.debug(error.getDefaultMessage());
 	        }
 			
 			return "headoffice/addProgram";
@@ -153,7 +153,7 @@ public class ProgramController {
 			
 			// 에러 메시지 출력
 	        for (ObjectError error : bindingResult2.getAllErrors()) {
-	        	log.debug("programDate 객체 validation 실패 : " + error.getDefaultMessage());
+	        	log.debug(error.getDefaultMessage());
 	        }
 	        
 			return "headoffice/addProgram";
@@ -164,7 +164,7 @@ public class ProgramController {
 			
 			// 에러 메시지 출력
 	        for (ObjectError error : bindingResult3.getAllErrors()) {
-	        	log.debug("programImg 객체 validation 실패 : " + error.getDefaultMessage());
+	        	log.debug(error.getDefaultMessage());
 	        }
 	        
 			return "headoffice/addProgram";
@@ -221,7 +221,7 @@ public class ProgramController {
 			
 			// 에러 메시지 출력
 	        for (ObjectError error : bindingResult1.getAllErrors()) {
-	        	log.debug("program 객체 validation 실패 : " + error.getDefaultMessage());
+	        	log.debug(error.getDefaultMessage());
 	        }
 			
 			return "redirect:/headoffice/program/update/{programNo}/{originDate}";
@@ -235,7 +235,7 @@ public class ProgramController {
 			
 			// 에러 메시지 출력
 	        for (ObjectError error : bindingResult2.getAllErrors()) {
-	        	log.debug("programDate 객체 validation 실패 : " + error.getDefaultMessage());
+	        	log.debug(error.getDefaultMessage());
 	        }
 	        
 			return "redirect:/headoffice/program/update/{programNo}/{originDate}";
@@ -249,7 +249,7 @@ public class ProgramController {
 			
 			// 에러 메시지 출력
 	        for (ObjectError error : bindingResult3.getAllErrors()) {
-	        	log.debug("programImg 객체 validation 실패 : " + error.getDefaultMessage());
+	        	log.debug(error.getDefaultMessage());
 	        }
 	        
 			return "redirect:/headoffice/program/update/{programNo}/{originDate}";
@@ -267,8 +267,7 @@ public class ProgramController {
 	}
 	
 	@GetMapping("/deactive/{programNo}/{programDate}")
-	public String deactive(HttpSession session, @PathVariable int programNo,
-									@PathVariable String programDate) {
+	public String deactive(@PathVariable int programNo, @PathVariable String programDate) {
 		
 		int result = programService.deactiveProgram(programNo);
 		// 디버깅
@@ -278,8 +277,7 @@ public class ProgramController {
 	}
 	
 	@GetMapping("/active/{programNo}/{programDate}")
-	public String active(HttpSession session, @PathVariable int programNo,
-									@PathVariable String programDate) {
+	public String active(@PathVariable int programNo, @PathVariable String programDate) {
 		
 		int result = programService.activeProgram(programNo);
 		// 디버깅

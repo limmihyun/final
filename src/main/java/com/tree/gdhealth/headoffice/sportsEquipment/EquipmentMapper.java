@@ -18,4 +18,7 @@ public interface EquipmentMapper {
 	int insertEquipment(SportsEquipment sportsEquipment);
 	int insertEquipmentImg(SportsEquipmentImg sportsEquipmentImg);
 	
+	int deactiveEquipment(int sportsEquipmentNo);
+	int activeEquipment(int sportsEquipmentNo);
+	
 }

@@ -4,6 +4,7 @@
 
 	<select id="equipmentList" parameterType="map" resultType="map">
 		SELECT
+			s.sports_equipment_no equipmentNo,
 			s.item_name itemName,
 			s.item_price itemPrice,
 			s.note note,
@@ -91,5 +92,19 @@
 			#{sportsEquipmentImgType}
 		)
 	</insert>
+	
+	<update id="deactiveEquipment">
+		UPDATE sports_equipment
+		SET
+			active = 'N'
+		WHERE sports_equipment_no = #{sportsEquipmentNo}
+	</update>
+	
+	<update id="activeEquipment">
+		UPDATE sports_equipment
+		SET
+			active = 'Y'
+		WHERE sports_equipment_no = #{sportsEquipmentNo}
+	</update>
 
 </mapper>

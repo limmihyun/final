@@ -11,6 +11,7 @@ import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.tree.gdhealth.headoffice.Paging;
 import com.tree.gdhealth.vo.SportsEquipment;
@@ -62,8 +63,7 @@ public class EquipmentController {
 	}
 	
 	@GetMapping("/searchPaging")
-	public String searchPaging(Model model, String type, String keyword, 
-			int page) {
+	public String searchPaging(Model model, String type, String keyword, int page) {
 		
 		// 검색 결과 개수
 		int searchCnt = equipmentService.getSearchCnt(type, keyword);
@@ -109,7 +109,7 @@ public class EquipmentController {
 			
 			// 에러 메시지 출력
 	        for (ObjectError error : bindingResult1.getAllErrors()) {
-	        	log.debug("SportsEquipment 객체 validation 실패 : " + error.getDefaultMessage());
+	        	log.debug(error.getDefaultMessage());
 	        }
 			
 			return "headoffice/addEquipment";
@@ -120,7 +120,7 @@ public class EquipmentController {
 			
 			// 에러 메시지 출력
 	        for (ObjectError error : bindingResult2.getAllErrors()) {
-	        	log.debug("SportsEquipmentImg 객체 validation 실패 : " + error.getDefaultMessage());
+	        	log.debug(error.getDefaultMessage());
 	        }
 			
 			return "headoffice/addEquipment";
@@ -132,6 +132,28 @@ public class EquipmentController {
 		equipmentService.insertEquipment(sportsEquipment, sportsEquipmentImg, path);
 		
 		return "redirect:/headoffice/equipment";
+	}
+	
+	@ResponseBody
+	@GetMapping("/deactive")
+	public int deactive(int equipmentNo) {
+		
+		int result = equipmentService.deactiveEquipment(equipmentNo);
+		// 디버깅
+		log.debug("물품 비활성화(성공:1,실패:0) : " + result);
+		
+		return result;
+	}
+	
+	@ResponseBody
+	@GetMapping("/active")
+	public int active(int equipmentNo) {
+		
+		int result = equipmentService.activeEquipment(equipmentNo);
+		// 디버깅
+		log.debug("물품 활성화(성공:1,실패:0) : " + result);
+		
+		return result;
 	}
 
 }

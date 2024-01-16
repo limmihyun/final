@@ -118,5 +118,23 @@ public class EquipmentService {
 		imgSave.saveFile(equipmentFile, path, filename);
 		
 	}
+	
+	public int deactiveEquipment(int sportsEquipmentNo) {
+			
+		int result = equipmentMapper.deactiveEquipment(sportsEquipmentNo);
+		// 디버깅
+		log.debug("물품 비활성화(성공:1,실패:0) : " + result);
+		
+		return result;
+	}
+		
+	public int activeEquipment(int sportsEquipmentNo) {
+		
+		int result = equipmentMapper.activeEquipment(sportsEquipmentNo);
+		// 디버깅
+		log.debug("물품 활성화(성공:1,실패:0) : " + result);
+		
+		return result;
+	}
 
 }

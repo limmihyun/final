@@ -111,12 +111,8 @@
 															<option value="isActive">활성화 여부</option>								
 														</select>   															
                                         			</td>
-                                        			<td id="plus1">
-                                        				<!-- <input type="text" name="keyword" id="keyword" placeholder="검색어 입력" class="form-control" style="width:170px;">  -->          				
-                                        			</td>
-                                        			<td id="plus2">
-                                        				<!-- <button style="margin-left:10px; width:50px;" type="button" class="btn" id="searchBtn">검색</button> -->
-                                        			</td>
+                                        			<td id="plus1"></td>
+                                        			<td id="plus2"></td>
                                         		</tr>	
                                         	</table>	    
                                         </div>
@@ -269,6 +265,7 @@
 			
 	});
 	
+	// 동적으로 추가된 요소에 대해 이벤트 처리
 	// 검색
 	$(document).on('click', '#searchBtn', function(e){
 		
@@ -329,6 +326,52 @@
 		searchPaging(page,type,keyword);
 		
 	});
+	
+	$(document).on('click', '.deactiveBtn', function(){
+		
+		let deactiveBtn = $(this);
+		let equipmentNo = deactiveBtn.data('equipmentno');
+		
+		$.ajax({
+			url : '${pageContext.request.contextPath}/headoffice/equipment/deactive',
+			method : 'get',
+			data : {
+				equipmentNo : equipmentNo
+			},
+			success : function(result){
+				
+				if(result == 1) {
+					deactiveBtn.text('비활성화');
+					deactiveBtn.removeClass('deactiveBtn').addClass('activeBtn'); // 클래스 변경
+					return;
+				}
+			}			
+		});	
+		
+	});
+	
+	$(document).on('click', '.activeBtn', function(){
+		
+		let activeBtn = $(this);
+		let equipmentNo = activeBtn.data('equipmentno');
+		
+		$.ajax({
+			url : '${pageContext.request.contextPath}/headoffice/equipment/active',
+			method : 'get',
+			data : {
+				equipmentNo : equipmentNo
+			},
+			success : function(result){
+				
+				if(result == 1) {
+					activeBtn.text('활성화');
+					activeBtn.removeClass('activeBtn').addClass('deactiveBtn'); // 클래스 변경
+					return;
+				}
+			}			
+		});
+		
+	})
 
 </script>
 </html>

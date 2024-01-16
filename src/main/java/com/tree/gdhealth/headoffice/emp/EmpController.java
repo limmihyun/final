@@ -135,7 +135,7 @@ public class EmpController {
 			
 			// 에러 메시지 출력
 	        for (ObjectError error : bindingResult1.getAllErrors()) {
-	        	log.debug("employee 객체 validation 실패 : " + error.getDefaultMessage());
+	        	log.debug(error.getDefaultMessage());
 	        }
 			
 			return "headoffice/addEmp";
@@ -146,7 +146,7 @@ public class EmpController {
 			
 			// 에러 메시지 출력
 	        for (ObjectError error : bindingResult2.getAllErrors()) {
-	        	log.debug("employeeDetail 객체 validation 실패 : " + error.getDefaultMessage());
+	        	log.debug(error.getDefaultMessage());
 	        }
 	        
 			return "headoffice/addEmp";
@@ -157,7 +157,7 @@ public class EmpController {
 			
 			// 에러 메시지 출력
 	        for (ObjectError error : bindingResult3.getAllErrors()) {
-	        	log.debug("employeeImg 객체 validation 실패 : " + error.getDefaultMessage());
+	        	log.debug(error.getDefaultMessage());
 	        }
 	        
 			return "headoffice/addEmp";

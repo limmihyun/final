@@ -18,7 +18,6 @@
 			    	</colgroup>
 			    	<thead>
 			    		<tr>
-			    			
 			    			<th>물품 이름</th>
 			    			<th>이미지</th>
 			    			<th>물품 가격(원)</th>
@@ -31,8 +30,7 @@
 			    	</thead>
 			    	<tbody>
 						<c:forEach var="m" items="${equipmentList}">
-			    			<tr>
-			    				
+			    			<tr>	    				
 			    				<td>${m.itemName}</td>
 			    				<td>
 			    					<img src="${pageContext.request.contextPath}/upload/equipment/${m.filename}" style="width:70px; height:70px;">
@@ -42,10 +40,12 @@
 			    				<td>${m.employeeName}</td>
 			    				<td>${m.createdate}</td>
 			    				<c:if test="${m.active == 'Y'}">
-			    					<td><a class="btn btn-primary">활성화</a></td>
+			    					<td><button type="button" class="btn btn-primary deactiveBtn" 
+			    									data-equipmentno="${m.equipmentNo}">활성화</button></td>
 			    				</c:if>
 			    				<c:if test="${m.active == 'N'}">
-			    					<td><a class="btn btn-primary"></a>비활성화</td>
+			    					<td><button type="button" class="btn btn-primary activeBtn" 
+			    									data-equipmentno="${m.equipmentNo}">비활성화</button></td>
 			    				</c:if>
 		    					<td>
 		    						<a href="#" class="btn btn-primary">수정</a>
