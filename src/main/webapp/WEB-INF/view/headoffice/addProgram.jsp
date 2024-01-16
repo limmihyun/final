@@ -286,7 +286,7 @@
 	
 	// 이미지 파일의 형식을 검사하는 함수
 	function isImageFile(file) {
-        // 간단한 예시로 파일 확장자를 이용한 확인 방법
+
         var validImageTypes = ['image/jpg', 'image/jpeg', 'image/png', 'image/gif', 'image/webp'];
         return validImageTypes.includes(file.type);
     }
@@ -338,7 +338,7 @@
 			return;
 		}
 		
-		if($('#programMaxCustomer').val().trim() == '') {
+		if($('#programMaxCustomer').val() == '') {
 			alert('수용 인원을 입력하세요.');
 			$('#programMaxCustomer').val('');	
 			$('#programMaxCustomer').focus();			
@@ -383,12 +383,12 @@
 	        	return;
 	        }
 	    });
-		/*
+		
 	    if(!isFormatValid) {
 			alert('형식이 올바르지 않은 개설 날짜 입력창이 있습니다. 날짜를 선택하거나 "-"를 눌러 입력창을 삭제하세요.');
             return;
 		}
-	    */   
+	      
 		// 추가하는 개설날짜 중에 중복된 개설날짜가 있는지 확인하는 함수
 		let values = [];
 	    $('#dateArea input[type="text"]').each(function () {

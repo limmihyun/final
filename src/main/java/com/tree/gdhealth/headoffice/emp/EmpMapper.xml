@@ -41,6 +41,12 @@
 	<select id="employeeCnt" resultType="int">
 		SELECT COUNT(*)
 		FROM employee e
+		INNER JOIN employee_detail ed
+			ON ed.employee_no = e.employee_no
+		INNER JOIN employee_img ei
+			ON ei.employee_no = e.employee_no
+		INNER JOIN branch b
+			ON b.branch_no = e.branch_no
 	</select>
 	
 	<select id="searchCnt" parameterType="map" resultType="int">

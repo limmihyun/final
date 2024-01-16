@@ -1,18 +1,15 @@
-package com.tree.gdhealth.headoffice.customValidation;
+package com.tree.gdhealth.headoffice.customValidation.validator;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeParseException;
 import java.util.List;
 
+import com.tree.gdhealth.headoffice.customValidation.FutureDates;
+
 import jakarta.validation.ConstraintValidator;
 import jakarta.validation.ConstraintValidatorContext;
 
 public class FutureDatesValidator implements ConstraintValidator<FutureDates, List<String>>{
-
-	@Override
-	public void initialize(FutureDates constraintAnnotation) {
-		// 초기화 로직이 없을 경우 생략
-	}
 	
 	@Override
 	public boolean isValid(List<String> values, ConstraintValidatorContext context) {

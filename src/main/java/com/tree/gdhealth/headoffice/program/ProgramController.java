@@ -13,14 +13,12 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.tree.gdhealth.headoffice.Paging;
-import com.tree.gdhealth.headoffice.customValidation.DateGroup;
-import com.tree.gdhealth.headoffice.customValidation.DatesGroup;
+import com.tree.gdhealth.headoffice.customValidation.group.DateGroup;
+import com.tree.gdhealth.headoffice.customValidation.group.DatesGroup;
 import com.tree.gdhealth.vo.Program;
 import com.tree.gdhealth.vo.ProgramDate;
 import com.tree.gdhealth.vo.ProgramImg;
@@ -45,7 +43,7 @@ public class ProgramController {
 	}
 	
 	@GetMapping("/paging")
-	public String paging(Model model, @RequestParam(defaultValue = "1") int page) {
+	public String paging(Model model, int page) {
 		
 		// 전체 프로그램 수
 		int programCnt = programService.getProgramCnt();
@@ -61,8 +59,8 @@ public class ProgramController {
 				.build();
 		paging.calculation();
 		
-		List<Map<String, Object>> searchList = programService.getProgramList(paging.getBeginRow(), paging.getRowPerPage());	
-		model.addAttribute("programList", searchList);  
+		List<Map<String, Object>> programList = programService.getProgramList(paging.getBeginRow(), paging.getRowPerPage());	
+		model.addAttribute("programList", programList);  
 		
 		// 페이징(model 추가)
 		paging.pagingAttributes(model, paging, page);
@@ -72,13 +70,12 @@ public class ProgramController {
 	}
 	
 	@GetMapping("/searchPaging")
-	public String searchPaging(Model model, String type, String keyword, 
-									@RequestParam(defaultValue = "1") int page) {
+	public String searchPaging(Model model, String type, String keyword, int page) {
 		
 		// 검색 결과 개수
 		int searchCnt = programService.getSearchCnt(type, keyword);
 		// 디버깅
-		log.debug("전체 프로그램 수 : " + searchCnt);
+		log.debug("검색 결과 개수(searchPaging) " + searchCnt);
 		
 		// 페이징
 		Paging paging = Paging.builder()
@@ -116,7 +113,7 @@ public class ProgramController {
 				
 		boolean checkDatesExists = programService.checkDatesExists(programDates);
 		// 디버깅
-		log.debug("dates 존재 확인(존재:true,존재x:false) : " + checkDatesExists);
+		log.debug("선택한 날짜들이 이미 존재하는지 확인(존재:true,존재x:false) : " + checkDatesExists);
 		
 		return checkDatesExists;
 				
@@ -128,7 +125,7 @@ public class ProgramController {
 		
 		boolean checkDateOneExists = programService.checkDateOneExists(programDate);
 		// 디버깅
-		log.debug("dateOne 존재 확인(존재:true,존재x:false) : " + checkDateOneExists);
+		log.debug("선택한 날짜가 이미 존재하는지 확인(존재:true,존재x:false) : " + checkDateOneExists);
 		
 		return checkDateOneExists;
 	}
@@ -136,8 +133,8 @@ public class ProgramController {
 	@PostMapping("/addProgram")
 	public String addProgram(@Validated Program program, BindingResult bindingResult1,
 								@Validated(DatesGroup.class) ProgramDate programDate, 
-								BindingResult bindingResult2, 
-								MultipartFile programFile,
+								BindingResult bindingResult2,
+								@Validated ProgramImg programImg, BindingResult bindingResult3,
 								HttpSession session) {
 		
 		// 첫 번째 객체(Program)의 유효성 검증 실패시 처리
@@ -145,7 +142,7 @@ public class ProgramController {
 			
 			// 에러 메시지 출력
 	        for (ObjectError error : bindingResult1.getAllErrors()) {
-	        	log.debug("program 객체 validation 실패 : " + error.getDefaultMessage());
+	        	log.debug(error.getDefaultMessage());
 	        }
 			
 			return "headoffice/addProgram";
@@ -156,7 +153,18 @@ public class ProgramController {
 			
 			// 에러 메시지 출력
 	        for (ObjectError error : bindingResult2.getAllErrors()) {
-	        	log.debug("programDate 객체 validation 실패 : " + error.getDefaultMessage());
+	        	log.debug(error.getDefaultMessage());
+	        }
+	        
+			return "headoffice/addProgram";
+		}
+		
+		// 세 번째 객체(ProgramDate)의 유효성 검증 실패시 처리
+		if(bindingResult3.hasErrors()) {
+			
+			// 에러 메시지 출력
+	        for (ObjectError error : bindingResult3.getAllErrors()) {
+	        	log.debug(error.getDefaultMessage());
 	        }
 	        
 			return "headoffice/addProgram";
@@ -165,7 +173,7 @@ public class ProgramController {
 		String path = session.getServletContext().getRealPath("/upload/program");
 		// 디버깅
 		log.debug("저장 경로 : " + path);
-		programService.insertProgram(program, programDate, programFile, path);
+		programService.insertProgram(program, programDate, programImg, path);
 		
 		return "redirect:/headoffice/program";
 	}
@@ -198,22 +206,21 @@ public class ProgramController {
 	public String update(@Validated Program program, BindingResult bindingResult1, 
 							@Validated(DateGroup.class) ProgramDate programDate, 
 							BindingResult bindingResult2, 
-							ProgramImg programImg,
-			HttpSession session, MultipartFile programFile, RedirectAttributes redirectAttributes) {
+							ProgramImg programImg, 
+			HttpSession session, RedirectAttributes redirectAttributes) {
 		
 		int programNo = program.getProgramNo();
 		redirectAttributes.addAttribute("programNo", programNo);
 		
-		String originDate;
+		String originDate = programDate.getOriginDate();
 		// 첫 번째 객체(Program)의 유효성 검증 실패시 처리
 		if(bindingResult1.hasErrors()) {
 			
-			originDate = programDate.getOriginDate();
 			redirectAttributes.addAttribute("originDate", originDate);
 			
 			// 에러 메시지 출력
 	        for (ObjectError error : bindingResult1.getAllErrors()) {
-	        	log.debug("program 객체 validation 실패 : " + error.getDefaultMessage());
+	        	log.debug(error.getDefaultMessage());
 	        }
 			
 			return "redirect:/headoffice/program/update/{programNo}/{originDate}";
@@ -222,21 +229,20 @@ public class ProgramController {
 		// 두 번째 객체(ProgramDate)의 유효성 검증 실패시 error 발생 시 처리
 		if(bindingResult2.hasErrors()) {
 			
-			originDate = programDate.getOriginDate();
 			redirectAttributes.addAttribute("originDate", originDate);
 			
 			// 에러 메시지 출력
 	        for (ObjectError error : bindingResult2.getAllErrors()) {
-	        	log.debug("programDate 객체 validation 실패 : " + error.getDefaultMessage());
+	        	log.debug(error.getDefaultMessage());
 	        }
 	        
 			return "redirect:/headoffice/program/update/{programNo}/{originDate}";
 		}
 		
 		String oldPath = session.getServletContext().getRealPath("/upload/program/" + programImg.getFilename());
-		String path = session.getServletContext().getRealPath("/upload/program");
+		String newPath = session.getServletContext().getRealPath("/upload/program");
 		
-		programService.updateProgram(program, programDate, programFile, path, oldPath);
+		programService.updateProgram(program, programDate, programImg, newPath, oldPath);
 		
 		String date = programDate.getProgramDate();
 		redirectAttributes.addAttribute("programDate", date);
@@ -245,8 +251,7 @@ public class ProgramController {
 	}
 	
 	@GetMapping("/deactive/{programNo}/{programDate}")
-	public String deactive(HttpSession session, @PathVariable int programNo,
-									@PathVariable String programDate) {
+	public String deactive(@PathVariable int programNo, @PathVariable String programDate) {
 		
 		int result = programService.deactiveProgram(programNo);
 		// 디버깅
@@ -256,8 +261,7 @@ public class ProgramController {
 	}
 	
 	@GetMapping("/active/{programNo}/{programDate}")
-	public String active(HttpSession session, @PathVariable int programNo,
-									@PathVariable String programDate) {
+	public String active(@PathVariable int programNo, @PathVariable String programDate) {
 		
 		int result = programService.activeProgram(programNo);
 		// 디버깅

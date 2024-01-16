@@ -60,7 +60,7 @@
                             	<span class="mini-click-non">발주</span>
                             </a>
                             <ul class="submenu-angle" aria-expanded="false">
-                                <li><a title="Peity Charts" href="/headoffice/sportsEquipmentOrder/list"><span class="mini-sub-pro">발주관리</span></a></li>
+                                <li><a href="/headoffice/sportsEquipmentOrder/list"><span class="mini-sub-pro">발주관리</span></a></li>
                             </ul>
                         </li>
                         <li>
@@ -69,24 +69,20 @@
                             	<span class="mini-click-non">회원권</span>
                             </a>
                             <ul class="submenu-angle" aria-expanded="false">
-                                <li><a title="Peity Charts" href="${pageContext.request.contextPath}/headoffice/membershipList"><span class="mini-sub-pro">회원권 목록</span></a></li>
+                                <li><a href="${pageContext.request.contextPath}/headoffice/membershipList"><span class="mini-sub-pro">회원권 목록</span></a></li>
                             </ul>
                             <ul class="submenu-angle" aria-expanded="false">
-                                <li><a title="Peity Charts" href="${pageContext.request.contextPath}/headoffice/addMembership"><span class="mini-sub-pro">회원권 추가</span></a></li>
+                                <li><a href="${pageContext.request.contextPath}/headoffice/addMembership"><span class="mini-sub-pro">회원권 추가</span></a></li>
                             </ul>
                         </li>
 						<li>
                             <a class="has-arrow" href="mailbox.html" aria-expanded="false">
                             	<span class="educate-icon educate-form icon-wrap"></span> 
-                            	<span class="mini-click-non">소모품</span>
+                            	<span class="mini-click-non">물품</span>
                             </a>
                             <ul class="submenu-angle form-mini-nb-dp" aria-expanded="false">
-                                <li><a title="Basic Form Elements" href="basic-form-element.html"><span class="mini-sub-pro">Bc Form Elements</span></a></li>
-                                <li><a title="Advance Form Elements" href="advance-form-element.html"><span class="mini-sub-pro">Ad Form Elements</span></a></li>
-                                <li><a title="Password Meter" href="password-meter.html"><span class="mini-sub-pro">Password Meter</span></a></li>
-                                <li><a title="Multi Upload" href="multi-upload.html"><span class="mini-sub-pro">Multi Upload</span></a></li>
-                                <li><a title="Text Editor" href="tinymc.html"><span class="mini-sub-pro">Text Editor</span></a></li>
-                                <li><a title="Dual List Box" href="dual-list-box.html"><span class="mini-sub-pro">Dual List Box</span></a></li>
+                                <li><a href="${pageContext.request.contextPath}/headoffice/equipment"><span class="mini-sub-pro">물품 목록</span></a></li>
+                                <li><a href="${pageContext.request.contextPath}/headoffice/equipment/addEquipment"><span class="mini-sub-pro">물품 추가</span></a></li>                           
                             </ul>
                         </li>
 						<li>

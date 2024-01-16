@@ -1,19 +1,18 @@
 package com.tree.gdhealth.headoffice.program;
 
 import java.io.File;
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
-import java.util.UUID;
 
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.tree.gdhealth.headoffice.ImageSave;
 import com.tree.gdhealth.vo.Program;
 import com.tree.gdhealth.vo.ProgramDate;
 import com.tree.gdhealth.vo.ProgramImg;
@@ -52,7 +51,7 @@ public class ProgramService {
 	}
 	
 	public List<Map<String, Object>> getSearchList(int beginRow, int rowPerPage, 
-			String type, String keyword) {
+													String type, String keyword) {
 
 		Map<String, Object> map = new HashMap<>();
 		map.put("beginRow", beginRow);
@@ -109,7 +108,7 @@ public class ProgramService {
 		return checkDateOneExists;
 	}
 	
-	public void insertProgram(Program program, ProgramDate programDate, MultipartFile programFile,
+	public void insertProgram(Program program, ProgramDate programDate, ProgramImg programImg,
 									String path) {
 		
 		/////////////////// 로그인 기능 구현 전 임시 코드 start//////////////////////////
@@ -148,17 +147,15 @@ public class ProgramService {
 			// insert를 실패하였을 때 강제로 예외를 발생시켜 애노테이션 Transactiona이 작동하도록 한다.
 			throw new RuntimeException(); 
 		}
-
-		// 이미지 추가
-		if(!programFile.isEmpty()) { // 업로드한 이미지 파일이 하나이상 있다면
-			// 파일 저장
-			programImgSave(programFile, path, program.getProgramNo());
-		}
+		
+		MultipartFile programFile = programImg.getProgramFile();
+		// 파일 저장
+		insertOrUpdateProgramImg(programFile, path, program.getProgramNo(), true);
 		
 	}
 	
-	public void updateProgram(Program program, ProgramDate programDate, MultipartFile programFile,
-			String path, String oldPath) {
+	public void updateProgram(Program program, ProgramDate programDate, ProgramImg programImg,
+									String newPath, String oldPath) {
 
 		int result = programMapper.updateProgram(program);
 		log.debug("프로그램 수정(성공:1) : " + result);
@@ -166,16 +163,21 @@ public class ProgramService {
 		int dateResult = programMapper.updateProgramDate(programDate);
 		log.debug("프로그램 date 수정(성공:1) : " + dateResult);
 			
-		if(!programFile.isEmpty()) {
+		MultipartFile programFile = programImg.getProgramFile();
 		
+		// 수정한 파일이 존재할 때
+		if(!programFile.isEmpty()) {
+			
 			// 기존 파일 삭제
 			File file = new File(oldPath);
 			boolean isDelete = file.delete();
 			// 디버깅
 			log.debug("기존 파일 삭제 여부 : " + isDelete);
 			
+			int programNo = program.getProgramNo();
+			
 			// 수정한 파일 저장
-			programImgUpdate(programFile, path, program.getProgramNo());
+			insertOrUpdateProgramImg(programFile, newPath, programNo, false);
 		}
 	
 	}
@@ -198,84 +200,30 @@ public class ProgramService {
 		return result;
 	}
 	
-	public void programImgSave(MultipartFile programFile, String path, int programNo) {
+	public void insertOrUpdateProgramImg(MultipartFile programFile, String path, int programNo, boolean isInsert) {
+		
+		ImageSave imgSave = new ImageSave();
 		
 		ProgramImg img= new ProgramImg();
 		img.setProgramNo(programNo);
 		img.setOriginName(programFile.getOriginalFilename());
 		img.setProgramImgSize(programFile.getSize());
 		img.setProgramImgType(programFile.getContentType());
-
-		// fileName : 임의의 문자 생성(유일한 식별자)
-		String uName = UUID.randomUUID().toString(); // 파일이름
 		
-		String oName = programFile.getOriginalFilename();
-		// lastIndexOf : parameter로 전달받은 문자열을 원본 문자열의 뒤에서부터 탐색하여, 
-		// 처음으로 파라미터의 문자열이 나오는 index를 리턴한다.
-		// 확장자 구하기 : xx.xxx.pdf -> .pdf
-		String extName = oName.substring(oName.lastIndexOf(".")); 
-		log.debug("확장자 : " + extName);
+		String filename = imgSave.getFilename(programFile);
+		img.setFilename(filename);
 		
-		// 이미지 파일이 아니면 rollback
-		if(!(extName.equals(".png") || extName.equals(".jpg") || 
-				extName.equals(".jpeg") || extName.equals(".gif") || extName.equals(".webp"))) {
-			// 강제로 예외를 발생시켜 애노테이션 @Transactional이 작동되게 한다.
-			throw new RuntimeException();
+		if(isInsert) {
+			int imgResult = programMapper.insertProgramImg(img);
+			log.debug("programImg 추가(성공:1) : " + imgResult);
+		} else {
+			int imgResult = programMapper.updateProgramImg(img);
+			log.debug("programImgUpdate 추가(성공:1) : " + imgResult);
 		}
 		
-		img.setFilename(uName + extName);
+		// 파일 저장
+		imgSave.saveFile(programFile, path, filename);
 		
-		int imgResult = programMapper.insertProgramImg(img);
-		log.debug("programImg 추가(성공:1) : " + imgResult);
-		
-		// 물리적file을 원하는 경로(path)에 저장
-		File file = new File(path+"/"+uName+extName); // 빈파일
-		try {
-			programFile.transferTo(file); // 물리적으로 파일 업로드가 됨.
-		} catch (IllegalStateException | IOException e) {
-			e.printStackTrace();
-			throw new RuntimeException();
-		}
-	}
-	
-	public void programImgUpdate(MultipartFile programFile, String path, int programNo) {
-		
-		ProgramImg img= new ProgramImg();
-		img.setProgramNo(programNo);
-		img.setOriginName(programFile.getOriginalFilename());
-		img.setProgramImgSize(programFile.getSize());
-		img.setProgramImgType(programFile.getContentType());
-
-		// fileName : 임의의 문자 생성(유일한 식별자)
-		String uName = UUID.randomUUID().toString(); // 파일이름
-		
-		String oName = programFile.getOriginalFilename();
-		// lastIndexOf : parameter로 전달받은 문자열을 원본 문자열의 뒤에서부터 탐색하여, 
-		// 처음으로 파라미터의 문자열이 나오는 index를 리턴한다.
-		// 확장자 구하기 : xx.xxx.pdf -> .pdf
-		String extName = oName.substring(oName.lastIndexOf(".")); 
-		log.debug("확장자 : " + extName);
-		
-		// 이미지 파일이 아니면 rollback
-		if(!(extName.equals(".png") || extName.equals(".jpg") || 
-				extName.equals(".jpeg") || extName.equals(".gif") || extName.equals(".webp"))) {
-			// 강제로 예외를 발생시켜 애노테이션 @Transactional이 작동되게 한다.
-			throw new RuntimeException();
-		}
-
-		img.setFilename(uName + extName);
-		
-		int imgResult = programMapper.updateProgramImg(img);
-		log.debug("programImgUpdate 추가(성공:1) : " + imgResult);
-		
-		// 물리적file을 원하는 경로(path)에 저장
-		File file = new File(path+"/"+uName+extName); // 빈파일
-		try {
-			programFile.transferTo(file); // 물리적으로 파일 업로드가 됨.
-		} catch (IllegalStateException | IOException e) {
-			e.printStackTrace();
-			throw new RuntimeException();
-		}
 	}
 	
 }

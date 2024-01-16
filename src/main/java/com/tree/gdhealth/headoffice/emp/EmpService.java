@@ -1,16 +1,14 @@
 package com.tree.gdhealth.headoffice.emp;
 
-import java.io.File;
-import java.io.IOException;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.UUID;
 
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.tree.gdhealth.headoffice.ImageSave;
 import com.tree.gdhealth.vo.Employee;
 import com.tree.gdhealth.vo.EmployeeDetail;
 import com.tree.gdhealth.vo.EmployeeImg;
@@ -101,7 +99,7 @@ public class EmpService {
 	}
 	
 	public void insertEmployee(Employee employee, EmployeeDetail employeeDetail, 
-								MultipartFile employeeFile, String path) {
+								EmployeeImg employeeImg, String path) {
 		
 		int result = empMapper.insertEmployee(employee);
 		// 디버깅
@@ -113,15 +111,15 @@ public class EmpService {
 		// 디버깅
 		log.debug("employeeDetail 추가(성공:1) : " + detailResult);
 		
-		// file 추가
-		if(!employeeFile.isEmpty()) { // 업로드한 파일이 하나이상 있다면
-			// 파일 저장
-			empImgSave(employeeFile, path, employee.getEmployeeNo());
-		}
+		MultipartFile employeeFile = employeeImg.getEmployeeFile();
+		// 파일 저장
+		insertEmpImg(employeeFile, path, employee.getEmployeeNo());
 	
 	}
 	
-	public void empImgSave(MultipartFile employeeFile, String path, int employeeNo) {
+	public void insertEmpImg(MultipartFile employeeFile, String path, int employeeNo) {
+		
+		ImageSave imgSave = new ImageSave();
 		
 		EmployeeImg img = new EmployeeImg();
 		img.setEmployeeNo(employeeNo);
@@ -129,36 +127,15 @@ public class EmpService {
 		img.setEmployeeImgSize(employeeFile.getSize());
 		img.setEmployeeImgType(employeeFile.getContentType());
 
-		// fileName : 임의의 문자 생성(유일한 식별자)
-		String uName = UUID.randomUUID().toString(); // 저장할 파일이름
-		
-		String oName = employeeFile.getOriginalFilename();
-		// lastIndexOf : parameter로 전달받은 문자열을 원본 문자열의 뒤에서부터 탐색하여, 
-		// 처음으로 파라미터의 문자열이 나오는 index를 리턴한다.
-		// 확장자 구하기 : xx.xxx.pdf -> .pdf
-		String extName = oName.substring(oName.lastIndexOf(".")); 
-		log.debug("확장자 : " + extName);
-		
-		// 이미지 파일이 아니면 rollback
-		if(!(extName.equals(".png") || extName.equals(".jpg") || 
-				extName.equals(".jpeg") || extName.equals(".gif") || extName.equals(".webp"))) {
-			// 강제로 예외를 발생시켜 애노테이션 @Transactional이 작동되게 한다.
-			throw new RuntimeException();
-		}
-		
-		img.setEmployeeImgFilename(uName + extName);
+		String filename = imgSave.getFilename(employeeFile);
+		img.setEmployeeImgFilename(filename);
 		
 		int imgResult = empMapper.insertEmployeeImg(img);
 		log.debug("employeeImg 추가(성공:1) : " + imgResult);
 		
-		// 물리적file을 원하는 경로(path)에 저장
-		File file = new File(path+"/"+uName+extName); // 빈파일
-		try {
-			employeeFile.transferTo(file); // 물리적으로 파일 업로드가 됨.
-		} catch (IllegalStateException | IOException e) {
-			e.printStackTrace();
-			throw new RuntimeException();
-		}
+		// 파일 저장
+		imgSave.saveFile(employeeFile, path, filename);
+
 	}
 				
 }

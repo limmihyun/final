@@ -6,6 +6,8 @@ import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
+import com.tree.gdhealth.headoffice.customValidation.validator.FutureDateValidator;
+
 import jakarta.validation.Constraint;
 import jakarta.validation.Payload;
 
@@ -23,4 +25,5 @@ public @interface FutureDate {
     
     // 페이로드 : 특별한 정보를 전달할 때 사용
     Class<? extends Payload>[] payload() default {};
+    
 }

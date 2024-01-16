@@ -9,17 +9,15 @@ import org.springframework.validation.BindingResult;
 import org.springframework.validation.ObjectError;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.multipart.MultipartFile;
 
 import com.tree.gdhealth.headoffice.Paging;
 import com.tree.gdhealth.vo.Employee;
 import com.tree.gdhealth.vo.EmployeeDetail;
+import com.tree.gdhealth.vo.EmployeeImg;
 
 import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
@@ -41,7 +39,7 @@ public class EmpController {
 	}
 	
 	@GetMapping("/paging")
-	public String paging(Model model, @RequestParam(defaultValue = "1") int page) {
+	public String paging(Model model, int page) {
 			
 		// 전체 직원 수
 		int employeeCnt = empService.getEmployeeCnt();
@@ -69,7 +67,7 @@ public class EmpController {
 	
 	@GetMapping("/searchPaging")
 	public String searchPaging(Model model, String type, String keyword, 
-									@RequestParam(defaultValue = "1") int page) {
+									int page) {
 		
 		// 검색 결과 개수
 		int searchCnt = empService.getSearchCnt(type, keyword);
@@ -129,7 +127,7 @@ public class EmpController {
 	@PostMapping("/addEmp")
 	public String addEmp(@Validated Employee employee,BindingResult bindingResult1,
 							@Validated EmployeeDetail employeeDetail, BindingResult bindingResult2,
-							 MultipartFile employeeFile,
+							@Validated EmployeeImg employeeImg, BindingResult bindingResult3,
 							 HttpSession session, Model model) {
 		
 		// 첫 번째 객체(Employee)의 유효성 검사 실패 시 처리
@@ -137,7 +135,7 @@ public class EmpController {
 			
 			// 에러 메시지 출력
 	        for (ObjectError error : bindingResult1.getAllErrors()) {
-	        	log.debug("employee 객체 validation 실패 : " + error.getDefaultMessage());
+	        	log.debug(error.getDefaultMessage());
 	        }
 			
 			return "headoffice/addEmp";
@@ -148,7 +146,18 @@ public class EmpController {
 			
 			// 에러 메시지 출력
 	        for (ObjectError error : bindingResult2.getAllErrors()) {
-	        	log.debug("employeeDetail 객체 validation 실패 : " + error.getDefaultMessage());
+	        	log.debug(error.getDefaultMessage());
+	        }
+	        
+			return "headoffice/addEmp";
+		}
+		
+		// 세 번째 객체(EmployeeImg)의 유효성 검사 실패 시 처리
+		if(bindingResult3.hasErrors()) {
+			
+			// 에러 메시지 출력
+	        for (ObjectError error : bindingResult3.getAllErrors()) {
+	        	log.debug(error.getDefaultMessage());
 	        }
 	        
 			return "headoffice/addEmp";
@@ -157,7 +166,7 @@ public class EmpController {
 		String path = session.getServletContext().getRealPath("/upload/emp");
 		// 디버깅
 		log.debug("저장 경로 : " + path);
-		empService.insertEmployee(employee, employeeDetail, employeeFile, path);
+		empService.insertEmployee(employee, employeeDetail, employeeImg, path);
 		
 		return "redirect:/headoffice/emp";
 	}

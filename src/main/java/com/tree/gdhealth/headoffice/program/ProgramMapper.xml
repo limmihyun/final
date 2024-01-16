@@ -37,22 +37,30 @@
 	
 	<select id="programCnt" resultType="int">
 		SELECT COUNT(*)
-		FROM program
+		FROM program p
+		INNER JOIN program_date pd
+			ON pd.program_no = p.program_no
+		INNER JOIN program_img pi
+			ON p.program_no = pi.program_no
 	</select>
 	
 	<select id="searchCnt" parameterType="map" resultType="int">
 		SELECT COUNT(*)
 		FROM program p
+		INNER JOIN program_date pd
+			ON pd.program_no = p.program_no
+		INNER JOIN program_img pi
+			ON p.program_no = pi.program_no
 		<where>
 			<choose>
 				<when test="type != null and type.equals('title')">
-					p.program_name LIKE CONCAT('%',#{keyword},'%')
+					program_name LIKE CONCAT('%',#{keyword},'%')
 				</when>	
 				<when test="type != null and type.equals('detail')">
-					p.program_detail LIKE CONCAT('%',#{keyword},'%')
+					program_detail LIKE CONCAT('%',#{keyword},'%')
 				</when>
 				<when test="type != null and type.equals('active')">
-					p.program_active LIKE CONCAT('%',#{keyword},'%')
+					program_active LIKE CONCAT('%',#{keyword},'%')
 				</when>			
 			</choose>
 		</where>

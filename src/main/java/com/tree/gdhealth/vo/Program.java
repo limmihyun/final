@@ -11,7 +11,6 @@ public class Program {
 	
 	/*
 		@Size : 문자열, 배열, Collection, Map 등의 크기를 검증할 때 사용된다.
-		
 		@Max, @Min : 숫자 타입 (int, long 등)의 값이 최대값을 초과하거나 최소값 미만이 되지 않도록 검증할 때 사용된다.
 	*/
 	
@@ -27,7 +26,7 @@ public class Program {
 	
 	@Max(value = 100, message = "수용 인원은 최대 100명까지 가능합니다.")
 	@Min(value = 1, message = "수용 인원은 1명 이상이어야 합니다.")
-	@NotNull(message = "나이를 입력해주세요.")
+	@NotNull(message = "수용 인원을 입력해주세요.")
 	private Integer programMaxCustomer;
 	
 	private String programActive;

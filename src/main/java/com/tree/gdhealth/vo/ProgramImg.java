@@ -1,5 +1,9 @@
 package com.tree.gdhealth.vo;
 
+import org.springframework.web.multipart.MultipartFile;
+
+import com.tree.gdhealth.headoffice.customValidation.ValidFile;
+
 import lombok.Data;
 
 @Data
@@ -13,5 +17,8 @@ public class ProgramImg {
 	private String programImgType;
 	private String createdate;
 	private String updatedate;
+	
+	@ValidFile
+	private MultipartFile programFile;
 	
 }

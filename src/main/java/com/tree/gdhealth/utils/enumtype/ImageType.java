@@ -8,10 +8,13 @@ import lombok.Getter;
  */
 @Getter
 public enum ImageType {
+	
     PNG("image/gif"),
     JPG("image/png"),
     JPEG("image/jpeg"),
-    GIF("image/gif");
+    GIF("image/gif"),
+    WEBP("image/webp");
+	
 
     private final String contentType;
     ImageType(String contentType) {
