@@ -36,7 +36,7 @@ public class PaymentController {
 	}
 	
 	@GetMapping("/customer/addPayment")
-	public String addPayment(Model model, HttpSession session, int membershipNo, int membershipPrice) {
+	public String addPayment(Model model, HttpSession session, int membershipNo, int membershipPrice, String membershipName) {
 		
 		if(session.getAttribute("customerNo") == null) {
 			return "redirect:/customer/login";
@@ -48,6 +48,9 @@ public class PaymentController {
 		model.addAttribute("customerNo", customerNo);
 		model.addAttribute("membershipNo", membershipNo);
 		model.addAttribute("membershipPrice", membershipPrice);
+		model.addAttribute("membershipName", membershipName);
+		System.out.println("siuu" + membershipName);
+
 
 		
 		System.out.println("uuu~~~" + membershipNo);

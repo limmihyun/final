@@ -58,7 +58,7 @@
 							<p>회원권 제목 : ${m.membershipName}</p>
 							<p>회원권 개월수 : ${m.membershipMonth}개월</p>
 							<p>회원권 가격 : ${m.membershipPrice}원</p>
-							<a href="${pageContext.request.contextPath}/customer/addPayment?membershipNo=${m.membershipNo}&membershipPrice=${m.membershipPrice}" class="btn btn-primary">결제하기</a>
+							<a href="${pageContext.request.contextPath}/customer/addPayment?membershipNo=${m.membershipNo}&membershipPrice=${m.membershipPrice}&membershipName=${m.membershipName}" class="btn btn-primary">결제하기</a>
 						</div>
 					</div>
 					

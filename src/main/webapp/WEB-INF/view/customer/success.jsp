@@ -33,7 +33,7 @@
     <section class="breadcrumb-area set-bg" data-setbg="/img/elements/element-bg.jpg">
     </section>
     <div class="container">
-    	<div style="margin-top: 5%; margin-bottom:5%; align:center; text-align:center;">
+    	<div style="margin-top: 5%; margin-bottom:5%; text-align:center;">
     		<img width="100" height="80" src="/img/pay.png">
 		    <h2>결제 성공 !</h2><br>
 			<a href="${pageContext.request.contextPath}/customer/home" class="btn btn-primary">< 홈으로</a>
