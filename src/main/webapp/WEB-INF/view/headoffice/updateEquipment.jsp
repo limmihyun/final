@@ -125,16 +125,15 @@
 		                                        <div class="address-hr">
 		                                            <p><b>물품 가격(원)</b><br />
 		                                            	<input type="number" maxlength="9" oninput="maxLengthCheck(this)" 
-		                                            			value="${equipmentOne.itemPrice}" name="itemPrice" style="border-color:gray;">
+		                                            			value="${equipmentOne.itemPrice}" name="itemPrice" 
+		                                            			id="itemPrice" style="border-color:gray;">
 		                                            </p>
 		                                        </div>
 		                                    </div>
 		                                    <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
-		                                        <div class="form-group">	                                
-		                                        	 <p><b>이미지</b><br />
-		                                            	<input type="file" name="equipmentFile" id="equipmentFile" style="margin-left:50px; 
-		                                            									border-color:gray;"  accept="image/*">
-		                                            </p>                                 
+		                                        <div class="form-group" style="text-align:center;">	                                
+		                                        	 <b>이미지</b><br />
+		                                             <input type="file" class="btn" name="equipmentFile" id="equipmentFile" style="border-color:gray; display:inline-block; width:200px;"  accept="image/*">                      
 		                                        </div>
 		                                    </div>
 		                                    <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
@@ -266,13 +265,18 @@
 			return;
 		}
 		
-		let fileInput = $('#equipmentFile')[0];
-		console.log(fileInput);
+		if(Number($('#itemPrice').val()) > 100000000 || Number($('#itemPrice').val()) < 0) {
+			alert('물품 가격의 범위는 0~1억원입니다.');
+			$('#itemPrice').val('');	
+			$('#itemPrice').focus();
+			return;
+		}
 		
-		if (fileInput !== undefined) {
+		let fileInput = $('#equipmentFile')[0];
+		let file = fileInput.files[0];
+		
+		if (file !== undefined) {
 			
-	        let file = fileInput.files[0];
-
             if (!isImageFile(file)) {
                 alert('사진은 이미지 파일만 첨부 가능합니다.');
                 $('#equipmentFile').focus();

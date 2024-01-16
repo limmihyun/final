@@ -117,7 +117,7 @@
 	                                        <div class="blog-details blog-sig-details">
 	                                        	<div class="blog-details" style="text-align:center;">
 	                                        		<h3 style="margin-bottom:50px;">프로그램 수정하기</h3>
-                                        			<input type="file" name="programFile" style="display:block; margin:0 auto;">    
+                                        			<input type="file" name="programFile" id="programFile" style="display:block; margin:0 auto;" accept="image/*">    
 	                                        	</div>
 	                                        	
 	                                            <div class="details-blog-dt blog-sig-details-dt courses-info mobile-sm-d-n">
@@ -221,7 +221,14 @@
 	    if (object.value.length > object.maxLength){
 	      object.value = object.value.slice(0, object.maxLength);
 	    }    
-	 }
+	}
+	
+	// 이미지 파일의 형식을 검사하는 함수
+	function isImageFile(file) {
+
+        var validImageTypes = ['image/jpg', 'image/jpeg', 'image/png', 'image/gif', 'image/webp'];
+        return validImageTypes.includes(file.type);
+    }
 	
 	// 달력 API
 	$(function() {
@@ -242,6 +249,19 @@
 	 });
 	
 	$('#updateBtn').click(function(){
+		
+		let fileInput = $('#programFile')[0];
+		let file = fileInput.files[0];
+		
+		if (file !== undefined) {
+			
+            if (!isImageFile(file)) {
+                alert('사진은 이미지 파일만 첨부 가능합니다.');
+                $('#programFile').focus();
+                return;
+            }
+	              
+	    } 
 		
 		if($('#programMaxCustomer').val().trim() == '') {
 			alert('수용 인원을 입력하세요.');
