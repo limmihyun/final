@@ -1,4 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.tree.gdhealth.customer.payment.PaymentMapper">
+	<insert id="addPayment">
+		INSERT INTO payment(membership_no, customer_no, payment_date, createdate, updatedate) VALUES(#{membershipNo}, #{customerNo}, NOW(),NOW(),NOW());
+	</insert>
+
 </mapper>

@@ -1,9 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
-<html lang="zxx">
-
-<head>
+<html lang="ko">
+  <head>
     <meta charset="UTF-8">
     <meta name="description" content="TopGym Template">
     <meta name="keywords" content="TopGym, unica, creative, html">
@@ -23,11 +21,9 @@
     <link rel="stylesheet" href="/css/slicknav.min.css" type="text/css">
     <link rel="stylesheet" href="/css/style.css" type="text/css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
-</head>
-
-<body>
-    <!-- Page Preloder -->
-    <div id="preloder">
+  </head>
+  <body>
+  <div id="preloder">
         <div class="loader"></div>
     </div>
 
@@ -35,39 +31,16 @@
      <jsp:include page="/WEB-INF/header/header.jsp" />
     <!-- Breadcrumb Section Begin -->
     <section class="breadcrumb-area set-bg" data-setbg="/img/elements/element-bg.jpg">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-12 text-center">
-                    <div class="breadcrumb-content">
-                        <h2>회원권 구매</h2>
-                        <div class="links">
-                            <a href="/customer/home">Home</a>
-                            
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
     </section>
+    <div class="container">
+    	<div style="margin-top: 5%; margin-bottom:5%; align:center; text-align:center;">
+    		<img width="100" height="80" src="/img/pay.png">
+		    <h2>결제 성공 !</h2><br>
+			<a href="${pageContext.request.contextPath}/customer/home" class="btn btn-primary">< 홈으로</a>
+		</div>
+	</div>
 	
-		<section>
-			<div id="membershipList">
-				<c:forEach var="m" items="${membershipList}">
-					<div style="border-radius:10px; border-style:solid; border-color:black; background-color:#F6F6F6; margin:1%;">
-						<div style="margin:1%;">
-							<p>회원권 제목 : ${m.membershipName}</p>
-							<p>회원권 개월수 : ${m.membershipMonth}개월</p>
-							<p>회원권 가격 : ${m.membershipPrice}원</p>
-							<a href="${pageContext.request.contextPath}/customer/addPayment?membershipNo=${m.membershipNo}&membershipPrice=${m.membershipPrice}" class="btn btn-primary">결제하기</a>
-						</div>
-					</div>
-					
-
-				</c:forEach>
-			</div>
-		</section>
-	
-     <jsp:include page="/WEB-INF/footer/footer.jsp" />
+	<jsp:include page="/WEB-INF/footer/footer.jsp" />
 
 
     <!-- Js Plugins -->
@@ -79,6 +52,5 @@
     <script src="/js/circle-progress.min.js"></script>
     <script src="/js/jquery.barfiller.js"></script>
     <script src="/js/main.js"></script>
-</body>
-
+  </body>
 </html>

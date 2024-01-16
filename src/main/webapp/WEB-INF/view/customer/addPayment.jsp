@@ -1,17 +1,13 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+
 <!DOCTYPE html>
 <html lang="ko">
 <head>
   <meta charSet="utf-8"/>
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>결제 위젯</title>
   <script src="https://js.tosspayments.com/v1/payment-widget"></script>
-  <style>
-    #payment-button{ width:100%; padding:15px; background-color:#3065AC; color:white; border-radius:3px; font-size:16px; border:none; margin-top:10px}
-	.title {margin: 0 0 4px; font-size: 24px; font-weight: 600;color: #4e5968;}
-  </style>
+  
 </head>
 <body>
   <!-- 상품 정보 영역-->
@@ -28,49 +24,50 @@
   <div id="payment-method"></div>
   <div id="agreement"></div> 
   <button id="payment-button">결제하기</button>
+  <a href="#" onclick="testBtn()" class="btn btn-primary" style="padding: 10px 24px;">결제</a>
+  <script>
+    	var membershipNo = ${membershipNo};
+    	var membershipPrice = ${membershipPrice};
+  </script>
 </body>
 
 <script>
-  const clientKey = 'test_ck_D5GePWvyJnrK0W0k6q8gLzN97Eoq' // 상점을 특정하는 키
-  const customerKey = 'YbX2HuSlsC9uVJW6NMRMj' // 결제 고객을 특정하는 키
-  const amount = 15_000 // 결제 금액
-  const couponAmount = 5_000 // 할인 쿠폰 금액
 
-  /*결제위젯 영역 렌더링*/
-  const paymentWidget = PaymentWidget(clientKey, customerKey) // 회원 결제
-  // const paymentWidget = PaymentWidget(clientKey, PaymentWidget.ANONYMOUS) // 비회원 결제
-  paymentMethods = paymentWidget.renderPaymentMethods('#payment-method', amount)
-  
-  /*약관 영역 렌더링*/
-  const paymentAgreement = paymentWidget.renderAgreement('#agreement')
-  
-  /*결제창 열기*/
-  document.querySelector("#payment-button").addEventListener("click",()=>{
-    paymentWidget.requestPayment({
-      orderId: 'AD8aZDpbzXs4EQa-UkIX7',
-      orderName: '토스 티셔츠',
-      successUrl: 'http://localhost/customer/membershipList',
-      failUrl: 'http://localhost/customer/membershipList',
-      customerEmail: 'customer1223@gmail.com', 
-      customerName: '김토스2'
-      }).catch(function (error) {
-          if (error.code === 'USER_CANCEL') {
-          // 결제 고객이 결제창을 닫았을 때 에러 처리
-          } if (error.code === 'INVALID_CARD_COMPANY') {
-            // 유효하지 않은 카드 코드에 대한 에러 처리
-          }
-      })  
-  })
+		const button = document.getElementById("payment-button");
+		var membershipNo = ${membershipNo};
+		
+		console.log(membershipNo)
+		
+		// 클라이언트 키로 객체 초기화 
+		var clientKey = "test_gck_docs_Ovk5rk1EwkEbP0W43n07xlzm"
+		var customerKey = "i2EIaT_0sKkHjO71yz7Rq";
+	    var paymentWidget = PaymentWidget(clientKey, customerKey)
+	    
+	    const paymentMethodWidget = paymentWidget.renderPaymentMethods(
+	        "#payment-method",
+	        { value: membershipPrice }, // 결제금액 
+	        { variantKey: "DEFAULT" }
+        );
+	    
+	    paymentWidget.renderAgreement(
+	    	        "#agreement", 
+	    	        { variantKey: "AGREEMENT" }
+	    );
 
-  /*할인 쿠폰 적용*/
-  document.querySelector("#coupon").addEventListener("click", applyDiscount)
-	
-  function applyDiscount(e) {
-    if (e.target.checked) {
-      paymentMethods.updateAmount(amount - couponAmount, "쿠폰")
-    } else {
-      paymentMethods.updateAmount(amount)
-    }
-  }
+	    
+	    // 결제창 시작
+        button.addEventListener("click", function () {
+
+         paymentWidget.requestPayment({ // 결제수단 파라미터 (카드, 계좌이체, 가상계좌, 휴대폰 등)
+	     
+	    	orderId: '1W_pCfO4rzG9szdasKe',
+	    	orderName: '테스트',
+	    	customerName: '김토토스',
+	    	successUrl: window.location.origin + "/customer/processPayment?membershipNo=" + membershipNo,
+	    	failUrl: window.location.origin + "/customer/fail",
+	    	
+	     });
+	 });
 </script>
+
 </html>
