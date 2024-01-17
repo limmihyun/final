@@ -11,7 +11,7 @@ import org.springframework.web.client.RestTemplate;
 import java.nio.charset.StandardCharsets;
 import java.time.Duration;
 
-/**
+/**<p>외부 통신을 위한 레스트템플릿의 사전 설정용 config Class</p>
  * @author 정인호
  * @apiNote 로컬에서 new 연산자로 선언된 RestTemplate과는 StringHttpMessageConverter 우선순위 차이가 있다.
  * 스프링 빈으로 생성될 경우 xml response를 자동으로 json 으로 convert 해준다. 이 점을 유의할 것.

@@ -4,6 +4,7 @@ import lombok.Getter;
 import lombok.ToString;
 
 /**<p>employeeApi의 조회조건을 담는 객체</p>
+ * 조건이 배타적이므로 정적 팩토리 메서드로 생성자를 대체했습니다.
  * @author 정인호
  */
 @ToString

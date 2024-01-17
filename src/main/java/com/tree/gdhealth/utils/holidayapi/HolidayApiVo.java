@@ -18,11 +18,16 @@ public class HolidayApiVo {
 	private LocalDate locdate;
 	private String seq;
 
+	/** responseBody 문자열을 자바 boolean 타입으로 변경
+	 */
 	public void setIsHoliday(String YorN){
 		if(YorN.equals("Y")){
 			this.isHoliday = true;
 		}
 	}
+
+	/**응답 바디의 문자열날짜를 날짜타입으로 파싱
+	 */
 	public void setLocdate(String yyyymmdd){
 		this.locdate = LocalDate.parse(yyyymmdd, DateTimeFormatter.ofPattern("yMMdd"));
 	}

@@ -49,7 +49,6 @@ public class BranchServiceFacade {
     }
 
     public List<EmployeeInformation> getBranchEmployeeList(Integer branchNo) {
-
         return employeeApiService.getEmployeeListByBranchNo(branchNo);
     }
 
@@ -59,14 +58,17 @@ public class BranchServiceFacade {
         return sportsEquipmentApiService.getSportsEquipmentOrderOne(orderNo);
     }
 
+    /**<p>발주리스트를 가져오는 메소드</p>
+     * @param criteria 조회 조건이 내장
+     */
     public List<SportsEquipmentOrderInformation> getSportsEquipmentOrderList(
             SportsEquipmentOrderRetrieveCriteria criteria) {
 
         return sportsEquipmentApiService.getSportsEquipmentOrderList(criteria);
     }
 
-    /**
-     * @apiNote {@link BranchServiceFacade} ::getSportsEquipmentOrderList 와 같은 조건으로 수행해야합니다.
+    /**<p> Url 과 파라미터를 조립해 페이지네이션용 URI를 만들어내는 메소드</p>
+     * @apiNote {@link BranchServiceFacade} ::getSportsEquipmentOrderList 와 같은 Criteria 으로 수행해야합니다.
      */
     public List<PageUri> getSportsEquipmentOrderListPagination(
             SportsEquipmentOrderRetrieveCriteria criteria,
@@ -83,10 +85,19 @@ public class BranchServiceFacade {
         return paginationUriGenerator.getPageUriList(criteria.getRequestPage(),lastPage,urlPath,paramMap);
     }
 
+    /**<p>발주를 추가하는 메소드</p>
+     * @param reqDto 발주정보가 담긴 요청 객체
+     * @return success? true : false
+     */
     public boolean addSportsEquipmentOrder(SportsEquipmentOrderAddRequest reqDto) {
         return sportsEquipmentApiService.addSportsEquipmentOrder(reqDto);
     }
 
+    /**<p>발주건의 처리상태를 변경하는 메소드</p>
+     * @param orderNo 발주번호
+     * @param changeOrderStatus 변경을 요하는 상태문자열 {@link com.tree.gdhealth.utils.enumtype.OrderStatus}
+     * @return success? true : false
+     */
     public boolean changeSportsEquipmentOrderStatus(Integer orderNo, String changeOrderStatus) {
 
         return sportsEquipmentApiService.changeSportsEquipmentOrderStatus(orderNo, changeOrderStatus);
@@ -96,7 +107,7 @@ public class BranchServiceFacade {
     /** <p>지점의 프로그램 스케줄이 담긴 캘린더를 생성하는 메소드</p>
      *  date 리스트에 휴일 API로 가져온 공휴일정보를 매핑하여 반환
      * @param requestDate 기준일
-     * @param branchNo
+     * @return 기준일을 전후로 한 날짜의 프로그램 정보가 포함된 주간캘린더 객체
      */
     public BranchProgramCalendar getBranchProgramCalendar(Integer branchNo, LocalDate requestDate) {
 

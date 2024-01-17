@@ -2,7 +2,7 @@ package com.tree.gdhealth.utils.enumtype;
 
 import lombok.Getter;
 
-/** 물품발주의 처리상태
+/** 물품발주의 처리상태를 나타내는 열거타입
  * @author 정인호
  */
 @Getter
@@ -16,12 +16,16 @@ public enum OrderStatus {
         this.code = code;
     }
 
+    /**
+     * @param code 문자열  e.g. 대기, 승인, 거부
+     * @return 문자열에 대응하는 열거타입
+     */
     public static OrderStatus fromCode(String code) {
         for (OrderStatus orderStatus : OrderStatus.values()) {
             if (orderStatus.code.equals(code)) {
                 return orderStatus;
             }
         }
-        throw new IllegalArgumentException( code + "에 해당하는 Constant가 없습니다");
+        throw new IllegalArgumentException( code + "에 해당하는 열거타입이 없습니다");
     }
 }
