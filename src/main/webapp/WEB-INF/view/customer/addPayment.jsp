@@ -80,14 +80,12 @@
     <script src="/js/circle-progress.min.js"></script>
     <script src="/js/jquery.barfiller.js"></script>
     <script src="/js/main.js"></script>
-    
-      <script>
-    	var membershipNo = ${membershipNo};
-    	var membershipPrice = ${membershipPrice};
- 	 </script>
 </body>
 
 <script>
+		
+		var membershipNo = ${membershipNo};
+		var membershipPrice = ${membershipPrice};
 
 		const button = document.getElementById("payment-button");
 		var membershipNo = ${membershipNo};
