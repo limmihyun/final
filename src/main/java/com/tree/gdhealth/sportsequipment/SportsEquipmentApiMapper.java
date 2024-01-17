@@ -4,6 +4,7 @@ import com.tree.gdhealth.sportsequipment.dto.SportsEquipmentOrderAddRequest;
 import com.tree.gdhealth.sportsequipment.dto.SportsEquipmentOrderInformation;
 import com.tree.gdhealth.sportsequipment.dto.SportsEquipmentOrderRetrieveCriteria;
 import com.tree.gdhealth.vo.SportsEquipment;
+import com.tree.gdhealth.vo.SportsEquipmentImg;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 
@@ -24,4 +25,6 @@ public interface SportsEquipmentApiMapper {
     SportsEquipmentOrderInformation selectSportsEquipmentOrderOneByOrderNo(@Param("orderNo") Integer orderNo);
 
     int updateSportsEquipmentOrderStatus(@Param("orderNo") Integer orderNo, @Param("changeOrderStatus") String changeOrderStatus);
+
+    SportsEquipmentImg selectSportsEquipmentImage(int sportsEquipmentNo);
 }

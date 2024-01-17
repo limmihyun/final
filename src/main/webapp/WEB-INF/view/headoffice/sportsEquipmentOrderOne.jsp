@@ -188,7 +188,7 @@
                                                             </div>
                                                             <div class="form-group">
                                                                 <label>물품사진</label> <%-- 물품 선택시 갱신--%>
-                                                                <br><img src="/img/about-us.jpg" height="200" width="200">
+                                                                <br><img id="sportsEquipmentImage" src="#" height="200" width="200">
                                                             </div>
 
                                                             <div class="form-group edit-ta-resize">
@@ -285,39 +285,12 @@
 
 
 <script>
-    /*지점리스트를 가져옵니다*/
     $.ajax({
-        url: '/api/v1/branch/list',
-        type: 'get',
-        success: function (response){
-            let currentUri = window.location.href;
-            let url = new URL(currentUri);
-            $('#branchSelectFrom').html('<option value="">전체지점</option>');
-            $(response).each(function (index, item){
-                $('#branchSelectFrom').append('<option value="' + item.branchNo + '">' + item.branchName + '</option>');
-            });
-            if(url.searchParams.get('branchNo') !== ''){
-                $('#branchSelectFrom').val(url.searchParams.get('branchNo'));
-            }
+        url: '/api/v1/sportsEquipmentImage/' + ${orderOne.sportsEquipmentNo},
+        type: 'GET',
+        success: function (response) {
+            $('#sportsEquipmentImage').attr('src','/upload/equipment/'+response);
         }
-    });
-
-    /*isOnlyWaitingListSelectFrom 변경시 이동합니다.*/
-    $('#isOnlyWaitingListSelectFrom').change(function () {
-        let isOnlyWaitingListSelect = $('#isOnlyWaitingListSelectFrom').val();
-        let currentUri = window.location.href;
-        let url = new URL(currentUri);
-        url.searchParams.set('isOnlyWaitingList', isOnlyWaitingListSelect);
-        window.location.href = url.toString();
-    });
-
-    /*branchSelectFrom 변경시 이동합니다.*/
-    $('#branchSelectFrom').change(function () {
-        let branchSelect = $('#branchSelectFrom').val();
-        let currentUri = window.location.href;
-        let url = new URL(currentUri);
-        url.searchParams.set('branchNo', branchSelect);
-        window.location.href = url.toString();
     });
 </script>
 </script>

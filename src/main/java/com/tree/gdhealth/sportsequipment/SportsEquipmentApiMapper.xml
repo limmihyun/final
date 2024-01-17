@@ -114,4 +114,17 @@
                  LEFT JOIN employee_detail aed ON seo.employee_approver = aed.employee_no
         where seo.order_no = #{orderNo}
     </select>
+    <select id="selectSportsEquipmentImage" resultType="com.tree.gdhealth.vo.SportsEquipmentImg">
+        SELECT
+            sports_equipment_img_no sportsEquipmentImgNo,
+            sports_equipment_no sportsEquipmentNo,
+            sports_equipment_img_origin_name sportsEquipmentImgOriginName,
+            sports_equipment_img_file_name sportsEquipmentImgFileName,
+            sports_equipment_img_size sportsEquipmentImgSize,
+            sports_equipment_img_type sportsEquipmentImgType,
+            createdate,
+            updatedate
+        FROM sports_equipment_img
+        WHERE sports_equipment_no = #{sportsEquipmentNo}
+    </select>
 </mapper>

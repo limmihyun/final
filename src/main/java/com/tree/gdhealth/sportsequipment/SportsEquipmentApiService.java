@@ -4,12 +4,14 @@ import com.tree.gdhealth.sportsequipment.dto.SportsEquipmentOrderAddRequest;
 import com.tree.gdhealth.sportsequipment.dto.SportsEquipmentOrderInformation;
 import com.tree.gdhealth.sportsequipment.dto.SportsEquipmentOrderRetrieveCriteria;
 import com.tree.gdhealth.vo.SportsEquipment;
+import com.tree.gdhealth.vo.SportsEquipmentImg;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+import java.util.Optional;
 
 /**<p>sportsEquipment domain영역을 담담하는 service </p>
  * @author 정인호
@@ -60,5 +62,10 @@ public class SportsEquipmentApiService {
         int affectedRows = sportsEquipmentApiMapper.updateSportsEquipmentOrderStatus(orderNo, changeOrderStatus);
 
         return affectedRows == 1;
+    }
+
+    public String getSportsEquipmentImagePath(int sportsEquipmentNo) {
+        return Optional.ofNullable(sportsEquipmentApiMapper.selectSportsEquipmentImage(sportsEquipmentNo)).map(SportsEquipmentImg::getSportsEquipmentImgFileName).orElse(null);
+
     }
 }
