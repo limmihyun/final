@@ -115,7 +115,7 @@
                                                         </div>
                                                         <div class="form-group">
                                                             <label>물품사진</label> <%-- 물품 선택시 갱신--%>
-                                                            <br><img src="/img/about-us.jpg" height="200" width="200">
+                                                            <br><img id="sportsEquipmentImage" src="/img/about-us.jpg" height="200" width="200">
                                                         </div>
 
                                                         <div class="form-group edit-ta-resize">
@@ -208,6 +208,13 @@
                 let quantity = $('#quantity').val();
                 $('#totalPrice').val(itemPrice * quantity);
                 $('#note').val("");
+            }
+        });
+        $.ajax({
+            url: '/api/v1/sportsEquipmentImage/' + selectedItem,
+            type: 'GET',
+            success: function (response) {
+                $('#sportsEquipmentImage').attr('src','/upload/equipment/'+response);
             }
         });
     });
