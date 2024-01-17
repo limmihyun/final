@@ -2,7 +2,7 @@ package com.tree.gdhealth.employee.dto;
 
 import lombok.Data;
 
-/**
+/**<p> 직원의 상세정보를 담는 객체</p>
  * @author 정인호
  */
 

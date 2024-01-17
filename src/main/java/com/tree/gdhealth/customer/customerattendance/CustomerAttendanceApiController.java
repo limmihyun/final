@@ -34,7 +34,6 @@ public class CustomerAttendanceApiController {
      */
     @GetMapping("/api/v1/customerAttendance/enter")
     public void recordEnterTime(@RequestParam int programReservationNo){
-
         service.recordEnterTime(programReservationNo);
     }
 

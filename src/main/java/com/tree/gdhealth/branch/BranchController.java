@@ -33,7 +33,6 @@ import java.util.List;
 @Controller
 public class BranchController {
     private final BranchServiceFacade serviceFacade;
-    private final PaginationUriGenerator paginationUriGenerator;
 
     @GetMapping("/home")
     public String getBranchHome(){
@@ -71,12 +70,12 @@ public class BranchController {
      * @return 지점의 물품발주조회 페이지
      * @param requestPage (쿼리스트링)요청 페이지번호
      * @param isOnlyWaitingList (쿼리스트링)대기건만 조회할 것인지 여부
-     * @apiNote  출력정보와 페이지네이션 정보
+     * @apiNote  모델에 출력정보와 페이지네이션 정보를 포함합니다.
      */
     @Auth(AUTHORITY = Authority.BRANCH_EMP_ONLY)
     @GetMapping("/sportsEquipment/order/list")
     public String getBranchSportsEquipmentOrderList(
-            @ModelAttribute @RequestParam(name = "requestPage", defaultValue = "1") Integer requestPage,
+            @RequestParam(name = "requestPage", defaultValue = "1") Integer requestPage,
             @RequestParam(name = "isOnlyWaitingList", defaultValue = "false") boolean isOnlyWaitingList,
             @SessionAttribute("loginEmployee") LoginEmployee loginEmployee,
             Model model) {
@@ -108,13 +107,18 @@ public class BranchController {
     /**<p>지점물품발주요청 post</p>
      * @param reqDto {@link SportsEquipmentOrderAddRequest} 필드 유효성검사
      * @return 지점 물품 주문 폼 페이지에 메세지를 쿼리스트링 추가하여 리다이렉트
+     * @param errors 유호성검사의 오류시 에러메시지를 담아 폼 페이지로 보냅니다.
      */
     @Auth(AUTHORITY = Authority.BRANCH_EMP_ONLY)
     @PostMapping("/sportsEquipment/order")
     public String addSportsEquipmentOrder(@Validated SportsEquipmentOrderAddRequest reqDto, Errors errors, Model model) {
         log.debug(reqDto.toString());
         if (errors.hasErrors()){
-            List<String> fieldErrorMessageList = errors.getFieldErrors().stream().map(DefaultMessageSourceResolvable::getDefaultMessage).toList();
+            List<String> fieldErrorMessageList = errors.getFieldErrors()
+                    .stream()
+                    .map(DefaultMessageSourceResolvable::getDefaultMessage)
+                    .toList();
+
             model.addAttribute("fieldErrorMessageList", fieldErrorMessageList);
             return "/branch/sportsEquipment/order/addForm";
         }

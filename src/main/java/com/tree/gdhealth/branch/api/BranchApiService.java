@@ -20,6 +20,11 @@ import java.util.List;
 public class BranchApiService {
     private final BranchApiMapper mapper;
 
+    /**<p>하나의 지점 정보를 조회</p>
+     * @param branchNo
+     * @return null or 한개의 객체
+     * @throws TooManyResultsException 2개이상의 값이 조회된 경우
+     */
     public Branch getBranchOneByBranchNo(int branchNo)throws TooManyResultsException {
         List<Branch> dtoList = mapper.selectBranchListByCriteria(BranchRetrieveCriteria.branchNo(branchNo));
         if(dtoList.size() > 1) {
@@ -28,6 +33,10 @@ public class BranchApiService {
         return dtoList.isEmpty()? null : dtoList.get(0);
     }
 
+    /**
+     * <p>모든 지점 정보 조회</p>
+     * criteria 에 빈 조건 객체가 들어갑니다.
+     */
     public List<Branch> getBranchListAll() {
         return mapper.selectBranchListByCriteria(BranchRetrieveCriteria.none());
     }
