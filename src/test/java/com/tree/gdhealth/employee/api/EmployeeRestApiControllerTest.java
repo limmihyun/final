@@ -46,8 +46,8 @@ class EmployeeRestApiControllerTest {
 
     @Test
     void 직원하나를_가져온다() {
-        String UrlStr = "http://localhost:"+port+"/api/v1/employee";
-        URI uri = UriComponentsBuilder.fromUriString(UrlStr).queryParam("employeeNo", "2").build().toUri();
+        String UrlStr = "http://localhost:"+port+"/api/v1/employee/2";
+        URI uri = UriComponentsBuilder.fromUriString(UrlStr).build().toUri();
         ResponseEntity<EmployeeInformation> responseEntity = restTemplate.exchange(
                 uri, HttpMethod.GET, null,
                 EmployeeInformation.class);

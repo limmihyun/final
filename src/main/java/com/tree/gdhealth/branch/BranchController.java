@@ -33,24 +33,11 @@ import java.util.List;
 @Controller
 public class BranchController {
     private final BranchServiceFacade serviceFacade;
-
+    @Auth(AUTHORITY = Authority.BRANCH_EMP_ONLY)
     @GetMapping("/home")
     public String getBranchHome(){
 
         return "/branch/home";
-    }
-
-    @GetMapping("/testLoginEmployee")
-    public String testLogin(HttpSession session){
-
-        Employee employee = new Employee();
-        employee.setEmployeeId("gasan1manager");
-        employee.setEmployeePw("1234");
-        LoginEmployee loginEmployee = serviceFacade.testEmployeeLogin(employee);
-
-        session.setAttribute("loginEmployee", loginEmployee);
-
-        return "redirect:/branch/home";
     }
 
     /**<p>지점 직원리스트 페이지 호출</p>

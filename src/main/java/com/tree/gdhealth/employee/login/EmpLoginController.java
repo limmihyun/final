@@ -59,6 +59,6 @@ private final EmpLoginService empLoginService;
 		String msg = "로그아웃 되셨습니다.";
 		red.addFlashAttribute("msg",msg);
 		session.invalidate();
-		return "redirect:/branch/home";
+		return "redirect:/employee/login";
 	}
 }
