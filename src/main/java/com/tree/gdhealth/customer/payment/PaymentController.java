@@ -9,6 +9,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.tree.gdhealth.headoffice.membership.MembershipService;
 import com.tree.gdhealth.vo.Membership;
@@ -42,7 +43,6 @@ public class PaymentController {
 			return "redirect:/customer/login";
 		}
 		
-		
 		int customerNo = (int)(session.getAttribute("customerNo"));
 		
 		model.addAttribute("customerNo", customerNo);
@@ -59,6 +59,19 @@ public class PaymentController {
 		return "customer/addPayment";
 	}
 	
+	@GetMapping("/customer/updatePayment")
+	public String updatePayment(HttpSession session, Model model, int membershipMonth, int membershipPrice, String membershipName) {
+
+		int customerNo = (int)(session.getAttribute("customerNo"));
+		
+		model.addAttribute("customerNo", customerNo);
+		model.addAttribute("membershipPrice", membershipPrice);
+		model.addAttribute("membershipName", membershipName);
+		model.addAttribute("membershipMonth", membershipMonth);
+		
+		return "customer/updatePayment";
+	}
+
     @GetMapping("/customer/processPayment")
     public String processPayment(int membershipNo, HttpSession session) {
     	
@@ -67,6 +80,16 @@ public class PaymentController {
     	System.out.println(membershipNo);
     	
     	paymentService.addPayment(membershipNo, customerNo);
+    	
+        return "redirect:/customer/success";
+    }
+    
+    @GetMapping("/customer/tossPayment")
+    public String tossPayment(HttpSession session, int membershipMonth) {
+    	
+		int customerNo = (int)(session.getAttribute("customerNo"));
+		
+		paymentService.updatePayment(customerNo, membershipMonth);
     	
         return "redirect:/customer/success";
     }

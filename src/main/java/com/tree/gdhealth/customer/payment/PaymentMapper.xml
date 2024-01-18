@@ -4,5 +4,16 @@
 	<insert id="addPayment">
 		INSERT INTO payment(membership_no, customer_no, payment_date, createdate, updatedate) VALUES(#{membershipNo}, #{customerNo}, NOW(),NOW(),NOW());
 	</insert>
+	<select id="selectPayment">
+		SELECT count(*) from payment where customer_no = #{customerNo};
+	</select>
+<update id="updatePayment" parameterType="java.util.Map">
+	    UPDATE payment 
+	    SET payment_date = STR_TO_DATE(CONCAT(#{year}, '-', #{month}, '-', #{day}), '%Y-%m-%d') 
+	    WHERE customer_no = #{customerNo};  
+</update>
 
+	<select id="selectPaymentMonth" resultType="java.util.Map">
+		SELECT MONTH(payment_date) month, YEAR(payment_date) year, DAY(payment_date) day from payment where customer_no = #{customerNo};
+	</select>
 </mapper>
