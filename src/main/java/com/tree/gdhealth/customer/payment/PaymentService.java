@@ -24,4 +24,39 @@ public class PaymentService {
 
 		return 1;
 	}
+	
+	public int selectPayment(int customerNo) {
+		
+		int result = paymentMapper.selectPayment(customerNo);
+		
+		return result;
+	}
+	
+	public int updatePayment(int customerNo, int membershipMonth) {
+		
+		Map<String,Object> paramap = paymentMapper.selectPaymentMonth(customerNo);
+		
+		int month = (int)paramap.get("month");
+		int year = (int)paramap.get("year");
+		int day = (int)paramap.get("day");
+		
+		month = month + membershipMonth;
+		if(month > 12) {
+			year = year + 1;
+			month = month - 12;
+		}
+		
+		Map<String, Object> result = new HashMap<>();
+		result.put("customerNo", customerNo);
+		result.put("month", month);
+		result.put("year", year);
+		result.put("day", day);
+
+		System.out.println(result + "result !! ! ! !");
+		
+		
+		int resultint = paymentMapper.updatePayment(result);
+		
+		return resultint;
+	}
 }

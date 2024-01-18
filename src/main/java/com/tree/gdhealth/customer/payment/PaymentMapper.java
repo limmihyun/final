@@ -8,4 +8,10 @@ import org.apache.ibatis.annotations.Mapper;
 public interface PaymentMapper {
 
 	int addPayment(Map<String, Object> paramap);
+	
+	int selectPayment(int customerNo);
+	
+	int updatePayment(Map<String, Object> paramap);
+	
+	Map<String,Object> selectPaymentMonth(int customerNo);
 }
