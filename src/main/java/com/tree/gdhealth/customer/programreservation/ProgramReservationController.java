@@ -103,27 +103,14 @@ public class ProgramReservationController {
 		Integer yearObj = Integer.parseInt(String.valueOf(paramap.get("year")));
 		Integer monthObj = Integer.parseInt(String.valueOf(paramap.get("month")));
 		Integer dayObj = Integer.parseInt(String.valueOf(paramap.get("day")));
-		Integer membershipMonthObj = Integer.parseInt(String.valueOf(paramap.get("membershipMonth")));
-		
-		// payment_date에다 membershipMonth를 더해서 회원의 회원권 총 시간 구하기
-		if (monthObj instanceof Integer && membershipMonthObj instanceof Integer) {
-		    paymentMonth = (int) monthObj + (int) membershipMonthObj;
-		} 
-		System.out.println(paymentMonth + "<--paymentMonth");
-		
-		if(paymentMonth > 12) {
-			yearObj = yearObj + 1;
-			paymentMonth = paymentMonth - 12;
-			monthObj = paymentMonth;
-		}
-		
-		System.out.println(yearObj + "<--yearObj");
 
 		String month1 = String.format("%02d",monthObj);
+		String day1 = String.format("%02d",dayObj);
+
 		
 		System.out.println(month1 + "<--month1");
 		
-		String paymentDate = yearObj + month1 + dayObj;
+		String paymentDate = yearObj + month1 + day1;
 		System.out.println(paymentDate + "<---paymentDate");
 
 		
