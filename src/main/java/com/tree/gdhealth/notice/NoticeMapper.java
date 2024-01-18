@@ -9,7 +9,7 @@ import com.tree.gdhealth.vo.Notice;
 
 @Mapper
 public interface NoticeMapper {
-	//공지추가
+		//공지추가
 		int addNotice(Notice notice);
 		
 		//공지수정

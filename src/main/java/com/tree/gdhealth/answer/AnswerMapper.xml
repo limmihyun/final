@@ -1,12 +1,21 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.tree.gdhealth.answer.AnswerMapper">
-	
-	<select id="answerOne"
+	<select id= "answerOne"
 			parameterType="int"
 			resultType="com.tree.gdhealth.vo.Answer">
+	SELECT	
+		a.answer_no AS answerNo,
+		e.employee_id AS employeeId,
+		a.answer_content AS answerContent,
+		a.createdate AS createdate,
+		a.updatedate AS updatedate
+	FROM answer a JOIN employee e
+	ON a.employee_no = e.employee_no
+	WHERE question_no = #{questionNo};
 	
 	</select>
+	
 	<insert id="addAnswer"
 			parameterType="com.tree.gdhealth.vo.Answer">
 	INSERT INTO answer (
@@ -24,7 +33,7 @@
 			parameterType="com.tree.gdhealth.vo.Answer">
 	UPDATE answer
 	SET answer_content = #{answerContent}
-	WHERE answer_no = #{answerNo}
+	WHERE question_no = #{questionNo}
 	
 	</update>
 	
@@ -32,6 +41,7 @@
 			parameterType="com.tree.gdhealth.vo.Answer">
 	DELETE 
 	FROM answer
-	where answer_no = #{answerNo}
+	where question_no = #{questionNo}
 	</delete>
+	
 </mapper>

@@ -85,6 +85,7 @@
 	     	<c:otherwise>
 	     		<td><a href="${pageContext.request.contextPath}/question/questionOne?questionNo=${n.questionNo}">${n.questionTitle}</a></td>
 	     	</c:otherwise>
+	     	
 	     </c:choose>
 	     <td>${n.customerId}</td>
 	     <td>${n.createdate}</td>
@@ -95,8 +96,12 @@
  
    </tbody>
    </table>
+   <c:choose>
+   <c:when test="${customerNo != null}">
    <a href="${pageContext.request.contextPath}/question/addQuestion"><button type="submit" class="site-btn">문의하기</button></a>
-   			
+   </c:when>
+   
+   </c:choose>		
        <!-- Js Plugins -->
     <script src="/js/jquery-3.3.1.min.js"></script>
     <script src="/js/bootstrap.min.js"></script>
