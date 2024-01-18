@@ -47,7 +47,7 @@ public class NoticeService {
       int beginRow = (currentPage -1) * rowPerPage;
       
       Map<String, Object> paramMap = new HashMap<>();
-      
+       
       paramMap.put("beginRow", beginRow);
       paramMap.put("rowPerPage", rowPerPage);
       

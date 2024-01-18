@@ -5,7 +5,7 @@ import lombok.Data;
 @Data
 public class Question {
 	private Integer customerNo;
-	private int questionNo;
+	private Integer questionNo;
 	private Integer branchNo;
 	private String branchName;
 	private String customerId;

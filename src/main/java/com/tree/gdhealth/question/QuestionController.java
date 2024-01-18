@@ -8,8 +8,10 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 
+import com.tree.gdhealth.answer.AnswerService;
 import com.tree.gdhealth.customer.franchisebranch.FranchiseBranchService;
 import com.tree.gdhealth.employee.login.LoginEmployee;
+import com.tree.gdhealth.vo.Answer;
 import com.tree.gdhealth.vo.Branch;
 import com.tree.gdhealth.vo.Question;
 
@@ -21,6 +23,7 @@ import lombok.extern.slf4j.Slf4j;
 public class QuestionController {
 	@Autowired QuestionService questionService;
 	@Autowired FranchiseBranchService franchiseBranchService;
+	@Autowired AnswerService answerService;
 
 	@GetMapping("/question/questionList")
 	public String questionList(Model model, Question question, HttpSession session) {
@@ -58,10 +61,16 @@ public class QuestionController {
 
 	@GetMapping("/question/questionOne")
 	public String questionOne(HttpSession session, Model model, int questionNo, Question question) {
-		
 		Question qsOne = questionService.questionOne(questionNo);
+		Answer ansOne = answerService.answerOne(questionNo);
+		
+		LoginEmployee loginEmployee = (LoginEmployee)session.getAttribute("loginEmployee");
+		
+		
 		model.addAttribute("qsOne", qsOne);
+		model.addAttribute("ansOne", ansOne);
 		return "/question/questionOne";
+		
 	}
 	
 	@PostMapping("/question/questionOne")
@@ -112,7 +121,7 @@ public class QuestionController {
 		model.addAttribute("customerNo", customerNo);
 		model.addAttribute("branchList", branchList);
 		model.addAttribute("questionNo", questionNo);
-		;
+		
 		return "/question/updateQuestion";
 	}
 	

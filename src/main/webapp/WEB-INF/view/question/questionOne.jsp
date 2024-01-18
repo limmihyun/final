@@ -21,6 +21,7 @@
     <link rel="stylesheet" href="/css/barfiller.css" type="text/css">
     <link rel="stylesheet" href="/css/slicknav.min.css" type="text/css">
     <link rel="stylesheet" href="/css/style.css" type="text/css">
+    
 </head>
 
 <body>
@@ -74,18 +75,17 @@
     </section>
     <!-- Search Bar End -->
     <!-- Contact Section Begin -->
-    //
     <div class="untree_co-section before-footer-section">
             <div class="container">
              <div class="p-3 p-lg-5 border bg-white">
              <h1 class="mb-4 section-title">Q&A</h1>
              <br>
-				<table class ="table">
- 		<tr>
+            <table class ="table">
+        <tr>
             <th>질문번호</th>
             <td><p style="border: none;">${qsOne.questionNo}</p></td>
         </tr>
-    	<tr>
+       <tr>
             <th>지점명</th>
             <td><p style="border: none;">${qsOne.branchName}</p></td>
         </tr>
@@ -98,9 +98,9 @@
             <td><p style="border: none;">${qsOne.questionTitle}</td>
         </tr>
         <tr>
-    		<th>내용</th>
-    		<td><textarea rows="6" cols="130" style="border: none;" readonly>${qsOne.questionContent}</textarea></td>
-		</tr>
+          <th>내용</th>
+          <td><textarea rows="6" cols="130" style="border: none;" readonly>${qsOne.questionContent}</textarea></td>
+      </tr>
         <tr>
             <th>게시일</th>
             <td><p style="border: none;">${qsOne.createdate}</td>
@@ -109,59 +109,115 @@
             <th>수정일</th>
             <td><p style="border: none;">${qsOne.updatedate}</td>
         </tr>
-        
     </table>
-     <a>
-        <a href="${pageContext.request.contextPath}/question/updateQuestion?questionNo=${qsOne.questionNo}" class="btn btn-primary">수정</a>
-        <a href="${pageContext.request.contextPath}/question/deleteQuestion?questionNo=${qsOne.questionNo}" class="btn btn-danger">삭제</a>
-    </a>
-</div>
-</div>
-</div>
 
-     
+    <c:if test="${customerNo != null}">
+     	<a style="float: right; margin-left: 10px;">
+        	<a href="${pageContext.request.contextPath}/question/updateQuestion?questionNo=${qsOne.questionNo}" class="btn btn-primary">수정</a>
+        	<a href="${pageContext.request.contextPath}/question/deleteQuestion?questionNo=${qsOne.questionNo}" class="btn btn-danger">삭제</a>
+    	</a>
+    </c:if>
     
-    <!-- Contact Section End -->
-    <!-- Footer Section Begin -->
-    <footer class="footer-section set-bg" data-setbg="/img/footer-bg.jpg">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-12">
-                    <div class="footer-content">
-                        <div class="footer-logo">
-                            <a href="#"><img src="/img/logo.png" alt=""></a>
-                        </div>
-                        <div class="footer-menu">
-                            <ul>
-                                <li><a href="./home.html">Home</a></li>
-                                <li><a href="#">About us</a></li>
-                                <li><a href="#">Classes</a></li>
-                                <li><a href="#">Instructors</a></li>
-                                <li><a href="#">News</a></li>
-                                <li><a href="#">Contact</a></li>
-                            </ul>
-                        </div>
-                        <div class="subscribe-form">
-                            <form action="#">
-                                <input type="text" placeholder="your Email">
-                                <button type="submit">Sign Up</button>
-                            </form>
-                        </div>
-                        <div class="footer-icon-img">
-                            <img src="/img/footer-icon.png" alt="">
-                        </div>
-                        <div class="copyright">
-                            <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
-Copyright &copy;<script>document.write(new Date().getFullYear());</script> All rights reserved | This template is made with <i class="fa fa-heart-o" aria-hidden="true"></i> by <a href="https://colorlib.com" target="_blank">Colorlib</a>
-<!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
-                        </div>
+    <c:if test="${ansOne.answerContent != null && customerNo != null}">
+	    <div class="untree_co-section before-footer-section" >
+	    <div class="container">
+        <div class="p-3 p-lg-5 border bg-white">
+        	<div class="mt-5">
+        	<br>
+            	<h1 class="mb-2 section-title" style="font-size: 3.5rem; margin-bottom: 0;">Answer</h1>
+            </div>
+            <div style="border: 1px solid #ddd; padding: 10px; margin-bottom: 5;">
+                <table class="table">
+                    <tr>
+                        <th>답변자</th>
+                        <td>${ansOne.employeeId}</td>
+                    </tr>
+                    <tr>
+                        <th>내용</th>
+                        <td><textarea rows="6" cols="130" style="border: none;" readonly>${ansOne.answerContent}</textarea></td>
+                    </tr>
+                    <tr>
+                        <th>답변일자</th>
+                        <td>${ansOne.createdate}</td>
+                    </tr>
+                    <tr>
+                        <th>수정일자</th>
+                        <td>${ansOne.updatedate}</td>
+                    </tr>
+                </table>
+     </c:if>
+     <c:if test="${ansOne.answerContent != null && loginEmployee.employeeNo != null}">
+		<div class="untree_co-section before-footer-section">
+    <div class="container">
+        <div class="p-3 p-lg-5 border bg-white">
+            <div class="mt-5">
+                <br>
+                <h1 class="mb-2 section-title" style="font-size: 3.5rem; margin-bottom: 0;">Answer</h1>
+            </div>
+            <div style="border: 1px solid #ddd; padding: 10px; margin-bottom: 5;">
+                <form method="post" action="${pageContext.request.contextPath}/answer/updateAnswer">
+                    <input type="hidden" name="questionNo" value="${qsOne.questionNo}">
+                    <table class="table">
+                        <tr>
+                            <th>답변자</th>
+                            <td>${ansOne.employeeId}</td>
+                        </tr>
+                        <tr>
+                            <th>내용</th>
+                            <td><textarea rows="6" cols="130" style="border: none;" name="answerContent">${ansOne.answerContent}</textarea></td>
+                        </tr>
+                        <tr>
+                            <th>답변일자</th>
+                            <td>${ansOne.createdate}</td>
+                        </tr>
+                        <tr>
+                            <th>수정일자</th>
+                            <td>${ansOne.updatedate}</td>
+                        </tr>
+                    </table>
+                    <div style="text-align: right; margin-top: 10px;">
+                        <button type="submit" class="btn btn-primary">수정하기</button>
+                        <a href="${pageContext.request.contextPath}/answer/deleteAnswer?questionNo=${qsOne.questionNo}" class="btn btn-danger">삭제</a>
                     </div>
-                </div>
+                </form>
             </div>
         </div>
-    </footer>
-    <!-- Footer Section End -->
+    </div>
+</div>
+		
+     	
+    			
+     </c:if>
+   </div>
+   </div>
+   </div>
+	
 
+	<c:if test="${ansOne.answerContent == null && loginEmployee.employeeNo != null}">
+	<section class="contact-section">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-6">
+                    <div class="contact-info">
+                        <div class="contact-form">
+                           <form method="post" action="${pageContext.request.contextPath}/answer/addAnswer">
+                                <div class="row">
+                                <input type="hidden" name="questionNo" value="${qsOne.questionNo}">
+                                <input type="hidden" name="employeeNo" value="${loginEmployee.employeeNo}">
+                                <div class="container" style="margin-top:-30px; margin-left: -20px;">
+                                   <div class="col-lg-12">
+                                        <textarea placeholder="답변을 작성하세요" name = "answerContent"></textarea>
+                                        <button type="submit" class="site-btn">작성하기</button>
+                                    </div>
+                      </form>
+</div>
+</div>
+</div> 
+	
+	</c:if>
+
+
+    <!-- Contact Section End -->
     <!-- Js Plugins -->
     <script src="/js/jquery-3.3.1.min.js"></script>
     <script src="/js/bootstrap.min.js"></script>

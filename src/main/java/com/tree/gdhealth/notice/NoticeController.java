@@ -54,7 +54,6 @@ public class NoticeController {
 		   branchLevel = loginEmployee.getBranchLevel();
 	   }
 	   
-	 
        System.out.println("noticeNo: "+ noticeNo); 
        Notice notiOne = noticeService.noticeOne(noticeNo);
          
