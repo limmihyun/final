@@ -1,5 +1,6 @@
 package com.tree.gdhealth.customer.payment;
 
+import java.time.LocalDate;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -16,9 +17,38 @@ public class PaymentService {
 	
 	public int addPayment(int membershipNo, int customerNo) {
 		
+		int membershipMonth = paymentMapper.membershipMonth(membershipNo);
+		
+		// 현재 년, 월, 일 구하기 -------------------------------------
+		
+        LocalDate currentDate = LocalDate.now();
+
+        // 년, 월, 일 가져오기
+        int year = currentDate.getYear();
+        int month = currentDate.getMonthValue();
+        int day = currentDate.getDayOfMonth();
+
+        // 결과 출력
+        System.out.println("Year: " + year);
+        System.out.println("Month: " + month);
+        System.out.println("Day: " + day);
+		// --------------------------------------
+        
+		int resultMonth = membershipMonth + month; // 현재 날짜와 membershipMonth를 더한 값.
+		
+		if(resultMonth > 12) {
+			year = year + 1;
+			resultMonth = resultMonth - 12;
+		}
+        
+        
 		Map<String, Object> paramap = new HashMap<>();
 		paramap.put("membershipNo", membershipNo);
+		paramap.put("year", year);
+		paramap.put("resultMonth", resultMonth);
+		paramap.put("day", day);
 		paramap.put("customerNo", customerNo);
+
 		
 		paymentMapper.addPayment(paramap);
 
