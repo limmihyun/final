@@ -32,7 +32,12 @@
 	FROM question
 	WHERE customer_no = #{customerNo}
 </select>
-
+<select id="membership" parameterType="int" resultType="String">
+	SELECT
+		payment_date
+	FROM payment
+	WHERE customer_no = #{customerNo}
+</select>
 <select id="customerDeleteCk" parameterType="com.tree.gdhealth.vo.Customer" resultType="INTEGER">
 	SELECT
 	customer_no

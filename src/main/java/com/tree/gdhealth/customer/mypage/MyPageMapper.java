@@ -13,6 +13,7 @@ public interface MyPageMapper {
 	int attendanceCount(int customerNo);
 	int reviewCount(int customerNo);
 	int questionCount(int customerNo);
+	String membership(int customerNo);
 	Integer customerDeleteCk(Customer customerNo);
 	CustomerImg customerImgCk(Customer cusotomer);
 	int customerDelete(Customer customer);

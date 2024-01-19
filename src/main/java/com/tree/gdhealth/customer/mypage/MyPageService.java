@@ -45,6 +45,10 @@ public class MyPageService {
 		int questionCount = myPageMapper.questionCount(customerNo);  
 		return questionCount;
 	}
+	public String membership(int customerNo) {
+		String membership = myPageMapper.membership(customerNo);  
+		return membership;
+	}
 	
 	// 고객 계정 삭제전 체크
 	public int deleteCustomerCk(Customer customer) {

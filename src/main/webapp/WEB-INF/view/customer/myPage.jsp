@@ -29,6 +29,10 @@
 				<div class="number">${questionCount}</div>
 				<div>문의</div>
 			</div>
+			<div class="item">
+				<div class="number">${membership}</div>
+				<div>맴버십</div>
+			</div>
 		</div>
 		<div class="shippingStatusContainer">
 			<div class="title">신체 정보</div>
@@ -60,57 +64,15 @@
 			</div>
 			</div>
 		</div>
-		<div class="shippingStatusContainer">
-			<div class="title">서비스 조회</div>
-			<div class="status">
-
-				<div class="item">
-					<div>
-						<div class="green number">
-							<a class="green number" href="">6</a>
-						</div>
-						<div class="text">결제내역</div>
-					</div>
-					<div class="icon">></div>
-				</div>
-				<div class="item">
-					<div>
-						<div class="number">
-							<a class="green number" href="">7</a>
-						</div>
-						<div class="text">맵버십</div>
-					</div>
-					<div class="icon">></div>
-				</div>
-				<div class="item">
-					<div>
-						<div class="green number">
-							<a class="green number" href="">8</a>
-						</div>
-						<div class="text">프로그램</div>
-					</div>
-					<div class="icon">></div>
-				</div>
-				<div class="item">
-					<div>
-						<div class="green number">
-							<a class="green number" href="">9</a>
-						</div>
-						<div class="text">구매확정</div>
-					</div>
-				</div>
-
-			</div>
-
-		</div>
+		
 		<div class="listContainer">
 			<div class="item">
 				<a href="#"><div class="icon">ii &nbsp; 내 정보 수정</div></a> <a
 					class="right" href="#"><div>></div></a>
 			</div>
 			<div class="item">
-				<a href="/customer/programrs"><div class="icon">ii &nbsp; 스케줄</div></a> <a
-					class="right" href="/customer/programrs"><div>></div></a>
+				<a href="/customer/myreservation"><div class="icon">ii &nbsp; 스케줄</div></a> <a
+					class="right" href="/customer/myreservation"><div>></div></a>
 			</div>
 			<div class="item">
 				<a href="/question/questionList"><div class="icon">ii &nbsp; 문의사항</div></a> <a
@@ -120,15 +82,11 @@
 				<a href="#"><div class="icon">ii &nbsp; 맴버십 정보</div></a> <a
 					class="right" href="#"><div>></div></a>
 			</div>
-			<div class="item">
-				<a href="#"><div class="icon">ii &nbsp; 프로그램 정보</div></a> <a
-					class="right" href="#"><div>></div></a>
-			</div>
 		</div>
 		<div class="listContainer">
 			<div class="item">
-				<a href="#"><div class="icon">ii &nbsp; 고객센터</div></a> <a
-					class="right" href="#"><div>></div></a>
+				<a href="/customer/franchiseBranch"><div class="icon">ii &nbsp; 고객센터</div></a> <a
+					class="right" href="/customer/franchiseBranch"><div>></div></a>
 			</div>
 			<div class="item">
 				<a href="/customer/delete"><div class="icon">ii &nbsp; 회원탈퇴</div></a> <a

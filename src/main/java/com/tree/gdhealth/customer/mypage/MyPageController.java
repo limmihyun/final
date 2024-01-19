@@ -17,6 +17,7 @@ import jakarta.validation.constraints.PastOrPresent;
 public class MyPageController {
 	@Autowired MyPageService myPageService;
 	
+	// 마이페이지 입장
 	@GetMapping("/customer/myPage")
 	public String myPage(HttpSession session,Model model) {
 		if(session.getAttribute("customerNo") == null) {
@@ -35,6 +36,13 @@ public class MyPageController {
 		//문의
 		int questionCount = myPageService.question(customerNo);
 		model.addAttribute("questionCount", questionCount);
+		//맴버십
+		String membership = myPageService.membership(customerNo);
+		if(membership == null) {
+			membership = "만료";
+		}
+		model.addAttribute("membership", membership);
+		
 		return "customer/myPage";
 	}
 	
