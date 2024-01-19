@@ -29,6 +29,8 @@ private final EmpLoginService empLoginService;
 		// 로그인 세션 확인
 		if(loginEmployee == null) {
 			return "employee/logIn";
+		} else if(loginEmployee.getBranchLevel() == 1) {
+			return "headoffice/home";
 		}
 		return "customer/home";
 	}

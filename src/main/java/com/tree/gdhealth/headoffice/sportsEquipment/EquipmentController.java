@@ -16,6 +16,8 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.tree.gdhealth.headoffice.Paging;
+import com.tree.gdhealth.utils.auth.Auth;
+import com.tree.gdhealth.utils.auth.Authority;
 import com.tree.gdhealth.vo.SportsEquipment;
 import com.tree.gdhealth.vo.SportsEquipmentImg;
 
@@ -32,6 +34,7 @@ public class EquipmentController {
 	// DI
 	private final EquipmentService equipmentService;
 	
+	@Auth(AUTHORITY = Authority.HEAD_EMP_ONLY)
 	@GetMapping
 	public String equipment() {
 		
@@ -95,6 +98,7 @@ public class EquipmentController {
 		
 	}
 	
+	@Auth(AUTHORITY = Authority.HEAD_EMP_ONLY)
 	@GetMapping("/addEquipment")
 	public String addEquipment() {
 		
@@ -136,6 +140,7 @@ public class EquipmentController {
 		return "redirect:/headoffice/equipment";
 	}
 	
+	@Auth(AUTHORITY = Authority.HEAD_EMP_ONLY)
 	@GetMapping("/update/{equipmentNo}")
 	public String update(@PathVariable int equipmentNo, Model model) {
 		

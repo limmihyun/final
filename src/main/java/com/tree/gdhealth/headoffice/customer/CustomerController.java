@@ -9,6 +9,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.tree.gdhealth.headoffice.Paging;
+import com.tree.gdhealth.utils.auth.Auth;
+import com.tree.gdhealth.utils.auth.Authority;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -21,6 +23,7 @@ public class CustomerController {
 	
 	private final CustomerService customerService;
 	
+	@Auth(AUTHORITY = Authority.HEAD_EMP_ONLY)
 	@GetMapping
 	public String customer() {
 		

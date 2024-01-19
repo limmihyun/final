@@ -48,7 +48,7 @@ public class AuthHandlerInterceptor implements HandlerInterceptor {
             case HEAD_EMP_ONLY -> {
                 LoginEmployee loginEmployee = (LoginEmployee) request.getSession().getAttribute("loginEmployee");
                 if(loginEmployee == null || loginEmployee.getBranchLevel() != 1){
-                    response.sendRedirect("/error/noAuth");
+                    response.sendRedirect("/employee/login");
                     return false;
                 }else {
                     return true;

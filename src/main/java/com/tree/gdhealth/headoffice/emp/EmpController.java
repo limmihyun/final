@@ -15,6 +15,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.tree.gdhealth.headoffice.Paging;
+import com.tree.gdhealth.utils.auth.Auth;
+import com.tree.gdhealth.utils.auth.Authority;
 import com.tree.gdhealth.vo.Employee;
 import com.tree.gdhealth.vo.EmployeeDetail;
 import com.tree.gdhealth.vo.EmployeeImg;
@@ -31,6 +33,7 @@ public class EmpController {
 	
 	private final EmpService empService;
 
+	@Auth(AUTHORITY = Authority.HEAD_EMP_ONLY)
 	@GetMapping
 	public String emp() {
 		
@@ -117,6 +120,7 @@ public class EmpController {
 		return result;
 	}
 	
+	@Auth(AUTHORITY = Authority.HEAD_EMP_ONLY)
 	@GetMapping("/addEmp") 
 	public String addEmp(HttpSession session) {
 				
@@ -171,6 +175,7 @@ public class EmpController {
 		return "redirect:/headoffice/emp";
 	}
 	
+	@Auth(AUTHORITY = Authority.HEAD_EMP_ONLY)
 	@GetMapping("/empOne/{employeeId}")
 	public String empOne(Model model, @PathVariable String employeeId) {
 		
