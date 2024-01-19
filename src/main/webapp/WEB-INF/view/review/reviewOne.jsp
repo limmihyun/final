@@ -87,7 +87,7 @@
         </tr>
         <tr>
             <th>예약번호</th>
-            <td><p style="border: none;">${revuOne.programReservationNo}</p></td>
+            <td><p style="border: none;">${revuOne.programRsNo}</p></td>
         </tr>
     
         <tr>

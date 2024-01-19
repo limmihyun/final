@@ -5,7 +5,7 @@ import lombok.Data;
 @Data
 public class Review {
 	private int reviewNo;
-	private int programReservationNo;
+	private int programRsNo;
 	private String customerId;
 	private String reviewTitle;
 	private String reviewContent;

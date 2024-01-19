@@ -3,7 +3,8 @@
 <mapper namespace="com.tree.gdhealth.notice.NoticeMapper">
 <!-- 공지 리스트 -->
    <select id="noticeList"
-   parameterType="com.tree.gdhealth.vo.Notice">
+   parameterType="java.util.Map"
+   resultType="com.tree.gdhealth.vo.Notice">
    
    SELECT 
        n.notice_no AS noticeNo,

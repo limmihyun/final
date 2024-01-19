@@ -19,3 +19,4 @@ public interface ReviewMapper {
 	//상세
 	Review reviewOne(int reviewNo);
 }
+
