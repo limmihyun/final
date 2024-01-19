@@ -29,6 +29,7 @@ public class ProgramService {
 	// DI
 	private final ProgramMapper programMapper;
 	
+	@Transactional(readOnly = true)
 	public List<Map<String, Object>> getProgramList(int beginRow, int rowPerPage) {
 		
 		Map<String, Object> map = new HashMap<>();
@@ -41,6 +42,7 @@ public class ProgramService {
 		
 	}
 	
+	@Transactional(readOnly = true)
 	public int getProgramCnt() {
 		
 		int programCnt = programMapper.programCnt();
@@ -50,6 +52,7 @@ public class ProgramService {
 		return programCnt;
 	}
 	
+	@Transactional(readOnly = true)
 	public List<Map<String, Object>> getSearchList(int beginRow, int rowPerPage, 
 													String type, String keyword) {
 
@@ -65,6 +68,7 @@ public class ProgramService {
 		
 	}
 	
+	@Transactional(readOnly = true)
 	public int getSearchCnt(String type, String keyword) {
 		
 		Map<String, Object> map = new HashMap<>();
@@ -79,6 +83,7 @@ public class ProgramService {
 		
 	}
 	
+	@Transactional(readOnly = true)
 	public Map<String, Object> getProgramOne(int programNo, String programDate) {
 		
 		Map<String, Object> map = new HashMap<>();
@@ -90,6 +95,7 @@ public class ProgramService {
 		return programOne;
 	}
 	
+	@Transactional(readOnly = true)
 	public boolean checkDatesExists(List<String> programDates) {
 		
 		boolean checkDatesExists = programMapper.checkDatesExists(programDates);
@@ -99,6 +105,7 @@ public class ProgramService {
 		return checkDatesExists;
 	}
 	
+	@Transactional(readOnly = true)
 	public boolean checkDateOneExists(String programDate) {
 		
 		boolean checkDateOneExists = programMapper.checkDateOneExists(programDate);

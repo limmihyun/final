@@ -25,6 +25,7 @@ public class EmpService {
 	// DI
 	private final EmpMapper empMapper;
 	
+	@Transactional(readOnly = true)
 	public List<Map<String, Object>> getEmployeeList(int beginRow, int rowPerPage) {
 		
 		Map<String, Object> map = new HashMap<>();
@@ -35,7 +36,8 @@ public class EmpService {
 		
 		return employeeList;
 	}
-			
+	
+	@Transactional(readOnly = true)
 	public int getEmployeeCnt() {
 		
 		int employeeCnt = empMapper.employeeCnt();
@@ -45,6 +47,7 @@ public class EmpService {
 		return employeeCnt;
 	}
 	
+	@Transactional(readOnly = true)
 	public List<Map<String, Object>> getSearchList(int beginRow, int rowPerPage, 
 													String type, String keyword) {
 				
@@ -60,6 +63,7 @@ public class EmpService {
 		
 	}
 	
+	@Transactional(readOnly = true)
 	public int getSearchCnt(String type, String keyword) {
 		
 		Map<String, Object> map = new HashMap<>();
@@ -73,6 +77,7 @@ public class EmpService {
 		return searchCnt;
 	}
 	
+	@Transactional(readOnly = true)
 	public List<String> getBranchList() {
 		
 		List<String> branchList = empMapper.branchList();
@@ -82,6 +87,7 @@ public class EmpService {
 		return branchList;
 	}
 	
+	@Transactional(readOnly = true)
 	public Map<String, Object> getEmployeeOne(String employeeId) {
 		
 		Map<String, Object> employeeOne = empMapper.employeeOne(employeeId);
@@ -91,6 +97,7 @@ public class EmpService {
 		return employeeOne;
 	}
 	
+	@Transactional(readOnly = true)
 	public int idCheck(String employeeId) {
 		
 		int result = empMapper.idCheck(employeeId);

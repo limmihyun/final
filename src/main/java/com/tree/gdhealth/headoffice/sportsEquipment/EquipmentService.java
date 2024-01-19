@@ -25,6 +25,7 @@ public class EquipmentService {
 	
 	private final EquipmentMapper equipmentMapper;
 	
+	@Transactional(readOnly = true)
 	public List<Map<String, Object>> getEquipmentList(int beginRow, int rowPerPage) {
 		
 		Map<String, Object> map = new HashMap<>();
@@ -36,6 +37,7 @@ public class EquipmentService {
 		return equipmentList;
 	}
 	
+	@Transactional(readOnly = true)
 	public int getEquipmentCnt() {
 		
 		int equipmentCnt = equipmentMapper.equipmentCnt();
@@ -46,6 +48,7 @@ public class EquipmentService {
 		
 	}
 	
+	@Transactional(readOnly = true)
 	public List<Map<String, Object>> getSearchList(int beginRow, int rowPerPage, 
 													String type, String keyword) {
 
@@ -61,6 +64,7 @@ public class EquipmentService {
 		
 	}
 	
+	@Transactional(readOnly = true)
 	public int getSearchCnt(String type, String keyword) {
 		
 		Map<String, Object> map = new HashMap<>();
@@ -75,6 +79,7 @@ public class EquipmentService {
 		
 	}
 	
+	@Transactional(readOnly = true)
 	public Map<String, Object> getEquipmentOne(int equipmentNo) {
 		
 		Map<String, Object> equipment = equipmentMapper.equipmentOne(equipmentNo);
