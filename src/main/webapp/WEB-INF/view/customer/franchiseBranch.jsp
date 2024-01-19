@@ -163,8 +163,8 @@
                         <div class="single-icon-box-img">
                         
                         </div>
-                        <h5>Diet Plans</h5>
-                        <p></p>
+                        <h5>Parking</h5>
+                        <p id="parking"></p>
                     </div>
                 </div>
             </div>
@@ -229,6 +229,7 @@ function loadBranchDetails(branchNo) {
             $('#branchName').html(response.branchName +" 현황");
             $('#reviewsName').html("reviews");
             $('#reviews').html(response.reviewCount);
+            $('#parking').html("무료주차 2시간 가능");
             // Congestion 업데이트
             updateCongestion(response.count);
 
