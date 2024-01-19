@@ -86,7 +86,7 @@ public class NoticeController {
 		   return "redirect:/employee/login";
 	   }
 	   
-	   
+	  
 	   return "/notice/addNotice";
    }
    

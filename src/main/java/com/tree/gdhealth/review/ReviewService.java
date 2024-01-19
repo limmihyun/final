@@ -26,15 +26,11 @@ public class ReviewService {
 		return resultReviewOne;
 	}
 	//추가
-	public int addreview(Review review) {
-		// TODO Auto-generated method stub
-		return 0;
+	public int addReview(Review review) {
+		int row = reviewMapper.addReview(review);
+		
+		return row;
 	}
-	public int deleteReview(Review review) {
-		// TODO Auto-generated method stub
-		return 0;
-	}
-	
 	//수정
 	
 	//삭제

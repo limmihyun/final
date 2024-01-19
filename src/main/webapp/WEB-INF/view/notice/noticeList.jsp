@@ -103,6 +103,15 @@
    </c:forEach>
    </tbody>
    </table>
+   <div>현재 페이지 ${currentPage}</div>
+   <div>
+	   	<c:if test="${currentPage -1) > 0}">
+	   		<a href="${pageContext.request.contextPath}/noticeList?currenPage=${currentPage -1}">이전</a>
+	   	</c:if>
+	   	<c:if test="${currentPage < lastPage}">
+	   		<a href="${pageContext.request.contextPath}/noticeList?currenPage=${currentPage +1}">다음</a>
+	   	</c:if>
+   </div>
    <c:choose>
    <c:when test="${branchLevel == 1}">
    <a href="${pageContext.request.contextPath}/notice/addNotice"><button type="submit" class="site-btn">공지추가</button></a>

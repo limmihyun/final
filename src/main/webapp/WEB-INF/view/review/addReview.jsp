@@ -80,9 +80,9 @@
                 <div class="col-lg-6">
                     <div class="contact-info">
                         <div class="contact-form">
-                           <form method="post" action="${pageContext.request.contextPath}/review/addReview">
+                           <form method="post" action="${pageContext.request.contextPath}/review/addReview"
+                           				enctype="multipart/form-data">
                                 <div class="row">
-                                
                                 <div class="container" style="margin-top: 100px;">
                                 	<div class="col-lg-12">
                                 		<input type="hidden" name="customerNo" value="${customerNo}">
