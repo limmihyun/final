@@ -75,19 +75,21 @@
 					class="right" href="/customer/myreservation"><div>></div></a>
 			</div>
 			<div class="item">
+				<a href="/review/reviewList"><div class="icon">ii &nbsp; 리뷰</div></a> <a
+					class="right" href="/review/reviewList"><div>></div></a>
+			</div>
+			<div class="item">
 				<a href="/question/questionList"><div class="icon">ii &nbsp; 문의사항</div></a> <a
 					class="right" href="/question/questionList"><div>></div></a>
 			</div>
 			<div class="item">
-				<a href="#"><div class="icon">ii &nbsp; 맴버십 정보</div></a> <a
-					class="right" href="#"><div>></div></a>
+				<a href="/customer/membershipList"><div class="icon">ii &nbsp; 맴버십 구매</div></a> <a
+					class="right" href="/customer/membershipList"><div>></div></a>
 			</div>
+			
 		</div>
 		<div class="listContainer">
-			<div class="item">
-				<a href="/customer/franchiseBranch"><div class="icon">ii &nbsp; 고객센터</div></a> <a
-					class="right" href="/customer/franchiseBranch"><div>></div></a>
-			</div>
+			
 			<div class="item">
 				<a href="/customer/delete"><div class="icon">ii &nbsp; 회원탈퇴</div></a> <a
 					class="right" href="#"><div>></div></a>
