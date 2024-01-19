@@ -93,7 +93,7 @@
             <div class="row m-80">
                 <div class="col-lg-12">
                     <div class="milestone-title">
-                        <h2>지점현황</h2>
+                        <h2 id="branchName">전국현황</h2>
                     </div>
                 </div>
                 <div class="col-lg-3 col-md-6">
@@ -127,9 +127,9 @@
                         <div class="counter-icon">
                             
                         </div>
-                        <span class="m-counter">56</span>
-                        <strong>k</strong>
-                        <p>Ig Folowers</p>
+                        <span id="reviews" class="m-counter">56</span>
+                        <strong></strong>
+                        <p id="reviewsName">followers</p>
                     </div>
                 </div>
             </div>
@@ -226,7 +226,9 @@ function loadBranchDetails(branchNo) {
             $('#branchTel').html(response.branchName +"  :  "+ response.branchTel);
             $('#branchAddress').html(response.branchAddress);
             $('#trainerCount').html(response.trainerCount);
-
+            $('#branchName').html(response.branchName +" 현황");
+            $('#reviewsName').html("reviews");
+            $('#reviews').html(response.reviewCount);
             // Congestion 업데이트
             updateCongestion(response.count);
 

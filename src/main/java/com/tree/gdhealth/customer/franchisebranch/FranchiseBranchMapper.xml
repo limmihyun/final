@@ -47,4 +47,11 @@
 	WHERE branch_no = #{branchNo} AND employee_active = 'Y' AND employee_position = 'trainer'
 	</select>
 	
+	<select id="branchReviewCountOne" parameterType="com.tree.gdhealth.vo.Branch" resultType="int">
+	SELECT count(*)
+	FROM review r JOIN program_reservation p
+	ON r.program_reservation_no = p.program_reservation_no
+	WHERE p.branch_no = #{branchNo}
+	</select> 
+	
 </mapper>

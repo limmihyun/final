@@ -33,8 +33,11 @@ public class FranchiseBranchService {
 		// 선택된 지점의 맴버, 트레이너 수 저장 
 		int branchMemberCount = franchiseBranchMapper.branchMemberCounterOne(branch);
 		int branchTrainerCount = franchiseBranchMapper.branchTrainerCountOne(branch);
+		int branchReviewCount = franchiseBranchMapper.branchReviewCountOne(branch);
+		
 		data.setCount(branchMemberCount);
 		data.setTrainerCount(branchTrainerCount);
+		data.setReviewCount(branchReviewCount);
 		return data;
 	}
 }

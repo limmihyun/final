@@ -23,6 +23,7 @@ public class Branch {
     private Boolean isActive; // -> branch.branch_active
     private Integer count;
     private int trainerCount;
+    private int reviewCount;
     private LocalDateTime createdate;
     private LocalDateTime updatedate;
 
