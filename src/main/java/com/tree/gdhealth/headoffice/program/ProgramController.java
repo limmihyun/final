@@ -19,6 +19,8 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import com.tree.gdhealth.headoffice.Paging;
 import com.tree.gdhealth.headoffice.customValidation.group.DateGroup;
 import com.tree.gdhealth.headoffice.customValidation.group.DatesGroup;
+import com.tree.gdhealth.utils.auth.Auth;
+import com.tree.gdhealth.utils.auth.Authority;
 import com.tree.gdhealth.vo.Program;
 import com.tree.gdhealth.vo.ProgramDate;
 import com.tree.gdhealth.vo.ProgramImg;
@@ -36,6 +38,7 @@ public class ProgramController {
 	// DI 
 	private final ProgramService programService;
 	
+	@Auth(AUTHORITY = Authority.HEAD_EMP_ONLY)
 	@GetMapping
 	public String program() {
 		
@@ -100,6 +103,7 @@ public class ProgramController {
 		
 	}
 	
+	@Auth(AUTHORITY = Authority.HEAD_EMP_ONLY)
 	@GetMapping("/addProgram")
 	public String addProgram() {
 		
@@ -178,6 +182,7 @@ public class ProgramController {
 		return "redirect:/headoffice/program";
 	}
 	
+	@Auth(AUTHORITY = Authority.HEAD_EMP_ONLY)
 	@GetMapping("/programOne/{programNo}/{programDate}")
 	public String programOne(Model model, @PathVariable int programNo, 
 											@PathVariable String programDate) {
@@ -190,6 +195,7 @@ public class ProgramController {
 		return "headoffice/programOne";
 	}
 	
+	@Auth(AUTHORITY = Authority.HEAD_EMP_ONLY)
 	@GetMapping("/update/{programNo}/{programDate}")
 	public String update(Model model, @PathVariable int programNo, 
 									@PathVariable String programDate) {
@@ -250,6 +256,7 @@ public class ProgramController {
 		return "redirect:/headoffice/program/programOne/{programNo}/{programDate}";
 	}
 	
+	@Auth(AUTHORITY = Authority.HEAD_EMP_ONLY)
 	@GetMapping("/deactive/{programNo}/{programDate}")
 	public String deactive(@PathVariable int programNo, @PathVariable String programDate) {
 		
@@ -260,6 +267,7 @@ public class ProgramController {
 		return "redirect:/headoffice/program/programOne/{programNo}/{programDate}";
 	}
 	
+	@Auth(AUTHORITY = Authority.HEAD_EMP_ONLY)
 	@GetMapping("/active/{programNo}/{programDate}")
 	public String active(@PathVariable int programNo, @PathVariable String programDate) {
 		

@@ -226,7 +226,7 @@
 		let result = confirm('비활성화 하시겠습니까?');
 		
 		if(result) {
-			location.href = '${pageContext.request.contextPath}/headoffice/equipment/deactive/${programOne.programNo}/${programOne.programDate}';
+			location.href = '${pageContext.request.contextPath}/headoffice/program/deactive/${programOne.programNo}/${programOne.programDate}';
 		}
 	});
 	
@@ -234,7 +234,7 @@
 		let result = confirm('활성화 하시겠습니까?');
 		
 		if(result) {
-			location.href = '${pageContext.request.contextPath}/headoffice/equipment/active/${programOne.programNo}/${programOne.programDate}';
+			location.href = '${pageContext.request.contextPath}/headoffice/program/active/${programOne.programNo}/${programOne.programDate}';
 		}
 	})
 
