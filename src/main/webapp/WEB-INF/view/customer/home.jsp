@@ -61,15 +61,15 @@
         <div class="slide-items owl-carousel">
             <div class="single-slide set-bg active" data-setbg="/img/bg.jpg">
                 <h1>Be Fit.Top Gym</h1>
-                <a href="#" class="primary-btn">Read More</a>
+                
             </div>
             <div class="single-slide set-bg" data-setbg="/img/bg-2.jpg">
                 <h1>Be Fit.Top Trainer</h1>
-                <a href="#" class="primary-btn">Read More</a>
+                
             </div>
             <div class="single-slide set-bg" data-setbg="/img/bg-3.jpg">
                 <h1>Be Fit.Top Body</h1>
-                <a href="#" class="primary-btn">Read More</a>
+                
             </div>
         </div>
     </section>
@@ -159,7 +159,7 @@
             </div>
             <div class="row p-70">
                 <div class="col-lg-12 text-center">
-                    <a href="#" class="service-btn primary-btn">see all the services</a>
+                    
                 </div>
             </div>
         </div>
@@ -169,55 +169,7 @@
    
     <!-- Traniner Section End -->
     <!-- Upcoming Event Begin -->
-    <section class="upcoming-event-section spad-2">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-4 col-md-6">
-                    <div class="upcoming-classes">
-                        <div class="up-title">
-                            <span>Next</span>
-                            <h5>Upcomming Classes</h5>
-                        </div>
-                        <ul class="classes-time">
-                            <li><img src="/img/stopwatch.png" alt=""> Gym Fitness <span>11:00 - 12:00</span></li>
-                            <li><img src="/img/stopwatch.png" alt=""> Pilates <span>12:00 - 13:00</span></li>
-                            <li><img src="/img/stopwatch.png" alt=""> Spinning <span>13:00 - 14:00</span></li>
-                            <li><img src="/img/stopwatch.png" alt=""> Yoga <span>14:00 - 15:00</span></li>
-                            <li><img src="/img/stopwatch.png" alt=""> Gym Fitness <span>15:00 - 16:00</span></li>
-                            <li><img src="/img/stopwatch.png" alt=""> Pilates <span>16:00 - 17:00</span></li>
-                        </ul>
-                    </div>
-                </div>
-                <div class="col-lg-4 col-md-6">
-                    <div class="membership-card set-bg" data-setbg="img/m-card.jpg">
-                        <div class="membership-details">
-                            <div class="up-title">
-                                <span>Next</span>
-                                <h5>Membership Cards</h5>
-                            </div>
-                            <div class="discount">
-                                <h1>25% <span>Discount</span></h1>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-4 col-md-12">
-                    <div class="member-sign-up set-bg" data-setbg="img/signup-bg.jpg">
-                        <div class="up-title">
-                            <span>New</span>
-                            <h5>Personal Trainer</h5>
-                        </div>
-                        <p>Pellentesque dictum nisl in nibh dictum volutpat nec a quam. Vivamus suscipit nisl quis nulla
-                            pretium.Pellentesque dictum nisl in nibh dictum volutpat nec a quam. Vivamus suscipit nisl
-                            quis nulla pretium.</p>
-                        <div class="member-signup-btn">
-                            <a href="#" class="primary-btn">Sign up Now</a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
+    
     <!-- Upcoming Event End -->
     <!-- Footer Section Begin -->
     <!-- Footer Section Begin -->

@@ -15,6 +15,8 @@
 							<li><a href="/customer/franchiseBranch">branch</a></li>
 							<li><a href="/question/questionList">q&a</a></li>
 							<li><a href="/notice/noticeList">notice</a></li>
+							<li><a href="/review/reviewList">review</a></li>
+							<li><a href="/customer/membershipList">membership</a></li>
 							<c:if test="${customerNo eq null}">
 								<li><a href="/customer/login">login</a></li>
 							</c:if>
@@ -34,10 +36,7 @@
 						<script>
 							document.write(new Date().getFullYear());
 						</script>
-						All rights reserved | This template is made with <i
-							class="fa fa-heart-o" aria-hidden="true"></i> by <a
-							href="https://colorlib.com" target="_blank">Colorlib</a>
-						<!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+						All rights reserved | This page is made gdhealth
 					</div>
 				</div>
 			</div>
