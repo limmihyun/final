@@ -22,7 +22,7 @@
                     </li>
                     <li>
                         <a class="has-arrow" href="all-professors.html" aria-expanded="false"><span class="educate-icon educate-professor icon-wrap"></span> <span class="mini-click-non">
-                                    직원관리</span></a>
+                                    지점직원조회</span></a>
                         <ul class="submenu-angle" aria-expanded="false">
                             <li><a title="All Professors" href="/branch/employee/list"><span class="mini-sub-pro">지점직원조회</span></a></li>
                         </ul>
@@ -40,8 +40,12 @@
                                     고객질문답변</span></a>
                     </li>
                     <li>
-                        <a title="Landing Page" href="#" aria-expanded="false"><span class="educate-icon educate-data-table icon-wrap" aria-hidden="true"></span> <span class="mini-click-non">
-                                    고객조회</span></a>
+                        <a title="Landing Page" href="/review/reviewList" aria-expanded="false"><span class="educate-icon educate-data-table icon-wrap" aria-hidden="true"></span> <span class="mini-click-non">
+                                    리뷰게시판</span></a>
+                    </li>
+                    <li>
+                        <a title="Landing Page" href="/notice/noticeList" aria-expanded="false"><span class="educate-icon educate-data-table icon-wrap" aria-hidden="true"></span> <span class="mini-click-non">
+                                    공지게시판</span></a>
                     </li>
                 </ul>
             </nav>
@@ -72,8 +76,7 @@
                                         <ul class="nav navbar-nav mai-top-nav">
                                             <li class="nav-item"><a href="/customer/home" class="nav-link">고객 홈</a></li>
                                             <li class="nav-item"><a href="/branch/home" class="nav-link">지점 홈</a></li>
-                                            <li class="nav-item"><a href="/notice/noticeList" class="nav-link">공지 게시판</a></li>
-                                            <li class="nav-item"><a href="/branch/testLoginEmployee" class="nav-link">직원 테스트로그인</a></li>
+                                            <li class="nav-item"><a href="/employee/logout" class="nav-link">로그아웃</a></li>
                                         </ul>
                                     </div>
                                 </div>
