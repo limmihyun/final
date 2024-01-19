@@ -23,6 +23,85 @@
     <link rel="stylesheet" href="/css/slicknav.min.css" type="text/css">
     <link rel="stylesheet" href="/css/style.css" type="text/css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+<style>
+.membership-list{
+    width: 735px;
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: 15%;
+}
+.membership h3{
+    font-size: 24px;
+    color: #545454;
+    margin-top:60px;
+    margin-bottom: 60px;
+    text-align: center;
+}
+
+.product{
+    display: block;
+    width: 225px;
+    text-align: center;
+    text-decoration:none;
+    color: black;
+    float:left;
+    margin-left: 10px;
+    margin-right: 10px;
+    margin-bottom: 30px;
+}
+
+.product-name{
+    margin-top: 20px;
+    margin-bottom: 4px;
+}
+
+
+
+.product {
+  overflow: visible;
+  padding: .25em .4em
+}
+
+.product:before, .membershipList a:after {
+  -webkit-transition: -webkit-transform .3s;
+  transition: transform .3s;
+  background: rgba(255, 255, 255, 0.4);
+  content: "";
+  position: absolute;
+}
+
+.product:before {
+  top: -webkit-calc(110% - .25em);
+  top: calc(110% - .25em);
+  left: -webkit-calc(50% - .3em);
+  left: calc(50% - .3em);
+  width: .6em;
+  height: .6em;
+  border-radius: 1.2em;
+  -webkit-transform: scale(0);
+  transform: scale(0)
+}
+
+.product:after {
+  top: 110%;
+  left: 0;
+  width: 100%;
+  height: 2px;
+  -webkit-transform: scaleX(0);
+  transform: scaleX(0)
+}
+
+.product:hover:before {
+  webkit-transform: scale(1);
+  transform: scale(1)
+}
+
+.product:hover:after {
+  -webkit-transform: scaleX(1);
+  transform: scaleX(1)
+}
+
+</style>    
 </head>
 
 <body>
@@ -50,19 +129,33 @@
         </div>
     </section>
 	
-		<section>
-			<div id="membershipList">
+		<section class="features-section spad">
+		<div class="membership">
+		<h3>회원권</h3>
+			<div id="membershipList" class="membership-list">
 				<c:forEach var="m" items="${membershipList}">
-					<div style="border-radius:10px; border-style:solid; border-color:black; background-color:#F6F6F6; margin:1%;">
+					<a href="#" class="product" onclick="checkAndRedirect(${m.membershipNo}, ${m.membershipPrice}, '${m.membershipName}', ${m.membershipMonth})">
+		                <div class="product-name">
+		                    회원권 제목 : ${m.membershipName}
+		                </div>
+		                <div class="product-date">
+		                	회원권 개월수 : ${m.membershipMonth}개월
+		                </div>
+		                <div class="product-price">
+		                    회원권 가격 : ${m.membershipPrice}원
+		                </div>
+		            </a>
+<%-- 					<div style="border-radius:10px; border-style:solid; border-color:black; background-color:#F6F6F6; margin:1%;">
 						<div style="margin:1%;">
 							<p>회원권 제목 : ${m.membershipName}</p>
 							<p>회원권 개월수 : ${m.membershipMonth}개월</p>
 							<p>회원권 가격 : ${m.membershipPrice}원</p>
 							<a href="#" class="btn btn-primary" onclick="checkAndRedirect(${m.membershipNo}, ${m.membershipPrice}, '${m.membershipName}', ${m.membershipMonth})">결제하기</a>
 						</div>
-					</div>
+					</div> --%>
 				</c:forEach>
 			</div>
+		</div>
 		</section>
 	
      <jsp:include page="/WEB-INF/footer/footer.jsp" />

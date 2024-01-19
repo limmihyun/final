@@ -106,13 +106,15 @@
 							<p>회원권 가격 : ${m.membershipPrice}원</p>
 						</div>
 						
-						<c:if test="${m.active eq 'N'}">
-							<a href="#" onclick="activeY(${m.membershipNo}, '${m.active}')" class="btn btn-primary">비활성화</a>
-						</c:if>
-						
-						<c:if test="${m.active eq 'Y'}">
-							<a href="#" onclick="activeN(${m.membershipNo}, '${m.active}')" class="btn btn-primary">활성화</a>
-						</c:if>
+						<div style="margin:1%;">
+							<c:if test="${m.active eq 'N'}">
+								<a href="#" onclick="activeY(${m.membershipNo}, '${m.active}')" class="btn btn-primary">비활성화</a>
+							</c:if>
+							
+							<c:if test="${m.active eq 'Y'}">
+								<a href="#" onclick="activeN(${m.membershipNo}, '${m.active}')" class="btn btn-primary">활성화</a>
+							</c:if>
+						</div>
 					</div>
 					
 
