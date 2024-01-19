@@ -83,6 +83,8 @@
     
     <script>
     	function deleteBtn(){
+    	
+    		
             event.preventDefault();
 
 			console.log("클릭");
@@ -96,7 +98,7 @@
 					console.log(jsonData, " <--jsonData");
 					
     				$('#reservationList').load(location.href + " #reservationList");
-    			}
+    			},
      		    error: function (jqXHR, textStatus, errorThrown) {
     		        if (jqXHR.status === 500) {
     		            alert("로그인을 확인해주세요.");
