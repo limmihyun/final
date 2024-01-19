@@ -18,6 +18,7 @@ public class CustomerService {
 	
 	private final CustomerMapper customerMapper;
 	
+	@Transactional(readOnly = true)
 	public List<Map<String, Object>> getCustomerList(int beginRow, int rowPerPage) {
 		
 		Map<String, Object> map = new HashMap<>();
@@ -30,6 +31,7 @@ public class CustomerService {
 		
 	}
 	
+	@Transactional(readOnly = true)
 	public int getCustomerCnt() {
 		
 		int customerCnt = customerMapper.customerCnt();
@@ -39,6 +41,7 @@ public class CustomerService {
 		return customerCnt;
 	}
 	
+	@Transactional(readOnly = true)
 	public List<Map<String, Object>> getSearchList(int beginRow, int rowPerPage, 
 													String type, String keyword) {
 
@@ -54,6 +57,7 @@ public class CustomerService {
 	
 	}
 	
+	@Transactional(readOnly = true)
 	public int getSearchCnt(String type, String keyword) {
 		
 		Map<String, Object> map = new HashMap<>();
