@@ -117,11 +117,7 @@ public class ProgramService {
 	
 	public void insertProgram(Program program, ProgramDate programDate, ProgramImg programImg,
 									String path) {
-		
-		/////////////////// 로그인 기능 구현 전 임시 코드 start//////////////////////////
-		program.setEmployeeNo(1);
-		/////////////////// 로그인 기능 구현 전 임시 코드 end////////////////////////////
-		
+				
 		int result = programMapper.insertProgram(program);
 		// 디버깅
 		log.debug("program 추가(성공:1) : " + result);	
