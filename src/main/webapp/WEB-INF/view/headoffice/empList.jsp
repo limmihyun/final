@@ -119,17 +119,6 @@
                                         </div>
                                     </div>
                                     <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">	
-                                    	<!-- 
-                                    	<ul class="breadcome-menu">
-                                            <li>
-                                           		 <select name="searchField" class="form-control" style="width:130px;">
-													<option value="select">선택</option>
-													<option value="title">이름 순</option>
-													<option value="memo">입사 날짜 순</option>
-												  </select>    
-                                            </li>
-                                   	    </ul>
-                                    	 -->		
                                     </div>                        
                                 </div>
                             </div>

@@ -14,14 +14,7 @@
 			           	    <div class="col-lg-3 col-md-6 col-sm-6 col-xs-12" style="margin-bottom:15px;">
 			                	<div class="student-inner-std res-mg-b-30">
 			                     <div class="student-img">
-			                     	<!-- 
-			                     	<c:if test="${empty m.filename}">
-			                     		<img src="${pageContext.request.contextPath}/upload/emp/${m.filename}" alt="${pageContext.request.contextPath}/noImg.png" style="height:300px; width:300px;"/> 
-			                     	</c:if>
-			                     	
-			                     	 -->
-			        
-				                        <img src="${pageContext.request.contextPath}/upload/emp/${m.filename}" style="height:300px; width:300px;"/>     	  
+			                        <img src="${pageContext.request.contextPath}/upload/emp/${m.filename}" style="height:300px; width:300px;"/>     	  
 			                     </div>
 			                     <div class="student-dtl">
 			                         <h2>
