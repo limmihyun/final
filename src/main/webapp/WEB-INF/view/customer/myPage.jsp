@@ -86,6 +86,10 @@
 				<a href="/customer/membershipList"><div class="icon">ii &nbsp; 맴버십 구매</div></a> <a
 					class="right" href="/customer/membershipList"><div>></div></a>
 			</div>
+			<div class="item">
+				<a href="/chat/moveChating"><div class="icon">ii &nbsp; 채팅</div></a> <a
+					class="right" href="/chat/moveChating?customerId=${sessionScope.customerId}"><div>></div></a>
+			</div>
 			
 		</div>
 		<div class="listContainer">

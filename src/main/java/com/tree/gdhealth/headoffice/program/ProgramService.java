@@ -122,7 +122,6 @@ public class ProgramService {
 		// 디버깅
 		log.debug("program 추가(성공:1) : " + result);	
 		
-		// programMapper.xml에서 selectKey로 얻어 온 program table의 auto increment 값
 		List<String> dates = programDate.getProgramDates();
 		log.debug("dates : " + dates);
 		
@@ -137,7 +136,7 @@ public class ProgramService {
 		for(String date : dates) {
 			if(!date.equals("")) { // list의 요소가 공백이 아닐 경우
 				ProgramDate p = new ProgramDate();
-				p.setProgramNo(program.getProgramNo());
+				p.setProgramNo(program.getProgramNo()); // programMapper.xml에서 selectKey로 얻어 온 program table의 auto increment 값
 				p.setProgramDate(date);
 				dateList.add(p);
 			}

@@ -82,7 +82,7 @@
                             </ul>
                         </li>
 						<li>
-                            <a href="mailbox.html" aria-expanded="false">
+                            <a href="${pageContext.request.contextPath}/chat/room" aria-expanded="false">
                             	<span class="educate-icon educate-interface icon-wrap"></span> 
                             	<span class="mini-click-non">채팅</span>
                             </a>
