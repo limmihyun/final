@@ -23,4 +23,7 @@ public interface NoticeMapper {
 		
 		//공지 리스트
 		List<Notice> noticeList(Map<String, Object> paramMap);
+		
+		//공지개수
+		int noticeCount();
 }

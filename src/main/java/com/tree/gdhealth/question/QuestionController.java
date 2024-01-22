@@ -1,18 +1,21 @@
 package com.tree.gdhealth.question;
 
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.tree.gdhealth.answer.AnswerService;
 import com.tree.gdhealth.customer.franchisebranch.FranchiseBranchService;
 import com.tree.gdhealth.employee.login.LoginEmployee;
 import com.tree.gdhealth.vo.Answer;
 import com.tree.gdhealth.vo.Branch;
+import com.tree.gdhealth.vo.Notice;
 import com.tree.gdhealth.vo.Question;
 
 import jakarta.servlet.http.HttpSession;
@@ -26,11 +29,14 @@ public class QuestionController {
 	@Autowired AnswerService answerService;
 
 	@GetMapping("/question/questionList")
-	public String questionList(Model model, Question question, HttpSession session) {
-		
-		
-	    List<Question> list = questionService.questionList();
+	public String questionList(Model model, Question question, HttpSession session, @RequestParam(defaultValue="1")int currentPage) {
+		Map<String, Object> questionData = questionService.questionList(currentPage);
+		List<Question> list = (List<Question>) questionData.get("resultQuestionList");
+		int lastPage = (int) questionData.get("lastPage");
+		  
 	    model.addAttribute("list", list);
+	    model.addAttribute("currentPage", currentPage);
+	    model.addAttribute("lastPage", lastPage);
 	
 	    
 	    

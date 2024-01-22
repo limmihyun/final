@@ -21,7 +21,8 @@
 	ON q.customer_no = c.customer_no
 	JOIN branch b 
 	ON q.branch_no = b.branch_no
-	ORDER BY q.question_no DESC;
+	ORDER BY q.question_no DESC
+	LIMIT #{beginRow}, #{rowPerPage};
 	
 </select>
 
@@ -96,4 +97,11 @@
 		WHERE question_no = #{questionNo}
 
 </delete>
+
+<!-- 질문 개수 --> 
+ 	<select id="questionCount"
+ 	parameterType="java.util.Map"
+ 	resultType="int">
+ 	SELECT count (*) FROM question
+ 	</select>
 </mapper>
