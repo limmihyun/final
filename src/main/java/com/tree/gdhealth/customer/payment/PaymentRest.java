@@ -1,5 +1,7 @@
 package com.tree.gdhealth.customer.payment;
 
+import java.time.LocalDate;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -18,12 +20,16 @@ public class PaymentRest {
         boolean hasMembership = false;
 		
 		int customerNo = (int)(session.getAttribute("customerNo"));
-		
+		System.out.println("zzzz");
+
+		paymentService.deletePayment(customerNo);
 		int selectPayment = paymentService.selectPayment(customerNo);
 		System.out.println(selectPayment + "null일려나");
+		
+		int activeN = paymentService.selectActiveN(customerNo);
 
 		
-		if(selectPayment > 0) {
+		if(selectPayment > 0 || activeN > 0) {
 			hasMembership = true;
 		}
 		

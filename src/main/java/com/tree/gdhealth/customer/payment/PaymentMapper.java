@@ -11,9 +11,13 @@ public interface PaymentMapper {
 	
 	int selectPayment(int customerNo);
 	
+	int selectActiveN(int customerNo);
+	
 	int updatePayment(Map<String, Object> paramap);
 	
 	Map<String,Object> selectPaymentMonth(int customerNo);
 	
 	int membershipMonth(int membershipNo);
+	
+	int deletePayment(int customerNo);
 }
