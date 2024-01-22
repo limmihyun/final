@@ -4,7 +4,6 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
@@ -91,7 +90,6 @@ public class SocketHandler extends TextWebSocketHandler {
 				String idCheck = (String) roomListSessions.get(i).get("id"); // 세션리스트의 저장된 방 번호를 가져와서
 				if(idCheck.equals(id)) { // 같은 값의 방이 존재한다면
 					// 해당 방 번호의 세션리스트에 존재하는 모든 object값(id, sessionId)을 가져온다.
-					// 
 					temp = roomListSessions.get(i); 
 					break;
 				}
