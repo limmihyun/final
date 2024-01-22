@@ -120,7 +120,7 @@
 			p.payment_no paymentNo
 		FROM payment p INNER JOIN membership m
 		  ON p.membership_no = m.membership_no
-		WHERE p.customer_no = #{customerNo}
+		WHERE p.customer_no = #{customerNo} AND p.active = 'N';
 	</select>
 	
 	<insert id="programReservationAdd" parameterType="java.util.Map">
