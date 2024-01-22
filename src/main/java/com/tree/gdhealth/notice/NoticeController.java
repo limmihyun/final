@@ -3,6 +3,7 @@ package com.tree.gdhealth.notice;
 
 
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -12,7 +13,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.tree.gdhealth.employee.login.LoginEmployee;
-import com.tree.gdhealth.vo.Employee;
 import com.tree.gdhealth.vo.Notice;
 
 import jakarta.servlet.http.HttpSession;
@@ -26,10 +26,13 @@ public class NoticeController {
    
    @GetMapping("/notice/noticeList")
    public String noticeList(HttpSession session,Model model, @RequestParam(defaultValue="1")int currentPage) {
-      
-      List<Notice> list = noticeService.noticeList(currentPage);
+	  Map<String, Object> noticeData = noticeService.noticeList(currentPage);
+	  List<Notice> list = (List<Notice>) noticeData.get("resultNoticeList");
+	  int lastPage = (int) noticeData.get("lastPage");
+	  
       model.addAttribute("list", list);
       model.addAttribute("currentPage", currentPage);
+      model.addAttribute("lastPage", lastPage);
       
       LoginEmployee loginEmployee = (LoginEmployee)session.getAttribute("loginEmployee");
       

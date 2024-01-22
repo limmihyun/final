@@ -1,6 +1,8 @@
 package com.tree.gdhealth.question;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -14,10 +16,30 @@ public class QuestionService {
 	@Autowired QuestionMapper questionMapper;
 	
 	//문의 리스트
-	public List<Question> questionList(){
+	public  Map<String,Object> questionList(int currentPage){
+		  int rowPerPage = 10;
+	      int beginRow = (currentPage -1) * rowPerPage;
+	      
+	      Map<String, Object> paramMap = new HashMap<>();
+	       
+	      paramMap.put("beginRow", beginRow);
+	      paramMap.put("rowPerPage", rowPerPage);
 		
-		List<Question> resultQuestionList = questionMapper.questionList();
-		return resultQuestionList;
+	      List<Question> resultQuestionList = questionMapper.questionList(paramMap);
+	      
+	      int temp = questionMapper.questionCount();
+	      System.out.print("현재 질문 개수:" + temp);
+	      int lastPage = temp / rowPerPage;
+	      int value = temp % rowPerPage;
+	      
+	      if(value != 0) {
+	    	  lastPage = lastPage + 1;
+	      }
+	      Map<String, Object> result = new HashMap<>();
+	      result.put("resultQuestionList", resultQuestionList);
+	      result.put("lastPage", lastPage);
+	      System.out.print("마지막 페이지:" + lastPage);
+	      return result;
 	}
 	
 	//문의 상세
