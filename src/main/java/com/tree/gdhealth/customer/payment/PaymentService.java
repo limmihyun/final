@@ -49,6 +49,7 @@ public class PaymentService {
 		paramap.put("day", day);
 		paramap.put("customerNo", customerNo);
 
+		System.out.println("paramap!" + paramap);
 		
 		paymentMapper.addPayment(paramap);
 
@@ -89,4 +90,67 @@ public class PaymentService {
 		
 		return resultint;
 	}
+	
+	public int deletePayment(int customerNo) {
+		
+		
+		// -------- 회원권 만료시 DELETE --------
+		
+		// 현재 날짜 데이터 가져오기 
+        LocalDate currentDate = LocalDate.now();
+
+        // 년, 월, 일 가져오기
+        int year = currentDate.getYear();
+        int month = currentDate.getMonthValue();
+        int day = currentDate.getDayOfMonth();
+
+        // 결과 출력
+        System.out.println("Year: " + year);
+        System.out.println("Month: " + month);
+        System.out.println("Day: " + day);
+        
+        String month1 = String.format("%02d",month);
+        String day1 = String.format("%02d",day);
+        
+        String date = year + month1 + day1;
+
+        System.out.println("date" + date);
+        
+		// -----------------------------------
+        
+        Map<String, Object> paymentDate = paymentMapper.selectPaymentMonth(customerNo);
+        if(paymentDate != null) {
+	        int paymentYear = (int)paymentDate.get("year");
+	        int paymentMonth = (int)paymentDate.get("month");
+	        int paymentDay = (int)paymentDate.get("day");
+	        
+	        String paymentMonth1 = String.format("%02d",paymentMonth);
+	        String paymentDay1 = String.format("%02d",paymentDay);
+	        
+	        System.out.println("paymentYear: " + paymentYear);
+	        System.out.println("paymentMonth1: " + paymentMonth1);
+	        System.out.println("paymentDay1: " + paymentDay1);
+	   
+	        
+	        String paymentDate1 = paymentYear + paymentMonth1 + paymentDay1;
+	        
+	        System.out.println("paymentDate1" + paymentDate1);
+	        
+			if(Integer.parseInt(paymentDate1) < Integer.parseInt(date)) {
+				
+				System.out.println("현재 날짜가 더 큰 경우");
+				paymentMapper.deletePayment(customerNo);
+				
+			}
+        }
+        return 1;
+	}
+	
+	public int selectActiveN(int customerNo) {
+		
+		int result = paymentMapper.selectActiveN(customerNo);
+		
+		return result;
+	}
+
 }
