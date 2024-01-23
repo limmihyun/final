@@ -1,11 +1,13 @@
 package com.tree.gdhealth.employee.login;
 
+import jakarta.servlet.http.HttpServletRequest;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.SessionAttribute;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
@@ -30,7 +32,9 @@ private final EmpLoginService empLoginService;
 		if(loginEmployee == null) {
 			return "employee/logIn";
 		} else if(loginEmployee.getBranchLevel() == 1) {
-			return "headoffice/empList";
+			return "redirect:/headoffice/emp";
+		} else if(loginEmployee.getBranchLevel() == 0) {
+			return "redirect:/branch/home";
 		}
 		return "customer/home";
 	}
@@ -48,7 +52,7 @@ private final EmpLoginService empLoginService;
 		session.removeAttribute("userLevel");
 		
 		session.setAttribute("loginEmployee", loginEmployee);
-		// branchNo 채크해서 본사페이지 이동
+		// branchNo 체크해서 본사페이지 이동
 		if(loginEmployee.getBranchNo() == 1) {
 			return "redirect:/headoffice/emp";
 		}
@@ -56,11 +60,17 @@ private final EmpLoginService empLoginService;
 	}
 	
 	@GetMapping("/employee/logout")
-	public String logout(HttpSession session,RedirectAttributes red) {
+	public String logout(HttpServletRequest request,
+						 HttpSession session,
+						 RedirectAttributes red,
+						 @RequestParam(name = "ref", required = false)boolean ref) {
 		System.out.println("로그아웃");
 		String msg = "로그아웃 되셨습니다.";
 		red.addFlashAttribute("msg",msg);
 		session.invalidate();
+		if(ref){
+			return "redirect:"+request.getHeader("referer");
+		}
 		return "redirect:/employee/login";
 	}
 }

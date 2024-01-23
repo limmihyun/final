@@ -19,8 +19,13 @@
                             <li><a href="/question/questionList">q&a</a></li>
                             <li><a href="/notice/noticeList">notice</a></li>
                             <li><a href="/review/reviewList">review</a></li>
-                            <li><a href="/customer/membershipList">membership</a></li>              
-                            <c:if test="${customerNo eq null}">
+                            <li><a href="/customer/membershipList">membership</a></li>
+                            <c:if test="${sessionScope.loginEmployee ne null}">
+                                <li class="log"><a href="/employee/login">${sessionScope.loginEmployee.employeeName}님 업무페이지</a></li>
+                                <li class="log"><a href="/employee/logout?ref=true">직원 로그아웃</a></li>
+
+                            </c:if>
+                            <c:if test="${sessionScope.loginEmployee eq null && customerNo eq null}">
                             <li class="log"><a href="/customer/login">login</a></li>
                             
                             </c:if>
