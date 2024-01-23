@@ -291,6 +291,15 @@
             $('#programDate').focus();
             return;
         }
+		
+		let today = new Date();
+		let validateDate = new Date($('#programDate').val());
+		
+		if(today > validateDate) {
+			alert('날짜는 오늘 혹은 그 이후로만 설정 가능합니다.');
+			$('#programDate').focus();
+            return;
+		}
 						
 		if($('#programName').val().trim() == '') {
 			alert('프로그램 제목을 입력하세요.');
