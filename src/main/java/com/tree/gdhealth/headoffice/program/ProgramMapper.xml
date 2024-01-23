@@ -159,13 +159,15 @@
 		SET 
 			program_name = #{programName},
 			program_detail = #{programDetail},
-			program_max_customer = #{programMaxCustomer}
+			program_max_customer = #{programMaxCustomer},
+			updatedate = NOW()
 		WHERE program_no = #{programNo}
 	</update>
 	<update id="updateProgramDate" parameterType="com.tree.gdhealth.vo.ProgramDate">
 		UPDATE program_date
 		SET
-			program_date = #{programDate}
+			program_date = #{programDate},
+			updatedate = NOW()
 		WHERE program_no = #{programNo}
 		AND program_date = #{originDate}
 	</update>	
@@ -175,21 +177,24 @@
 			program_img_origin = #{originName},
 			program_img_file = #{filename},
 			program_img_size = #{programImgSize},
-			program_img_type = #{programImgType}
+			program_img_type = #{programImgType},
+			updatedate = NOW()
 		WHERE program_no = #{programNo}
 	</update>
 	
 	<update id="deactiveProgram">
 		UPDATE program
 		SET
-			program_active = 'N'
+			program_active = 'N',
+			updatedate = NOW()
 		WHERE program_no = #{programNo}
 	</update>
 		
 	<update id="activeProgram">
 		UPDATE program
 		SET
-			program_active = 'Y'
+			program_active = 'Y',
+			updatedate = NOW()
 		WHERE program_no = #{programNo}
 	</update>
 </mapper>

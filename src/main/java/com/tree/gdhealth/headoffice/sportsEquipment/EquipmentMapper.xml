@@ -112,7 +112,8 @@
 		SET
 			item_name = #{itemName},
 			item_price = #{itemPrice},
-			note = #{note}
+			note = #{note},
+			updatedate = NOW()
 		WHERE sports_equipment_no = #{sportsEquipmentNo}
 	</update>
 	
@@ -122,21 +123,24 @@
 			sports_equipment_img_origin_name = #{sportsEquipmentImgOriginName},
 			sports_equipment_img_file_name = #{sportsEquipmentImgFileName},
 			sports_equipment_img_size = #{sportsEquipmentImgSize},
-			sports_equipment_img_type = #{sportsEquipmentImgType}
+			sports_equipment_img_type = #{sportsEquipmentImgType},
+			updatedate = NOW()
 		WHERE sports_equipment_no = #{sportsEquipmentNo}
 	</update>
 	
 	<update id="deactiveEquipment">
 		UPDATE sports_equipment
 		SET
-			active = 'N'
+			active = 'N',
+			updatedate = NOW()
 		WHERE sports_equipment_no = #{sportsEquipmentNo}
 	</update>
 	
 	<update id="activeEquipment">
 		UPDATE sports_equipment
 		SET
-			active = 'Y'
+			active = 'Y',
+			updatedate = NOW()
 		WHERE sports_equipment_no = #{sportsEquipmentNo}
 	</update>
 
