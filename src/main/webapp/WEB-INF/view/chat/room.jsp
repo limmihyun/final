@@ -88,7 +88,7 @@
 						<td class='num'>${m.roomNo}</td>
 						<td class='room'>${m.customerId}</td>
 						<td class='go'>
-							<button type='button' onclick='location.href="/chat/moveChating?customerId=${m.customerId}"'>참여</button>
+							<button type='button' onclick='location.href="/chat/headofficeRoom?customerId=${m.customerId}"'>참여</button>
 						</td>
 					</tr>
 				</c:forEach>
@@ -98,28 +98,6 @@
 </body>
 	
 <script type="text/javascript">
-	
-	/*
-	
-	var ws;
-	function commonAjax(url, parameter, type, calbak, contentType){
-		$.ajax({
-			url: url,
-			data: parameter,
-			type: type,
-			contentType : contentType != null ? contentType : 'application/x-www-form-urlencoded; charset=UTF-8',
-			success: function (res) {
-				calbak(res);
-			},
-			error : function(err){
-				console.log('error');
-				calbak(err);
-			}
-		});
-	}
-	
-	*/	
-	
-		
+			
 </script>
 </html>

@@ -4,6 +4,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
+<script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
 <link rel="stylesheet" href="/css/myPage.css" type="text/css">
 <title>GD HEALTH</title>
 </head>
@@ -87,8 +88,12 @@
 					class="right" href="/customer/membershipList"><div>></div></a>
 			</div>
 			<div class="item">
-				<a href="/chat/moveChating"><div class="icon">ii &nbsp; 채팅</div></a> <a
-					class="right" href="/chat/moveChating?customerId=${sessionScope.customerId}"><div>></div></a>
+				<a href="#" class="chat">
+					<div class="icon">ii &nbsp; 채팅</div>
+				</a> 
+				<a class="right" class="chat">
+					<div>></div>
+				</a>
 			</div>
 			
 		</div>
@@ -120,4 +125,14 @@
 		</div>
 	</div>
 </body>
+
+<script>
+	$('.chat').click(function(event){
+		event.preventDefault();
+		url = '/chat/moveChating?customerId=${sessionScope.customerId}';
+		const options = 'top=10, left=10, width=600, height=700, status=no, menubar=no, toolbar=no';
+		window.open(url, '_blank', options);
+	})
+</script>
 </html>
+
