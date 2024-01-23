@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
+
     <!-- Start Left menu area -->
     <div class="left-sidebar-pro">
         <nav id="sidebar" class="">
@@ -93,7 +95,7 @@
                             </ul>
                         </li>
 						<li>
-                            <a href="${pageContext.request.contextPath}/chat/room" aria-expanded="false">
+                            <a href="${pageContext.request.contextPath}/chat/room" aria-expanded="false" id="chat">
                             	<span class="educate-icon educate-interface icon-wrap"></span> 
                             	<span class="mini-click-non">채팅</span>
                				</a>
@@ -105,3 +107,15 @@
         </nav>
     </div>
     <!-- End Left menu area -->
+ <script>
+ 	$(document).ready(function(){
+ 		
+ 		$('#chat').click(function(event){
+ 			event.preventDefault();
+ 			url = '${pageContext.request.contextPath}/chat/room';
+ 			const options = 'top=10, left=10, width=600, height=700, status=no, menubar=no, toolbar=no';
+ 			window.open(url, '_blank', options);
+ 		})
+ 		
+ 	})
+ </script>

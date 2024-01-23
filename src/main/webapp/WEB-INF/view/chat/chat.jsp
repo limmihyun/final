@@ -46,8 +46,18 @@
 </head>
 <body>
 	<div id="container" class="container">
+	
 		<h1>${customerId}의 채팅방</h1>
-		<input type="hidden" id="customerId" value="${customerId}">
+		
+		<input type="hidden" id="status" value="${status}">
+		<input type="hidden" id="roomNo" value="${roomNo}">
+		<c:if test="${status == 'customer'}">
+			<input type="hidden" id="id" value="${customerId}">
+		</c:if>
+		<c:if test="${status == 'employee'}">
+			<input type="hidden" id="id" value="${sessionScope.loginEmployee.employeeId}">
+		</c:if>
+		
 		<input type="hidden" id="employeeId" value="${sessionScope.loginEmployee.employeeId}">
 		<div id="chating" class="chating"></div>
 				
@@ -64,6 +74,10 @@
 </body>
 
 <script type="text/javascript">
+
+	console.log('roomNo : ' + $('#roomNo').val());
+	console.log('status : ' + $('#status').val());
+	console.log('id : ' + $('#id').val())
 	
 	wsOpen();
 	
@@ -71,7 +85,7 @@
 
 	function wsOpen(){
 		//웹소켓 전송시 현재 방의 번호를 넘겨서 보낸다.
-		ws = new WebSocket("ws://" + location.host + "/chating/"+$("#customerId").val());
+		ws = new WebSocket("ws://" + location.host + "/chating/"+$("#roomNo").val());
 		wsEvt();
 	}
 		
@@ -89,9 +103,9 @@
 			if(msg != null && msg.trim() != ''){
 				var d = JSON.parse(msg);
 				if(d.type == "message"){
-					if(d.id == $("#customerId").val()){
+					if(d.id == $("#id").val()){
 						$("#chating").append("<p class='me'>나 : " + d.msg + "</p>");	
-					} else{
+					} else {
 						$("#chating").append("<p class='others'>" + d.id + " : " + d.msg + "</p>");
 					}
 						
@@ -109,15 +123,15 @@
 	
 	function send() {
 		
-		let id = $('#employeeId').val();
-		if(id == '') {
-			id = $("#customerId").val();
-		}
+		let status = $('#status').val();
+		let id = $('#id').val();
+			
 		console.log('send id : ' + id);
 		
 		var option ={
 			type: "message",
 			id : id,
+			roomNo : $("#roomNo").val(),
 			msg : $("#chatting").val()
 		}
 		ws.send(JSON.stringify(option));

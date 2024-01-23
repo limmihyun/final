@@ -20,6 +20,15 @@
 		FROM chat_room
 		WHERE customer_no = #{customerNo} 
 	</select>
+	
+	<select id="getRoomNo" parameterType="String">
+		SELECT
+			chat_room_no
+		FROM chat_room cr
+		INNER JOIN customer c
+			ON c.customer_no = cr.customer_no
+		WHERE c.customer_id=#{customerId}
+	</select>
 
 	<insert id="insertRoom" parameterType="com.tree.gdhealth.vo.ChatRoom">
 		INSERT INTO chat_room(
@@ -27,6 +36,9 @@
 		) VALUES(
 			#{customerNo}
 		)
+		<selectKey resultType="int" keyProperty="chatRoomNo" order="AFTER">
+      		  SELECT LAST_INSERT_ID()
+   		</selectKey>
 	</insert>
 
 </mapper>

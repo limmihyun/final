@@ -14,6 +14,8 @@ import org.springframework.web.socket.TextMessage;
 import org.springframework.web.socket.WebSocketSession;
 import org.springframework.web.socket.handler.TextWebSocketHandler;
 
+import com.tree.gdhealth.employee.login.LoginEmployee;
+
 @Component
 public class SocketHandler extends TextWebSocketHandler {
 	
@@ -30,16 +32,16 @@ public class SocketHandler extends TextWebSocketHandler {
 		//소켓 연결
 		boolean flag = false;
 		String url = session.getUri().toString();
-		String id = url.split("/chating/")[1];
+		String roomNo = url.split("/chating/")[1];
 		
 		int idx = roomListSessions.size(); //방의 사이즈를 조사한다.
 		System.out.println("방의 개수 : " + idx);
 		if(roomListSessions.size() > 0) {
 			
 			for(int i=0; i<roomListSessions.size(); i++) {
-				String idCheck = (String) roomListSessions.get(i).get("id");
+				String roomNoCheck = (String) roomListSessions.get(i).get("roomNo");
 				
-				if(idCheck.equals(id)) {
+				if(roomNoCheck.equals(roomNo)) {
 					flag = true;
 					idx = i;
 					break;
@@ -58,16 +60,30 @@ public class SocketHandler extends TextWebSocketHandler {
 		} else { // 최초 생성하는 방이라면 방번호와 세션을 추가한다.
 			
 			HashMap<String, Object> map = new HashMap<String, Object>();
-			map.put("id", id);
+			map.put("roomNo", roomNo);
 			map.put(session.getId(), session);
 			roomListSessions.add(map);
 			System.out.println("roomListSessions(최초 생성) : " + roomListSessions);
 		}
 		
-		//세션등록이 끝나면 발급받은 세션ID값의 메시지를 발송한다.
+		// 세션 등록이 끝나면 발급받은 세션ID값의 메시지를 발송한다.
 		JSONObject obj = new JSONObject();
 		obj.put("type", "getId");
-		obj.put("id", session.getAttributes().get("customerId"));
+		
+		
+		////////////////////////////////////////////////////////////
+		Object customerId = session.getAttributes().get("customerId");
+		LoginEmployee loginEmployee =(LoginEmployee) session.getAttributes().get("loginEmployee");
+		String employeeId = "";
+		if(loginEmployee != null) {
+			employeeId = loginEmployee.getEmployeeId();
+		}
+		
+		if(customerId != null) {
+			obj.put("id", session.getAttributes().get("customerId"));
+		} else {
+			obj.put("id", employeeId);
+		}
 		// 디버깅
 		System.out.println("웹 소켓 연결 : " + obj);
 		session.sendMessage(new TextMessage(obj.toJSONString()));
@@ -81,14 +97,15 @@ public class SocketHandler extends TextWebSocketHandler {
 		System.out.println("메시지 전송 : " + msg);
 		JSONObject obj = jsonToObjectParser(msg);
 		
-		String id = (String) obj.get("id");
+		String roomNo = (String) obj.get("roomNo");
 		HashMap<String, Object> temp = new HashMap<String, Object>();
 		
+		System.out.println("roomListSessions : " + roomListSessions.size());
 		if(roomListSessions.size() > 0) {
 			
 			for(int i=0; i<roomListSessions.size(); i++) {
-				String idCheck = (String) roomListSessions.get(i).get("id"); // 세션리스트의 저장된 방 번호를 가져와서
-				if(idCheck.equals(id)) { // 같은 값의 방이 존재한다면
+				String idCheck = (String) roomListSessions.get(i).get("roomNo"); // 세션리스트의 저장된 방 번호를 가져와서
+				if(idCheck.equals(roomNo)) { // 같은 값의 방이 존재한다면
 					// 해당 방 번호의 세션리스트에 존재하는 모든 object값(id, sessionId)을 가져온다.
 					temp = roomListSessions.get(i); 
 					break;
@@ -98,18 +115,19 @@ public class SocketHandler extends TextWebSocketHandler {
 			// 해당 방의 세션들만 찾아서 메시지를 발송해준다.
 			for(String k : temp.keySet()) {
 				
-				if(k.equals("id")) { // 다만 id일 경우에는 건너뛴다.(sessionId일 경우에만 적용)
+				if(k.equals("roomNo")) { // 다만 방 번호일 경우에는 건너뛴다.(sessionId일 경우에만 적용)
 					continue;
 				}
 				
 				String message2 = (String) obj.get("msg");
 				HashMap<String, Object> map = new HashMap<>();
-				map.put("id", id);
+				map.put("roomNo", roomNo);
 				map.put("message", message2);
 				messageList.add(map);
 				System.out.println("messageList : " + messageList);
 				
 				WebSocketSession wss = (WebSocketSession) temp.get(k);
+				System.out.println("webSocketSessions : " + wss);
 				if(wss != null) {
 					try {
 						wss.sendMessage(new TextMessage(obj.toJSONString()));
