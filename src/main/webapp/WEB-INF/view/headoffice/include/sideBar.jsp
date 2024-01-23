@@ -10,13 +10,6 @@
                 <nav class="sidebar-nav left-sidebar-menu-pro">
                     <ul class="metismenu" id="menu1">
                        <li>
-                            <a href="${pageContext.request.contextPath}/headoffice/home">
-		                        <span class="educate-icon educate-home icon-wrap"></span>
-		                        <span class="mini-click-non">홈</span>
-		                     </a>                            
-                       </li>
-                       <li>
-
                             <a class="has-arrow" href="#" aria-expanded="false">
                                <span class="educate-icon educate-professor icon-wrap"></span> 
                                <span class="mini-click-non">직원</span>
