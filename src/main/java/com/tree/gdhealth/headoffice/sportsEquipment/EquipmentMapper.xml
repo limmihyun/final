@@ -33,7 +33,7 @@
 				</when>			
 			</choose>
 		</where>
-		ORDER BY s.createdate DESC
+		ORDER BY s.item_price DESC
 		LIMIT #{beginRow}, #{rowPerPage}
 	</select>
 	
@@ -49,14 +49,22 @@
 		FROM sports_equipment s
 		INNER JOIN sports_equipment_img si
 			ON si.sports_equipment_no = s.sports_equipment_no
+		INNER JOIN employee_detail ed
+			ON ed.employee_no = s.writer_employee_no
 		<where>
 			<choose>
 				<when test="type != null and type.equals('name')">
-					item_name LIKE CONCAT('%',#{keyword},'%')
+					s.item_name LIKE CONCAT('%',#{keyword},'%')
 				</when>	
 				<when test="type != null and type.equals('note')">
-					note LIKE CONCAT('%',#{keyword},'%')
-				</when>		
+					s.note LIKE CONCAT('%',#{keyword},'%')
+				</when>
+				<when test="type != null and type.equals('writer')">
+					ed.employee_name note LIKE CONCAT('%',#{keyword},'%')
+				</when>	
+				<when test="type != null and type.equals('isActive')">
+					s.active LIKE CONCAT('%',#{keyword},'%')
+				</when>	
 			</choose>
 		</where>
 	</select>
