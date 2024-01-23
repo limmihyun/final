@@ -8,8 +8,15 @@
     <meta name="keywords" content="TopGym, unica, creative, html">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>TopGym | Fitness HTML Template</title>
-
+ 	<title>GD HEALTH</title>
+   <script>
+        $(document).ready(function() {
+            var msg = "${msg}";
+            if (msg.trim() !== "") {
+                alert(msg);
+            }
+        });
+    </script>
     <!-- Google Font -->
     <link href="https://fonts.googleapis.com/css?family=Roboto:100,300,300i,400,500,700,900" rel="stylesheet">
 
@@ -28,53 +35,24 @@
     <div id="preloder">
         <div class="loader"></div>
     </div>
-    <!-- Header Section Begin -->
-    <header class="header-section" style="background-color: #fff; box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.1); position: fixed; width: 100%; z-index: 1000;">
+    <jsp:include page="/WEB-INF/header/header.jsp" />
+   	<section class="breadcrumb-area set-bg" data-setbg="/img/elements/element-bg.jpg">
         <div class="container">
             <div class="row">
-                <div class="col-lg-12">
-                    <div class="main-menu">
-                        <div class="logo">
-                            <a href="./index.html">
-                                <img src="/img/logo.png" alt="">
-                            </a>
+                <div class="col-lg-12 text-center">
+                    <div class="breadcrumb-content">
+                        <h2>Q&A</h2>
+                        <div class="links">
+                            <a href="/customer/home">Home</a>
+                            
                         </div>
-                        <nav class="mobile-menu">
-                            <ul>
-                                <li><a href="./index.html">Home</a></li>
-                                <li><a href="./about-us.html">About us</a></li>
-                                <li><a href="./classes.html">Classes</a></li>
-                                <li><a href="./elements.html">Instructors</a></li>
-                                <li><a href="./blog.html">News</a></li>
-                                <li><a href="./contact.html">Contact</a></li>
-                                <li class="search-btn search-trigger"><i class="fa fa-search"></i></li>
-                            </ul>
-                        </nav>
-                        <div id="mobile-menu-wrap"></div>
                     </div>
                 </div>
             </div>
         </div>
-    </header>
-    <!-- Header End -->
-    <!-- Search Bar Begin -->
-    <section class="search-bar-wrap">
-        <span class="search-close"><i class="fa fa-close"></i></span>
-        <div class="search-bar-table">
-            <div class="search-bar-tablecell">
-                <div class="search-bar-inner">
-                    <h2>Search</h2>
-                    <form action="#">
-                        <input type="search" placeholder="Type Keywords">
-                        <button type="submit">Search</button>
-                    </form>
-                </div>
-            </div>
-        </div>
     </section>
-    <!-- Search Bar End -->
     <!-- Contact Section Begin -->
-    //
+    
     <div class="untree_co-section before-footer-section">
             <div class="container">
              <div class="p-3 p-lg-5 border bg-white">
@@ -85,11 +63,7 @@
             <th>리뷰번호</th>
             <td><p style="border: none;">${revuOne.reviewNo}</p></td>
         </tr>
-        <tr>
-            <th>예약번호</th>
-            <td><p style="border: none;">${revuOne.programRsNo}</p></td>
-        </tr>
-    
+        
         <tr>
             <th>제목</th>
             <td><p style="border: none;">${revuOne.reviewTitle}</td>
@@ -109,8 +83,8 @@
         
     </table>
      <a>
-        <a href="${pageContext.request.contextPath}/review/updateReview?reviewNo=${revuOne.reviewNo}" class="btn btn-primary">수정</a>
-        <a href="${pageContext.request.contextPath}/review/deleteteReview?reviewNo=${revuOne.reviewNo}" class="btn btn-primary">삭제</a>
+        <!--<a href="${pageContext.request.contextPath}/review/updateReview?reviewNo=${revuOne.reviewNo}" class="btn btn-primary">수정</a>-->
+        <!--<a href="${pageContext.request.contextPath}/review/deleteteReview?reviewNo=${revuOne.reviewNo}" class="btn btn-primary">삭제</a>-->
     </a>
 </div>
 </div>

@@ -24,7 +24,7 @@
 </head>
 
 <body>
-	<!-- Page Preloder -->
+   <!-- Page Preloder -->
     <div id="preloder">
         <div class="loader"></div>
     </div>
@@ -81,16 +81,16 @@
                     <div class="contact-info">
                         <div class="contact-form">
                            <form method="post" action="${pageContext.request.contextPath}/review/addReview"
-                           				enctype="multipart/form-data">
+                                       enctype="multipart/form-data">
                                 <div class="row">
                                 <div class="container" style="margin-top: 100px;">
-                                	<div class="col-lg-12">
-                                		<input type="hidden" name="customerNo" value="${customerNo}">
+                                   <div class="col-lg-12">
+                                      <input type="hidden" name="customerNo" value="${customerNo}">
                                         <input type="text" placeholder="reviewTitle" name="reviewTitle" > 
                                         <textarea placeholder="Message" name = "reviewContent"></textarea>
                                         <button type="submit" class="site-btn">작성하기</button>
-   										
-  						  </form>
+                                 
+                      </form>
     <!-- Js Plugins -->
     <script src="/js/jquery-3.3.1.min.js"></script>
     <script src="/js/bootstrap.min.js"></script>

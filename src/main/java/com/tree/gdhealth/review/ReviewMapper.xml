@@ -3,7 +3,8 @@
 <mapper namespace="com.tree.gdhealth.review.ReviewMapper">
 <!-- 리스트 -->
 	<select id="reviewList"
-	parameterType="com.tree.gdhealth.vo.Review">
+	parameterType="java.util.Map"
+	resultType="com.tree.gdhealth.vo.Review">
 	
 	SELECT
 		r.review_no AS reviewNo,
@@ -15,9 +16,20 @@
 	JOIN
 		customer c ON r.customer_no = c.customer_no
 	ORDER BY
-		r.review_no DESC;
-		
+		r.review_no DESC
+	LIMIT #{beginRow}, #{rowPerPage};	
 	
+	</select>
+	<select id="selectProgramRsNoByCustomerNo"  resultType="Integer">
+		SELECT 
+			prr.program_reservation_no AS programRsNo 
+		FROM program_reservation prr
+		WHERE prr.payment_no = 
+			(SELECT 
+				pay.payment_no 
+			FROM payment pay 
+			WHERE pay.customer_no = #{customerNo} 
+				AND pay.active = 'Y')
 	</select>
 	
 <!-- 상세 -->
@@ -27,14 +39,12 @@
 	
 	SELECT 
 		r.review_no AS reviewNo,
-		r.program_reservation_no AS programRsNo,
 		c.customer_id AS customerId,
 		r.review_title AS reviewTitle,
 		COALESCE(ri.review_img_origin, 'NoImage') AS reviewImgOrigin,
 		r.review_content AS reviewContent,
 		r.createdate AS createdate,
-		r.updatedate AS updatedate
-		
+		r.updatedate AS updatedate	
 	FROM review r
 	JOIN customer c ON r.customer_no = c.customer_no
 	LEFT JOIN review_img ri ON ri.review_no = r.review_no
@@ -45,7 +55,6 @@
 <!-- 삽입 -->
 	<insert id="addReview" parameterType="com.tree.gdhealth.vo.Review">
     INSERT INTO review (
-        program_reservation_no,
         customer_no,
         review_title,
         review_content,
@@ -53,12 +62,11 @@
         updatedate
     )
     VALUES (
-        #{programRsNo},
         #{customerNo},
         #{reviewTitle},
         #{reviewContent},
-        #{createdate},
-        #{updatedate}
+        NOW(),
+        NOW()
     )
 </insert>
 		
@@ -66,6 +74,9 @@
 	<update id="updateReview"
 	parameterType="com.tree.gdhealth.vo.Review">
 	
+	UPDATE review
+	SET review_title = #{reviewTitle}, review_content = #{reviewContent}
+	WHERE review_no = #{reviewNo}
 	</update>
 
 <!-- 삭제 -->
@@ -75,9 +86,11 @@
 	FROM review
 	WHERE review_no = #{reviewNo}
 	</delete>
+<!-- 리뷰 개수 -->
+	<select id="reviewCount"
+	parameterType="java.util.Map"
+	resultType="int">
+	SELECT count (*) FROM review
 	
-
-	
-	
-
+	</select>
 </mapper>
