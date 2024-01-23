@@ -51,18 +51,7 @@
                             	<span class="educate-icon educate-course icon-wrap"></span> 
                             	<span class="mini-click-non">문의사항</span>
                             </a>                   
-                        </li>                                         
-                        <li>
-                            <a class="has-arrow" href="#" aria-expanded="false">
-                               <span class="educate-icon educate-course icon-wrap"></span> 
-                               <span class="mini-click-non">서비스</span>
-                            </a>
-                            <ul class="submenu-angle form-mini-nb-dp" aria-expanded="false">
-                                <li><a href="${pageContext.request.contextPath}/question/questionList"><span class="mini-sub-pro">질문게시판</span></a></li>
-                                <li><a href="${pageContext.request.contextPath}/notice/noticeList"><span class="mini-sub-pro">공지사항</span></a></li> 
-                                <li><a href="${pageContext.request.contextPath}/notice/addNotice"><span class="mini-sub-pro">공지추가</span></a></li>                              
-                            </ul>                         
-                        </li>                                        
+                        </li>                                                                          
                         <li>
                             <a class="has-arrow" href="mailbox.html" aria-expanded="false">
                                <span class="educate-icon educate-data-table icon-wrap"></span> 
