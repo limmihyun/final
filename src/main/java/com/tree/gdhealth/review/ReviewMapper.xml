@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.tree.gdhealth.review.ReviewMapper">
+<!-- 리스트 -->
+	<select id="reviewList"
+	parameterType="java.util.Map"
+	resultType="com.tree.gdhealth.vo.Review">
+	
+	SELECT
+		r.review_no AS reviewNo,
+		r.review_title AS reviewTitle,
+		c.customer_id AS customerId,
+		r.createdate,
+		r.updatedate
+	FROM review r
+	JOIN
+		customer c ON r.customer_no = c.customer_no
+	ORDER BY
+		r.review_no DESC
+	LIMIT #{beginRow}, #{rowPerPage};	
+	
+	</select>
+	<select id="selectProgramRsNoByCustomerNo"  resultType="Integer">
+		SELECT 
+			prr.program_reservation_no AS programRsNo 
+		FROM program_reservation prr
+		WHERE prr.payment_no = 
+			(SELECT 
+				pay.payment_no 
+			FROM payment pay 
+			WHERE pay.customer_no = #{customerNo} 
+				AND pay.active = 'Y')
+	</select>
+	
+<!-- 상세 -->
+	<select id="reviewOne"
+	parameterType="int"
+	resultType="com.tree.gdhealth.vo.Review">
+	
+	SELECT 
+		r.review_no AS reviewNo,
+		c.customer_id AS customerId,
+		r.review_title AS reviewTitle,
+		COALESCE(ri.review_img_origin, 'NoImage') AS reviewImgOrigin,
+		r.review_content AS reviewContent,
+		r.createdate AS createdate,
+		r.updatedate AS updatedate	
+	FROM review r
+	JOIN customer c ON r.customer_no = c.customer_no
+	LEFT JOIN review_img ri ON ri.review_no = r.review_no
+	WHERE r.review_no = #{reviewNo};
+
+	</select>
+	
+<!-- 삽입 -->
+	<insert id="addReview" parameterType="com.tree.gdhealth.vo.Review">
+    INSERT INTO review (
+        customer_no,
+        review_title,
+        review_content,
+        createdate,
+        updatedate
+    )
+    VALUES (
+        #{customerNo},
+        #{reviewTitle},
+        #{reviewContent},
+        NOW(),
+        NOW()
+    )
+</insert>
+		
+<!-- 수정 -->
+	<update id="updateReview"
+	parameterType="com.tree.gdhealth.vo.Review">
+	
+	UPDATE review
+	SET review_title = #{reviewTitle}, review_content = #{reviewContent}
+	WHERE review_no = #{reviewNo}
+	</update>
+
+<!-- 삭제 -->
+	<delete id="deleteReview"
+	parameterType="com.tree.gdhealth.vo.Review">
+	DELETE 
+	FROM review
+	WHERE review_no = #{reviewNo}
+	</delete>
+<!-- 리뷰 개수 -->
+	<select id="reviewCount"
+	parameterType="java.util.Map"
+	resultType="int">
+	SELECT count (*) FROM review
+	
+	</select>
+</mapper>

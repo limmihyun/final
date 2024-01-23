@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE configuration PUBLIC "-//mybatis.org//DTD Config 3.0//EN" "http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+    <!-- Your MyBatis configuration settings go here -->
+    <typeHandlers>
+        <typeHandler handler="com.tree.gdhealth.utils.typehandler.OrderStatusTypeHandler"/>
+        <typeHandler handler="com.tree.gdhealth.utils.typehandler.ImgTypeTypeHandler"/>
+    </typeHandlers>
+    <!-- Type aliases, mappers, etc. -->
+</configuration>
+<!-- author : 정인호 -->

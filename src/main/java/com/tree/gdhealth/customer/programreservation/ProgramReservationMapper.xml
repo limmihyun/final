@@ -1,0 +1,162 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.tree.gdhealth.customer.programreservation.ProgramReservationMapper">
+	<select id="selectProgramByMonth" resultType="java.util.Map">
+		SELECT
+		      YEAR(pd.program_date) year,
+			  MONTH(pd.program_date) month,
+			  DAY(pd.program_date) day,
+			  COUNT(pr.program_date_no) cnt,
+			  p.program_max_customer programMaxCustomer,
+		      p.program_name programName,
+		      pd.program_date_no programDateNo
+		FROM program_reservation pr RIGHT OUTER JOIN program_date pd
+		  on pr.program_date_no = pd.program_date_no INNER JOIN program p
+		  on p.program_no = pd.program_no
+		WHERE YEAR(pd.program_date) = #{year}
+		AND MONTH(pd.program_date) = #{month}
+		GROUP BY pd.program_date_no
+		ORDER BY pd.program_date ASC
+	</select>
+	
+	<select id="allCalendarList" resultType="java.util.Map">
+		SELECT
+		    YEAR(pd.program_date) year,
+			  MONTH(pd.program_date) month,
+			  DAY(pd.program_date) day,
+			  COUNT(pr.program_date_no) cnt,
+			p.program_max_customer programMaxCustomer,
+			p.program_name programName
+		FROM program_reservation pr RIGHT OUTER JOIN program_date pd
+		  on pr.program_date_no = pd.program_date_no INNER JOIN program p
+		  on p.program_no = pd.program_no
+		GROUP BY pd.program_date
+		ORDER BY pd.program_date ASC
+	</select>
+	
+ 	<select id="listPage" resultType="java.util.Map">
+		SELECT
+		      YEAR(pd.program_date) year,
+			  MONTH(pd.program_date) month,
+			  DAY(pd.program_date) day,
+			  COUNT(pr.program_date_no) cnt,
+			p.program_max_customer programMaxCustomer,
+			p.program_name programName,
+			pd.program_date_no programDateNo
+		FROM program_reservation pr RIGHT OUTER JOIN program_date pd
+		  on pr.program_date_no = pd.program_date_no INNER JOIN program p
+		  on p.program_no = pd.program_no
+		WHERE YEAR(pd.program_date) = #{year} AND MONTH(pd.program_date) = #{month} AND DAY(pd.program_date) >= #{thisDay}
+		GROUP BY pd.program_date_no
+		ORDER BY pd.program_date ASC
+		LIMIT #{beginRow},#{rowPerPage};
+	</select> 
+		
+	<select id="lastPage" resultType="Integer">
+		SELECT
+			COUNT(*)
+		FROM  program_date pd INNER JOIN program p 
+		   on pd.program_no = p.program_no
+		WHERE YEAR(pd.program_date) = #{year} AND MONTH(pd.program_date) = #{month} AND DAY(pd.program_date) >= #{thisDay}
+		GROUP BY MONTH(pd.program_date)
+	</select>
+	
+	<select id="myCalendarList" resultType="java.util.Map">
+		SELECT
+			  DAY(pd.program_date) day,
+			  pd.program_date_no programDateNo
+		FROM program_reservation pr RIGHT OUTER JOIN program_date pd
+		  on pr.program_date_no = pd.program_date_no INNER JOIN payment p
+		   on pr.payment_no = p.payment_no
+		WHERE YEAR(pd.program_date) = #{year}
+		AND MONTH(pd.program_date) = #{month}
+		 AND p.customer_no = #{customerNo}
+		GROUP BY pd.program_date
+		ORDER BY pd.program_date ASC
+	</select>
+	
+	<select id="proRsOne" resultType="java.util.Map" parameterType="java.util.Map">
+		SELECT
+			  p.program_name programName,
+			  pd.program_date programDate,
+			  pd.program_date_no programDateNo
+		FROM  program_date pd INNER JOIN program p
+	       on p.program_no = pd.program_no
+ 		WHERE YEAR(pd.program_date) = #{year}
+		  AND MONTH(pd.program_date) = #{month}
+		  AND DAY(pd.program_date) = #{day}
+		  AND p.program_name = #{programName}
+		ORDER BY pd.program_date ASC;
+	</select>
+	
+	
+	<select id="reservationDate" parameterType="java.util.Map" resultType="Integer">
+		SELECT pr.branch_no branchNo
+		FROM program_reservation pr INNER JOIN payment p
+		  ON pr.payment_no = p.payment_no
+		WHERE pr.program_date_no = #{programDateNo} AND p.customer_no = #{customerNo}
+	</select>
+	
+	<select id="branchList" resultType="com.tree.gdhealth.vo.Branch">
+		SELECT branch_name branchName,
+			   branch_no branchNo
+		FROM branch
+		WHERE branch_name != '본점';
+	</select>
+	
+	<select id="customerId">
+		SELECT
+			customer_id customerId
+		FROM customer
+		WHERE customer_no = #{customerNo}
+	</select>
+	
+	<select id="customerPayment">
+		SELECT
+			YEAR(p.payment_date) year,
+			MONTH(p.payment_date) month,
+			DAY(p.payment_date) day,
+			m.membership_month membershipMonth,
+			p.payment_no paymentNo
+		FROM payment p INNER JOIN membership m
+		  ON p.membership_no = m.membership_no
+		WHERE p.customer_no = #{customerNo} AND p.active = 'N';
+	</select>
+	
+	<insert id="programReservationAdd" parameterType="java.util.Map">
+		INSERT INTO program_reservation(payment_no, program_date_no, branch_no, program_reservation_date) VALUES(#{paymentNo}, #{programDateNo}, #{branchNo}, NOW());
+	</insert>
+	
+	<select id="myreservation" resultType="java.util.Map">
+	SELECT YEAR(pd.program_date) year,
+		   MONTH(pd.program_date) month,
+		    DAY(pd.program_date) day,
+		    pg.program_name programName,
+		    b.branch_name branchName,
+		    pr.program_reservation_no programReservationNo
+	FROM program_reservation pr INNER JOIN payment p
+	  ON pr.payment_no = p.payment_no INNER JOIN program_date pd
+	  ON pr.program_date_no = pd.program_date_no INNER JOIN program pg
+	  ON pd.program_no = pg.program_no INNER JOIN branch b
+	  ON pr.branch_no = b.branch_no
+	WHERE p.customer_no = #{customerNo};
+	</select>
+	
+	<delete id="reservationdelete" parameterType="java.util.Map">
+		DELETE FROM program_reservation WHERE program_reservation_no = #{programReservationNo}
+	</delete>
+	
+	<delete id="reviewdelete" parameterType="java.util.Map">
+		DELETE FROM review WHERE program_reservation_no = #{programReservationNo};
+	</delete>
+	<delete id="customerAttendanceDelete" parameterType="java.util.Map">
+	    DELETE FROM customer_attendance WHERE program_reservation_no = #{programReservationNo};
+	</delete>
+	<select id="reviewSelect" parameterType="java.util.Map">
+		SELECT review_no FROM review WHERE program_reservation_no = #{programReservationNo};
+	</select>
+	
+	<delete id="reviewimgdelete">
+		DELETE FROM review_img WHERE review_no = #{reviewNo};
+	</delete>
+</mapper>

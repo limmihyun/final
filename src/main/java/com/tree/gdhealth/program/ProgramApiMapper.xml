@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.tree.gdhealth.program.ProgramApiMapper">
+
+    <insert id="insertManager">
+        INSERT INTO program_manager
+            (program_date_no, program_no, trainer_employee_no)
+        VALUES
+            (#{programDateNo},(SELECT program_date.program_no FROM program_date WHERE program_date.program_date_no = #{programDateNo} LIMIT 0,1),#{managerNo})
+    </insert>
+    <update id="changeManager">
+        UPDATE program_manager
+        SET trainer_employee_no = #{managerNo}
+        WHERE program_date_no = #{programDateNo}
+            AND program_manager.trainer_employee_no IN
+                (SELECT e1.employee_no FROM employee e1 WHERE branch_no = (SELECT e2.branch_no FROM employee e2 WHERE e2.employee_no = #{managerNo}))
+    </update>
+    <select id="getBranchProgramDate" resultType="java.util.Map">
+        SELECT
+            dateList.generated_date 'date',
+            prd.program_date_no programDateNo,
+            prd.program_no programNo,
+            pr.program_name programName,
+            pr.program_detail programDetail,
+            pr.writer_employee_no employeeNo,
+            eed.employee_name employeeName,
+            prm.trainer_employee_no managerNo,
+            med.employee_name managerName,
+            med.employee_phone managerPhone,
+            pr.program_max_customer maxCustomer,
+            pri.program_img_file programImageFile,
+            IF(prd.program_no IS NULL, NULL, ifnull(prr.reservedCount, 0)) AS reservedCount,
+            (SELECT br.branch_address FROM branch br WHERE br.branch_no = #{branchNo}) AS 'address',
+            (SELECT MIN(prd2.program_date) FROM program_date prd2 WHERE prd2.program_no = prd.program_no) AS startDate,
+            (SELECT MAX(prd2.program_date) FROM program_date prd2 WHERE prd2.program_no = prd.program_no) AS endDate
+        FROM
+                (SELECT #{date} AS 'generated_date' FROM DUAL) dateList
+                    LEFT JOIN program_date prd ON dateList.generated_date = prd.program_date
+                    LEFT JOIN program pr
+                              ON prd.program_no = pr.program_no
+                    LEFT JOIN program_img pri ON prd.program_no = pri.program_no
+                    LEFT JOIN (SELECT * FROM program_manager prm WHERE prm.trainer_employee_no IN (SELECT em.employee_no FROM employee em WHERE em.branch_no = #{branchNo})) prm
+                              ON prd.program_date_no = prm.program_date_no
+                    LEFT JOIN (SELECT program_date_no, COUNT(program_reservation_no) AS reservedCount FROM program_reservation WHERE branch_no = #{branchNo} GROUP BY program_date_no) prr
+                              ON prd.program_date_no = prr.program_date_no
+                    LEFT JOIN employee_detail eed ON pr.writer_employee_no = eed.employee_no
+                    LEFT JOIN employee_detail med ON prm.trainer_employee_no = med.employee_no
+    </select>
+    <select id="selectManager" resultType="java.lang.Integer">
+        SELECT count(*)
+        FROM program_manager
+        WHERE
+            program_manager.trainer_employee_no IN
+            (SELECT e1.employee_no FROM employee e1 WHERE branch_no = (SELECT e2.branch_no FROM employee e2 WHERE e2.employee_no = #{managerNo}))
+          AND program_date_no = #{programDateNo}
+    </select>
+
+    <select id="getProgramDateBetween" resultType="com.tree.gdhealth.program.dto.BranchProgramDate">
+        <!-- @note 받은 날짜로부터 +7일의 날짜행을 만들고 정보를 레프트조인합니다.
+        (프로그램정보, 담당직원, 총예약인원 수 등)-->
+        SELECT
+        dateList.generated_date date,
+        prd.program_date_no programDateNo,
+        prd.program_no programNo,
+        pr.program_name programName,
+        pr.program_detail programDetail,
+        pr.writer_employee_no writerEmployeeNo,
+        eed.employee_name employeeName,
+        prm.trainer_employee_no trainerEmployeeNo,
+        med.employee_name managerName,
+        pr.program_max_customer maxCustomer,
+        IF(prd.program_no IS NULL, NULL, ifnull(prr.reservedCount, 0))
+        AS reservedCount
+        FROM
+        (SELECT DATE(#{startDate}) + INTERVAL seq DAY AS generated_date FROM seq_0_to_${totalDays}) dateList
+        LEFT JOIN program_date prd ON dateList.generated_date = prd.program_date
+        LEFT JOIN program pr
+        ON prd.program_no = pr.program_no
+        LEFT JOIN (SELECT * FROM program_manager prm WHERE prm.trainer_employee_no IN (SELECT em.employee_no FROM employee em WHERE em.branch_no = #{branchNo})) prm
+        ON prd.program_date_no = prm.program_date_no
+        LEFT JOIN (SELECT program_date_no, COUNT(program_reservation_no) AS reservedCount FROM program_reservation WHERE branch_no = #{branchNo} GROUP BY program_date_no) prr
+        ON prd.program_date_no = prr.program_date_no
+        LEFT JOIN employee_detail eed ON pr.writer_employee_no = eed.employee_no
+        LEFT JOIN employee_detail med ON prm.trainer_employee_no = med.employee_no
+        ORDER BY dateList.generated_date
+    </select>
+</mapper>
