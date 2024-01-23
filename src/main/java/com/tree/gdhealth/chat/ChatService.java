@@ -6,6 +6,7 @@ import java.util.Map;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.tree.gdhealth.vo.ChatRoom;
 
 import lombok.RequiredArgsConstructor;
 
@@ -24,6 +25,13 @@ public class ChatService {
 		
 	}
 	
+	public int getRoomNo(String customerId) {
+		
+		int getRoomNo = chatMapper.getRoomNo(customerId);
+		
+		return getRoomNo;
+	}
+	
 	public boolean isRoomExists(int customerNo) {
 		
 		boolean isRoomExists = chatMapper.isRoomExists(customerNo);
@@ -31,9 +39,9 @@ public class ChatService {
 		return isRoomExists;
 	}
 	
-	public int insertRoom(int customerNo) {
+	public int insertRoom(ChatRoom chatRoom) {
 		
-		int result = chatMapper.insertRoom(customerNo);
+		int result = chatMapper.insertRoom(chatRoom);
 		
 		return result;
 		
