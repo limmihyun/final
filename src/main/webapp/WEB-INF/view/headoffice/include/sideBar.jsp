@@ -9,17 +9,14 @@
             <div class="left-custom-menu-adp-wrap">
                 <nav class="sidebar-nav left-sidebar-menu-pro">
                     <ul class="metismenu" id="menu1">
-<<<<<<< HEAD
-                    	<li>
-=======
                        <li>
                             <a href="${pageContext.request.contextPath}/headoffice/home">
-                        <span class="educate-icon educate-home icon-wrap"></span>
-                        <span class="mini-click-non">홈</span>
-                     </a>                            
-                        </li>
+		                        <span class="educate-icon educate-home icon-wrap"></span>
+		                        <span class="mini-click-non">홈</span>
+		                     </a>                            
+                       </li>
                        <li>
->>>>>>> 1e45ab49b80a8717e680b50c2c7ef5cc587c0790
+
                             <a class="has-arrow" href="#" aria-expanded="false">
                                <span class="educate-icon educate-professor icon-wrap"></span> 
                                <span class="mini-click-non">직원</span>
@@ -48,7 +45,6 @@
                                 <li><a href="${pageContext.request.contextPath}/headoffice/program/addProgram"><span class="mini-sub-pro">프로그램 추가</span></a></li>                               
                             </ul>                         
                         </li> 
-<<<<<<< HEAD
                         <li>
                             <a href="${pageContext.request.contextPath}/notice/noticeList" aria-expanded="false">
                             	<span class="educate-icon educate-course icon-wrap"></span> 
@@ -61,8 +57,7 @@
                             	<span class="mini-click-non">문의사항</span>
                             </a>                   
                         </li>                                         
-=======
-                       <li>
+                        <li>
                             <a class="has-arrow" href="#" aria-expanded="false">
                                <span class="educate-icon educate-course icon-wrap"></span> 
                                <span class="mini-click-non">서비스</span>
@@ -73,7 +68,6 @@
                                 <li><a href="${pageContext.request.contextPath}/notice/addNotice"><span class="mini-sub-pro">공지추가</span></a></li>                              
                             </ul>                         
                         </li>                                        
->>>>>>> 1e45ab49b80a8717e680b50c2c7ef5cc587c0790
                         <li>
                             <a class="has-arrow" href="mailbox.html" aria-expanded="false">
                                <span class="educate-icon educate-data-table icon-wrap"></span> 
@@ -95,7 +89,7 @@
                                 <li><a href="${pageContext.request.contextPath}/headoffice/addMembership"><span class="mini-sub-pro">회원권 추가</span></a></li>
                             </ul>
                         </li>
-                  <li>
+                        <li>
                             <a class="has-arrow" href="mailbox.html" aria-expanded="false">
                                <span class="educate-icon educate-form icon-wrap"></span> 
                                <span class="mini-click-non">물품</span>
@@ -105,18 +99,11 @@
                                 <li><a href="${pageContext.request.contextPath}/headoffice/equipment/addEquipment"><span class="mini-sub-pro">물품 추가</span></a></li>                           
                             </ul>
                         </li>
-<<<<<<< HEAD
 						<li>
                             <a href="${pageContext.request.contextPath}/chat/room" aria-expanded="false">
                             	<span class="educate-icon educate-interface icon-wrap"></span> 
                             	<span class="mini-click-non">채팅</span>
-=======
-                  <li>
-                            <a class="has-arrow" href="mailbox.html" aria-expanded="false">
-                               <span class="educate-icon educate-interface icon-wrap"></span> 
-                               <span class="mini-click-non">채팅</span>
->>>>>>> 1e45ab49b80a8717e680b50c2c7ef5cc587c0790
-                            </a>
+               				</a>
                         </li> 
                                          
                     </ul>
