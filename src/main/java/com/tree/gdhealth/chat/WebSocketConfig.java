@@ -19,7 +19,7 @@ public class WebSocketConfig implements WebSocketConfigurer {
 	@Override
 	public void registerWebSocketHandlers(WebSocketHandlerRegistry registry) {
 	// HttpSessionHandshakeInterceptor : HttpSession에 저장 된 사용자ID를 WebSocketSession에서도 사용
-		registry.addHandler(webSocketHandler, "/chating/{roomNo}")
+		registry.addHandler(webSocketHandler, "/chatting/{roomNo}")
 					.addInterceptors(new HttpSessionHandshakeInterceptor())
 					.setAllowedOrigins("*");
 		

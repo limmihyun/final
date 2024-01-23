@@ -20,23 +20,19 @@ public class ChatController {
 	
 	private final ChatService chatService;
 	
-	/**
-	 * 방 페이지
-	 * @return
-	 */
+	// 방
 	@GetMapping("/room")
 	public String room(Model model) {
 		
 		List<Map<String, Object>> roomList = chatService.getRoomList();
-		
 		model.addAttribute("roomList", roomList);
 
 		return "chat/room";
 	}
 			
 	// 채팅방(고객)
-	@GetMapping("/moveChating")
-	public String chating(Model model, String customerId, ChatRoom chatRoom,
+	@GetMapping("/moveChatting")
+	public String chatting(Model model, String customerId, ChatRoom chatRoom,
 						@SessionAttribute("customerNo") int customerNo) {
 		
 		System.out.println("customerNo : " + customerNo);
@@ -46,13 +42,13 @@ public class ChatController {
 			chatRoom.setCustomerNo(customerNo);
 			int insertRoom = chatService.insertRoom(chatRoom);
 			model.addAttribute("roomNo",chatRoom.getChatRoomNo());
-			System.out.println("방 추가 : " + insertRoom) ;
 		}
+		
+		model.addAttribute("customerId", customerId);
+		model.addAttribute("status", "customer");
 		
 		int roomNo = chatService.getRoomNo(customerId);
 		model.addAttribute("roomNo",roomNo);
-		model.addAttribute("customerId", customerId);
-		model.addAttribute("status", "customer");
 		
 		return "chat/chat";
 	

@@ -6,7 +6,7 @@
 <head>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 <meta charset="UTF-8">
-	<title>Chating</title>
+	<title>chatting</title>
 	<style>
 		*{
 			margin:0;
@@ -24,17 +24,17 @@
 			border-left: 3px solid #FFBB00;
 			margin-bottom: 20px;
 		}
-		.chating{
+		.chatting{
 			background-color: #000;
 			width: 500px;
 			height: 500px;
 			overflow: auto;
 		}
-		.chating .me{
+		.chatting .me{
 			color: #F6F6F6;
 			text-align: right;
 		}
-		.chating .others{
+		.chatting .others{
 			color: #FFE400;
 			text-align: left;
 		}
@@ -59,13 +59,13 @@
 		</c:if>
 		
 		<input type="hidden" id="employeeId" value="${sessionScope.loginEmployee.employeeId}">
-		<div id="chating" class="chating"></div>
+		<div id="chatting" class="chatting"></div>
 				
 		<div id="yourMsg">
 			<table class="inputTable">
 				<tr>
 					<th>메시지</th>
-					<th><input id="chatting" placeholder="보내실 메시지를 입력하세요."></th>
+					<th><input id="sendMessage" placeholder="보내실 메시지를 입력하세요."></th>
 					<th><button onclick="send()" id="sendBtn">보내기</button></th>
 				</tr>
 			</table>
@@ -85,7 +85,7 @@
 
 	function wsOpen(){
 		//웹소켓 전송시 현재 방의 번호를 넘겨서 보낸다.
-		ws = new WebSocket("ws://" + location.host + "/chating/"+$("#roomNo").val());
+		ws = new WebSocket("ws://" + location.host + "/chatting/"+$("#roomNo").val());
 		wsEvt();
 	}
 		
@@ -104,9 +104,9 @@
 				var d = JSON.parse(msg);
 				if(d.type == "message"){
 					if(d.id == $("#id").val()){
-						$("#chating").append("<p class='me'>나 : " + d.msg + "</p>");	
+						$("#chatting").append("<p class='me'>본인 : " + d.msg + "</p>");	
 					} else {
-						$("#chating").append("<p class='others'>" + d.id + " : " + d.msg + "</p>");
+						$("#chatting").append("<p class='others'>" + d.id + " : " + d.msg + "</p>");
 					}
 						
 				} 
@@ -132,10 +132,10 @@
 			type: "message",
 			id : id,
 			roomNo : $("#roomNo").val(),
-			msg : $("#chatting").val()
+			msg : $("#sendMessage").val()
 		}
 		ws.send(JSON.stringify(option));
-		$('#chatting').val("");
+		$('#sendMessage').val("");
 	}
 </script>
 </html>
