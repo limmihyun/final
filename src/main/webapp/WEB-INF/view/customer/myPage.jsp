@@ -92,7 +92,7 @@
 				<a href="#" class="chat">
 					<div class="icon">ii &nbsp; 채팅</div>
 				</a> 
-				<a class="right" class="chat">
+				<a href='#' class="right chat">
 					<div>></div>
 				</a>
 			</div>
