@@ -14,8 +14,10 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.SessionAttribute;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.tree.gdhealth.employee.login.LoginEmployee;
 import com.tree.gdhealth.headoffice.Paging;
 import com.tree.gdhealth.headoffice.customValidation.group.DateGroup;
 import com.tree.gdhealth.headoffice.customValidation.group.DatesGroup;
@@ -134,12 +136,14 @@ public class ProgramController {
 		return checkDateOneExists;
 	}
 	
+	@Auth(AUTHORITY = Authority.HEAD_EMP_ONLY)
 	@PostMapping("/addProgram")
 	public String addProgram(@Validated Program program, BindingResult bindingResult1,
 								@Validated(DatesGroup.class) ProgramDate programDate, 
 								BindingResult bindingResult2,
 								@Validated ProgramImg programImg, BindingResult bindingResult3,
-								HttpSession session) {
+								HttpSession session, 
+								@SessionAttribute(name = "loginEmployee") LoginEmployee empInfo) {
 		
 		// 첫 번째 객체(Program)의 유효성 검증 실패시 처리
 		if(bindingResult1.hasErrors()) {
@@ -177,6 +181,10 @@ public class ProgramController {
 		String path = session.getServletContext().getRealPath("/upload/program");
 		// 디버깅
 		log.debug("저장 경로 : " + path);
+		
+		int employeeNo = empInfo.getEmployeeNo();
+		program.setEmployeeNo(employeeNo);
+
 		programService.insertProgram(program, programDate, programImg, path);
 		
 		return "redirect:/headoffice/program";
@@ -208,6 +216,7 @@ public class ProgramController {
 		return "headoffice/updateProgram"; 
 	}
 	
+	@Auth(AUTHORITY = Authority.HEAD_EMP_ONLY)
 	@PostMapping("/update")
 	public String update(@Validated Program program, BindingResult bindingResult1, 
 							@Validated(DateGroup.class) ProgramDate programDate, 

@@ -13,8 +13,10 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.SessionAttribute;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.tree.gdhealth.employee.login.LoginEmployee;
 import com.tree.gdhealth.headoffice.Paging;
 import com.tree.gdhealth.utils.auth.Auth;
 import com.tree.gdhealth.utils.auth.Authority;
@@ -105,10 +107,12 @@ public class EquipmentController {
 		return "headoffice/addEquipment";
 	}
 	
+	@Auth(AUTHORITY = Authority.HEAD_EMP_ONLY)
 	@PostMapping("/addEquipment")
 	public String addEquipment(@Validated SportsEquipment sportsEquipment, BindingResult bindingResult1,
 								@Validated SportsEquipmentImg sportsEquipmentImg, BindingResult bindingResult2,
-								HttpSession session) {
+								HttpSession session,
+								@SessionAttribute(name = "loginEmployee") LoginEmployee empInfo) {
 		
 		// SportsEquipment의 유효성 검증 실패시 처리
 		if(bindingResult1.hasErrors()) {
@@ -135,6 +139,10 @@ public class EquipmentController {
 		String path = session.getServletContext().getRealPath("/upload/equipment");
 		// 디버깅
 		log.debug("저장 경로 : " + path);
+		
+		int writerNo = empInfo.getEmployeeNo();
+		sportsEquipment.setEmployeeNo(writerNo);
+		
 		equipmentService.insertEquipment(sportsEquipment, sportsEquipmentImg, path);
 		
 		return "redirect:/headoffice/equipment";
@@ -150,6 +158,7 @@ public class EquipmentController {
 		return "headoffice/updateEquipment";
 	}
 	
+	@Auth(AUTHORITY = Authority.HEAD_EMP_ONLY)
 	@PostMapping("/update")
 	public String update(@Validated SportsEquipment equipment, BindingResult bindingResult1,
 							SportsEquipmentImg sportsEquipmentImg,
@@ -178,6 +187,7 @@ public class EquipmentController {
 		return "redirect:/headoffice/equipment";
 	}
 	
+	@Auth(AUTHORITY = Authority.HEAD_EMP_ONLY)
 	@ResponseBody
 	@GetMapping("/deactive")
 	public int deactive(int equipmentNo) {

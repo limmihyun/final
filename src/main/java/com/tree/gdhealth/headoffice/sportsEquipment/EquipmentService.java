@@ -110,10 +110,6 @@ public class EquipmentService {
 	public void insertEquipment(SportsEquipment sportsEquipment, SportsEquipmentImg sportsEquipmentImg, 
 										String path) {
 		
-		/////////////////// 로그인 기능 구현 전 임시 코드 start//////////////////////////
-		sportsEquipment.setEmployeeNo(1);
-		/////////////////// 로그인 기능 구현 전 임시 코드 end////////////////////////////
-		
 		if(sportsEquipment.getNote() == null) {
 			sportsEquipment.setNote("");
 		}

@@ -24,6 +24,10 @@
     <link rel="stylesheet" href="/css/style.css" type="text/css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
 <style>
+p{
+	font-size:15px;	
+}
+
 .membership-list{
     width: 735px;
     margin-left: auto;
@@ -128,31 +132,56 @@
             </div>
         </div>
     </section>
-	
-		<section class="features-section spad">
-		<div class="membership">
-		<h3>회원권</h3>
-			<div id="membershipList" class="membership-list">
+
+
+
+
+
+
+
+
+	<section class="upcoming-event-section spad-2">
+		<div class="container">
+			<div class="row">
+				<h3 style="text-align:center; margin-bottom:10px;">회원권</h3>
 				<c:forEach var="m" items="${membershipList}">
-				 <div class="li">
-					<a href="#" class="product" onclick="checkAndRedirect(${m.membershipNo}, ${m.membershipPrice}, '${m.membershipName}', ${m.membershipMonth})">
-		                <div class="product-name">
-		                    회원권 제목 : ${m.membershipName}
-		                </div>
-		                <div class="product-date">
-		                	회원권 개월수 : ${m.membershipMonth}개월
-		                </div>
-		                <div class="product-price">
-		                    회원권 가격 : ${m.membershipPrice}원
-		                </div>
-		            </a>
-		           </div>
+					<div class="col-lg-4 col-md-6" style="margin-bottom:10px">
+						<div class="membership-card set-bg" data-setbg="img/m-card.jpg">
+							<div class="membership-details">
+								<div class="up-title">
+									<span>Next</span>
+									<h5>Membership Cards</h5>
+								</div>
+								<div class="discount">
+									<div id="membershipList" class="membership-list">
+										<div class="li">											
+												<div class="product-name"><p>회원권 제목 : ${m.membershipName}</p>
+												</div>
+												<div class="product-date"><p>회원권 개월수 :
+													${m.membershipMonth}개월</p></div>
+												<div class="product-price"><p>회원권 가격 :
+													${m.membershipPrice}원</p></div>
+											<a href="#" style="margin-top:15%;" class="product btn btn-primary"onclick="checkAndRedirect(${m.membershipNo}, ${m.membershipPrice}, '${m.membershipName}', ${m.membershipMonth})">결제하기</a>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
 				</c:forEach>
 			</div>
 		</div>
-		</section>
-	
-     <jsp:include page="/WEB-INF/footer/footer.jsp" />
+	</section>
+
+
+
+
+
+
+
+
+
+	<jsp:include page="/WEB-INF/footer/footer.jsp" />
 
     <!-- Js Plugins -->
     <script src="/js/jquery-3.3.1.min.js"></script>
