@@ -30,7 +30,7 @@ private final EmpLoginService empLoginService;
 		if(loginEmployee == null) {
 			return "employee/logIn";
 		} else if(loginEmployee.getBranchLevel() == 1) {
-			return "headoffice/home";
+			return "headoffice/empList";
 		}
 		return "customer/home";
 	}
@@ -50,7 +50,7 @@ private final EmpLoginService empLoginService;
 		session.setAttribute("loginEmployee", loginEmployee);
 		// branchNo 채크해서 본사페이지 이동
 		if(loginEmployee.getBranchNo() == 1) {
-			return "redirect:/headoffice/home";
+			return "redirect:/headoffice/emp";
 		}
 		return "redirect:/branch/home";
 	}

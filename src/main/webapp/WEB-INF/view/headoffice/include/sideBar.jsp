@@ -6,9 +6,12 @@
             <div class="sidebar-header">
                <h1 style="color:#2E64FE; margin-top:15px;">본사 페이지</h1>   
             </div>
-            <div class="left-custom-menu-adp-wrap comment-scrollbar">
+            <div class="left-custom-menu-adp-wrap">
                 <nav class="sidebar-nav left-sidebar-menu-pro">
                     <ul class="metismenu" id="menu1">
+<<<<<<< HEAD
+                    	<li>
+=======
                        <li>
                             <a href="${pageContext.request.contextPath}/headoffice/home">
                         <span class="educate-icon educate-home icon-wrap"></span>
@@ -16,6 +19,7 @@
                      </a>                            
                         </li>
                        <li>
+>>>>>>> 1e45ab49b80a8717e680b50c2c7ef5cc587c0790
                             <a class="has-arrow" href="#" aria-expanded="false">
                                <span class="educate-icon educate-professor icon-wrap"></span> 
                                <span class="mini-click-non">직원</span>
@@ -44,6 +48,20 @@
                                 <li><a href="${pageContext.request.contextPath}/headoffice/program/addProgram"><span class="mini-sub-pro">프로그램 추가</span></a></li>                               
                             </ul>                         
                         </li> 
+<<<<<<< HEAD
+                        <li>
+                            <a href="${pageContext.request.contextPath}/notice/noticeList" aria-expanded="false">
+                            	<span class="educate-icon educate-course icon-wrap"></span> 
+                            	<span class="mini-click-non">공지</span>
+                            </a>                     
+                        </li>
+                        <li>
+                            <a href="${pageContext.request.contextPath}/question/questionList" aria-expanded="false">
+                            	<span class="educate-icon educate-course icon-wrap"></span> 
+                            	<span class="mini-click-non">문의사항</span>
+                            </a>                   
+                        </li>                                         
+=======
                        <li>
                             <a class="has-arrow" href="#" aria-expanded="false">
                                <span class="educate-icon educate-course icon-wrap"></span> 
@@ -55,6 +73,7 @@
                                 <li><a href="${pageContext.request.contextPath}/notice/addNotice"><span class="mini-sub-pro">공지추가</span></a></li>                              
                             </ul>                         
                         </li>                                        
+>>>>>>> 1e45ab49b80a8717e680b50c2c7ef5cc587c0790
                         <li>
                             <a class="has-arrow" href="mailbox.html" aria-expanded="false">
                                <span class="educate-icon educate-data-table icon-wrap"></span> 
@@ -86,21 +105,18 @@
                                 <li><a href="${pageContext.request.contextPath}/headoffice/equipment/addEquipment"><span class="mini-sub-pro">물품 추가</span></a></li>                           
                             </ul>
                         </li>
+<<<<<<< HEAD
+						<li>
+                            <a href="${pageContext.request.contextPath}/chat/room" aria-expanded="false">
+                            	<span class="educate-icon educate-interface icon-wrap"></span> 
+                            	<span class="mini-click-non">채팅</span>
+=======
                   <li>
                             <a class="has-arrow" href="mailbox.html" aria-expanded="false">
                                <span class="educate-icon educate-interface icon-wrap"></span> 
                                <span class="mini-click-non">채팅</span>
+>>>>>>> 1e45ab49b80a8717e680b50c2c7ef5cc587c0790
                             </a>
-                            <ul class="submenu-angle interface-mini-nb-dp" aria-expanded="false">
-                                <li><a title="Google Map" href="google-map.html"><span class="mini-sub-pro">Google Map</span></a></li>
-                                <li><a title="Data Maps" href="data-maps.html"><span class="mini-sub-pro">Data Maps</span></a></li>
-                                <li><a title="Pdf Viewer" href="pdf-viewer.html"><span class="mini-sub-pro">Pdf Viewer</span></a></li>
-                                <li><a title="X-Editable" href="x-editable.html"><span class="mini-sub-pro">X-Editable</span></a></li>
-                                <li><a title="Code Editor" href="code-editor.html"><span class="mini-sub-pro">Code Editor</span></a></li>
-                                <li><a title="Tree View" href="tree-view.html"><span class="mini-sub-pro">Tree View</span></a></li>
-                                <li><a title="Preloader" href="preloader.html"><span class="mini-sub-pro">Preloader</span></a></li>
-                                <li><a title="Images Cropper" href="images-cropper.html"><span class="mini-sub-pro">Images Cropper</span></a></li>
-                            </ul>
                         </li> 
                                          
                     </ul>

@@ -98,7 +98,7 @@ public class EmpController {
 	    return "headoffice/fragment/searchEmp";
 		
 	}
-		
+	
 	@ResponseBody
 	@GetMapping("/branchList")
 	public List<String> branchList() {
@@ -128,6 +128,7 @@ public class EmpController {
 		
 	}
 	
+	@Auth(AUTHORITY = Authority.HEAD_EMP_ONLY)
 	@PostMapping("/addEmp")
 	public String addEmp(@Validated Employee employee,BindingResult bindingResult1,
 							@Validated EmployeeDetail employeeDetail, BindingResult bindingResult2,

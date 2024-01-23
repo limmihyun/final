@@ -19,6 +19,7 @@
 			ON pd.program_no = p.program_no
 		INNER JOIN program_img pi
 			ON p.program_no = pi.program_no
+		ORDER BY pd.program_date DESC
 		<where>
 			<choose>
 				<when test="type != null and type.equals('title')">

@@ -35,6 +35,7 @@
 				</when>
 			</choose>
 		</where>
+		ORDER BY ed.createdate DESC
 		LIMIT #{beginRow}, #{rowPerPage}
 	</select>	
 	

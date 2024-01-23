@@ -40,6 +40,7 @@ public class LoginController {
 		session.removeAttribute("loginEmployee");
 
 		session.setAttribute("customerNo", customerNo);
+		session.setAttribute("customerId", customer.getCustomerId());
 		session.setAttribute("userLevel", 0);
 		return "redirect:/customer/home";
 	}
