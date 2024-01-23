@@ -17,10 +17,13 @@ public interface NoticeMapper {
 		
 		//공지삭제
 		int deleteNotice(Notice notice);
-		
+	
 		//공지상세
 		Notice noticeOne(int noticeNo);
 		
 		//공지 리스트
 		List<Notice> noticeList(Map<String, Object> paramMap);
+		
+		//공지개수
+		int noticeCount();
 }

@@ -1,6 +1,7 @@
 package com.tree.gdhealth.question;
 
 import java.util.List;
+import java.util.Map;
 
 import org.apache.ibatis.annotations.Mapper;
 
@@ -10,7 +11,7 @@ import com.tree.gdhealth.vo.Question;
 public interface QuestionMapper {
 	
 	//질문 리스트
-	List<Question> questionList();
+	List<Question> questionList(Map<String, Object> paramMap);
 	
 	//질문 상세
 	Question questionOne(int questionNo) ;
@@ -26,5 +27,8 @@ public interface QuestionMapper {
 	
 	//삭제
 	int deleteQuestion(Question question);
+	
+	//질문 개수
+	int questionCount();
 }
    

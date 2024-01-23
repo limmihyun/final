@@ -3,7 +3,8 @@
 <mapper namespace="com.tree.gdhealth.notice.NoticeMapper">
 <!-- 공지 리스트 -->
    <select id="noticeList"
-   parameterType="com.tree.gdhealth.vo.Notice">
+   parameterType="java.util.Map"
+   resultType="com.tree.gdhealth.vo.Notice">
    
    SELECT 
        n.notice_no AS noticeNo,
@@ -67,6 +68,12 @@
    DELETE 
    FROM notice
    WHERE notice_no = #{noticeNo}
-   
    </delete>
+ <!-- 공지 개수 --> 
+ 	<select id="noticeCount"
+ 	parameterType="java.util.Map"
+ 	resultType="int">
+ 	SELECT count (*) FROM notice
+ 	</select>
+ 
 </mapper>

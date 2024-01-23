@@ -56,7 +56,7 @@ public class MyPageService {
 		if(myPageMapper.customerDeleteCk(customer) == null || myPageMapper.customerDeleteCk(customer) == 0) {
 			return result;
 		}
-			result = myPageMapper.customerDeleteCk(customer);
+		result = myPageMapper.customerDeleteCk(customer);
 		return result;
 	}
 	

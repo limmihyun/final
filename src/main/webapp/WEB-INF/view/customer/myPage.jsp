@@ -67,8 +67,8 @@
 		
 		<div class="listContainer">
 			<div class="item">
-				<a href="#"><div class="icon">ii &nbsp; 내 정보 수정</div></a> <a
-					class="right" href="#"><div>></div></a>
+				<a href="/customer/updateMyPage"><div class="icon">ii &nbsp; 내 정보 수정</div></a> <a
+					class="right" href="/customer/updateMyPage"><div>></div></a>
 			</div>
 			<div class="item">
 				<a href="/customer/myreservation"><div class="icon">ii &nbsp; 스케줄</div></a> <a

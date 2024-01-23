@@ -134,6 +134,7 @@
 		<h3>회원권</h3>
 			<div id="membershipList" class="membership-list">
 				<c:forEach var="m" items="${membershipList}">
+				 <div class="li">
 					<a href="#" class="product" onclick="checkAndRedirect(${m.membershipNo}, ${m.membershipPrice}, '${m.membershipName}', ${m.membershipMonth})">
 		                <div class="product-name">
 		                    회원권 제목 : ${m.membershipName}
@@ -145,14 +146,7 @@
 		                    회원권 가격 : ${m.membershipPrice}원
 		                </div>
 		            </a>
-<%-- 					<div style="border-radius:10px; border-style:solid; border-color:black; background-color:#F6F6F6; margin:1%;">
-						<div style="margin:1%;">
-							<p>회원권 제목 : ${m.membershipName}</p>
-							<p>회원권 개월수 : ${m.membershipMonth}개월</p>
-							<p>회원권 가격 : ${m.membershipPrice}원</p>
-							<a href="#" class="btn btn-primary" onclick="checkAndRedirect(${m.membershipNo}, ${m.membershipPrice}, '${m.membershipName}', ${m.membershipMonth})">결제하기</a>
-						</div>
-					</div> --%>
+		           </div>
 				</c:forEach>
 			</div>
 		</div>

@@ -42,7 +42,7 @@ public class NoticeService {
    }
    
    // 공지 리스트
-   public List<Notice> noticeList(int currentPage){
+   public Map<String,Object> noticeList(int currentPage){
       int rowPerPage = 10;
       int beginRow = (currentPage -1) * rowPerPage;
       
@@ -52,7 +52,20 @@ public class NoticeService {
       paramMap.put("rowPerPage", rowPerPage);
       
       List <Notice> resultNoticeList = noticeMapper.noticeList(paramMap);
-      return resultNoticeList;
+      
+      int temp = noticeMapper.noticeCount();
+      System.out.print("현재 공지 개수:" + temp);
+      int lastPage = temp / rowPerPage;
+      int value = temp % rowPerPage;
+      
+      if(value != 0) {
+    	  lastPage = lastPage + 1;
+      }
+      Map<String, Object> result = new HashMap<>();
+      result.put("resultNoticeList", resultNoticeList);
+      result.put("lastPage", lastPage);
+      System.out.print("마지막 페이지:" + lastPage);
+      return result;
    }
    
 }

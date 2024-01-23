@@ -5,19 +5,28 @@
 		INSERT INTO payment(membership_no, customer_no, payment_date, createdate, updatedate) VALUES(#{membershipNo}, #{customerNo}, CONCAT(#{year}, '-', #{resultMonth}, '-', #{day}),NOW(),NOW());
 	</insert>
 	<select id="selectPayment">
-		SELECT count(*) from payment where customer_no = #{customerNo};
+		SELECT count(*) from payment where customer_no = #{customerNo} AND active != 'Y';
+	</select>
+	<select id="selectActiveN">
+		SELECT count(*) FROM payment WHERE customer_no = #{customerNo} AND active = "N";
 	</select>
 <update id="updatePayment" parameterType="java.util.Map">
 	    UPDATE payment 
 	    SET payment_date = STR_TO_DATE(CONCAT(#{year}, '-', #{month}, '-', #{day}), '%Y-%m-%d') 
-	    WHERE customer_no = #{customerNo};  
+	    WHERE customer_no = #{customerNo} AND active = 'N';
 </update>
 
 	<select id="selectPaymentMonth" resultType="java.util.Map">
-		SELECT MONTH(payment_date) month, YEAR(payment_date) year, DAY(payment_date) day from payment where customer_no = #{customerNo};
+		SELECT MONTH(payment_date) month, YEAR(payment_date) year, DAY(payment_date) day from payment where customer_no = #{customerNo} AND active = 'N';
 	</select>
 	
 	<select id="membershipMonth">
 		SELECT membership_month FROM membership WHERE membership_no = #{membershipNo};
 	</select>
+	
+	<update id="deletePayment">
+		UPDATE payment SET active = 'Y' WHERE customer_no = #{customerNo};
+	</update>
+	
+	
 </mapper>
