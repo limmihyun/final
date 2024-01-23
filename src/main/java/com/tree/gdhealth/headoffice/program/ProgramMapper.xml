@@ -18,8 +18,7 @@
 		INNER JOIN program_date pd
 			ON pd.program_no = p.program_no
 		INNER JOIN program_img pi
-			ON p.program_no = pi.program_no
-		ORDER BY pd.program_date DESC
+			ON p.program_no = pi.program_no	
 		<where>
 			<choose>
 				<when test="type != null and type.equals('title')">
@@ -33,6 +32,7 @@
 				</when>			
 			</choose>
 		</where>
+		ORDER BY pd.program_date DESC
 		LIMIT #{beginRow}, #{rowPerPage}
 	</select>
 	
