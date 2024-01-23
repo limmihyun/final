@@ -19,8 +19,8 @@ import com.tree.gdhealth.employee.login.LoginEmployee;
 @Component
 public class SocketHandler extends TextWebSocketHandler {
 	
-	List<HashMap<String, Object>> roomListSessions = new ArrayList<>(); // 웹소켓 세션을 담아둘 리스트
-	ArrayList<HashMap<String, Object>> messageList = new ArrayList<>();
+	List<HashMap<String, Object>> roomListSessions = new ArrayList<>(); // 웹소켓 세션을 담아 둘 리스트
+	ArrayList<HashMap<String, Object>> messageList = new ArrayList<>(); // 채팅 메시지를 담아 둘 리스트
 	
 	@SuppressWarnings("unchecked")
 	@Override
@@ -132,7 +132,7 @@ public class SocketHandler extends TextWebSocketHandler {
 				System.out.println("messageList : " + messageList);
 				//// 채팅 저장 코드 end
 				
-				// 웹소켓 세션 객체에는 url이 저장되어 있어 해당되는 url로 메시지를 보내 웹소켓통신을 가능하게 한다.
+				// 웹소켓 세션 객체에는 url이 저장되어 있어 해당되는 url로 메시지를 보내 웹소켓 통신을 가능하게 한다.
 				WebSocketSession wss = (WebSocketSession) temp.get(k);
 				System.out.println("webSocketSessions : " + wss);
 				if(wss != null) {

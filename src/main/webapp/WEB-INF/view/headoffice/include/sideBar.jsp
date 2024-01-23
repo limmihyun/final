@@ -84,7 +84,7 @@
                             </ul>
                         </li>
 						<li>
-                            <a href="${pageContext.request.contextPath}/chat/room" aria-expanded="false" id="chat">
+                            <a href="#" aria-expanded="false" id="chat">
                             	<span class="educate-icon educate-interface icon-wrap"></span> 
                             	<span class="mini-click-non">채팅</span>
                				</a>
@@ -101,7 +101,7 @@
  		
  		$('#chat').click(function(event){
  			event.preventDefault();
- 			url = '${pageContext.request.contextPath}/chat/room';
+ 			url = '${pageContext.request.contextPath}/chat/roomList';
  			const options = 'top=10, left=10, width=600, height=700, status=no, menubar=no, toolbar=no';
  			window.open(url, '_blank', options);
  		})

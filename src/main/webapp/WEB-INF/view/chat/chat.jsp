@@ -20,8 +20,8 @@
 		.container h1{
 			text-align: left;
 			padding: 5px 5px 5px 15px;
-			color: #FFBB00;
-			border-left: 3px solid #FFBB00;
+			color: #58ACFA;
+			border-left: 3px solid #58ACFA;
 			margin-bottom: 20px;
 		}
 		.chatting{
@@ -35,7 +35,7 @@
 			text-align: right;
 		}
 		.chatting .others{
-			color: #FFE400;
+			color: #58ACFA;
 			text-align: left;
 		}
 		input{
