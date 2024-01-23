@@ -24,6 +24,10 @@
     <link rel="stylesheet" href="/css/style.css" type="text/css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
 <style>
+p{
+	font-size:15px;	
+}
+
 .membership-list{
     width: 735px;
     margin-left: auto;
@@ -150,16 +154,14 @@
 								</div>
 								<div class="discount">
 									<div id="membershipList" class="membership-list">
-										<div class="li">
-											<a href="#" class="product"
-												onclick="checkAndRedirect(${m.membershipNo}, ${m.membershipPrice}, '${m.membershipName}', ${m.membershipMonth})">
-												<div class="product-name">회원권 제목 : ${m.membershipName}
+										<div class="li">											
+												<div class="product-name"><p>회원권 제목 : ${m.membershipName}</p>
 												</div>
-												<div class="product-date">회원권 개월수 :
-													${m.membershipMonth}개월</div>
-												<div class="product-price">회원권 가격 :
-													${m.membershipPrice}원</div>
-											</a>
+												<div class="product-date"><p>회원권 개월수 :
+													${m.membershipMonth}개월</p></div>
+												<div class="product-price"><p>회원권 가격 :
+													${m.membershipPrice}원</p></div>
+											<a href="#" style="margin-top:15%;" class="product btn btn-primary"onclick="checkAndRedirect(${m.membershipNo}, ${m.membershipPrice}, '${m.membershipName}', ${m.membershipMonth})">결제하기</a>
 										</div>
 									</div>
 								</div>
