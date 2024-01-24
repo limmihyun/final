@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.SessionAttribute;
 
 import com.tree.gdhealth.utils.auth.Auth;
 import com.tree.gdhealth.utils.auth.Authority;
+import com.tree.gdhealth.vo.ChatMessage;
 import com.tree.gdhealth.vo.ChatRoom;
 
 import lombok.RequiredArgsConstructor;
@@ -40,14 +41,14 @@ public class ChatController {
 	@GetMapping("/customerRoom")
 	public String chatting(Model model, String customerId, ChatRoom chatRoom,
 						@SessionAttribute("customerNo") int customerNo) {
-		
-		System.out.println("customerNo : " + customerNo);
-		
+				
 		boolean isRoomExists = chatService.isRoomExists(customerNo);
 		if(!isRoomExists) {
+			
 			chatRoom.setCustomerNo(customerNo);
 			int insertRoom = chatService.insertRoom(chatRoom);
 			log.debug("방 추가(성공:1) : " + insertRoom);
+			
 			model.addAttribute("roomNo",chatRoom.getChatRoomNo());
 		}
 		
@@ -56,6 +57,10 @@ public class ChatController {
 		
 		int roomNo = chatService.getRoomNo(customerId);
 		model.addAttribute("roomNo",roomNo);
+		
+		List<ChatMessage> messageList = chatService.getChatList(roomNo);
+		model.addAttribute("messageList", messageList);
+		log.debug("messageList : " + messageList.toString());
 		
 		return "chat/chat";
 	
@@ -71,6 +76,10 @@ public class ChatController {
 		
 		int roomNo = chatService.getRoomNo(customerId);
 		model.addAttribute("roomNo", roomNo);
+		
+		List<ChatMessage> messageList = chatService.getChatList(roomNo);
+		model.addAttribute("messageList", messageList);
+		log.debug("messageList : " + messageList.toString());
 		
 		return "chat/chat";
 	}

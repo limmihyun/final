@@ -6,6 +6,7 @@ import java.util.Map;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.tree.gdhealth.vo.ChatMessage;
 import com.tree.gdhealth.vo.ChatRoom;
 
 import lombok.RequiredArgsConstructor;
@@ -23,6 +24,13 @@ public class ChatService {
 		
 		return ChatRoomList;
 		
+	}
+	
+	public List<ChatMessage> getChatList(int chatRoomNo) {
+		
+		List<ChatMessage> chatList = chatMapper.chatList(chatRoomNo);
+		
+		return chatList;
 	}
 	
 	public int getRoomNo(String customerId) {

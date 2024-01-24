@@ -7,7 +7,8 @@ public class ChatMessage {
 	
 	int chatMessageNo;
 	int chatRoomNo;
-	int messageSenderNo;
+	Integer customerNo;
+	Integer employeeNo;
 	String messageContent;
 	String createdate;
 
