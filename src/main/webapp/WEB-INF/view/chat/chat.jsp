@@ -6,7 +6,7 @@
 <head>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 <meta charset="UTF-8">
-	<title>Chating</title>
+	<title>chatting</title>
 	<style>
 		*{
 			margin:0;
@@ -20,22 +20,22 @@
 		.container h1{
 			text-align: left;
 			padding: 5px 5px 5px 15px;
-			color: #FFBB00;
-			border-left: 3px solid #FFBB00;
+			color: #58ACFA;
+			border-left: 3px solid #58ACFA;
 			margin-bottom: 20px;
 		}
-		.chating{
+		.chatting{
 			background-color: #000;
 			width: 500px;
 			height: 500px;
 			overflow: auto;
 		}
-		.chating .me{
+		.chatting .me{
 			color: #F6F6F6;
 			text-align: right;
 		}
-		.chating .others{
-			color: #FFE400;
+		.chatting .others{
+			color: #58ACFA;
 			text-align: left;
 		}
 		input{
@@ -46,27 +46,54 @@
 </head>
 <body>
 	<div id="container" class="container">
-	
-		<h1>${customerId}의 채팅방</h1>
+		<c:if test="${status == 'customer'}">
+			<h1>${customerId}의 채팅방</h1>
+		</c:if>
+		<c:if test="${status == 'employee'}">
+			<h1>${customerId}의 채팅방(본사 직원용)</h1>
+		</c:if>
 		
 		<input type="hidden" id="status" value="${status}">
 		<input type="hidden" id="roomNo" value="${roomNo}">
 		<c:if test="${status == 'customer'}">
-			<input type="hidden" id="id" value="${customerId}">
+			<input type="hidden" id="id" value="${sessionScope.customerId}">
+			<input type="hidden" id="no" value="${sessionScope.customerNo}">
 		</c:if>
 		<c:if test="${status == 'employee'}">
 			<input type="hidden" id="id" value="${sessionScope.loginEmployee.employeeId}">
+			<input type="hidden" id="no" value="${sessionScope.loginEmployee.employeeNo}">
 		</c:if>
 		
 		<input type="hidden" id="employeeId" value="${sessionScope.loginEmployee.employeeId}">
-		<div id="chating" class="chating"></div>
+		<div id="chatting" class="chatting">
+			<c:forEach var="m" items="${messageList}">
+				<c:if test="${m.employeeNo != null && status == 'employee'}">
+					<p class="me">본인 : ${m.messageContent}</p>
+				</c:if>
+				<c:if test="${m.customerNo != null && status == 'customer'}">
+					<p class="me">본인 : ${m.messageContent}</p>
+				</c:if>
+				<c:if test="${m.employeeNo != null && status == 'customer'}">
+					<p class="others">${sessionScope.loginEmployee.employeeId} : ${m.messageContent}</p>
+				</c:if>
+				<c:if test="${m.customerNo != null && status == 'employee'}">
+					<p class="others">${sessionScope.customerId} : ${m.messageContent}</p>
+				</c:if>
+			</c:forEach>
+		</div>
 				
 		<div id="yourMsg">
 			<table class="inputTable">
 				<tr>
 					<th>메시지</th>
-					<th><input id="chatting" placeholder="보내실 메시지를 입력하세요."></th>
-					<th><button onclick="send()" id="sendBtn">보내기</button></th>
+					<th><input id="sendMessage" placeholder="보내실 메시지를 입력하세요."></th>
+
+
+						<th><button onclick="send()" id="sendBtn">보내기</button></th>
+
+					<c:if test="${status == 'employee'}">
+						<th><button onclick="goBack()" id="sendBtn" style="margin-left:22px;">뒤로 가기</button></th>
+					</c:if>			
 				</tr>
 			</table>
 		</div>
@@ -75,17 +102,26 @@
 
 <script type="text/javascript">
 
-	console.log('roomNo : ' + $('#roomNo').val());
-	console.log('status : ' + $('#status').val());
-	console.log('id : ' + $('#id').val())
+	function goBack() {
+		window.history.back();
+	}
+
+	let chatArea = $('.chatArea');
+	if(chatArea.length > 0) {
+		let text = chatArea.text();
+		if (text.length > 30) {
+	          // 글자 수가 40자 이상이면 개행 추가
+	          chatArea.text(text.substring(0, 40) + '\n' + text.substring(40));
+        }
+	}
+	
 	
 	wsOpen();
-	
 	var ws;
 
 	function wsOpen(){
 		//웹소켓 전송시 현재 방의 번호를 넘겨서 보낸다.
-		ws = new WebSocket("ws://" + location.host + "/chating/"+$("#roomNo").val());
+		ws = new WebSocket("ws://" + location.host + "/chatting/"+$("#roomNo").val());
 		wsEvt();
 	}
 		
@@ -101,12 +137,18 @@
 			console.log('message : ' + msg);
 			
 			if(msg != null && msg.trim() != ''){
+				
 				var d = JSON.parse(msg);
+				
+				let today = new Date();
+				let hours = today.getHours(); // 시
+				let minutes = today.getMinutes();  // 분
+				
 				if(d.type == "message"){
 					if(d.id == $("#id").val()){
-						$("#chating").append("<p class='me'>나 : " + d.msg + "</p>");	
+						$("#chatting").append("<p class='me'>본인 : " + d.msg + "</p>");	
 					} else {
-						$("#chating").append("<p class='others'>" + d.id + " : " + d.msg + "</p>");
+						$("#chatting").append("<p class='others'>" + d.id + " : "  + d.msg + "</p>");
 					}
 						
 				} 
@@ -123,19 +165,20 @@
 	
 	function send() {
 		
-		let status = $('#status').val();
 		let id = $('#id').val();
+		let status = $('#status').val();
+		let indexNo = $('#no').val();
 			
-		console.log('send id : ' + id);
-		
 		var option ={
 			type: "message",
 			id : id,
+			status : status,
+			indexNo : indexNo,
 			roomNo : $("#roomNo").val(),
-			msg : $("#chatting").val()
+			msg : $("#sendMessage").val()
 		}
 		ws.send(JSON.stringify(option));
-		$('#chatting').val("");
+		$('#sendMessage').val("");
 	}
 </script>
 </html>
