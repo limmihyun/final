@@ -20,11 +20,10 @@ public class PaymentRest {
         boolean hasMembership = false;
 		
 		int customerNo = (int)(session.getAttribute("customerNo"));
-		System.out.println("zzzz");
 
 		paymentService.deletePayment(customerNo);
 		int selectPayment = paymentService.selectPayment(customerNo);
-		System.out.println(selectPayment + "null일려나");
+		System.out.println(selectPayment + "null 검사");
 		
 		int activeN = paymentService.selectActiveN(customerNo);
 
