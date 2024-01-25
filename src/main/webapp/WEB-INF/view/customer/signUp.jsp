@@ -240,6 +240,7 @@
 	</script>
 
 	<script>
+	
 	let getId= RegExp(/^[a-zA-Z0-9]{4,12}$/);
 	let getName= RegExp(/^[가-힣]+$/);
 	let getExp =  /^(01[016789]{1})[0-9]{3,4}[0-9]{4}$/;
@@ -458,6 +459,24 @@
 				$('#customerBirth').focus(); 
 				return false;
 			}
+			let customerBirthValue = $('#customerBirth').val();
+			// 나이가 13세에서 90세 사이인지 확인
+			let birthYear = parseInt(customerBirthValue.substring(0, 4), 10);
+			let today = new Date();
+			let age = today.getFullYear() - birthYear - 1;
+			let birthDateThisYear = new Date(today.getFullYear(), birthYear, parseInt(customerBirthValue.substring(5, 7), 10) - 1, parseInt(customerBirthValue.substring(8), 10));
+
+			if ((today - birthDateThisYear) >= 0) {
+			    age++;
+			}
+
+			if (age < 13 || age > 90) {
+			    alert("나이는 13세에서 90세 사이어야 합니다.");
+			    $('#customerBirth').val("");
+			    $('#customerBirth').focus();
+			    return false;
+			}
+			
 			
 			
 			if(fileInput.files.length === 0) {
