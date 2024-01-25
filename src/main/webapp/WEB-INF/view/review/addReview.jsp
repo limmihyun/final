@@ -86,8 +86,15 @@
                                 <div class="container" style="margin-top: 100px;">
                                    <div class="col-lg-12">
                                       <input type="hidden" name="customerNo" value="${customerNo}">
-                                        <input type="text" placeholder="reviewTitle" name="reviewTitle" > 
-                                        <textarea placeholder="Message" name = "reviewContent"></textarea>
+                                        <input type="text" placeholder="reviewTitle" name="reviewTitle" >
+                                       <label>&nbsp;프로그램</label>
+                                       <select name="programRsNo" class="form-control">
+                                           <c:forEach var="item" items="${programRsNoList}">
+                                           <option value="${item.programRsNo}">${item.programName}</option>
+                                           </c:forEach>
+                                       </select>
+                                       <br>
+                                       <textarea placeholder="Message" name = "reviewContent"></textarea>
                                         <button type="submit" class="site-btn">작성하기</button>
                                  
                       </form>

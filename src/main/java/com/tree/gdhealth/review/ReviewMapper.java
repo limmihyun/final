@@ -21,7 +21,7 @@ public interface ReviewMapper {
 	Review reviewOne(int reviewNo);
 	//개수
 	int reviewCount();
-	
-	List<Integer> selectProgramRsNoByCustomerNo(int customerNo);
+
+	List<ProgramRsVo> selectProgramRsNoByCustomerNo(int customerNo);
 }
 
