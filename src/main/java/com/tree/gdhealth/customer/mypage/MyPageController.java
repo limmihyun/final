@@ -46,6 +46,7 @@ public class MyPageController {
       
       return "customer/myPage";
    }
+   
    @GetMapping("/customer/updateMyPage")
    public String updateMyPage(HttpSession session, Model model) {
       if(session.getAttribute("customerNo") == null) {

@@ -60,7 +60,10 @@
              <div class="p-3 p-lg-5 border bg-white">
              <h1 class="mb-4 section-title">Q&A</h1>
              <br>
-            <table class ="table">
+             
+    <form method="post" action="${pageContext.request.contextPath}/question/updateAnswer">
+      <input type="hidden" name="questionNo" value="${qsOne.questionNo}">
+        <table class ="table">
         <tr>
             <th>질문번호</th>
             <td><p style="border: none;">${qsOne.questionNo}</p></td>
@@ -73,14 +76,28 @@
             <th>작성자</th>
             <td><p style="border: none;">${qsOne.customerId}</p></td>
         </tr>
+        <c:choose>
+        <c:when test="${customerNo == qsOne.customerNo}">
         <tr>
             <th>제목</th>
             <td><p style="border: none;">${qsOne.questionTitle}</td>
         </tr>
         <tr>
           <th>내용</th>
+          <td><textarea rows="6" cols="130" style="border: none;">${qsOne.questionContent}</textarea></td>
+      	</tr>
+        </c:when>
+        <c:otherwise>
+        <tr>
+            <th>제목</th>
+            <td><p style="border: none;" readonly>${qsOne.questionTitle}</td>
+        </tr>
+        <tr>
+          <th>내용</th>
           <td><textarea rows="6" cols="130" style="border: none;" readonly>${qsOne.questionContent}</textarea></td>
-      </tr>
+      	</tr>
+      	</c:otherwise>
+      	</c:choose>
         <tr>
             <th>게시일</th>
             <td><p style="border: none;">${qsOne.createdate}</td>
@@ -91,12 +108,13 @@
         </tr>
     </table>
 
-    <c:if test="${customerNo != null}">
+    <c:if test="${customerNo == qsOne.customerNo}">
      	<a style="float: right; margin-left: 10px;">
         	<a href="${pageContext.request.contextPath}/question/updateQuestion?questionNo=${qsOne.questionNo}" class="btn btn-primary">수정</a>
         	<a href="${pageContext.request.contextPath}/question/deleteQuestion?questionNo=${qsOne.questionNo}" class="btn btn-danger">삭제</a>
     	</a>
     </c:if>
+    </form>
     
     <!-- customer 입장: 답변이 달려 있다면 답변이 보이도록 -->
     <c:if test="${ansOne.answerContent != null && customerNo != null}">
@@ -160,7 +178,7 @@
                     </table>
                     <div style="text-align: right; margin-top: 10px;">
                         <button type="submit" class="btn btn-primary">수정하기</button>
-                        <a href="${pageContext.request.contextPath}/answer/deleteAnswer?questionNo=${qsOne.questionNo}" class="btn btn-danger">삭제</a>
+                        <a href="${pageContext.request.contextPath}/answer/deleteAnswer?questionNo=${qsOne.questionNo}" class="btn btn-danger">삭제하기</a>
                     </div>
                 </form>
             </div>
