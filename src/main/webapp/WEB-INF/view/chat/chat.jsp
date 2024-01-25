@@ -47,7 +47,7 @@
 <body>
 	<div id="container" class="container">
 		<c:if test="${status == 'customer'}">
-			<h1>${customerId}의 채팅방</h1>
+			<h1>${sessionScope.customerId}의 채팅방</h1>
 		</c:if>
 		<c:if test="${status == 'employee'}">
 			<h1>${customerId}의 채팅방(본사 직원용)</h1>
@@ -71,13 +71,13 @@
 					<p class="me">본인 : ${m.messageContent}</p>
 				</c:if>
 				<c:if test="${m.customerNo != null && status == 'customer'}">
-					<p class="me">본인 : ${m.messageContent}</p>
+					<p class="me">${sessionScope.customerId} : ${m.messageContent}</p>
 				</c:if>
 				<c:if test="${m.employeeNo != null && status == 'customer'}">
-					<p class="others">${sessionScope.loginEmployee.employeeId} : ${m.messageContent}</p>
+					<p class="others">본사 : ${m.messageContent}</p>
 				</c:if>
 				<c:if test="${m.customerNo != null && status == 'employee'}">
-					<p class="others">${sessionScope.customerId} : ${m.messageContent}</p>
+					<p class="others">${customerId} : ${m.messageContent}</p>
 				</c:if>
 			</c:forEach>
 		</div>
@@ -145,10 +145,17 @@
 				let minutes = today.getMinutes();  // 분
 				
 				if(d.type == "message"){
-					if(d.id == $("#id").val()){
-						$("#chatting").append("<p class='me'>본인 : " + d.msg + "</p>");	
-					} else {
+					if(d.id == $("#id").val()){ // 본인이 입력한 채팅인지 확인
+						if(d.status == 'customer') {
+							$("#chatting").append("<p class='me'>" + d.id + " : " + d.msg + "</p>");
+						} else {
+							$("#chatting").append("<p class='me'>본인 : " + d.msg + "</p>");
+						}
+							
+					} else if(d.status == "customer") {
 						$("#chatting").append("<p class='others'>" + d.id + " : "  + d.msg + "</p>");
+					} else if(d.status == "employee") {
+						$("#chatting").append("<p class='others'> 본사 : "  + d.msg + "</p>");
 					}
 						
 				} 

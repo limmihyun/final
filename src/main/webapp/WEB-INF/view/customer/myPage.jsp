@@ -95,7 +95,6 @@
 					<div>></div>
 				</a>
 			</div>
-			
 		</div>
 		<div class="listContainer">
 			
@@ -129,7 +128,7 @@
 <script>
 	$('.chat').click(function(event){
 		event.preventDefault();
-		url = '/chat/customerRoom?customerId=${sessionScope.customerId}';
+		url = '/chat/customerRoom';
 		const options = 'top=10, left=10, width=600, height=700, status=no, menubar=no, toolbar=no';
 		window.open(url, '_blank', options);
 	})

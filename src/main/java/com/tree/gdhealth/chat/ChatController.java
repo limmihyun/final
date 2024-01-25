@@ -39,11 +39,12 @@ public class ChatController {
 	// 채팅방(고객)
 	@Auth(AUTHORITY = Authority.CUSTOMER_ONLY)
 	@GetMapping("/customerRoom")
-	public String chatting(Model model, String customerId, ChatRoom chatRoom,
-						@SessionAttribute("customerNo") int customerNo) {
-				
+	public String chatting(Model model, ChatRoom chatRoom,
+						@SessionAttribute("customerNo") int customerNo,
+						@SessionAttribute("customerId") String customerId) {
+		// 해당 고객에 대한 채팅방이 이미 존재하는지 확인
 		boolean isRoomExists = chatService.isRoomExists(customerNo);
-		if(!isRoomExists) {
+		if(!isRoomExists) { // 방이 아직 존재하지 않다면 방을 추가
 			
 			chatRoom.setCustomerNo(customerNo);
 			int insertRoom = chatService.insertRoom(chatRoom);
@@ -52,7 +53,6 @@ public class ChatController {
 			model.addAttribute("roomNo",chatRoom.getChatRoomNo());
 		}
 		
-		model.addAttribute("customerId", customerId);
 		model.addAttribute("status", "customer");
 		
 		int roomNo = chatService.getRoomNo(customerId);
