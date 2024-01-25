@@ -59,9 +59,6 @@ public class ProgramReservationController {
 		List<Map<String, Object>> resultList = programReservationService.selectProgramByMonth((int)(calendarMap.get("targetYear")), (int)(calendarMap.get("targetMonth")));
 		model.addAttribute("resultList", resultList);
 		System.out.println(resultList + "<---resultList 출력");
-	
-//		List<Map<String, Object>> allList = programReservationService.allCalendarList();
-//		model.addAttribute("allList", allList);
 		
 		List<Map<String, Object>> myCalendarList = programReservationService.myCalendarLust((int)(calendarMap.get("targetYear")), (int)(calendarMap.get("targetMonth")), customerNo);
 		model.addAttribute("myCalendarList", myCalendarList);
@@ -130,7 +127,7 @@ public class ProgramReservationController {
 		//             -----branchList---------
 		
 		List<Branch> branchList = programReservationService.branchList();
-		System.out.println(branchList + "/////branchLust");
+		System.out.println(branchList + "/branchLust");
 		model.addAttribute("branchList", branchList);
 	
 		// --------------------------------------------------
