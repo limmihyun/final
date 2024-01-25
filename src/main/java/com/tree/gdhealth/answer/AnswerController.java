@@ -91,13 +91,52 @@ public class AnswerController {
 			if(branchLevel != 1) {
 				return "redirect:/employee/login";
 			}
-			 answer.setAnswerContent(request.getParameter("answerContent"));
+			answer.setAnswerContent(request.getParameter("answerContent"));
 			model.addAttribute("questionNo", questionNo);
 			int row = answerService.updateAnswer(answer);
 			return "redirect:/question/questionOne?questionNo=" + questionNo;
 	}
 	
 	@GetMapping("/answer/deleteAnswer")
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	public String deleteAnswer(Model model, HttpSession session, Answer answer, Integer answerNo, Integer questionNo) {
 		LoginEmployee loginEmployee = (LoginEmployee)session.getAttribute("loginEmployee");
 		int branchLevel = 0;

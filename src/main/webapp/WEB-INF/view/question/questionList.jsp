@@ -63,18 +63,18 @@
         </div>        
        
           <div style="text-align: center; margin: 20px;">
-        <table class="table site-block-order-table mb-5" style="margin-top: 20px;">
+        <table class="table site-block-order-table mb-5">
          <thead>
-          <th style="text-align: center;">질문번호</th>
+            <th style="text-align: center;">질문번호</th>
             <th style="text-align: center;">지점명</th>
             <th style="text-align: center;">제목</th>
             <th style="text-align: center;">작성자</th>
             <th style="text-align: center;">작성날짜</th>
             <th style="text-align: center;">수정날짜</th>
          </thead>
-            <tbody>
+       		<tbody>
             <c:forEach var="n" items="${list}">
-               <tr>
+           <tr>
                  <td style="align-text:center;">${n.questionNo}</td>
                  <td>${n.branchName}</td>
                  <c:choose>
@@ -97,30 +97,28 @@
                  <td>${n.customerId}</td>
                  <td>${n.createdate}</td>
                  <td>${n.updatedate}</td>
-               </tr>
-               
-             </c:forEach>
-            </tbody>
+           </tr>  
+           </c:forEach>
+           </tbody>
          </table>
       <div>현재 페이지 ${currentPage}</div>
-   <div>
-         <c:if test="${currentPage - 1 > 0}">
-            <a style="margin-top:1%;" class="btn btn-white" href="${pageContext.request.contextPath}/question/questionList?currentPage=${1}">처음</a>
-            <a style="margin-top:1%;" class="btn btn-primary" href="${pageContext.request.contextPath}/question/questionList?currentPage=${currentPage - 1}">이전</a>
-              
-         </c:if>
-            <a style="margin-top:1%;" class="btn btn-primary" href="${pageContext.request.contextPath}/question/questionList?currentPage=${currentPage + 1}">다음</a>
-         <c:if test="${currentPage -1 > 0}">
-            <a style="margin-top:1%;" class="btn btn-white" href="${pageContext.request.contextPath}/question/questionList?currentPage=${lastPage}">마지막</a>
-         </c:if>
-   </div>
+   	  <div>
+	        <c:if test="${currentPage - 1 > 0}">
+	          <a style="margin-top:1%;" class="btn btn-white" href="${pageContext.request.contextPath}/question/questionList?currentPage=${1}">처음</a>
+	          <a style="margin-top:1%;" class="btn btn-primary" href="${pageContext.request.contextPath}/question/questionList?currentPage=${currentPage - 1}">이전</a>     
+	        </c:if>
+	           <a style="margin-top:1%;" class="btn btn-primary" href="${pageContext.request.contextPath}/question/questionList?currentPage=${currentPage + 1}">다음</a>
+	        <c:if test="${currentPage -1 > 0}">
+	           <a style="margin-top:1%;" class="btn btn-white" href="${pageContext.request.contextPath}/question/questionList?currentPage=${lastPage}">마지막</a>
+	        </c:if>
+   	 </div>
    <c:choose>
-   <c:when test="${customerNo != null}">
-   <a style="margin-top: 10px;" class="btn btn-primary" href="${pageContext.request.contextPath}/question/addQuestion">문의하기</a>
+   		<c:when test="${customerNo != null}">
+   		<a style="margin-top: 10px;" class="btn btn-primary" href="${pageContext.request.contextPath}/question/addQuestion">문의하기</a>
    </c:when>
-   
-   </c:choose>   
-   </section>   
+   </c:choose>     
+  </div>
+  </section>
          <jsp:include page="/WEB-INF/footer/footer.jsp" />
        		<!-- Js Plugins -->
 		    <script src="/js/jquery-3.3.1.min.js"></script>

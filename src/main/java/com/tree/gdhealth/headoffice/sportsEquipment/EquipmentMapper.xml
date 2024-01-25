@@ -33,7 +33,7 @@
 				</when>			
 			</choose>
 		</where>
-		ORDER BY s.createdate DESC
+		ORDER BY s.item_price DESC
 		LIMIT #{beginRow}, #{rowPerPage}
 	</select>
 	
@@ -49,14 +49,22 @@
 		FROM sports_equipment s
 		INNER JOIN sports_equipment_img si
 			ON si.sports_equipment_no = s.sports_equipment_no
+		INNER JOIN employee_detail ed
+			ON ed.employee_no = s.writer_employee_no
 		<where>
 			<choose>
 				<when test="type != null and type.equals('name')">
-					item_name LIKE CONCAT('%',#{keyword},'%')
+					s.item_name LIKE CONCAT('%',#{keyword},'%')
 				</when>	
 				<when test="type != null and type.equals('note')">
-					note LIKE CONCAT('%',#{keyword},'%')
-				</when>		
+					s.note LIKE CONCAT('%',#{keyword},'%')
+				</when>
+				<when test="type != null and type.equals('writer')">
+					ed.employee_name note LIKE CONCAT('%',#{keyword},'%')
+				</when>	
+				<when test="type != null and type.equals('isActive')">
+					s.active LIKE CONCAT('%',#{keyword},'%')
+				</when>	
 			</choose>
 		</where>
 	</select>
@@ -112,7 +120,8 @@
 		SET
 			item_name = #{itemName},
 			item_price = #{itemPrice},
-			note = #{note}
+			note = #{note},
+			updatedate = NOW()
 		WHERE sports_equipment_no = #{sportsEquipmentNo}
 	</update>
 	
@@ -122,21 +131,24 @@
 			sports_equipment_img_origin_name = #{sportsEquipmentImgOriginName},
 			sports_equipment_img_file_name = #{sportsEquipmentImgFileName},
 			sports_equipment_img_size = #{sportsEquipmentImgSize},
-			sports_equipment_img_type = #{sportsEquipmentImgType}
+			sports_equipment_img_type = #{sportsEquipmentImgType},
+			updatedate = NOW()
 		WHERE sports_equipment_no = #{sportsEquipmentNo}
 	</update>
 	
 	<update id="deactiveEquipment">
 		UPDATE sports_equipment
 		SET
-			active = 'N'
+			active = 'N',
+			updatedate = NOW()
 		WHERE sports_equipment_no = #{sportsEquipmentNo}
 	</update>
 	
 	<update id="activeEquipment">
 		UPDATE sports_equipment
 		SET
-			active = 'Y'
+			active = 'Y',
+			updatedate = NOW()
 		WHERE sports_equipment_no = #{sportsEquipmentNo}
 	</update>
 

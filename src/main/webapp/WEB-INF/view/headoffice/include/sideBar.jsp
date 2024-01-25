@@ -51,18 +51,7 @@
                             	<span class="educate-icon educate-course icon-wrap"></span> 
                             	<span class="mini-click-non">문의사항</span>
                             </a>                   
-                        </li>                                         
-                        <li>
-                            <a class="has-arrow" href="#" aria-expanded="false">
-                               <span class="educate-icon educate-course icon-wrap"></span> 
-                               <span class="mini-click-non">서비스</span>
-                            </a>
-                            <ul class="submenu-angle form-mini-nb-dp" aria-expanded="false">
-                                <li><a href="${pageContext.request.contextPath}/question/questionList"><span class="mini-sub-pro">질문게시판</span></a></li>
-                                <li><a href="${pageContext.request.contextPath}/notice/noticeList"><span class="mini-sub-pro">공지사항</span></a></li> 
-                                <li><a href="${pageContext.request.contextPath}/notice/addNotice"><span class="mini-sub-pro">공지추가</span></a></li>                              
-                            </ul>                         
-                        </li>                                        
+                        </li>                                                                          
                         <li>
                             <a class="has-arrow" href="mailbox.html" aria-expanded="false">
                                <span class="educate-icon educate-data-table icon-wrap"></span> 
@@ -95,7 +84,7 @@
                             </ul>
                         </li>
 						<li>
-                            <a href="${pageContext.request.contextPath}/chat/room" aria-expanded="false" id="chat">
+                            <a href="#" aria-expanded="false" id="chat">
                             	<span class="educate-icon educate-interface icon-wrap"></span> 
                             	<span class="mini-click-non">채팅</span>
                				</a>
@@ -112,7 +101,7 @@
  		
  		$('#chat').click(function(event){
  			event.preventDefault();
- 			url = '${pageContext.request.contextPath}/chat/room';
+ 			url = '${pageContext.request.contextPath}/chat/roomList';
  			const options = 'top=10, left=10, width=600, height=700, status=no, menubar=no, toolbar=no';
  			window.open(url, '_blank', options);
  		})

@@ -67,11 +67,10 @@
 		</div>
 		
 		<div class="listContainer">
-			<!--<div class="item">
+			<div class="item">
 				<a href="/customer/updateMyPage"><div class="icon">ii &nbsp; 내 정보 수정</div></a> <a
 					class="right" href="/customer/updateMyPage"><div>></div></a>
 			</div>
-			-->
 			<div class="item">
 				<a href="/customer/myreservation"><div class="icon">ii &nbsp; 스케줄</div></a> <a
 					class="right" href="/customer/myreservation"><div>></div></a>
@@ -90,13 +89,12 @@
 			</div>
 			<div class="item">
 				<a href="#" class="chat">
-					<div class="icon">ii &nbsp; 채팅</div>
+					<div class="icon">ii &nbsp; 본사 직원과 채팅하기</div>
 				</a> 
-				<a class="right" class="chat">
+				<a href='#' class="right chat">
 					<div>></div>
 				</a>
 			</div>
-			
 		</div>
 		<div class="listContainer">
 			
@@ -128,12 +126,15 @@
 </body>
 
 <script>
+
+	// 채팅방 팝업창 생성
 	$('.chat').click(function(event){
 		event.preventDefault();
-		url = '/chat/moveChating?customerId=${sessionScope.customerId}';
+		url = '/chat/customerRoom';
 		const options = 'top=10, left=10, width=600, height=700, status=no, menubar=no, toolbar=no';
 		window.open(url, '_blank', options);
 	})
+	
 </script>
 </html>
 

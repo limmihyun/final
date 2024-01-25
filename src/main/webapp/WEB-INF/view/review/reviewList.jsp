@@ -52,43 +52,63 @@
             </div>
         </div>
     </section>
-  <div class="untree_co-section" style="padding-top: 80px;">
-          <div class="container" style="margin-top: 100px;">
-   
-                    <h2 class="h3 mb-3 text-black">Review</h2>
-                    <p class="mb-4">리뷰 게시판입니다.</p>
-                    
-                    <div class="p-3 p-lg-5 border bg-white">
-                      <table class="table site-block-order-table mb-5">
-      
-   <thead>
-        <th>번호</th>
-       <th>제목</th>
-       <th>작성자</th>
-       <th>작성날짜</th>
-       <th>수정날짜</th>
-   </thead>
+ 	  <section class="features-section spad">
+       <div id="review" align="left" style="margin-left: 40px;">
+             <h1 class="h3 mb-3 text-black">Review</h1>
+      </div>
+        <div style="text-align: left; position: relative; margin-left: 40px;">
+            <p class="mb-4">리뷰를 남겨 주세요.</p>
+        </div>        
+       
+          <div style="text-align: center; margin: 20px;">
+        <table class="table site-block-order-table mb-5">
+         <thead>
+          <th style="text-align: center;">번호</th>
+            <th style="text-align: center;">제목</th>
+            <th style="text-align: center;">작성자</th>
+            <th style="text-align: center;">작성날짜</th>
+         </thead>
    <tbody>
-   <c:forEach var="n" items="${list}">
-   <tr>
-      <td style="align-text:center;">${n.reviewNo}</td>
-      <td><a href="${pageContext.request.contextPath}/review/reviewOne?reviewNo=${n.reviewNo}">${n.reviewTitle}</a></td>
-      <td>${n.customerId}</td>
-      <td>${n.createdate}</td>
-      <td>${n.updatedate}</td>
-   </tr>
-   </c:forEach>
+	   <c:forEach var="n" items="${list}">
+	   	<tr>
+	      <td style="align-text:center;">${n.reviewNo}</td>
+	      <td><a href="${pageContext.request.contextPath}/review/reviewOne?reviewNo=${n.reviewNo}">${n.reviewTitle}</a></td>
+	      <td>${n.customerId}</td>
+	      <td>${n.createdate}</td>
+	      <td>${n.updatedate}</td>
+	   	</tr>
+   	   </c:forEach>
    </tbody>
    </table>
+   <div>현재 페이지 ${currentPage}</div>
+   <div>
+         <c:if test="${currentPage - 1 > 0}">
+            <a style="margin-top:1%;" class="btn btn-white" href="${pageContext.request.contextPath}/review/reviewList?currentPage=${1}">처음</a>
+            <a style="margin-top:1%;" class="btn btn-primary" href="${pageContext.request.contextPath}/review/reviewList?currentPage=${currentPage - 1}">이전</a>
+              
+         </c:if>
+            <a style="margin-top:1%;" class="btn btn-primary" href="${pageContext.request.contextPath}/review/reviewList?currentPage=${currentPage + 1}">다음</a>
+         <c:if test="${currentPage -1 > 0}">
+            <a style="margin-top:1%;" class="btn btn-white" href="${pageContext.request.contextPath}/review/reviewList?currentPage=${lastPage}">마지막</a>
+         </c:if>
+   </div>
+   <c:choose>
+      <c:when test="${customerNo != null}">
+  		 <a style="margin-top: 10px;" class="btn btn-primary" href="${pageContext.request.contextPath}/review/addReview">리뷰쓰기</a>
+   	  </c:when>
+   </c:choose>
+   </div>
+   	 </section>
    <a href="${pageContext.request.contextPath}/review/addReview"><button type="submit" class="site-btn">리뷰쓰기</button></a>
+       <jsp:include page="/WEB-INF/footer/footer.jsp" />
        <!-- Js Plugins -->
-    <script src="/js/jquery-3.3.1.min.js"></script>
-    <script src="/js/bootstrap.min.js"></script>
-    <script src="/js/jquery.slicknav.js"></script>
-    <script src="/js/owl.carousel.min.js"></script>
-    <script src="/js/jquery.magnific-popup.min.js"></script>
-    <script src="/js/circle-progress.min.js"></script>
-    <script src="/js/jquery.barfiller.js"></script>
-    <script src="/js/main.js"></script>
-</body>
+	    <script src="/js/jquery-3.3.1.min.js"></script>
+	    <script src="/js/bootstrap.min.js"></script>
+	    <script src="/js/jquery.slicknav.js"></script>
+	    <script src="/js/owl.carousel.min.js"></script>
+	    <script src="/js/jquery.magnific-popup.min.js"></script>
+	    <script src="/js/circle-progress.min.js"></script>
+	    <script src="/js/jquery.barfiller.js"></script>
+	    <script src="/js/main.js"></script>
+	</body>
 </html>

@@ -3,6 +3,7 @@ package com.tree.gdhealth.customer.mypage;
 import org.apache.ibatis.annotations.Mapper;
 
 import com.tree.gdhealth.vo.Customer;
+import com.tree.gdhealth.vo.CustomerDetail;
 import com.tree.gdhealth.vo.CustomerImg;
 import com.tree.gdhealth.vo.CustomerMyPage;
 
@@ -19,4 +20,5 @@ public interface MyPageMapper {
 	int customerDelete(Customer customer);
 	int customerDetailDelete(Customer customer);
 	int customerImgDelete(Customer customer);
+	int updateMyPage(CustomerDetail customerDetail);
 }
