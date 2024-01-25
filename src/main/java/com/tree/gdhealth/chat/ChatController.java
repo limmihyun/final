@@ -83,5 +83,5 @@ public class ChatController {
 		
 		return "chat/chat";
 	}
-
+	
 }

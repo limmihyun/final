@@ -167,7 +167,7 @@
 
 		document.addEventListener("keypress", function(e){
 			if(e.keyCode == 13){ // 엔터 키를 눌렀을 때
-				send(); // JSON 데이터들을 웹소켓으로 전송
+				send(); // JSON 데이터들을 웹소켓으로 전송	
 			}
 		});
 	}
