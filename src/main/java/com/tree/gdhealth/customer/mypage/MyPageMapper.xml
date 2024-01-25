@@ -80,5 +80,11 @@
 		customer_active = 'N'
 	WHERE customer_no = #{customerNo}
 </update>
+<update id="updateMyPage" parameterType="com.tree.gdhealth.vo.CustomerDetail">
+	UPDATE customer_detail
+	SET customer_height = #{customerHeight}, 
+		customer_weight = #{customerWeight}
+	WHERE customer_no = #{customerNo}
 
+</update>
 </mapper>
