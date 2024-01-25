@@ -65,11 +65,11 @@ public class ProgramReservationRest {
         responseMap.put("resultList", resultList);
         responseMap.put("currentPageMonth1", currentPageMonth1);
         responseMap.put("myCalendarList", myCalendarList);
-        System.out.println("**********" + calendarMap);
-        System.out.println("**********" + listMonth1 + "<--listMonth1");
-        System.out.println("**********" + lastPage + "<--lastPage");
-        System.out.println("**********" + myCalendarList + "<--myCalendarList");
-        System.out.println("**********" + currentPageMonth1 + "<--currentPageMonth1");
+        System.out.println(calendarMap);
+        System.out.println(listMonth1 + "<--listMonth1");
+        System.out.println(lastPage + "<--lastPage");
+        System.out.println(myCalendarList + "<--myCalendarList");
+        System.out.println(currentPageMonth1 + "<--currentPageMonth1");
 
         
         return responseMap;
