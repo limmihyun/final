@@ -226,11 +226,9 @@
                                             </div>
                                             <div class="pull-right pagination">
                                                 <ul class="pagination">
-                                                    <li class="page-pre"><a href="#">‹</a></li>
                                                     <c:forEach var="pageUri" items="${pageUriList}">
                                                         <li class="page-number ${pageUri.page eq requestPage? "active" : null}"><a href="${pageUri.uri}">${pageUri.page}</a></li>
                                                     </c:forEach>
-                                                    <li class="page-next"><a href="#">›</a></li>
                                                 </ul>
                                             </div>
                                         </div>

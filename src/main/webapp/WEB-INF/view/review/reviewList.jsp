@@ -87,7 +87,9 @@
             <a style="margin-top:1%;" class="btn btn-primary" href="${pageContext.request.contextPath}/review/reviewList?currentPage=${currentPage - 1}">이전</a>
               
          </c:if>
+         <c:if test="${currentPage != lastPage}">
             <a style="margin-top:1%;" class="btn btn-primary" href="${pageContext.request.contextPath}/review/reviewList?currentPage=${currentPage + 1}">다음</a>
+         </c:if>
          <c:if test="${currentPage -1 > 0}">
             <a style="margin-top:1%;" class="btn btn-white" href="${pageContext.request.contextPath}/review/reviewList?currentPage=${lastPage}">마지막</a>
          </c:if>
