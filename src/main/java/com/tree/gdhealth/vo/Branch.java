@@ -24,6 +24,7 @@ public class Branch {
     private Integer count;
     private int trainerCount;
     private int reviewCount;
+    private int reviewAllCount;
     private LocalDateTime createdate;
     private LocalDateTime updatedate;
 

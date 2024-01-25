@@ -21,8 +21,11 @@ public class FranchiseBranchService {
 	}
 	public Branch branchMemberCnt() {
 		Branch branch = franchiseBranchMapper.branchMemberCnt();
+		int branchReviewCount = franchiseBranchMapper.reviewCount();
 		int branchTrainerCount = franchiseBranchMapper.branchTrainerCount(branch);
+		branch.setReviewAllCount(branchReviewCount);
 		branch.setTrainerCount(branchTrainerCount);
+		
 		return branch;
 	}
 	
