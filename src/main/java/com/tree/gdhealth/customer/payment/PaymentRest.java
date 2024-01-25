@@ -19,12 +19,21 @@ public class PaymentRest {
 		
         boolean hasMembership = false;
 		
+		
+		if(session.getAttribute("customerNo") == null) {
+			return false;
+		}
+		
 		int customerNo = (int)(session.getAttribute("customerNo"));
-
+		
+		System.out.println("customerNo : " + customerNo);
+		
 		paymentService.deletePayment(customerNo);
 		int selectPayment = paymentService.selectPayment(customerNo);
 		System.out.println(selectPayment + "null 검사");
 		
+
+				
 		int activeN = paymentService.selectActiveN(customerNo);
 
 		
