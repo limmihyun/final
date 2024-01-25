@@ -65,6 +65,8 @@
 		</c:if>
 		
 		<input type="hidden" id="employeeId" value="${sessionScope.loginEmployee.employeeId}">
+		
+		<!---------------- 채팅 창 start -------------->
 		<div id="chatting" class="chatting">
 			<c:forEach var="m" items="${messageList}">
 				<c:if test="${m.employeeNo != null && status == 'employee'}">
@@ -81,6 +83,7 @@
 				</c:if>
 			</c:forEach>
 		</div>
+		<!---------------- 채팅 창 end -------------->
 				
 		<div id="yourMsg">
 			<table class="inputTable">
@@ -102,20 +105,16 @@
 
 <script type="text/javascript">
 
+	// 뒤로 가기
 	function goBack() {
 		window.history.back();
 	}
-
-	let chatArea = $('.chatArea');
-	if(chatArea.length > 0) {
-		let text = chatArea.text();
-		if (text.length > 30) {
-	          // 글자 수가 40자 이상이면 개행 추가
-	          chatArea.text(text.substring(0, 40) + '\n' + text.substring(40));
-        }
-	}
 	
+	 let chat = document.querySelector('#chatting');
+	 // 채팅방 접속 시 스크롤이 맨 아래로 이동되도록 한다.
+     chat.scrollTop = chat.scrollHeight;
 	
+	// 채팅방에 접속하면 웹소켓 open
 	wsOpen();
 	var ws;
 
@@ -136,7 +135,7 @@
 			var msg = data.data;
 			console.log('message : ' + msg);
 			
-			if(msg != null && msg.trim() != ''){
+			if(msg != null && msg.trim() != '') {
 				
 				var d = JSON.parse(msg);
 				
@@ -161,11 +160,14 @@
 				} 
 			}
 			
+			// 메시지를 입력하면 스크롤이 맨 밑으로 이동되도록 한다.
+			chat.scrollTop = chat.scrollHeight;
+			
 		}
 
 		document.addEventListener("keypress", function(e){
 			if(e.keyCode == 13){ // 엔터 키를 눌렀을 때
-				send();
+				send(); // JSON 데이터들을 웹소켓으로 전송
 			}
 		});
 	}

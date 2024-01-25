@@ -25,7 +25,7 @@ public class ChatController {
 	
 	private final ChatService chatService;
 	
-	// 방
+	// 방 목록
 	@Auth(AUTHORITY = Authority.HEAD_EMP_ONLY)
 	@GetMapping("/roomList")
 	public String room(Model model) {
