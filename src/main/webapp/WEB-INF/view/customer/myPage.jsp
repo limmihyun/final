@@ -89,7 +89,7 @@
 			</div>
 			<div class="item">
 				<a href="#" class="chat">
-					<div class="icon">ii &nbsp; 채팅</div>
+					<div class="icon">ii &nbsp; 본사 직원과 채팅하기</div>
 				</a> 
 				<a href='#' class="right chat">
 					<div>></div>
@@ -126,12 +126,15 @@
 </body>
 
 <script>
+
+	// 채팅방 팝업창 생성
 	$('.chat').click(function(event){
 		event.preventDefault();
 		url = '/chat/customerRoom';
 		const options = 'top=10, left=10, width=600, height=700, status=no, menubar=no, toolbar=no';
 		window.open(url, '_blank', options);
 	})
+	
 </script>
 </html>
 
