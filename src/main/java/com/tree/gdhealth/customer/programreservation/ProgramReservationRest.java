@@ -71,9 +71,6 @@ public class ProgramReservationRest {
         System.out.println("**********" + myCalendarList + "<--myCalendarList");
         System.out.println("**********" + currentPageMonth1 + "<--currentPageMonth1");
 
-
-
-
         
         return responseMap;
     }

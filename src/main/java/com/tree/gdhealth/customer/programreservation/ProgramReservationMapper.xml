@@ -152,7 +152,7 @@
 	<delete id="customerAttendanceDelete" parameterType="java.util.Map">
 	    DELETE FROM customer_attendance WHERE program_reservation_no = #{programReservationNo};
 	</delete>
-	<select id="reviewSelect" parameterType="java.util.Map">
+	<select id="reviewSelect" parameterType="java.util.Map" resultType="Integer">
 		SELECT review_no FROM review WHERE program_reservation_no = #{programReservationNo};
 	</select>
 	

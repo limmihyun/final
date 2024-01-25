@@ -238,22 +238,23 @@ public class ProgramReservationService {
 	}
 	
 	public int reviewdelete(int programReservationNo, int customerNo) {
-		
-		int reviewNo = 0;
-		
+				
 		Map<String, Object> paramap = new HashMap<>();
 		paramap.put("customerNo", customerNo);
 		paramap.put("programReservationNo", programReservationNo);
 		
 		int result1 = programReservationMapper.customerAttendanceDelete(paramap);
 		
-		Integer selectedReviewNo = programReservationMapper.reviewSelect(paramap);
+		System.out.println("test debug");
 		
-	    if (selectedReviewNo != null) {
-	        reviewNo = selectedReviewNo;
+		List<Integer> selectedReviewNo = programReservationMapper.reviewSelect(paramap);
+		
+	    if (selectedReviewNo.size() > 0) {
+	        for(int i=0; i<selectedReviewNo.size();i++) {
+	        	Integer reviewNo = selectedReviewNo.get(i);
+	    		programReservationMapper.reviewimgdelete(reviewNo);
+	        }
 	    }
-		
-		int result2 = programReservationMapper.reviewimgdelete(reviewNo);
 		
 		int result = programReservationMapper.reviewdelete(paramap);
 		
