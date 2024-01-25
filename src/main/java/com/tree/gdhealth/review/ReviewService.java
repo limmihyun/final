@@ -55,8 +55,11 @@ public class ReviewService {
 		return row;
 	}
 	//수정
-	public List<Integer>  getProgramRsNoByCustomerNo(int customerNo) {
-		return reviewMapper.selectProgramRsNoByCustomerNo(customerNo);
+	public List<ProgramRsVo>  getProgramRsNoByCustomerNo(int customerNo) {
+
+		List<ProgramRsVo> list = reviewMapper.selectProgramRsNoByCustomerNo(customerNo);
+		list.forEach(System.out::println);
+		return list;
 		
 	}
 	

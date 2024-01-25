@@ -76,9 +76,11 @@ public class ReviewController{
 			if(customerNo == null) {
 				return "redirect:/customer/login";
 			}
+
 		int row = reviewService.addReview(review);
 		return "redirect:/review/reviewList";
 	}
+
 	@GetMapping("/review/deleteReview")
 	public String deleteReview(HttpSession session, Review review, Model model, int reviewNo) {
 		Integer customerNo = ((Integer)session.getAttribute("customerNo"));
