@@ -67,11 +67,10 @@
 		</div>
 		
 		<div class="listContainer">
-			<!--<div class="item">
+			<div class="item">
 				<a href="/customer/updateMyPage"><div class="icon">ii &nbsp; 내 정보 수정</div></a> <a
 					class="right" href="/customer/updateMyPage"><div>></div></a>
 			</div>
-			-->
 			<div class="item">
 				<a href="/customer/myreservation"><div class="icon">ii &nbsp; 스케줄</div></a> <a
 					class="right" href="/customer/myreservation"><div>></div></a>

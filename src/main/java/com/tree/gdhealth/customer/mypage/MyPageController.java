@@ -8,10 +8,11 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.tree.gdhealth.vo.Customer;
+import com.tree.gdhealth.vo.CustomerDetail;
 import com.tree.gdhealth.vo.CustomerMyPage;
 
+import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
-import jakarta.validation.constraints.PastOrPresent;
 
 @Controller
 public class MyPageController {
@@ -71,6 +72,34 @@ public class MyPageController {
       model.addAttribute("membership", membership);
       return "customer/updateMyPage";
    }
+   @PostMapping("/customer/updateMyPage")
+   public String updateMyPage(HttpSession session, Model model, CustomerDetail customerDetail, HttpServletRequest request) {
+	   int customerNo = (int)session.getAttribute("customerNo");
+	   if(customerNo == 0) {
+	         return "customer/home";
+	      }
+	   if(customerNo != 0) {
+		   System.out.println("dddddddd");
+		   int customerHeight = Integer.valueOf(request.getParameter("customerHeight"));
+		   int customerWeight = Integer.valueOf(request.getParameter("customerWe"
+		   		+ "ight"));
+		   
+		   customerDetail.setCustomerHeight(customerHeight);
+		   customerDetail.setCustomerWeight(customerWeight);
+		   customerDetail.setCustomerNo(customerNo);
+
+		   myPageService.updateMyPage(customerDetail);
+		  
+		   System.out.println("customerWeight: " + customerWeight);
+		   System.out.println("customerHeight: " + customerHeight);
+		   
+		   return "redirect:/customer/myPage";
+		   
+		  
+		   
+	   };
+	   return "redirect:/customer/myPage";
+   }
    @GetMapping("/customer/delete")
    public String customerDeletePage(HttpSession session,Model model) {
       if(session.getAttribute("customerNo") == null) {
@@ -92,6 +121,7 @@ public class MyPageController {
       model.addAttribute("open",1);
       return "customer/delete";
    }
+   
    @GetMapping("/customer/deleteDo")
    public String customerDeleteDo(HttpSession session,Model model,Customer customer, RedirectAttributes red) {
       // 사진삭제를위한 패스 값 입력

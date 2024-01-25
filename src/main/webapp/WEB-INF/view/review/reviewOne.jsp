@@ -56,7 +56,7 @@
     <div class="untree_co-section before-footer-section">
             <div class="container">
              <div class="p-3 p-lg-5 border bg-white">
-             <h1 class="mb-4 section-title">Notice</h1>
+             <h1 class="mb-4 section-title">Review</h1>
              <br>
 				<table class ="table">
  		<tr>

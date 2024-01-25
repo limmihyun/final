@@ -37,52 +37,40 @@
          </div>
       </div>
       <div class="shippingStatusContainer">
+      	<form method="post" action="${pageContext.request.contextPath}/customer/updateMyPage">
          <div class="title">신체 정보</div>
          <div class="status">
+          <input type="hidden" id="customerNo" value="${info.customerNo}">
          <div class="item">
          <div>
             <div class="center">신장</div>
             <div class="number">
-               <input type="text" id="customerHeight" value="${info.customerHeight}">
+               <input type="text" id="customerHeight" name="customerHeight" value="${info.customerHeight}">
                 </div>
          </div>
          </div>
-         
+
          <div class="item">
-         <div>
+         <div style="position: relative; left: -337px;">
             <div class="center">체중</div>
             <div class="number">
-            <input type="text" id="customerWeight" value="${info.customerWeight}">
+            <input type="text" id="customerWeight" name="customerWeight" value="${info.customerWeight}">
             </div>      
          </div>
          </div>
          
-         <div class="item">
-         <div>
-            <div class="center">BMI</div>
-            <div class="number">
-            <input type="text" id="customerBmi" value="${info.customerBmi}">
-            </div>      
-         </div>
-         </div>
-         
-         <div class="item">
-         <div>
-            <div class="center">업데이트</div>
-            <div class="number"></div>
-               <input type="text" id="customerUpdatedate" value="${info.customerUpdatedate}">
-            </div>
-            </div>
-         </div>
-         </div>
+          <div style="position: relative; left: -700px; margin-top: 30px;">
+            <button type="submit" style="background-color: green; border: none; color: white; padding: 8px 15px; cursor: pointer; border-radius: 5px;">저장</button>
+          </div>
+        </form>
       </div>
-      <button type="submit" style=" margin-left: 650px; background-color: green; border: none; color: white; padding: 8px 15px; cursor: pointer; border-radius: 5px;">저장</button>
+    </div>
       
       <div class="listContainer">
          <div class="item">
-            <a href="#"><div class="icon">ii &nbsp; 내 정보 수정</div></a> <a
-               class="right" href="#"><div>></div></a>
-         </div>
+				<a href="/customer/myPage"><div class="icon">ii &nbsp; 내 정보</div></a> <a
+					class="right" href="/customer/myPage"><div>></div></a>
+			</div>
          <div class="item">
             <a href="/customer/myreservation"><div class="icon">ii &nbsp; 스케줄</div></a> <a
                class="right" href="/customer/myreservation"><div>></div></a>

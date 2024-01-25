@@ -7,9 +7,9 @@ import javax.management.RuntimeErrorException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import org.springframework.web.context.request.async.AsyncRequestTimeoutException;
 
 import com.tree.gdhealth.vo.Customer;
+import com.tree.gdhealth.vo.CustomerDetail;
 import com.tree.gdhealth.vo.CustomerImg;
 import com.tree.gdhealth.vo.CustomerMyPage;
 
@@ -89,6 +89,14 @@ public class MyPageService {
 		}
 		
 		
+	}
+	//고객정보 키, 몸무게 수정
+	public int updateMyPage(CustomerDetail customerDetail) {
+		
+		System.out.println("ff");
+		int row = myPageMapper.updateMyPage(customerDetail);
+		System.out.println(row);
+		return row;
 	}
 	
 }
