@@ -16,7 +16,7 @@
             <div class="grade">${info.customerEmail}</div>
             <div class="name">${info.customerName}</div>
          </div>
-         <div class="modify">i</div>
+         <div class="modify"></div>
       </div>
       <div class="summaryContainer">
          <div class="item">

@@ -84,7 +84,6 @@
 	UPDATE customer_detail
 	SET customer_height = #{customerHeight}, 
 		customer_weight = #{customerWeight}
-	WHERE customer_no = #{customerNo}
 
 </update>
 </mapper>

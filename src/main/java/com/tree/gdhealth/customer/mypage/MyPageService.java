@@ -50,6 +50,7 @@ public class MyPageService {
 		return membership;
 	}
 	
+	
 	// 고객 계정 삭제전 체크
 	public int deleteCustomerCk(Customer customer) {
 		int result = 0;
