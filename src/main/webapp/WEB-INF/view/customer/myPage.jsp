@@ -9,13 +9,14 @@
 <title>GD HEALTH</title>
 </head>
 <body>
+	
 	<div class="wrap">
 		<div class="greenContainer">
 			<div>
 				<div class="grade">${info.customerEmail}</div>
 				<div class="name">${info.customerName}</div>
 			</div>
-			<div class="modify">i</div>
+			<div class="modify"></div>
 		</div>
 		<div class="summaryContainer">
 			<div class="item">
@@ -32,7 +33,7 @@
 			</div>
 			<div class="item">
 				<div class="number">${membership}</div>
-				<div>맴버십</div>
+				<div>멤버십</div>
 			</div>
 		</div>
 		<div class="shippingStatusContainer">
@@ -84,7 +85,7 @@
 					class="right" href="/question/questionList"><div>></div></a>
 			</div>
 			<div class="item">
-				<a href="/customer/membershipList"><div class="icon">ii &nbsp; 맴버십 구매</div></a> <a
+				<a href="/customer/membershipList"><div class="icon">ii &nbsp; 멤버십 구매</div></a> <a
 					class="right" href="/customer/membershipList"><div>></div></a>
 			</div>
 			<div class="item">
