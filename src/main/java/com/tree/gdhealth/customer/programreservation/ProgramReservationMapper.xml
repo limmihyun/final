@@ -79,9 +79,12 @@
 		SELECT
 			  p.program_name programName,
 			  pd.program_date programDate,
-			  pd.program_date_no programDateNo
+			  pd.program_date_no programDateNo,
+			  pi.program_img_file programImgFile,
+			  p.program_detail programDetail
 		FROM  program_date pd INNER JOIN program p
-	       on p.program_no = pd.program_no
+	       on p.program_no = pd.program_no INNER JOIN program_img pi
+	       on pi.program_no = p.program_no
  		WHERE YEAR(pd.program_date) = #{year}
 		  AND MONTH(pd.program_date) = #{month}
 		  AND DAY(pd.program_date) = #{day}
