@@ -44,6 +44,7 @@
 	SELECT 
 		r.review_no AS reviewNo,
 		c.customer_id AS customerId,
+		c.customer_no AS customerNo,
 		r.review_title AS reviewTitle,
 		COALESCE(ri.review_img_origin, 'NoImage') AS reviewImgOrigin,
 		r.review_content AS reviewContent,

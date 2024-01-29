@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import com.tree.gdhealth.vo.Notice;
 import com.tree.gdhealth.vo.Review;
 
+import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
 import lombok.extern.slf4j.Slf4j;
 
@@ -80,7 +81,19 @@ public class ReviewController{
 		int row = reviewService.addReview(review);
 		return "redirect:/review/reviewList";
 	}
-
+	
+	@PostMapping("/review/updateReview")
+	public String updateReview(Model model, HttpSession session, Review review, int reviewNo, HttpServletRequest request) {
+		Integer customerNo = ((Integer)session.getAttribute("customerNo"));
+		if(customerNo == null) {
+			return "redirect:/customer/login";
+		}
+		review.setReviewTitle(request.getParameter("reviewTitle"));
+		review.setReviewContent(request.getParameter("reviewContent"));
+		model.addAttribute("reviewNo", reviewNo);
+		int row = reviewService.updateReview(review);
+		return "redirect:/review/reviewOne?reviewNo=" + reviewNo;
+	}
 	@GetMapping("/review/deleteReview")
 	public String deleteReview(HttpSession session, Review review, Model model, int reviewNo) {
 		Integer customerNo = ((Integer)session.getAttribute("customerNo"));

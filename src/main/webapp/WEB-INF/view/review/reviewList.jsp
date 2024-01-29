@@ -101,7 +101,6 @@
    </c:choose>
    </div>
    	 </section>
-   <a href="${pageContext.request.contextPath}/review/addReview"><button type="submit" class="site-btn">리뷰쓰기</button></a>
        <jsp:include page="/WEB-INF/footer/footer.jsp" />
        <!-- Js Plugins -->
 	    <script src="/js/jquery-3.3.1.min.js"></script>

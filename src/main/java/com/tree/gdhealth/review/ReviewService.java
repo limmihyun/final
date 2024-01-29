@@ -55,6 +55,19 @@ public class ReviewService {
 		return row;
 	}
 	//수정
+	public int updateReview(Review review) {
+		int row = reviewMapper.updateReview(review);
+		return row;
+	}
+	
+
+	
+	//삭제
+	public int deleteReview(Review review) {
+		int row = reviewMapper.deleteReview(review);
+		return row;
+	}
+	
 	public List<ProgramRsVo>  getProgramRsNoByCustomerNo(int customerNo) {
 
 		List<ProgramRsVo> list = reviewMapper.selectProgramRsNoByCustomerNo(customerNo);
@@ -63,11 +76,6 @@ public class ReviewService {
 		
 	}
 	
-	//삭제
-	public int deleteReview(Review review) {
-		int row = reviewMapper.deleteReview(review);
-		return row;
-	}
 }
 
 
