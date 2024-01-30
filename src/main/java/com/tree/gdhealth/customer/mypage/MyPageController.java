@@ -29,10 +29,13 @@ public class MyPageController {
       System.out.println(customerNo);
       //고객정보
       CustomerMyPage info = myPageService.MyPage(customerNo);
-   
       model.addAttribute("info", info);
-      
-      
+      //전화번호 하이픈
+      String phoneNumber = myPageService.selectPhone(customerNo);
+      String phoneCustom = phoneNumber.substring(0,3)+"-"+
+    		  			   phoneNumber.substring(3,7)+"-"+
+    		  			   phoneNumber.substring(7);
+       model.addAttribute("phoneCustom", phoneCustom);
       //출석
       int attendanceCount = myPageService.attendance(customerNo);
       model.addAttribute("attendanceCount", attendanceCount);
@@ -102,7 +105,7 @@ public class MyPageController {
       return "customer/updateMyPage";
    }
    @PostMapping("/customer/updateMyPage")
-   public String updateMyPage(HttpSession session, Model model, CustomerDetail customerDetail, HttpServletRequest request) {
+   public String updateMyPage(HttpSession session, Model model, CustomerMyPage customerMyPage, Customer customer, HttpServletRequest request) {
 	   int customerNo = (int)session.getAttribute("customerNo");
 	   if(customerNo == 0) {
 	         return "customer/home";
@@ -116,15 +119,19 @@ public class MyPageController {
 		   String customerPhone = request.getParameter("customerPhone");
 		   String customerAddress = request.getParameter("customerAddress");
 		   String customerEmail = request.getParameter("customerEmail");
-		   
-		   customerDetail.setCustomerHeight(customerHeight);
-	       customerDetail.setCustomerWeight(customerWeight);
-	       customerDetail.setCustomerName(customerName);
-	       customerDetail.setCustomerPhone(customerPhone);
-	       customerDetail.setCustomerAddress(customerAddress);
-	       customerDetail.setCustomerEmail(customerEmail);
-	       System.out.println(customerDetail.toString());
-		   myPageService.updateMyPage(customerDetail);
+		   String customerPw = request.getParameter("customerPw");
+		   customer.setCustomerNo(customerNo);
+		   customerMyPage.setCustomerNo(customerNo);
+		   customerMyPage.setCustomerHeight(customerHeight);
+		   customerMyPage.setCustomerWeight(customerWeight);
+		   customerMyPage.setCustomerName(customerName);
+		   customerMyPage.setCustomerPhone(customerPhone);
+		   customerMyPage.setCustomerAddress(customerAddress);
+		   customerMyPage.setCustomerEmail(customerEmail);
+		   customer.setCustomerPw(customerPw);
+	       System.out.println(customerMyPage.toString());
+		   myPageService.updateMyPage(customerMyPage);
+		   myPageService.updatePw(customer);
 		   
 		   System.out.println("customerWeight: " + customerWeight);
 		   System.out.println("customerHeight: " + customerHeight);

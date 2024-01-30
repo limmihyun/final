@@ -21,6 +21,8 @@ public class MyPageService {
 	public CustomerMyPage MyPage(int customerNo) {
 		System.out.println(customerNo);
 		CustomerMyPage info = myPageMapper.info(customerNo);
+		
+		
 		CustomerImg imgInfo = myPageMapper.customerImgCk(customerNo);
 		
 		if(imgInfo != null) {
@@ -59,7 +61,11 @@ public class MyPageService {
 		String membership = myPageMapper.membership(customerNo);  
 		return membership;
 	}
-	
+	//휴대폰번호 하이픈 셋팅
+	public String selectPhone(int customerNo) {
+		String selectPhone = myPageMapper.selectPhone(customerNo);
+		return selectPhone;
+	}
 	
 	// 고객 계정 삭제전 체크
 	public int deleteCustomerCk(Customer customer) {
@@ -102,11 +108,16 @@ public class MyPageService {
 		
 	}
 	//고객정보 수정
-	public int updateMyPage(CustomerDetail customerDetail) {
+	public int updateMyPage(CustomerMyPage customerMyPage) {
 		
 		System.out.println("ff");
-		int row = myPageMapper.updateMyPage(customerDetail);
+		int row = myPageMapper.updateMyPage(customerMyPage);
 		System.out.println(row);
+		return row;
+	}
+	//비밀번호 수정
+	public int updatePw(Customer customer) {
+		int row = myPageMapper.updatePw(customer);
 		return row;
 	}
 	

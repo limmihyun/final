@@ -1,169 +1,483 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<c:set var="path" value="${pageContext.request.contextPath}" /><!-- request.getContextPath 간소화 -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<link rel="stylesheet" href="/css/myPage.css" type="text/css">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta name="author" content="Saurav">
+<link href="/css/bootstrap.min.css" rel="stylesheet">
+<link href="/css/number.css" rel="stylesheet">
 <title>GD HEALTH</title>
-
 </head>
-<body>
-   <div class="wrap">
-      <div class="greenContainer">
-         <div>
-            <div class="grade">${info.customerEmail}</div>
-            <div class="name">${info.customerName}</div>
-         </div>
-         <div class="modify"></div>
-      </div>
-      <div class="summaryContainer">
-         <div class="item">
-            <div class="number">${attendanceCount}</div>
-            <div>출석횟수</div>
-         </div>
-         <div class="item">
-            <div class="number">${reviewCount}</div>
-            <div>리뷰</div>
-         </div>
-         <div class="item">
-            <div class="number">${questionCount}</div>
-            <div>문의</div>
-         </div>
-         <div class="item">
-            <div class="number">${membership}</div>
-            <div>멤버십</div>
-         </div>
-      </div>
-     <div class="shippingStatusContainer">
-     
-     <form method="post" action="${pageContext.request.contextPath}/customer/updateMyPage?customerNo=${info.customerNo}">
-     <input type="hidden" id="customerNo" value="${info.customerNo}">
-			<div class="title">개인 정보</div>
-			<div class="status">
-			<div class="item">
-				<div class="img">
-				<img src="/upload/customer/${imgInfo.customerImgFileName}" alt="Profile Image">
-			</div>
-			</div>
-			
-			<div class="item">
-			<div>
-				<div class="center">아이디</div>
-				<div class="Id">${info.customerId}</div>	
-				<div class="center" style="margin-top: 60px;">이름</div>
-				<div class="string">
-            		<input type="text" id="customerName" name="customerName" value="${info.customerName}">
-            	</div>
-			</div>
-			</div>
-			<div class="item">
-			<div>
-				<div class="center">생년월일</div>
-				<div class="birth">${info.customerBirth}</div>	
-				<div class="center" style="margin-top: 60px;">휴대폰</div>
-				<div class="string">
-            		<input type="text" id="customerPhone" name="customerPhone" value="${info.customerPhone}">
-            	</div>
-			</div>
-			</div>
-			<div class="item">
-			<div>
-				<div class="center">주소</div>
-				<input type="text" id="customerAddress" name="customerAddress" value="${info.customerAddress}" style="width: 450px;">
-    			
-				<div class="center" style="margin-top: 60px;">이메일</div>
-				<div class="string">
-            		<input type="text" id="customerEmail" name="customerEmail" value="${info.customerEmail}">
-            	</div>
-			</div>
-			</div>
-			<div class="item">
-			
-			</div>
-			<div style="position: relative; margin-right : 200px; margin-top: 30px;">
-            <button type="submit" style="background-color: green; border: none; color: white; padding: 8px 15px; cursor: pointer; border-radius: 5px;">저장</button>
-          </div>
+
+<body class="bg-light">
+	<div class="container">
+		<div class="py-5 text-center">
+			<img class="d-block mx-auto mb-4" src="/logo.jpg" alt="" width="72"
+				height="72">
+			<h2>상세정보</h2>
 		</div>
-		
-         <div class="title">신체 정보</div>
-         <div class="status">
-         <div class="item">
-         <div>
-            <div class="center">신장</div>
-            <div class="number">
-               <input type="text" id="customerHeight" name="customerHeight" value="${info.customerHeight}">
-                </div>
-         </div>
-         </div>
+	</div>
+	<div class="container">
+		<div class="row">
+			<div class="col-md-12">
+				<form name="form" method="post" action="/customer/updateMyPage">
+					<div class="form-group">
+						<label>이름</label> <input type="text"
+							class="form-control" id="customerName" name="customerName" value="${info.customerName}"
+							required>
+					</div>
 
-         <div class="item">
-         <div style="position: relative; left: -407px;">
-            <div class="center">체중</div>
-            <div class="number">
-            <input type="text" id="customerWeight" name="customerWeight" value="${info.customerWeight}">
-            </div>      
-         </div>
-         </div>
-         
-          <div style="position: relative; left: -800px; margin-top: 30px;">
-            <button type="submit" style="background-color: green; border: none; color: white; padding: 8px 15px; cursor: pointer; border-radius: 5px;">저장</button>
-          </div>
-          </div>
-        </form>
-      </div>
-    </div>
-      
-      <div class="listContainer">
-         <div class="item">
-				<a href="/customer/myPage"><div class="icon">ii &nbsp; 내 정보</div></a> <a
-					class="right" href="/customer/myPage"><div>></div></a>
+
+					<div class="form-group">
+						<label>아이디</label>
+						<div class="row">
+							<div class="col">
+								<input class="form-control" id="customerId" name="customerId" value="${info.customerId}" readonly
+									style="position: relative;" required>
+								<input type="hidden" class="form-control" id="customerIdSave">
+							</div>
+						</div>
+						<small id="idHelp" class="form-text text-muted"></small>
+					</div>
+					
+					<div class="form-group">
+						<label>비밀번호</label> <input type="password"
+							class="form-control" id="customerPw" name="customerPw" placeholder="영문+숫자+특수문자"
+							required>
+						<small id="pwHelp" class="form-text text-muted"></small>
+					</div>
+					<div class="form-group">
+						<label>비밀번호확인</label> <input type="password"
+							class="form-control" id="customerPwCk" name="customerPwCk" placeholder=""
+							required>
+						<small id="pwCkHelp" class="form-text text-muted"></small>
+					</div>
+					
+
+					<div class="form-group">
+						<label for="exampleInputEmail1">이메일</label>
+						<div class="row">
+							<div class="col">
+								<input type="email" class="form-control" id="customerEmail" name="customerEmail" value="${info.customerEmail}"
+									style="position: relative;">
+								<input type="hidden" class="form-control" id="customerEmailSave">
+							</div>
+							<div class="col-auto">
+								<button type="button" id="emailCk" class="btn btn-primary">중복확인</button>
+							</div>
+						</div>
+						<small id="emailHelp" class="form-text text-muted"></small>
+					</div>
+					<div class="form-group">
+						<label for="exampleInputEmail1">전화번호</label> <input type="text"
+							class="form-control" id="customerPhone" name="customerPhone" value="${info.customerPhone}">
+							
+						<small id="hpHelp" class="form-text text-muted"></small>
+					</div>
+					<div class="form-group">
+						<label for="exampleInputPassword1">주소</label>
+						<div class="row">
+							<div class="col">
+								<input type="text" class="form-control" id="address" name="customerAddress" value="${info.customerAddress}">	
+							</div>
+							<div class="col-auto">
+								<input type="button" onclick="sample2_execDaumPostcode()"
+									class="btn btn-primary" value="우편번호 찾기"><br>
+							</div>
+						</div>
+					</div>
+
+					<div class="row">
+						<div class="col-md-2 mb-3">
+							<label for="country">성별</label> <select
+								class="custom-select d-block w-50" id="gender" name="customerGender" required>
+								<option>남</option>
+								<option>여</option>
+							</select>
+						</div>
+						
+						<div class="col-md-2 mb-3">
+							<label for="zip">키</label> 
+							<input type="number" class="form-control w-50" id="customerHeight" name="customerHeight" value="${info.customerHeight}">
+							<div class="invalid-feedback">Please provide a valid state.
+							</div>
+						</div>
+						
+						<div class="col-md-2 mb-3">
+							<label for="zip">체중</label> 
+							<input type="number" class="form-control w-50"  id="customerWeight" name="customerWeight" value="${info.customerWeight}">
+						</div>
+						
+					</div>
+					
+					<button type="button" id="updateMyPageBtn" class="btn btn-primary btn-lg btn-block">수정하기</button>
 			</div>
-         <div class="item">
-            <a href="/customer/myreservation"><div class="icon">ii &nbsp; 스케줄</div></a> <a
-               class="right" href="/customer/myreservation"><div>></div></a>
-         </div>
-         <div class="item">
-            <a href="/review/reviewList"><div class="icon">ii &nbsp; 리뷰</div></a> <a
-               class="right" href="/review/reviewList"><div>></div></a>
-         </div>
-         <div class="item">
-            <a href="/question/questionList"><div class="icon">ii &nbsp; 문의사항</div></a> <a
-               class="right" href="/question/questionList"><div>></div></a>
-         </div>
-         <div class="item">
-            <a href="/customer/membershipList"><div class="icon">ii &nbsp; 맴버십 구매</div></a> <a
-               class="right" href="/customer/membershipList"><div>></div></a>
-         </div>
-         
-      </div>
-      <div class="listContainer">
-         
-         <div class="item">
-            <a href="/customer/delete"><div class="icon">ii &nbsp; 회원탈퇴</div></a> <a
-               class="right" href="#"><div>></div></a>
-         </div>
-      </div>
-      <div class="infoContainer">
-         <div class="item">
+		</div>
+		<footer class="my-5 pt-5 text-muted text-center text-small">
+			<p class="mb-1">&copy; 2020-2024 GDHealth</p>
+			<ul class="list-inline">
+				<li class="list-inline-item"><a href="#">Privacy</a></li>
+				<li class="list-inline-item"><a href="#">Terms</a></li>
+				<li class="list-inline-item"><a href="#">Support</a></li>
+			</ul>
+		</footer>
+	</div>
+	<script>
+	$(document).ready(function(){
+		
+		$('#emailCk').click(function(){
+			if($('#customerEmail').val()==""){
+				alert("이메일을 입력하세요");
+				$('#customerEmail').focus();
+				return false;
+			}
+			if(getSpace.test($('#customerEmail').val())){
+				alert("공백은 입력 불가능 합니다"); 
+				$("#customerEmail").val("");
+				$('#customerEmail').focus(); 
+				return false;
+			}
+			if(!getEmail.test($('#customerEmail').val())){
+				alert("이메일 형식을 맞춰주세요 ***@***.**");
+				$("#customerEmail").val("");
+				$('#customerEmail').focus();
+				return false;
+	    	}
+		    $.ajax({
+		        async: true,
+		        url: '/customer/emailCk',
+		        type: 'get',
+		        data: {'customerEmail': $('#customerEmail').val() }, // 대분류 선택 문자열
+		        success: function(jsonData){
+		        	var customerNo = jsonData;
+		            if (customerNo == 0) {
+		                alert('사용 가능한 Email입니다.');
+		                $('#emailHelp').html('중복체크완료');
+		                $('#customerEmailSave').val($('#customerEmail').val());
+		            } else {
+		                alert('중복된 Email입니다. 다른 Email를 사용해주세요.');
+		            }
+		        },
+		        error: function(){
+		            alert('Email 확인 중 오류가 발생했습니다. 다시 시도하십시오.');
+		        }
+		    });
+		});
+	});
+	</script>
 
-            <div>
-               <h3>
-                  <a href="/notice/noticeList" class="black">공지사항</a>
-               </h3>
-            </div>
-         </div>
+	<script>
+	
+	let getId= RegExp(/^[a-zA-Z0-9]{4,12}$/);
+	let getName= RegExp(/^[가-힣]+$/);
+	let getExp =  /^(01[016789]{1})[0-9]{3,4}[0-9]{4}$/;
+	let getPw = /(?=.*\d{1,50})(?=.*[~`!@#$%\^&*()-+=]{1,50})(?=.*[a-zA-Z]{1,50}).{8,16}$/;
+	let getSpace = /\s/g;
+	let getEmail = /^[a-zA-Z0-9]+([\w\.\_\-])*([a-zA-Z0-9])+([\w\.\_\-])+@([a-zA-Z0-9]+\.)+[a-zA-Z0-9]{2,8}$/;
+	let getNumber = /^[0-9]+$/;
+	let getBirth = /^(19[0-9][0-9]|20\d{2})-(0[0-9]|1[0-2])-(0[1-9]|[1-2][0-9]|3[0-1])$/;
+	let fileInput = document.getElementById('chooseFile');
+	
+	$(document).ready(function(){
+		
+		$('#customerPw').blur(function(){
+			if (!getPw.test($('#customerPw').val())){
+				$('#pwHelp').html("비밀번호는 영문,숫자,특수문자를 각각 하나씩 포함한 8~16자리로 설정해주세요.");
+				return false;
+			}else{
+				$('#pwHelp').html("");
+			}
+		});
+		$('#customerPwCk').blur(function(){
+			if($('#customerPw').val() != $('#customerPwCk').val()){
+				$('#pwCkHelp').html("비밀번호가 다릅니다");
+				return false;
+			}else{
+				$('#pwCkHelp').html("");
+			}
+		});
+		
+		$('#customerPhone').blur(function(){
+			if(!getExp.test($("#customerPhone").val())){
+				$('#hpHelp').html("유효한 휴대폰번호를 입력해주세요");
+				return false;
+			}else{
+				$('#hpHelp').html("");
+			}
+		});
+		
+		
+		// 회원가입 버튼 submit 전 유효성 체크
+		$('#updateMyPageBtn').click(function(){
+			
+			
+			
+			if($('#customerPw').val()==""){ 
+				alert("비밀번호를 입력하세요");        
+				$('#customerPw').focus();     
+				return false;
+			}
+			if(getSpace.test($('#customerPw').val())){
+				alert("공백은 입력 불가능 합니다");
+				$("#customerPw").val("");
+				$('#customerPw').focus();    
+				return false;
+			}
+			if (!getPw.test($('#customerPw').val())){
+				alert("비밀번호는 영문,숫자,특수문자를 각각 하나씩 포함한 8~16자리로 설정해주세요.");
+				$("#customerPw").val("");
+				$('#customerPw').focus();
+				return false;
+        	}
+			if($('#customerPwCk').val()==""){
+				alert("비밀번호 확인을 입력하세요"); 
+				$('#customerPwCk').focus();
+				return false;
+			}
+			if(getSpace.test($('#customerPwCk').val())){
+				alert("공백은 입력 불가능 합니다"); 
+				$("#customerPwCk").val("");
+				$('#customerPwCk').focus(); 
+				return false;
+			}
+			if($('#customerPw').val() != $('#customerPwCk').val()){
+				alert('비밀번호가 맞지 않습니다 다시 입력해주세요');
+				$('#customerPw').val('');
+				$('#customerPwCk').val('');
+				return false;
+			}
+			
+			
+			if($('#customerName').val()==""){
+				alert("이름을 입력하세요");  
+				$('#customerName').focus(); 
+				return false;
+			}
+			if(getSpace.test($('#customerName').val())){
+				alert("공백은 입력 불가능 합니다"); 
+				$("#customerName").val("");
+				$('#customerName').focus(); 
+				return false;
+			}
+			if(!getName.test($("#customerName").val())){
+				alert("이름은 한글만 입력 가능합니다.")
+				$("#customerName").val("");
+				$("#customerName").focus();
+				return false;
+			}
+			
+			if($('#customerEmail').val()==""){
+				alert("이메일을 입력하세요");
+				$('#customerEmail').focus();
+				return false;
+			}
+			if(getSpace.test($('#customerEmail').val())){
+				alert("공백은 입력 불가능 합니다"); 
+				$("#customerEmail").val("");
+				$('#customerEmail').focus(); 
+				return false;
+			}
+			if(!getEmail.test($('#customerEmail').val())){
+				alert("이메일 형식을 맞춰주세요 ***@***.**");
+				$("#customerEmail").val("");
+				$('#customerEmail').focus();
+				return false;
+        	}
+			
+			
+			if($('#customerPhone').val()==""){
+				alert("전화번호를 입력하세요"); 
+				$('#customerPhone').focus();
+				return false;
+			}
+			if(getSpace.test($('#customerPhone').val())){
+				alert("공백은 입력 불가능 합니다");
+				$("#customerPhone").val("");
+				$('#customerPhone').focus(); 
+				return false;
+			}
+			if(!getExp.test($("#customerPhone").val())){
+				alert("유효한 휴대폰번호를 입력해주세요 (010********)");
+				$("#customerPhone").val("");
+				$("#customerPhone").focus();
+				return false;
+			}
+			
+			
+			if($('#customerAddress').val()==""){
+				alert("주소를 입력하세요");  
+				$('#customerAddress').focus(); 
+				return false;
+			}
+			if(getSpace.test($('#customerAddress').val())){
+				alert("공백은 입력 불가능 합니다");
+				$("#customerAddress").val("");
+				$('#customerAddress').focus(); 
+				return false;
+			}
+			
+			if($('#customerHeight').val()==""){
+				alert("키(신장)를 입력하세요"); 
+				$('#customerHeight').focus();
+				return false;
+			}
+			if(getSpace.test($('#customerHeight').val())){
+				alert("공백은 입력 불가능 합니다");
+				$('#customerHeight').val("");
+				$('#customerHeight').focus(); 
+				return false;
+			}
+			if($('#customerHeight').val()<50 || $('#customerHeight').val()>250){
+				alert("정확한 키(신장)를 입력해주세요");
+				$('#customerHeight').val("");
+				$('#customerHeight').focus();
+				return false;
+        	}
+			
+			if($('#customerWeight').val()==""){
+				alert("체중을 입력하세요"); 
+				$('#customerWeight').focus();
+				return false;
+			}
+			if(getSpace.test($('#customerWeight').val())){
+				alert("공백은 입력 불가능 합니다");
+				$('#customerWeight').val("");
+				$('#customerWeight').focus(); 
+				return false;
+			}
+			
+			if($('#customerWeight').val()<20 || $('#customerWeight').val()>200){
+				alert("정확한 체중을 입력해주세요");
+				$('#customerWeight').val("");
+				$('#customerWeight').focus();
+				return false;
+        	}
+			
+			
+			
+			
+			
+			
 
-         <div class="item">
+			if ($('#customerEmailSave').val().length === 0) {
+			    alert("이메일 중복확인을 눌러주세요");
+			    return false;
+			}
+			
+			
+			if($('#customerEmail').val() !== $('#customerEmailSave').val()){
+				alert("이메일값이 변경되었습니다 다시 중복확인을 눌러주세요");
+				return false;
+			}
+			
+			
+			
+			document.form.submit();
+		});
+		});
+	
+	</script>
+	
+	
+	
+	
+	
+	
+	<div id="layer"
+		style="display: none; position: fixed; overflow: hidden; z-index: 1; -webkit-overflow-scrolling: touch;">
+		<img src="//t1.daumcdn.net/postcode/resource/images/close.png"
+			id="btnCloseLayer"
+			style="cursor: pointer; position: absolute; right: -3px; top: -3px; z-index: 1"
+			onclick="closeDaumPostcode()" alt="닫기 버튼">
+	</div>
+	
+	
+	<script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+	
+	<script>
+		function loadFile(input) {
+			var file = input.files[0];	//선택된 파일 가져오기
+			
+			//미리 만들어 놓은 div에 text(파일 이름) 추가
+			var name = document.getElementById('fileName');
+			name.textContent = file.name;
+		};
 
-            <div>
-               <h3>
-                  <a href="/customer/home" class="black">홈으로</a>
-               </h3>
-            </div>
-         </div>
-      </div>
-   </div>
+
+	
+		var element_layer = document.getElementById('layer');
+
+		function closeDaumPostcode() {
+			element_layer.style.display = 'none';
+		}
+
+		function sample2_execDaumPostcode() {
+			new daum.Postcode(
+					{
+						oncomplete : function(data) {
+							var addr = '';
+							var extraAddr = '';
+							if (data.userSelectedType === 'R') {
+								addr = data.roadAddress;
+							} else {
+								addr = data.jibunAddress;
+							}
+							if (data.userSelectedType === 'R') {
+								if (data.bname !== ''
+										&& /[동|로|가]$/g.test(data.bname)) {
+									extraAddr += data.bname;
+								}
+								if (data.buildingName !== ''
+										&& data.apartment === 'Y') {
+									extraAddr += (extraAddr !== '' ? ', '
+											+ data.buildingName
+											: data.buildingName);
+								}
+								if (extraAddr !== '') {
+									extraAddr = ' (' + extraAddr + ')';
+								}
+								addr = addr + " " + extraAddr;
+
+							} else {
+
+							}
+
+							document.getElementById("address").value = addr;
+							document.getElementById("addressDetail").focus();
+
+							element_layer.style.display = 'none';
+						},
+						width : '100%',
+						height : '100%',
+						maxSuggestItems : 5
+					}).embed(element_layer);
+
+			element_layer.style.display = 'block';
+
+			initLayerPosition();
+		}
+
+		function initLayerPosition() {
+			var width = 400;
+			var height = 480;
+			var borderWidth = 5;
+
+			element_layer.style.width = width + 'px';
+			element_layer.style.height = height + 'px';
+			element_layer.style.border = borderWidth + 'px solid';
+			element_layer.style.left = (((window.innerWidth || document.documentElement.clientWidth) - width) / 2 - borderWidth)
+					+ 'px';
+			element_layer.style.top = (((window.innerHeight || document.documentElement.clientHeight) - height) / 2 - borderWidth)
+					+ 'px';
+		}
+		
+	
+	</script>
 </body>
-</html>>
+</html>
