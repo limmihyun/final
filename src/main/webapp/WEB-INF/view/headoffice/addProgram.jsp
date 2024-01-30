@@ -308,6 +308,8 @@
 	// 선택한 날짜가 오늘 혹은 그 이후인지 검증하는 함수
 	function validateFuture(input) {
 		
+		console.log(input);
+		
 		let today = new Date();
 		let validDate = new Date(input);
 		
@@ -386,7 +388,6 @@
 		
 		// id가 dateArea인 div태그 내의 모든 input 태그에 대해 날짜 형식 검증
 	    $('#dateArea input[type="text"]').each(function() {
-	    	console.log('validateDateFormat : ' + validateDateFormat($(this)));
 	        if(!validateDateFormat($(this))) {
 	        	isFormatValid = false;
 	        	return;
@@ -402,8 +403,7 @@
 		
 		// id가 dateArea인 div태그 내의 모든 input 태그에 대해 오늘 날짜 혹은 그 이후인지 검증
 	    $('#dateArea input[type="text"]').each(function() {
-	    	console.log('validateFuture : ' + validateFuture($(this)));
-	        if(!validateFuture($(this))) {
+	        if(!validateFuture($(this).val())) {
 	        	isFutureDateValid = false;
 	        	return;
 	        }
