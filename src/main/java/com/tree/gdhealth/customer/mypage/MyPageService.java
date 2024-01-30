@@ -19,8 +19,14 @@ public class MyPageService {
 	@Autowired MyPageMapper myPageMapper;
 	
 	public CustomerMyPage MyPage(int customerNo) {
+		System.out.println(customerNo);
 		CustomerMyPage info = myPageMapper.info(customerNo);
+		CustomerImg imgInfo = myPageMapper.customerImgCk(customerNo);
 		
+		if(imgInfo != null) {
+			info.setImgFileName(imgInfo.getCustomerImgFileName());
+		}
+	
 		// bmi 계산식
 		double weight = info.getCustomerWeight();
 		double height = info.getCustomerHeight();
@@ -32,6 +38,10 @@ public class MyPageService {
 		System.out.println(bmi);
 		return info;
 	}
+	
+	public CustomerImg selectCustomerImg(int customerNo) {
+        return myPageMapper.selectCustomerImg(customerNo);
+    }
 	
 	public int attendance(int customerNo) {
 		int attendanceCount = myPageMapper.attendanceCount(customerNo);  
@@ -91,7 +101,7 @@ public class MyPageService {
 		
 		
 	}
-	//고객정보 키, 몸무게 수정
+	//고객정보 수정
 	public int updateMyPage(CustomerDetail customerDetail) {
 		
 		System.out.println("ff");

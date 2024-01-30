@@ -4,6 +4,12 @@
 <html>
 <head>
 <meta charset="UTF-8">
+
+<!-- Latest compiled and minified CSS -->
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+
+<!-- Latest compiled JavaScript -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
 <script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
 <link rel="stylesheet" href="/css/myPage.css" type="text/css">
 <title>GD HEALTH</title>
@@ -13,7 +19,6 @@
 	<div class="wrap">
 		<div class="greenContainer">
 			<div>
-				<div class="grade">${info.customerEmail}</div>
 				<div class="name">${info.customerName}</div>
 			</div>
 			<div class="modify"></div>
@@ -34,6 +39,57 @@
 			<div class="item">
 				<div class="number">${membership}</div>
 				<div>멤버십</div>
+			</div>
+		</div>
+		
+		
+		<div class="shippingStatusContainer">
+			<div class="title">개인 정보</div>
+			<div class="status">
+			<div class="item">
+				<div class="img">
+				<img src="/upload/customer/${imgInfo.customerImgFileName}" alt="Profile Image">
+			</div>
+			</div>
+			<div class="item">
+			<div>
+				<div class="center">아이디</div>
+				<div class="Id">${info.customerId}</div>	
+				<div class="center" style="margin-top: 80px;">이름</div>
+				<div class=name">${info.customerName}</div>
+			</div>
+			</div>
+			<div class="item">
+			<div>
+				<div class="center">생년월일</div>
+				<div class="birth">${info.customerBirth}</div>	
+				<div class="center" style="margin-top: 80px;">성별</div>
+				<div class="gender">${info.customerGender}</div>
+			</div>
+			</div>
+			<div class="item">
+    		<div>
+        		<div class="center">주소</div>
+        		<div class="address">${info.customerAddress}</div>
+        		<div class="row">
+        			<div class="col"> 
+        				<div class="center" style="margin-top: 80px;">휴대폰</div>
+        				<div class="phone">${info.customerPhone}</div>
+        			</div>
+        			<div class="col">
+        				<div class="center" style="margin-top: 80px;">이메일</div>
+        				<div class="email" >${info.customerEmail}</div>
+        			</div>
+        		</div>
+    		</div>
+    		<div>
+        		
+    		</div>
+			</div>
+			<div class="item">
+			
+			</div>
+	
 			</div>
 		</div>
 		<div class="shippingStatusContainer">

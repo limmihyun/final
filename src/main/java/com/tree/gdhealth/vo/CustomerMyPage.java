@@ -7,6 +7,8 @@ public class CustomerMyPage {
 	private Integer customerNo;
 	private String customerId;
 	private String customerBirth;
+	private String customerGender;
+	private String customerPhone;
 	private int customerHeight;
 	private int customerWeight;
 	private int attendanceCount;
@@ -14,6 +16,9 @@ public class CustomerMyPage {
 	private int questionCount;
 	private double customerBmi;
 	private String customerName;
+	private String customerImgFileName;
 	private String customerEmail;
+	private String customerAddress;
 	private String customerUpdatedate;
+	private String imgFileName;
 }
