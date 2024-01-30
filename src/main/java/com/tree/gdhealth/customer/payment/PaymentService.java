@@ -83,7 +83,7 @@ public class PaymentService {
 		result.put("year", year);
 		result.put("day", day);
 
-		System.out.println(result + "result !! ! ! !");
+		System.out.println(result + "result");
 		
 		
 		int resultint = paymentMapper.updatePayment(result);

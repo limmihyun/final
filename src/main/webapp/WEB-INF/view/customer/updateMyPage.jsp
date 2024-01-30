@@ -16,7 +16,7 @@
             <div class="grade">${info.customerEmail}</div>
             <div class="name">${info.customerName}</div>
          </div>
-         <div class="modify">i</div>
+         <div class="modify"></div>
       </div>
       <div class="summaryContainer">
          <div class="item">
@@ -33,14 +33,62 @@
          </div>
          <div class="item">
             <div class="number">${membership}</div>
-            <div>맴버십</div>
+            <div>멤버십</div>
          </div>
       </div>
-      <div class="shippingStatusContainer">
-      	<form method="post" action="${pageContext.request.contextPath}/customer/updateMyPage">
+     <div class="shippingStatusContainer">
+     
+     <form method="post" action="${pageContext.request.contextPath}/customer/updateMyPage?customerNo=${info.customerNo}">
+     <input type="hidden" id="customerNo" value="${info.customerNo}">
+			<div class="title">개인 정보</div>
+			<div class="status">
+			<div class="item">
+				<div class="img">
+				<img src="/upload/customer/${imgInfo.customerImgFileName}" alt="Profile Image">
+			</div>
+			</div>
+			
+			<div class="item">
+			<div>
+				<div class="center">아이디</div>
+				<div class="Id">${info.customerId}</div>	
+				<div class="center" style="margin-top: 60px;">이름</div>
+				<div class="string">
+            		<input type="text" id="customerName" name="customerName" value="${info.customerName}">
+            	</div>
+			</div>
+			</div>
+			<div class="item">
+			<div>
+				<div class="center">생년월일</div>
+				<div class="birth">${info.customerBirth}</div>	
+				<div class="center" style="margin-top: 60px;">휴대폰</div>
+				<div class="string">
+            		<input type="text" id="customerPhone" name="customerPhone" value="${info.customerPhone}">
+            	</div>
+			</div>
+			</div>
+			<div class="item">
+			<div>
+				<div class="center">주소</div>
+				<input type="text" id="customerAddress" name="customerAddress" value="${info.customerAddress}" style="width: 450px;">
+    			
+				<div class="center" style="margin-top: 60px;">이메일</div>
+				<div class="string">
+            		<input type="text" id="customerEmail" name="customerEmail" value="${info.customerEmail}">
+            	</div>
+			</div>
+			</div>
+			<div class="item">
+			
+			</div>
+			<div style="position: relative; margin-right : 200px; margin-top: 30px;">
+            <button type="submit" style="background-color: green; border: none; color: white; padding: 8px 15px; cursor: pointer; border-radius: 5px;">저장</button>
+          </div>
+		</div>
+		
          <div class="title">신체 정보</div>
          <div class="status">
-          <input type="hidden" id="customerNo" value="${info.customerNo}">
          <div class="item">
          <div>
             <div class="center">신장</div>
@@ -51,7 +99,7 @@
          </div>
 
          <div class="item">
-         <div style="position: relative; left: -337px;">
+         <div style="position: relative; left: -407px;">
             <div class="center">체중</div>
             <div class="number">
             <input type="text" id="customerWeight" name="customerWeight" value="${info.customerWeight}">
@@ -59,8 +107,9 @@
          </div>
          </div>
          
-          <div style="position: relative; left: -700px; margin-top: 30px;">
+          <div style="position: relative; left: -800px; margin-top: 30px;">
             <button type="submit" style="background-color: green; border: none; color: white; padding: 8px 15px; cursor: pointer; border-radius: 5px;">저장</button>
+          </div>
           </div>
         </form>
       </div>

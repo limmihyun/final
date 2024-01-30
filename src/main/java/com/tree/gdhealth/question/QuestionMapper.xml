@@ -86,7 +86,7 @@
 		parameterType="com.tree.gdhealth.vo.Question">
 		
 		UPDATE question
-		SET branch_no = #{branchNo}, question_title = #{questionTitle}, question_content = #{questionContent}, isSecret = #{isSecret}
+		SET branch_no = #{branchNo}, question_title = #{questionTitle}, question_content = #{questionContent}, isSecret = #{isSecret}, updatedate = NOW()
 		WHERE question_no = #{questionNo}
 </update>
 

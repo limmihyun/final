@@ -11,6 +11,7 @@ import com.tree.gdhealth.vo.CustomerMyPage;
 public interface MyPageMapper {
 	
 	CustomerMyPage info(int customerNo);
+	CustomerImg customerImgCk(int customerNo);
 	int attendanceCount(int customerNo);
 	int reviewCount(int customerNo);
 	int questionCount(int customerNo);
@@ -21,4 +22,5 @@ public interface MyPageMapper {
 	int customerDetailDelete(Customer customer);
 	int customerImgDelete(Customer customer);
 	int updateMyPage(CustomerDetail customerDetail);
+	CustomerImg selectCustomerImg(int customerNo);
 }

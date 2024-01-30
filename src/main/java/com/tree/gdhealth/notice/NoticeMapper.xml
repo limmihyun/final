@@ -57,7 +57,7 @@
    parameterType="com.tree.gdhealth.vo.Notice">
    
    UPDATE notice
-   SET notice_title = #{noticeTitle}, notice_content = #{noticeContent}
+   SET notice_title = #{noticeTitle}, notice_content = #{noticeContent}, updatedate = NOW()
    WHERE notice_no = #{noticeNo}
    </update>
 

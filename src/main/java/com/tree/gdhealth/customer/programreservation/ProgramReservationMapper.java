@@ -34,7 +34,7 @@ public interface ProgramReservationMapper {
 	
 	int reviewdelete (Map<String, Object> paramap);
 	
-	Integer reviewSelect (Map<String, Object> paramap);
+	List<Integer> reviewSelect (Map<String, Object> paramap);
 	
 	int reviewimgdelete (int reviewNo);
 	
