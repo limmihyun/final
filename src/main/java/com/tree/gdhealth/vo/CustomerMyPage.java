@@ -6,6 +6,7 @@ import lombok.Data;
 public class CustomerMyPage {
 	private Integer customerNo;
 	private String customerId;
+	private String customerPw;
 	private String customerBirth;
 	private String customerGender;
 	private String customerPhone;

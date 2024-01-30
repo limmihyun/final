@@ -72,11 +72,12 @@
         		<div class="center">주소</div>
         		<div class="address">${info.customerAddress}</div>
         		<div class="row">
-        			<div class="col"> 
+        			<div class="col-md-9"> 
         				<div class="center" style="margin-top: 80px;">휴대폰</div>
-        				<div class="phone">${info.customerPhone}</div>
+        				<div class="phone">${phoneCustom}</div>
+        				
         			</div>
-        			<div class="col">
+        			<div class="col-md-3 text-right">
         				<div class="center" style="margin-top: 80px;">이메일</div>
         				<div class="email" >${info.customerEmail}</div>
         			</div>

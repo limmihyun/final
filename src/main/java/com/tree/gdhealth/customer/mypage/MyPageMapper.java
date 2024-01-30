@@ -21,6 +21,8 @@ public interface MyPageMapper {
 	int customerDelete(Customer customer);
 	int customerDetailDelete(Customer customer);
 	int customerImgDelete(Customer customer);
-	int updateMyPage(CustomerDetail customerDetail);
+	int updateMyPage(CustomerMyPage customerMyPage);
+	int updatePw(Customer customer);
+	String selectPhone(int customerNo);
 	CustomerImg selectCustomerImg(int customerNo);
 }

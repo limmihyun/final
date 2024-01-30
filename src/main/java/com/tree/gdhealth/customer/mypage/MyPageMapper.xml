@@ -5,16 +5,13 @@
 	SELECT
 	c.customer_no customerNo,
 	c.customer_id customerId,
+	c.customer_pw customerPw,
 	d.customer_name customerName,
 	d.customer_email customerEmail,
 	d.customer_birth customerBirth,
 	d.customer_address customerAddress,
 	d.customer_gender customerGender,
-	CONCAT(
-		SUBSTRING(d.customer_phone, 1, 3), '-', 
-		SUBSTRING(d.customer_phone, 4, 4), '-', 
-		SUBSTRING(d.customer_phone, 8)
-	) as customerPhone,
+	d.customer_phone customerPhone,
 	d.customer_height customerHeight,
 	d.customer_weight customerWeight,
 	d.updatedate customerUpdatedate
@@ -91,7 +88,7 @@ WHERE d.customer_no = #{customerNo}
 		customer_active = 'N'
 	WHERE customer_no = #{customerNo}
 </update>
-<update id="updateMyPage" parameterType="com.tree.gdhealth.vo.CustomerDetail">
+<update id="updateMyPage" parameterType="com.tree.gdhealth.vo.CustomerMyPage">
 	UPDATE customer_detail
 	SET customer_height = #{customerHeight}, 
 		customer_weight = #{customerWeight},
@@ -102,7 +99,16 @@ WHERE d.customer_no = #{customerNo}
 		updatedate = NOW()
 	WHERE customer_no = #{customerNo}
 </update>
-
+<update id="updatePw" parameterType="com.tree.gdhealth.vo.Customer">
+	UPDATE customer
+	SET customer_pw = PASSWORD(#{customerPw})
+	WHERE customer_no = #{customerNo}
+</update>
+<select id="selectPhone" parameterType="com.tree.gdhealth.vo.CustomerDetail">
+	SELECT customer_phone AS customerPhone
+	FROM customer_detail
+	WHERE customer_no = #{customerNo}
+</select>
 <select id="selectCustomerImg"
 		parameterType="int"
 		resultType="com.tree.gdhealth.vo.CustomerImg">
