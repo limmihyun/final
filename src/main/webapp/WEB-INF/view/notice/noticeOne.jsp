@@ -41,7 +41,7 @@
             <div class="row">
                 <div class="col-lg-12 text-center">
                     <div class="breadcrumb-content">
-                        <h2>Q&A</h2>
+                        <h2>Notice</h2>
                         <div class="links">
                             <a href="/customer/home">Home</a>
                             
