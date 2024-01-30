@@ -41,7 +41,7 @@
             <div class="row">
                 <div class="col-lg-12 text-center">
                     <div class="breadcrumb-content">
-                        <h2>Q&A</h2>
+                        <h2>Review</h2>
                         <div class="links">
                             <a href="/customer/home">Home</a>
                             
@@ -56,22 +56,37 @@
     <div class="untree_co-section before-footer-section">
             <div class="container">
              <div class="p-3 p-lg-5 border bg-white">
-             <h1 class="mb-4 section-title">Notice</h1>
+             <h1 class="mb-4 section-title">Review</h1>
              <br>
+             <form method="post" action="${pageContext.request.contextPath}/review/updateReview">
+                    <input type="hidden" name="reviewNo" value="${revuOne.reviewNo}">
 				<table class ="table">
  		<tr>
             <th>리뷰번호</th>
             <td><p style="border: none;">${revuOne.reviewNo}</p></td>
         </tr>
-        
-        <tr>
+       <c:choose>
+       <c:when test="${customerNo == revuOne.customerNo}">
+       <tr>
             <th>제목</th>
-            <td><p style="border: none;">${revuOne.reviewTitle}</td>
+            <td><input type="text" name="reviewTitle" value="${revuOne.reviewTitle}" style="border: none; width: 100%;"></td>
+        </tr>
+        <tr>
+    		<th>내용</th>
+    		<td><textarea rows="6" cols="130"  style="border: none;" name="reviewContent">${revuOne.reviewContent}</textarea></td>
+		</tr>
+       </c:when>
+       <c:otherwise>
+       <tr>
+            <th>제목</th>
+            <td><input type="text" name="reviewTitle" value="${revuOne.reviewTitle}" style="border: none; width: 100%;" readonly></td>
         </tr>
         <tr>
     		<th>내용</th>
     		<td><textarea rows="6" cols="130" style="border: none;" readonly>${revuOne.reviewContent}</textarea></td>
 		</tr>
+       </c:otherwise>
+       </c:choose>
         <tr>
             <th>게시일</th>
             <td><p style="border: none;">${revuOne.createdate}</td>
@@ -82,10 +97,12 @@
         </tr>
         
     </table>
-     <a>
-        <!--<a href="${pageContext.request.contextPath}/review/updateReview?reviewNo=${revuOne.reviewNo}" class="btn btn-primary">수정</a>-->
-        <!--<a href="${pageContext.request.contextPath}/review/deleteteReview?reviewNo=${revuOne.reviewNo}" class="btn btn-primary">삭제</a>-->
-    </a>
+     <c:if test="${customerNo == revuOne.customerNo}">
+     	<div style="text-align: right; margin-top: 10px;">
+           <button type="submit" class="btn btn-primary">수정하기</button>
+           <a href="${pageContext.request.contextPath}/review/deleteReview?reviewNo=${revuOne.reviewNo}" class="btn btn-danger">삭제하기</a>
+        </div>
+    </c:if>
 </div>
 </div>
 </div>

@@ -34,6 +34,7 @@
 		q.question_no AS questionNo,
 		b.branch_name AS branchName,
 		c.customer_id AS customerId,
+		c.customer_no AS customerNo,
 		q.question_title AS questionTitle,
 		q.question_content AS questionContent,
 		q.createdate AS createdate,
@@ -85,7 +86,7 @@
 		parameterType="com.tree.gdhealth.vo.Question">
 		
 		UPDATE question
-		SET branch_no = #{branchNo}, question_title = #{questionTitle}, question_content = #{questionContent}, isSecret = #{isSecret}
+		SET branch_no = #{branchNo}, question_title = #{questionTitle}, question_content = #{questionContent}, isSecret = #{isSecret}, updatedate = NOW()
 		WHERE question_no = #{questionNo}
 </update>
 

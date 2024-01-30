@@ -28,10 +28,10 @@ public class ProgramReservationService {
 		int	thisYear = today.get(Calendar.YEAR);
 		int thisMonth = (today.get(Calendar.MONTH)+1);
 		int thisDay = today.get(Calendar.DAY_OF_MONTH);
-		System.out.println(thisYear + "!!year");
-		System.out.println(thisMonth + "!!month");
-		System.out.println(thisDay + "!!day");
-		System.out.println(today + "!!totay");
+		System.out.println(thisYear + "year");
+		System.out.println(thisMonth + "month");
+		System.out.println(thisDay + "day");
+		System.out.println(today + "totay");
 
 
 
@@ -115,10 +115,10 @@ public class ProgramReservationService {
 		int rowPerPage = 4;
 		int beginRow = (currentPage-1) * rowPerPage;
 		
-		System.out.println(thisYear + "//thisYear");
-		System.out.println(year + "//year");
-		System.out.println(thisMonth + "//thisMonth");
-		System.out.println(month + "//month");
+		System.out.println(thisYear + "thisYear");
+		System.out.println(year + "year");
+		System.out.println(thisMonth + "thisMonth");
+		System.out.println(month + "month");
 
 		month = month + 1;
 		
@@ -238,22 +238,23 @@ public class ProgramReservationService {
 	}
 	
 	public int reviewdelete(int programReservationNo, int customerNo) {
-		
-		int reviewNo = 0;
-		
+				
 		Map<String, Object> paramap = new HashMap<>();
 		paramap.put("customerNo", customerNo);
 		paramap.put("programReservationNo", programReservationNo);
 		
 		int result1 = programReservationMapper.customerAttendanceDelete(paramap);
 		
-		Integer selectedReviewNo = programReservationMapper.reviewSelect(paramap);
+		System.out.println("test debug");
 		
-	    if (selectedReviewNo != null) {
-	        reviewNo = selectedReviewNo;
+		List<Integer> selectedReviewNo = programReservationMapper.reviewSelect(paramap);
+		
+	    if (selectedReviewNo.size() > 0) {
+	        for(int i=0; i<selectedReviewNo.size();i++) {
+	        	Integer reviewNo = selectedReviewNo.get(i);
+	    		programReservationMapper.reviewimgdelete(reviewNo);
+	        }
 	    }
-		
-		int result2 = programReservationMapper.reviewimgdelete(reviewNo);
 		
 		int result = programReservationMapper.reviewdelete(paramap);
 		

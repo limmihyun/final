@@ -3,16 +3,31 @@
 <mapper namespace="com.tree.gdhealth.customer.mypage.MyPageMapper">
 <select id="info" parameterType="int" resultType="com.tree.gdhealth.vo.CustomerMyPage">
 	SELECT
+	c.customer_no customerNo,
 	c.customer_id customerId,
 	d.customer_name customerName,
 	d.customer_email customerEmail,
 	d.customer_birth customerBirth,
+	d.customer_address customerAddress,
+	d.customer_gender customerGender,
+	CONCAT(
+		SUBSTRING(d.customer_phone, 1, 3), '-', 
+		SUBSTRING(d.customer_phone, 4, 4), '-', 
+		SUBSTRING(d.customer_phone, 8)
+	) as customerPhone,
 	d.customer_height customerHeight,
 	d.customer_weight customerWeight,
 	d.updatedate customerUpdatedate
-	FROM customer c JOIN customer_detail d
-	ON c.customer_no = d.customer_no
-	WHERE c.customer_no = #{customerNo}
+FROM customer c JOIN customer_detail d 
+ON c.customer_no = d.customer_no
+WHERE d.customer_no = #{customerNo}
+	
+</select>
+
+<select id="customerImgCk" parameterType="int" resultType="com.tree.gdhealth.vo.CustomerImg">
+	SELECT *
+	FROM customer_img 
+	WHERE customer_no = #{customerNo}
 </select>
 <select id="attendanceCount" parameterType="int" resultType="int">
 	SELECT
@@ -36,7 +51,8 @@
 	SELECT
 		payment_date
 	FROM payment
-	WHERE customer_no = #{customerNo}
+	WHERE customer_no = #{customerNo} and active = "N"
+
 </select>
 <select id="customerDeleteCk" parameterType="com.tree.gdhealth.vo.Customer" resultType="INTEGER">
 	SELECT
@@ -44,12 +60,7 @@
 	FROM customer
 	WHERE customer_id = #{customerId} AND customer_active = 'Y' AND customer_pw = PASSWORD(#{customerPw})
 </select>
-<select id="customerImgCk" parameterType="com.tree.gdhealth.vo.CustomerImg" resultType="com.tree.gdhealth.vo.CustomerImg">
-	SELECT
-	customer_img_file_name customerImgFileName
-	FROM customer_img
-	WHERE customer_no = #{customerNo}
-</select>
+
 <update id="customerDetailDelete" parameterType="com.tree.gdhealth.vo.Customer">
 	UPDATE customer_detail
 	SET 
@@ -80,5 +91,31 @@
 		customer_active = 'N'
 	WHERE customer_no = #{customerNo}
 </update>
+<update id="updateMyPage" parameterType="com.tree.gdhealth.vo.CustomerDetail">
+	UPDATE customer_detail
+	SET customer_height = #{customerHeight}, 
+		customer_weight = #{customerWeight},
+		customer_name = #{customerName},
+		customer_phone = #{customerPhone},
+		customer_email = #{customerEmail},
+		customer_address = #{customerAddress},
+		updatedate = NOW()
+	WHERE customer_no = #{customerNo}
+</update>
+
+<select id="selectCustomerImg"
+		parameterType="int"
+		resultType="com.tree.gdhealth.vo.CustomerImg">
+		
+		SELECT 
+		customer_no AS customerNo,
+		customer_img_no AS customerImgNo,
+		customer_img_file_name AS customerImgFileName
+		
+		FROM customer_img
+		
+		WHERE customer_no = #{customerNo}
+		
+</select>
 
 </mapper>

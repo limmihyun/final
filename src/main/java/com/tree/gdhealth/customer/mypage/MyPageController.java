@@ -8,10 +8,12 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.tree.gdhealth.vo.Customer;
+import com.tree.gdhealth.vo.CustomerDetail;
+import com.tree.gdhealth.vo.CustomerImg;
 import com.tree.gdhealth.vo.CustomerMyPage;
 
+import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
-import jakarta.validation.constraints.PastOrPresent;
 
 @Controller
 public class MyPageController {
@@ -24,9 +26,13 @@ public class MyPageController {
          return "customer/home";
       }
       int customerNo = (Integer)session.getAttribute("customerNo");
+      System.out.println(customerNo);
       //고객정보
       CustomerMyPage info = myPageService.MyPage(customerNo);
+   
       model.addAttribute("info", info);
+      
+      
       //출석
       int attendanceCount = myPageService.attendance(customerNo);
       model.addAttribute("attendanceCount", attendanceCount);
@@ -36,15 +42,33 @@ public class MyPageController {
       //문의
       int questionCount = myPageService.question(customerNo);
       model.addAttribute("questionCount", questionCount);
-      //맴버십
+      System.out.println("문의까지 됨");
+      
+      
+      // 이미지 정보 가져오기
+      System.out.println("이미지 정보 가져오기 시작");
+      CustomerImg imgInfo = myPageService.selectCustomerImg(customerNo);
+      System.out.println("이미지 정보 가져오기 끝");
+      
+      System.out.println(imgInfo.toString());
+      System.out.println(info.toString());
+      System.out.println(customerNo);
+      
+      model.addAttribute("imgInfo", imgInfo);
+      
+      //멤버십
+      System.out.println("멤버십 시작");
       String membership = myPageService.membership(customerNo);
+      System.out.println("멤버십 중간");
       if(membership == null) {
          membership = "만료";
       }
+      System.out.println("멤버십 끝");
       model.addAttribute("membership", membership);
       
       return "customer/myPage";
    }
+   
    @GetMapping("/customer/updateMyPage")
    public String updateMyPage(HttpSession session, Model model) {
       if(session.getAttribute("customerNo") == null) {
@@ -69,7 +93,48 @@ public class MyPageController {
          membership = "만료";
       }
       model.addAttribute("membership", membership);
+      // 이미지 정보 가져오기
+      System.out.println("이미지 정보 가져오기 시작");
+      CustomerImg imgInfo = myPageService.selectCustomerImg(customerNo);
+      System.out.println("이미지 정보 가져오기 끝");
+      model.addAttribute("imgInfo", imgInfo);
+      
       return "customer/updateMyPage";
+   }
+   @PostMapping("/customer/updateMyPage")
+   public String updateMyPage(HttpSession session, Model model, CustomerDetail customerDetail, HttpServletRequest request) {
+	   int customerNo = (int)session.getAttribute("customerNo");
+	   if(customerNo == 0) {
+	         return "customer/home";
+	      }
+	   System.out.println("customerNo: " + customerNo);
+	   if(customerNo != 0) {
+		   System.out.println("dddddddd");
+		   int customerHeight = Integer.valueOf(request.getParameter("customerHeight"));
+		   int customerWeight = Integer.valueOf(request.getParameter("customerWeight"));
+		   String customerName = request.getParameter("customerName");
+		   String customerPhone = request.getParameter("customerPhone");
+		   String customerAddress = request.getParameter("customerAddress");
+		   String customerEmail = request.getParameter("customerEmail");
+		   
+		   customerDetail.setCustomerHeight(customerHeight);
+	       customerDetail.setCustomerWeight(customerWeight);
+	       customerDetail.setCustomerName(customerName);
+	       customerDetail.setCustomerPhone(customerPhone);
+	       customerDetail.setCustomerAddress(customerAddress);
+	       customerDetail.setCustomerEmail(customerEmail);
+	       System.out.println(customerDetail.toString());
+		   myPageService.updateMyPage(customerDetail);
+		   
+		   System.out.println("customerWeight: " + customerWeight);
+		   System.out.println("customerHeight: " + customerHeight);
+		   
+		   return "redirect:/customer/myPage";
+		   
+		  
+		   
+	   };
+	   return "redirect:/customer/myPage";
    }
    @GetMapping("/customer/delete")
    public String customerDeletePage(HttpSession session,Model model) {
@@ -92,6 +157,7 @@ public class MyPageController {
       model.addAttribute("open",1);
       return "customer/delete";
    }
+   
    @GetMapping("/customer/deleteDo")
    public String customerDeleteDo(HttpSession session,Model model,Customer customer, RedirectAttributes red) {
       // 사진삭제를위한 패스 값 입력

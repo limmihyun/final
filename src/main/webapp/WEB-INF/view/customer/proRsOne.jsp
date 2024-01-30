@@ -73,7 +73,13 @@
 							</select></td>
 						</tr>
 					</table>
-					<button class="btn btn-dark btn-lg">예약하기</button>
+					<div>
+					<img src="${pageContext.request.contextPath}/upload/program/${resultList.programImgFile}">
+					</div><br>
+					<div>
+					<p>프로그램 설명 : ${resultList.programDetail}</p>
+					</div>
+					<button class="btn btn-primary">예약하기</button>
 				</form>
 				<br>
 				<a href="${pageContext.request.contextPath}/customer/programrs" style="font-size:12px;"> < 이전으로</a>

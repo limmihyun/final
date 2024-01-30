@@ -7,9 +7,9 @@ import javax.management.RuntimeErrorException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import org.springframework.web.context.request.async.AsyncRequestTimeoutException;
 
 import com.tree.gdhealth.vo.Customer;
+import com.tree.gdhealth.vo.CustomerDetail;
 import com.tree.gdhealth.vo.CustomerImg;
 import com.tree.gdhealth.vo.CustomerMyPage;
 
@@ -19,8 +19,14 @@ public class MyPageService {
 	@Autowired MyPageMapper myPageMapper;
 	
 	public CustomerMyPage MyPage(int customerNo) {
+		System.out.println(customerNo);
 		CustomerMyPage info = myPageMapper.info(customerNo);
+		CustomerImg imgInfo = myPageMapper.customerImgCk(customerNo);
 		
+		if(imgInfo != null) {
+			info.setImgFileName(imgInfo.getCustomerImgFileName());
+		}
+	
 		// bmi 계산식
 		double weight = info.getCustomerWeight();
 		double height = info.getCustomerHeight();
@@ -32,6 +38,10 @@ public class MyPageService {
 		System.out.println(bmi);
 		return info;
 	}
+	
+	public CustomerImg selectCustomerImg(int customerNo) {
+        return myPageMapper.selectCustomerImg(customerNo);
+    }
 	
 	public int attendance(int customerNo) {
 		int attendanceCount = myPageMapper.attendanceCount(customerNo);  
@@ -49,6 +59,7 @@ public class MyPageService {
 		String membership = myPageMapper.membership(customerNo);  
 		return membership;
 	}
+	
 	
 	// 고객 계정 삭제전 체크
 	public int deleteCustomerCk(Customer customer) {
@@ -89,6 +100,14 @@ public class MyPageService {
 		}
 		
 		
+	}
+	//고객정보 수정
+	public int updateMyPage(CustomerDetail customerDetail) {
+		
+		System.out.println("ff");
+		int row = myPageMapper.updateMyPage(customerDetail);
+		System.out.println(row);
+		return row;
 	}
 	
 }

@@ -29,7 +29,6 @@ public class PaymentController {
 		
 		
 		
-		System.out.println("여기 지나가냐??");
 		
 		return "customer/membershipList";
 	}
@@ -47,11 +46,9 @@ public class PaymentController {
 		model.addAttribute("membershipNo", membershipNo);
 		model.addAttribute("membershipPrice", membershipPrice);
 		model.addAttribute("membershipName", membershipName);
-		System.out.println("siuu" + membershipName);
 
 
 		
-		System.out.println("uuu~~~" + membershipNo);
 
 		
 		return "customer/addPayment";

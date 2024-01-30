@@ -305,6 +305,17 @@
 	    
 	}
 	
+	// 선택한 날짜가 오늘 혹은 그 이후인지 검증하는 함수
+	function validateFuture(input) {
+		
+		console.log(input);
+		
+		let today = new Date();
+		let validDate = new Date(input);
+		
+		return validDate >= today;
+	}
+	
 	// 선택한 개설 날짜 중에 중복된 날짜가 있는지 검증하는 함수
 	function hasDuplicates(array) {
         return (new Set(array)).size !== array.length;
@@ -375,9 +386,8 @@
 		
 		let isFormatValid = true;
 		
-		// id가 dataArea인 div태그 내의 모든 input 태그에 대해 날짜 형식 검증
+		// id가 dateArea인 div태그 내의 모든 input 태그에 대해 날짜 형식 검증
 	    $('#dateArea input[type="text"]').each(function() {
-	    	console.log('validateDateFormat : ' + validateDateFormat($(this)));
 	        if(!validateDateFormat($(this))) {
 	        	isFormatValid = false;
 	        	return;
@@ -388,6 +398,22 @@
 			alert('형식이 올바르지 않은 개설 날짜 입력창이 있습니다. 날짜를 선택하거나 "-"를 눌러 입력창을 삭제하세요.');
             return;
 		}
+		
+		let isFutureDateValid = true;
+		
+		// id가 dateArea인 div태그 내의 모든 input 태그에 대해 오늘 날짜 혹은 그 이후인지 검증
+	    $('#dateArea input[type="text"]').each(function() {
+	        if(!validateFuture($(this).val())) {
+	        	isFutureDateValid = false;
+	        	return;
+	        }
+	    });
+		
+	    if(!isFutureDateValid) {
+			alert('날짜는 오늘 혹은 그 이후로만 설정 가능합니다.');
+            return;
+		}
+	    
 	      
 		// 추가하는 개설날짜 중에 중복된 개설날짜가 있는지 확인하는 함수
 		let values = [];

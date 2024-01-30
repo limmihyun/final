@@ -32,7 +32,7 @@
 	<update id="updateAnswer"
 			parameterType="com.tree.gdhealth.vo.Answer">
 	UPDATE answer
-	SET answer_content = #{answerContent}
+	SET answer_content = #{answerContent}, updatedate = NOW()
 	WHERE question_no = #{questionNo}
 	
 	</update>

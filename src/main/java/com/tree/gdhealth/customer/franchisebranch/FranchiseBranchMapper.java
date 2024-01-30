@@ -13,6 +13,8 @@ public interface FranchiseBranchMapper {
 	
 	Branch branchMemberCnt();
 	
+	int reviewCount();
+	
 	Branch branchInfoOne(Branch branch);
 	
 	int branchTrainerCount(Branch branch);
@@ -22,4 +24,6 @@ public interface FranchiseBranchMapper {
 	int branchTrainerCountOne(Branch branch);
 	
 	int branchReviewCountOne(Branch branch);
+	
+	
 }

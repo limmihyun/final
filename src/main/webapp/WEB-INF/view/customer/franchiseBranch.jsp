@@ -127,9 +127,9 @@
                         <div class="counter-icon">
                             
                         </div>
-                        <span id="reviews" class="m-counter">56</span>
+                        <span id="reviews" class="m-counter">${cnt.reviewAllCount}</span>
                         <strong></strong>
-                        <p id="reviewsName">followers</p>
+                        <p id="reviewsName">REVIEWS</p>
                     </div>
                 </div>
             </div>
