@@ -123,5 +123,23 @@ WHERE d.customer_no = #{customerNo}
 		WHERE customer_no = #{customerNo}
 		
 </select>
+<!-- 중복검사 -->
+<select id="EmailCheck"
+		parameterType="String"
+		resultType="Integer">
+SELECT customer_no
+FROM customer_detail
+WHERE customer_email = #{customerEmail}
+</select>
+<!--  -->
+<select id="updateEmailCk"
+		parameterType="com.tree.gdhealth.vo.CustomerMyPage"
+		resultType="Integer">	
+		
+SELECT customer_no
+FROM customer_detail
+WHERE customer_email = #{customerEmail}
+AND customer_no = #{customerNo}
+</select>
 
 </mapper>

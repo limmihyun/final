@@ -119,6 +119,24 @@ public class MyPageService {
 	public int updatePw(Customer customer) {
 		int row = myPageMapper.updatePw(customer);
 		return row;
+	} 
+	//이메일 소유 확인
+	public int updateEmailCk(CustomerMyPage customerMyPage) {
+		int customerNo;
+		Integer EmailCheckResult = myPageMapper.EmailCheck(customerMyPage.getCustomerEmail());
+		Integer updateEmailCkResult = myPageMapper.updateEmailCk(customerMyPage);
+		System.out.println(updateEmailCkResult);
+		if(updateEmailCkResult == null || updateEmailCkResult == 0) {
+		if(EmailCheckResult == null || EmailCheckResult == 0) {
+		   customerNo = 0;
+		   return customerNo;
+		   }
+		   customerNo = myPageMapper.EmailCheck(customerMyPage.getCustomerEmail());
+		   return customerNo;
+		}
+		customerNo = 0;
+		
+		return customerNo;
 	}
 	
 }

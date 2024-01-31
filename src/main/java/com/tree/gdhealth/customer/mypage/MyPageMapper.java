@@ -23,6 +23,8 @@ public interface MyPageMapper {
 	int customerImgDelete(Customer customer);
 	int updateMyPage(CustomerMyPage customerMyPage);
 	int updatePw(Customer customer);
+	Integer updateEmailCk(CustomerMyPage customerMyPage);
+	Integer EmailCheck(String customerEmail);
 	String selectPhone(int customerNo);
 	CustomerImg selectCustomerImg(int customerNo);
 }

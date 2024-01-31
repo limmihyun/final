@@ -5,6 +5,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.tree.gdhealth.vo.Customer;
@@ -183,5 +184,13 @@ public class MyPageController {
       return "redirect:/customer/home";
    }
    
+    @ResponseBody
+	@GetMapping("/customer/updateEmailCk")
+	public int updateEmailCk(HttpSession session, CustomerMyPage customerMyPage){
+		int customerNo = (Integer)session.getAttribute("customerNo");
+		customerMyPage.setCustomerNo(customerNo);
+		customerNo = myPageService.updateEmailCk(customerMyPage);
+		return customerNo;
+	}
    
 }

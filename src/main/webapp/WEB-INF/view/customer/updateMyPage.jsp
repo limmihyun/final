@@ -151,7 +151,7 @@
 	    	}
 		    $.ajax({
 		        async: true,
-		        url: '/customer/emailCk',
+		        url: '/customer/updateEmailCk',
 		        type: 'get',
 		        data: {'customerEmail': $('#customerEmail').val() }, // 대분류 선택 문자열
 		        success: function(jsonData){
@@ -160,11 +160,12 @@
 		                alert('사용 가능한 Email입니다.');
 		                $('#emailHelp').html('중복체크완료');
 		                $('#customerEmailSave').val($('#customerEmail').val());
-		            } else {
+		            } else{
 		                alert('중복된 Email입니다. 다른 Email를 사용해주세요.');
 		            }
 		        },
 		        error: function(){
+		        	
 		            alert('Email 확인 중 오류가 발생했습니다. 다시 시도하십시오.');
 		        }
 		    });
